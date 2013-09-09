@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'AmiKoOSX' target in the 'AmiKoOSX' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
