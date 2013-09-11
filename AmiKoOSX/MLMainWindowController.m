@@ -87,10 +87,14 @@ static NSInteger mCurrentSearchState = kTitle;
     NSArray *listofSectionTitles;
     
     NSProgressIndicator* progressIndicator;
+    
+    float m_alpha;
+    float m_delta;
 }
 
 @synthesize myView;
 @synthesize mySplashScreen;
+@synthesize myToolbar;
 @synthesize mySearchField;
 @synthesize myTableView;
 @synthesize mySectionTitles;
@@ -104,7 +108,12 @@ static NSInteger mCurrentSearchState = kTitle;
     
     if (!self)
         return nil;
-        
+    
+    m_alpha = 0.0;
+    m_delta = 0.01;
+    [[self window] setAlphaValue:m_alpha];
+    [self fadeInAndShow];
+    
     // Allocate some variables
     medi = [NSMutableArray array];
     favoriteKeyData = [NSMutableArray array];
@@ -120,13 +129,7 @@ static NSInteger mCurrentSearchState = kTitle;
     
     // Set default database
     mUsedDatabase = kAips;
-    
-    // Test
-    searchResults = [self searchAipsDatabaseWith:@""];
-    if (searchResults) {
-        [self updateTableView];
-    }
-    
+        
     // Set search state
     [self setSearchState:kTitle];
     
@@ -136,11 +139,37 @@ static NSInteger mCurrentSearchState = kTitle;
                                                object:nil];
     [[self window] makeFirstResponder:self];
 
+    /*
+    [myToolbar setVisible:NO];
     [[self.window contentView] addSubview:mySplashScreen];
+    */
     
     [[self window] setBackgroundColor:[NSColor whiteColor]];
-    
+        
     return self;
+}
+
+- (void) fadeInAndShow
+{
+    if (m_alpha<1.0) {
+        m_alpha += m_delta;
+        [[self window] setAlphaValue:m_alpha];
+        
+        [NSTimer scheduledTimerWithTimeInterval:0.01
+                                         target:self
+                                       selector:@selector(fadeInAndShow)
+                                       userInfo:nil
+                                        repeats:NO];
+    } else {
+        [[self window] setAlphaValue:1.0];
+        
+        // Test
+        searchResults = [self searchAipsDatabaseWith:@""];
+        if (searchResults) {
+            [self updateTableView];
+            [self.myTableView reloadData];
+        }
+    }
 }
 
 - (void) awakeFromNib
@@ -153,7 +182,10 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (void) windowResized: (NSNotification *)notification;
 {
+    /*
     [self.mySplashScreen removeFromSuperview];
+    [myToolbar setVisible:YES];    
+    */
 }
 
 - (IBAction) tappedOnStar: (id)sender

@@ -29,6 +29,10 @@
 @end
 
 @implementation MLAppDelegate
+{
+    float m_alpha;
+    float m_delta;
+}
 
 // It is possible to auto-synthesize the following properties
 @synthesize window;
@@ -50,11 +54,47 @@
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification
 {
+    m_alpha = 1.0;
+    m_delta = 0.01;
+    
+    [NSApp activateIgnoringOtherApps:YES];
+    
+    [window makeKeyAndOrderFront:self];
+    [window setOrderedIndex:0];
+    [window makeKeyAndOrderFront:self];
+    
+    [NSTimer scheduledTimerWithTimeInterval:5.0
+                                     target:self
+                                   selector:@selector(fadeOutAndRemove)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
+- (void) fadeOutAndRemove
+{
+    if (m_alpha>0.05) {
+        m_alpha -= m_delta;
+        [[window contentView] setAlphaValue:m_alpha];
+        
+        [NSTimer scheduledTimerWithTimeInterval:0.02
+                                         target:self
+                                       selector:@selector(fadeOutAndRemove)
+                                       userInfo:nil
+                                        repeats:NO];
+    } else {
+        [window close];
+        [self startMainWindow];
+    }
+}
+
+- (void) startMainWindow
+{
     if (!mainWindowController)
         mainWindowController = [[MLMainWindowController alloc] init];
     
     [mainWindowController showWindow:nil];
 }
+
 
 // @synthesize masterViewController;
 

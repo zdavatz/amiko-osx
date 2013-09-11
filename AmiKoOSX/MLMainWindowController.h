@@ -28,6 +28,7 @@
 {
     IBOutlet NSView *myView;
     IBOutlet NSView *mySplashScreen;
+    IBOutlet NSToolbar *myToolbar;
     IBOutlet NSSearchField *mySearchField;
     IBOutlet NSTableView *myTableView;
     IBOutlet NSTableView *mySectionTitles;
@@ -36,6 +37,7 @@
 
 @property (nonatomic, retain) IBOutlet NSView *myView;
 @property (nonatomic, retain) IBOutlet NSView *mySplashScreen;
+@property (nonatomic, retain) IBOutlet NSToolbar *myToolbar;
 @property (nonatomic, retain) IBOutlet NSSearchField *mySearchField;
 @property (nonatomic, retain) IBOutlet NSTableView *myTableView;
 @property (nonatomic, retain) IBOutlet NSTableView *mySectionTitles;

@@ -10,6 +10,7 @@
 		D539C10117DB911F00759260 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D539C10017DB911F00759260 /* amiko.iconset */; };
 		D539C10617DCED1D00759260 /* MLSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D539C10517DCED1D00759260 /* MLSplashScreen.m */; };
 		D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
+		D541211917DFA96800ACDB81 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D541211817DFA96800ACDB81 /* QuartzCore.framework */; };
 		D5EBC68117C912FF00EBEF39 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBC68017C912FF00EBEF39 /* Cocoa.framework */; };
 		D5EBC68B17C912FF00EBEF39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */; };
 		D5EBC68D17C912FF00EBEF39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC68C17C912FF00EBEF39 /* main.m */; };
@@ -44,6 +45,7 @@
 		D539C10417DCED1D00759260 /* MLSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSplashScreen.h; sourceTree = "<group>"; };
 		D539C10517DCED1D00759260 /* MLSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSplashScreen.m; sourceTree = "<group>"; };
 		D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zur_Rose_1000x670px.png; sourceTree = "<group>"; };
+		D541211817DFA96800ACDB81 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D5EBC67D17C912FF00EBEF39 /* AmiKoOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmiKoOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5EBC68017C912FF00EBEF39 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D5EBC68317C912FF00EBEF39 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -92,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D541211917DFA96800ACDB81 /* QuartzCore.framework in Frameworks */,
 				D5EBC6C717CD21C200EBEF39 /* WebKit.framework in Frameworks */,
 				D5EBC6BE17C9247A00EBEF39 /* libsqlite3.0.dylib in Frameworks */,
 				D5EBC68117C912FF00EBEF39 /* Cocoa.framework in Frameworks */,
@@ -104,6 +107,7 @@
 		D5EBC67417C912FF00EBEF39 = {
 			isa = PBXGroup;
 			children = (
+				D541211817DFA96800ACDB81 /* QuartzCore.framework */,
 				D5EBC6C617CD21C200EBEF39 /* WebKit.framework */,
 				D5EBC68617C912FF00EBEF39 /* AmiKoOSX */,
 				D5EBC67F17C912FF00EBEF39 /* Frameworks */,

@@ -72,7 +72,6 @@
 						<string key="NSFrame">{{-3, -3}, {1006, 676}}</string>
 						<reference key="NSSuperview" ref="911422688"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="562321458">
@@ -479,7 +478,7 @@
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="649739905"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
-													<int key="NSsFlags">207360</int>
+													<int key="NSsFlags">207376</int>
 													<reference key="NSVScroller" ref="649739905"/>
 													<reference key="NSHScroller" ref="957483892"/>
 													<reference key="NSContentView" ref="106640134"/>
@@ -1154,6 +1153,14 @@
 						<reference key="destination" ref="911422688"/>
 					</object>
 					<int key="connectionID">1369</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">myToolbar</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="534265036"/>
+					</object>
+					<int key="connectionID">1635</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2072,7 +2079,7 @@
 								<float key="scoringTypeFloat">9</float>
 								<int key="contentType">3</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="846703509">
+							<object class="IBNSLayoutConstraint" id="75140687">
 								<reference key="firstItem" ref="100886994"/>
 								<int key="firstAttribute">6</int>
 								<int key="relation">0</int>
@@ -3167,7 +3174,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1634</int>
-						<reference key="object" ref="846703509"/>
+						<reference key="object" ref="75140687"/>
 						<reference key="parent" ref="571528381"/>
 					</object>
 				</array>
@@ -3176,6 +3183,8 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<boolean value="YES" key="1.IBNSWindowAutoPositionCentersHorizontal"/>
+				<boolean value="YES" key="1.IBNSWindowAutoPositionCentersVertical"/>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1.IBWindowTemplateEditedContentRect">{{357, 418}, {480, 270}}</string>
 				<integer value="1" key="1.NSWindowTemplate.visibleAtLaunch"/>
@@ -3305,7 +3314,7 @@
 					<reference ref="597790876"/>
 					<reference ref="589115042"/>
 					<reference ref="564138273"/>
-					<reference ref="846703509"/>
+					<reference ref="75140687"/>
 					<reference ref="162100769"/>
 					<reference ref="419760502"/>
 				</array>
@@ -3439,7 +3448,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1634</int>
+			<int key="maxID">1635</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3507,6 +3516,7 @@
 						<string key="mySectionTitles">NSTableView</string>
 						<string key="mySplashScreen">NSView</string>
 						<string key="myTableView">NSTableView</string>
+						<string key="myToolbar">NSToolbar</string>
 						<string key="myView">NSView</string>
 						<string key="myWebView">WebView</string>
 					</dictionary>
@@ -3526,6 +3536,10 @@
 						<object class="IBToOneOutletInfo" key="myTableView">
 							<string key="name">myTableView</string>
 							<string key="candidateClassName">NSTableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="myToolbar">
+							<string key="name">myToolbar</string>
+							<string key="candidateClassName">NSToolbar</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="myView">
 							<string key="name">myView</string>

@@ -21,12 +21,18 @@
  
  ------------------------------------------------------------------------ */
 
+#import <QuartzCore/QuartzCore.h>
 #import "MLSplashScreen.h"
 
 @implementation MLSplashScreen
 {
     float m_alpha;
     float m_delta;
+    
+    /*
+    NSImage *m_sourceImage;
+    CIImage *m_inputImage;
+    */
 }
 
 - (id) initWithFrame: (NSRect)frame
@@ -41,8 +47,13 @@
 
 - (void) awakeFromNib
 {
-    m_alpha = 3.0;
+    /*
+    m_sourceImage = [self image];
+    m_inputImage = [CIImage imageWithData:[m_sourceImage TIFFRepresentation]];
+    */
+    m_alpha = 2.0;
     m_delta = 0.01;
+    
     [self fadeOutAndRemove];
 }
 
@@ -59,6 +70,22 @@
     if (m_alpha>0.05) {
         m_alpha -= m_delta;
         [self setAlphaValue:m_alpha];
+        
+        /*
+        CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+        [filter setValue:m_inputImage forKey:@"inputImage"];
+        [filter setValue:[NSNumber numberWithFloat:10*m_alpha] forKey:@"inputRadius"];
+        CIImage *outputImage = [filter valueForKey:@"outputImage"];
+        
+        NSRect outputImageRect = NSRectFromCGRect([outputImage extent]);
+        NSImage* blurredImage = [[NSImage alloc] initWithSize:outputImageRect.size];
+        [blurredImage lockFocus];
+        [outputImage drawAtPoint:NSZeroPoint fromRect:outputImageRect
+                       operation:NSCompositeCopy fraction:1.0];
+        [blurredImage unlockFocus];
+
+        [self setImage:blurredImage];
+        */
         [NSTimer scheduledTimerWithTimeInterval:0.01
                                          target:self
                                        selector:@selector(fadeOutAndRemove)
