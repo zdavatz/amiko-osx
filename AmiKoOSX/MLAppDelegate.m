@@ -58,7 +58,8 @@
     m_delta = 0.01;
     
     [NSApp activateIgnoringOtherApps:YES];
-    
+
+    [window center];
     [window makeKeyAndOrderFront:self];
     [window setOrderedIndex:0];
     [window makeKeyAndOrderFront:self];

@@ -113,6 +113,7 @@ static NSInteger mCurrentSearchState = kTitle;
     m_delta = 0.01;
     [[self window] setAlphaValue:m_alpha];
     [self fadeInAndShow];
+    [[self window] center];
     
     // Allocate some variables
     medi = [NSMutableArray array];
@@ -315,7 +316,7 @@ static NSInteger mCurrentSearchState = kTitle;
 - (void) showHelp: (id)sender
 {
     // Starts Safari
-    NSURL * helpFile = [NSURL URLWithString:@"http://www.ywesee.com/AmiKo/Desktop"];
+    NSURL * helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
     [[NSWorkspace sharedWorkspace] openURL:helpFile];
 }
 
