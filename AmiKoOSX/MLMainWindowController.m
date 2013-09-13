@@ -31,6 +31,11 @@
 #import <mach/mach.h>
 #import <unistd.h>
 
+// static NSString *APP_NAME = @"AmiKoOSX";
+// static NSString *APP_NAME = @"AmiKoOSX-zR";
+// static NSString *APP_NAME = @"CoMedOSX";
+static NSString *APP_NAME = @"CoMedOSX-zR";
+
 enum {
     kAips=0, kHospital=1, kFavorites=2
 };
@@ -39,10 +44,7 @@ enum {
     kTitle=0, kAuthor=1, kAtcCode=2, kRegNr=3, kSubstances=4, kTherapy=5, kWebView=6
 };
 
-/*
-static NSString *SectionTitle_DE = @" Zusammensetzung; Galenische Form; Indikationen; Dosierung; Kontraindikationen; Vorsichtmass.; Interaktionen; Schwangerschaft; Fahrtüchtigkeit; Unerwünschte Wirk.; Überdosierung; Eig./Wirkung; Kinetik; Präklinik; Sonstige Hinweise; Zulassungsnr.; Packungen; Firma; Stand der Info";
-*/
-
+static NSString *SEARCH_STRING = @"Suche";
 static NSString *SEARCH_TITLE = @"Präparat";
 static NSString *SEARCH_AUTHOR = @"Inhaber";
 static NSString *SEARCH_ATCCODE = @"ATC Code";
@@ -104,10 +106,38 @@ static NSInteger mCurrentSearchState = kTitle;
 {
     // [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]
     // self = [super initWithNibName:@"MLMasterViewController" bundle:nil];
-    self = [super initWithWindowNibName:@"MLMainWindow"];    
+    if ([APP_NAME isEqualToString:@"AmiKoOSX"])
+        self = [super initWithWindowNibName:@"MLAmiKoMainWindow"];
+    else if ([APP_NAME isEqualToString:@"AmiKoOSX-zR"])
+        self = [super initWithWindowNibName:@"MLAmiKozRMainWindow"];
+    else if ([APP_NAME isEqualToString:@"CoMedOSX"])
+        self = [super initWithWindowNibName:@"MLCoMedMainWindow"];
+    else if ([APP_NAME isEqualToString:@"CoMedOSX-zR"])
+        self = [super initWithWindowNibName:@"MLCoMedzRMainWindow"];
+    else return nil;
     
     if (!self)
         return nil;
+    
+    if ([[self appLanguage] isEqualToString:@"de"]) {
+        SEARCH_STRING = @"Suche";
+        SEARCH_TITLE = @"Präparat";
+        SEARCH_AUTHOR = @"Inhaber";
+        SEARCH_ATCCODE = @"ATC Code";
+        SEARCH_REGNR = @"Reg. Nr.";
+        SEARCH_SUBSTANCES = @"Wirkstoff";
+        SEARCH_THERAPY = @"Therapie";
+        SEARCH_FACHINFO = @"Fachinformation";
+    } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+        SEARCH_STRING = @"Recherche";
+        SEARCH_TITLE = @"Spécialité";
+        SEARCH_AUTHOR = @"Titulaire";
+        SEARCH_ATCCODE = @"Code ATC";
+        SEARCH_REGNR = @"Nombre Enregistration";
+        SEARCH_SUBSTANCES = @"Principe Active";
+        SEARCH_THERAPY = @"Thérapie";
+        SEARCH_FACHINFO = @"Notice Infopro";
+    }
     
     m_alpha = 0.0;
     m_delta = 0.01;
@@ -121,8 +151,21 @@ static NSInteger mCurrentSearchState = kTitle;
     
     // Open database
     mDb = [[MLDBAdapter alloc] init];
-    [mDb openDatabase];
+    if ([[self appLanguage] isEqualToString:@"de"]) {
+        if (![mDb openDatabase:@"amiko_db_full_idx_de"]) {
+            NSLog(@"No German database!");
+            mDb = nil;
+        }
+    } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+        if (![mDb openDatabase:@"amiko_db_full_idx_fr"]) {
+            NSLog(@"No French database!");
+            mDb = nil;
+        }
+    }
+    
+#ifdef DEBUG
     NSLog(@"Number of records = %ld", (long)[mDb getNumRecords]);
+#endif
     
     favoriteData = [[MLDataStore alloc] init];
     [self loadData];
@@ -189,11 +232,24 @@ static NSInteger mCurrentSearchState = kTitle;
     */
 }
 
+- (NSString *) appLanguage
+{
+    if ([APP_NAME isEqualToString:@"AmiKoOSX"]
+        || [APP_NAME isEqualToString:@"AmiKoOSX-zR"])
+        return @"de";
+    else if ([APP_NAME isEqualToString:@"CoMedOSX"]
+             || [APP_NAME isEqualToString:@"CoMedOSX-zR"])
+        return @"fr";
+    
+    return nil;
+}
+
 - (IBAction) tappedOnStar: (id)sender
 {
     NSInteger row = [self.myTableView rowForView:sender];
+#ifdef DEBUG
     NSLog(@"Tapped on star: %ld", row);
-       
+#endif
     NSString *medRegnrs = [NSString stringWithString:[favoriteKeyData objectAtIndex:row]];
     
     if ([favoriteMedsSet containsObject:medRegnrs])
@@ -308,9 +364,15 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (IBAction) showAboutFile: (id)sender
 {
-    // Starts Safari
-    NSURL * aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_de" withExtension:@"html"];
-    [[NSWorkspace sharedWorkspace] openURL:aboutFile];
+    if ([[self appLanguage] isEqualToString:@"de"]) {
+        NSURL * aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_de" withExtension:@"html"];
+        // Starts Safari
+        [[NSWorkspace sharedWorkspace] openURL:aboutFile];
+    } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+        NSURL * aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_fr" withExtension:@"html"];
+        // Starts Safari
+        [[NSWorkspace sharedWorkspace] openURL:aboutFile];
+    }
 }
 
 - (void) showHelp: (id)sender
@@ -340,9 +402,9 @@ static NSInteger mCurrentSearchState = kTitle;
 - (void) switchDatabases: (NSToolbarItem *)item
 {
     static bool inProgress = false;    
-    
+#ifdef DEBUG
     NSLog(@"%s", __FUNCTION__);
-    
+#endif
     switch (item.tag) {
         case 0:
         {
@@ -407,17 +469,20 @@ static NSInteger mCurrentSearchState = kTitle;
     
     NSDate *startTime = [NSDate date];
     
-    for (NSString *regnrs in favoriteMedsSet) {
-        NSArray *med = [mDb searchRegNr:regnrs];
-        [medList addObject:med[0]];
+    if (mDb!=nil) {
+        for (NSString *regnrs in favoriteMedsSet) {
+            NSArray *med = [mDb searchRegNr:regnrs];
+            [medList addObject:med[0]];
+        }
+        
+        NSDate *endTime = [NSDate date];
+        NSTimeInterval execTime = [endTime timeIntervalSinceDate:startTime];
+#ifdef DEBUG
+        NSLog(@"%ld Favoriten in %dms", [medList count], (int)(1000*execTime+0.5));
+#endif
+        return medList;
     }
-    
-    NSDate *endTime = [NSDate date];
-    NSTimeInterval execTime = [endTime timeIntervalSinceDate:startTime];
-    
-    NSLog(@"%ld Favoriten in %dms", [medList count], (int)(1000*execTime+0.5));
-    
-    return medList;
+    return nil;
 }
 
 - (void) saveData
@@ -452,37 +517,37 @@ static NSInteger mCurrentSearchState = kTitle;
         case kTitle:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kTitle;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"Suche %@", SEARCH_TITLE]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_TITLE]];
              break;
         case kAuthor:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kAuthor;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"Suche %@", SEARCH_AUTHOR]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_AUTHOR]];
             break;
         case kAtcCode:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kAtcCode;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"Suche %@", SEARCH_ATCCODE]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_ATCCODE]];
             break;
         case kRegNr:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kRegNr;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"Suche %@", SEARCH_REGNR]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_REGNR]];
             break;
         case kSubstances:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kSubstances;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"Suche %@", SEARCH_SUBSTANCES]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_SUBSTANCES]];
             break;
         case kTherapy:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kTherapy;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"Suche %@", SEARCH_THERAPY]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_THERAPY]];
             break;
         case kWebView:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kWebView;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"Suche %@", SEARCH_FACHINFO]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_FACHINFO]];
             break;
     }
     mCurrentSearchState = searchState;
@@ -517,8 +582,9 @@ static NSInteger mCurrentSearchState = kTitle;
     NSTimeInterval execTime = [endTime timeIntervalSinceDate:startTime];
     
     int timeForSearch_ms = (int)(1000*execTime+0.5);
+#ifdef DEBUG
     NSLog(@"%ld Treffer in %dms", (unsigned long)[searchRes count], timeForSearch_ms);
-    
+#endif
     return searchRes;
 }
 

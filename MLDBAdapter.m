@@ -81,11 +81,15 @@ static NSString *FULL_TABLE = nil;
  */
 #pragma mark Instance functions
 
-- (void) openDatabase
+- (int) openDatabase: (NSString *)name
 {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_de" ofType:@"db"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"db"];
     
-    mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
+    if (filePath!=nil )
+        mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
+    else
+        return 0;
+    return 1;
 }
 
 - (void) closeDatabase
