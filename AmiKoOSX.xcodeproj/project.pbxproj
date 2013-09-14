@@ -17,10 +17,11 @@
 		D5E91AD617E3955300B66B27 /* CoMedzRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */; };
 		D5E91AD817E3956000B66B27 /* CoMedMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */; };
 		D5E91ADA17E3956C00B66B27 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD917E3956C00B66B27 /* AmiKoMainMenu.xib */; };
+		D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */; };
 		D5EBC68117C912FF00EBEF39 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBC68017C912FF00EBEF39 /* Cocoa.framework */; };
 		D5EBC68B17C912FF00EBEF39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */; };
 		D5EBC68D17C912FF00EBEF39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC68C17C912FF00EBEF39 /* main.m */; };
-		D5EBC69117C912FF00EBEF39 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68F17C912FF00EBEF39 /* Credits.rtf */; };
+		D5EBC69117C912FF00EBEF39 /* Credits-de.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68F17C912FF00EBEF39 /* Credits-de.rtf */; };
 		D5EBC69417C912FF00EBEF39 /* MLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC69317C912FF00EBEF39 /* MLAppDelegate.m */; };
 		D5EBC69717C912FF00EBEF39 /* AmiKozRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC69517C912FF00EBEF39 /* AmiKozRMainMenu.xib */; };
 		D5EBC6A417C913B100EBEF39 /* MLMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6A217C913B100EBEF39 /* MLMainWindowController.m */; };
@@ -58,6 +59,7 @@
 		D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoMedzRMainMenu.xib; sourceTree = "<group>"; };
 		D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoMedMainMenu.xib; sourceTree = "<group>"; };
 		D5E91AD917E3956C00B66B27 /* AmiKoMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKoMainMenu.xib; sourceTree = "<group>"; };
+		D5E91B5517E4C6C100B66B27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = "en.lproj/Credits-fr.rtf"; sourceTree = "<group>"; };
 		D5EBC67D17C912FF00EBEF39 /* AmiKoOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmiKoOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5EBC68017C912FF00EBEF39 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D5EBC68317C912FF00EBEF39 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -67,7 +69,7 @@
 		D5EBC68A17C912FF00EBEF39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D5EBC68C17C912FF00EBEF39 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D5EBC68E17C912FF00EBEF39 /* AmiKoOSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AmiKoOSX-Prefix.pch"; sourceTree = "<group>"; };
-		D5EBC69017C912FF00EBEF39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		D5EBC69017C912FF00EBEF39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = "en.lproj/Credits-de.rtf"; sourceTree = "<group>"; };
 		D5EBC69217C912FF00EBEF39 /* MLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLAppDelegate.h; sourceTree = "<group>"; };
 		D5EBC69317C912FF00EBEF39 /* MLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLAppDelegate.m; sourceTree = "<group>"; };
 		D5EBC69617C912FF00EBEF39 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AmiKozRMainMenu.xib; sourceTree = "<group>"; };
@@ -195,7 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				D5EBC68817C912FF00EBEF39 /* AmiKoOSX-Info.plist */,
-				D5EBC68F17C912FF00EBEF39 /* Credits.rtf */,
+				D5EBC68F17C912FF00EBEF39 /* Credits-de.rtf */,
+				D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */,
 				D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */,
 				D5EBC68C17C912FF00EBEF39 /* main.m */,
 				D5EBC68E17C912FF00EBEF39 /* AmiKoOSX-Prefix.pch */,
@@ -325,7 +328,7 @@
 			files = (
 				D5EBC6CE17D218D900EBEF39 /* MLSearchWebView.js in Resources */,
 				D5EBC68B17C912FF00EBEF39 /* InfoPlist.strings in Resources */,
-				D5EBC69117C912FF00EBEF39 /* Credits.rtf in Resources */,
+				D5EBC69117C912FF00EBEF39 /* Credits-de.rtf in Resources */,
 				D5EBC69717C912FF00EBEF39 /* AmiKozRMainMenu.xib in Resources */,
 				D5EBC6A917C9200000EBEF39 /* amiko_db_full_idx_de.db in Resources */,
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
@@ -344,6 +347,7 @@
 				D5E91AD617E3955300B66B27 /* CoMedzRMainMenu.xib in Resources */,
 				D5E91AD817E3956000B66B27 /* CoMedMainMenu.xib in Resources */,
 				D5E91ADA17E3956C00B66B27 /* AmiKoMainMenu.xib in Resources */,
+				D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +376,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5E91B5517E4C6C100B66B27 /* en */,
+			);
+			name = "Credits-fr.rtf";
+			sourceTree = "<group>";
+		};
 		D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -380,12 +392,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		D5EBC68F17C912FF00EBEF39 /* Credits.rtf */ = {
+		D5EBC68F17C912FF00EBEF39 /* Credits-de.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D5EBC69017C912FF00EBEF39 /* en */,
 			);
-			name = Credits.rtf;
+			name = "Credits-de.rtf";
 			sourceTree = "<group>";
 		};
 		D5EBC69517C912FF00EBEF39 /* AmiKozRMainMenu.xib */ = {

@@ -48,5 +48,6 @@
 - (IBAction) toolbarAction:(id)sender;
 - (IBAction) printSearchResult:(id)sender;
 - (IBAction) showAboutFile: (id)sender;
+- (IBAction) showAboutPanel: (id)sender;
 
 @end

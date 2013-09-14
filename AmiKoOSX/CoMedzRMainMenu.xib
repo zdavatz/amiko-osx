@@ -142,7 +142,7 @@
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="428040735">
 									<reference key="NSMenu" ref="720053764"/>
-									<string key="NSTitle">Fachinformation Imprimer...</string>
+									<string key="NSTitle">Imprimer Notice Infopro...</string>
 									<string key="NSKeyEquiv">p</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -151,7 +151,7 @@
 								</object>
 								<object class="NSMenuItem" id="49223823">
 									<reference key="NSMenu" ref="720053764"/>
-									<string key="NSTitle">Suchresultat Imprimer...</string>
+									<string key="NSTitle">Imprimer Résultat de Recherche...</string>
 									<string key="NSKeyEquiv">t</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>

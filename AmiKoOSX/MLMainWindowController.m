@@ -31,6 +31,12 @@
 #import <mach/mach.h>
 #import <unistd.h>
 
+/** 
+ * 1. Select APP_NAME
+ * 2. Select target name
+ * 3. Change settings in .plist file
+ */
+
 // static NSString *APP_NAME = @"AmiKoOSX";
 // static NSString *APP_NAME = @"AmiKoOSX-zR";
 // static NSString *APP_NAME = @"CoMedOSX";
@@ -244,6 +250,18 @@ static NSInteger mCurrentSearchState = kTitle;
     return nil;
 }
 
+- (NSString *) notSpecified
+{
+    if ([APP_NAME isEqualToString:@"AmiKoOSX"]
+        || [APP_NAME isEqualToString:@"AmiKoOSX-zR"])
+        return @"k.A.";
+    else if ([APP_NAME isEqualToString:@"CoMedOSX"]
+             || [APP_NAME isEqualToString:@"CoMedOSX-zR"])
+        return @"n.s.";
+    
+    return nil;
+}
+
 - (IBAction) tappedOnStar: (id)sender
 {
     NSInteger row = [self.myTableView rowForView:sender];
@@ -373,6 +391,35 @@ static NSInteger mCurrentSearchState = kTitle;
         // Starts Safari
         [[NSWorkspace sharedWorkspace] openURL:aboutFile];
     }
+}
+
+// A small custom about box
+- (IBAction) showAboutPanel: (id)sender
+{
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *creditsPath = nil;
+    if ([[self appLanguage] isEqualToString:@"de"])
+        creditsPath = [mainBundle pathForResource:@"Credits-de" ofType:@"rtf"];
+    else if ([[self appLanguage] isEqualToString:@"fr"])
+        creditsPath = [mainBundle pathForResource:@"Credits-fr" ofType:@"rtf"];
+    NSAttributedString *credits = [[NSAttributedString alloc] initWithPath:creditsPath documentAttributes:nil];
+    
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd.MM.yyyy"];
+    NSString *compileDate = [dateFormat stringFromDate:today];
+    
+    NSString *versionString = [NSString stringWithFormat:@"%@", compileDate];
+   
+    NSDictionary *optionsDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 credits, @"Credits",
+                                 [mainBundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
+                                 [mainBundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
+                                 [mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
+                                 versionString, @"Version",
+                                 nil];
+    
+    [NSApp orderFrontStandardAboutPanelWithOptions:optionsDict];
 }
 
 - (void) showHelp: (id)sender
@@ -595,14 +642,14 @@ static NSInteger mCurrentSearchState = kTitle;
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = @"k.A.";
+        m.title = [self notSpecified]; // @"k.A.";
     if (![packinfo isEqual:[NSNull null]]) {
         if ([packinfo length]>0)
             m.subTitle = packinfo;
         else
-            m.subTitle = @"k.A.";
+            m.subTitle = [self notSpecified]; // @"k.A.";
     } else
-        m.subTitle = @"k.A.";
+        m.subTitle = [self notSpecified]; // @"k.A.";
     m.medId = medId;
     
     [medi addObject:m];
@@ -615,14 +662,14 @@ static NSInteger mCurrentSearchState = kTitle;
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = @"k.A.";
+        m.title = [self notSpecified]; // @"k.A.";
     if (![author isEqual:[NSNull null]]) {
         if ([author length]>0)
             m.subTitle = author;
         else
-            m.subTitle = @"k.A.";
+            m.subTitle = [self notSpecified]; // @"k.A.";
     } else
-        m.subTitle = @"k.A.";
+        m.subTitle = [self notSpecified]; // @"k.A.";
     m.medId = medId;
     
     [medi addObject:m];
@@ -635,7 +682,7 @@ static NSInteger mCurrentSearchState = kTitle;
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = @"k.A.";
+        m.title = [self notSpecified]; // @"k.A.";
     NSArray *m_atc = [atccode componentsSeparatedByString:@";"];
     NSArray *m_class = [atcclass componentsSeparatedByString:@";"];
     NSMutableString *m_atccode_str = nil;
@@ -652,11 +699,11 @@ static NSInteger mCurrentSearchState = kTitle;
     else if ([m_class count] == 3)
         m_atcclass = [NSMutableString stringWithString:[m_class objectAtIndex:1]];
     if ([m_atccode_str isEqual:[NSNull null]])
-        [m_atccode_str setString:@"k.A."];
+        [m_atccode_str setString:[self notSpecified]];
     if ([m_atcclass_str isEqual:[NSNull null]])
-        [m_atcclass_str setString:@"k.A."];
+        [m_atcclass_str setString:[self notSpecified]];
     if ([m_atcclass isEqual:[NSNull null]])
-        [m_atcclass setString:@"k.A."];
+        [m_atcclass setString:[self notSpecified]];
     m.subTitle = [NSString stringWithFormat:@"%@ - %@\n%@", m_atccode_str, m_atcclass_str, m_atcclass];
     m.medId = medId;
     
@@ -670,13 +717,13 @@ static NSInteger mCurrentSearchState = kTitle;
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = @"k.A.";
+        m.title = [self notSpecified]; // @"k.A.";
     NSMutableString *m_regnrs = [NSMutableString stringWithString:regnrs];
     NSMutableString *m_auth = [NSMutableString stringWithString:author];
     if ([m_regnrs isEqual:[NSNull null]])
-        [m_regnrs setString:@"k.A."];
+        [m_regnrs setString:[self notSpecified]];
     if ([m_auth isEqual:[NSNull null]])
-        [m_auth setString:@"k.A."];
+        [m_auth setString:[self notSpecified]];
     m.subTitle = [NSString stringWithFormat:@"%@ - %@", m_regnrs, m_auth];
     m.medId = medId;
     
@@ -693,13 +740,13 @@ static NSInteger mCurrentSearchState = kTitle;
         m.title = substances;
     }
     else
-        m.title = @"k.A.";
+        m.title = [self notSpecified]; // @"k.A.";
     NSMutableString *m_title = [NSMutableString stringWithString:title];
     NSMutableString *m_auth = [NSMutableString stringWithString:author];
     if ([m_title isEqual:[NSNull null]])
-        [m_title setString:@"k.A."];
+        [m_title setString:[self notSpecified]];
     if ([m_auth isEqual:[NSNull null]])
-        [m_auth setString:@"k.A."];
+        [m_auth setString:[self notSpecified]];
     m.subTitle = [NSString stringWithFormat:@"%@ - %@", m_title, m_auth];
     m.medId = medId;
     
@@ -713,7 +760,7 @@ static NSInteger mCurrentSearchState = kTitle;
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = @"k.A.";
+        m.title = [self notSpecified]; // @"k.A.";
     NSArray *m_applications = [applications componentsSeparatedByString:@";"];
     NSMutableString *m_swissmedic = nil;
     NSMutableString *m_bag = nil;
@@ -726,9 +773,9 @@ static NSInteger mCurrentSearchState = kTitle;
         }
     }
     if ([m_swissmedic isEqual:[NSNull null]])
-        [m_swissmedic setString:@"k.A."];
+        [m_swissmedic setString:[self notSpecified]];
     if ([m_bag isEqual:[NSNull null]])
-        [m_bag setString:@"k.A."];
+        [m_bag setString:[self notSpecified]]; // @"k.A.";
     m.subTitle = [NSString stringWithFormat:@"%@\n%@", m_swissmedic, m_bag];
     m.medId = medId;
     
