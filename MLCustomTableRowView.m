@@ -49,16 +49,23 @@
     // Draw selected row rectangle here
     if (self.selectionHighlightStyle != NSTableViewSelectionHighlightStyleNone) {
         NSRect selectionRect = NSInsetRect(self.bounds, 0.0, 0.0);
-        /*
-        [[NSColor colorWithCalibratedWhite:.85 alpha:1.0] setStroke];
-        [[NSColor colorWithCalibratedWhite:.85 alpha:1.0] setFill];
-        */
+        /* 
         [[NSColor colorWithCalibratedRed:228/255.0 green:228/255.0 blue:255/255.0 alpha:1.0] setStroke];
         [[NSColor colorWithCalibratedRed:228/255.0 green:228/255.0 blue:255/255.0 alpha:1.0] setFill];
-        
+         
         NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:8 yRadius:8];
         [selectionPath fill];
         [selectionPath stroke];
+        */
+        // Define gradient colors
+        NSColor* gradientStartColor = [NSColor colorWithCalibratedRed:210/255.0 green:210/255.0 blue:230/255.0 alpha:1.0];
+        NSColor* gradientEndColor = [NSColor colorWithCalibratedRed:230/255.0 green:230/255.0 blue:255/255.0 alpha:1.0];
+        // Gradient Declarations
+        NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:gradientStartColor endingColor:gradientEndColor];
+        // Rounded Rectangle Drawing
+        NSBezierPath *roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:8 yRadius:8];
+        [gradient drawInBezierPath:roundedRectanglePath angle:90];
     }
 }
+
 @end
