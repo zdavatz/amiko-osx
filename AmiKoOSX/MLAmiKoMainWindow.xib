@@ -71,13 +71,12 @@
 						</set>
 						<string key="NSFrame">{{-3, -3}, {1006, 676}}</string>
 						<reference key="NSSuperview" ref="911422688"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="562321458">
 							<int key="NSCellFlags">134217728</int>
 							<int key="NSCellFlags2">33554432</int>
-							<object class="NSCustomResource" key="NSContents" id="788368519">
+							<object class="NSCustomResource" key="NSContents" id="662842931">
 								<string key="NSClassName">NSImage</string>
 								<string key="NSResourceName">app_icon_512x512</string>
 							</object>
@@ -93,7 +92,6 @@
 				</array>
 				<string key="NSFrameSize">{1000, 670}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="470498808"/>
 			</object>
 			<object class="NSWindowTemplate" id="1005">
@@ -123,7 +121,7 @@
 							<string key="NSToolbarItemPaletteLabel">About</string>
 							<string key="NSToolbarItemToolTip">About</string>
 							<nil key="NSToolbarItemView"/>
-							<reference key="NSToolbarItemImage" ref="788368519"/>
+							<reference key="NSToolbarItemImage" ref="662842931"/>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{0, 0}</string>
@@ -292,7 +290,6 @@
 						<reference ref="940612096"/>
 						<reference ref="385343132"/>
 						<reference ref="797004835"/>
-						<reference ref="581602912"/>
 						<reference ref="1193283"/>
 						<reference ref="837730608"/>
 					</array>
@@ -3476,7 +3473,6 @@
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="onButtonPressed:">id</string>
-						<string key="printDocument:">id</string>
 						<string key="printSearchResult:">id</string>
 						<string key="searchNow:">id</string>
 						<string key="showAboutFile:">id</string>
@@ -3487,10 +3483,6 @@
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="onButtonPressed:">
 							<string key="name">onButtonPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="printDocument:">
-							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="printSearchResult:">
