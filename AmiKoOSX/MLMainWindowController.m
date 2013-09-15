@@ -31,16 +31,17 @@
 #import <mach/mach.h>
 #import <unistd.h>
 
-/** 
- * 1. Select APP_NAME
- * 2. Select target name
- * 3. Change settings in .plist file
- */
-
-// static NSString *APP_NAME = @"AmiKoOSX";
-// static NSString *APP_NAME = @"AmiKoOSX-zR";
-// static NSString *APP_NAME = @"CoMedOSX";
+#if defined (AMIKOOSX)
+static NSString *APP_NAME = @"AmiKoOSX";
+#elif defined (AMIKOOSX_ZR)
+static NSString *APP_NAME = @"AmiKoOSX-zR";
+#elif defined (COMEDOSX)
+static NSString *APP_NAME = @"CoMedOSX";
+#elif defined (COMEDOSX_ZR)
 static NSString *APP_NAME = @"CoMedOSX-zR";
+#else
+static NSString *APP_NAME = @"AmiKoOSX";
+#endif
 
 enum {
     kAips=0, kHospital=1, kFavorites=2
@@ -238,6 +239,18 @@ static NSInteger mCurrentSearchState = kTitle;
     */
 }
 
+- (NSString *) appOwner
+{
+    if ([APP_NAME isEqualToString:@"AmiKoOSX"]
+        || [APP_NAME isEqualToString:@"CoMedOSX"])
+        return @"ywesee";
+    else if ([APP_NAME isEqualToString:@"AmiKoOSX-zR"]
+             || [APP_NAME isEqualToString:@"CoMedOSX-zR"])
+        return @"zurrose";
+    
+    return nil;
+}
+
 - (NSString *) appLanguage
 {
     if ([APP_NAME isEqualToString:@"AmiKoOSX"]
@@ -425,8 +438,13 @@ static NSInteger mCurrentSearchState = kTitle;
 - (void) showHelp: (id)sender
 {
     // Starts Safari
-    NSURL * helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
-    [[NSWorkspace sharedWorkspace] openURL:helpFile];
+    if ([[self appOwner] isEqualToString:@"zurrose"]) {
+        NSURL * helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
+        [[NSWorkspace sharedWorkspace] openURL:helpFile];
+    } else if ([[self appOwner] isEqualToString:@"ywesee"]) {
+        NSURL * helpFile = [NSURL URLWithString:@"http://www.ywesee.com/AmiKo/Desktop"];
+        [[NSWorkspace sharedWorkspace] openURL:helpFile];
+    }
 }
 
 - (void) launchProgressIndicator

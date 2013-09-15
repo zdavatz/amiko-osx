@@ -312,7 +312,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="439893737">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSImageView" id="561752908">
@@ -328,6 +328,7 @@
 							</set>
 							<string key="NSFrame">{{-3, -8}, {966, 651}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="233954335">
@@ -335,7 +336,7 @@
 								<int key="NSCellFlags2">33554432</int>
 								<object class="NSCustomResource" key="NSContents">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">Zur_Rose_1000x670px</string>
+									<string key="NSResourceName">app_icon_512x512</string>
 								</object>
 								<string key="NSCellIdentifier">_NS:9</string>
 								<int key="NSAlign">0</int>
@@ -348,6 +349,8 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{960, 640}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="561752908"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
@@ -923,20 +926,16 @@
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="onButtonPressed:">id</string>
-						<string key="printDocument:">id</string>
 						<string key="printSearchResult:">id</string>
 						<string key="searchNow:">id</string>
 						<string key="showAboutFile:">id</string>
+						<string key="showAboutPanel:">id</string>
 						<string key="tappedOnStar:">id</string>
 						<string key="toolbarAction:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="onButtonPressed:">
 							<string key="name">onButtonPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="printDocument:">
-							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="printSearchResult:">
@@ -949,6 +948,10 @@
 						</object>
 						<object class="IBActionInfo" key="showAboutFile:">
 							<string key="name">showAboutFile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showAboutPanel:">
+							<string key="name">showAboutPanel:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="tappedOnStar:">
@@ -1021,7 +1024,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>
-			<string key="Zur_Rose_1000x670px">{1000, 670}</string>
+			<string key="app_icon_512x512">{512, 512}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
 	</data>
