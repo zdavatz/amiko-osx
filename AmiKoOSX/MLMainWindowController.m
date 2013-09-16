@@ -531,8 +531,10 @@ static NSInteger mCurrentSearchState = kTitle;
 - (NSArray *) retrieveAllFavorites
 {
     NSMutableArray *medList = [NSMutableArray array];
-    
+
+#ifdef DEBUG
     NSDate *startTime = [NSDate date];
+#endif
     
     if (mDb!=nil) {
         for (NSString *regnrs in favoriteMedsSet) {
@@ -540,9 +542,9 @@ static NSInteger mCurrentSearchState = kTitle;
             [medList addObject:med[0]];
         }
         
+#ifdef DEBUG
         NSDate *endTime = [NSDate date];
         NSTimeInterval execTime = [endTime timeIntervalSinceDate:startTime];
-#ifdef DEBUG
         NSLog(@"%ld Favoriten in %dms", [medList count], (int)(1000*execTime+0.5));
 #endif
         return medList;
@@ -622,7 +624,9 @@ static NSInteger mCurrentSearchState = kTitle;
 {    
     NSArray *searchRes = [NSArray array];
     
+#ifdef DEBUG
     NSDate *startTime = [NSDate date];
+#endif
     
     if (mCurrentSearchState == kTitle) {
         searchRes = [mDb searchTitle:searchQuery];
@@ -642,12 +646,12 @@ static NSInteger mCurrentSearchState = kTitle;
     else if (mCurrentSearchState == kTherapy) {
         searchRes = [mDb searchApplication:searchQuery];
     }
-    
+
+#ifdef DEBUG    
     NSDate *endTime = [NSDate date];
     NSTimeInterval execTime = [endTime timeIntervalSinceDate:startTime];
-    
+
     int timeForSearch_ms = (int)(1000*execTime+0.5);
-#ifdef DEBUG
     NSLog(@"%ld Treffer in %dms", (unsigned long)[searchRes count], timeForSearch_ms);
 #endif
     return searchRes;
