@@ -529,7 +529,7 @@
 													<object class="NSButtonCell" key="NSCell" id="677362746">
 														<int key="NSCellFlags">-2080374784</int>
 														<int key="NSCellFlags2">0</int>
-														<string key="NSContents">Principe Active</string>
+														<string key="NSContents">Principe Actif</string>
 														<reference key="NSSupport" ref="480366027"/>
 														<string key="NSCellIdentifier">_NS:9</string>
 														<reference key="NSControlView" ref="65010575"/>
@@ -555,7 +555,7 @@
 													<object class="NSButtonCell" key="NSCell" id="881199047">
 														<int key="NSCellFlags">-2080374784</int>
 														<int key="NSCellFlags2">0</int>
-														<string key="NSContents">Nombre Enregistration</string>
+														<string key="NSContents">No d'autorisation</string>
 														<reference key="NSSupport" ref="480366027"/>
 														<string key="NSCellIdentifier">_NS:9</string>
 														<reference key="NSControlView" ref="648656142"/>
@@ -633,7 +633,7 @@
 													<object class="NSButtonCell" key="NSCell" id="877838759">
 														<int key="NSCellFlags">-2080374784</int>
 														<int key="NSCellFlags2">0</int>
-														<string key="NSContents">Spécialité</string>
+                            <string key="NSContents">Préparation</string>
 														<reference key="NSSupport" ref="480366027"/>
 														<string key="NSCellIdentifier">_NS:9</string>
 														<reference key="NSControlView" ref="938233441"/>

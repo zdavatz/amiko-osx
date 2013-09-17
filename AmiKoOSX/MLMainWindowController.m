@@ -137,11 +137,11 @@ static NSInteger mCurrentSearchState = kTitle;
         SEARCH_FACHINFO = @"Fachinformation";
     } else if ([[self appLanguage] isEqualToString:@"fr"]) {
         SEARCH_STRING = @"Recherche";
-        SEARCH_TITLE = @"Spécialité";
+        SEARCH_TITLE = @"Préparation";
         SEARCH_AUTHOR = @"Titulaire";
         SEARCH_ATCCODE = @"Code ATC";
-        SEARCH_REGNR = @"Nombre Enregistration";
-        SEARCH_SUBSTANCES = @"Principe Active";
+        SEARCH_REGNR = @"No d'autorisation";
+        SEARCH_SUBSTANCES = @"Principe Actif";
         SEARCH_THERAPY = @"Thérapie";
         SEARCH_FACHINFO = @"Notice Infopro";
     }
