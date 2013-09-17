@@ -312,7 +312,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="439893737">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSImageView" id="561752908">
@@ -328,6 +328,7 @@
 							</set>
 							<string key="NSFrame">{{-3, -8}, {966, 651}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="233954335">
@@ -348,6 +349,8 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{960, 640}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="561752908"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
@@ -926,6 +929,7 @@
 						<string key="printSearchResult:">id</string>
 						<string key="searchNow:">id</string>
 						<string key="showAboutFile:">id</string>
+						<string key="showAboutPanel:">id</string>
 						<string key="tappedOnStar:">id</string>
 						<string key="toolbarAction:">id</string>
 					</dictionary>
@@ -944,6 +948,10 @@
 						</object>
 						<object class="IBActionInfo" key="showAboutFile:">
 							<string key="name">showAboutFile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showAboutPanel:">
+							<string key="name">showAboutPanel:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="tappedOnStar:">
