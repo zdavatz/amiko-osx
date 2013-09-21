@@ -4,9 +4,9 @@
  
  Created on 24/08/2013.
  
- This file is part of AMiKoOSX.
+ This file is part of AmiKo for OSX.
  
- AmiKoOSX is free software: you can redistribute it and/or modify
+ AmiKo for OSX is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
  (at your option) any later version.

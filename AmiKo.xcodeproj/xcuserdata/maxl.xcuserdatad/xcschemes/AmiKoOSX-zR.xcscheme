@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D5E91BB517E5E8E800B66B27"
-               BuildableName = "CoMedOSX.app"
-               BlueprintName = "CoMedOSX"
-               ReferencedContainer = "container:AmiKoOSX.xcodeproj">
+               BlueprintIdentifier = "D5E91B5717E5E24000B66B27"
+               BuildableName = "AmiKo-zR.app"
+               BlueprintName = "AmiKo-zR"
+               ReferencedContainer = "container:AmiKo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D5E91BB517E5E8E800B66B27"
-            BuildableName = "CoMedOSX.app"
-            BlueprintName = "CoMedOSX"
-            ReferencedContainer = "container:AmiKoOSX.xcodeproj">
+            BlueprintIdentifier = "D5E91B5717E5E24000B66B27"
+            BuildableName = "AmiKo-zR.app"
+            BlueprintName = "AmiKo-zR"
+            ReferencedContainer = "container:AmiKo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,10 +51,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D5E91BB517E5E8E800B66B27"
-            BuildableName = "CoMedOSX.app"
-            BlueprintName = "CoMedOSX"
-            ReferencedContainer = "container:AmiKoOSX.xcodeproj">
+            BlueprintIdentifier = "D5E91B5717E5E24000B66B27"
+            BuildableName = "AmiKo-zR.app"
+            BlueprintName = "AmiKo-zR"
+            ReferencedContainer = "container:AmiKo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D5E91BB517E5E8E800B66B27"
-            BuildableName = "CoMedOSX.app"
-            BlueprintName = "CoMedOSX"
-            ReferencedContainer = "container:AmiKoOSX.xcodeproj">
+            BlueprintIdentifier = "D5E91B5717E5E24000B66B27"
+            BuildableName = "AmiKo-zR.app"
+            BlueprintName = "AmiKo-zR"
+            ReferencedContainer = "container:AmiKo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

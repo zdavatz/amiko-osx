@@ -98,7 +98,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{120, 400}, {992, 657}}</string>
 				<int key="NSWTFlags">544735232</int>
-				<string key="NSWindowTitle">CoMedOSX-zR</string>
+				<string key="NSWindowTitle">CoMed-zR</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<object class="NSToolbar" key="NSViewClass" id="534265036">
 					<object class="NSMutableString" key="NSToolbarIdentifier">
@@ -3475,6 +3475,7 @@
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="onButtonPressed:">id</string>
+						<string key="printDocument:">id</string>
 						<string key="printSearchResult:">id</string>
 						<string key="searchNow:">id</string>
 						<string key="showAboutFile:">id</string>
@@ -3485,6 +3486,10 @@
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="onButtonPressed:">
 							<string key="name">onButtonPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="printDocument:">
+							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="printSearchResult:">

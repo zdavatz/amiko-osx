@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */; };
+		D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
+		D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */; };
+		D52A0D7A17EDC60E003BF272 /* AmiKo.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */; };
 		D536126617E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D536126717E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D536126817E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
@@ -103,10 +107,10 @@
 		D5E91BD917E5E8E800B66B27 /* MLCoMedMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD117E3886500B66B27 /* MLCoMedMainWindow.xib */; };
 		D5E91BDC17E5E8E800B66B27 /* CoMedMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */; };
 		D5E91BDE17E5E8E800B66B27 /* Credits-fr.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */; };
-		D5E91BE417E601AF00B66B27 /* AmiKoOSX-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BB417E5E8E500B66B27 /* AmiKoOSX-Info.plist */; };
-		D5E91BE517E601B400B66B27 /* CoMedOSX-zR-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68817C912FF00EBEF39 /* CoMedOSX-zR-Info.plist */; };
-		D5E91BE617E601B700B66B27 /* AmiKoOSX-zR-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B8517E5E24000B66B27 /* AmiKoOSX-zR-Info.plist */; };
-		D5E91BE717E601BA00B66B27 /* CoMedOSX-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BE317E5E8E900B66B27 /* CoMedOSX-Info.plist */; };
+		D5E91BE417E601AF00B66B27 /* AmiKo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */; };
+		D5E91BE517E601B400B66B27 /* CoMed-zR-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68817C912FF00EBEF39 /* CoMed-zR-Info.plist */; };
+		D5E91BE617E601B700B66B27 /* AmiKo-zR-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */; };
+		D5E91BE717E601BA00B66B27 /* CoMed-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */; };
 		D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */; };
 		D5E91BF017E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */; };
 		D5E91BF217E6061900B66B27 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BF117E6061900B66B27 /* amiko_db_full_idx_fr.db */; };
@@ -139,11 +143,11 @@
 		D5EBC6E117D5214300EBEF39 /* 10-medical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E017D5214300EBEF39 /* 10-medical@2x.png */; };
 		D5EBC6E317D521A500EBEF39 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
 		D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */; };
-		D5F6BB2C17E8BCA800DCBD16 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2B17E8BCA800DCBD16 /* amikoosx_splash_1000x670.png */; };
-		D5F6BB3017E8BDBE00DCBD16 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2E17E8BDBE00DCBD16 /* comedosx_splash_1000x670.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amikoosx_splash_1000x670.png; sourceTree = "<group>"; };
+		D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comedosx_splash_1000x670.png; sourceTree = "<group>"; };
 		D536126517E770A80087B132 /* amiko.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = amiko.iconset; sourceTree = "<group>"; };
 		D539C10417DCED1D00759260 /* MLSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSplashScreen.h; sourceTree = "<group>"; };
 		D539C10517DCED1D00759260 /* MLSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSplashScreen.m; sourceTree = "<group>"; };
@@ -156,25 +160,25 @@
 		D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoMedMainMenu.xib; sourceTree = "<group>"; };
 		D5E91AD917E3956C00B66B27 /* AmiKoMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		D5E91B5517E4C6C100B66B27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = "en.lproj/Credits-fr.rtf"; sourceTree = "<group>"; };
-		D5E91B8417E5E24000B66B27 /* AmiKoOSX-zR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AmiKoOSX-zR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5E91B8517E5E24000B66B27 /* AmiKoOSX-zR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKoOSX-zR-Info.plist"; sourceTree = SOURCE_ROOT; };
-		D5E91BB317E5E8E400B66B27 /* AmiKoOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmiKoOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5E91BB417E5E8E500B66B27 /* AmiKoOSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKoOSX-Info.plist"; sourceTree = SOURCE_ROOT; };
-		D5E91BE217E5E8E800B66B27 /* CoMedOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoMedOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5E91BE317E5E8E900B66B27 /* CoMedOSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoMedOSX-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D5E91B8417E5E24000B66B27 /* AmiKo-zR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AmiKo-zR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-zR-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D5E91BB317E5E8E400B66B27 /* AmiKo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmiKo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D5E91BE217E5E8E800B66B27 /* CoMed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoMed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoMed-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_de.db; sourceTree = "<group>"; };
 		D5E91BF117E6061900B66B27 /* amiko_db_full_idx_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_fr.db; sourceTree = "<group>"; };
 		D5E91BF417E6065C00B66B27 /* amiko_report_de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = amiko_report_de.html; sourceTree = "<group>"; };
 		D5E91BFA17E6074D00B66B27 /* amiko_report_fr.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = amiko_report_fr.html; sourceTree = "<group>"; };
-		D5EBC67D17C912FF00EBEF39 /* CoMedOSX-zR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoMedOSX-zR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5EBC67D17C912FF00EBEF39 /* CoMed-zR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoMed-zR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5EBC68017C912FF00EBEF39 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D5EBC68317C912FF00EBEF39 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D5EBC68417C912FF00EBEF39 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D5EBC68517C912FF00EBEF39 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D5EBC68817C912FF00EBEF39 /* CoMedOSX-zR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoMedOSX-zR-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D5EBC68817C912FF00EBEF39 /* CoMed-zR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoMed-zR-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D5EBC68A17C912FF00EBEF39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D5EBC68C17C912FF00EBEF39 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D5EBC68E17C912FF00EBEF39 /* AmiKoOSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AmiKoOSX-Prefix.pch"; sourceTree = "<group>"; };
+		D5EBC68E17C912FF00EBEF39 /* AmiKo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AmiKo-Prefix.pch"; sourceTree = "<group>"; };
 		D5EBC69017C912FF00EBEF39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = "en.lproj/Credits-de.rtf"; sourceTree = "<group>"; };
 		D5EBC69217C912FF00EBEF39 /* MLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLAppDelegate.h; sourceTree = "<group>"; };
 		D5EBC69317C912FF00EBEF39 /* MLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLAppDelegate.m; sourceTree = "<group>"; };
@@ -205,12 +209,10 @@
 		D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star@2x.png"; sourceTree = "<group>"; };
 		D5EBC6E617D79F2400EBEF39 /* MLAmiKozRMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKozRMainWindow.xib; sourceTree = "<group>"; };
 		D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKozRMainMenu.xib; sourceTree = "<group>"; };
-		D5F6BB2717E8BC2800DCBD16 /* AmiKoOSX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AmiKoOSX.entitlements; sourceTree = "<group>"; };
-		D5F6BB2817E8BC3200DCBD16 /* CoMedOSX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CoMedOSX.entitlements; sourceTree = "<group>"; };
-		D5F6BB2917E8BC3900DCBD16 /* AmiKoOSX-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "AmiKoOSX-zR.entitlements"; sourceTree = "<group>"; };
-		D5F6BB2A17E8BC3C00DCBD16 /* CoMedOSX-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "CoMedOSX-zR.entitlements"; sourceTree = "<group>"; };
-		D5F6BB2B17E8BCA800DCBD16 /* amikoosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amikoosx_splash_1000x670.png; sourceTree = "<group>"; };
-		D5F6BB2E17E8BDBE00DCBD16 /* comedosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comedosx_splash_1000x670.png; sourceTree = "<group>"; };
+		D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AmiKo.entitlements; path = ../AmiKo.entitlements; sourceTree = "<group>"; };
+		D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoMed.entitlements; path = ../CoMed.entitlements; sourceTree = "<group>"; };
+		D5F6BB2917E8BC3900DCBD16 /* AmiKo-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "AmiKo-zR.entitlements"; sourceTree = SOURCE_ROOT; };
+		D5F6BB2A17E8BC3C00DCBD16 /* CoMed-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "CoMed-zR.entitlements"; path = "../CoMed-zR.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,12 +288,9 @@
 		D5EBC67417C912FF00EBEF39 = {
 			isa = PBXGroup;
 			children = (
-				D5F6BB2A17E8BC3C00DCBD16 /* CoMedOSX-zR.entitlements */,
-				D5F6BB2917E8BC3900DCBD16 /* AmiKoOSX-zR.entitlements */,
-				D5F6BB2817E8BC3200DCBD16 /* CoMedOSX.entitlements */,
 				D541211817DFA96800ACDB81 /* QuartzCore.framework */,
 				D5EBC6C617CD21C200EBEF39 /* WebKit.framework */,
-				D5EBC68617C912FF00EBEF39 /* AmiKoOSX */,
+				D5EBC68617C912FF00EBEF39 /* AmiKo */,
 				D5EBC67F17C912FF00EBEF39 /* Frameworks */,
 				D5EBC67E17C912FF00EBEF39 /* Products */,
 			);
@@ -300,10 +299,10 @@
 		D5EBC67E17C912FF00EBEF39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D5EBC67D17C912FF00EBEF39 /* CoMedOSX-zR.app */,
-				D5E91B8417E5E24000B66B27 /* AmiKoOSX-zR.app */,
-				D5E91BB317E5E8E400B66B27 /* AmiKoOSX.app */,
-				D5E91BE217E5E8E800B66B27 /* CoMedOSX.app */,
+				D5EBC67D17C912FF00EBEF39 /* CoMed-zR.app */,
+				D5E91B8417E5E24000B66B27 /* AmiKo-zR.app */,
+				D5E91BB317E5E8E400B66B27 /* AmiKo.app */,
+				D5E91BE217E5E8E800B66B27 /* CoMed.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -327,10 +326,9 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		D5EBC68617C912FF00EBEF39 /* AmiKoOSX */ = {
+		D5EBC68617C912FF00EBEF39 /* AmiKo */ = {
 			isa = PBXGroup;
 			children = (
-				D5F6BB2717E8BC2800DCBD16 /* AmiKoOSX.entitlements */,
 				D5EBC6C817CFDD3800EBEF39 /* Resources */,
 				D5EBC6BF17C9248300EBEF39 /* Libs */,
 				D5EBC6A717C91FAC00EBEF39 /* Database */,
@@ -340,21 +338,26 @@
 				D5EBC6A017C9137600EBEF39 /* Classes */,
 				D5EBC68717C912FF00EBEF39 /* Supporting Files */,
 			);
+			name = AmiKo;
 			path = AmiKoOSX;
 			sourceTree = "<group>";
 		};
 		D5EBC68717C912FF00EBEF39 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D5E91BB417E5E8E500B66B27 /* AmiKoOSX-Info.plist */,
-				D5E91BE317E5E8E900B66B27 /* CoMedOSX-Info.plist */,
-				D5E91B8517E5E24000B66B27 /* AmiKoOSX-zR-Info.plist */,
-				D5EBC68817C912FF00EBEF39 /* CoMedOSX-zR-Info.plist */,
+				D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */,
+				D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */,
+				D5F6BB2917E8BC3900DCBD16 /* AmiKo-zR.entitlements */,
+				D5F6BB2A17E8BC3C00DCBD16 /* CoMed-zR.entitlements */,
+				D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */,
+				D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */,
+				D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */,
+				D5EBC68817C912FF00EBEF39 /* CoMed-zR-Info.plist */,
 				D5EBC68F17C912FF00EBEF39 /* Credits-de.rtf */,
 				D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */,
 				D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */,
 				D5EBC68C17C912FF00EBEF39 /* main.m */,
-				D5EBC68E17C912FF00EBEF39 /* AmiKoOSX-Prefix.pch */,
+				D5EBC68E17C912FF00EBEF39 /* AmiKo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -414,8 +417,8 @@
 		D5EBC6C817CFDD3800EBEF39 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D5F6BB2E17E8BDBE00DCBD16 /* comedosx_splash_1000x670.png */,
-				D5F6BB2B17E8BCA800DCBD16 /* amikoosx_splash_1000x670.png */,
+				D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */,
+				D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */,
 				D536126517E770A80087B132 /* amiko.iconset */,
 				D5E91BFA17E6074D00B66B27 /* amiko_report_fr.html */,
 				D5E91BF417E6065C00B66B27 /* amiko_report_de.html */,
@@ -434,9 +437,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D5E91B5717E5E24000B66B27 /* AmiKoOSX-zR */ = {
+		D5E91B5717E5E24000B66B27 /* AmiKo-zR */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5E91B8117E5E24000B66B27 /* Build configuration list for PBXNativeTarget "AmiKoOSX-zR" */;
+			buildConfigurationList = D5E91B8117E5E24000B66B27 /* Build configuration list for PBXNativeTarget "AmiKo-zR" */;
 			buildPhases = (
 				D5E91B5817E5E24000B66B27 /* Sources */,
 				D5E91B6517E5E24000B66B27 /* Frameworks */,
@@ -446,14 +449,14 @@
 			);
 			dependencies = (
 			);
-			name = "AmiKoOSX-zR";
+			name = "AmiKo-zR";
 			productName = AmiKoOSX;
-			productReference = D5E91B8417E5E24000B66B27 /* AmiKoOSX-zR.app */;
+			productReference = D5E91B8417E5E24000B66B27 /* AmiKo-zR.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D5E91B8617E5E8E400B66B27 /* AmiKoOSX */ = {
+		D5E91B8617E5E8E400B66B27 /* AmiKo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5E91BB017E5E8E400B66B27 /* Build configuration list for PBXNativeTarget "AmiKoOSX" */;
+			buildConfigurationList = D5E91BB017E5E8E400B66B27 /* Build configuration list for PBXNativeTarget "AmiKo" */;
 			buildPhases = (
 				D5E91B8717E5E8E400B66B27 /* Sources */,
 				D5E91B9417E5E8E400B66B27 /* Frameworks */,
@@ -463,14 +466,14 @@
 			);
 			dependencies = (
 			);
-			name = AmiKoOSX;
+			name = AmiKo;
 			productName = AmiKoOSX;
-			productReference = D5E91BB317E5E8E400B66B27 /* AmiKoOSX.app */;
+			productReference = D5E91BB317E5E8E400B66B27 /* AmiKo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D5E91BB517E5E8E800B66B27 /* CoMedOSX */ = {
+		D5E91BB517E5E8E800B66B27 /* CoMed */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5E91BDF17E5E8E800B66B27 /* Build configuration list for PBXNativeTarget "CoMedOSX" */;
+			buildConfigurationList = D5E91BDF17E5E8E800B66B27 /* Build configuration list for PBXNativeTarget "CoMed" */;
 			buildPhases = (
 				D5E91BB617E5E8E800B66B27 /* Sources */,
 				D5E91BC317E5E8E800B66B27 /* Frameworks */,
@@ -480,14 +483,14 @@
 			);
 			dependencies = (
 			);
-			name = CoMedOSX;
+			name = CoMed;
 			productName = AmiKoOSX;
-			productReference = D5E91BE217E5E8E800B66B27 /* CoMedOSX.app */;
+			productReference = D5E91BE217E5E8E800B66B27 /* CoMed.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D5EBC67C17C912FF00EBEF39 /* CoMedOSX-zR */ = {
+		D5EBC67C17C912FF00EBEF39 /* CoMed-zR */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5EBC69A17C912FF00EBEF39 /* Build configuration list for PBXNativeTarget "CoMedOSX-zR" */;
+			buildConfigurationList = D5EBC69A17C912FF00EBEF39 /* Build configuration list for PBXNativeTarget "CoMed-zR" */;
 			buildPhases = (
 				D5EBC67917C912FF00EBEF39 /* Sources */,
 				D5EBC67A17C912FF00EBEF39 /* Frameworks */,
@@ -497,9 +500,9 @@
 			);
 			dependencies = (
 			);
-			name = "CoMedOSX-zR";
+			name = "CoMed-zR";
 			productName = AmiKoOSX;
-			productReference = D5EBC67D17C912FF00EBEF39 /* CoMedOSX-zR.app */;
+			productReference = D5EBC67D17C912FF00EBEF39 /* CoMed-zR.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -512,7 +515,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Ywesee GmbH";
 			};
-			buildConfigurationList = D5EBC67817C912FF00EBEF39 /* Build configuration list for PBXProject "AmiKoOSX" */;
+			buildConfigurationList = D5EBC67817C912FF00EBEF39 /* Build configuration list for PBXProject "AmiKo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -524,10 +527,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D5E91B8617E5E8E400B66B27 /* AmiKoOSX */,
-				D5E91BB517E5E8E800B66B27 /* CoMedOSX */,
-				D5E91B5717E5E24000B66B27 /* AmiKoOSX-zR */,
-				D5EBC67C17C912FF00EBEF39 /* CoMedOSX-zR */,
+				D5E91B8617E5E8E400B66B27 /* AmiKo */,
+				D5E91BB517E5E8E800B66B27 /* CoMed */,
+				D5E91B5717E5E24000B66B27 /* AmiKo-zR */,
+				D5EBC67C17C912FF00EBEF39 /* CoMed-zR */,
 			);
 		};
 /* End PBXProject section */
@@ -549,7 +552,7 @@
 				D5E91B7617E5E24000B66B27 /* MLAmiKozRMainWindow.xib in Resources */,
 				D5E91B7917E5E24000B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91B8017E5E24000B66B27 /* Credits-fr.rtf in Resources */,
-				D5E91BE617E601B700B66B27 /* AmiKoOSX-zR-Info.plist in Resources */,
+				D5E91BE617E601B700B66B27 /* AmiKo-zR-Info.plist in Resources */,
 				D5E91BF017E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D5E91BF617E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				D536126817E770A80087B132 /* amiko.iconset in Resources */,
@@ -574,11 +577,12 @@
 				D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */,
 				D5E91BAE17E5E8E400B66B27 /* AmiKoMainMenu.xib in Resources */,
 				D5E91BAF17E5E8E400B66B27 /* Credits-fr.rtf in Resources */,
-				D5E91BE417E601AF00B66B27 /* AmiKoOSX-Info.plist in Resources */,
+				D5E91BE417E601AF00B66B27 /* AmiKo-Info.plist in Resources */,
 				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				D536126617E770A80087B132 /* amiko.iconset in Resources */,
-				D5F6BB2C17E8BCA800DCBD16 /* amikoosx_splash_1000x670.png in Resources */,
+				D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */,
+				D52A0D7A17EDC60E003BF272 /* AmiKo.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,11 +603,12 @@
 				D5E91BD917E5E8E800B66B27 /* MLCoMedMainWindow.xib in Resources */,
 				D5E91BDC17E5E8E800B66B27 /* CoMedMainMenu.xib in Resources */,
 				D5E91BDE17E5E8E800B66B27 /* Credits-fr.rtf in Resources */,
-				D5E91BE717E601BA00B66B27 /* CoMedOSX-Info.plist in Resources */,
+				D5E91BE717E601BA00B66B27 /* CoMed-Info.plist in Resources */,
 				D5E91BF217E6061900B66B27 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
 				D536126717E770A80087B132 /* amiko.iconset in Resources */,
-				D5F6BB3017E8BDBE00DCBD16 /* comedosx_splash_1000x670.png in Resources */,
+				D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */,
+				D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,7 +629,7 @@
 				D5E91AD017E387F100B66B27 /* MLCoMedzRMainWindow.xib in Resources */,
 				D5E91AD617E3955300B66B27 /* CoMedzRMainMenu.xib in Resources */,
 				D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */,
-				D5E91BE517E601B400B66B27 /* CoMedOSX-zR-Info.plist in Resources */,
+				D5E91BE517E601B400B66B27 /* CoMed-zR-Info.plist in Resources */,
 				D5E91BF317E6061900B66B27 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BFC17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
 				D536126917E770A80087B132 /* amiko.iconset in Resources */,
@@ -743,15 +748,15 @@
 		D5E91B8217E5E24000B66B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "AmiKoOSX-zR.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "AmiKo-zR.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKoOSX-Prefix.pch";
-				INFOPLIST_FILE = "AmiKoOSX-zR-Info.plist";
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "AmiKo-zR-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "-DAMIKOOSX_ZR";
-				PRODUCT_NAME = "AmiKoOSX-zR";
+				OTHER_CFLAGS = "-DAMIKO_ZR";
+				PRODUCT_NAME = "AmiKo-zR";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -760,15 +765,15 @@
 		D5E91B8317E5E24000B66B27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "AmiKoOSX-zR.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "AmiKo-zR.entitlements";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: ywesee GmbH (4B37356EGR)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKoOSX-Prefix.pch";
-				INFOPLIST_FILE = "AmiKoOSX-zR-Info.plist";
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "AmiKo-zR-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "-DAMIKOOSX_ZR";
-				PRODUCT_NAME = "AmiKoOSX-zR";
+				OTHER_CFLAGS = "-DAMIKO_ZR";
+				PRODUCT_NAME = "AmiKo-zR";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -777,15 +782,15 @@
 		D5E91BB117E5E8E400B66B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = AmiKoOSX/AmiKoOSX.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKoOSX-Prefix.pch";
-				INFOPLIST_FILE = "AmiKoOSX-Info.plist";
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "-DAMIKOOSX";
-				PRODUCT_NAME = AmiKoOSX;
+				OTHER_CFLAGS = "-DAMIKO";
+				PRODUCT_NAME = AmiKo;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -794,15 +799,15 @@
 		D5E91BB217E5E8E400B66B27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = AmiKoOSX/AmiKoOSX.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: ywesee GmbH (4B37356EGR)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKoOSX-Prefix.pch";
-				INFOPLIST_FILE = "AmiKoOSX-Info.plist";
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "-DAMIKOOSX";
-				PRODUCT_NAME = AmiKoOSX;
+				OTHER_CFLAGS = "-DAMIKO";
+				PRODUCT_NAME = AmiKo;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -811,15 +816,15 @@
 		D5E91BE017E5E8E800B66B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = CoMedOSX.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CoMed.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKoOSX-Prefix.pch";
-				INFOPLIST_FILE = "CoMedOSX-Info.plist";
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "CoMed-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "-DCOMEDOSX";
-				PRODUCT_NAME = CoMedOSX;
+				OTHER_CFLAGS = "-DCOMED";
+				PRODUCT_NAME = CoMed;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -828,15 +833,15 @@
 		D5E91BE117E5E8E800B66B27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = CoMedOSX.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CoMed.entitlements;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: ywesee GmbH (4B37356EGR)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKoOSX-Prefix.pch";
-				INFOPLIST_FILE = "CoMedOSX-Info.plist";
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "CoMed-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "-DCOMEDOSX";
-				PRODUCT_NAME = CoMedOSX;
+				OTHER_CFLAGS = "-DCOMED";
+				PRODUCT_NAME = CoMed;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -905,14 +910,14 @@
 		D5EBC69B17C912FF00EBEF39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "CoMedOSX-zR.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "CoMed-zR.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKoOSX-Prefix.pch";
-				INFOPLIST_FILE = "CoMedOSX-zR-Info.plist";
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "CoMed-zR-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "-DCOMEDOSX_ZR";
+				OTHER_CFLAGS = "-DCOMED_ZR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -922,14 +927,14 @@
 		D5EBC69C17C912FF00EBEF39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "CoMedOSX-zR.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "CoMed-zR.entitlements";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: ywesee GmbH (4B37356EGR)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKoOSX-Prefix.pch";
-				INFOPLIST_FILE = "CoMedOSX-zR-Info.plist";
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "CoMed-zR-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "-DCOMEDOSX_ZR";
+				OTHER_CFLAGS = "-DCOMED_ZR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -939,7 +944,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D5E91B8117E5E24000B66B27 /* Build configuration list for PBXNativeTarget "AmiKoOSX-zR" */ = {
+		D5E91B8117E5E24000B66B27 /* Build configuration list for PBXNativeTarget "AmiKo-zR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5E91B8217E5E24000B66B27 /* Debug */,
@@ -948,7 +953,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D5E91BB017E5E8E400B66B27 /* Build configuration list for PBXNativeTarget "AmiKoOSX" */ = {
+		D5E91BB017E5E8E400B66B27 /* Build configuration list for PBXNativeTarget "AmiKo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5E91BB117E5E8E400B66B27 /* Debug */,
@@ -957,7 +962,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D5E91BDF17E5E8E800B66B27 /* Build configuration list for PBXNativeTarget "CoMedOSX" */ = {
+		D5E91BDF17E5E8E800B66B27 /* Build configuration list for PBXNativeTarget "CoMed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5E91BE017E5E8E800B66B27 /* Debug */,
@@ -966,7 +971,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D5EBC67817C912FF00EBEF39 /* Build configuration list for PBXProject "AmiKoOSX" */ = {
+		D5EBC67817C912FF00EBEF39 /* Build configuration list for PBXProject "AmiKo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5EBC69817C912FF00EBEF39 /* Debug */,
@@ -975,7 +980,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D5EBC69A17C912FF00EBEF39 /* Build configuration list for PBXNativeTarget "CoMedOSX-zR" */ = {
+		D5EBC69A17C912FF00EBEF39 /* Build configuration list for PBXNativeTarget "CoMed-zR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5EBC69B17C912FF00EBEF39 /* Debug */,

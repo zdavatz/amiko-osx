@@ -98,7 +98,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{120, 400}, {992, 657}}</string>
 				<int key="NSWTFlags">544735232</int>
-				<string key="NSWindowTitle">AmiKoOSX</string>
+				<string key="NSWindowTitle">AmiKo</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<object class="NSToolbar" key="NSViewClass" id="534265036">
 					<object class="NSMutableString" key="NSToolbarIdentifier">
@@ -3470,45 +3470,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">MLMainWindowController</string>
 					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="onButtonPressed:">id</string>
-						<string key="printSearchResult:">id</string>
-						<string key="searchNow:">id</string>
-						<string key="showAboutFile:">id</string>
-						<string key="showAboutPanel:">id</string>
-						<string key="tappedOnStar:">id</string>
-						<string key="toolbarAction:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="onButtonPressed:">
-							<string key="name">onButtonPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="printSearchResult:">
-							<string key="name">printSearchResult:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="searchNow:">
-							<string key="name">searchNow:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showAboutFile:">
-							<string key="name">showAboutFile:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showAboutPanel:">
-							<string key="name">showAboutPanel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="tappedOnStar:">
-							<string key="name">tappedOnStar:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toolbarAction:">
-							<string key="name">toolbarAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="mySearchField">NSSearchField</string>
 						<string key="mySectionTitles">NSTableView</string>

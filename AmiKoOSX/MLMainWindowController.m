@@ -4,9 +4,9 @@
  
  Created on 24/08/2013.
  
- This file is part of AMiKoOSX.
+ This file is part of AmiKo for OSX.
  
- AmiKoOSX is free software: you can redistribute it and/or modify
+ AmiKo for OSX is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
  (at your option) any later version.
@@ -31,16 +31,16 @@
 #import <mach/mach.h>
 #import <unistd.h>
 
-#if defined (AMIKOOSX)
-static NSString *APP_NAME = @"AmiKoOSX";
-#elif defined (AMIKOOSX_ZR)
-static NSString *APP_NAME = @"AmiKoOSX-zR";
-#elif defined (COMEDOSX)
-static NSString *APP_NAME = @"CoMedOSX";
-#elif defined (COMEDOSX_ZR)
-static NSString *APP_NAME = @"CoMedOSX-zR";
+#if defined (AMIKO)
+static NSString *APP_NAME = @"AmiKo";
+#elif defined (AMIKO_ZR)
+static NSString *APP_NAME = @"AmiKo-zR";
+#elif defined (COMED)
+static NSString *APP_NAME = @"CoMed";
+#elif defined (COMED_ZR)
+static NSString *APP_NAME = @"CoMed-zR";
 #else
-static NSString *APP_NAME = @"AmiKoOSX";
+static NSString *APP_NAME = @"AmiKo";
 #endif
 
 enum {
@@ -113,13 +113,13 @@ static NSInteger mCurrentSearchState = kTitle;
 {
     // [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]
     // self = [super initWithNibName:@"MLMasterViewController" bundle:nil];
-    if ([APP_NAME isEqualToString:@"AmiKoOSX"])
+    if ([APP_NAME isEqualToString:@"AmiKo"])
         self = [super initWithWindowNibName:@"MLAmiKoMainWindow"];
-    else if ([APP_NAME isEqualToString:@"AmiKoOSX-zR"])
+    else if ([APP_NAME isEqualToString:@"AmiKo-zR"])
         self = [super initWithWindowNibName:@"MLAmiKozRMainWindow"];
-    else if ([APP_NAME isEqualToString:@"CoMedOSX"])
+    else if ([APP_NAME isEqualToString:@"CoMed"])
         self = [super initWithWindowNibName:@"MLCoMedMainWindow"];
-    else if ([APP_NAME isEqualToString:@"CoMedOSX-zR"])
+    else if ([APP_NAME isEqualToString:@"CoMed-zR"])
         self = [super initWithWindowNibName:@"MLCoMedzRMainWindow"];
     else return nil;
     
@@ -241,11 +241,11 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (NSString *) appOwner
 {
-    if ([APP_NAME isEqualToString:@"AmiKoOSX"]
-        || [APP_NAME isEqualToString:@"CoMedOSX"])
+    if ([APP_NAME isEqualToString:@"AmiKo"]
+        || [APP_NAME isEqualToString:@"CoMed"])
         return @"ywesee";
-    else if ([APP_NAME isEqualToString:@"AmiKoOSX-zR"]
-             || [APP_NAME isEqualToString:@"CoMedOSX-zR"])
+    else if ([APP_NAME isEqualToString:@"AmiKo-zR"]
+             || [APP_NAME isEqualToString:@"CoMed-zR"])
         return @"zurrose";
     
     return nil;
@@ -253,11 +253,11 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (NSString *) appLanguage
 {
-    if ([APP_NAME isEqualToString:@"AmiKoOSX"]
-        || [APP_NAME isEqualToString:@"AmiKoOSX-zR"])
+    if ([APP_NAME isEqualToString:@"AmiKo"]
+        || [APP_NAME isEqualToString:@"AmiKo-zR"])
         return @"de";
-    else if ([APP_NAME isEqualToString:@"CoMedOSX"]
-             || [APP_NAME isEqualToString:@"CoMedOSX-zR"])
+    else if ([APP_NAME isEqualToString:@"CoMed"]
+             || [APP_NAME isEqualToString:@"CoMed-zR"])
         return @"fr";
     
     return nil;
@@ -265,11 +265,11 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (NSString *) notSpecified
 {
-    if ([APP_NAME isEqualToString:@"AmiKoOSX"]
-        || [APP_NAME isEqualToString:@"AmiKoOSX-zR"])
+    if ([APP_NAME isEqualToString:@"AmiKo"]
+        || [APP_NAME isEqualToString:@"AmiKo-zR"])
         return @"k.A.";
-    else if ([APP_NAME isEqualToString:@"CoMedOSX"]
-             || [APP_NAME isEqualToString:@"CoMedOSX-zR"])
+    else if ([APP_NAME isEqualToString:@"CoMed"]
+             || [APP_NAME isEqualToString:@"CoMed-zR"])
         return @"n.s.";
     
     return nil;
