@@ -119,5 +119,11 @@
     self.masterViewController.view.frame = ((NSView*)self.window.contentView).bounds;
 }
 */
- 
+
+- (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)application
+{
+    return YES;
+}
+
+
 @end
