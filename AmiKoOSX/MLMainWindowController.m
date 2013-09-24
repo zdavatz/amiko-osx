@@ -180,7 +180,8 @@ static NSInteger mCurrentSearchState = kTitle;
     
     // Set default database
     mUsedDatabase = kAips;
-        
+    [myToolbar setSelectedItemIdentifier:@"AIPS"];
+    
     // Set search state
     [self setSearchState:kTitle];
     
@@ -435,14 +436,25 @@ static NSInteger mCurrentSearchState = kTitle;
     [NSApp orderFrontStandardAboutPanelWithOptions:optionsDict];
 }
 
+- (IBAction) sendFeedback: (id)sender
+{
+    // Starts mail client
+    if ([[self appOwner] isEqualToString:@"ywesee"]) {
+        NSString* subject = [NSString stringWithFormat:@"%@ Feedback", APP_NAME];
+        NSString *encodedSubject = [NSString stringWithFormat:@"mailto:zdavatz@ywesee.com?subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSURL *helpFile = [NSURL URLWithString:encodedSubject];
+        [[NSWorkspace sharedWorkspace] openURL:helpFile];
+    }
+}
+
 - (void) showHelp: (id)sender
 {
     // Starts Safari
     if ([[self appOwner] isEqualToString:@"zurrose"]) {
-        NSURL * helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
+        NSURL *helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     } else if ([[self appOwner] isEqualToString:@"ywesee"]) {
-        NSURL * helpFile = [NSURL URLWithString:@"http://www.ywesee.com/AmiKo/Desktop"];
+        NSURL *helpFile = [NSURL URLWithString:@"http://www.ywesee.com/AmiKo/Desktop"];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     }
 }

@@ -49,5 +49,6 @@
 - (IBAction) printSearchResult:(id)sender;
 - (IBAction) showAboutFile: (id)sender;
 - (IBAction) showAboutPanel: (id)sender;
+- (IBAction) sendFeedback: (id)sender;
 
 @end

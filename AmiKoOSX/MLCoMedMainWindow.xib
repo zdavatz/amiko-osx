@@ -135,14 +135,14 @@
                                                     <action selector="onButtonPressed:" target="-2" id="255"/>
                                                 </connections>
                                             </button>
-                                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" hasHorizontalScroller="NO" verticalScrollElasticity="allowed" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="167">
+                                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" verticalScrollElasticity="allowed" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="167">
                                                 <rect key="frame" x="11" y="58" width="342" height="416"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <clipView key="contentView" id="Fda-GP-sbT">
                                                     <rect key="frame" x="0.0" y="0.0" width="342" height="416"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="32" rowSizeStyle="automatic" viewBased="YES" id="170">
+                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="170">
                                                             <rect key="frame" x="0.0" y="0.0" width="342" height="416"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -374,7 +374,9 @@
                                                             <webView translatesAutoresizingMaskIntoConstraints="NO" id="227">
                                                                 <rect key="frame" x="0.0" y="50" width="465" height="659"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
-                                                                <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                                                                <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
+                                                                    <nil key="identifier"/>
+                                                                </webPreferences>
                                                             </webView>
                                                         </subviews>
                                                         <constraints>
@@ -423,12 +425,12 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="0E8EDFD4-E512-4119-9C4C-4CF777B5C00F" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="3">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="D4F72A23-F39D-4B01-9500-99CB3E0F4E93" label="AIPS" paletteLabel="AIPS Database" toolTip="AIPS Database" image="10-medical@2x" selectable="YES" id="10">
+                    <toolbarItem implicitItemIdentifier="D4F72A23-F39D-4B01-9500-99CB3E0F4E93" explicitItemIdentifier="AIPS" label="AIPS" paletteLabel="AIPS Database" toolTip="AIPS Database" image="10-medical@2x" selectable="YES" id="10">
                         <connections>
                             <action selector="toolbarAction:" target="-2" id="520"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="CB6C7AF7-8A57-4F47-B591-56FF37A277D9" label="Favorites" paletteLabel="Favorites" toolTip="Favorites" tag="1" image="28-star@2x" selectable="YES" id="11">
+                    <toolbarItem implicitItemIdentifier="CB6C7AF7-8A57-4F47-B591-56FF37A277D9" explicitItemIdentifier="Favorites" label="Favorites" paletteLabel="Favorites" toolTip="Favorites" tag="1" image="28-star@2x" selectable="YES" id="11">
                         <connections>
                             <action selector="toolbarAction:" target="-2" id="521"/>
                         </connections>
