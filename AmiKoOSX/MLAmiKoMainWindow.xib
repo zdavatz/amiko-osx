@@ -430,7 +430,7 @@
                             <action selector="toolbarAction:" target="-2" id="520"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="CB6C7AF7-8A57-4F47-B591-56FF37A277D9" explicitItemIdentifier="Favorites" label="Favorites" paletteLabel="Favorites" toolTip="Favorites" tag="1" image="28-star@2x" selectable="YES" id="11">
+                    <toolbarItem implicitItemIdentifier="CB6C7AF7-8A57-4F47-B591-56FF37A277D9" explicitItemIdentifier="Favoriten" label="Favoriten" paletteLabel="Favoriten" toolTip="Favoriten" tag="1" image="28-star@2x" selectable="YES" id="11">
                         <connections>
                             <action selector="toolbarAction:" target="-2" id="521"/>
                         </connections>
