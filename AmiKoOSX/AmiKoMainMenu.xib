@@ -37,7 +37,7 @@
                                     <action selector="hideOtherApplications:" target="-1" id="368"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Show All" id="150">
+                            <menuItem title="Alle Fenster anzeigen" id="150">
                                 <connections>
                                     <action selector="unhideAllApplications:" target="-1" id="370"/>
                                 </connections>
@@ -72,7 +72,7 @@
                 <menuItem title="Fenster" id="19">
                     <menu key="submenu" title="Fenster" systemMenu="window" id="24">
                         <items>
-                            <menuItem title="Show Toolbar" keyEquivalent="t" id="297">
+                            <menuItem title="Werkzeugleiste anzeigen" keyEquivalent="t" id="297">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="366"/>
@@ -81,7 +81,7 @@
                             <menuItem isSeparatorItem="YES" id="550">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Minimize" keyEquivalent="m" id="23">
+                            <menuItem title="Minimieren" keyEquivalent="m" id="23">
                                 <connections>
                                     <action selector="performMiniaturize:" target="-1" id="37"/>
                                 </connections>
@@ -94,7 +94,7 @@
                             <menuItem isSeparatorItem="YES" id="92">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Bring All to Front" id="5">
+                            <menuItem title="Alle Fenster in den Vordergrund" id="5">
                                 <connections>
                                     <action selector="arrangeInFront:" target="-1" id="39"/>
                                 </connections>
