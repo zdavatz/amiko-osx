@@ -17,7 +17,7 @@
                 <menuItem title="CoMed" id="56">
                     <menu key="submenu" title="CoMed" systemMenu="apple" id="57">
                         <items>
-                            <menuItem title="A propos de CoMed" id="58">
+                            <menuItem title="CoMed" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
@@ -26,12 +26,12 @@
                             <menuItem isSeparatorItem="YES" id="144">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Hide CoMed" keyEquivalent="h" id="134">
+                            <menuItem title="Cacher CoMed" keyEquivalent="h" id="134">
                                 <connections>
                                     <action selector="hide:" target="-1" id="367"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Hide Others" keyEquivalent="h" id="145">
+                            <menuItem title="Cacher autres fenêtres" keyEquivalent="h" id="145">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="hideOtherApplications:" target="-1" id="368"/>
@@ -72,7 +72,7 @@
                 <menuItem title="Window" id="19">
                     <menu key="submenu" title="Window" systemMenu="window" id="24">
                         <items>
-                            <menuItem title="Show Toolbar" keyEquivalent="t" id="297">
+                          <menuItem title="Voir/Cacher Toolbar" keyEquivalent="t" id="297">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="366"/>
@@ -81,7 +81,7 @@
                             <menuItem isSeparatorItem="YES" id="550">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Minimize" keyEquivalent="m" id="23">
+                            <menuItem title="Minimiser" keyEquivalent="m" id="23">
                                 <connections>
                                     <action selector="performMiniaturize:" target="-1" id="37"/>
                                 </connections>
@@ -94,7 +94,7 @@
                             <menuItem isSeparatorItem="YES" id="92">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Bring All to Front" id="5">
+                            <menuItem title="Mettre en avant" id="5">
                                 <connections>
                                     <action selector="arrangeInFront:" target="-1" id="39"/>
                                 </connections>
@@ -127,7 +127,7 @@
                             <menuItem isSeparatorItem="YES" id="623">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Report File" keyEquivalent="r" id="564">
+                            <menuItem title="Erreurs Swissmedic" keyEquivalent="r" id="564">
                                 <connections>
                                     <action selector="showAboutFile:" target="-1" id="567"/>
                                 </connections>
