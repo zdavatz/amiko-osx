@@ -454,7 +454,7 @@ static NSInteger mCurrentSearchState = kTitle;
         NSURL *helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     } else if ([[self appOwner] isEqualToString:@"ywesee"]) {
-        NSURL *helpFile = [NSURL URLWithString:@"http://www.ywesee.com/AmiKo/Desktop"];
+        NSURL *helpFile = [NSURL URLWithString:@"https://itunes.apple.com/us/app/amiko/id708142753?mt=12"];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     }
 }
