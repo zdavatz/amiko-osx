@@ -443,7 +443,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="4"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="7"/>
-                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="Über" paletteLabel="Über" toolTip="Über" tag="4" image="app_icon_512x512" id="9">
+                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="AmiKo" paletteLabel="AmiKo" toolTip="AmiKo" tag="4" image="app_icon_512x512" id="9">
                         <connections>
                             <action selector="showAboutPanel:" target="-2" id="1639"/>
                         </connections>

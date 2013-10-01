@@ -17,7 +17,7 @@
                 <menuItem title="AmiKo" id="56">
                     <menu key="submenu" title="AmiKo" systemMenu="apple" id="57">
                         <items>
-                            <menuItem title="Über AmiKo" id="58">
+                            <menuItem title="AmiKo" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
