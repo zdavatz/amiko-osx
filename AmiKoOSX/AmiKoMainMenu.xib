@@ -72,7 +72,7 @@
                 <menuItem title="Fenster" id="19">
                     <menu key="submenu" title="Fenster" systemMenu="window" id="24">
                         <items>
-                            <menuItem title="Werkzeugleiste anzeigen" keyEquivalent="t" id="297">
+                          <menuItem title="Werkzeugleiste verstecken / anzeigen" keyEquivalent="t" id="297">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="366"/>
