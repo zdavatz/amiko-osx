@@ -182,6 +182,11 @@ static NSInteger mCurrentSearchState = kTitle;
     mUsedDatabase = kAips;
     [myToolbar setSelectedItemIdentifier:@"AIPS"];
     
+    if ([[self appLanguage] isEqualToString:@"de"])
+        [[myToolbar items][3] setLabel:@"Drucken"];
+    else if ([[self appLanguage] isEqualToString:@"fr"])
+        [[myToolbar items][3] setLabel:@"Imprimer"];
+    
     // Set search state
     [self setSearchState:kTitle];
     
