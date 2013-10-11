@@ -194,8 +194,8 @@ static NSString *FULL_TABLE = nil;
  */
 - (NSArray *) searchApplication: (NSString *)application
 {
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%%;%@%%'",
-                       SHORT_TABLE, DATABASE_TABLE, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application];
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%% %@%%' or %@ like '%%;%@%%'",
+                       SHORT_TABLE, DATABASE_TABLE, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application];
     NSArray *results = [mySqliteDb performQuery:query];
 
     return [self extractShortMedInfoFrom:results];
