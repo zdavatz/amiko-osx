@@ -58,7 +58,7 @@ static NSString *SEARCH_ATCCODE = @"ATC Code";
 static NSString *SEARCH_REGNR = @"Reg. Nr.";
 static NSString *SEARCH_SUBSTANCES = @"Wirkstoff";
 static NSString *SEARCH_THERAPY = @"Therapie";
-static NSString *SEARCH_FACHINFO = @"Fachinformation";
+static NSString *SEARCH_FACHINFO = @"in Fachinformation";
 
 static NSInteger mUsedDatabase = kAips;
 static NSInteger mCurrentSearchState = kTitle;
@@ -134,7 +134,7 @@ static NSInteger mCurrentSearchState = kTitle;
         SEARCH_REGNR = @"Reg. Nr.";
         SEARCH_SUBSTANCES = @"Wirkstoff";
         SEARCH_THERAPY = @"Therapie";
-        SEARCH_FACHINFO = @"Fachinformation";
+        SEARCH_FACHINFO = @"in Fachinformation";
     } else if ([[self appLanguage] isEqualToString:@"fr"]) {
         SEARCH_STRING = @"Recherche";
         SEARCH_TITLE = @"Préparation";
