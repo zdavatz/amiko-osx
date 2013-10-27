@@ -134,7 +134,7 @@ static NSInteger mCurrentSearchState = kTitle;
         SEARCH_REGNR = @"Reg. Nr.";
         SEARCH_SUBSTANCES = @"Wirkstoff";
         SEARCH_THERAPY = @"Therapie";
-        SEARCH_FACHINFO = @"Fachinformation";
+        SEARCH_FACHINFO = @"in Fachinformation";
     } else if ([[self appLanguage] isEqualToString:@"fr"]) {
         SEARCH_STRING = @"Recherche";
         SEARCH_TITLE = @"Préparation";
