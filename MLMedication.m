@@ -35,6 +35,7 @@
 @synthesize atcClass;
 @synthesize therapy;
 @synthesize application;
+@synthesize indications;
 @synthesize packInfo;
 @synthesize addInfo;
 @synthesize sectionIds;

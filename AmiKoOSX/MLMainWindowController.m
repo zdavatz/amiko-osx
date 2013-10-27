@@ -58,7 +58,7 @@ static NSString *SEARCH_ATCCODE = @"ATC Code";
 static NSString *SEARCH_REGNR = @"Reg. Nr.";
 static NSString *SEARCH_SUBSTANCES = @"Wirkstoff";
 static NSString *SEARCH_THERAPY = @"Therapie";
-static NSString *SEARCH_FACHINFO = @"Fachinformation";
+static NSString *SEARCH_FACHINFO = @"in Fachinformation";
 
 static NSInteger mUsedDatabase = kAips;
 static NSInteger mCurrentSearchState = kTitle;
@@ -990,7 +990,6 @@ static NSInteger mCurrentSearchState = kTitle;
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
             cellView.textField.stringValue = [medi[row] title];
             cellView.detailTextField.stringValue = [medi[row] subTitle];
-         
             // Check if cell.textLabel.text is in starred NSSet
             NSString *regnrStr = favoriteKeyData[row];
             if ([favoriteMedsSet containsObject:regnrStr])
@@ -1073,6 +1072,18 @@ static NSInteger mCurrentSearchState = kTitle;
     report_memory();
     
 }
+
+/*
+- (NSString *)tableView:(NSTableView *)aTableView toolTipForCell:(NSCell *)aCell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)row mouseLocation:(NSPoint)mouseLocation
+{
+    
+}
+
+- (void) tableViewColumnDidResize:(NSNotification *)notification
+{
+    NSLog(@"Column resized");
+}
+*/
 
 #define PADDING 5.0f
 - (CGFloat) tableView: (NSTableView *)tableView heightOfRow: (NSInteger)row

@@ -35,6 +35,7 @@
 @property (nonatomic, copy) NSString *atcClass;
 @property (nonatomic, copy) NSString *therapy;
 @property (nonatomic, copy) NSString *application;
+@property (nonatomic, copy) NSString *indications;
 @property (nonatomic, copy) NSString *packInfo;
 @property (nonatomic, copy) NSString *addInfo;
 @property (nonatomic, copy) NSString *sectionIds;

@@ -25,7 +25,7 @@
 #import "MLSQLiteDatabase.h"
 
 enum {
-  kMedId = 0, kTitle, kAuth, kAtcCode, kSubstances, kRegnrs, kAtcClass, kTherapy, kApplication, kCustomerId, kPackInfo, kAddInfo, kIdsStr, kSectionsStr, kContentStr, kStyleStr
+  kMedId = 0, kTitle, kAuth, kAtcCode, kSubstances, kRegnrs, kAtcClass, kTherapy, kApplication, kIndications, kCustomerId, kPackInfo, kAddInfo, kIdsStr, kSectionsStr, kContentStr, kStyleStr
 };
 
 static NSString *KEY_ROWID = @"_id";
@@ -37,6 +37,7 @@ static NSString *KEY_REGNRS = @"regnrs";
 static NSString *KEY_ATCCLASS = @"atc_class";
 static NSString *KEY_THERAPY = @"tindex_str";
 static NSString *KEY_APPLICATION = @"application_str";
+static NSString *KEY_INDICATIONS = @"indications_str";
 static NSString *KEY_CUSTOMER_ID = @"customer_id";
 static NSString *KEY_PACK_INFO = @"pack_info_str";
 static NSString *KEY_ADDINFO = @"add_info_str";
@@ -67,12 +68,12 @@ static NSString *FULL_TABLE = nil;
     if (self == [MLDBAdapter class])
     {
         if (SHORT_TABLE == nil) {
-            SHORT_TABLE = [[NSString alloc] initWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
-                           KEY_ROWID, KEY_TITLE, KEY_AUTH, KEY_ATCCODE, KEY_SUBSTANCES, KEY_REGNRS, KEY_ATCCLASS, KEY_THERAPY, KEY_APPLICATION, KEY_CUSTOMER_ID, KEY_PACK_INFO];
+            SHORT_TABLE = [[NSString alloc] initWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
+                           KEY_ROWID, KEY_TITLE, KEY_AUTH, KEY_ATCCODE, KEY_SUBSTANCES, KEY_REGNRS, KEY_ATCCLASS, KEY_THERAPY, KEY_APPLICATION, KEY_INDICATIONS, KEY_CUSTOMER_ID, KEY_PACK_INFO];
         }
         if (FULL_TABLE == nil) {
-            FULL_TABLE = [[NSString alloc] initWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
-                          KEY_ROWID, KEY_TITLE, KEY_AUTH, KEY_ATCCODE, KEY_SUBSTANCES, KEY_REGNRS, KEY_ATCCLASS, KEY_THERAPY, KEY_APPLICATION, KEY_CUSTOMER_ID, KEY_PACK_INFO, KEY_ADDINFO, KEY_IDS, KEY_SECTIONS, KEY_CONTENT, KEY_STYLE];
+            FULL_TABLE = [[NSString alloc] initWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
+                          KEY_ROWID, KEY_TITLE, KEY_AUTH, KEY_ATCCODE, KEY_SUBSTANCES, KEY_REGNRS, KEY_ATCCLASS, KEY_THERAPY, KEY_APPLICATION, KEY_INDICATIONS, KEY_CUSTOMER_ID, KEY_PACK_INFO, KEY_ADDINFO, KEY_IDS, KEY_SECTIONS, KEY_CONTENT, KEY_STYLE];
         }
     }
 }
@@ -194,8 +195,8 @@ static NSString *FULL_TABLE = nil;
  */
 - (NSArray *) searchApplication: (NSString *)application
 {
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%% %@%%' or %@ like '%%;%@%%'",
-                       SHORT_TABLE, DATABASE_TABLE, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application];
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%% %@%%' or %@ like '%%;%@%%' or %@ like '%@%%' or %@ like '%%;%@%%'",
+                       SHORT_TABLE, DATABASE_TABLE, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_INDICATIONS, application, KEY_INDICATIONS, application];
     NSArray *results = [mySqliteDb performQuery:query];
 
     return [self extractShortMedInfoFrom:results];
@@ -214,6 +215,7 @@ static NSString *FULL_TABLE = nil;
     [medi setAtcClass:(NSString *)[cursor objectAtIndex:kAtcClass]];
     [medi setTherapy:(NSString *)[cursor objectAtIndex:kTherapy]];
     [medi setApplication:(NSString *)[cursor objectAtIndex:kApplication]];
+    [medi setIndications:(NSString *)[cursor objectAtIndex:kIndications]];
     [medi setCustomerId:[(NSString *)[cursor objectAtIndex:kCustomerId] intValue]];
     [medi setPackInfo:(NSString *)[cursor objectAtIndex:kPackInfo]];
     
@@ -233,6 +235,7 @@ static NSString *FULL_TABLE = nil;
     [medi setAtcClass:(NSString *)[cursor objectAtIndex:kAtcClass]];
     [medi setTherapy:(NSString *)[cursor objectAtIndex:kTherapy]];
     [medi setApplication:(NSString *)[cursor objectAtIndex:kApplication]];
+    [medi setIndications:(NSString *)[cursor objectAtIndex:kIndications]];
     [medi setCustomerId:[(NSString *)[cursor objectAtIndex:kCustomerId] intValue]];
     [medi setPackInfo:(NSString *)[cursor objectAtIndex:kPackInfo]];
     [medi setAddInfo:(NSString *)[cursor objectAtIndex:kAddInfo]];
@@ -260,6 +263,7 @@ static NSString *FULL_TABLE = nil;
         [medi setAtcClass:(NSString *)[cursor objectAtIndex:kAtcClass]];
         [medi setTherapy:(NSString *)[cursor objectAtIndex:kTherapy]];
         [medi setApplication:(NSString *)[cursor objectAtIndex:kApplication]];
+        [medi setIndications:(NSString *)[cursor objectAtIndex:kIndications]];
         [medi setCustomerId:[(NSString *)[cursor objectAtIndex:kCustomerId] intValue]];
         [medi setPackInfo:(NSString *)[cursor objectAtIndex:kPackInfo]];
         
@@ -285,6 +289,7 @@ static NSString *FULL_TABLE = nil;
         [medi setAtcClass:(NSString *)[cursor objectAtIndex:kAtcClass]];
         [medi setTherapy:(NSString *)[cursor objectAtIndex:kTherapy]];
         [medi setApplication:(NSString *)[cursor objectAtIndex:kApplication]];
+        [medi setIndications:(NSString *)[cursor objectAtIndex:kIndications]];
         [medi setCustomerId:[(NSString *)[cursor objectAtIndex:kCustomerId] intValue]];
         [medi setPackInfo:(NSString *)[cursor objectAtIndex:kPackInfo]];
         [medi setAddInfo:(NSString *)[cursor objectAtIndex:kAddInfo]];
