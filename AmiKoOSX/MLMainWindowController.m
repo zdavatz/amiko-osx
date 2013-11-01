@@ -97,6 +97,8 @@ static NSInteger mCurrentSearchState = kTitle;
     
     NSProgressIndicator* progressIndicator;
     
+    dispatch_queue_t mSearchQueue;
+
     float m_alpha;
     float m_delta;
 }
@@ -125,6 +127,9 @@ static NSInteger mCurrentSearchState = kTitle;
     
     if (!self)
         return nil;
+    
+    // Initialize global serial dispatch queue
+    mSearchQueue = dispatch_queue_create("com.ywesee.searchdb", nil);
     
     if ([[self appLanguage] isEqualToString:@"de"]) {
         SEARCH_STRING = @"Suche";
@@ -300,7 +305,7 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (IBAction) searchNow: (id)sender
 {
-    static bool inProgress = false;
+    static volatile bool inProgress = false;
         
     NSString *searchText = [mySearchField stringValue];
     
@@ -310,24 +315,31 @@ static NSInteger mCurrentSearchState = kTitle;
         // MLMainWindowController* __weak weakSelf = self;  // best solution but works only for > 10.8
         MLMainWindowController* __unsafe_unretained weakSelf = self; // works also in 10.7 (Lion)
         
-        dispatch_queue_t search_queue = dispatch_queue_create("com.ywesee.searchdb", nil);
-        dispatch_async(search_queue, ^(void) {
+        // dispatch_queue_t search_queue = dispatch_queue_create("com.ywesee.searchdb", nil);
+        dispatch_async(mSearchQueue, ^(void) {
             MLMainWindowController* scopeSelf = weakSelf;
+            while (inProgress) {
+                [NSThread sleepForTimeInterval:0.005];  // Wait for 5ms
+            }
             if (!inProgress) {
-                inProgress = true;
+                @synchronized(self) {
+                    inProgress = true;
+                }
                 if ([searchText length]>0)
                     searchResults = [scopeSelf searchAipsDatabaseWith:searchText];
                 else {
                     if (mUsedDatabase == kFavorites)
                         searchResults = [scopeSelf retrieveAllFavorites];
                 }
+                // Update tableview
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [scopeSelf updateTableView];
+                    [self.myTableView reloadData];
+                    @synchronized(self) {
+                        inProgress = false;
+                    }
+                });
             }
-            // Update tableview
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [scopeSelf updateTableView];
-                [self.myTableView reloadData];
-                inProgress = false;
-            });
         });
     } else {
         if ([searchText length] > 2)
@@ -466,6 +478,15 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (void) launchProgressIndicator
 {
+#ifdef DEBUG
+    NSLog(@"%s", __FUNCTION__);
+#endif
+    
+    if (progressIndicator!=nil) {
+        [progressIndicator stopAnimation:self];
+        [progressIndicator removeFromSuperview];
+    }
+    
     CGFloat viewWidth = myView.bounds.size.width;
     CGFloat viewHeight = myView.bounds.size.height;
     progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(viewWidth/2-16, viewHeight/2-16, 32, 32)];
@@ -477,13 +498,16 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (void) stopProgressIndicator
 {
+#ifdef DEBUG
+    NSLog(@"%s", __FUNCTION__);
+#endif
     [progressIndicator stopAnimation:self];
     [progressIndicator removeFromSuperview];
 }
 
 - (void) switchDatabases: (NSToolbarItem *)item
 {
-    static bool inProgress = false;    
+    static volatile bool inProgress = false;
 #ifdef DEBUG
     NSLog(@"%s", __FUNCTION__);
 #endif
@@ -497,20 +521,28 @@ static NSInteger mCurrentSearchState = kTitle;
             // MLMainWindowController* __weak weakSelf = self;
             MLMainWindowController* __unsafe_unretained weakSelf = self;
             //
-            dispatch_queue_t search_queue = dispatch_queue_create("com.ywesee.searchdb", nil);
-            dispatch_async(search_queue, ^(void) {
+            // dispatch_queue_t search_queue = dispatch_queue_create("com.ywesee.searchdb", nil);
+            dispatch_async(mSearchQueue, ^(void) {
                 MLMainWindowController* scopeSelf = weakSelf;
+                while (inProgress) {
+                   [NSThread sleepForTimeInterval:0.005];  // Wait for 5ms
+                }
                 if (!inProgress) {
-                    inProgress = true;
+                    @synchronized(self) {
+                        inProgress = true;
+                    }
                     mCurrentSearchState = kTitle;
                     searchResults = [scopeSelf searchAipsDatabaseWith:@""];
+                
+                    // Update tableview
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [scopeSelf updateTableView];
+                        [self.myTableView reloadData];
+                        @synchronized(self) {
+                            inProgress = false;
+                        }
+                    });
                 }
-                // Update tableview
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [scopeSelf updateTableView];
-                    [self.myTableView reloadData];
-                    inProgress = false;
-                });
             });
             break;
         }
@@ -523,20 +555,28 @@ static NSInteger mCurrentSearchState = kTitle;
             // MLMainWindowController* __weak weakSelf = self;
             MLMainWindowController* __unsafe_unretained weakSelf = self;
             //
-            dispatch_queue_t search_queue = dispatch_queue_create("com.ywesee.searchdb", nil);
-            dispatch_async(search_queue, ^(void) {
+            // dispatch_queue_t search_queue = dispatch_queue_create("com.ywesee.searchdb", nil);
+            dispatch_async(mSearchQueue, ^(void) {
                 MLMainWindowController* scopeSelf = weakSelf;
+                while (inProgress) {
+                   [NSThread sleepForTimeInterval:0.005];  // Wait for 5ms
+                }
                 if (!inProgress) {
-                    inProgress = true;
+                    @synchronized(self) {
+                        inProgress = true;
+                    }
                     mCurrentSearchState = kTitle;
                     searchResults = [scopeSelf retrieveAllFavorites];
+
+                    // Update tableview
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [scopeSelf updateTableView];
+                        [self.myTableView reloadData];
+                        @synchronized(self) {
+                            inProgress = false;
+                        }
+                    });
                 }
-                // Update tableview
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [scopeSelf updateTableView];
-                    [self.myTableView reloadData];
-                    inProgress = false;
-                });
             });
             break;
         }
