@@ -98,6 +98,7 @@ static NSInteger mCurrentSearchState = kTitle;
     NSProgressIndicator* progressIndicator;
     
     dispatch_queue_t mSearchQueue;
+    volatile bool mSearchInProgress;
 
     float m_alpha;
     float m_delta;
@@ -130,6 +131,7 @@ static NSInteger mCurrentSearchState = kTitle;
     
     // Initialize global serial dispatch queue
     mSearchQueue = dispatch_queue_create("com.ywesee.searchdb", nil);
+    mSearchInProgress = false;
     
     if ([[self appLanguage] isEqualToString:@"de"]) {
         SEARCH_STRING = @"Suche";
@@ -305,8 +307,6 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (IBAction) searchNow: (id)sender
 {
-    static volatile bool inProgress = false;
-        
     NSString *searchText = [mySearchField stringValue];
     
     if (mCurrentSearchState != kWebView ) {
@@ -318,12 +318,12 @@ static NSInteger mCurrentSearchState = kTitle;
         // dispatch_queue_t search_queue = dispatch_queue_create("com.ywesee.searchdb", nil);
         dispatch_async(mSearchQueue, ^(void) {
             MLMainWindowController* scopeSelf = weakSelf;
-            while (inProgress) {
+            while (mSearchInProgress) {
                 [NSThread sleepForTimeInterval:0.005];  // Wait for 5ms
             }
-            if (!inProgress) {
+            if (!mSearchInProgress) {
                 @synchronized(self) {
-                    inProgress = true;
+                    mSearchInProgress = true;
                 }
                 if ([searchText length]>0)
                     searchResults = [scopeSelf searchAipsDatabaseWith:searchText];
@@ -336,7 +336,7 @@ static NSInteger mCurrentSearchState = kTitle;
                     [scopeSelf updateTableView];
                     [self.myTableView reloadData];
                     @synchronized(self) {
-                        inProgress = false;
+                        mSearchInProgress = false;
                     }
                 });
             }
@@ -478,10 +478,6 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (void) launchProgressIndicator
 {
-#ifdef DEBUG
-    NSLog(@"%s", __FUNCTION__);
-#endif
-    
     if (progressIndicator!=nil) {
         [progressIndicator stopAnimation:self];
         [progressIndicator removeFromSuperview];
@@ -498,16 +494,12 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (void) stopProgressIndicator
 {
-#ifdef DEBUG
-    NSLog(@"%s", __FUNCTION__);
-#endif
     [progressIndicator stopAnimation:self];
     [progressIndicator removeFromSuperview];
 }
 
 - (void) switchDatabases: (NSToolbarItem *)item
 {
-    static volatile bool inProgress = false;
 #ifdef DEBUG
     NSLog(@"%s", __FUNCTION__);
 #endif
@@ -524,12 +516,12 @@ static NSInteger mCurrentSearchState = kTitle;
             // dispatch_queue_t search_queue = dispatch_queue_create("com.ywesee.searchdb", nil);
             dispatch_async(mSearchQueue, ^(void) {
                 MLMainWindowController* scopeSelf = weakSelf;
-                while (inProgress) {
+                while (mSearchInProgress) {
                    [NSThread sleepForTimeInterval:0.005];  // Wait for 5ms
                 }
-                if (!inProgress) {
+                if (!mSearchInProgress) {
                     @synchronized(self) {
-                        inProgress = true;
+                        mSearchInProgress = true;
                     }
                     mCurrentSearchState = kTitle;
                     searchResults = [scopeSelf searchAipsDatabaseWith:@""];
@@ -539,7 +531,7 @@ static NSInteger mCurrentSearchState = kTitle;
                         [scopeSelf updateTableView];
                         [self.myTableView reloadData];
                         @synchronized(self) {
-                            inProgress = false;
+                            mSearchInProgress = false;
                         }
                     });
                 }
@@ -558,12 +550,12 @@ static NSInteger mCurrentSearchState = kTitle;
             // dispatch_queue_t search_queue = dispatch_queue_create("com.ywesee.searchdb", nil);
             dispatch_async(mSearchQueue, ^(void) {
                 MLMainWindowController* scopeSelf = weakSelf;
-                while (inProgress) {
+                while (mSearchInProgress) {
                    [NSThread sleepForTimeInterval:0.005];  // Wait for 5ms
                 }
-                if (!inProgress) {
+                if (!mSearchInProgress) {
                     @synchronized(self) {
-                        inProgress = true;
+                        mSearchInProgress = true;
                     }
                     mCurrentSearchState = kTitle;
                     searchResults = [scopeSelf retrieveAllFavorites];
@@ -573,7 +565,7 @@ static NSInteger mCurrentSearchState = kTitle;
                         [scopeSelf updateTableView];
                         [self.myTableView reloadData];
                         @synchronized(self) {
-                            inProgress = false;
+                            mSearchInProgress = false;
                         }
                     });
                 }
