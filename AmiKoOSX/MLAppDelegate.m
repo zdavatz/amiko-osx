@@ -64,7 +64,7 @@
     [window setOrderedIndex:0];
     [window makeKeyAndOrderFront:self];
     
-    [NSTimer scheduledTimerWithTimeInterval:5.0
+    [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
                                    selector:@selector(fadeOutAndRemove)
                                    userInfo:nil
