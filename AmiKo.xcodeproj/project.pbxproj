@@ -17,11 +17,25 @@
 		D536126917E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D539C10617DCED1D00759260 /* MLSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D539C10517DCED1D00759260 /* MLSplashScreen.m */; };
 		D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
+		D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
+		D53ABBF5189521FD00C4525C /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
+		D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */; };
+		D53ABBF9189522AD00C4525C /* MLProgressSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */; };
 		D541211917DFA96800ACDB81 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D541211817DFA96800ACDB81 /* QuartzCore.framework */; };
+		D545C8D61898522400491511 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D54AB37518984B5800637257 /* libz.1.2.5.dylib */; };
+		D545C8D91898527300491511 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C8D81898527300491511 /* SSZipArchive.m */; };
+		D545C8E41898527C00491511 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8DC1898527C00491511 /* ioapi.c */; };
+		D545C8E51898527C00491511 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8DE1898527C00491511 /* mztools.c */; };
+		D545C8E61898527C00491511 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8E01898527C00491511 /* unzip.c */; };
+		D545C8E71898527C00491511 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8E21898527C00491511 /* zip.c */; };
 		D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1776180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
+		D5CD48BD18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
+		D5CD48BE18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
+		D5CD48BF18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
+		D5CD48C018944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
 		D5E91AD017E387F100B66B27 /* MLCoMedzRMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91ACF17E387F100B66B27 /* MLCoMedzRMainWindow.xib */; };
 		D5E91AD617E3955300B66B27 /* CoMedzRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */; };
 		D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */; };
@@ -148,8 +162,25 @@
 		D539C10417DCED1D00759260 /* MLSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSplashScreen.h; sourceTree = "<group>"; };
 		D539C10517DCED1D00759260 /* MLSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSplashScreen.m; sourceTree = "<group>"; };
 		D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zur_Rose_1000x670px.png; sourceTree = "<group>"; };
+		D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLProgressSheet.xib; sourceTree = "<group>"; };
+		D53ABBF6189522AD00C4525C /* MLProgressSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLProgressSheetController.h; sourceTree = "<group>"; };
+		D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLProgressSheetController.m; sourceTree = "<group>"; };
 		D541211817DFA96800ACDB81 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D545C8D71898527300491511 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
+		D545C8D81898527300491511 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		D545C8DB1898527C00491511 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		D545C8DC1898527C00491511 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		D545C8DD1898527C00491511 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		D545C8DE1898527C00491511 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		D545C8DF1898527C00491511 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		D545C8E01898527C00491511 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		D545C8E11898527C00491511 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		D545C8E21898527C00491511 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		D545C8E31898527C00491511 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D5AB1772180886810050DC12 /* 28-star-ye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star-ye.png"; sourceTree = "<group>"; };
+		D5CD48BB18944E11005CEC4C /* MLCustomURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomURLConnection.h; sourceTree = "<group>"; };
+		D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomURLConnection.m; sourceTree = "<group>"; };
 		D5E91ACF17E387F100B66B27 /* MLCoMedzRMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedzRMainWindow.xib; sourceTree = "<group>"; };
 		D5E91AD117E3886500B66B27 /* MLCoMedMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedMainWindow.xib; sourceTree = "<group>"; };
 		D5E91AD317E3888700B66B27 /* MLAmiKoMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKoMainWindow.xib; sourceTree = "<group>"; };
@@ -227,6 +258,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D545C8D61898522400491511 /* libz.1.2.5.dylib in Frameworks */,
 				D5E91B9517E5E8E400B66B27 /* QuartzCore.framework in Frameworks */,
 				D5E91B9617E5E8E400B66B27 /* WebKit.framework in Frameworks */,
 				D5E91B9717E5E8E400B66B27 /* libsqlite3.0.dylib in Frameworks */,
@@ -259,6 +291,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D53ABBF2189521D400C4525C /* MainSheets */ = {
+			isa = PBXGroup;
+			children = (
+				D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */,
+			);
+			name = MainSheets;
+			sourceTree = "<group>";
+		};
+		D545C8DA1898527C00491511 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				D545C8DB1898527C00491511 /* crypt.h */,
+				D545C8DC1898527C00491511 /* ioapi.c */,
+				D545C8DD1898527C00491511 /* ioapi.h */,
+				D545C8DE1898527C00491511 /* mztools.c */,
+				D545C8DF1898527C00491511 /* mztools.h */,
+				D545C8E01898527C00491511 /* unzip.c */,
+				D545C8E11898527C00491511 /* unzip.h */,
+				D545C8E21898527C00491511 /* zip.c */,
+				D545C8E31898527C00491511 /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
 		D5E91B3717E39C1100B66B27 /* MainNibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +362,7 @@
 		D5EBC67F17C912FF00EBEF39 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D54AB37518984B5800637257 /* libz.1.2.5.dylib */,
 				D5EBC68017C912FF00EBEF39 /* Cocoa.framework */,
 				D5EBC68217C912FF00EBEF39 /* Other Frameworks */,
 			);
@@ -379,6 +436,10 @@
 				D5EBC6DE17D5113700EBEF39 /* MLCustomTableRowView.m */,
 				D539C10417DCED1D00759260 /* MLSplashScreen.h */,
 				D539C10517DCED1D00759260 /* MLSplashScreen.m */,
+				D5CD48BB18944E11005CEC4C /* MLCustomURLConnection.h */,
+				D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */,
+				D53ABBF6189522AD00C4525C /* MLProgressSheetController.h */,
+				D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */,
 			);
 			name = Classes;
 			path = ..;
@@ -387,6 +448,7 @@
 		D5EBC6A617C913B900EBEF39 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D53ABBF2189521D400C4525C /* MainSheets */,
 				D5E91B3717E39C1100B66B27 /* MainNibs */,
 				D5E91B3817E39C3700B66B27 /* MainWindows */,
 			);
@@ -405,6 +467,9 @@
 		D5EBC6BF17C9248300EBEF39 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D545C8DA1898527C00491511 /* minizip */,
+				D545C8D71898527300491511 /* SSZipArchive.h */,
+				D545C8D81898527300491511 /* SSZipArchive.m */,
 				D5EBC6BD17C9247A00EBEF39 /* libsqlite3.0.dylib */,
 			);
 			name = Libs;
@@ -545,6 +610,7 @@
 				D5E91B7417E5E24000B66B27 /* 10-medical@2x.png in Resources */,
 				D5E91B7517E5E24000B66B27 /* 28-star@2x.png in Resources */,
 				D5E91B7617E5E24000B66B27 /* MLAmiKozRMainWindow.xib in Resources */,
+				D53ABBF5189521FD00C4525C /* MLProgressSheet.xib in Resources */,
 				D5E91B7917E5E24000B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91B8017E5E24000B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BF017E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
@@ -568,6 +634,7 @@
 				D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */,
 				D5E91BA317E5E8E400B66B27 /* 10-medical@2x.png in Resources */,
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
+				D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */,
 				D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */,
 				D5E91BAE17E5E8E400B66B27 /* AmiKoMainMenu.xib in Resources */,
@@ -638,11 +705,13 @@
 				D5E91B5917E5E24000B66B27 /* main.m in Sources */,
 				D5E91B5A17E5E24000B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B5B17E5E24000B66B27 /* MLMainWindowController.m in Sources */,
+				D53ABBF9189522AD00C4525C /* MLProgressSheetController.m in Sources */,
 				D5E91B5C17E5E24000B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D5E91B5D17E5E24000B66B27 /* MLSearchWebView.js in Sources */,
 				D5E91B5E17E5E24000B66B27 /* MLDBAdapter.m in Sources */,
 				D5E91B5F17E5E24000B66B27 /* MLMedication.m in Sources */,
 				D5E91B6017E5E24000B66B27 /* MLDataStore.m in Sources */,
+				D5CD48BF18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
 				D5E91B6117E5E24000B66B27 /* MLItemCellView.m in Sources */,
 				D5E91B6217E5E24000B66B27 /* MLSearchWebView.m in Sources */,
 				D5E91B6317E5E24000B66B27 /* MLCustomTableRowView.m in Sources */,
@@ -654,15 +723,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D545C8E61898527C00491511 /* unzip.c in Sources */,
 				D5E91B8817E5E8E400B66B27 /* main.m in Sources */,
 				D5E91B8917E5E8E400B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
+				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
 				D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */,
+				D545C8E71898527C00491511 /* zip.c in Sources */,
 				D5E91B8C17E5E8E400B66B27 /* MLSearchWebView.js in Sources */,
 				D5E91B8D17E5E8E400B66B27 /* MLDBAdapter.m in Sources */,
+				D545C8E51898527C00491511 /* mztools.c in Sources */,
 				D5E91B8E17E5E8E400B66B27 /* MLMedication.m in Sources */,
 				D5E91B8F17E5E8E400B66B27 /* MLDataStore.m in Sources */,
+				D5CD48BD18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
+				D545C8E41898527C00491511 /* ioapi.c in Sources */,
 				D5E91B9017E5E8E400B66B27 /* MLItemCellView.m in Sources */,
+				D545C8D91898527300491511 /* SSZipArchive.m in Sources */,
 				D5E91B9117E5E8E400B66B27 /* MLSearchWebView.m in Sources */,
 				D5E91B9217E5E8E400B66B27 /* MLCustomTableRowView.m in Sources */,
 				D5E91B9317E5E8E400B66B27 /* MLSplashScreen.m in Sources */,
@@ -681,6 +757,7 @@
 				D5E91BBC17E5E8E800B66B27 /* MLDBAdapter.m in Sources */,
 				D5E91BBD17E5E8E800B66B27 /* MLMedication.m in Sources */,
 				D5E91BBE17E5E8E800B66B27 /* MLDataStore.m in Sources */,
+				D5CD48BE18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
 				D5E91BC017E5E8E800B66B27 /* MLSearchWebView.m in Sources */,
 				D5E91BC117E5E8E800B66B27 /* MLCustomTableRowView.m in Sources */,
@@ -700,6 +777,7 @@
 				D5EBC6B817C9206800EBEF39 /* MLDBAdapter.m in Sources */,
 				D5EBC6B917C9206800EBEF39 /* MLMedication.m in Sources */,
 				D5EBC6BC17C9207200EBEF39 /* MLDataStore.m in Sources */,
+				D5CD48C018944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
 				D5EBC6C517CBBCEA00EBEF39 /* MLItemCellView.m in Sources */,
 				D5EBC6CD17D0F08700EBEF39 /* MLSearchWebView.m in Sources */,
 				D5EBC6DF17D5113700EBEF39 /* MLCustomTableRowView.m in Sources */,

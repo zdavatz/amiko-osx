@@ -164,18 +164,7 @@ static NSInteger mCurrentSearchState = kTitle;
     favoriteKeyData = [NSMutableArray array];
     
     // Open database
-    mDb = [[MLDBAdapter alloc] init];
-    if ([[self appLanguage] isEqualToString:@"de"]) {
-        if (![mDb openDatabase:@"amiko_db_full_idx_de"]) {
-            NSLog(@"No German database!");
-            mDb = nil;
-        }
-    } else if ([[self appLanguage] isEqualToString:@"fr"]) {
-        if (![mDb openDatabase:@"amiko_db_full_idx_fr"]) {
-            NSLog(@"No French database!");
-            mDb = nil;
-        }
-    }
+    [self openSQLiteDatabase];
     
 #ifdef DEBUG
     NSLog(@"Number of records = %ld", (long)[mDb getNumRecords]);
@@ -196,6 +185,12 @@ static NSInteger mCurrentSearchState = kTitle;
     
     // Set search state
     [self setSearchState:kTitle];
+    
+    // Register observer to notify successful download of new database
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(finishedDownloading:)
+                                                 name:@"MLDidFinishLoading"
+                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(windowResized:)
@@ -226,14 +221,52 @@ static NSInteger mCurrentSearchState = kTitle;
                                         repeats:NO];
     } else {
         [[self window] setAlphaValue:1.0];
-        
         // Test
-        searchResults = [self searchAipsDatabaseWith:@""];
-        if (searchResults) {
-            [self updateTableView];
-            [self.myTableView reloadData];
+        [self reloadDataInTableView];
+    }
+}
+
+- (void) openSQLiteDatabase
+{
+    mDb = [[MLDBAdapter alloc] init];
+    if ([[self appLanguage] isEqualToString:@"de"]) {
+        if (![mDb openDatabase:@"amiko_db_full_idx_de"]) {
+            NSLog(@"No German database!");
+            mDb = nil;
+        }
+    } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+        if (![mDb openDatabase:@"amiko_db_full_idx_fr"]) {
+            NSLog(@"No French database!");
+            mDb = nil;
         }
     }
+}
+
+- (void) finishedDownloading:(NSNotification *)notification
+{
+    if ([[notification name] isEqualToString:@"MLDidFinishLoading"]) {
+        if (mDb!=nil) {
+            // Close database
+            [mDb closeDatabase];
+            // Re-open database
+            NSLog(@"Re-opening database");
+            [self openSQLiteDatabase];
+            // Reload table
+            [self reloadDataInTableView];
+        }
+    }
+}
+
+- (void) reloadDataInTableView
+{
+    searchResults = [self searchAipsDatabaseWith:@""];
+    if (searchResults) {
+        [self updateTableView];
+        [self.myTableView reloadData];
+    }
+    
+    // Reset search state
+    [self setSearchState:kTitle];
 }
 
 - (void) awakeFromNib
@@ -247,9 +280,9 @@ static NSInteger mCurrentSearchState = kTitle;
 - (void) windowResized: (NSNotification *)notification;
 {
     /*
-    [self.mySplashScreen removeFromSuperview];
-    [myToolbar setVisible:YES];    
-    */
+     [self.mySplashScreen removeFromSuperview];
+     [myToolbar setVisible:YES];
+     */
 }
 
 - (NSString *) appOwner
@@ -411,16 +444,42 @@ static NSInteger mCurrentSearchState = kTitle;
     [printJob runOperation];
 }
 
+- (IBAction) updateAipsDatabase:(id)sender
+{
+    // Update database
+    if ([[self appLanguage] isEqualToString:@"de"])
+        [mDb updateDatabase:@"de"];
+    else if ([[self appLanguage] isEqualToString:@"fr"])
+        [mDb updateDatabase:@"fr"];
+}
+
 - (IBAction) showAboutFile: (id)sender
 {
+    // A. Check first users documents folder
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // Get documents directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [paths lastObject];
     if ([[self appLanguage] isEqualToString:@"de"]) {
-        NSURL * aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_de" withExtension:@"html"];
-        // Starts Safari
-        [[NSWorkspace sharedWorkspace] openURL:aboutFile];
+        NSString *filePath = [[documentsDir stringByAppendingPathComponent:@"amiko_report_de"] stringByAppendingPathExtension:@"html"];
+        if ([fileManager fileExistsAtPath:filePath]) {
+            // Starts Safari            
+            [[NSWorkspace sharedWorkspace] openFile:filePath];
+        } else {
+            NSURL * aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_de" withExtension:@"html"];
+            // Starts Safari
+            [[NSWorkspace sharedWorkspace] openURL:aboutFile];
+        }
     } else if ([[self appLanguage] isEqualToString:@"fr"]) {
-        NSURL * aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_fr" withExtension:@"html"];
-        // Starts Safari
-        [[NSWorkspace sharedWorkspace] openURL:aboutFile];
+        NSString *filePath = [[documentsDir stringByAppendingPathComponent:@"amiko_report_fr"] stringByAppendingPathExtension:@"html"];
+        if ([fileManager fileExistsAtPath:filePath]) {
+            // Starts Safari
+            [[NSWorkspace sharedWorkspace] openFile:filePath];
+        } else {
+            NSURL * aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_fr" withExtension:@"html"];
+            // Starts Safari
+            [[NSWorkspace sharedWorkspace] openURL:aboutFile];
+        }
     }
 }
 

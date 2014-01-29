@@ -38,23 +38,23 @@
     // Create NSFileManager object to check the status of the database and to copy it if required
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // Get documents directory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [paths objectAtIndex:0];
     // Returns a new string made by appending to the receiver a given string
-    NSString *dbPath = [documentsDir stringByAppendingPathComponent:dbName];
+    NSString *writableDBPath = [documentsDir stringByAppendingPathComponent:dbName];
     // Check if the database has already been created at specified path
-    BOOL success = [fileManager fileExistsAtPath:dbPath];
+    BOOL success = [fileManager fileExistsAtPath:writableDBPath];
+    // If the file exists, do nothing...
+	if (success)
+        return;
 
-	if (success) {
-	    NSError *error;
-        // Get the path to the database in the application package
-		NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
-        // Copy the database from the package to the users filesystem
-		success = [fileManager copyItemAtPath:defaultDBPath toPath:dbPath error:&error];
-		
-		if (!success)
-			NSLog(@"%s Failed to create writable database file with message '%@'.", __FUNCTION__, [error localizedDescription]);
-	}
+    NSError *error;
+    // Get the path to the database in the application package
+	NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+    // Copy the database from the package to the users filesystem
+	success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+	if (!success)
+		NSLog(@"%s Failed to create writable database file with message '%@'.", __FUNCTION__, [error localizedDescription]);
 }
 
 /** Instance functions

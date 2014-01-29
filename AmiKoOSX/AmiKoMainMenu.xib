@@ -66,6 +66,12 @@
                                     <action selector="printSearchResult:" target="-1" id="554"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ld7-WO-ECc"/>
+                            <menuItem title="AIPS Datenbank Aktualisieren" tag="2" keyEquivalent="a" id="sQD-fz-4he">
+                                <connections>
+                                    <action selector="updateAipsDatabase:" target="-1" id="CYl-0r-8uP"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -127,7 +133,7 @@
                             <menuItem isSeparatorItem="YES" id="623">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Swissmedic Fehler" keyEquivalent="r" id="564">
+                            <menuItem title="Report" keyEquivalent="r" id="564">
                                 <connections>
                                     <action selector="showAboutFile:" target="-1" id="567"/>
                                 </connections>

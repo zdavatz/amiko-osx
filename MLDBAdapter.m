@@ -23,6 +23,7 @@
 
 #import "MLDBAdapter.h"
 #import "MLSQLiteDatabase.h"
+#import "MLCustomURLConnection.h"
 
 enum {
   kMedId = 0, kTitle, kAuth, kAtcCode, kSubstances, kRegnrs, kAtcClass, kTherapy, kApplication, kIndications, kCustomerId, kPackInfo, kAddInfo, kIdsStr, kSectionsStr, kContentStr, kStyleStr
@@ -53,7 +54,6 @@ static NSString *DATABASE_TABLE = @"amikodb";
 static NSString *SHORT_TABLE = nil;
 static NSString *FULL_TABLE = nil;
 
-
 @implementation MLDBAdapter
 {
     MLSQLiteDatabase *mySqliteDb;
@@ -65,8 +65,7 @@ static NSString *FULL_TABLE = nil;
 
 + (void) initialize
 {
-    if (self == [MLDBAdapter class])
-    {
+    if (self == [MLDBAdapter class]) {
         if (SHORT_TABLE == nil) {
             SHORT_TABLE = [[NSString alloc] initWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
                            KEY_ROWID, KEY_TITLE, KEY_AUTH, KEY_ATCCODE, KEY_SUBSTANCES, KEY_REGNRS, KEY_ATCCLASS, KEY_THERAPY, KEY_APPLICATION, KEY_INDICATIONS, KEY_CUSTOMER_ID, KEY_PACK_INFO];
@@ -80,22 +79,57 @@ static NSString *FULL_TABLE = nil;
 
 /** Instance functions
  */
+
 #pragma mark Instance functions
 
-- (int) openDatabase: (NSString *)name
+- (BOOL) openDatabase: (NSString *)dbName
 {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"db"];
+    // A. Check first users documents folder
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // Get documents directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [paths lastObject];
+    NSString *filePath = [[documentsDir stringByAppendingPathComponent:dbName] stringByAppendingPathExtension:@"db"];
+    // Check if database exists
+    if (filePath!=nil) {
+        if ([fileManager fileExistsAtPath:filePath]) {
+            mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
+            NSLog(@"Database found documents folder - %@", filePath);
+            return TRUE;
+        }
+    }
     
-    if (filePath!=nil )
+    // B. If no database is available, check if db is in app bundle
+    filePath = [[NSBundle mainBundle] pathForResource:dbName ofType:@"db"];
+    if (filePath!=nil ) {
         mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
-    else
-        return 0;
-    return 1;
+        NSLog(@"Database found in app bundle - %@", filePath);
+        return TRUE;
+    }
+    
+    return FALSE;
 }
 
 - (void) closeDatabase
 {
-    [mySqliteDb close];
+    if (mySqliteDb)
+        [mySqliteDb close];
+}
+
+- (void) updateDatabase: (NSString *)language
+{ 
+    if ([language isEqualToString:@"de"]) {
+        MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
+        [reportConn downloadFileWithName:@"amiko_report_de.html" andModal:NO];
+        MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
+        [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
+    } else if ([language isEqualToString:@"fr"]) {
+        MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
+        [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:NO];
+        MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
+        [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:YES];
+    }
+    
 }
 
 - (NSInteger) getNumRecords

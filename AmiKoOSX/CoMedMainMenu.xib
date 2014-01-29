@@ -127,7 +127,7 @@
                             <menuItem isSeparatorItem="YES" id="623">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Erreurs Swissmedic" keyEquivalent="r" id="564">
+                            <menuItem title="Rapport" keyEquivalent="r" id="564">
                                 <connections>
                                     <action selector="showAboutFile:" target="-1" id="567"/>
                                 </connections>
