@@ -130,6 +130,11 @@
                                     <action selector="sendFeedback:" target="-1" id="J2f-H6-Qad"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Share" keyEquivalent="s" id="agB-1X-aN9">
+                                <connections>
+                                    <action selector="shareApp:" target="-1" id="PAy-ja-X0v"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="623">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>

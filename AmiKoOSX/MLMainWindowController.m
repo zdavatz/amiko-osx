@@ -263,6 +263,7 @@ static NSInteger mCurrentSearchState = kTitle;
     if (searchResults) {
         [self updateTableView];
         [self.myTableView reloadData];
+        [self.myTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1)];
     }
     
     // Reset search state
@@ -521,6 +522,11 @@ static NSInteger mCurrentSearchState = kTitle;
         NSURL *helpFile = [NSURL URLWithString:encodedSubject];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     }
+}
+
+- (IBAction) shareApp: (id)sender
+{
+    NSLog(@"Sharing app");
 }
 
 - (void) showHelp: (id)sender

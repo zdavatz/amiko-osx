@@ -123,7 +123,11 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
     if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"]) {
         NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *zipFilePath = [documentsDirectory stringByAppendingPathComponent:mFileName];
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_de" ofType:@"db"];
+        NSString *filePath;
+        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"])
+            filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_de" ofType:@"db"];
+        if ([mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"])
+            filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_fr" ofType:@"db"];
         if (filePath!=nil) {
             // NSLog(@"Filepath = %@", filePath);
             NSString *output = [documentsDirectory stringByAppendingPathComponent:@"."];
