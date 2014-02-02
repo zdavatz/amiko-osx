@@ -155,7 +155,7 @@ static NSInteger mCurrentSearchState = kTitle;
     
     m_alpha = 0.0;
     m_delta = 0.01;
-    [[self window] setAlphaValue:m_alpha];
+    [[self window] setAlphaValue:1.0];//m_alpha];
     [self fadeInAndShow];
     [[self window] center];
     
@@ -212,7 +212,7 @@ static NSInteger mCurrentSearchState = kTitle;
 {
     if (m_alpha<1.0) {
         m_alpha += m_delta;
-        [[self window] setAlphaValue:m_alpha];
+        [[self window] setAlphaValue:1.0f]; // m_alpha
         
         [NSTimer scheduledTimerWithTimeInterval:0.01
                                          target:self
@@ -249,12 +249,41 @@ static NSInteger mCurrentSearchState = kTitle;
             // Close database
             [mDb closeDatabase];
             // Re-open database
-            NSLog(@"Re-opening database");
             [self openSQLiteDatabase];
             // Reload table
             [self reloadDataInTableView];
+            // Display friendly message
+            NSBeep();
+            long numSearchRes = [searchResults count];
+            
+            NSAlert *alert = [[NSAlert alloc] init];
+            
+            [alert addButtonWithTitle:@"OK"];
+            if ([[self appLanguage] isEqualToString:@"de"]) {
+                [alert setMessageText:@"AIPS Datenbank aktualisiert!"];
+                [alert setInformativeText:[NSString stringWithFormat:@"Die Datenbank enthält %ld Fachinfos.", numSearchRes]];
+            } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+                [alert setMessageText:@"Banque des donnees AIPS mises à jour!"];
+                [alert setInformativeText:[NSString stringWithFormat:@"La banque des données contien %ld notices infopro.", numSearchRes]];
+            }
+            [alert setAlertStyle:NSInformationalAlertStyle];
+            
+            [alert beginSheetModalForWindow:[self window]
+                              modalDelegate:self
+                             didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                                contextInfo:nil];
+            // [alert runModal];
         }
     }
+}
+
+
+- (void) alertDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode==NSAlertFirstButtonReturn) {
+        NSLog(@"Database successfully updated!");
+    }
+    
 }
 
 - (void) reloadDataInTableView
@@ -1124,7 +1153,7 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (void) tableViewSelectionDidChange: (NSNotification *)notification
 {    
-    if ([notification object] == self.myTableView ) {
+    if ([notification object] == self.myTableView) {
                 
         NSInteger row = [[notification object] selectedRow];
         long mId = [medi[row] medId];
@@ -1166,8 +1195,9 @@ static NSInteger mCurrentSearchState = kTitle;
         
     }
     
+#ifdef DEBUG
     report_memory();
-    
+#endif
 }
 
 /*

@@ -66,9 +66,15 @@
     
     [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
-                                   selector:@selector(fadeOutAndRemove)
+                                   selector:@selector(closeSplashScreen)    // fadeOutAndRemove
                                    userInfo:nil
                                     repeats:NO];
+}
+
+- (void) closeSplashScreen
+{
+    [window close];
+    [self startMainWindow];
 }
 
 - (void) fadeOutAndRemove

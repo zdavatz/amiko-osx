@@ -24,13 +24,13 @@
     return nil;
 }
 
-- (IBAction) onCancelPressed: (id)sender
+- (IBAction) onCancelPressed:(id)sender
 {
     mDownloadInProgress = NO;
     
 }
 
-- (void) show: (NSWindow *)window
+- (void) show:(NSWindow *)window
 {
     if (!mProgressPanel)
         [NSBundle loadNibNamed:@"MLProgressSheet" owner:self];
@@ -61,7 +61,7 @@
     [mProgressPanel close];
 }
 
-- (void) update: (long)value max:(long long)maxValue
+- (void) update:(long)value max:(long long)maxValue
 {
     NSString *msg = [NSString stringWithFormat:@"Downloading... %ld kB out of %lld kB", value/1000, maxValue/1000];
     [mDownloadMsg setStringValue:msg];
