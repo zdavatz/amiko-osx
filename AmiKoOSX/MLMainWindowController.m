@@ -62,6 +62,7 @@ static NSString *SEARCH_FACHINFO = @"in Fachinformation";
 
 static NSInteger mUsedDatabase = kAips;
 static NSInteger mCurrentSearchState = kTitle;
+static NSString *mCurrentSearchKey = @"";
 
 @interface DataObject : NSObject
 
@@ -222,7 +223,7 @@ static NSInteger mCurrentSearchState = kTitle;
     } else {
         [[self window] setAlphaValue:1.0];
         // Test
-        [self reloadDataInTableView];
+        [self resetDataInTableView];
     }
 }
 
@@ -251,7 +252,11 @@ static NSInteger mCurrentSearchState = kTitle;
             // Re-open database
             [self openSQLiteDatabase];
             // Reload table
-            [self reloadDataInTableView];
+            NSInteger _mySearchState = mCurrentSearchState;
+            NSString *_mySearchKey = mCurrentSearchKey;
+            [self resetDataInTableView];
+            mCurrentSearchState = _mySearchState;
+            mCurrentSearchKey = _mySearchKey;
             // Display friendly message
             NSBeep();
             long numSearchRes = [searchResults count];
@@ -272,7 +277,6 @@ static NSInteger mCurrentSearchState = kTitle;
                               modalDelegate:self
                              didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
                                 contextInfo:nil];
-            // [alert runModal];
         }
     }
 }
@@ -282,21 +286,44 @@ static NSInteger mCurrentSearchState = kTitle;
 {
     if (returnCode==NSAlertFirstButtonReturn) {
         NSLog(@"Database successfully updated!");
+        // Resume table
+        [self restoreDataInTableView];
     }
-    
 }
 
-- (void) reloadDataInTableView
+- (void) resetDataInTableView
 {
+    // Reset search state
+    [self setSearchState:kTitle];
+    
     searchResults = [self searchAipsDatabaseWith:@""];
     if (searchResults) {
         [self updateTableView];
         [self.myTableView reloadData];
         [self.myTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1)];
     }
-    
-    // Reset search state
-    [self setSearchState:kTitle];
+}
+
+- (void) restoreDataInTableView
+{
+    // Restore search state
+    [self setSearchState:mCurrentSearchState];
+    // Search
+    if (mCurrentSearchState!=kWebView) {
+        if (mUsedDatabase==kAips) {
+            searchResults = [self searchAipsDatabaseWith:mCurrentSearchKey];
+        }
+        else if (mUsedDatabase==kFavorites) {
+            searchResults = [self retrieveAllFavorites];
+        }
+        if (searchResults) {
+            [[mySearchField cell] setStringValue:mCurrentSearchKey];
+            [self updateTableView];
+            [self.myTableView reloadData];
+        }
+    } else {
+        [[mySearchField cell] setStringValue:mCurrentSearchKey];
+    }
 }
 
 - (void) awakeFromNib
@@ -548,6 +575,9 @@ static NSInteger mCurrentSearchState = kTitle;
     if ([[self appOwner] isEqualToString:@"ywesee"]) {
         NSString* subject = [NSString stringWithFormat:@"%@ Feedback", APP_NAME];
         NSString *encodedSubject = [NSString stringWithFormat:@"mailto:zdavatz@ywesee.com?subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        /*
+        AmiKo OS X\r\n\nGet it now: https://play.google.com/store/apps/details?id=com.ywesee.amiko.de\r\n\nEnjoy!");
+        */
         NSURL *helpFile = [NSURL URLWithString:encodedSubject];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     }
@@ -555,7 +585,17 @@ static NSInteger mCurrentSearchState = kTitle;
 
 - (IBAction) shareApp: (id)sender
 {
-    NSLog(@"Sharing app");
+    // Starts mail client
+    NSString* subject = [NSString stringWithFormat:@"%@ OS X", APP_NAME];
+    NSString* body = [NSString stringWithFormat:@"%@ OS X\r\n\nGet it now: https://itunes.apple.com/us/app/amiko/id708142753?mt=12\r\n\nEnjoy!\r\n", APP_NAME];
+    
+    NSString *encodedSubject = [NSString stringWithFormat:@"subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *encodedBody = [NSString stringWithFormat:@"body=%@", [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:?%@&%@", encodedSubject, encodedBody];
+
+    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
+    
+    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
 }
 
 - (void) showHelp: (id)sender
@@ -790,6 +830,8 @@ static NSInteger mCurrentSearchState = kTitle;
         searchRes = [mDb searchApplication:searchQuery];
     }
 
+    mCurrentSearchKey = searchQuery;
+    
 #ifdef DEBUG    
     NSDate *endTime = [NSDate date];
     NSTimeInterval execTime = [endTime timeIntervalSinceDate:startTime];
