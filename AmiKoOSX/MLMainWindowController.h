@@ -42,13 +42,15 @@
 @property (nonatomic, retain) IBOutlet NSTableView *myTableView;
 @property (nonatomic, retain) IBOutlet NSTableView *mySectionTitles;
 
-- (IBAction) tappedOnStar: (id)sender;
-- (IBAction) searchNow: (id)sender;
-- (IBAction) onButtonPressed: (id)sender;
+- (IBAction) tappedOnStar:(id)sender;
+- (IBAction) searchNow:(id)sender;
+- (IBAction) onButtonPressed:(id)sender;
 - (IBAction) toolbarAction:(id)sender;
 - (IBAction) printSearchResult:(id)sender;
-- (IBAction) showAboutFile: (id)sender;
-- (IBAction) showAboutPanel: (id)sender;
-- (IBAction) sendFeedback: (id)sender;
+- (IBAction) showAboutFile:(id)sender;
+- (IBAction) showAboutPanel:(id)sender;
+- (IBAction) sendFeedback:(id)sender;
+- (IBAction) shareApp:(id)sender;
+- (IBAction) rateApp:(id)sender;
 
 @end

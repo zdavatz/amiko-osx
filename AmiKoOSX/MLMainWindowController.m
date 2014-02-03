@@ -510,7 +510,7 @@ static NSString *mCurrentSearchKey = @"";
         [mDb updateDatabase:@"fr"];
 }
 
-- (IBAction) showAboutFile: (id)sender
+- (IBAction) showAboutFile:(id)sender
 {
     // A. Check first users documents folder
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -541,7 +541,7 @@ static NSString *mCurrentSearchKey = @"";
 }
 
 // A small custom about box
-- (IBAction) showAboutPanel: (id)sender
+- (IBAction) showAboutPanel:(id)sender
 {
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *creditsPath = nil;
@@ -569,7 +569,7 @@ static NSString *mCurrentSearchKey = @"";
     [NSApp orderFrontStandardAboutPanelWithOptions:optionsDict];
 }
 
-- (IBAction) sendFeedback: (id)sender
+- (IBAction) sendFeedback:(id)sender
 {
     // Starts mail client
     if ([[self appOwner] isEqualToString:@"ywesee"]) {
@@ -583,7 +583,7 @@ static NSString *mCurrentSearchKey = @"";
     }
 }
 
-- (IBAction) shareApp: (id)sender
+- (IBAction) shareApp:(id)sender
 {
     // Starts mail client
     NSString* subject = [NSString stringWithFormat:@"%@ OS X", APP_NAME];
@@ -596,6 +596,14 @@ static NSString *mCurrentSearchKey = @"";
     NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
     
     [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+}
+
+- (IBAction) rateApp:(id)sender
+{
+    if ([[self appLanguage] isEqualToString:@"de"])
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"macappstore://itunes.apple.com/app/id708142753?mt=12"]];
+    else if ([[self appLanguage] isEqualToString:@"fr"])
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"macappstore://itunes.apple.com/app/id710472327?mt=12"]];
 }
 
 - (void) showHelp: (id)sender
