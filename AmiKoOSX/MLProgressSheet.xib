@@ -11,6 +11,7 @@
                 <outlet property="mDownloadPercent" destination="vLP-OR-WLH" id="oHU-aB-P8Q"/>
                 <outlet property="mProgressIndicator" destination="mtS-RX-tOv" id="1Hq-sw-fRB"/>
                 <outlet property="mProgressPanel" destination="1" id="RgM-U2-ZxQ"/>
+                <outlet property="mSplashImage" destination="zBy-pJ-w3J" id="0gB-Rm-CzI"/>
                 <outlet property="mTextField" destination="HGE-iM-aiE" id="lbG-mP-lTZ"/>
                 <outlet property="window" destination="1" id="cc4-EQ-6XF"/>
             </connections>
@@ -62,13 +63,13 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sSc-Y4-HGu">
                         <rect key="frame" x="17" y="140" width="443" height="320"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="amikoosx_splash_1000x670" id="zBy-pJ-w3J"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Zur_Rose_1000x670px" id="zBy-pJ-w3J"/>
                     </imageView>
                 </subviews>
             </view>
         </window>
     </objects>
     <resources>
-        <image name="amikoosx_splash_1000x670" width="1000" height="670"/>
+        <image name="Zur_Rose_1000x670px" width="1000" height="670"/>
     </resources>
 </document>

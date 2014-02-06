@@ -61,11 +61,11 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
             myConnection = [[NSURLConnection alloc] initWithRequest:request
                                                            delegate:self
                                                    startImmediately:NO];
-            [myConnection setDelegateQueue: [NSOperationQueue mainQueue]];
+            [myConnection setDelegateQueue:[NSOperationQueue mainQueue]];
             [myConnection start];
         });
         
-        // Get handle to file where the downloaded file is saved
+    // Get handle to file where the downloaded file is saved
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
     [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
@@ -120,13 +120,13 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
     if (mModal)
         [mProgressSheet remove];
     // Unzip database
-    if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"]) {
+    if ([[mFileName pathExtension] isEqualToString:@"zip"])  {
         NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *zipFilePath = [documentsDirectory stringByAppendingPathComponent:mFileName];
         NSString *filePath;
-        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"])
+        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_de.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_de" ofType:@"db"];
-        if ([mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"])
+        if ([mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_fr.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_fr" ofType:@"db"];
         if (filePath!=nil) {
             // NSLog(@"Filepath = %@", filePath);

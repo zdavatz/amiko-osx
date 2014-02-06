@@ -67,7 +67,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ld7-WO-ECc"/>
-                            <menuItem title="AIPS Datenbank Aktualisieren" tag="2" keyEquivalent="a" id="sQD-fz-4he">
+                            <menuItem title="Datenbank Aktualisieren" tag="2" keyEquivalent="a" id="sQD-fz-4he">
                                 <connections>
                                     <action selector="updateAipsDatabase:" target="-1" id="CYl-0r-8uP"/>
                                 </connections>
@@ -112,14 +112,6 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Hilfe" systemMenu="help" id="561">
                         <items>
-                            <menuItem title="AmiKo Hilfe" keyEquivalent="?" id="562">
-                                <connections>
-                                    <action selector="showHelp:" target="-1" id="563"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="566">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
                             <menuItem title="Feedback" keyEquivalent="f" id="M4g-kf-yKq">
                                 <connections>
                                     <action selector="sendFeedback:" target="-1" id="J2f-H6-Qad"/>

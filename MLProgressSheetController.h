@@ -11,6 +11,7 @@
 @interface MLProgressSheetController : NSWindowController
 {
     IBOutlet NSWindow *mProgressPanel;
+    IBOutlet NSImageCell *mSplashImage;
     IBOutlet NSTextField *mDownloadMsg;
     IBOutlet NSTextField *mDownloadPercent;
     IBOutlet NSProgressIndicator *mProgressIndicator;

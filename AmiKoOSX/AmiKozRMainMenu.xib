@@ -66,6 +66,14 @@
                                     <action selector="printSearchResult:" target="-1" id="554"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Aqd-XG-Ud3">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Datenbank Aktualisieren" tag="1" keyEquivalent="a" id="cuR-Pf-Lft">
+                                <connections>
+                                    <action selector="updateAipsDatabase:" target="-1" id="7oS-rg-Fi2"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -111,18 +119,15 @@
                                     <action selector="showHelp:" target="-1" id="563"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Feedback" keyEquivalent="f" id="np4-MC-bul">
+                                <connections>
+                                    <action selector="sendFeedback:" target="-1" id="4TF-Wp-SJy"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="566">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Update" keyEquivalent="u" id="618">
-                                <connections>
-                                    <action selector="showHelp:" target="-1" id="622"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="623">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Report File" keyEquivalent="r" id="564">
+                            <menuItem title="Report" keyEquivalent="r" id="564">
                                 <connections>
                                     <action selector="showAboutFile:" target="-1" id="567"/>
                                 </connections>

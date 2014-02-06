@@ -28,7 +28,7 @@
 
 - (BOOL) openDatabase: (NSString *)name;
 - (void) closeDatabase;
-- (void) updateDatabase: (NSString *)language;
+- (void) updateDatabase: (NSString *)language for: (NSString *)owner;
 - (NSInteger) getNumRecords;
 - (MLMedication *) searchId: (long)rowId;
 - (NSArray *) getRecord: (long)rowId;

@@ -66,6 +66,14 @@
                                     <action selector="printSearchResult:" target="-1" id="554"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ihy-SV-Ow5">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Mise à Jour Banque des Données" tag="1" keyEquivalent="a" id="hzh-JH-owL">
+                                <connections>
+                                    <action selector="updateAipsDatabase:" target="-1" id="yXU-37-IC0"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -111,18 +119,15 @@
                                     <action selector="showHelp:" target="-1" id="563"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="566">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Mise à jour" keyEquivalent="u" id="618">
+                            <menuItem title="Feedback" keyEquivalent="f" id="ene-aP-SBJ">
                                 <connections>
-                                    <action selector="showHelp:" target="-1" id="622"/>
+                                    <action selector="sendFeedback:" target="-1" id="K2x-ep-NpP"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="623">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Report File" keyEquivalent="r" id="564">
+                            <menuItem title="Rapport" keyEquivalent="r" id="564">
                                 <connections>
                                     <action selector="showAboutFile:" target="-1" id="567"/>
                                 </connections>

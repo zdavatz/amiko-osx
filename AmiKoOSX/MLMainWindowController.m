@@ -32,15 +32,20 @@
 #import <unistd.h>
 
 #if defined (AMIKO)
-static NSString *APP_NAME = @"AmiKo";
+NSString* const APP_NAME = @"AmiKo";
+NSString* const APP_ID = @"708142753";
 #elif defined (AMIKO_ZR)
-static NSString *APP_NAME = @"AmiKo-zR";
+NSString* const APP_NAME = @"AmiKo-zR";
+NSString* const APP_ID = @"708142753";
 #elif defined (COMED)
-static NSString *APP_NAME = @"CoMed";
+NSString* const APP_NAME = @"CoMed";
+NSString* const APP_ID = @"710472327";
 #elif defined (COMED_ZR)
-static NSString *APP_NAME = @"CoMed-zR";
+NSString* const APP_NAME = @"CoMed-zR";
+NSString* const APP_ID = @"710472327";
 #else
-static NSString *APP_NAME = @"AmiKo";
+NSString* const APP_NAME = @"AmiKo";
+NSString* const APP_ID = @"708142753";
 #endif
 
 enum {
@@ -505,9 +510,9 @@ static NSString *mCurrentSearchKey = @"";
 {
     // Update database
     if ([[self appLanguage] isEqualToString:@"de"])
-        [mDb updateDatabase:@"de"];
+        [mDb updateDatabase:@"de" for:[self appOwner]];
     else if ([[self appLanguage] isEqualToString:@"fr"])
-        [mDb updateDatabase:@"fr"];
+        [mDb updateDatabase:@"fr" for:[self appOwner]];
 }
 
 - (IBAction) showAboutFile:(id)sender
@@ -571,24 +576,24 @@ static NSString *mCurrentSearchKey = @"";
 
 - (IBAction) sendFeedback:(id)sender
 {
+    NSString *subject = [NSString stringWithFormat:@"%@ Feedback", APP_NAME];
+    NSString *encodedSubject = [NSString stringWithFormat:@"mailto:zdavatz@ywesee.com?subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *helpFile = [NSURL URLWithString:encodedSubject];
     // Starts mail client
-    if ([[self appOwner] isEqualToString:@"ywesee"]) {
-        NSString* subject = [NSString stringWithFormat:@"%@ Feedback", APP_NAME];
-        NSString *encodedSubject = [NSString stringWithFormat:@"mailto:zdavatz@ywesee.com?subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        /*
-        AmiKo OS X\r\n\nGet it now: https://play.google.com/store/apps/details?id=com.ywesee.amiko.de\r\n\nEnjoy!");
-        */
-        NSURL *helpFile = [NSURL URLWithString:encodedSubject];
-        [[NSWorkspace sharedWorkspace] openURL:helpFile];
-    }
+    [[NSWorkspace sharedWorkspace] openURL:helpFile];
 }
 
 - (IBAction) shareApp:(id)sender
 {
     // Starts mail client
     NSString* subject = [NSString stringWithFormat:@"%@ OS X", APP_NAME];
-    NSString* body = [NSString stringWithFormat:@"%@ OS X\r\n\nGet it now: https://itunes.apple.com/us/app/amiko/id708142753?mt=12\r\n\nEnjoy!\r\n", APP_NAME];
-    
+    NSString* body = nil;
+    if ([[self appLanguage] isEqualToString:@"de"])
+        body = [NSString stringWithFormat:@"%@ OS X: Schweizer Arzneimittelkompendium\r\n\n"
+                "Get it now: https://itunes.apple.com/us/app/amiko/id%@?mt=12\r\n\nEnjoy!\r\n", APP_NAME, APP_ID];
+    else if ([[self appLanguage] isEqualToString:@"fr"])
+        body = [NSString stringWithFormat:@"%@ OS X: Compendium des Médicaments Suisse\r\n\n"
+                "Get it now: https://itunes.apple.com/us/app/amiko/id%@?mt=12\r\n\nEnjoy!\r\n", APP_NAME, APP_ID];
     NSString *encodedSubject = [NSString stringWithFormat:@"subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSString *encodedBody = [NSString stringWithFormat:@"body=%@", [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSString *encodedURLString = [NSString stringWithFormat:@"mailto:?%@&%@", encodedSubject, encodedBody];
@@ -600,10 +605,7 @@ static NSString *mCurrentSearchKey = @"";
 
 - (IBAction) rateApp:(id)sender
 {
-    if ([[self appLanguage] isEqualToString:@"de"])
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"macappstore://itunes.apple.com/app/id708142753?mt=12"]];
-    else if ([[self appLanguage] isEqualToString:@"fr"])
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"macappstore://itunes.apple.com/app/id710472327?mt=12"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"macappstore://itunes.apple.com/app/id%@?mt=12", APP_ID]]];
 }
 
 - (void) showHelp: (id)sender
@@ -613,7 +615,7 @@ static NSString *mCurrentSearchKey = @"";
         NSURL *helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     } else if ([[self appOwner] isEqualToString:@"ywesee"]) {
-        NSURL *helpFile = [NSURL URLWithString:@"https://itunes.apple.com/us/app/amiko/id708142753?mt=12"];
+        NSURL *helpFile = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/amiko/id%@?mt=12", APP_ID]];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     }
 }

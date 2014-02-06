@@ -25,6 +25,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 @interface MLCustomURLConnection : NSURLConnection <NSURLConnectionDataDelegate>
 
-- (void) downloadFileWithName: (NSString *)file andModal: (bool)modal;
+- (void) downloadFileWithName:(NSString *)file andModal:(bool)modal;
 
 @end

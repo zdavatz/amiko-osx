@@ -24,6 +24,23 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
+#if defined (AMIKO)
+extern NSString* const APP_NAME;
+extern NSString* const APP_ID;
+#elif defined (AMIKO_ZR)
+extern NSString* const APP_NAME;
+extern NSString* const APP_ID;
+#elif defined (COMED)
+extern NSString* const APP_NAME;
+extern NSString* const APP_ID;
+#elif defined (COMED_ZR)
+extern NSString* const APP_NAME;
+extern NSString* const APP_ID;
+#else
+extern NSString* const APP_NAME;
+extern NSString* const APP_ID;
+#endif
+
 @interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
     IBOutlet NSView *myView;

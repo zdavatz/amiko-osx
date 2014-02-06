@@ -116,18 +116,23 @@ static NSString *FULL_TABLE = nil;
         [mySqliteDb close];
 }
 
-- (void) updateDatabase: (NSString *)language
-{ 
+- (void) updateDatabase: (NSString *)language for:(NSString *)owner
+{
+    MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
+    MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
+ 
     if ([language isEqualToString:@"de"]) {
-        MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
         [reportConn downloadFileWithName:@"amiko_report_de.html" andModal:NO];
-        MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
-        [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
+        if ([owner isEqualToString:@"ywesee"])
+            [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
+        else if ([owner isEqualToString:@"zurrose"])
+            [dbConn downloadFileWithName:@"amiko_db_full_idx_zr_de.zip" andModal:YES];
     } else if ([language isEqualToString:@"fr"]) {
-        MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
-        [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:NO];
-        MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
-        [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:YES];
+        [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:NO];
+        if ([owner isEqualToString:@"ywesee"])
+            [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:YES];
+        else if ([owner isEqualToString:@"zurrose"])
+            [dbConn downloadFileWithName:@"amiko_db_full_idx_zr_fr.zip" andModal:YES];
     }
     
 }
