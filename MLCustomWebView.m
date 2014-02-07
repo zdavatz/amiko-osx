@@ -2,7 +2,7 @@
  
  Copyright (c) 2014 Max Lungarella <cybrmx@gmail.com>
  
- Created on 26/01/2014.
+ Created on 06/02/2014.
  
  This file is part of AmiKo for OSX.
  
@@ -21,25 +21,24 @@
  
  ------------------------------------------------------------------------ */
 
-#import <Cocoa/Cocoa.h>
+#import "MLCustomWebView.h"
 
-@interface MLProgressSheetController : NSWindowController
+@implementation MLCustomWebView
+
+- (id) initWithFrame:(NSRect)frame
 {
-    IBOutlet NSWindow *mProgressPanel;
-    IBOutlet NSImageCell *mSplashImage;
-    IBOutlet NSTextField *mDownloadMsg;
-    IBOutlet NSTextField *mDownloadPercent;
-    IBOutlet NSProgressIndicator *mProgressIndicator;
-    
-    bool mDownloadInProgress;
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code here.
+    }
+    return self;
 }
 
-@property (nonatomic, assign) bool mDownloadInProgress;
-
-- (IBAction) onCancelPressed: (id)sender;
-
-- (void) show: (NSWindow *)window;
-- (void) remove;
-- (void) update: (long)value max: (long long)maxValue;
+- (void) drawRect:(NSRect)dirtyRect
+{
+	[super drawRect:dirtyRect];
+	
+    // Drawing code here.
+}
 
 @end

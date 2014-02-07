@@ -197,6 +197,12 @@ static NSString *mCurrentSearchKey = @"";
                                              selector:@selector(finishedDownloading:)
                                                  name:@"MLDidFinishLoading"
                                                object:nil];
+
+    // Register observer to notify absence of file on pillbox server
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(finishedDownloading:)
+                                                 name:@"MLStatusCode404"
+                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(windowResized:)
@@ -283,6 +289,24 @@ static NSString *mCurrentSearchKey = @"";
                              didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
                                 contextInfo:nil];
         }
+    } else if ([[notification name] isEqualToString:@"MLStatusCode404"]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        
+        [alert addButtonWithTitle:@"OK"];
+        if ([[self appLanguage] isEqualToString:@"de"]) {
+            [alert setMessageText:@"Datenbank kann nicht aktualisiert werden!"];
+            [alert setInformativeText:[NSString stringWithFormat:@"Bitte wenden Sie sich an:\nzdavatz@ywesee.com\n+41 43 540 05 50"]];
+        } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+            [alert setMessageText:@"Mise à jour n'est pas possible!"];
+            [alert setInformativeText:[NSString stringWithFormat:@"S'il vous plait contacter:\nzdavatz@ywesee.com\n+41 43 540 05 50"]];
+        }
+        [alert setAlertStyle:NSInformationalAlertStyle];
+        
+        [alert beginSheetModalForWindow:[self window]
+                          modalDelegate:self
+                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                            contextInfo:nil];
+
     }
 }
 
@@ -1228,7 +1252,7 @@ static NSString *mCurrentSearchKey = @"";
         [self setSearchState:kWebView];
     
         [[myWebView preferences] setDefaultFontSize:14];
-    
+        
         NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
         [myRowView setEmphasized:YES];
         

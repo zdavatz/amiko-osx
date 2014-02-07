@@ -52,6 +52,10 @@
 		D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
 		D545C90718A3FC0700491511 /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
 		D545C90818A3FC0800491511 /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
+		D545C90B18A4286B00491511 /* MLCustomWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C90A18A4286B00491511 /* MLCustomWebView.m */; };
+		D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C90A18A4286B00491511 /* MLCustomWebView.m */; };
+		D545C90D18A4286B00491511 /* MLCustomWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C90A18A4286B00491511 /* MLCustomWebView.m */; };
+		D545C90E18A4286B00491511 /* MLCustomWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C90A18A4286B00491511 /* MLCustomWebView.m */; };
 		D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
@@ -201,6 +205,8 @@
 		D545C8E11898527C00491511 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
 		D545C8E21898527C00491511 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
 		D545C8E31898527C00491511 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		D545C90918A4286B00491511 /* MLCustomWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomWebView.h; sourceTree = "<group>"; };
+		D545C90A18A4286B00491511 /* MLCustomWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomWebView.m; sourceTree = "<group>"; };
 		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D5AB1772180886810050DC12 /* 28-star-ye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star-ye.png"; sourceTree = "<group>"; };
 		D5CD48BB18944E11005CEC4C /* MLCustomURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomURLConnection.h; sourceTree = "<group>"; };
@@ -467,6 +473,8 @@
 				D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */,
 				D53ABBF6189522AD00C4525C /* MLProgressSheetController.h */,
 				D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */,
+				D545C90918A4286B00491511 /* MLCustomWebView.h */,
+				D545C90A18A4286B00491511 /* MLCustomWebView.m */,
 			);
 			name = Classes;
 			path = ..;
@@ -738,6 +746,7 @@
 				D5E91B5A17E5E24000B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B5B17E5E24000B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF9189522AD00C4525C /* MLProgressSheetController.m in Sources */,
+				D545C90D18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D5E91B5C17E5E24000B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FD18A2CE0D00491511 /* zip.c in Sources */,
 				D5E91B5D17E5E24000B66B27 /* MLSearchWebView.js in Sources */,
@@ -764,6 +773,7 @@
 				D5E91B8917E5E8E400B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
+				D545C90B18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8E71898527C00491511 /* zip.c in Sources */,
 				D5E91B8C17E5E8E400B66B27 /* MLSearchWebView.js in Sources */,
@@ -790,6 +800,7 @@
 				D5E91BB817E5E8E800B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */,
 				D545C8EE18A2CDD100491511 /* MLProgressSheetController.m in Sources */,
+				D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FC18A2CE0D00491511 /* zip.c in Sources */,
 				D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */,
@@ -816,6 +827,7 @@
 				D5EBC69417C912FF00EBEF39 /* MLAppDelegate.m in Sources */,
 				D5EBC6A417C913B100EBEF39 /* MLMainWindowController.m in Sources */,
 				D545C8EF18A2CDD200491511 /* MLProgressSheetController.m in Sources */,
+				D545C90E18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D5EBC6AD17C9202600EBEF39 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FE18A2CE0D00491511 /* zip.c in Sources */,
 				D5EBC6B217C9205E00EBEF39 /* MLSearchWebView.js in Sources */,

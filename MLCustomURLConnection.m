@@ -1,6 +1,6 @@
 /*
  
- Copyright (c) 2013 Max Lungarella <cybrmx@gmail.com>
+ Copyright (c) 2014 Max Lungarella <cybrmx@gmail.com>
  
  Created on 25/01/2014.
  
@@ -34,6 +34,7 @@
     MLProgressSheetController *mProgressSheet;
     long mTotExceptedBytes;
     long mTotDownloadedBytes;
+    long mStatusCode;
     bool mModal;
     NSString *mFileName;
 }
@@ -85,6 +86,9 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+    // Get status code
+    mStatusCode = [((NSHTTPURLResponse *)response) statusCode];
+
     mTotExceptedBytes = [response expectedContentLength];
     NSLog(@"Expected content length = %ld bytes", mTotExceptedBytes);
     mTotDownloadedBytes = 0;
@@ -119,6 +123,11 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
         [mFile closeFile];
     if (mModal)
         [mProgressSheet remove];
+    if (mStatusCode==404) {
+        // Notify status code 404 (file not found)
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MLStatusCode404" object:self];
+        return;
+    }
     // Unzip database
     if ([[mFileName pathExtension] isEqualToString:@"zip"])  {
         NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

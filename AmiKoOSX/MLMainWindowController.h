@@ -23,6 +23,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
+#import "MLCustomWebView.h"
 
 #if defined (AMIKO)
 extern NSString* const APP_NAME;
@@ -49,7 +50,7 @@ extern NSString* const APP_ID;
     IBOutlet NSSearchField *mySearchField;
     IBOutlet NSTableView *myTableView;
     IBOutlet NSTableView *mySectionTitles;
-    IBOutlet WebView *myWebView;
+    IBOutlet MLCustomWebView *myWebView;
 }
 
 @property (nonatomic, retain) IBOutlet NSView *myView;
