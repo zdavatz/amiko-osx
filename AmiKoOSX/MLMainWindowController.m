@@ -576,9 +576,9 @@ static NSString *mCurrentSearchKey = @"";
 
 - (BOOL) isConnected
 {
-    NSURL *dummyURL = [NSURL URLWithString:@"http://www.google.com"];
+    NSURL *dummyURL = [NSURL URLWithString:@"http://pillbox.oddb.org"];
     NSData *data = [NSData dataWithContentsOfURL:dummyURL];
-    NSLog(@"Ping to www.google.com = %lu bytes", (unsigned long)[data length]);
+    NSLog(@"Ping to pillbox.oddb.org = %lu bytes", (unsigned long)[data length]);
     return data!=nil;
 }
 
@@ -596,9 +596,9 @@ static NSString *mCurrentSearchKey = @"";
         
         [alert addButtonWithTitle:@"OK"];
         if ([[self appLanguage] isEqualToString:@"de"]) {
-            [alert setMessageText:@"Für die Aktualisierung benötigen Sie eine aktive Internetverbindung."];
+            [alert setMessageText:@"Für die Aktualisierung der Datenbank benötigen Sie eine aktive Internetverbindung."];
         } else if ([[self appLanguage] isEqualToString:@"fr"]) {
-            [alert setMessageText:@"Pour la mise à jour vous devez disposer d’une connexion Internet active."];
+            [alert setMessageText:@"Pour la mise à jour de la banque des données vous devez disposer d’une connexion Internet active."];
         }
         [alert setAlertStyle:NSInformationalAlertStyle];
         
