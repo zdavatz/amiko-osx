@@ -114,7 +114,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Aide" systemMenu="help" id="561">
                         <items>
-                            <menuItem title="Feedback" keyEquivalent="f" id="aRK-Ud-Qb4">
+                            <menuItem title="Feedback" keyEquivalent="x" id="aRK-Ud-Qb4">
                                 <connections>
                                     <action selector="sendFeedback:" target="-1" id="OlT-xG-31H"/>
                                 </connections>

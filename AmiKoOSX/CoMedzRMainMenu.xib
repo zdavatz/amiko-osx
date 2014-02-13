@@ -119,7 +119,7 @@
                                     <action selector="showHelp:" target="-1" id="563"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Feedback" keyEquivalent="f" id="ene-aP-SBJ">
+                            <menuItem title="Feedback" keyEquivalent="x" id="ene-aP-SBJ">
                                 <connections>
                                     <action selector="sendFeedback:" target="-1" id="K2x-ep-NpP"/>
                                 </connections>

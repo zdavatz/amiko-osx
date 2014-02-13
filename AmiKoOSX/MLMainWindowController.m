@@ -27,6 +27,7 @@
 #import "MLSearchWebView.h"
 #import "MLDataStore.h"
 #import "MLCustomTableRowView.h"
+#import "MLCustomView.h"
 
 #import <mach/mach.h>
 #import <unistd.h>
@@ -101,7 +102,9 @@ static NSString *mCurrentSearchKey = @"";
     NSArray *listofSectionIds;
     NSArray *listofSectionTitles;
     
-    NSProgressIndicator* progressIndicator;
+    NSProgressIndicator *progressIndicator;
+    
+    NSTextFinder *mTextFinder;
     
     dispatch_queue_t mSearchQueue;
     volatile bool mSearchInProgress;
@@ -216,10 +219,51 @@ static NSString *mCurrentSearchKey = @"";
     */
     
     [[self window] setBackgroundColor:[NSColor whiteColor]];
-        
+    
+    // 09/02/2014: TextFinder in Xib file... IBOutlet...
+    /*
+    mTextFinder = [[NSTextFinder alloc] init];
+    [mTextFinder setClient:myWebView];
+    [mTextFinder setFindBarContainer:[myWebView scrollView]];
+
+    [[myWebView scrollView] setFindBarPosition:NSScrollViewFindBarPositionAboveContent];
+    [[myWebView scrollView] setFindBarVisible:YES];
+    
+    [mTextFinder setIncrementalSearchingEnabled:YES];   // type-as-you-go
+    [mTextFinder setIncrementalSearchingShouldDimContentView:YES];
+    
+    // change the NSFindPboard NSPasteboardTypeString
+    NSPasteboard* pBoard = [NSPasteboard pasteboardWithName:NSFindPboard];
+    [pBoard declareTypes:[NSArray arrayWithObjects:NSPasteboardTypeString, NSPasteboardTypeTextFinderOptions, nil] owner:nil];
+    [pBoard setString:@"Abilify" forType:NSStringPboardType];
+    NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSTextFinderCaseInsensitiveKey, [NSNumber numberWithInteger:NSTextFinderMatchingTypeContains], NSTextFinderMatchingTypeKey, nil];
+    [pBoard setPropertyList:options forType:NSPasteboardTypeTextFinderOptions];
+
+    [mTextFinder cancelFindIndicator];
+    [mTextFinder noteClientStringWillChange];
+    [mTextFinder performAction:NSTextFinderActionShowFindInterface];
+    
+    // [mTextFinder performAction:NSTextFinderActionSetSearchString];
+    
+    // [self showFinderInterface];
+     */
     return self;
 }
 
+/*
+#pragma mark - NSTextFinderClient methods
+- (void) performTextFinderAction:(id)sender
+{
+    NSLog(@"perform action");
+    [mTextFinder performAction:[sender tag]];
+}
+
+- (void) showFinderInterface
+{
+    [mTextFinder performAction:NSTextFinderActionShowFindInterface];
+}
+*/
+ 
 - (void) fadeInAndShow
 {
     if (m_alpha<1.0) {
@@ -298,7 +342,7 @@ static NSString *mCurrentSearchKey = @"";
             [alert setInformativeText:[NSString stringWithFormat:@"Bitte wenden Sie sich an:\nzdavatz@ywesee.com\n+41 43 540 05 50"]];
         } else if ([[self appLanguage] isEqualToString:@"fr"]) {
             [alert setMessageText:@"Mise à jour n'est pas possible!"];
-            [alert setInformativeText:[NSString stringWithFormat:@"S'il vous plait contacter:\nzdavatz@ywesee.com\n+41 43 540 05 50"]];
+            [alert setInformativeText:[NSString stringWithFormat:@"S'il vous plaît contacter:\nzdavatz@ywesee.com\n+41 43 540 05 50"]];
         }
         [alert setAlertStyle:NSInformationalAlertStyle];
         
@@ -530,13 +574,39 @@ static NSString *mCurrentSearchKey = @"";
     [printJob runOperation];
 }
 
+- (BOOL) isConnected
+{
+    NSURL *dummyURL = [NSURL URLWithString:@"http://www.google.com"];
+    NSData *data = [NSData dataWithContentsOfURL:dummyURL];
+    NSLog(@"Ping to www.google.com = %lu bytes", (unsigned long)[data length]);
+    return data!=nil;
+}
+
 - (IBAction) updateAipsDatabase:(id)sender
 {
-    // Update database
-    if ([[self appLanguage] isEqualToString:@"de"])
-        [mDb updateDatabase:@"de" for:[self appOwner]];
-    else if ([[self appLanguage] isEqualToString:@"fr"])
-        [mDb updateDatabase:@"fr" for:[self appOwner]];
+    // Check if there is an active internet connection
+    if ([self isConnected]) {
+        // Update database
+        if ([[self appLanguage] isEqualToString:@"de"])
+            [mDb updateDatabase:@"de" for:[self appOwner]];
+        else if ([[self appLanguage] isEqualToString:@"fr"])
+            [mDb updateDatabase:@"fr" for:[self appOwner]];
+    } else {
+        NSAlert *alert = [[NSAlert alloc] init];
+        
+        [alert addButtonWithTitle:@"OK"];
+        if ([[self appLanguage] isEqualToString:@"de"]) {
+            [alert setMessageText:@"Für die Aktualisierung benötigen Sie eine aktive Internetverbindung."];
+        } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+            [alert setMessageText:@"Pour la mise à jour vous devez disposer d’une connexion Internet active."];
+        }
+        [alert setAlertStyle:NSInformationalAlertStyle];
+        
+        [alert beginSheetModalForWindow:[self window]
+                          modalDelegate:self
+                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                            contextInfo:nil];
+    }
 }
 
 - (IBAction) showAboutFile:(id)sender
@@ -1249,10 +1319,9 @@ static NSString *mCurrentSearchKey = @"";
         NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, med.contentStr];
         NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
         [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
-        [self setSearchState:kWebView];
-    
         [[myWebView preferences] setDefaultFontSize:14];
-        
+        [self setSearchState:kWebView];
+             
         NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
         [myRowView setEmphasized:YES];
         

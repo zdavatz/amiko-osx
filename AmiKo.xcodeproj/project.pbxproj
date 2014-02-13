@@ -56,6 +56,10 @@
 		D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C90A18A4286B00491511 /* MLCustomWebView.m */; };
 		D545C90D18A4286B00491511 /* MLCustomWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C90A18A4286B00491511 /* MLCustomWebView.m */; };
 		D545C90E18A4286B00491511 /* MLCustomWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C90A18A4286B00491511 /* MLCustomWebView.m */; };
+		D545C91118A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
+		D545C91218A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
+		D545C91318A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
+		D545C91418A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
 		D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
@@ -207,6 +211,8 @@
 		D545C8E31898527C00491511 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		D545C90918A4286B00491511 /* MLCustomWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomWebView.h; sourceTree = "<group>"; };
 		D545C90A18A4286B00491511 /* MLCustomWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomWebView.m; sourceTree = "<group>"; };
+		D545C90F18A5725900491511 /* MLCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomView.h; sourceTree = "<group>"; };
+		D545C91018A5725900491511 /* MLCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomView.m; sourceTree = "<group>"; };
 		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D5AB1772180886810050DC12 /* 28-star-ye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star-ye.png"; sourceTree = "<group>"; };
 		D5CD48BB18944E11005CEC4C /* MLCustomURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomURLConnection.h; sourceTree = "<group>"; };
@@ -475,6 +481,8 @@
 				D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */,
 				D545C90918A4286B00491511 /* MLCustomWebView.h */,
 				D545C90A18A4286B00491511 /* MLCustomWebView.m */,
+				D545C90F18A5725900491511 /* MLCustomView.h */,
+				D545C91018A5725900491511 /* MLCustomView.m */,
 			);
 			name = Classes;
 			path = ..;
@@ -755,6 +763,7 @@
 				D5E91B5F17E5E24000B66B27 /* MLMedication.m in Sources */,
 				D5E91B6017E5E24000B66B27 /* MLDataStore.m in Sources */,
 				D5CD48BF18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
+				D545C91318A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8F418A2CE0200491511 /* ioapi.c in Sources */,
 				D5E91B6117E5E24000B66B27 /* MLItemCellView.m in Sources */,
 				D545C8F118A2CDEA00491511 /* SSZipArchive.m in Sources */,
@@ -782,6 +791,7 @@
 				D5E91B8E17E5E8E400B66B27 /* MLMedication.m in Sources */,
 				D5E91B8F17E5E8E400B66B27 /* MLDataStore.m in Sources */,
 				D5CD48BD18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
+				D545C91118A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8E41898527C00491511 /* ioapi.c in Sources */,
 				D5E91B9017E5E8E400B66B27 /* MLItemCellView.m in Sources */,
 				D545C8D91898527300491511 /* SSZipArchive.m in Sources */,
@@ -809,6 +819,7 @@
 				D5E91BBD17E5E8E800B66B27 /* MLMedication.m in Sources */,
 				D5E91BBE17E5E8E800B66B27 /* MLDataStore.m in Sources */,
 				D5CD48BE18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
+				D545C91218A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8F318A2CE0100491511 /* ioapi.c in Sources */,
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
 				D545C8F018A2CDE900491511 /* SSZipArchive.m in Sources */,
@@ -836,6 +847,7 @@
 				D5EBC6B917C9206800EBEF39 /* MLMedication.m in Sources */,
 				D5EBC6BC17C9207200EBEF39 /* MLDataStore.m in Sources */,
 				D5CD48C018944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
+				D545C91418A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8F518A2CE0200491511 /* ioapi.c in Sources */,
 				D5EBC6C517CBBCEA00EBEF39 /* MLItemCellView.m in Sources */,
 				D545C8F218A2CDEB00491511 /* SSZipArchive.m in Sources */,

@@ -23,19 +23,6 @@
         <view identifier="SplashScreenView" id="1080">
             <rect key="frame" x="0.0" y="0.0" width="1000" height="670"/>
             <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="1535" customClass="MLSplashScreen">
-                    <rect key="frame" x="-3" y="-3" width="1006" height="676"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="app_icon_512x512" id="1536"/>
-                </imageView>
-            </subviews>
-            <constraints>
-                <constraint firstItem="1535" firstAttribute="bottom" secondItem="1080" secondAttribute="bottom" id="1568"/>
-                <constraint firstItem="1535" firstAttribute="top" secondItem="1080" secondAttribute="top" id="1570"/>
-                <constraint firstItem="1535" firstAttribute="leading" secondItem="1080" secondAttribute="leading" id="1631"/>
-                <constraint firstItem="1535" firstAttribute="trailing" secondItem="1080" secondAttribute="trailing" id="1632"/>
-            </constraints>
         </view>
         <window title="AmiKo" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" wantsToBeColor="NO" frameAutosaveName="AmiKoWindow" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -371,7 +358,7 @@
                                                         <rect key="frame" x="161" y="0.0" width="509" height="709"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <webView translatesAutoresizingMaskIntoConstraints="NO" id="227">
+                                                            <webView translatesAutoresizingMaskIntoConstraints="NO" id="227" customClass="MLCustomWebView">
                                                                 <rect key="frame" x="0.0" y="50" width="465" height="659"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
@@ -458,6 +445,11 @@
                 </defaultToolbarItems>
             </toolbar>
         </window>
+        <imageView id="1535" customClass="MLSplashScreen">
+            <rect key="frame" x="0.0" y="0.0" width="1006" height="676"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="app_icon_512x512" id="1536"/>
+        </imageView>
     </objects>
     <resources>
         <image name="10-medical@2x" width="22" height="22"/>

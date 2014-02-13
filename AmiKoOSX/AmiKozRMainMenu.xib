@@ -119,7 +119,7 @@
                                     <action selector="showHelp:" target="-1" id="563"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Feedback" keyEquivalent="f" id="np4-MC-bul">
+                            <menuItem title="Feedback" keyEquivalent="x" id="np4-MC-bul">
                                 <connections>
                                     <action selector="sendFeedback:" target="-1" id="4TF-Wp-SJy"/>
                                 </connections>

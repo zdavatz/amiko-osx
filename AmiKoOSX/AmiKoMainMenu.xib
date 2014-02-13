@@ -112,7 +112,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Hilfe" systemMenu="help" id="561">
                         <items>
-                            <menuItem title="Feedback" keyEquivalent="f" id="M4g-kf-yKq">
+                            <menuItem title="Feedback" keyEquivalent="x" id="M4g-kf-yKq">
                                 <connections>
                                     <action selector="sendFeedback:" target="-1" id="J2f-H6-Qad"/>
                                 </connections>

@@ -29,7 +29,20 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
+        ///
+        /*
+        mTextFinder = [[NSTextFinder alloc] init];
+        [mTextFinder setClient:self];  // myWebView implements the <NSTextFinderClient> protocol
+        [mTextFinder setIncrementalSearchingEnabled:YES];
+        [mTextFinder setFindBarContainer:[self scrollView]];
+        [[self scrollView] setFindBarPosition:NSScrollViewFindBarPositionAboveContent];
+        [[self scrollView] setFindBarVisible:YES];
+        [mTextFinder cancelFindIndicator];
+        [mTextFinder performAction:NSTextFinderActionSetSearchString];
+        
+        [self showFinderInterface];
+        */
+        ///
     }
     return self;
 }
@@ -39,6 +52,12 @@
 	[super drawRect:dirtyRect];
 	
     // Drawing code here.
+}
+
+#pragma mark - NSTextFinderClient methods
+- (void) performTextFinderAction:(id)sender
+{
+    NSLog(@"perform action");
 }
 
 @end
