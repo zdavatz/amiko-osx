@@ -70,6 +70,8 @@ static NSInteger mUsedDatabase = kAips;
 static NSInteger mCurrentSearchState = kTitle;
 static NSString *mCurrentSearchKey = @"";
 
+static BOOL mSearchInteractions = false;
+
 @interface DataObject : NSObject
 
 @property NSString *title;
@@ -101,6 +103,8 @@ static NSString *mCurrentSearchKey = @"";
     
     NSArray *listofSectionIds;
     NSArray *listofSectionTitles;
+
+    NSMutableDictionary *mMedBasket;
     
     NSProgressIndicator *progressIndicator;
     
@@ -146,7 +150,7 @@ static NSString *mCurrentSearchKey = @"";
         SEARCH_STRING = @"Suche";
         SEARCH_TITLE = @"Präparat";
         SEARCH_AUTHOR = @"Inhaber";
-        SEARCH_ATCCODE = @"ATC Code";
+        SEARCH_ATCCODE = @"Wirkstoff / ATC Code";
         SEARCH_REGNR = @"Reg. Nr.";
         SEARCH_SUBSTANCES = @"Wirkstoff";
         SEARCH_THERAPY = @"Therapie";
@@ -155,7 +159,7 @@ static NSString *mCurrentSearchKey = @"";
         SEARCH_STRING = @"Recherche";
         SEARCH_TITLE = @"Préparation";
         SEARCH_AUTHOR = @"Titulaire";
-        SEARCH_ATCCODE = @"Code ATC";
+        SEARCH_ATCCODE = @"Principe Actif / Code ATC";
         SEARCH_REGNR = @"No d'autorisation";
         SEARCH_SUBSTANCES = @"Principe Actif";
         SEARCH_THERAPY = @"Thérapie";
@@ -172,12 +176,14 @@ static NSString *mCurrentSearchKey = @"";
     medi = [NSMutableArray array];
     favoriteKeyData = [NSMutableArray array];
     
-    // Open database
+    // Open sqlite database
     [self openSQLiteDatabase];
-    
 #ifdef DEBUG
-    NSLog(@"Number of records = %ld", (long)[mDb getNumRecords]);
+    NSLog(@"Number of records in main sqlite database = %ld", (long)[mDb getNumRecords]);
 #endif
+    
+    // Open drug interactions csv file
+    [self openInteractionsCsvFile];
     
     favoriteData = [[MLDataStore alloc] init];
     [self loadData];
@@ -279,6 +285,19 @@ static NSString *mCurrentSearchKey = @"";
         [[self window] setAlphaValue:1.0];
         // Test
         [self resetDataInTableView];
+    }
+}
+
+- (void) openInteractionsCsvFile
+{
+    if ([[self appLanguage] isEqualToString:@"de"]) {
+        if (![mDb openInteractionsCsvFile:@"drug_interactions_csv_de"]) {
+            NSLog(@"No German drug interactions file!");
+        }
+    } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+        if (![mDb openInteractionsCsvFile:@"drug_interactions_csv_fr"]) {
+            NSLog(@"No French drug interactions file!");
+        }
     }
 }
 
@@ -464,8 +483,8 @@ static NSString *mCurrentSearchKey = @"";
     else
         [favoriteMedsSet addObject:medRegnrs];
      
-     favoriteData = [MLDataStore initWithFavMedsSet:favoriteMedsSet];
-     [self saveData];
+    favoriteData = [MLDataStore initWithFavMedsSet:favoriteMedsSet];
+    [self saveData];
 }
 
 - (IBAction) searchNow: (id)sender
@@ -529,9 +548,11 @@ static NSString *mCurrentSearchKey = @"";
         case 3:
             [self setSearchState:kRegNr];
             break;
+            /*
         case 4:
             [self setSearchState:kSubstances];
             break;
+             */
         case 5:
             [self setSearchState:kTherapy];
             break;
@@ -746,6 +767,7 @@ static NSString *mCurrentSearchKey = @"";
         {
             NSLog(@"AIPS Database");
             mUsedDatabase = kAips;
+            mSearchInteractions = false;
             //
             searchResults = [NSArray array];
             // MLMainWindowController* __weak weakSelf = self;
@@ -780,6 +802,7 @@ static NSString *mCurrentSearchKey = @"";
         {
             NSLog(@"Favorites");
             mUsedDatabase = kFavorites;
+            mSearchInteractions = false;
             //
             searchResults = [NSArray array];
             // MLMainWindowController* __weak weakSelf = self;
@@ -809,6 +832,11 @@ static NSString *mCurrentSearchKey = @"";
                 }
             });
             break;
+        }
+        case 2:
+        {
+            NSLog(@"Interactions");
+            mSearchInteractions = true;
         }
         default:
             break;
@@ -1004,18 +1032,26 @@ static NSString *mCurrentSearchKey = @"";
         if (![[m_atc objectAtIndex:1] isEqual:nil])
             m_atcclass_str = [NSMutableString stringWithString:[m_atc objectAtIndex:1]];
     }
-    NSMutableString *m_atcclass = nil;
-    if ([m_class count] == 2)
-        m_atcclass = [NSMutableString stringWithString:[m_class objectAtIndex:0]];
-    else if ([m_class count] == 3)
-        m_atcclass = [NSMutableString stringWithString:[m_class objectAtIndex:1]];
     if ([m_atccode_str isEqual:[NSNull null]])
         [m_atccode_str setString:[self notSpecified]];
     if ([m_atcclass_str isEqual:[NSNull null]])
         [m_atcclass_str setString:[self notSpecified]];
-    if ([m_atcclass isEqual:[NSNull null]])
-        [m_atcclass setString:[self notSpecified]];
-    m.subTitle = [NSString stringWithFormat:@"%@ - %@\n%@", m_atccode_str, m_atcclass_str, m_atcclass];
+    
+    NSMutableString *m_atcclass = nil;
+    if ([m_class count] == 2) {  // *** Ver.<1.2
+        m_atcclass = [NSMutableString stringWithString:[m_class objectAtIndex:1]];
+        if ([m_atcclass isEqual:[NSNull null]])
+            [m_atcclass setString:[self notSpecified]];
+        m.subTitle = [NSString stringWithFormat:@"%@ - %@\n%@", m_atccode_str, m_atcclass_str, m_atcclass];
+    } else if ([m_class count] == 3) {  // *** Ver.>=1.2
+        NSArray *m_atc_class_l4_and_l5 = [m_class[2] componentsSeparatedByString:@"#"];
+        int n = (int)[m_atc_class_l4_and_l5 count];
+        if (n>1)
+            m_atcclass = [NSMutableString stringWithString:[m_atc_class_l4_and_l5 objectAtIndex:n-2]];
+        if ([m_atcclass isEqual:[NSNull null]])
+            [m_atcclass setString:[self notSpecified]];
+        m.subTitle = [NSString stringWithFormat:@"%@ - %@\n%@\n%@", m_atccode_str, m_atcclass_str, m_atcclass, m_class[1]];
+    }
     m.medId = medId;
     
     [medi addObject:m];
@@ -1251,12 +1287,15 @@ static NSString *mCurrentSearchKey = @"";
     return rowView;
 }
 
-/** NSTableViewDataDelegate
- */
+/*
+ * NSTableViewDataDelegate
+*/
 - (NSView *) tableView: (NSTableView *)tableView viewForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
     if (tableView == self.myTableView) {
-        // Get new CellView
+        /*
+         * Check if table is search result (=myTableView)
+        */
         MLItemCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
 
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
@@ -1286,10 +1325,13 @@ static NSString *mCurrentSearchKey = @"";
             
             return cellView;
         }
-    } else if (tableView == mySectionTitles) {
+    } else if (tableView == self.mySectionTitles) {
+        /*
+         * Check if table is list of chapter titles (=mySectionTitles)
+        */
         NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-        if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"])
-        {
+        
+        if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
             cellView.textField.stringValue = listofSectionTitles[row];
             return cellView;
         }
@@ -1300,7 +1342,9 @@ static NSString *mCurrentSearchKey = @"";
 - (void) tableViewSelectionDidChange: (NSNotification *)notification
 {    
     if ([notification object] == self.myTableView) {
-                
+        /*
+         * Check if table is search result (=myTableView)
+        */
         NSInteger row = [[notification object] selectedRow];
         long mId = [medi[row] medId];
     
@@ -1332,7 +1376,10 @@ static NSString *mCurrentSearchKey = @"";
         listofSectionTitles = [med.sectionTitles componentsSeparatedByString:@";"];
         //
         [mySectionTitles reloadData];
-    } else if ([notification object] == mySectionTitles) {
+    } else if ([notification object] == self.mySectionTitles) {
+        /* 
+         * Check if table is list of chapter titles (=mySectionTitles)
+        */
         NSInteger row = [[notification object] selectedRow];
         
         NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", listofSectionIds[row]];

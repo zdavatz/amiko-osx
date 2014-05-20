@@ -64,6 +64,26 @@
 		D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1776180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
+		D5B0105C1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
+		D5B0105D1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
+		D5B0105E1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
+		D5B0105F1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
+		D5B010611927C472007BE838 /* deleterow.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D5B010621927C472007BE838 /* deleterow.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D5B010631927C472007BE838 /* deleterow.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D5B010641927C472007BE838 /* deleterow.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D5B010661927C4EF007BE838 /* 55-network@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B010651927C4EF007BE838 /* 55-network@2x.png */; };
+		D5B010671927C4EF007BE838 /* 55-network@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B010651927C4EF007BE838 /* 55-network@2x.png */; };
+		D5B010681927C4EF007BE838 /* 55-network@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B010651927C4EF007BE838 /* 55-network@2x.png */; };
+		D5B010691927C4EF007BE838 /* 55-network@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B010651927C4EF007BE838 /* 55-network@2x.png */; };
+		D5B0106B1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
+		D5B0106C1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
+		D5B0106D1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
+		D5B0106E1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
+		D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
+		D5B6F96D192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
+		D5B6F96E192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
+		D5B6F96F192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
 		D5CD48BD18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
 		D5CD48BE18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
 		D5CD48BF18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
@@ -215,6 +235,11 @@
 		D545C91018A5725900491511 /* MLCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomView.m; sourceTree = "<group>"; };
 		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D5AB1772180886810050DC12 /* 28-star-ye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star-ye.png"; sourceTree = "<group>"; };
+		D5B0105B1927C451007BE838 /* interactions_css.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = interactions_css.css; sourceTree = "<group>"; };
+		D5B010601927C472007BE838 /* deleterow.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = deleterow.js; sourceTree = "<group>"; };
+		D5B010651927C4EF007BE838 /* 55-network@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "55-network@2x.png"; sourceTree = "<group>"; };
+		D5B0106A1927C4F6007BE838 /* 55-network.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "55-network.png"; sourceTree = "<group>"; };
+		D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drug_interactions_csv_de.csv; sourceTree = "<group>"; };
 		D5CD48BB18944E11005CEC4C /* MLCustomURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomURLConnection.h; sourceTree = "<group>"; };
 		D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomURLConnection.m; sourceTree = "<group>"; };
 		D5E91ACF17E387F100B66B27 /* MLCoMedzRMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedzRMainWindow.xib; sourceTree = "<group>"; };
@@ -501,6 +526,7 @@
 		D5EBC6A717C91FAC00EBEF39 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */,
 				D5E91BF117E6061900B66B27 /* amiko_db_full_idx_fr.db */,
 				D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */,
 			);
@@ -521,6 +547,10 @@
 		D5EBC6C817CFDD3800EBEF39 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D5B0106A1927C4F6007BE838 /* 55-network.png */,
+				D5B010651927C4EF007BE838 /* 55-network@2x.png */,
+				D5B010601927C472007BE838 /* deleterow.js */,
+				D5B0105B1927C451007BE838 /* interactions_css.css */,
 				D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */,
 				D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */,
 				D536126517E770A80087B132 /* amiko.iconset */,
@@ -650,14 +680,18 @@
 				D5E91B7017E5E24000B66B27 /* amiko_stylesheet.css in Resources */,
 				D5E91B7117E5E24000B66B27 /* 28-star-gy.png in Resources */,
 				D5E91B7317E5E24000B66B27 /* app_icon_512x512.png in Resources */,
+				D5B0106D1927C4F6007BE838 /* 55-network.png in Resources */,
 				D5E91B7417E5E24000B66B27 /* 10-medical@2x.png in Resources */,
 				D5E91B7517E5E24000B66B27 /* 28-star@2x.png in Resources */,
 				D5E91B7617E5E24000B66B27 /* MLAmiKozRMainWindow.xib in Resources */,
 				D545C90718A3FC0700491511 /* MLProgressSheet.xib in Resources */,
 				D5E91B7917E5E24000B66B27 /* Zur_Rose_1000x670px.png in Resources */,
+				D5B010681927C4EF007BE838 /* 55-network@2x.png in Resources */,
 				D5E91B8017E5E24000B66B27 /* Credits-fr.rtf in Resources */,
+				D5B0105E1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91BF017E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D5E91BF617E6065C00B66B27 /* amiko_report_de.html in Resources */,
+				D5B6F96E192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */,
 				D536126817E770A80087B132 /* amiko.iconset in Resources */,
 				D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */,
@@ -668,12 +702,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5B0106B1927C4F6007BE838 /* 55-network.png in Resources */,
 				D5E91B9A17E5E8E400B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B9C17E5E8E400B66B27 /* Credits-de.rtf in Resources */,
 				D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */,
+				D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5E91B9F17E5E8E400B66B27 /* amiko_stylesheet.css in Resources */,
 				D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */,
+				D5B0105C1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */,
 				D5E91BA317E5E8E400B66B27 /* 10-medical@2x.png in Resources */,
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
@@ -682,6 +719,7 @@
 				D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */,
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
 				D5E91BAE17E5E8E400B66B27 /* AmiKoMainMenu.xib in Resources */,
+				D5B010661927C4EF007BE838 /* 55-network@2x.png in Resources */,
 				D5E91BAF17E5E8E400B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
@@ -695,12 +733,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5B0106C1927C4F6007BE838 /* 55-network.png in Resources */,
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
 				D5E91BCB17E5E8E800B66B27 /* Credits-de.rtf in Resources */,
 				D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */,
+				D5B6F96D192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
+				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
 				D5E91BD117E5E8E800B66B27 /* app_icon_512x512.png in Resources */,
 				D5E91BD217E5E8E800B66B27 /* 10-medical@2x.png in Resources */,
@@ -709,6 +750,7 @@
 				D5E91BD717E5E8E800B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91BD917E5E8E800B66B27 /* MLCoMedMainWindow.xib in Resources */,
 				D5E91BDC17E5E8E800B66B27 /* CoMedMainMenu.xib in Resources */,
+				D5B010671927C4EF007BE838 /* 55-network@2x.png in Resources */,
 				D5E91BDE17E5E8E800B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BF217E6061900B66B27 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
@@ -728,14 +770,18 @@
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
 				D5EBC6D117D256EC00EBEF39 /* 28-star-gy.png in Resources */,
 				D5EBC6D917D3ADCA00EBEF39 /* app_icon_512x512.png in Resources */,
+				D5B0106E1927C4F6007BE838 /* 55-network.png in Resources */,
 				D5EBC6E117D5214300EBEF39 /* 10-medical@2x.png in Resources */,
 				D5EBC6E317D521A500EBEF39 /* 28-star@2x.png in Resources */,
 				D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */,
 				D545C90818A3FC0800491511 /* MLProgressSheet.xib in Resources */,
 				D5E91AD017E387F100B66B27 /* MLCoMedzRMainWindow.xib in Resources */,
+				D5B010691927C4EF007BE838 /* 55-network@2x.png in Resources */,
 				D5E91AD617E3955300B66B27 /* CoMedzRMainMenu.xib in Resources */,
+				D5B0105F1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BF317E6061900B66B27 /* amiko_db_full_idx_fr.db in Resources */,
+				D5B6F96F192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5AB1776180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5E91BFC17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
 				D536126917E770A80087B132 /* amiko.iconset in Resources */,
@@ -755,6 +801,7 @@
 				D5E91B5B17E5E24000B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF9189522AD00C4525C /* MLProgressSheetController.m in Sources */,
 				D545C90D18A4286B00491511 /* MLCustomWebView.m in Sources */,
+				D5B010631927C472007BE838 /* deleterow.js in Sources */,
 				D5E91B5C17E5E24000B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FD18A2CE0D00491511 /* zip.c in Sources */,
 				D5E91B5D17E5E24000B66B27 /* MLSearchWebView.js in Sources */,
@@ -783,6 +830,7 @@
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
 				D545C90B18A4286B00491511 /* MLCustomWebView.m in Sources */,
+				D5B010611927C472007BE838 /* deleterow.js in Sources */,
 				D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8E71898527C00491511 /* zip.c in Sources */,
 				D5E91B8C17E5E8E400B66B27 /* MLSearchWebView.js in Sources */,
@@ -811,6 +859,7 @@
 				D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */,
 				D545C8EE18A2CDD100491511 /* MLProgressSheetController.m in Sources */,
 				D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */,
+				D5B010621927C472007BE838 /* deleterow.js in Sources */,
 				D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FC18A2CE0D00491511 /* zip.c in Sources */,
 				D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */,
@@ -839,6 +888,7 @@
 				D5EBC6A417C913B100EBEF39 /* MLMainWindowController.m in Sources */,
 				D545C8EF18A2CDD200491511 /* MLProgressSheetController.m in Sources */,
 				D545C90E18A4286B00491511 /* MLCustomWebView.m in Sources */,
+				D5B010641927C472007BE838 /* deleterow.js in Sources */,
 				D5EBC6AD17C9202600EBEF39 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FE18A2CE0D00491511 /* zip.c in Sources */,
 				D5EBC6B217C9205E00EBEF39 /* MLSearchWebView.js in Sources */,

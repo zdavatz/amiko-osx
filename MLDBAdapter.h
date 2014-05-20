@@ -26,6 +26,7 @@
 
 @interface MLDBAdapter : NSObject
 
+- (BOOL) openInteractionsCsvFile: (NSString *)name;
 - (BOOL) openDatabase: (NSString *)name;
 - (void) closeDatabase;
 - (void) updateDatabase: (NSString *)language for: (NSString *)owner;

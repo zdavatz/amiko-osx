@@ -57,6 +57,7 @@ static NSString *FULL_TABLE = nil;
 @implementation MLDBAdapter
 {
     MLSQLiteDatabase *mySqliteDb;
+    NSMutableDictionary *myDrugInteractionsMap;
 }
 
 /** Class functions
@@ -82,6 +83,42 @@ static NSString *FULL_TABLE = nil;
 
 #pragma mark Instance functions
 
+- (BOOL) openInteractionsCsvFile: (NSString *)name
+{    
+    // A. Check first users documents folder
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // Get documents directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [paths lastObject];
+    NSString *filePath = [[documentsDir stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"csv"];
+    // Check if database exists
+    if (filePath!=nil) {
+        if ([fileManager fileExistsAtPath:filePath]) {
+            NSLog(@"Drug interactions csv found documents folder - %@", filePath);
+            // Read drug interactions csv line after line
+            NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+            NSArray *rows = [content componentsSeparatedByString:@"\n"];
+            NSLog(@"Num rows = %lu", (unsigned long)[rows count]);
+            myDrugInteractionsMap = [[NSMutableDictionary alloc] init];
+            return TRUE;
+        }
+    }
+    
+    // B. If no database is available, check if db is in app bundle
+    filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"csv"];
+    if (filePath!=nil ) {
+        NSLog(@"Drug interactions csv found in app bundle - %@", filePath);
+        // Read drug interactions csv line after line
+        NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+        NSArray *rows = [content componentsSeparatedByString:@"\n"];
+        NSLog(@"Num rows = %lu", (unsigned long)[rows count]);
+        myDrugInteractionsMap = [[NSMutableDictionary alloc] init];
+        return TRUE;
+    }
+    
+    return FALSE;
+}
+
 - (BOOL) openDatabase: (NSString *)dbName
 {
     // A. Check first users documents folder
@@ -93,8 +130,8 @@ static NSString *FULL_TABLE = nil;
     // Check if database exists
     if (filePath!=nil) {
         if ([fileManager fileExistsAtPath:filePath]) {
+            NSLog(@"Database found documents folder - %@", filePath);            
             mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
-            NSLog(@"Database found documents folder - %@", filePath);
             return TRUE;
         }
     }
