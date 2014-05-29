@@ -57,7 +57,7 @@ static NSString *FULL_TABLE = nil;
 @implementation MLDBAdapter
 {
     MLSQLiteDatabase *mySqliteDb;
-    NSMutableDictionary *myDrugInteractionsMap;
+    NSMutableDictionary *myDrugInteractionMap;
 }
 
 /** Class functions
@@ -80,12 +80,11 @@ static NSString *FULL_TABLE = nil;
 
 /** Instance functions
  */
-
 #pragma mark Instance functions
 
-- (BOOL) openInteractionsCsvFile: (NSString *)name
+- (BOOL) openInteractionsCsvFile:(NSString *)name
 {    
-    // A. Check first users documents folder
+    // ** A. Check first users documents folder
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // Get documents directory
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -95,28 +94,51 @@ static NSString *FULL_TABLE = nil;
     if (filePath!=nil) {
         if ([fileManager fileExistsAtPath:filePath]) {
             NSLog(@"Drug interactions csv found documents folder - %@", filePath);
-            // Read drug interactions csv line after line
-            NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-            NSArray *rows = [content componentsSeparatedByString:@"\n"];
-            NSLog(@"Num rows = %lu", (unsigned long)[rows count]);
-            myDrugInteractionsMap = [[NSMutableDictionary alloc] init];
-            return TRUE;
+            return [self readDrugInteractionMap:filePath];
         }
     }
     
-    // B. If no database is available, check if db is in app bundle
+    // ** B. If no database is available, check if db is in app bundle
     filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"csv"];
     if (filePath!=nil ) {
         NSLog(@"Drug interactions csv found in app bundle - %@", filePath);
         // Read drug interactions csv line after line
-        NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-        NSArray *rows = [content componentsSeparatedByString:@"\n"];
-        NSLog(@"Num rows = %lu", (unsigned long)[rows count]);
-        myDrugInteractionsMap = [[NSMutableDictionary alloc] init];
-        return TRUE;
+        return [self readDrugInteractionMap:filePath];
     }
     
     return FALSE;
+}
+
+- (BOOL) readDrugInteractionMap:(NSString *)filePath
+{
+    // Read drug interactions csv line after line
+    NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSArray *rows = [content componentsSeparatedByString:@"\n"];
+    NSLog(@"Number of records in interaction file = %lu", (unsigned long)[rows count]);
+    myDrugInteractionMap = [[NSMutableDictionary alloc] init];
+    /*
+     token[0]: ATC-Code1
+     token[1]: ATC-Code2
+     token[2]: Html
+    */
+    for (NSString *s in rows) {
+        if (![s isEqualToString:@""]) {
+            NSArray *token = [s componentsSeparatedByString:@"||"];
+            NSString *key = [NSString stringWithFormat:@"%@-%@", token[0], token[1]];
+            [myDrugInteractionMap setObject:token[2] forKey:key];
+        }
+    }
+    return TRUE;
+
+}
+
+- (NSString *) getInteractionHtmlBetween:(NSString *)atc1 and:(NSString *)atc2
+{
+    if ([myDrugInteractionMap count]>0) {
+        NSString *key = [NSString stringWithFormat:@"%@-%@", atc1, atc2];
+        return [myDrugInteractionMap valueForKey:key];
+    }
+    return @"";
 }
 
 - (BOOL) openDatabase: (NSString *)dbName
@@ -153,7 +175,7 @@ static NSString *FULL_TABLE = nil;
         [mySqliteDb close];
 }
 
-- (void) updateDatabase: (NSString *)language for:(NSString *)owner
+- (void) updateDatabase:(NSString *)language for:(NSString *)owner
 {
     MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
     MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
@@ -196,14 +218,14 @@ static NSString *FULL_TABLE = nil;
     return [self cursorToFullMedInfo:[[self getRecord:rowId] objectAtIndex:0]];
 }
 
-- (NSArray *) searchWithQuery: (NSString *)query;
+- (NSArray *) searchWithQuery:(NSString *)query;
 {
     return [mySqliteDb performQuery:query];
 }
 
 /** Search Präparat
  */
-- (NSArray *) searchTitle: (NSString *)title
+- (NSArray *) searchTitle:(NSString *)title
 {
     NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%'",
                        SHORT_TABLE, DATABASE_TABLE, KEY_TITLE, title];
@@ -214,7 +236,7 @@ static NSString *FULL_TABLE = nil;
 
 /** Search Inhaber
  */
-- (NSArray *) searchAuthor: (NSString *)author
+- (NSArray *) searchAuthor:(NSString *)author
 {
     NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%'",
                        SHORT_TABLE, DATABASE_TABLE, KEY_AUTH, author];
@@ -225,7 +247,7 @@ static NSString *FULL_TABLE = nil;
 
 /** Search ATC Code
  */
-- (NSArray *) searchATCCode: (NSString *)atccode
+- (NSArray *) searchATCCode:(NSString *)atccode
 {
     NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%;%@%%' or %@ like '%@%%' or %@ like '%% %@%%' or %@ like '%%%@%%' or %@ like '%%;%%%@%%'",
                        SHORT_TABLE, DATABASE_TABLE, KEY_ATCCODE, atccode, KEY_ATCCODE, atccode, KEY_ATCCODE, atccode, KEY_ATCCLASS, atccode, KEY_ATCCLASS, atccode];
@@ -236,7 +258,7 @@ static NSString *FULL_TABLE = nil;
 
 /** Search Reg. Nr.
  */
-- (NSArray *) searchIngredients: (NSString *)ingredients
+- (NSArray *) searchIngredients:(NSString *)ingredients
 {
     NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%%-%@%%'",
                        SHORT_TABLE, DATABASE_TABLE, KEY_SUBSTANCES, ingredients, KEY_SUBSTANCES, ingredients, KEY_SUBSTANCES, ingredients];
@@ -247,7 +269,7 @@ static NSString *FULL_TABLE = nil;
 
 /** Search Wirkstoff
  */
-- (NSArray *) searchRegNr: (NSString *)regnr
+- (NSArray *) searchRegNr:(NSString *)regnr
 {
     NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%'",
                        SHORT_TABLE, DATABASE_TABLE, KEY_REGNRS, regnr, KEY_REGNRS, regnr];
@@ -258,7 +280,7 @@ static NSString *FULL_TABLE = nil;
 
 /** Search Therapie
  */
-- (NSArray *) searchTherapy: (NSString *)therapy
+- (NSArray *) searchTherapy:(NSString *)therapy
 {
     NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%% %@%%'",
                        SHORT_TABLE, DATABASE_TABLE, KEY_THERAPY, therapy, KEY_THERAPY, therapy, KEY_THERAPY, therapy];
@@ -269,7 +291,7 @@ static NSString *FULL_TABLE = nil;
 
 /** Search Application
  */
-- (NSArray *) searchApplication: (NSString *)application
+- (NSArray *) searchApplication:(NSString *)application
 {
     NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%% %@%%' or %@ like '%%;%@%%' or %@ like '%@%%' or %@ like '%%;%@%%'",
                        SHORT_TABLE, DATABASE_TABLE, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_INDICATIONS, application, KEY_INDICATIONS, application];
@@ -278,7 +300,7 @@ static NSString *FULL_TABLE = nil;
     return [self extractShortMedInfoFrom:results];
 }
 
-- (MLMedication *) cursorToShortMedInfo: (NSArray *)cursor
+- (MLMedication *) cursorToShortMedInfo:(NSArray *)cursor
 {
     MLMedication *medi = [[MLMedication alloc] init];
         
@@ -298,7 +320,7 @@ static NSString *FULL_TABLE = nil;
     return medi;
 }
 
-- (MLMedication *) cursorToFullMedInfo: (NSArray *)cursor
+- (MLMedication *) cursorToFullMedInfo:(NSArray *)cursor
 {
     MLMedication *medi = [[MLMedication alloc] init];
     
@@ -323,7 +345,7 @@ static NSString *FULL_TABLE = nil;
     return medi;
 }
 
-- (NSArray *) extractShortMedInfoFrom: (NSArray *)results
+- (NSArray *) extractShortMedInfoFrom:(NSArray *)results
 {
     NSMutableArray *medList = [NSMutableArray array];
 
@@ -349,7 +371,7 @@ static NSString *FULL_TABLE = nil;
     return medList;
 }
 
-- (NSArray *) extractFullMedInfoFrom: (NSArray *)results;
+- (NSArray *) extractFullMedInfoFrom:(NSArray *)results;
 {
     NSMutableArray *medList = [NSMutableArray array];
     

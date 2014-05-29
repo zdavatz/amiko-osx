@@ -84,6 +84,7 @@
 		D5B6F96D192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
 		D5B6F96E192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
 		D5B6F96F192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
+		D5B6F970193136A400495873 /* deleterow.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
 		D5CD48BD18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
 		D5CD48BE18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
 		D5CD48BF18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
@@ -205,6 +206,14 @@
 		D5EBC6E117D5214300EBEF39 /* 10-medical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E017D5214300EBEF39 /* 10-medical@2x.png */; };
 		D5EBC6E317D521A500EBEF39 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
 		D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */; };
+		D5FB9EC419351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FB9EC219351C700050B1B1 /* WebViewJavascriptBridge.js.txt */; };
+		D5FB9EC519351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FB9EC219351C700050B1B1 /* WebViewJavascriptBridge.js.txt */; };
+		D5FB9EC619351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FB9EC219351C700050B1B1 /* WebViewJavascriptBridge.js.txt */; };
+		D5FB9EC719351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FB9EC219351C700050B1B1 /* WebViewJavascriptBridge.js.txt */; };
+		D5FB9EC819351C700050B1B1 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5FB9EC319351C700050B1B1 /* WebViewJavascriptBridge.m */; };
+		D5FB9EC919351C700050B1B1 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5FB9EC319351C700050B1B1 /* WebViewJavascriptBridge.m */; };
+		D5FB9ECA19351C700050B1B1 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5FB9EC319351C700050B1B1 /* WebViewJavascriptBridge.m */; };
+		D5FB9ECB19351C700050B1B1 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5FB9EC319351C700050B1B1 /* WebViewJavascriptBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -301,6 +310,9 @@
 		D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoMed.entitlements; path = ../CoMed.entitlements; sourceTree = "<group>"; };
 		D5F6BB2917E8BC3900DCBD16 /* AmiKo-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "AmiKo-zR.entitlements"; sourceTree = SOURCE_ROOT; };
 		D5F6BB2A17E8BC3C00DCBD16 /* CoMed-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "CoMed-zR.entitlements"; path = "../CoMed-zR.entitlements"; sourceTree = "<group>"; };
+		D5FB9EC119351C700050B1B1 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		D5FB9EC219351C700050B1B1 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
+		D5FB9EC319351C700050B1B1 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -536,6 +548,7 @@
 		D5EBC6BF17C9248300EBEF39 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D5FB9EC019351C700050B1B1 /* WebViewJavascriptBridge */,
 				D545C8DA1898527C00491511 /* minizip */,
 				D545C8D71898527300491511 /* SSZipArchive.h */,
 				D545C8D81898527300491511 /* SSZipArchive.m */,
@@ -566,6 +579,16 @@
 				D5EBC6C917CFDD7000EBEF39 /* amiko_stylesheet.css */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		D5FB9EC019351C700050B1B1 /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				D5FB9EC119351C700050B1B1 /* WebViewJavascriptBridge.h */,
+				D5FB9EC219351C700050B1B1 /* WebViewJavascriptBridge.js.txt */,
+				D5FB9EC319351C700050B1B1 /* WebViewJavascriptBridge.m */,
+			);
+			path = WebViewJavascriptBridge;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -676,6 +699,7 @@
 			files = (
 				D5E91B6B17E5E24000B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91B6C17E5E24000B66B27 /* InfoPlist.strings in Resources */,
+				D5FB9EC619351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5E91B6D17E5E24000B66B27 /* Credits-de.rtf in Resources */,
 				D5E91B7017E5E24000B66B27 /* amiko_stylesheet.css in Resources */,
 				D5E91B7117E5E24000B66B27 /* 28-star-gy.png in Resources */,
@@ -702,6 +726,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5B6F970193136A400495873 /* deleterow.js in Resources */,
 				D5B0106B1927C4F6007BE838 /* 55-network.png in Resources */,
 				D5E91B9A17E5E8E400B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
@@ -715,6 +740,7 @@
 				D5E91BA317E5E8E400B66B27 /* 10-medical@2x.png in Resources */,
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
 				D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */,
+				D5FB9EC419351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */,
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
@@ -743,6 +769,7 @@
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
+				D5FB9EC519351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5E91BD117E5E8E800B66B27 /* app_icon_512x512.png in Resources */,
 				D5E91BD217E5E8E800B66B27 /* 10-medical@2x.png in Resources */,
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
@@ -766,6 +793,7 @@
 			files = (
 				D5EBC6CE17D218D900EBEF39 /* MLSearchWebView.js in Resources */,
 				D5EBC68B17C912FF00EBEF39 /* InfoPlist.strings in Resources */,
+				D5FB9EC719351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5EBC69117C912FF00EBEF39 /* Credits-de.rtf in Resources */,
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
 				D5EBC6D117D256EC00EBEF39 /* 28-star-gy.png in Resources */,
@@ -807,6 +835,7 @@
 				D5E91B5D17E5E24000B66B27 /* MLSearchWebView.js in Sources */,
 				D5E91B5E17E5E24000B66B27 /* MLDBAdapter.m in Sources */,
 				D545C8F718A2CE0500491511 /* mztools.c in Sources */,
+				D5FB9ECA19351C700050B1B1 /* WebViewJavascriptBridge.m in Sources */,
 				D5E91B5F17E5E24000B66B27 /* MLMedication.m in Sources */,
 				D5E91B6017E5E24000B66B27 /* MLDataStore.m in Sources */,
 				D5CD48BF18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
@@ -836,6 +865,7 @@
 				D5E91B8C17E5E8E400B66B27 /* MLSearchWebView.js in Sources */,
 				D5E91B8D17E5E8E400B66B27 /* MLDBAdapter.m in Sources */,
 				D545C8E51898527C00491511 /* mztools.c in Sources */,
+				D5FB9EC819351C700050B1B1 /* WebViewJavascriptBridge.m in Sources */,
 				D5E91B8E17E5E8E400B66B27 /* MLMedication.m in Sources */,
 				D5E91B8F17E5E8E400B66B27 /* MLDataStore.m in Sources */,
 				D5CD48BD18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
@@ -865,6 +895,7 @@
 				D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */,
 				D5E91BBC17E5E8E800B66B27 /* MLDBAdapter.m in Sources */,
 				D545C8F618A2CE0500491511 /* mztools.c in Sources */,
+				D5FB9EC919351C700050B1B1 /* WebViewJavascriptBridge.m in Sources */,
 				D5E91BBD17E5E8E800B66B27 /* MLMedication.m in Sources */,
 				D5E91BBE17E5E8E800B66B27 /* MLDataStore.m in Sources */,
 				D5CD48BE18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
@@ -894,6 +925,7 @@
 				D5EBC6B217C9205E00EBEF39 /* MLSearchWebView.js in Sources */,
 				D5EBC6B817C9206800EBEF39 /* MLDBAdapter.m in Sources */,
 				D545C8F818A2CE0600491511 /* mztools.c in Sources */,
+				D5FB9ECB19351C700050B1B1 /* WebViewJavascriptBridge.m in Sources */,
 				D5EBC6B917C9206800EBEF39 /* MLMedication.m in Sources */,
 				D5EBC6BC17C9207200EBEF39 /* MLDataStore.m in Sources */,
 				D5CD48C018944E11005CEC4C /* MLCustomURLConnection.m in Sources */,

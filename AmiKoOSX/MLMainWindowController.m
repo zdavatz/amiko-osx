@@ -29,6 +29,8 @@
 #import "MLCustomTableRowView.h"
 #import "MLCustomView.h"
 
+#import "WebViewJavascriptBridge.h"
+
 #import <mach/mach.h>
 #import <unistd.h>
 
@@ -110,6 +112,8 @@ static BOOL mSearchInteractions = false;
     
     NSTextFinder *mTextFinder;
     
+    WebViewJavascriptBridge *mJSBridge;
+    
     dispatch_queue_t mSearchQueue;
     volatile bool mSearchInProgress;
 
@@ -185,6 +189,16 @@ static BOOL mSearchInteractions = false;
     // Open drug interactions csv file
     [self openInteractionsCsvFile];
     
+    // Initialize medication basket
+    mMedBasket = [[NSMutableDictionary alloc] init];
+    
+    // Creates a bridge between JScript and ObjC
+    [self createJSBridge];
+    
+    // Initialize webview
+    [[myWebView preferences] setJavaScriptEnabled:YES];
+    [myWebView setUIDelegate:self];
+    
     favoriteData = [[MLDataStore alloc] init];
     [self loadData];
     favoriteMedsSet = [[NSMutableSet alloc] initWithSet:favoriteData.favMedsSet];
@@ -254,6 +268,21 @@ static BOOL mSearchInteractions = false;
     // [self showFinderInterface];
      */
     return self;
+}
+
+/**
+ In order for window alert to work with javascript two steps are necessary:
+ - setUIDelegate
+ - add the following function
+ */
+- (void) webView: (WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message
+{
+    NSAlert* jsAlert = [NSAlert alertWithMessageText:@"JavaScript"
+                                       defaultButton:@"OK"
+                                     alternateButton:nil
+                                         otherButton:nil
+                           informativeTextWithFormat:@"%@", message];
+    [jsAlert beginSheetModalForWindow:sender.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
 }
 
 /*
@@ -419,7 +448,7 @@ static BOOL mSearchInteractions = false;
 }
 
 - (void) awakeFromNib
-{
+{    
     // Important for capturing actions from menus
     // [[self window] makeFirstResponder:self];
     
@@ -1259,10 +1288,199 @@ static BOOL mSearchInteractions = false;
     [self stopProgressIndicator];
 }
 
+- (NSString *) medBasketHtml
+{
+    // basket_html_str + delete_all_button_str + "<br><br>" + top_note_html_str
+    int medCnt = 0;
+    NSString *medBasketStr = { @"<div id=\"Interaktionen\"><b>Medikamentenkorb</b></div><table width=\"100%25\">" };
+   
+    if ([mMedBasket count]>0) {
+        // Good, there are meds in the "Medikamentenkorb"
+        for (NSString *key in [mMedBasket allKeys]) {
+            MLMedication *med = [mMedBasket valueForKey:key];
+            NSArray *m_code1 = [[med atccode] componentsSeparatedByString:@";"];
+            NSString *atc_code1 = @"k.A.";
+            NSString *name1 = @"k.A";
+            if ([m_code1 count]>1) {
+                atc_code1 = [m_code1 objectAtIndex:0];
+                name1 = [m_code1 objectAtIndex:1];
+            }
+            
+            medCnt++;
+            medBasketStr = [medBasketStr stringByAppendingFormat:@"<tr>"
+                            @"<td>%d</td>"
+                            @"<td>%@</td>"
+                            @"<td>%@</td>"
+                            @"<td>%@</td>"
+                            @"<td align=\"right\"><input type=\"button\" value=\"löschen\" onclick=\"deleteRow('Interaktionen',this)\" />"
+                            @"</tr>", medCnt, key, atc_code1, name1];
+        }
+        medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"alle löschen\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
+    
+    } else {
+        // Medikamentenkorb is empty
+        medBasketStr = @"<div>Ihr Medikamentenkorb ist leer.<br><br></div>";
+    }
+    
+    return medBasketStr;
+}
+
+- (NSString *) topNoteHtml
+{
+    NSString *topNote = @"";
+    
+    if ([mMedBasket count]>0) {
+        // Add note to indicate that there are no interactions
+        topNote = @"<p class=\"paragraph0\">Werden keine Interaktionen angezeigt, sind z.Z. keine Interaktionen bekannt.</p><br><br>";
+    }
+    
+    return topNote;
+}
+
+- (NSString *) interactionsHtml
+{
+    NSMutableString *interactionStr = [[NSMutableString alloc] initWithString:@""];
+    NSMutableArray *sectionIds = [[NSMutableArray alloc] initWithObjects:@"Interaktionen", nil];
+    NSMutableArray *sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Interaktionen", nil];
+    
+    if ([mMedBasket count]>0) {
+        // Good, there are meds in the "Medikamentenkorb"
+        for (NSString *name1 in [mMedBasket allKeys]) {
+            for (NSString *name2 in [mMedBasket allKeys]) {
+                if (![name1 isEqualToString:name2]) {
+                    MLMedication *med1 = [mMedBasket valueForKey:name1];
+                    MLMedication *med2 = [mMedBasket valueForKey:name2];
+                    NSArray *m_code1 = [[med1 atccode] componentsSeparatedByString:@";"];
+                    NSArray *m_code2 = [[med2 atccode] componentsSeparatedByString:@";"];
+                    NSString *atc_code1 = @"";
+                    NSString *atc_code2 = @"";
+                    // Get ATC code of first drug, make sure to get the first in the list (the second one is not used)
+                    if ([m_code1 count]>1)
+                        atc_code1 = [m_code1 objectAtIndex:0];
+                    // Get ATC code of second drug, make sure to get the first in the list (the second one is not used)
+                    if ([m_code2 count]>1)
+                        atc_code2 = [m_code2 objectAtIndex:0];
+                    NSString *html = [mDb getInteractionHtmlBetween:atc_code1 and:atc_code2];
+                    if (html!=nil) {
+                        // Replace all occurrences of atc codes by med names apart from the FIRST one!
+                        NSRange range1 = [html rangeOfString:atc_code1 options:NSBackwardsSearch];
+                        html = [html stringByReplacingCharactersInRange:range1 withString:name1];
+                        NSRange range2 = [html rangeOfString:atc_code2 options:NSBackwardsSearch];
+                        html = [html stringByReplacingCharactersInRange:range2 withString:name2];
+                        // Concatenate strings
+                        [interactionStr appendString:html];
+                        // Add to title and anchor lists
+                        [sectionTitles addObject:[NSString stringWithFormat:@"%@-%@", name1, name2]];
+                        [sectionIds addObject:[NSString stringWithFormat:@"%@-%@", atc_code1, atc_code2]];
+                    }
+                }
+            }
+        }
+    }
+    
+    [sectionIds addObject:@"Legende"];
+    [sectionTitles addObject:@"Legende"];
+    
+    // Update section title anchors
+    listofSectionIds = [NSArray arrayWithArray:sectionIds];
+    // Update section titles (here: identical to anchors)
+    listofSectionTitles = [NSArray arrayWithArray:sectionTitles];
+    
+    NSLog(@"%@", interactionStr);
+    
+    return interactionStr;
+}
+
+- (NSString *) colorLegendHtml
+{
+    /*
+     Risikoklassen
+     -------------
+     A: Keine Massnahmen notwendig (grün)
+     B: Vorsichtsmassnahmen empfohlen (gelb)
+     C: Regelmässige Überwachung (orange)
+     D: Kombination vermeiden (pinky)
+     X: Kontraindiziert (hellrot)
+     0: Keine Angaben (grau)
+     */
+    NSString *legend = {
+        @"<table id=\"Legende\" width=\"100%25\">"
+        @"  <tr><td bgcolor=\"#caff70\"></td><td>A</td><td>Keine Massnahmen notwendig</td></tr>"
+        @"  <tr><td bgcolor=\"#ffec8b\"></td><td>B</td><td>Vorsichtsmassnahmen empfohlen</td></tr>"
+        @"  <tr><td bgcolor=\"#ffb90f\"></td><td>C</td><td>Regelmässige Überwachung</td></tr>"
+        @"  <tr><td bgcolor=\"#ff82ab\"></td><td>D</td><td>Kombination vermeiden</td></tr>"
+        @"  <tr><td bgcolor=\"#ff6a6a\"></td><td>X</td><td>Kontraindiziert</td></tr>"
+        @"</table>"
+    };
+    
+    return legend;
+}
+
+
+- (NSString *) bottomNoteHtml
+{
+    NSString *bottomNote = {
+        @"<p class=\"footnote\">1. Datenquelle: Public Domain Daten von EPha.ch.</p>"
+        @"<p class=\"footnote\">2. Unterstützt durch:  IBSA Institut Biochimique SA.</p>"
+    };
+    
+    return bottomNote;
+}
+
+/**
+ The following function intercepts messages sent from javascript to objective C and acts
+ acts as a bridge between JS and ObjC
+ */
+- (void) createJSBridge
+{
+    mJSBridge = [WebViewJavascriptBridge bridgeForWebView:myWebView handler:^(id msg, WVJBResponseCallback responseCallback) {
+        if ([msg isEqualToString:@"delete_all"]) {
+            NSLog(@"Delete all");
+            [mMedBasket removeAllObjects];
+        } else {
+            NSLog(@"Delete number %@", msg);
+            [mMedBasket removeObjectForKey:msg];
+        }
+        [self updateWebView];
+        
+        // Reponse to javascript...
+        // responseCallback(@"Right back atcha");
+    }];
+}
+
+- (void) updateWebView
+{
+    // --> OPTIMIZE!! Pre-load the following files!
+    
+    // Load style sheet from file
+    NSString *interactionsCssPath = [[NSBundle mainBundle] pathForResource:@"interactions_css" ofType:@"css"];
+    NSString *interactionsCss = [NSString stringWithContentsOfFile:interactionsCssPath encoding:NSUTF8StringEncoding error:nil];
+    
+    // Load javascript from file
+    NSString *jscriptPath = [[NSBundle mainBundle] pathForResource:@"deleterow" ofType:@"js"];
+    NSString *jscriptStr = [NSString stringWithContentsOfFile:jscriptPath encoding:NSUTF8StringEncoding error:nil];
+    
+    // Generate main interaction table
+    NSString *htmlStr = [NSString stringWithFormat:@"<html><head><meta charset=\"utf-8\" />"];
+    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head><body><div id=\"interactions\">%@<br><br>%@%@<br>%@<br>%@</body></div></html>",
+               jscriptStr,
+               interactionsCss,
+               [self medBasketHtml],
+               [self topNoteHtml],
+               [self interactionsHtml],
+               [self colorLegendHtml],
+               [self bottomNoteHtml]];
+    
+    NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+    
+    [mySectionTitles reloadData];
+}
+
 /** NSTableViewDataSource
  */
 - (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
-{    
+{
     if (tableView == self.myTableView) {
         if (mUsedDatabase == kAips) {
             // NSLog(@"table entries (aips): %ld", (unsigned long)[medi count]);
@@ -1279,7 +1497,7 @@ static BOOL mSearchInteractions = false;
     return 0;
 }
 
-- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
+- (NSTableRowView *) tableView: (NSTableView *)tableView rowViewForRow:(NSInteger)row
 {
     MLCustomTableRowView *rowView = [[MLCustomTableRowView alloc] initWithFrame:NSZeroRect];
     [rowView setRowIndex:row];
@@ -1326,11 +1544,10 @@ static BOOL mSearchInteractions = false;
             return cellView;
         }
     } else if (tableView == self.mySectionTitles) {
+        NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
         /*
          * Check if table is list of chapter titles (=mySectionTitles)
         */
-        NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-        
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
             cellView.textField.stringValue = listofSectionTitles[row];
             return cellView;
@@ -1340,7 +1557,7 @@ static BOOL mSearchInteractions = false;
 }
 
 - (void) tableViewSelectionDidChange: (NSNotification *)notification
-{    
+{
     if ([notification object] == self.myTableView) {
         /*
          * Check if table is search result (=myTableView)
@@ -1351,36 +1568,55 @@ static BOOL mSearchInteractions = false;
         // Get medi
         MLMedication *med = [mDb searchId:mId];
     
-        // Load style sheet from file
-        NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
-        NSString *amikoCss = nil;
-        if (amikoCssPath)
-            amikoCss = [NSString stringWithContentsOfFile:amikoCssPath encoding:NSUTF8StringEncoding error:nil];
-        else
-            amikoCss = [NSString stringWithString:med.styleStr];
-        
-        // Extract html string
-        NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, med.contentStr];
-        NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-        [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
-        [[myWebView preferences] setDefaultFontSize:14];
-        [self setSearchState:kWebView];
-             
-        NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
-        [myRowView setEmphasized:YES];
-        
-        // Extract section ids
-        listofSectionIds = [med.sectionIds componentsSeparatedByString:@","];
-        // Extract section titles
-        // listofSectionTitles = [SectionTitle_DE componentsSeparatedByString:@";"];
-        listofSectionTitles = [med.sectionTitles componentsSeparatedByString:@";"];
-        //
-        [mySectionTitles reloadData];
+        if (mSearchInteractions==false) {
+            // Load style sheet from file
+            NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
+            NSString *amikoCss = nil;
+            if (amikoCssPath)
+                amikoCss = [NSString stringWithContentsOfFile:amikoCssPath encoding:NSUTF8StringEncoding error:nil];
+            else
+                amikoCss = [NSString stringWithString:med.styleStr];
+            
+            // Extract html string
+            NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, med.contentStr];
+            NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+            [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+            [[myWebView preferences] setDefaultFontSize:14];
+            [self setSearchState:kWebView];
+            
+            NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
+            [myRowView setEmphasized:YES];
+            
+            // Extract section ids
+            listofSectionIds = [med.sectionIds componentsSeparatedByString:@","];
+            // Extract section titles
+            // listofSectionTitles = [SectionTitle_DE componentsSeparatedByString:@";"];
+            listofSectionTitles = [med.sectionTitles componentsSeparatedByString:@";"];
+            //
+            [mySectionTitles reloadData];
+        } else {
+            NSString *title = [med title];
+            title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if ([title length]>30) {
+                title = [title substringToIndex:30];
+                title = [title stringByAppendingString:@"..."];
+            }
+            
+            // Add med to medication basket
+            [mMedBasket setObject:med forKey:title];
+            
+            [self updateWebView];
+            
+            NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
+            [myRowView setEmphasized:YES];
+        }
     } else if ([notification object] == self.mySectionTitles) {
         /* 
          * Check if table is list of chapter titles (=mySectionTitles)
         */
         NSInteger row = [[notification object] selectedRow];
+        
+        NSLog(@"%@", listofSectionIds[row]);
         
         NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", listofSectionIds[row]];
         [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
