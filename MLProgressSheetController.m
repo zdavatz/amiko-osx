@@ -96,7 +96,7 @@
 
 - (void) update:(long)value max:(long long)maxValue
 {
-    NSString *msg = [NSString stringWithFormat:@"Downloading... %ld kB out of %lld kB", value/1000, maxValue/1000];
+    NSString *msg = [NSString stringWithFormat:@"Downloading update... %ld kB out of %lld kB", value/1000, maxValue/1000];
     [mDownloadMsg setStringValue:msg];
     int percent = (int)((double)value/maxValue*100.0);
     NSString *percentMsg = [NSString stringWithFormat:@"%d%%", percent];

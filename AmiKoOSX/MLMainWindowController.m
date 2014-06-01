@@ -51,10 +51,16 @@ NSString* const APP_NAME = @"AmiKo";
 NSString* const APP_ID = @"708142753";
 #endif
 
+/**
+ Database types
+ */
 enum {
     kAips=0, kHospital=1, kFavorites=2
 };
 
+/**
+ Search states
+ */
 enum {
     kTitle=0, kAuthor=1, kAtcCode=2, kRegNr=3, kSubstances=4, kTherapy=5, kWebView=6
 };
@@ -188,6 +194,9 @@ static BOOL mSearchInteractions = false;
     
     // Open drug interactions csv file
     [self openInteractionsCsvFile];
+#ifdef DEBUG
+     NSLog(@"Number of records in interaction file = %lu", (unsigned long)[mDb getNumInteractions]);
+#endif
     
     // Initialize medication basket
     mMedBasket = [[NSMutableDictionary alloc] init];
@@ -285,20 +294,6 @@ static BOOL mSearchInteractions = false;
     [jsAlert beginSheetModalForWindow:sender.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
 }
 
-/*
-#pragma mark - NSTextFinderClient methods
-- (void) performTextFinderAction:(id)sender
-{
-    NSLog(@"perform action");
-    [mTextFinder performAction:[sender tag]];
-}
-
-- (void) showFinderInterface
-{
-    [mTextFinder performAction:NSTextFinderActionShowFindInterface];
-}
-*/
- 
 - (void) fadeInAndShow
 {
     if (m_alpha<1.0) {
@@ -346,6 +341,9 @@ static BOOL mSearchInteractions = false;
     }
 }
 
+/**
+ Notification called when updates have been downloaded
+ */
 - (void) finishedDownloading:(NSNotification *)notification
 {
     if ([[notification name] isEqualToString:@"MLDidFinishLoading"]) {
@@ -354,6 +352,10 @@ static BOOL mSearchInteractions = false;
             [mDb closeDatabase];
             // Re-open database
             [self openSQLiteDatabase];
+            // Close interaction database
+            [mDb closeInteractionsCsvFile];
+            // Re-open interaction database
+            [self openInteractionsCsvFile];
             // Reload table
             NSInteger _mySearchState = mCurrentSearchState;
             NSString *_mySearchKey = mCurrentSearchKey;
@@ -363,16 +365,17 @@ static BOOL mSearchInteractions = false;
             // Display friendly message
             NSBeep();
             long numSearchRes = [searchResults count];
+            int numInteractions = (int)[mDb getNumInteractions];
             
             NSAlert *alert = [[NSAlert alloc] init];
             
             [alert addButtonWithTitle:@"OK"];
             if ([[self appLanguage] isEqualToString:@"de"]) {
                 [alert setMessageText:@"AIPS Datenbank aktualisiert!"];
-                [alert setInformativeText:[NSString stringWithFormat:@"Die Datenbank enthält %ld Fachinfos.", numSearchRes]];
+                [alert setInformativeText:[NSString stringWithFormat:@"Die Datenbank enthält %ld Fachinfos \nund %d Interaktionen.", numSearchRes, numInteractions]];
             } else if ([[self appLanguage] isEqualToString:@"fr"]) {
                 [alert setMessageText:@"Banque des donnees AIPS mises à jour!"];
-                [alert setInformativeText:[NSString stringWithFormat:@"La banque des données contien %ld notices infopro.", numSearchRes]];
+                [alert setInformativeText:[NSString stringWithFormat:@"La banque des données contien %ld notices infopro \net %d interactions.", numSearchRes, numInteractions]];
             }
             [alert setAlertStyle:NSInformationalAlertStyle];
             
@@ -412,6 +415,9 @@ static BOOL mSearchInteractions = false;
     }
 }
 
+/**
+ Resets search state and data in search results table
+ */
 - (void) resetDataInTableView
 {
     // Reset search state
@@ -425,6 +431,9 @@ static BOOL mSearchInteractions = false;
     }
 }
 
+/**
+ Restores search state and data in search results table
+ */
 - (void) restoreDataInTableView
 {
     // Restore search state
@@ -445,6 +454,14 @@ static BOOL mSearchInteractions = false;
     } else {
         [[mySearchField cell] setStringValue:mCurrentSearchKey];
     }
+}
+
+/**
+ Restores html in webview
+ */
+- (void) restoreWebView
+{
+    // Restore 
 }
 
 - (void) awakeFromNib
@@ -865,7 +882,10 @@ static BOOL mSearchInteractions = false;
         case 2:
         {
             NSLog(@"Interactions");
+            [self stopProgressIndicator];
             mSearchInteractions = true;
+            [self setSearchState:kTitle];
+            [self updateWebView];
         }
         default:
             break;
@@ -1012,9 +1032,27 @@ static BOOL mSearchInteractions = false;
     else
         m.title = [self notSpecified]; // @"k.A.";
     if (![packinfo isEqual:[NSNull null]]) {
-        if ([packinfo length]>0)
-            m.subTitle = packinfo;
-        else
+        if ([packinfo length]>0) {
+            if (mSearchInteractions==false)
+                m.subTitle = packinfo;
+            else {
+                // We pass atccode instead, which needs to be unpacked
+                NSArray *m_atc = [packinfo componentsSeparatedByString:@";"];
+                NSMutableString *m_atccode_str = nil;
+                NSMutableString *m_atcclass_str = nil;
+                if ([m_atc count] > 1) {
+                    if (![[m_atc objectAtIndex:0] isEqual:nil])
+                        m_atccode_str = [NSMutableString stringWithString:[m_atc objectAtIndex:0]];
+                    if (![[m_atc objectAtIndex:1] isEqual:nil])
+                        m_atcclass_str = [NSMutableString stringWithString:[m_atc objectAtIndex:1]];
+                }
+                if ([m_atccode_str isEqual:[NSNull null]])
+                    [m_atccode_str setString:[self notSpecified]];
+                if ([m_atcclass_str isEqual:[NSNull null]])
+                    [m_atcclass_str setString:[self notSpecified]];
+                m.subTitle = [NSString stringWithFormat:@"%@ - %@", m_atccode_str, m_atcclass_str];
+            }
+        } else
             m.subTitle = [self notSpecified]; // @"k.A.";
     } else
         m.subTitle = [self notSpecified]; // @"k.A.";
@@ -1173,7 +1211,10 @@ static BOOL mSearchInteractions = false;
                 for (MLMedication *m in searchResults) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:m.regnrs];
-                        [self addTitle:m.title andPackInfo:m.packInfo andMedId:m.medId];
+                        if (mSearchInteractions==false)
+                            [self addTitle:m.title andPackInfo:m.packInfo andMedId:m.medId];
+                        else
+                            [self addTitle:m.title andPackInfo:m.atccode andMedId:m.medId];
                     }
                 }
             }
@@ -1292,30 +1333,35 @@ static BOOL mSearchInteractions = false;
 {
     // basket_html_str + delete_all_button_str + "<br><br>" + top_note_html_str
     int medCnt = 0;
-    NSString *medBasketStr = { @"<div id=\"Interaktionen\"><b>Medikamentenkorb</b></div><table width=\"100%25\">" };
-   
+    NSString *medBasketStr = { @"<div id=\"Medikamentenkorb\"><fieldset><legend>Medikamentenkorb</legend></fieldset></div><table id=\"InterTable\" width=\"100%25\">" };
+
+    // Check if there are meds in the "Medikamentenkorb"
     if ([mMedBasket count]>0) {
-        // Good, there are meds in the "Medikamentenkorb"
-        for (NSString *key in [mMedBasket allKeys]) {
-            MLMedication *med = [mMedBasket valueForKey:key];
-            NSArray *m_code1 = [[med atccode] componentsSeparatedByString:@";"];
-            NSString *atc_code1 = @"k.A.";
-            NSString *name1 = @"k.A";
-            if ([m_code1 count]>1) {
-                atc_code1 = [m_code1 objectAtIndex:0];
-                name1 = [m_code1 objectAtIndex:1];
+        // First sort them alphabetically
+        NSArray *sortedNames = [[mMedBasket allKeys] sortedArrayUsingSelector: @selector(compare:)];
+        // Loop through all meds
+        for (NSString *name in sortedNames) {
+            MLMedication *med = [mMedBasket valueForKey:name];
+            NSArray *m_code = [[med atccode] componentsSeparatedByString:@";"];
+            NSString *atc_code = @"k.A.";
+            NSString *active_ingredient = @"k.A";
+            if ([m_code count]>1) {
+                atc_code = [m_code objectAtIndex:0];
+                active_ingredient = [m_code objectAtIndex:1];
             }
-            
+            // Increment med counter
             medCnt++;
+            // Update medication basket
             medBasketStr = [medBasketStr stringByAppendingFormat:@"<tr>"
                             @"<td>%d</td>"
                             @"<td>%@</td>"
                             @"<td>%@</td>"
                             @"<td>%@</td>"
-                            @"<td align=\"right\"><input type=\"button\" value=\"löschen\" onclick=\"deleteRow('Interaktionen',this)\" />"
-                            @"</tr>", medCnt, key, atc_code1, name1];
+                            @"<td align=\"right\"><input type=\"image\" src=\"217-trash.png\" onclick=\"deleteRow('InterTable',this)\" />"
+                            @"</tr>", medCnt, name, atc_code, active_ingredient];
         }
-        medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"alle löschen\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
+        // Add delete all button
+        medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Korb leeren\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
     
     } else {
         // Medikamentenkorb is empty
@@ -1329,9 +1375,9 @@ static BOOL mSearchInteractions = false;
 {
     NSString *topNote = @"";
     
-    if ([mMedBasket count]>0) {
+    if ([mMedBasket count]>1) {
         // Add note to indicate that there are no interactions
-        topNote = @"<p class=\"paragraph0\">Werden keine Interaktionen angezeigt, sind z.Z. keine Interaktionen bekannt.</p><br><br>";
+        topNote = @"<fieldset><legend>Bekannte Interaktionen</legend></fieldset><p>Werden keine Interaktionen angezeigt, sind z.Z. keine Interaktionen bekannt.</p>";
     }
     
     return topNote;
@@ -1340,58 +1386,72 @@ static BOOL mSearchInteractions = false;
 - (NSString *) interactionsHtml
 {
     NSMutableString *interactionStr = [[NSMutableString alloc] initWithString:@""];
-    NSMutableArray *sectionIds = [[NSMutableArray alloc] initWithObjects:@"Interaktionen", nil];
-    NSMutableArray *sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Interaktionen", nil];
-    
-    if ([mMedBasket count]>0) {
-        // Good, there are meds in the "Medikamentenkorb"
-        for (NSString *name1 in [mMedBasket allKeys]) {
-            for (NSString *name2 in [mMedBasket allKeys]) {
+    NSMutableArray *sectionIds = [[NSMutableArray alloc] initWithObjects:@"Medikamentenkorb", nil];
+    NSMutableArray *sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Medikamentenkorb", nil];
+
+    // Check if there are meds in the "Medikamentenkorb"
+    if ([mMedBasket count]>1) {
+        [interactionStr appendString:@"<fieldset><legend>Bekannte Interaktionen</legend></fieldset>"];
+        // First sort them alphabetically
+        NSArray *sortedNames = [[mMedBasket allKeys] sortedArrayUsingSelector: @selector(compare:)];
+        // Big loop
+        for (NSString *name1 in sortedNames) {
+            for (NSString *name2 in sortedNames) {
                 if (![name1 isEqualToString:name2]) {
                     MLMedication *med1 = [mMedBasket valueForKey:name1];
                     MLMedication *med2 = [mMedBasket valueForKey:name2];
+                    
                     NSArray *m_code1 = [[med1 atccode] componentsSeparatedByString:@";"];
                     NSArray *m_code2 = [[med2 atccode] componentsSeparatedByString:@";"];
+                    NSArray *atc1 = nil;
+                    NSArray *atc2 = nil;
+                    if ([m_code1 count]>1)
+                        atc1 = [[m_code1 objectAtIndex:0] componentsSeparatedByString:@","];
+                    if ([m_code2 count]>1)
+                        atc2 = [[m_code2 objectAtIndex:0] componentsSeparatedByString:@","];
+                    
                     NSString *atc_code1 = @"";
                     NSString *atc_code2 = @"";
-                    // Get ATC code of first drug, make sure to get the first in the list (the second one is not used)
-                    if ([m_code1 count]>1)
-                        atc_code1 = [m_code1 objectAtIndex:0];
-                    // Get ATC code of second drug, make sure to get the first in the list (the second one is not used)
-                    if ([m_code2 count]>1)
-                        atc_code2 = [m_code2 objectAtIndex:0];
-                    NSString *html = [mDb getInteractionHtmlBetween:atc_code1 and:atc_code2];
-                    if (html!=nil) {
-                        // Replace all occurrences of atc codes by med names apart from the FIRST one!
-                        NSRange range1 = [html rangeOfString:atc_code1 options:NSBackwardsSearch];
-                        html = [html stringByReplacingCharactersInRange:range1 withString:name1];
-                        NSRange range2 = [html rangeOfString:atc_code2 options:NSBackwardsSearch];
-                        html = [html stringByReplacingCharactersInRange:range2 withString:name2];
-                        // Concatenate strings
-                        [interactionStr appendString:html];
-                        // Add to title and anchor lists
-                        [sectionTitles addObject:[NSString stringWithFormat:@"%@-%@", name1, name2]];
-                        [sectionIds addObject:[NSString stringWithFormat:@"%@-%@", atc_code1, atc_code2]];
+                    if (atc1!=nil && [atc1 count]>0) {
+                        for (atc_code1 in atc1) {
+                            if (atc2!=nil && [atc2 count]>0) {
+                                for (atc_code2 in atc2) {
+                                    NSLog(@"%@ -> %@", atc_code1, atc_code2);
+                                    NSString *html = [mDb getInteractionHtmlBetween:atc_code1 and:atc_code2];
+                                    if (html!=nil) {
+                                        // Replace all occurrences of atc codes by med names apart from the FIRST one!
+                                        NSRange range1 = [html rangeOfString:atc_code1 options:NSBackwardsSearch];
+                                        html = [html stringByReplacingCharactersInRange:range1 withString:name1];
+                                        NSRange range2 = [html rangeOfString:atc_code2 options:NSBackwardsSearch];
+                                        html = [html stringByReplacingCharactersInRange:range2 withString:name2];
+                                        // Concatenate strings
+                                        [interactionStr appendString:html];
+                                        // Add to title and anchor lists
+                                        [sectionTitles addObject:[NSString stringWithFormat:@"%@ \u2192 %@", name1, name2]];
+                                        [sectionIds addObject:[NSString stringWithFormat:@"%@-%@", atc_code1, atc_code2]];
+                                    }
+                                }
+                                
+                            }
+                        }
                     }
                 }
             }
         }
     }
     
-    [sectionIds addObject:@"Legende"];
-    [sectionTitles addObject:@"Legende"];
+    [sectionIds addObject:@"Farblegende"];
+    [sectionTitles addObject:@"Farblegende"];
     
     // Update section title anchors
     listofSectionIds = [NSArray arrayWithArray:sectionIds];
     // Update section titles (here: identical to anchors)
     listofSectionTitles = [NSArray arrayWithArray:sectionTitles];
     
-    NSLog(@"%@", interactionStr);
-    
     return interactionStr;
 }
 
-- (NSString *) colorLegendHtml
+- (NSString *) footNoteHtml
 {
     /*
      Risikoklassen
@@ -1403,28 +1463,24 @@ static BOOL mSearchInteractions = false;
      X: Kontraindiziert (hellrot)
      0: Keine Angaben (grau)
      */
-    NSString *legend = {
-        @"<table id=\"Legende\" width=\"100%25\">"
-        @"  <tr><td bgcolor=\"#caff70\"></td><td>A</td><td>Keine Massnahmen notwendig</td></tr>"
-        @"  <tr><td bgcolor=\"#ffec8b\"></td><td>B</td><td>Vorsichtsmassnahmen empfohlen</td></tr>"
-        @"  <tr><td bgcolor=\"#ffb90f\"></td><td>C</td><td>Regelmässige Überwachung</td></tr>"
-        @"  <tr><td bgcolor=\"#ff82ab\"></td><td>D</td><td>Kombination vermeiden</td></tr>"
-        @"  <tr><td bgcolor=\"#ff6a6a\"></td><td>X</td><td>Kontraindiziert</td></tr>"
-        @"</table>"
-    };
+    if ([mMedBasket count]>0) {
+        NSString *legend = {
+            @"<fieldset><legend>Fussnoten</legend></fieldset>"
+            @"<p class=\"footnote\">1. Farblegende: </p>"
+            @"<table id=\"Farblegende\" width=\"100%25\">"
+            @"  <tr bgcolor=\"#caff70\"><td align=\"center\">A</td><td>Keine Massnahmen notwendig</td></tr>"
+            @"  <tr bgcolor=\"#ffec8b\"><td align=\"center\">B</td><td>Vorsichtsmassnahmen empfohlen</td></tr>"
+            @"  <tr bgcolor=\"#ffb90f\"><td align=\"center\">C</td><td>Regelmässige Überwachung</td></tr>"
+            @"  <tr bgcolor=\"#ff82ab\"><td align=\"center\">D</td><td>Kombination vermeiden</td></tr>"
+            @"  <tr bgcolor=\"#ff6a6a\"><td align=\"center\">X</td><td>Kontraindiziert</td></tr>"
+            @"</table>"
+            @"<p class=\"footnote\">2. Datenquelle: Public Domain Daten von EPha.ch.</p>"
+            @"<p class=\"footnote\">3. Unterstützt durch:  IBSA Institut Biochimique SA.</p>"
+        };
+        return legend;
+    }
     
-    return legend;
-}
-
-
-- (NSString *) bottomNoteHtml
-{
-    NSString *bottomNote = {
-        @"<p class=\"footnote\">1. Datenquelle: Public Domain Daten von EPha.ch.</p>"
-        @"<p class=\"footnote\">2. Unterstützt durch:  IBSA Institut Biochimique SA.</p>"
-    };
-    
-    return bottomNote;
+    return @"";
 }
 
 /**
@@ -1462,17 +1518,19 @@ static BOOL mSearchInteractions = false;
     
     // Generate main interaction table
     NSString *htmlStr = [NSString stringWithFormat:@"<html><head><meta charset=\"utf-8\" />"];
-    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head><body><div id=\"interactions\">%@<br><br>%@%@<br>%@<br>%@</body></div></html>",
+    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head><body><div id=\"interactions\">%@<br><br>%@<br>%@</body></div></html>",
                jscriptStr,
                interactionsCss,
                [self medBasketHtml],
-               [self topNoteHtml],
+               // [self topNoteHtml],
                [self interactionsHtml],
-               [self colorLegendHtml],
-               [self bottomNoteHtml]];
+               [self footNoteHtml]];
     
-    NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-    [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+    // With the following implementation, the images are not loaded
+    // NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    // [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+    
+    [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:[[NSBundle mainBundle] resourceURL]];
     
     [mySectionTitles reloadData];
 }
@@ -1581,7 +1639,7 @@ static BOOL mSearchInteractions = false;
             NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, med.contentStr];
             NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
             [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
-            [[myWebView preferences] setDefaultFontSize:14];
+            // [[myWebView preferences] setDefaultFontSize:14];
             [self setSearchState:kWebView];
             
             NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];

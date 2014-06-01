@@ -132,17 +132,24 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
     if ([[mFileName pathExtension] isEqualToString:@"zip"])  {
         NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *zipFilePath = [documentsDirectory stringByAppendingPathComponent:mFileName];
+
         NSString *filePath;
         if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_de.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_de" ofType:@"db"];
         if ([mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_fr.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_fr" ofType:@"db"];
+        if ([mFileName isEqualToString:@"drug_interactions_csv_de.zip"])
+            filePath = [[NSBundle mainBundle] pathForResource:@"drug_interactions_csv_de" ofType:@"csv"];
+        if ([mFileName isEqualToString:@"drug_interactions_csv_fr.zip"])
+            filePath = [[NSBundle mainBundle] pathForResource:@"drug_interactions_csv_fr" ofType:@"csv"];
+
         if (filePath!=nil) {
-            // NSLog(@"Filepath = %@", filePath);
             NSString *output = [documentsDirectory stringByAppendingPathComponent:@"."];
-            // NSLog(@"Output = %@", output);
             [SSZipArchive unzipFileAtPath:zipFilePath toDestination:output];
-            // Unzip data success, post notification
+        }
+        // Unzip data success, post notification once larger fales is unzipped!
+        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_de.zip"]
+            || [mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_fr.zip"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MLDidFinishLoading" object:self];
         }
     }

@@ -109,12 +109,18 @@ static NSString *FULL_TABLE = nil;
     return FALSE;
 }
 
+- (void) closeInteractionsCsvFile
+{
+    if ([myDrugInteractionMap count]>0) {
+        [myDrugInteractionMap removeAllObjects];
+    }
+}
+
 - (BOOL) readDrugInteractionMap:(NSString *)filePath
 {
     // Read drug interactions csv line after line
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSArray *rows = [content componentsSeparatedByString:@"\n"];
-    NSLog(@"Number of records in interaction file = %lu", (unsigned long)[rows count]);
     myDrugInteractionMap = [[NSMutableDictionary alloc] init];
     /*
      token[0]: ATC-Code1
@@ -130,6 +136,14 @@ static NSString *FULL_TABLE = nil;
     }
     return TRUE;
 
+}
+
+- (NSInteger) getNumInteractions
+{
+    if (myDrugInteractionMap!=nil)
+        return [myDrugInteractionMap count];
+    
+    return 0;
 }
 
 - (NSString *) getInteractionHtmlBetween:(NSString *)atc1 and:(NSString *)atc2
@@ -179,19 +193,24 @@ static NSString *FULL_TABLE = nil;
 {
     MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
     MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
+    MLCustomURLConnection *interConn = [[MLCustomURLConnection alloc] init];
  
     if ([language isEqualToString:@"de"]) {
         [reportConn downloadFileWithName:@"amiko_report_de.html" andModal:NO];
-        if ([owner isEqualToString:@"ywesee"])
+        if ([owner isEqualToString:@"ywesee"]) {
             [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
-        else if ([owner isEqualToString:@"zurrose"])
+            [interConn downloadFileWithName:@"drug_interactions_csv_de.zip" andModal:NO];
+        } else if ([owner isEqualToString:@"zurrose"]) {
             [dbConn downloadFileWithName:@"amiko_db_full_idx_zr_de.zip" andModal:YES];
+        }
     } else if ([language isEqualToString:@"fr"]) {
         [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:NO];
-        if ([owner isEqualToString:@"ywesee"])
+        if ([owner isEqualToString:@"ywesee"]) {
             [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:YES];
-        else if ([owner isEqualToString:@"zurrose"])
+            [interConn downloadFileWithName:@"drug_interactions_csv_fr.zip" andModal:NO];
+        } else if ([owner isEqualToString:@"zurrose"]) {
             [dbConn downloadFileWithName:@"amiko_db_full_idx_zr_fr.zip" andModal:YES];
+        }
     }
     
 }
