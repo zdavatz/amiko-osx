@@ -1416,7 +1416,6 @@ static BOOL mSearchInteractions = false;
                         for (atc_code1 in atc1) {
                             if (atc2!=nil && [atc2 count]>0) {
                                 for (atc_code2 in atc2) {
-                                    NSLog(@"%@ -> %@", atc_code1, atc_code2);
                                     NSString *html = [mDb getInteractionHtmlBetween:atc_code1 and:atc_code2];
                                     if (html!=nil) {
                                         // Replace all occurrences of atc codes by med names apart from the FIRST one!
@@ -1467,7 +1466,7 @@ static BOOL mSearchInteractions = false;
         NSString *legend = {
             @"<fieldset><legend>Fussnoten</legend></fieldset>"
             @"<p class=\"footnote\">1. Farblegende: </p>"
-            @"<table id=\"Farblegende\" width=\"100%25\">"
+            @"<table id=\"Farblegende\" style=\"background-color:#ffffff; padding:0px;\" width=\"100%25\">"
             @"  <tr bgcolor=\"#caff70\"><td align=\"center\">A</td><td>Keine Massnahmen notwendig</td></tr>"
             @"  <tr bgcolor=\"#ffec8b\"><td align=\"center\">B</td><td>Vorsichtsmassnahmen empfohlen</td></tr>"
             @"  <tr bgcolor=\"#ffb90f\"><td align=\"center\">C</td><td>Regelmässige Überwachung</td></tr>"
@@ -1491,10 +1490,10 @@ static BOOL mSearchInteractions = false;
 {
     mJSBridge = [WebViewJavascriptBridge bridgeForWebView:myWebView handler:^(id msg, WVJBResponseCallback responseCallback) {
         if ([msg isEqualToString:@"delete_all"]) {
-            NSLog(@"Delete all");
+            // NSLog(@"Delete all");
             [mMedBasket removeAllObjects];
         } else {
-            NSLog(@"Delete number %@", msg);
+            // NSLog(@"Delete number %@", msg);
             [mMedBasket removeObjectForKey:msg];
         }
         [self updateWebView];

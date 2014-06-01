@@ -2,7 +2,7 @@
 
 #interactions input{font-family:"Lucida Grande","sans-serif";font-size:0.9em;}
 #interactions div p{font-size:0.9em;}
-#interactions table{background-color:#ffffff;font-family:"Lucida Grande","sans-serif";font-size:0.9em;margin-top:0.9em;margin-bottom:0.9em;}
+#interactions table{background-color:#eeeeee;font-family:"Lucida Grande","sans-serif";font-size:0.9em;padding:0.5em;margin-top:0.9em;margin-bottom:0.9em;border-radius:0.3em;}
 #interactions td{font-family:"Lucida Grande","sans-serif";font-size:0.9em;}
 #interactions td p{font-family:"Lucida Grande","sans-serif";font-size:0.9em;}
 #interactions fieldset {border-bottom: none; border-left: none; border-right: none;}
