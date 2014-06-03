@@ -142,7 +142,7 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
             filePath = [[NSBundle mainBundle] pathForResource:@"drug_interactions_csv_de" ofType:@"csv"];
         if ([mFileName isEqualToString:@"drug_interactions_csv_fr.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"drug_interactions_csv_fr" ofType:@"csv"];
-
+        
         if (filePath!=nil) {
             NSString *output = [documentsDirectory stringByAppendingPathComponent:@"."];
             [SSZipArchive unzipFileAtPath:zipFilePath toDestination:output];

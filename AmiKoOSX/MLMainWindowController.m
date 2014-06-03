@@ -100,6 +100,7 @@ static BOOL mSearchInteractions = false;
 {
     // Instance variable declarations go here
     MLDBAdapter *mDb;
+    MLMedication *mMed;
     
     NSMutableArray *medi;
     NSMutableArray *favoriteKeyData;
@@ -805,9 +806,6 @@ static BOOL mSearchInteractions = false;
 
 - (void) switchDatabases: (NSToolbarItem *)item
 {
-#ifdef DEBUG
-    NSLog(@"%s", __FUNCTION__);
-#endif
     switch (item.tag) {
         case 0:
         {
@@ -882,9 +880,10 @@ static BOOL mSearchInteractions = false;
         case 2:
         {
             NSLog(@"Interactions");
-            [self stopProgressIndicator];
             mSearchInteractions = true;
-            [self setSearchState:kTitle];
+            [self stopProgressIndicator];
+            [self setSearchState:kTitle];            
+            [self pushToMedBasket];
             [self updateWebView];
         }
         default:
@@ -1329,12 +1328,31 @@ static BOOL mSearchInteractions = false;
     [self stopProgressIndicator];
 }
 
+- (void) pushToMedBasket
+{
+    if (mMed!=nil) {
+        NSString *title = [mMed title];
+        title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([title length]>30) {
+            title = [title substringToIndex:30];
+            title = [title stringByAppendingString:@"..."];
+        }
+    
+        // Add med to medication basket
+        [mMedBasket setObject:mMed forKey:title];
+    }
+}
+
 - (NSString *) medBasketHtml
 {
     // basket_html_str + delete_all_button_str + "<br><br>" + top_note_html_str
     int medCnt = 0;
-    NSString *medBasketStr = { @"<div id=\"Medikamentenkorb\"><fieldset><legend>Medikamentenkorb</legend></fieldset></div><table id=\"InterTable\" width=\"100%25\">" };
-
+    NSString *medBasketStr = @"";
+    if ([[self appLanguage] isEqualToString:@"de"])
+        medBasketStr = [medBasketStr stringByAppendingString:@"<div id=\"Medikamentenkorb\"><fieldset><legend>Medikamentenkorb</legend></fieldset></div><table id=\"InterTable\" width=\"100%25\">"];
+    else if ([[self appLanguage] isEqualToString:@"fr"])
+        medBasketStr = [medBasketStr stringByAppendingString:@"<div id=\"Medikamentenkorb\"><fieldset><legend>Panier des Médicaments</legend></fieldset></div><table id=\"InterTable\" width=\"100%25\">"];
+    
     // Check if there are meds in the "Medikamentenkorb"
     if ([mMedBasket count]>0) {
         // First sort them alphabetically
@@ -1361,11 +1379,16 @@ static BOOL mSearchInteractions = false;
                             @"</tr>", medCnt, name, atc_code, active_ingredient];
         }
         // Add delete all button
-        medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Korb leeren\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
-    
+        if ([[self appLanguage] isEqualToString:@"de"])
+            medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Korb leeren\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
+        else if ([[self appLanguage] isEqualToString:@"fr"])
+            medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Tout supprimer\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
     } else {
         // Medikamentenkorb is empty
-        medBasketStr = @"<div>Ihr Medikamentenkorb ist leer.<br><br></div>";
+        if ([[self appLanguage] isEqualToString:@"de"])
+            medBasketStr = @"<div>Ihr Medikamentenkorb ist leer.<br><br></div>";
+        else if ([[self appLanguage] isEqualToString:@"fr"])
+            medBasketStr = @"<div>Votre panier de médicaments est vide.<br><br></div>";
     }
     
     return medBasketStr;
@@ -1377,7 +1400,10 @@ static BOOL mSearchInteractions = false;
     
     if ([mMedBasket count]>1) {
         // Add note to indicate that there are no interactions
-        topNote = @"<fieldset><legend>Bekannte Interaktionen</legend></fieldset><p>Werden keine Interaktionen angezeigt, sind z.Z. keine Interaktionen bekannt.</p>";
+        if ([[self appLanguage] isEqualToString:@"de"])
+            topNote = @"<fieldset><legend>Bekannte Interaktionen</legend></fieldset><p>Werden keine Interaktionen angezeigt, sind z.Z. keine Interaktionen bekannt.</p>";
+        else  if ([[self appLanguage] isEqualToString:@"fr"])
+            topNote = @"<fieldset><legend>Interactions Connues</legend></fieldset><p>Werden keine Interaktionen angezeigt, sind z.Z. keine Interaktionen bekannt.</p>";
     }
     
     return topNote;
@@ -1387,11 +1413,18 @@ static BOOL mSearchInteractions = false;
 {
     NSMutableString *interactionStr = [[NSMutableString alloc] initWithString:@""];
     NSMutableArray *sectionIds = [[NSMutableArray alloc] initWithObjects:@"Medikamentenkorb", nil];
-    NSMutableArray *sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Medikamentenkorb", nil];
+    NSMutableArray *sectionTitles = nil;
+    if ([[self appLanguage] isEqualToString:@"de"])
+        sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Medikamentenkorb", nil];
+    else if ([[self appLanguage] isEqualToString:@"fr"])
+        sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Panier des médicaments", nil];
 
     // Check if there are meds in the "Medikamentenkorb"
     if ([mMedBasket count]>1) {
-        [interactionStr appendString:@"<fieldset><legend>Bekannte Interaktionen</legend></fieldset>"];
+        if ([[self appLanguage] isEqualToString:@"de"])
+            [interactionStr appendString:@"<fieldset><legend>Bekannte Interaktionen</legend></fieldset>"];
+        else if ([[self appLanguage] isEqualToString:@"fr"])
+            [interactionStr appendString:@"<fieldset><legend>Interactions Connues</legend></fieldset>"];
         // First sort them alphabetically
         NSArray *sortedNames = [[mMedBasket allKeys] sortedArrayUsingSelector: @selector(compare:)];
         // Big loop
@@ -1440,8 +1473,11 @@ static BOOL mSearchInteractions = false;
     }
     
     [sectionIds addObject:@"Farblegende"];
-    [sectionTitles addObject:@"Farblegende"];
-    
+    if ([[self appLanguage] isEqualToString:@"de"])
+        [sectionTitles addObject:@"Farblegende"];
+    else if ([[self appLanguage] isEqualToString:@"fr"])
+        [sectionTitles addObject:@"Légende des couleurs"];
+
     // Update section title anchors
     listofSectionIds = [NSArray arrayWithArray:sectionIds];
     // Update section titles (here: identical to anchors)
@@ -1463,20 +1499,37 @@ static BOOL mSearchInteractions = false;
      0: Keine Angaben (grau)
      */
     if ([mMedBasket count]>0) {
-        NSString *legend = {
-            @"<fieldset><legend>Fussnoten</legend></fieldset>"
-            @"<p class=\"footnote\">1. Farblegende: </p>"
-            @"<table id=\"Farblegende\" style=\"background-color:#ffffff; padding:0px;\" width=\"100%25\">"
-            @"  <tr bgcolor=\"#caff70\"><td align=\"center\">A</td><td>Keine Massnahmen notwendig</td></tr>"
-            @"  <tr bgcolor=\"#ffec8b\"><td align=\"center\">B</td><td>Vorsichtsmassnahmen empfohlen</td></tr>"
-            @"  <tr bgcolor=\"#ffb90f\"><td align=\"center\">C</td><td>Regelmässige Überwachung</td></tr>"
-            @"  <tr bgcolor=\"#ff82ab\"><td align=\"center\">D</td><td>Kombination vermeiden</td></tr>"
-            @"  <tr bgcolor=\"#ff6a6a\"><td align=\"center\">X</td><td>Kontraindiziert</td></tr>"
-            @"</table>"
-            @"<p class=\"footnote\">2. Datenquelle: Public Domain Daten von EPha.ch.</p>"
-            @"<p class=\"footnote\">3. Unterstützt durch:  IBSA Institut Biochimique SA.</p>"
-        };
-        return legend;
+        if ([[self appLanguage] isEqualToString:@"de"]) {
+            NSString *legend = {
+                @"<fieldset><legend>Fussnoten</legend></fieldset>"
+                @"<p class=\"footnote\">1. Farblegende: </p>"
+                @"<table id=\"Farblegende\" style=\"background-color:#ffffff; padding:0px;\" width=\"100%25\">"
+                @"  <tr bgcolor=\"#caff70\"><td align=\"center\">A</td><td>Keine Massnahmen notwendig</td></tr>"
+                @"  <tr bgcolor=\"#ffec8b\"><td align=\"center\">B</td><td>Vorsichtsmassnahmen empfohlen</td></tr>"
+                @"  <tr bgcolor=\"#ffb90f\"><td align=\"center\">C</td><td>Regelmässige Überwachung</td></tr>"
+                @"  <tr bgcolor=\"#ff82ab\"><td align=\"center\">D</td><td>Kombination vermeiden</td></tr>"
+                @"  <tr bgcolor=\"#ff6a6a\"><td align=\"center\">X</td><td>Kontraindiziert</td></tr>"
+                @"</table>"
+                @"<p class=\"footnote\">2. Datenquelle: Public Domain Daten von EPha.ch.</p>"
+                @"<p class=\"footnote\">3. Unterstützt durch:  IBSA Institut Biochimique SA.</p>"
+            };
+            return legend;
+        } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+            NSString *legend = {
+                @"<fieldset><legend>Notes</legend></fieldset>"
+                @"<p class=\"footnote\">1. Légende des couleurs: </p>"
+                @"<table id=\"Farblegende\" style=\"background-color:#ffffff; padding:0px;\" width=\"100%25\">"
+                @"  <tr bgcolor=\"#caff70\"><td align=\"center\">A</td><td>Aucune mesure nécessaire</td></tr>"
+                @"  <tr bgcolor=\"#ffec8b\"><td align=\"center\">B</td><td>Mesures de précaution sont recommandées</td></tr>"
+                @"  <tr bgcolor=\"#ffb90f\"><td align=\"center\">C</td><td>Doit être régulièrement surveillée</td></tr>"
+                @"  <tr bgcolor=\"#ff82ab\"><td align=\"center\">D</td><td>Eviter la combinaison</td></tr>"
+                @"  <tr bgcolor=\"#ff6a6a\"><td align=\"center\">X</td><td>Contre-indiquée</td></tr>"
+                @"</table>"
+                @"<p class=\"footnote\">2. Source des données : données du domaine publique de EPha.ch.</p>"
+                @"<p class=\"footnote\">3. Soutenu par : IBSA Institut Biochimique SA.</p>"
+            };
+            return legend;
+        }
     }
     
     return @"";
@@ -1521,7 +1574,6 @@ static BOOL mSearchInteractions = false;
                jscriptStr,
                interactionsCss,
                [self medBasketHtml],
-               // [self topNoteHtml],
                [self interactionsHtml],
                [self footNoteHtml]];
     
@@ -1623,7 +1675,7 @@ static BOOL mSearchInteractions = false;
         long mId = [medi[row] medId];
     
         // Get medi
-        MLMedication *med = [mDb searchId:mId];
+        mMed = [mDb searchId:mId];
     
         if (mSearchInteractions==false) {
             // Load style sheet from file
@@ -1632,10 +1684,10 @@ static BOOL mSearchInteractions = false;
             if (amikoCssPath)
                 amikoCss = [NSString stringWithContentsOfFile:amikoCssPath encoding:NSUTF8StringEncoding error:nil];
             else
-                amikoCss = [NSString stringWithString:med.styleStr];
+                amikoCss = [NSString stringWithString:mMed.styleStr];
             
             // Extract html string
-            NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, med.contentStr];
+            NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, mMed.contentStr];
             NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
             [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
             // [[myWebView preferences] setDefaultFontSize:14];
@@ -1645,23 +1697,14 @@ static BOOL mSearchInteractions = false;
             [myRowView setEmphasized:YES];
             
             // Extract section ids
-            listofSectionIds = [med.sectionIds componentsSeparatedByString:@","];
+            listofSectionIds = [mMed.sectionIds componentsSeparatedByString:@","];
             // Extract section titles
             // listofSectionTitles = [SectionTitle_DE componentsSeparatedByString:@";"];
-            listofSectionTitles = [med.sectionTitles componentsSeparatedByString:@";"];
+            listofSectionTitles = [mMed.sectionTitles componentsSeparatedByString:@";"];
             //
             [mySectionTitles reloadData];
         } else {
-            NSString *title = [med title];
-            title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            if ([title length]>30) {
-                title = [title substringToIndex:30];
-                title = [title stringByAppendingString:@"..."];
-            }
-            
-            // Add med to medication basket
-            [mMedBasket setObject:med forKey:title];
-            
+            [self pushToMedBasket];
             [self updateWebView];
             
             NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];

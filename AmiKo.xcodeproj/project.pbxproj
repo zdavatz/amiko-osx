@@ -60,6 +60,7 @@
 		D545C91218A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
 		D545C91318A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
 		D545C91418A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
+		D57AB17A193E6B68000DB3F2 /* deleterow.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
 		D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
@@ -81,7 +82,6 @@
 		D5B0106D1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
 		D5B0106E1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
 		D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
-		D5B6F96D192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
 		D5B6F96E192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
 		D5B6F96F192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
 		D5B6F970193136A400495873 /* deleterow.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
@@ -97,6 +97,8 @@
 		D5DD5767193B4EB40094244E /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DD5765193B4EB40094244E /* 218-trash2.png */; };
 		D5DD5768193B4EB40094244E /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DD5765193B4EB40094244E /* 218-trash2.png */; };
 		D5DD5769193B4EB40094244E /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DD5765193B4EB40094244E /* 218-trash2.png */; };
+		D5DD576B193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */; };
+		D5DD576C193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */; };
 		D5E91AD017E387F100B66B27 /* MLCoMedzRMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91ACF17E387F100B66B27 /* MLCoMedzRMainWindow.xib */; };
 		D5E91AD617E3955300B66B27 /* CoMedzRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */; };
 		D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */; };
@@ -261,6 +263,7 @@
 		D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomURLConnection.m; sourceTree = "<group>"; };
 		D5DD5760193B49260094244E /* 217-trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "217-trash.png"; sourceTree = "<group>"; };
 		D5DD5765193B4EB40094244E /* 218-trash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2.png"; sourceTree = "<group>"; };
+		D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drug_interactions_csv_fr.csv; sourceTree = "<group>"; };
 		D5E91ACF17E387F100B66B27 /* MLCoMedzRMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedzRMainWindow.xib; sourceTree = "<group>"; };
 		D5E91AD117E3886500B66B27 /* MLCoMedMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedMainWindow.xib; sourceTree = "<group>"; };
 		D5E91AD317E3888700B66B27 /* MLAmiKoMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKoMainWindow.xib; sourceTree = "<group>"; };
@@ -548,6 +551,7 @@
 		D5EBC6A717C91FAC00EBEF39 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */,
 				D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */,
 				D5E91BF117E6061900B66B27 /* amiko_db_full_idx_fr.db */,
 				D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */,
@@ -775,12 +779,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D57AB17A193E6B68000DB3F2 /* deleterow.js in Resources */,
 				D5B0106C1927C4F6007BE838 /* 55-network.png in Resources */,
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
 				D5E91BCB17E5E8E800B66B27 /* Credits-de.rtf in Resources */,
 				D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */,
-				D5B6F96D192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
@@ -799,6 +803,7 @@
 				D5E91BF217E6061900B66B27 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
 				D536126717E770A80087B132 /* amiko.iconset in Resources */,
+				D5DD576B193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */,
 				D5DD5762193B49260094244E /* 217-trash.png in Resources */,
 				D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */,
@@ -815,6 +820,7 @@
 				D5FB9EC719351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5EBC69117C912FF00EBEF39 /* Credits-de.rtf in Resources */,
 				D5DD5769193B4EB40094244E /* 218-trash2.png in Resources */,
+				D5DD576C193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
 				D5EBC6D117D256EC00EBEF39 /* 28-star-gy.png in Resources */,
 				D5EBC6D917D3ADCA00EBEF39 /* app_icon_512x512.png in Resources */,
