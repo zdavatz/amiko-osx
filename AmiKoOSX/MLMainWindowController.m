@@ -880,6 +880,7 @@ static BOOL mSearchInteractions = false;
         case 2:
         {
             NSLog(@"Interactions");
+            mUsedDatabase = kAips;
             mSearchInteractions = true;
             [self stopProgressIndicator];
             [self setSearchState:kTitle];            
