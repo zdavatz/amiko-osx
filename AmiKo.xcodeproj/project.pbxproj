@@ -61,6 +61,8 @@
 		D545C91318A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
 		D545C91418A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
 		D57AB17A193E6B68000DB3F2 /* deleterow.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D5A22508193FB19F0078FEFF /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
+		D5A22509193FB19F0078FEFF /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
 		D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
@@ -253,6 +255,7 @@
 		D545C90F18A5725900491511 /* MLCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomView.h; sourceTree = "<group>"; };
 		D545C91018A5725900491511 /* MLCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomView.m; sourceTree = "<group>"; };
 		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		D5A22507193FB19F0078FEFF /* 216-compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "216-compose.png"; sourceTree = "<group>"; };
 		D5AB1772180886810050DC12 /* 28-star-ye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star-ye.png"; sourceTree = "<group>"; };
 		D5B0105B1927C451007BE838 /* interactions_css.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = interactions_css.css; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
 		D5B010601927C472007BE838 /* deleterow.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = deleterow.js; sourceTree = "<group>"; };
@@ -586,6 +589,7 @@
 				D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */,
 				D5EBC6E017D5214300EBEF39 /* 10-medical@2x.png */,
 				D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */,
+				D5A22507193FB19F0078FEFF /* 216-compose.png */,
 				D5DD5765193B4EB40094244E /* 218-trash2.png */,
 				D5DD5760193B49260094244E /* 217-trash.png */,
 				D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */,
@@ -772,6 +776,7 @@
 				D536126617E770A80087B132 /* amiko.iconset in Resources */,
 				D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */,
 				D52A0D7A17EDC60E003BF272 /* AmiKo.entitlements in Resources */,
+				D5A22508193FB19F0078FEFF /* 216-compose.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,6 +812,7 @@
 				D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */,
 				D5DD5762193B49260094244E /* 217-trash.png in Resources */,
 				D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */,
+				D5A22509193FB19F0078FEFF /* 216-compose.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

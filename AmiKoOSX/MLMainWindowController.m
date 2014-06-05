@@ -1329,6 +1329,33 @@ static BOOL mSearchInteractions = false;
     [self stopProgressIndicator];
 }
 
+- (void) sendInteractionNotice
+{
+    NSMutableString *bodyStr = [[NSMutableString alloc] initWithString:@""];
+    
+    // Starts mail client
+    NSString *subject = [NSString stringWithFormat:@"%@ OS X: Unbekannte Interaktionen", APP_NAME];
+    
+    NSString* body = nil;
+    if ([mMedBasket count]>0) {
+        NSArray *sortedNames = [[mMedBasket allKeys] sortedArrayUsingSelector: @selector(compare:)];
+        for (NSString *name in sortedNames) {
+            [bodyStr appendString:[NSString stringWithFormat:@"- %@\r\n", name]];
+        }
+        if ([[self appLanguage] isEqualToString:@"de"])
+            body = [NSString stringWithFormat:@"Sehr geehrter Herr Davatz\r\n\nMedikamentenkorb:\r\n\n%@\r\nBeste Grüsse\r\n\n", bodyStr];
+        else if ([[self appLanguage] isEqualToString:@"fr"])
+            body = [NSString stringWithFormat:@"Sehr geehrter Herr Davatz\r\n\nPanier des médicaments:\r\n\n%@\r\nBeste Grüsse\r\n\n", bodyStr];
+    }
+    NSString *encodedSubject = [NSString stringWithFormat:@"subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *encodedBody = [NSString stringWithFormat:@"body=%@", [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:?%@&%@", encodedSubject, encodedBody];
+    
+    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
+    
+    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+}
+
 - (void) pushToMedBasket
 {
     if (mMed!=nil) {
@@ -1464,12 +1491,19 @@ static BOOL mSearchInteractions = false;
                                         [sectionIds addObject:[NSString stringWithFormat:@"%@-%@", atc_code1, atc_code2]];
                                     }
                                 }
-                                
                             }
                         }
                     }
                 }
             }
+        }
+        if ([sectionTitles count]<2) {
+            if ([[self appLanguage] isEqualToString:@"de"])
+                [interactionStr appendString:@"<p class=\"paragraph0\">Zur Zeit sind keine Interaktionen zwischen diesen Medikamenten bekannt.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Interaktion melden\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>"];
+            else if ([[self appLanguage] isEqualToString:@"fr"])
+                [interactionStr appendString:@"<p class=\"paragraph0\">Jusqu’ici il n’y pas d’interaction connue entre le médicaments.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Signaler une interaction\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>"];
+        } else if ([sectionTitles count]>2) {
+            [interactionStr appendString:@"<br>"];
         }
     }
     
@@ -1543,7 +1577,9 @@ static BOOL mSearchInteractions = false;
 - (void) createJSBridge
 {
     mJSBridge = [WebViewJavascriptBridge bridgeForWebView:myWebView handler:^(id msg, WVJBResponseCallback responseCallback) {
-        if ([msg isEqualToString:@"delete_all"]) {
+        if ([msg isEqualToString:@"notify_interaction"]) {
+            [self sendInteractionNotice];
+        } else if ([msg isEqualToString:@"delete_all"]) {
             // NSLog(@"Delete all");
             [mMedBasket removeAllObjects];
         } else {

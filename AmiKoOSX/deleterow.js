@@ -1,7 +1,9 @@
 function deleteRow(tableID,currentRow) {
     // var myfunc = window.RemoveMeds;
     try {
-		if (tableID=="Delete_all") {
+        if (tableID=="Notify_interaction") {
+            WebViewJavascriptBridge.send("notify_interaction");
+        } else if (tableID=="Delete_all") {
             // window.alert("delete all rows");
             WebViewJavascriptBridge.send("delete_all");
 		} else {
