@@ -1416,7 +1416,7 @@ static BOOL mSearchInteractions = false;
         if ([[self appLanguage] isEqualToString:@"de"])
             medBasketStr = @"<div>Ihr Medikamentenkorb ist leer.<br><br></div>";
         else if ([[self appLanguage] isEqualToString:@"fr"])
-            medBasketStr = @"<div>Votre panier de médicaments est vide.<br><br></div>";
+            medBasketStr = @"<div>Votre panier des médicaments est vide.<br><br></div>";
     }
     
     return medBasketStr;
