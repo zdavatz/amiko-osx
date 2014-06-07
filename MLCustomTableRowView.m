@@ -58,12 +58,12 @@
         [selectionPath stroke];
         */
         // Define gradient colors
-        NSColor* gradientStartColor = [NSColor colorWithCalibratedRed:210/255.0 green:210/255.0 blue:230/255.0 alpha:1.0];
+        NSColor* gradientStartColor = [NSColor colorWithCalibratedRed:230/255.0 green:230/255.0 blue:255/255.0 alpha:1.0];
         NSColor* gradientEndColor = [NSColor colorWithCalibratedRed:230/255.0 green:230/255.0 blue:255/255.0 alpha:1.0];
         // Gradient Declarations
         NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:gradientStartColor endingColor:gradientEndColor];
         // Rounded Rectangle Drawing
-        NSBezierPath *roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:8 yRadius:8];
+        NSBezierPath *roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:7 yRadius:7];
         [gradient drawInBezierPath:roundedRectanglePath angle:90];
     }
 }

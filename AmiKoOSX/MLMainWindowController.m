@@ -202,7 +202,7 @@ static BOOL mSearchInteractions = false;
     // Initialize medication basket
     mMedBasket = [[NSMutableDictionary alloc] init];
     
-    // Creates a bridge between JScript and ObjC
+    // Create bridge between JScript and ObjC
     [self createJSBridge];
     
     // Initialize webview
@@ -1356,6 +1356,9 @@ static BOOL mSearchInteractions = false;
     [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
 }
 
+/**
+ Add med in the buffer to the interaction basket
+ */
 - (void) pushToMedBasket
 {
     if (mMed!=nil) {
@@ -1371,6 +1374,9 @@ static BOOL mSearchInteractions = false;
     }
 }
 
+/**
+ Create interaction basket html string
+ */
 - (NSString *) medBasketHtml
 {
     // basket_html_str + delete_all_button_str + "<br><br>" + top_note_html_str
@@ -1437,16 +1443,22 @@ static BOOL mSearchInteractions = false;
     return topNote;
 }
 
+/**
+ Create html displaying interactions between drugs
+ */
 - (NSString *) interactionsHtml
 {
     NSMutableString *interactionStr = [[NSMutableString alloc] initWithString:@""];
     NSMutableArray *sectionIds = [[NSMutableArray alloc] initWithObjects:@"Medikamentenkorb", nil];
     NSMutableArray *sectionTitles = nil;
-    if ([[self appLanguage] isEqualToString:@"de"])
-        sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Medikamentenkorb", nil];
-    else if ([[self appLanguage] isEqualToString:@"fr"])
-        sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Panier des médicaments", nil];
 
+    if ([mMedBasket count]>0) {
+        if ([[self appLanguage] isEqualToString:@"de"])
+            sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Medikamentenkorb", nil];
+        else if ([[self appLanguage] isEqualToString:@"fr"])
+            sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Panier des médicaments", nil];
+    }
+    
     // Check if there are meds in the "Medikamentenkorb"
     if ([mMedBasket count]>1) {
         if ([[self appLanguage] isEqualToString:@"de"])
@@ -1459,9 +1471,10 @@ static BOOL mSearchInteractions = false;
         for (NSString *name1 in sortedNames) {
             for (NSString *name2 in sortedNames) {
                 if (![name1 isEqualToString:name2]) {
+                    // Extract meds by names from interaction basket
                     MLMedication *med1 = [mMedBasket valueForKey:name1];
                     MLMedication *med2 = [mMedBasket valueForKey:name2];
-                    
+                    // Get ATC codes from interaction db
                     NSArray *m_code1 = [[med1 atccode] componentsSeparatedByString:@";"];
                     NSArray *m_code2 = [[med2 atccode] componentsSeparatedByString:@";"];
                     NSArray *atc1 = nil;
@@ -1507,11 +1520,13 @@ static BOOL mSearchInteractions = false;
         }
     }
     
-    [sectionIds addObject:@"Farblegende"];
-    if ([[self appLanguage] isEqualToString:@"de"])
-        [sectionTitles addObject:@"Farblegende"];
-    else if ([[self appLanguage] isEqualToString:@"fr"])
-        [sectionTitles addObject:@"Légende des couleurs"];
+    if ([mMedBasket count]>0) {
+        [sectionIds addObject:@"Farblegende"];
+        if ([[self appLanguage] isEqualToString:@"de"])
+            [sectionTitles addObject:@"Farblegende"];
+        else if ([[self appLanguage] isEqualToString:@"fr"])
+            [sectionTitles addObject:@"Légende des couleurs"];
+    }
 
     // Update section title anchors
     listofSectionIds = [NSArray arrayWithArray:sectionIds];
@@ -1538,7 +1553,7 @@ static BOOL mSearchInteractions = false;
             NSString *legend = {
                 @"<fieldset><legend>Fussnoten</legend></fieldset>"
                 @"<p class=\"footnote\">1. Farblegende: </p>"
-                @"<table id=\"Farblegende\" style=\"background-color:#ffffff; padding:0px;\" width=\"100%25\">"
+                @"<table id=\"Farblegende\" style=\"background-color:#ffffff;\" cellpadding=\"3px\" width=\"100%25\">"
                 @"  <tr bgcolor=\"#caff70\"><td align=\"center\">A</td><td>Keine Massnahmen notwendig</td></tr>"
                 @"  <tr bgcolor=\"#ffec8b\"><td align=\"center\">B</td><td>Vorsichtsmassnahmen empfohlen</td></tr>"
                 @"  <tr bgcolor=\"#ffb90f\"><td align=\"center\">C</td><td>Regelmässige Überwachung</td></tr>"
@@ -1553,7 +1568,7 @@ static BOOL mSearchInteractions = false;
             NSString *legend = {
                 @"<fieldset><legend>Notes</legend></fieldset>"
                 @"<p class=\"footnote\">1. Légende des couleurs: </p>"
-                @"<table id=\"Farblegende\" style=\"background-color:#ffffff; padding:0px;\" width=\"100%25\">"
+                @"<table id=\"Farblegende\" style=\"background-color:#ffffff;\" cellpadding=\"3px\" width=\"100%25\">"
                 @"  <tr bgcolor=\"#caff70\"><td align=\"center\">A</td><td>Aucune mesure nécessaire</td></tr>"
                 @"  <tr bgcolor=\"#ffec8b\"><td align=\"center\">B</td><td>Mesures de précaution sont recommandées</td></tr>"
                 @"  <tr bgcolor=\"#ffb90f\"><td align=\"center\">C</td><td>Doit être régulièrement surveillée</td></tr>"
@@ -1623,7 +1638,9 @@ static BOOL mSearchInteractions = false;
     [mySectionTitles reloadData];
 }
 
-/** NSTableViewDataSource
+/** 
+ - NSTableViewDataSource -
+ Get number of rows of a table view
  */
 - (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
 {
@@ -1651,8 +1668,9 @@ static BOOL mSearchInteractions = false;
     return rowView;
 }
 
-/*
- * NSTableViewDataDelegate
+/**
+ - NSTableViewDataDelegate -
+ Update tableviews (search result and section titles)
 */
 - (NSView *) tableView: (NSTableView *)tableView viewForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
@@ -1702,6 +1720,9 @@ static BOOL mSearchInteractions = false;
     return nil;
 }
 
+/*
+ Update webview
+ */
 - (void) tableViewSelectionDidChange: (NSNotification *)notification
 {
     if ([notification object] == self.myTableView) {
@@ -1753,7 +1774,7 @@ static BOOL mSearchInteractions = false;
         */
         NSInteger row = [[notification object] selectedRow];
         
-        NSLog(@"%@", listofSectionIds[row]);
+        // NSLog(@"%@", listofSectionIds[row]);
         
         NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", listofSectionIds[row]];
         [myWebView stringByEvaluatingJavaScriptFromString:javaScript];

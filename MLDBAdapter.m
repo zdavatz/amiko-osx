@@ -84,14 +84,14 @@ static NSString *FULL_TABLE = nil;
 
 - (BOOL) openInteractionsCsvFile:(NSString *)name
 {    
-    // ** A. Check first users documents folder
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    // Get documents directory
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [paths lastObject];
+    
+    // ** A. Check first users documents folder
     NSString *filePath = [[documentsDir stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"csv"];
     // Check if database exists
     if (filePath!=nil) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:filePath]) {
             NSLog(@"Drug interactions csv found documents folder - %@", filePath);
             return [self readDrugInteractionMap:filePath];
@@ -198,16 +198,16 @@ static NSString *FULL_TABLE = nil;
     if ([language isEqualToString:@"de"]) {
         [reportConn downloadFileWithName:@"amiko_report_de.html" andModal:NO];
         if ([owner isEqualToString:@"ywesee"]) {
-            [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
             [interConn downloadFileWithName:@"drug_interactions_csv_de.zip" andModal:NO];
+            [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
         } else if ([owner isEqualToString:@"zurrose"]) {
             [dbConn downloadFileWithName:@"amiko_db_full_idx_zr_de.zip" andModal:YES];
         }
     } else if ([language isEqualToString:@"fr"]) {
         [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:NO];
         if ([owner isEqualToString:@"ywesee"]) {
+            [interConn downloadFileWithName:@"drug_interactions_csv_fr.zip" andModal:NO];            
             [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:YES];
-            [interConn downloadFileWithName:@"drug_interactions_csv_fr.zip" andModal:NO];
         } else if ([owner isEqualToString:@"zurrose"]) {
             [dbConn downloadFileWithName:@"amiko_db_full_idx_zr_fr.zip" andModal:YES];
         }
