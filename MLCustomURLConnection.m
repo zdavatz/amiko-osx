@@ -53,19 +53,19 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
     }
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
-        dispatch_async( queue, ^(void){
-            NSURL *url = [NSURL URLWithString:[PILLBOX_ODDB_ORG stringByAppendingString:fileName]];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url
-                                                     cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                 timeoutInterval:30.0];
-            
-            myConnection = [[NSURLConnection alloc] initWithRequest:request
-                                                           delegate:self
-                                                   startImmediately:NO];
-            [myConnection setDelegateQueue:[NSOperationQueue mainQueue]];
-            [myConnection start];
-        });
+    dispatch_async( queue, ^(void){
+        NSURL *url = [NSURL URLWithString:[PILLBOX_ODDB_ORG stringByAppendingString:fileName]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url
+                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                             timeoutInterval:30.0];
         
+        myConnection = [[NSURLConnection alloc] initWithRequest:request
+                                                       delegate:self
+                                               startImmediately:NO];
+        [myConnection setDelegateQueue:[NSOperationQueue mainQueue]];
+        [myConnection start];
+    });
+    
     // Get handle to file where the downloaded file is saved
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
@@ -90,7 +90,9 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
     mStatusCode = [((NSHTTPURLResponse *)response) statusCode];
 
     mTotExceptedBytes = [response expectedContentLength];
+#ifdef DEBUG
     NSLog(@"Expected content length = %ld bytes", mTotExceptedBytes);
+#endif
     mTotDownloadedBytes = 0;
 }
 

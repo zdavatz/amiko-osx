@@ -93,7 +93,7 @@ static NSString *FULL_TABLE = nil;
     if (filePath!=nil) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:filePath]) {
-            NSLog(@"Drug interactions csv found documents folder - %@", filePath);
+            NSLog(@"Drug interactions csv found in documents folder - %@", filePath);
             return [self readDrugInteractionMap:filePath];
         }
     }
@@ -130,12 +130,11 @@ static NSString *FULL_TABLE = nil;
     for (NSString *s in rows) {
         if (![s isEqualToString:@""]) {
             NSArray *token = [s componentsSeparatedByString:@"||"];
-            NSString *key = [NSString stringWithFormat:@"%@-%@", token[0], token[1]];
+            NSString *key = [NSString stringWithFormat:@"%@-%@", token[0], token[1]];            
             [myDrugInteractionMap setObject:token[2] forKey:key];
         }
     }
     return TRUE;
-
 }
 
 - (NSInteger) getNumInteractions

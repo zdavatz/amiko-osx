@@ -1023,7 +1023,7 @@ static BOOL mSearchInteractions = false;
     return searchRes;
 }
 
-- (void) addTitle: (NSString *)title andPackInfo: (NSString *)packinfo andMedId: (long)medId
+- (void) addTitle:(NSString *)title andPackInfo:(NSString *)packinfo andMedId: (long)medId
 {
     DataObject *m = [[DataObject alloc] init];
     
@@ -1061,7 +1061,7 @@ static BOOL mSearchInteractions = false;
     [medi addObject:m];
 }
 
-- (void) addTitle: (NSString *)title andAuthor: (NSString *)author andMedId: (long)medId
+- (void) addTitle:(NSString *)title andAuthor:(NSString *)author andMedId: (long)medId
 {
     DataObject *m = [[DataObject alloc] init];
     
@@ -1081,7 +1081,7 @@ static BOOL mSearchInteractions = false;
     [medi addObject:m];
 }
 
-- (void) addTitle: (NSString *)title andAtcCode: (NSString *)atccode andAtcClass: (NSString *)atcclass andMedId: (long)medId
+- (void) addTitle:(NSString *)title andAtcCode:(NSString *)atccode andAtcClass:(NSString *)atcclass andMedId: (long)medId
 {
     DataObject *m = [[DataObject alloc] init];
     
@@ -1124,7 +1124,7 @@ static BOOL mSearchInteractions = false;
     [medi addObject:m];
 }
 
-- (void) addTitle: (NSString *)title andRegnrs: (NSString *)regnrs andAuthor: (NSString *)author andMedId: (long)medId
+- (void) addTitle:(NSString *)title andRegnrs:(NSString *)regnrs andAuthor:(NSString *)author andMedId: (long)medId
 {
     DataObject *m = [[DataObject alloc] init];
     
@@ -1144,7 +1144,7 @@ static BOOL mSearchInteractions = false;
     [medi addObject:m];
 }
 
-- (void) addSubstances: (NSString *)substances andTitle: (NSString *)title andAuthor: (NSString *)author andMedId: (long)medId
+- (void) addSubstances:(NSString *)substances andTitle:(NSString *)title andAuthor:(NSString *)author andMedId:(long)medId
 {
     DataObject *m = [[DataObject alloc] init];
     
