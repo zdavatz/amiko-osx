@@ -1435,9 +1435,9 @@ static BOOL mSearchInteractions = false;
     if ([mMedBasket count]>1) {
         // Add note to indicate that there are no interactions
         if ([[self appLanguage] isEqualToString:@"de"])
-            topNote = @"<fieldset><legend>Bekannte Interaktionen</legend></fieldset><p>Werden keine Interaktionen angezeigt, sind z.Z. keine Interaktionen bekannt.</p>";
+            topNote = @"<fieldset><legend>Bekannte Interaktionen</legend></fieldset><p>Zur Zeit sind keine Interaktionen zwischen diesen Medikamenten in der EPha.ch-Datenbank vorhanden. Weitere Informationen finden Sie in der Fachinformation.</p>";
         else  if ([[self appLanguage] isEqualToString:@"fr"])
-            topNote = @"<fieldset><legend>Interactions Connues</legend></fieldset><p>Werden keine Interaktionen angezeigt, sind z.Z. keine Interaktionen bekannt.</p>";
+            topNote = @"<fieldset><legend>Interactions Connues</legend></fieldset><p>Il n’y a aucune information dans la banque de données EPha.ch à propos d’une interaction entre les médicaments sélectionnés. Veuillez consulter les informations professionelles.</p>";
     }
     
     return topNote;
