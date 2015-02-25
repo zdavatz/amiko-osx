@@ -35,7 +35,7 @@
 - (void) updateDatabase: (NSString *)language for: (NSString *)owner;
 - (NSInteger) getNumRecords;
 - (MLMedication *) searchId: (long)rowId;
-- (NSArray *) getRecord: (long)rowId;
+- (NSArray *) getFullRecord: (long)rowId;
 - (NSArray *) searchWithQuery: (NSString *)query;
 - (NSArray *) searchTitle: (NSString *)title;
 - (NSArray *) searchAuthor: (NSString *)author;

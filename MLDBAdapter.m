@@ -167,7 +167,7 @@ static NSString *FULL_TABLE = nil;
         if ([fileManager fileExistsAtPath:filePath]) {
             NSLog(@"Database found documents folder - %@", filePath);            
             mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
-            return TRUE;
+            return true;
         }
     }
     
@@ -176,10 +176,10 @@ static NSString *FULL_TABLE = nil;
     if (filePath!=nil ) {
         mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
         NSLog(@"Database found in app bundle - %@", filePath);
-        return TRUE;
+        return true;
     }
     
-    return FALSE;
+    return false;
 }
 
 - (void) closeDatabase
@@ -221,11 +221,11 @@ static NSString *FULL_TABLE = nil;
     return numRecords;
 }
 
-- (NSArray *) getRecord: (long)rowId
+- (NSArray *) getFullRecord: (long)rowId
 {
     NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@=%ld",
                        FULL_TABLE, DATABASE_TABLE, KEY_ROWID, rowId];
-    //NSArray *results = [mySqliteDb performQuery:query];
+     //NSArray *results = [mySqliteDb performQuery:query];
     
     return [mySqliteDb performQuery:query];
 }
@@ -233,7 +233,7 @@ static NSString *FULL_TABLE = nil;
 - (MLMedication *) searchId: (long)rowId
 {
     // getRecord returns an NSArray* hence the objectAtIndex!!   
-    return [self cursorToFullMedInfo:[[self getRecord:rowId] objectAtIndex:0]];
+    return [self cursorToFullMedInfo:[[self getFullRecord:rowId] objectAtIndex:0]];
 }
 
 - (NSArray *) searchWithQuery:(NSString *)query;

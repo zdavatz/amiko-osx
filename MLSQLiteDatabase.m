@@ -113,9 +113,10 @@
     // Convert NSString to a C String
     const char *sql = [query UTF8String];
     
+    int error_code = SQLITE_OK;
     // Open database from users filesystem
-    if (sqlite3_prepare_v2(database, sql, -1, &compiledStatement, nil) != SQLITE_OK) {
-        NSLog(@"%s Error when preparing query!", __FUNCTION__);
+    if ( (error_code=sqlite3_prepare_v2(database, sql, -1, &compiledStatement, nil)) != SQLITE_OK) {
+        NSLog(@"%s Error with code %d when preparing query!", __FUNCTION__, error_code);
     } else {
         NSMutableArray *result = [NSMutableArray array];
         @autoreleasepool {

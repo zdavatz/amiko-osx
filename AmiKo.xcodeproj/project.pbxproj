@@ -15,6 +15,18 @@
 		D536126717E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D536126817E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D536126917E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
+		D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877771A9E5AE700AEFDB4 /* favorites@2x.png */; };
+		D538777B1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877771A9E5AE700AEFDB4 /* favorites@2x.png */; };
+		D538777C1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877771A9E5AE700AEFDB4 /* favorites@2x.png */; };
+		D538777D1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877771A9E5AE700AEFDB4 /* favorites@2x.png */; };
+		D538777E1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877781A9E5AE700AEFDB4 /* interactions@2x.png */; };
+		D538777F1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877781A9E5AE700AEFDB4 /* interactions@2x.png */; };
+		D53877801A9E5AE700AEFDB4 /* interactions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877781A9E5AE700AEFDB4 /* interactions@2x.png */; };
+		D53877811A9E5AE700AEFDB4 /* interactions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877781A9E5AE700AEFDB4 /* interactions@2x.png */; };
+		D53877821A9E5AE700AEFDB4 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
+		D53877831A9E5AE700AEFDB4 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
+		D53877841A9E5AE700AEFDB4 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
+		D53877851A9E5AE700AEFDB4 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
 		D539C10617DCED1D00759260 /* MLSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D539C10517DCED1D00759260 /* MLSplashScreen.m */; };
 		D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
 		D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
@@ -75,17 +87,8 @@
 		D5B010621927C472007BE838 /* deleterow.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
 		D5B010631927C472007BE838 /* deleterow.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
 		D5B010641927C472007BE838 /* deleterow.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
-		D5B010661927C4EF007BE838 /* 55-network@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B010651927C4EF007BE838 /* 55-network@2x.png */; };
-		D5B010671927C4EF007BE838 /* 55-network@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B010651927C4EF007BE838 /* 55-network@2x.png */; };
-		D5B010681927C4EF007BE838 /* 55-network@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B010651927C4EF007BE838 /* 55-network@2x.png */; };
-		D5B010691927C4EF007BE838 /* 55-network@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B010651927C4EF007BE838 /* 55-network@2x.png */; };
-		D5B0106B1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
-		D5B0106C1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
-		D5B0106D1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
-		D5B0106E1927C4F6007BE838 /* 55-network.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B0106A1927C4F6007BE838 /* 55-network.png */; };
 		D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
 		D5B6F96E192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
-		D5B6F96F192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
 		D5B6F970193136A400495873 /* deleterow.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
 		D5CD48BD18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
 		D5CD48BE18944E11005CEC4C /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
@@ -126,7 +129,6 @@
 		D5E91B7017E5E24000B66B27 /* amiko_stylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6C917CFDD7000EBEF39 /* amiko_stylesheet.css */; };
 		D5E91B7117E5E24000B66B27 /* 28-star-gy.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6CF17D256EC00EBEF39 /* 28-star-gy.png */; };
 		D5E91B7317E5E24000B66B27 /* app_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */; };
-		D5E91B7417E5E24000B66B27 /* 10-medical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E017D5214300EBEF39 /* 10-medical@2x.png */; };
 		D5E91B7517E5E24000B66B27 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
 		D5E91B7617E5E24000B66B27 /* MLAmiKozRMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E617D79F2400EBEF39 /* MLAmiKozRMainWindow.xib */; };
 		D5E91B7917E5E24000B66B27 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
@@ -153,7 +155,6 @@
 		D5E91B9F17E5E8E400B66B27 /* amiko_stylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6C917CFDD7000EBEF39 /* amiko_stylesheet.css */; };
 		D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6CF17D256EC00EBEF39 /* 28-star-gy.png */; };
 		D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */; };
-		D5E91BA317E5E8E400B66B27 /* 10-medical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E017D5214300EBEF39 /* 10-medical@2x.png */; };
 		D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
 		D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
 		D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD317E3888700B66B27 /* MLAmiKoMainWindow.xib */; };
@@ -181,7 +182,6 @@
 		D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6C917CFDD7000EBEF39 /* amiko_stylesheet.css */; };
 		D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6CF17D256EC00EBEF39 /* 28-star-gy.png */; };
 		D5E91BD117E5E8E800B66B27 /* app_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */; };
-		D5E91BD217E5E8E800B66B27 /* 10-medical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E017D5214300EBEF39 /* 10-medical@2x.png */; };
 		D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
 		D5E91BD717E5E8E800B66B27 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
 		D5E91BD917E5E8E800B66B27 /* MLCoMedMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD117E3886500B66B27 /* MLCoMedMainWindow.xib */; };
@@ -215,7 +215,6 @@
 		D5EBC6D117D256EC00EBEF39 /* 28-star-gy.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6CF17D256EC00EBEF39 /* 28-star-gy.png */; };
 		D5EBC6D917D3ADCA00EBEF39 /* app_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */; };
 		D5EBC6DF17D5113700EBEF39 /* MLCustomTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6DE17D5113700EBEF39 /* MLCustomTableRowView.m */; };
-		D5EBC6E117D5214300EBEF39 /* 10-medical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E017D5214300EBEF39 /* 10-medical@2x.png */; };
 		D5EBC6E317D521A500EBEF39 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
 		D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */; };
 		D5FB9EC419351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FB9EC219351C700050B1B1 /* WebViewJavascriptBridge.js.txt */; };
@@ -232,6 +231,10 @@
 		D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amikoosx_splash_1000x670.png; sourceTree = "<group>"; };
 		D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comedosx_splash_1000x670.png; sourceTree = "<group>"; };
 		D536126517E770A80087B132 /* amiko.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = amiko.iconset; sourceTree = "<group>"; };
+		D53877771A9E5AE700AEFDB4 /* favorites@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorites@2x.png"; sourceTree = "<group>"; };
+		D53877781A9E5AE700AEFDB4 /* interactions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interactions@2x.png"; sourceTree = "<group>"; };
+		D53877791A9E5AE700AEFDB4 /* maindb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "maindb@2x.png"; sourceTree = "<group>"; };
+		D53877861A9E63BA00AEFDB4 /* MLUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLUtilities.h; sourceTree = "<group>"; };
 		D539C10417DCED1D00759260 /* MLSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSplashScreen.h; sourceTree = "<group>"; };
 		D539C10517DCED1D00759260 /* MLSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSplashScreen.m; sourceTree = "<group>"; };
 		D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zur_Rose_1000x670px.png; sourceTree = "<group>"; };
@@ -259,8 +262,6 @@
 		D5AB1772180886810050DC12 /* 28-star-ye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star-ye.png"; sourceTree = "<group>"; };
 		D5B0105B1927C451007BE838 /* interactions_css.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = interactions_css.css; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
 		D5B010601927C472007BE838 /* deleterow.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = deleterow.js; sourceTree = "<group>"; };
-		D5B010651927C4EF007BE838 /* 55-network@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "55-network@2x.png"; sourceTree = "<group>"; };
-		D5B0106A1927C4F6007BE838 /* 55-network.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "55-network.png"; sourceTree = "<group>"; };
 		D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drug_interactions_csv_de.csv; sourceTree = "<group>"; };
 		D5CD48BB18944E11005CEC4C /* MLCustomURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomURLConnection.h; sourceTree = "<group>"; };
 		D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomURLConnection.m; sourceTree = "<group>"; };
@@ -318,7 +319,6 @@
 		D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = app_icon_512x512.png; path = ../app_icon_512x512.png; sourceTree = "<group>"; };
 		D5EBC6DD17D5113700EBEF39 /* MLCustomTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomTableRowView.h; sourceTree = "<group>"; };
 		D5EBC6DE17D5113700EBEF39 /* MLCustomTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomTableRowView.m; sourceTree = "<group>"; };
-		D5EBC6E017D5214300EBEF39 /* 10-medical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10-medical@2x.png"; sourceTree = "<group>"; };
 		D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star@2x.png"; sourceTree = "<group>"; };
 		D5EBC6E617D79F2400EBEF39 /* MLAmiKozRMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKozRMainWindow.xib; sourceTree = "<group>"; };
 		D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKozRMainMenu.xib; sourceTree = "<group>"; };
@@ -536,6 +536,7 @@
 				D545C90A18A4286B00491511 /* MLCustomWebView.m */,
 				D545C90F18A5725900491511 /* MLCustomView.h */,
 				D545C91018A5725900491511 /* MLCustomView.m */,
+				D53877861A9E63BA00AEFDB4 /* MLUtilities.h */,
 			);
 			name = Classes;
 			path = ..;
@@ -577,8 +578,9 @@
 		D5EBC6C817CFDD3800EBEF39 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D5B0106A1927C4F6007BE838 /* 55-network.png */,
-				D5B010651927C4EF007BE838 /* 55-network@2x.png */,
+				D53877771A9E5AE700AEFDB4 /* favorites@2x.png */,
+				D53877781A9E5AE700AEFDB4 /* interactions@2x.png */,
+				D53877791A9E5AE700AEFDB4 /* maindb@2x.png */,
 				D5B010601927C472007BE838 /* deleterow.js */,
 				D5B0105B1927C451007BE838 /* interactions_css.css */,
 				D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */,
@@ -587,7 +589,6 @@
 				D5E91BFA17E6074D00B66B27 /* amiko_report_fr.html */,
 				D5E91BF417E6065C00B66B27 /* amiko_report_de.html */,
 				D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */,
-				D5EBC6E017D5214300EBEF39 /* 10-medical@2x.png */,
 				D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */,
 				D5A22507193FB19F0078FEFF /* 216-compose.png */,
 				D5DD5765193B4EB40094244E /* 218-trash2.png */,
@@ -689,8 +690,13 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = ML;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Ywesee GmbH";
+				TargetAttributes = {
+					D5E91B8617E5E8E400B66B27 = {
+						DevelopmentTeam = 4B37356EGR;
+					};
+				};
 			};
 			buildConfigurationList = D5EBC67817C912FF00EBEF39 /* Build configuration list for PBXProject "AmiKo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -722,17 +728,17 @@
 				D5E91B6C17E5E24000B66B27 /* InfoPlist.strings in Resources */,
 				D5FB9EC619351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5E91B6D17E5E24000B66B27 /* Credits-de.rtf in Resources */,
+				D538777C1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5DD5768193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5E91B7017E5E24000B66B27 /* amiko_stylesheet.css in Resources */,
 				D5E91B7117E5E24000B66B27 /* 28-star-gy.png in Resources */,
 				D5E91B7317E5E24000B66B27 /* app_icon_512x512.png in Resources */,
-				D5B0106D1927C4F6007BE838 /* 55-network.png in Resources */,
-				D5E91B7417E5E24000B66B27 /* 10-medical@2x.png in Resources */,
+				D53877841A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D5E91B7517E5E24000B66B27 /* 28-star@2x.png in Resources */,
 				D5E91B7617E5E24000B66B27 /* MLAmiKozRMainWindow.xib in Resources */,
 				D545C90718A3FC0700491511 /* MLProgressSheet.xib in Resources */,
 				D5E91B7917E5E24000B66B27 /* Zur_Rose_1000x670px.png in Resources */,
-				D5B010681927C4EF007BE838 /* 55-network@2x.png in Resources */,
+				D53877801A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5E91B8017E5E24000B66B27 /* Credits-fr.rtf in Resources */,
 				D5B0105E1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91BF017E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
@@ -749,7 +755,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5B6F970193136A400495873 /* deleterow.js in Resources */,
-				D5B0106B1927C4F6007BE838 /* 55-network.png in Resources */,
 				D5E91B9A17E5E8E400B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B9C17E5E8E400B66B27 /* Credits-de.rtf in Resources */,
@@ -757,10 +762,10 @@
 				D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5E91B9F17E5E8E400B66B27 /* amiko_stylesheet.css in Resources */,
 				D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */,
+				D538777E1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5DD5766193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5B0105C1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */,
-				D5E91BA317E5E8E400B66B27 /* 10-medical@2x.png in Resources */,
 				D5DD5761193B49260094244E /* 217-trash.png in Resources */,
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
 				D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */,
@@ -768,8 +773,9 @@
 				D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */,
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
+				D53877821A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
+				D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5E91BAE17E5E8E400B66B27 /* AmiKoMainMenu.xib in Resources */,
-				D5B010661927C4EF007BE838 /* 55-network@2x.png in Resources */,
 				D5E91BAF17E5E8E400B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
@@ -785,7 +791,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D57AB17A193E6B68000DB3F2 /* deleterow.js in Resources */,
-				D5B0106C1927C4F6007BE838 /* 55-network.png in Resources */,
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
 				D5E91BCB17E5E8E800B66B27 /* Credits-de.rtf in Resources */,
@@ -793,17 +798,18 @@
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
+				D538777F1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
 				D5FB9EC519351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5DD5767193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5E91BD117E5E8E800B66B27 /* app_icon_512x512.png in Resources */,
-				D5E91BD217E5E8E800B66B27 /* 10-medical@2x.png in Resources */,
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
 				D5E91BD717E5E8E800B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91BD917E5E8E800B66B27 /* MLCoMedMainWindow.xib in Resources */,
 				D5E91BDC17E5E8E800B66B27 /* CoMedMainMenu.xib in Resources */,
-				D5B010671927C4EF007BE838 /* 55-network@2x.png in Resources */,
+				D53877831A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
+				D538777B1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5E91BDE17E5E8E800B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BF217E6061900B66B27 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
@@ -825,23 +831,22 @@
 				D5EBC68B17C912FF00EBEF39 /* InfoPlist.strings in Resources */,
 				D5FB9EC719351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5EBC69117C912FF00EBEF39 /* Credits-de.rtf in Resources */,
+				D538777D1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5DD5769193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5DD576C193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
 				D5EBC6D117D256EC00EBEF39 /* 28-star-gy.png in Resources */,
+				D53877851A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D5EBC6D917D3ADCA00EBEF39 /* app_icon_512x512.png in Resources */,
-				D5B0106E1927C4F6007BE838 /* 55-network.png in Resources */,
-				D5EBC6E117D5214300EBEF39 /* 10-medical@2x.png in Resources */,
 				D5EBC6E317D521A500EBEF39 /* 28-star@2x.png in Resources */,
 				D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */,
 				D545C90818A3FC0800491511 /* MLProgressSheet.xib in Resources */,
 				D5E91AD017E387F100B66B27 /* MLCoMedzRMainWindow.xib in Resources */,
-				D5B010691927C4EF007BE838 /* 55-network@2x.png in Resources */,
+				D53877811A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5E91AD617E3955300B66B27 /* CoMedzRMainMenu.xib in Resources */,
 				D5B0105F1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BF317E6061900B66B27 /* amiko_db_full_idx_fr.db in Resources */,
-				D5B6F96F192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5AB1776180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5E91BFC17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
 				D536126917E770A80087B132 /* amiko.iconset in Resources */,
@@ -1038,9 +1043,9 @@
 		D5E91BB117E5E8E400B66B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
@@ -1057,9 +1062,9 @@
 		D5E91BB217E5E8E400B66B27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
@@ -1094,7 +1099,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CoMed.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: ywesee GmbH (4B37356EGR)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";

@@ -39,7 +39,7 @@
     NSString *mFileName;
 }
 
-static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
+static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/test/";
 
 - (void) downloadFileWithName:(NSString *)fileName andModal:(bool)modal
 {
