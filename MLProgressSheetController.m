@@ -74,7 +74,7 @@
        didEndSelector:nil
           contextInfo:nil];
 
-    [mProgressIndicator setStyle:NSProgressIndicatorSpinningStyle];
+    [mProgressIndicator setStyle:NSProgressIndicatorBarStyle]; // NSProgressIndicatorSpinningStyle];
     [mProgressIndicator setIndeterminate:NO];
     
     // Show the dialog

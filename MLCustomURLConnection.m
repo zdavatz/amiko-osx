@@ -39,7 +39,7 @@
     NSString *mFileName;
 }
 
-static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/test/";
+static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 
 - (void) downloadFileWithName:(NSString *)fileName andModal:(bool)modal
 {
@@ -147,7 +147,7 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/test/";
         
         if (filePath!=nil) {
             NSString *output = [documentsDirectory stringByAppendingPathComponent:@"."];
-            [SSZipArchive unzipFileAtPath:zipFilePath toDestination:output];
+            [SSZipArchive unzipFileAtPath:zipFilePath toDestination:output overwrite:YES password:nil error:nil];
         }
         // Unzip data success, post notification once larger fales is unzipped!
         if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_de.zip"]

@@ -274,7 +274,7 @@ static NSString *FULL_TABLE = nil;
     return [self extractShortMedInfoFrom:results];
 }
 
-/** Search Reg. Nr.
+/** Search Wirkstoff
  */
 - (NSArray *) searchIngredients:(NSString *)ingredients
 {
@@ -285,7 +285,7 @@ static NSString *FULL_TABLE = nil;
     return [self extractShortMedInfoFrom:results];
 }
 
-/** Search Wirkstoff
+/** Search Reg. Nr.
  */
 - (NSArray *) searchRegNr:(NSString *)regnr
 {

@@ -47,15 +47,14 @@ enum {
  Search states
  */
 enum {
-    kTitle=0, kAuthor=1, kAtcCode=2, kRegNr=3, kSubstances=4, kTherapy=5, kWebView=6
+    kTitle=0, kAuthor=1, kAtcCode=2, kRegNr=3, kTherapy=4, kWebView=5
 };
 
 static NSString *SEARCH_STRING = @"Suche";
 static NSString *SEARCH_TITLE = @"Präparat";
 static NSString *SEARCH_AUTHOR = @"Inhaber";
-static NSString *SEARCH_ATCCODE = @"ATC Code";
+static NSString *SEARCH_ATCCODE = @"Wirkstoff / ATC Code";
 static NSString *SEARCH_REGNR = @"Reg. Nr.";
-static NSString *SEARCH_SUBSTANCES = @"Wirkstoff";
 static NSString *SEARCH_THERAPY = @"Therapie";
 static NSString *SEARCH_FACHINFO = @"in Fachinformation";
 
@@ -148,7 +147,6 @@ static BOOL mSearchInteractions = false;
         SEARCH_AUTHOR = @"Inhaber";
         SEARCH_ATCCODE = @"Wirkstoff / ATC Code";
         SEARCH_REGNR = @"Reg. Nr.";
-        SEARCH_SUBSTANCES = @"Wirkstoff";
         SEARCH_THERAPY = @"Therapie";
         SEARCH_FACHINFO = @"in Fachinformation";
     } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
@@ -157,7 +155,6 @@ static BOOL mSearchInteractions = false;
         SEARCH_AUTHOR = @"Titulaire";
         SEARCH_ATCCODE = @"Principe Actif / Code ATC";
         SEARCH_REGNR = @"No d'autorisation";
-        SEARCH_SUBSTANCES = @"Principe Actif";
         SEARCH_THERAPY = @"Thérapie";
         SEARCH_FACHINFO = @"Notice Infopro";
     }
@@ -544,12 +541,7 @@ static BOOL mSearchInteractions = false;
         case 3:
             [self setSearchState:kRegNr];
             break;
-            /*
         case 4:
-            [self setSearchState:kSubstances];
-            break;
-             */
-        case 5:
             [self setSearchState:kTherapy];
             break;
     }
@@ -914,11 +906,6 @@ static BOOL mSearchInteractions = false;
             mCurrentSearchState = kRegNr;
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_REGNR]];
             break;
-        case kSubstances:
-            [[mySearchField cell] setStringValue:@""];
-            mCurrentSearchState = kSubstances;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_SUBSTANCES]];
-            break;
         case kTherapy:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kTherapy;
@@ -952,9 +939,6 @@ static BOOL mSearchInteractions = false;
     }
     else if (mCurrentSearchState == kRegNr) {
         searchRes = [mDb searchRegNr:searchQuery];
-    }
-    else if (mCurrentSearchState == kSubstances) {
-        searchRes = [mDb searchIngredients:searchQuery];
     }
     else if (mCurrentSearchState == kTherapy) {
         searchRes = [mDb searchApplication:searchQuery];
@@ -1038,6 +1022,10 @@ static BOOL mSearchInteractions = false;
         m.title = title;
     else
         m.title = [MLUtilities notSpecified]; // @"k.A.";
+    if ([atccode isEqual:[NSNull null]])
+        atccode = [MLUtilities notSpecified];
+    if ([atcclass isEqual:[NSNull null]])
+        atcclass = [MLUtilities notSpecified];
     NSArray *m_atc = [atccode componentsSeparatedByString:@";"];
     NSArray *m_class = [atcclass componentsSeparatedByString:@";"];
     NSMutableString *m_atccode_str = nil;
@@ -1047,6 +1035,8 @@ static BOOL mSearchInteractions = false;
             m_atccode_str = [NSMutableString stringWithString:[m_atc objectAtIndex:0]];
         if (![[m_atc objectAtIndex:1] isEqual:nil])
             m_atcclass_str = [NSMutableString stringWithString:[m_atc objectAtIndex:1]];
+    } else {
+        m_atccode_str = [NSMutableString stringWithString:[MLUtilities notSpecified]];
     }
     if ([m_atccode_str isEqual:[NSNull null]])
         [m_atccode_str setString:[MLUtilities notSpecified]];
@@ -1067,6 +1057,9 @@ static BOOL mSearchInteractions = false;
         if ([m_atcclass isEqual:[NSNull null]])
             [m_atcclass setString:[MLUtilities notSpecified]];
         m.subTitle = [NSString stringWithFormat:@"%@ - %@\n%@\n%@", m_atccode_str, m_atcclass_str, m_atcclass, m_class[1]];
+    } else {
+        m_atcclass = [NSMutableString stringWithString:[MLUtilities notSpecified]];
+        m.subTitle = [MLUtilities notSpecified];
     }
     m.medId = medId;
     
@@ -1226,24 +1219,6 @@ static BOOL mSearchInteractions = false;
                         if ([favoriteMedsSet containsObject:m.regnrs]) {
                             [favoriteKeyData addObject:m.regnrs];
                             [self addTitle:m.title andRegnrs:m.regnrs andAuthor:m.auth andMedId:m.medId];
-                        }
-                    }
-                }
-            }
-        }
-        else if (mCurrentSearchState == kSubstances) {
-            for (MLMedication *m in searchResults) {
-                if (mUsedDatabase == kAips) {
-                    if (![m.regnrs isEqual:[NSNull null]]) {
-                        [favoriteKeyData addObject:m.regnrs];
-                        [self addSubstances:m.substances andTitle:m.title andAuthor:m.auth andMedId:m.medId];
-                    }
-                }
-                else if (mUsedDatabase == kFavorites) {
-                    if (![m.regnrs isEqual:[NSNull null]]) {
-                        if ([favoriteMedsSet containsObject:m.regnrs]) {
-                            [favoriteKeyData addObject:m.regnrs];
-                            [self addSubstances:m.substances andTitle:m.title andAuthor:m.auth andMedId:m.medId];
                         }
                     }
                 }
