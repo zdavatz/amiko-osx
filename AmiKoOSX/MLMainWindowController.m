@@ -844,7 +844,8 @@ static BOOL mSearchInteractions = false;
     if (mDb!=nil) {
         for (NSString *regnrs in favoriteMedsSet) {
             NSArray *med = [mDb searchRegNr:regnrs];
-            [medList addObject:med[0]];
+            if (med!=nil && [med count]>0)
+                [medList addObject:med[0]];
         }
         
 #ifdef DEBUG
@@ -1022,10 +1023,12 @@ static BOOL mSearchInteractions = false;
         m.title = title;
     else
         m.title = [MLUtilities notSpecified]; // @"k.A.";
+    
     if ([atccode isEqual:[NSNull null]])
         atccode = [MLUtilities notSpecified];
     if ([atcclass isEqual:[NSNull null]])
         atcclass = [MLUtilities notSpecified];
+
     NSArray *m_atc = [atccode componentsSeparatedByString:@";"];
     NSArray *m_class = [atcclass componentsSeparatedByString:@";"];
     NSMutableString *m_atccode_str = nil;
@@ -1679,11 +1682,12 @@ static BOOL mSearchInteractions = false;
             [myRowView setEmphasized:YES];
             
             // Extract section ids
-            listofSectionIds = [mMed.sectionIds componentsSeparatedByString:@","];
+            if (![mMed.sectionIds isEqual:[NSNull null]])
+                listofSectionIds = [mMed.sectionIds componentsSeparatedByString:@","];
             // Extract section titles
-            // listofSectionTitles = [SectionTitle_DE componentsSeparatedByString:@";"];
-            listofSectionTitles = [mMed.sectionTitles componentsSeparatedByString:@";"];
-            //
+            if (![mMed.sectionTitles isEqual:[NSNull null]])
+                listofSectionTitles = [mMed.sectionTitles componentsSeparatedByString:@";"];
+
             [mySectionTitles reloadData];
         } else {
             [self pushToMedBasket];

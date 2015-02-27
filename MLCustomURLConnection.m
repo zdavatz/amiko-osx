@@ -149,7 +149,8 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
             NSString *output = [documentsDirectory stringByAppendingPathComponent:@"."];
             [SSZipArchive unzipFileAtPath:zipFilePath toDestination:output overwrite:YES password:nil error:nil];
         }
-        // Unzip data success, post notification once larger fales is unzipped!
+        
+        // --> Unzip data success, post notification when larger files is unzipped!
         if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_de.zip"]
             || [mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_fr.zip"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MLDidFinishLoading" object:self];
