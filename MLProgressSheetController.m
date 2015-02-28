@@ -104,4 +104,9 @@
     [mProgressIndicator setDoubleValue:percent];
 }
 
+- (void) updateMsg:(NSString *)msg
+{
+    [mDownloadMsg setStringValue:msg];
+}
+
 @end

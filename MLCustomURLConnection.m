@@ -78,7 +78,7 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 {
     NSLog(@"Download failed with an error: %@, %@", error, [error description]);
     // Release stuff
-    myConnection = nil;
+    // -> myConnection = nil;
     if (mFile)
         [mFile closeFile];
 }
@@ -100,7 +100,8 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 {
     if (mModal && ![mProgressSheet mDownloadInProgress]) {
         [myConnection cancel];
-        myConnection = nil;
+        // Release stuff
+        // -> myConnection = nil;
         if (mFile)
             [mFile closeFile];
         if (mModal)
@@ -120,11 +121,9 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection
 {
     // Release stuff
-    myConnection = nil;
+    // -> myConnection = nil;
     if (mFile)
         [mFile closeFile];
-    if (mModal)
-        [mProgressSheet remove];
     if (mStatusCode==404) {
         // Notify status code 404 (file not found)
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MLStatusCode404" object:self];
@@ -136,9 +135,9 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
         NSString *zipFilePath = [documentsDirectory stringByAppendingPathComponent:mFileName];
 
         NSString *filePath;
-        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_de.zip"])
+        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_de" ofType:@"db"];
-        if ([mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_fr.zip"])
+        if ([mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_fr" ofType:@"db"];
         if ([mFileName isEqualToString:@"drug_interactions_csv_de.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"drug_interactions_csv_de" ofType:@"csv"];
@@ -149,12 +148,16 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
             NSString *output = [documentsDirectory stringByAppendingPathComponent:@"."];
             [SSZipArchive unzipFileAtPath:zipFilePath toDestination:output overwrite:YES password:nil error:nil];
         }
+        if (mModal)
+            [mProgressSheet remove];
         
-        // --> Unzip data success, post notification when larger files is unzipped!
-        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_de.zip"]
-            || [mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_zr_fr.zip"]) {
+        // Unzip data success, post notification when larger files is unzipped!
+        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MLDidFinishLoading" object:self];
         }
+    } else {
+        if (mModal)
+            [mProgressSheet remove];
     }
 }
 

@@ -190,25 +190,22 @@ static NSString *FULL_TABLE = nil;
 
 - (void) updateDatabase:(NSString *)language for:(NSString *)owner
 {
+    // Initialize custom URL connections for files that will be downloaded...
     MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
     MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
     MLCustomURLConnection *interConn = [[MLCustomURLConnection alloc] init];
  
     if ([language isEqualToString:@"de"]) {
-        [reportConn downloadFileWithName:@"amiko_report_de.html" andModal:NO];
-        if ([owner isEqualToString:@"ywesee"]) {
+        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"]) {
+            [reportConn downloadFileWithName:@"amiko_report_de.html" andModal:NO];
             [interConn downloadFileWithName:@"drug_interactions_csv_de.zip" andModal:NO];
             [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
-        } else if ([owner isEqualToString:@"zurrose"]) {
-            [dbConn downloadFileWithName:@"amiko_db_full_idx_zr_de.zip" andModal:YES];
         }
     } else if ([language isEqualToString:@"fr"]) {
-        [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:NO];
-        if ([owner isEqualToString:@"ywesee"]) {
-            [interConn downloadFileWithName:@"drug_interactions_csv_fr.zip" andModal:NO];            
+        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"]) {
+            [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:NO];
+            [interConn downloadFileWithName:@"drug_interactions_csv_fr.zip" andModal:NO];
             [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:YES];
-        } else if ([owner isEqualToString:@"zurrose"]) {
-            [dbConn downloadFileWithName:@"amiko_db_full_idx_zr_fr.zip" andModal:YES];
         }
     }
     
@@ -221,11 +218,22 @@ static NSString *FULL_TABLE = nil;
     return numRecords;
 }
 
+- (NSInteger) getNumProducts
+{
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@", KEY_PACK_INFO, DATABASE_TABLE];
+    NSArray *results = [mySqliteDb performQuery:query];
+    NSInteger numProducts = 0;
+    for (NSArray *cursor in results)  {
+        numProducts += [[[cursor objectAtIndex:0] componentsSeparatedByString:@"\n"] count];
+    }
+    
+    return numProducts;
+}
+
 - (NSArray *) getFullRecord: (long)rowId
 {
     NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@=%ld",
                        FULL_TABLE, DATABASE_TABLE, KEY_ROWID, rowId];
-     //NSArray *results = [mySqliteDb performQuery:query];
     
     return [mySqliteDb performQuery:query];
 }
@@ -367,7 +375,7 @@ static NSString *FULL_TABLE = nil;
 {
     NSMutableArray *medList = [NSMutableArray array];
 
-    for (NSArray *cursor in results) {
+    for (NSArray *cursor in results)  {
         MLMedication *medi = [[MLMedication alloc] init];
         
         [medi setMedId:[(NSString *)[cursor objectAtIndex:kMedId] longLongValue]];

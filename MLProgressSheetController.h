@@ -41,5 +41,6 @@
 - (void) show: (NSWindow *)window;
 - (void) remove;
 - (void) update: (long)value max: (long long)maxValue;
+- (void) updateMsg:(NSString *)msg;
 
 @end

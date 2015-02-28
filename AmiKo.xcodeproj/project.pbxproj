@@ -27,6 +27,8 @@
 		D53877831A9E5AE700AEFDB4 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
 		D53877841A9E5AE700AEFDB4 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
 		D53877851A9E5AE700AEFDB4 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
+		D538778C1AA202E400AEFDB4 /* AmiKo-zR.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2917E8BC3900DCBD16 /* AmiKo-zR.entitlements */; };
+		D538778D1AA202E700AEFDB4 /* CoMed-zR.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2A17E8BC3C00DCBD16 /* CoMed-zR.entitlements */; };
 		D539C10617DCED1D00759260 /* MLSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D539C10517DCED1D00759260 /* MLSplashScreen.m */; };
 		D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
 		D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
@@ -693,6 +695,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Ywesee GmbH";
 				TargetAttributes = {
+					D5E91B5717E5E24000B66B27 = {
+						DevelopmentTeam = 4B37356EGR;
+					};
 					D5E91B8617E5E8E400B66B27 = {
 						DevelopmentTeam = 4B37356EGR;
 					};
@@ -734,6 +739,7 @@
 				D5E91B7117E5E24000B66B27 /* 28-star-gy.png in Resources */,
 				D5E91B7317E5E24000B66B27 /* app_icon_512x512.png in Resources */,
 				D53877841A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
+				D538778C1AA202E400AEFDB4 /* AmiKo-zR.entitlements in Resources */,
 				D5E91B7517E5E24000B66B27 /* 28-star@2x.png in Resources */,
 				D5E91B7617E5E24000B66B27 /* MLAmiKozRMainWindow.xib in Resources */,
 				D545C90718A3FC0700491511 /* MLProgressSheet.xib in Resources */,
@@ -837,6 +843,7 @@
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
 				D5EBC6D117D256EC00EBEF39 /* 28-star-gy.png in Resources */,
 				D53877851A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
+				D538778D1AA202E700AEFDB4 /* CoMed-zR.entitlements in Resources */,
 				D5EBC6D917D3ADCA00EBEF39 /* app_icon_512x512.png in Resources */,
 				D5EBC6E317D521A500EBEF39 /* 28-star@2x.png in Resources */,
 				D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */,
@@ -1011,6 +1018,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AmiKo-zR.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
@@ -1027,7 +1035,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AmiKo-zR.entitlements";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: ywesee GmbH (4B37356EGR)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";

@@ -342,11 +342,14 @@ static BOOL mSearchInteractions = false;
             // Reload table
             NSInteger _mySearchState = mCurrentSearchState;
             NSString *_mySearchKey = mCurrentSearchKey;
+            // Reset data in table view and get number of rows in table (=searchResults)
             [self resetDataInTableView];
             mCurrentSearchState = _mySearchState;
             mCurrentSearchKey = _mySearchKey;
             // Display friendly message
             NSBeep();
+            // Get number of products in database
+            long numProducts = [mDb getNumProducts];
             long numSearchRes = [searchResults count];
             int numInteractions = (int)[mDb getNumInteractions];
             
@@ -355,10 +358,10 @@ static BOOL mSearchInteractions = false;
             [alert addButtonWithTitle:@"OK"];
             if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
                 [alert setMessageText:@"AIPS Datenbank aktualisiert!"];
-                [alert setInformativeText:[NSString stringWithFormat:@"Die Datenbank enthält %ld Fachinfos \nund %d Interaktionen.", numSearchRes, numInteractions]];
+                [alert setInformativeText:[NSString stringWithFormat:@"Die Datenbank enthält:\n- %ld Produkte\n- %ld Fachinfos\n- %d Interaktionen", numProducts, numSearchRes, numInteractions]];
             } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
                 [alert setMessageText:@"Banque des donnees AIPS mises à jour!"];
-                [alert setInformativeText:[NSString stringWithFormat:@"La banque des données contien %ld notices infopro \net %d interactions.", numSearchRes, numInteractions]];
+                [alert setInformativeText:[NSString stringWithFormat:@"La banque des données contien:\n- %ld produits\n- %ld notices infopro\n- %d interactions", numProducts, numSearchRes, numInteractions]];
             }
             [alert setAlertStyle:NSInformationalAlertStyle];
             

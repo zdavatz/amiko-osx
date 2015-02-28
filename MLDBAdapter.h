@@ -34,6 +34,7 @@
 - (void) closeDatabase;
 - (void) updateDatabase: (NSString *)language for: (NSString *)owner;
 - (NSInteger) getNumRecords;
+- (NSInteger) getNumProducts;
 - (MLMedication *) searchId: (long)rowId;
 - (NSArray *) getFullRecord: (long)rowId;
 - (NSArray *) searchWithQuery: (NSString *)query;
