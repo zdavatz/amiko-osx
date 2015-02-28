@@ -52,18 +52,22 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
         [mProgressSheet show:[NSApp mainWindow]];
     }
     
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    dispatch_queue_t queue = dispatch_get_main_queue();//dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async( queue, ^(void){
         NSURL *url = [NSURL URLWithString:[PILLBOX_ODDB_ORG stringByAppendingString:fileName]];
         NSURLRequest *request = [NSURLRequest requestWithURL:url
                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
                                              timeoutInterval:30.0];
         
-        myConnection = [[NSURLConnection alloc] initWithRequest:request
-                                                       delegate:self
-                                               startImmediately:NO];
-        [myConnection setDelegateQueue:[NSOperationQueue mainQueue]];
-        [myConnection start];
+        if (request!=nil) {
+            myConnection = [[NSURLConnection alloc] initWithRequest:request
+                                                           delegate:self
+                                                   startImmediately:NO];
+            if (myConnection!=nil) {
+                // [myConnection setDelegateQueue:[NSOperationQueue mainQueue]];
+                [myConnection start];
+            }
+        }
     });
     
     // Get handle to file where the downloaded file is saved
@@ -78,7 +82,8 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 {
     NSLog(@"Download failed with an error: %@, %@", error, [error description]);
     // Release stuff
-    // -> myConnection = nil;
+    [myConnection cancel];
+    myConnection = nil;
     if (mFile)
         [mFile closeFile];
 }
@@ -99,9 +104,9 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     if (mModal && ![mProgressSheet mDownloadInProgress]) {
-        [myConnection cancel];
         // Release stuff
-        // -> myConnection = nil;
+        [myConnection cancel];
+        myConnection = nil;
         if (mFile)
             [mFile closeFile];
         if (mModal)
@@ -121,7 +126,8 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection
 {
     // Release stuff
-    // -> myConnection = nil;
+    [myConnection cancel];
+    myConnection = nil;
     if (mFile)
         [mFile closeFile];
     if (mStatusCode==404) {
