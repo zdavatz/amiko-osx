@@ -22,6 +22,7 @@
  ------------------------------------------------------------------------ */
 
 #import "MLSQLiteDatabase.h"
+#import "MLUtilities.h"
 
 @implementation MLSQLiteDatabase
 {
@@ -38,8 +39,7 @@
     // Create NSFileManager object to check the status of the database and to copy it if required
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // Get documents directory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [paths objectAtIndex:0];
+    NSString *documentsDir = [MLUtilities documentsDirectory];
     // Returns a new string made by appending to the receiver a given string
     NSString *writableDBPath = [documentsDir stringByAppendingPathComponent:dbName];
     // Check if the database has already been created at specified path

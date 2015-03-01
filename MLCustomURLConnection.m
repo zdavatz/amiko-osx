@@ -23,6 +23,7 @@
 
 #import "MLCustomURLConnection.h"
 #import "MLProgressSheetController.h"
+#import "MLUtilities.h"
 #import "SSZipArchive.h"
 
 @implementation MLCustomURLConnection
@@ -79,7 +80,7 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
     });
     
     // Get handle to file where the downloaded file is saved
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *documentsDirectory = [MLUtilities documentsDirectory];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
     [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
     mFile = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
@@ -133,7 +134,7 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
     }
     // Unzip database
     if ([[mFileName pathExtension] isEqualToString:@"zip"])  {
-        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *documentsDirectory = [MLUtilities documentsDirectory];
         NSString *zipFilePath = [documentsDirectory stringByAppendingPathComponent:mFileName];
 
         // These are the files that will be unzipped...

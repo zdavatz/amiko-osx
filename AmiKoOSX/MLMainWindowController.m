@@ -585,18 +585,10 @@ static BOOL mSearchInteractions = false;
     [printJob runOperation];
 }
 
-- (BOOL) isConnected
-{
-    NSURL *dummyURL = [NSURL URLWithString:@"http://pillbox.oddb.org"];
-    NSData *data = [NSData dataWithContentsOfURL:dummyURL];
-    NSLog(@"Ping to pillbox.oddb.org = %lu bytes", (unsigned long)[data length]);
-    return data!=nil;
-}
-
 - (IBAction) updateAipsDatabase:(id)sender
 {
     // Check if there is an active internet connection
-    if ([self isConnected]) {
+    if ([MLUtilities isConnected]) {
         // Update database
         if ([[MLUtilities appLanguage] isEqualToString:@"de"])
             [mDb updateDatabase:@"de" for:[MLUtilities appOwner]];
@@ -639,8 +631,8 @@ static BOOL mSearchInteractions = false;
             // Check if file is in the list of allowed files
             if ([MLUtilities checkFileIsAllowed:fileName]) {
                 NSFileManager *fileManager = [NSFileManager defaultManager];
-                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                NSString *documentsDir = [paths lastObject];
+                // Get documents directory                
+                NSString *documentsDir = [MLUtilities documentsDirectory];
                 NSString *dstPath = [documentsDir stringByAppendingPathComponent:fileName];
                 // Extract source file path
                 NSString *srcPath = [NSString stringWithFormat:@"%@", [fileURL path]];
@@ -663,8 +655,7 @@ static BOOL mSearchInteractions = false;
     // A. Check first users documents folder
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // Get documents directory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [paths lastObject];
+    NSString *documentsDir = [MLUtilities documentsDirectory];
     if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
         NSString *filePath = [[documentsDir stringByAppendingPathComponent:@"amiko_report_de"] stringByAppendingPathExtension:@"html"];
         if ([fileManager fileExistsAtPath:filePath]) {

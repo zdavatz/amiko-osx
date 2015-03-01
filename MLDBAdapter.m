@@ -24,6 +24,7 @@
 #import "MLDBAdapter.h"
 #import "MLSQLiteDatabase.h"
 #import "MLCustomURLConnection.h"
+#import "MLUtilities.h"
 
 enum {
   kMedId = 0, kTitle, kAuth, kAtcCode, kSubstances, kRegnrs, kAtcClass, kTherapy, kApplication, kIndications, kCustomerId, kPackInfo, kAddInfo, kIdsStr, kSectionsStr, kContentStr, kStyleStr
@@ -84,8 +85,7 @@ static NSString *FULL_TABLE = nil;
 
 - (BOOL) openInteractionsCsvFile:(NSString *)name
 {    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [paths lastObject];
+    NSString *documentsDir = [MLUtilities documentsDirectory];;
     
     // ** A. Check first users documents folder
     NSString *filePath = [[documentsDir stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"csv"];
@@ -159,8 +159,7 @@ static NSString *FULL_TABLE = nil;
     // A. Check first users documents folder
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // Get documents directory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [paths lastObject];
+    NSString *documentsDir = [MLUtilities documentsDirectory];
     NSString *filePath = [[documentsDir stringByAppendingPathComponent:dbName] stringByAppendingPathExtension:@"db"];
     // Check if database exists
     if (filePath!=nil) {

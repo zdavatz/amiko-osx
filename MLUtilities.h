@@ -82,6 +82,22 @@ NSString* const APP_ID = @"708142753";
     return nil;
 }
 
++ (BOOL) isConnected
+{
+    NSURL *dummyURL = [NSURL URLWithString:@"http://pillbox.oddb.org"];
+    NSData *data = [NSData dataWithContentsOfURL:dummyURL];
+    NSLog(@"Ping to pillbox.oddb.org = %lu bytes", (unsigned long)[data length]);
+    
+    return data!=nil;
+}
+
++ (NSString *) documentsDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+    return [paths lastObject];
+}
+
 + (BOOL) checkFileIsAllowed:(NSString *)name
 {
     if ([[self appLanguage] isEqualToString:@"de"]) {
