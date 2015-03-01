@@ -25,6 +25,7 @@
 
 @interface MLCustomURLConnection : NSURLConnection <NSURLConnectionDataDelegate>
 
+- (void) releaseStuff;
 - (void) downloadFileWithName:(NSString *)file andModal:(bool)modal;
 
 @end

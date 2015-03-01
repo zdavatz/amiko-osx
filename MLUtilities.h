@@ -45,6 +45,7 @@ NSString* const APP_ID = @"708142753";
 @end
 
 @implementation MLUtilities
+
 + (NSString *) appOwner
 {
     if ([APP_NAME isEqualToString:@"AmiKo"]
@@ -79,5 +80,25 @@ NSString* const APP_ID = @"708142753";
         return @"n.s.";
     
     return nil;
+}
+
++ (BOOL) checkFileIsAllowed:(NSString *)name
+{
+    if ([[self appLanguage] isEqualToString:@"de"]) {
+        if ([name isEqualToString:@"amiko_db_full_idx_de.db"]
+            || [name isEqualToString:@"amiko_report_de.html"]
+            || [name isEqualToString:@"drug_interactions_csv_de.csv"])  {
+                return true;
+            }
+    } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+        if ([name isEqualToString:@"amiko_db_full_idx_fr.db"]
+            || [name isEqualToString:@"amiko_report_de.html"]
+            || [name isEqualToString:@"drug_interactions_csv_fr.csv"])  {
+
+            return true;
+        }
+    }
+
+    return false;
 }
 @end

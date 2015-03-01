@@ -391,7 +391,6 @@ static BOOL mSearchInteractions = false;
     }
 }
 
-
 - (void) alertDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
     if (returnCode==NSAlertFirstButtonReturn) {
@@ -619,6 +618,44 @@ static BOOL mSearchInteractions = false;
                          didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
                             contextInfo:nil];
     }
+}
+
+- (IBAction) loadAipsDatabase:(id)sender
+{
+    // Create a file open dialog class
+    NSOpenPanel* openDlgPanel = [NSOpenPanel openPanel];
+    // Set array of file types
+    NSArray *fileTypesArray;
+    fileTypesArray = [NSArray arrayWithObjects:@"db",@"html",@"csv",nil];
+    // Enable options in the dialog
+    [openDlgPanel setCanChooseFiles:YES];
+    [openDlgPanel setAllowedFileTypes:fileTypesArray];
+    [openDlgPanel setAllowsMultipleSelection:false];
+    [openDlgPanel beginWithCompletionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            // Grab reference to what has been selected
+            NSURL *fileURL = [[openDlgPanel  URLs] firstObject];
+            NSString *fileName = [fileURL lastPathComponent];
+            // Check if file is in the list of allowed files
+            if ([MLUtilities checkFileIsAllowed:fileName]) {
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDir = [paths lastObject];
+                NSString *dstPath = [documentsDir stringByAppendingPathComponent:fileName];
+                // Extract source file path
+                NSString *srcPath = [NSString stringWithFormat:@"%@", [fileURL path]];
+                if (srcPath!=nil && dstPath!=nil) {
+                    // If it exists, remove old file
+                    if ([fileManager fileExistsAtPath:dstPath])
+                        [fileManager removeItemAtPath:dstPath error:nil];
+                    // Now copy new file and notify
+                    if ([fileManager copyItemAtPath:srcPath toPath:dstPath error:nil]) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"MLDidFinishLoading" object:self];
+                    }
+                }
+            }
+        }
+    }];
 }
 
 - (IBAction) showAboutFile:(id)sender

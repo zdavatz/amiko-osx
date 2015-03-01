@@ -41,6 +41,14 @@
 
 static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 
+- (void) releaseStuff
+{
+    [myConnection cancel];
+    myConnection = nil;
+    if (mFile)
+        [mFile closeFile];
+}
+
 - (void) downloadFileWithName:(NSString *)fileName andModal:(bool)modal
 {
     mModal = modal;
@@ -81,11 +89,7 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSLog(@"Download failed with an error: %@, %@", error, [error description]);
-    // Release stuff
-    [myConnection cancel];
-    myConnection = nil;
-    if (mFile)
-        [mFile closeFile];
+    [self releaseStuff];
 }
 
 
@@ -104,11 +108,7 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     if (mModal && ![mProgressSheet mDownloadInProgress]) {
-        // Release stuff
-        [myConnection cancel];
-        myConnection = nil;
-        if (mFile)
-            [mFile closeFile];
+        [self releaseStuff];
         if (mModal)
             [mProgressSheet remove];
         return;
@@ -125,11 +125,7 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
 
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    // Release stuff
-    [myConnection cancel];
-    myConnection = nil;
-    if (mFile)
-        [mFile closeFile];
+    [self releaseStuff];
     if (mStatusCode==404) {
         // Notify status code 404 (file not found)
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MLStatusCode404" object:self];
@@ -140,6 +136,7 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
         NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *zipFilePath = [documentsDirectory stringByAppendingPathComponent:mFileName];
 
+        // These are the files that will be unzipped...
         NSString *filePath;
         if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_de" ofType:@"db"];

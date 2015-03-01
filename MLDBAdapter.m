@@ -224,7 +224,7 @@ static NSString *FULL_TABLE = nil;
     NSArray *results = [mySqliteDb performQuery:query];
     NSInteger numProducts = 0;
     for (NSArray *cursor in results)  {
-        numProducts += [[[cursor objectAtIndex:0] componentsSeparatedByString:@"\n"] count];
+        numProducts += [[[cursor firstObject] componentsSeparatedByString:@"\n"] count];
     }
     
     return numProducts;
@@ -241,7 +241,7 @@ static NSString *FULL_TABLE = nil;
 - (MLMedication *) searchId: (long)rowId
 {
     // getRecord returns an NSArray* hence the objectAtIndex!!   
-    return [self cursorToFullMedInfo:[[self getFullRecord:rowId] objectAtIndex:0]];
+    return [self cursorToFullMedInfo:[[self getFullRecord:rowId] firstObject]];
 }
 
 - (NSArray *) searchWithQuery:(NSString *)query;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4510"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -11,7 +11,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
                 <menuItem title="AmiKo-zR" id="56">
@@ -69,9 +69,14 @@
                             <menuItem isSeparatorItem="YES" id="Aqd-XG-Ud3">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Datenbank Aktualisieren" tag="1" keyEquivalent="a" id="cuR-Pf-Lft">
+                            <menuItem title="Aktualisieren via Internet" tag="1" keyEquivalent="a" id="cuR-Pf-Lft">
                                 <connections>
                                     <action selector="updateAipsDatabase:" target="-1" id="7oS-rg-Fi2"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Aktualisieren via Datei" tag="1" keyEquivalent="l" id="gKE-5n-N9x">
+                                <connections>
+                                    <action selector="loadAipsDatabase:" target="-1" id="GZK-m6-37r"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -146,7 +151,6 @@
                 <subviews>
                     <imageView translatesAutoresizingMaskIntoConstraints="NO" id="599">
                         <rect key="frame" x="-3" y="-8" width="966" height="651"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="645" id="610"/>
                         </constraints>

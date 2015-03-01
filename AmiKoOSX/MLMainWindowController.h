@@ -65,6 +65,8 @@ extern NSString* const APP_ID;
 - (IBAction) onButtonPressed:(id)sender;
 - (IBAction) toolbarAction:(id)sender;
 - (IBAction) printSearchResult:(id)sender;
+- (IBAction) updateAipsDatabase:(id)sender;
+- (IBAction) loadAipsDatabase:(id)sender;
 - (IBAction) showAboutFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;
 - (IBAction) sendFeedback:(id)sender;
