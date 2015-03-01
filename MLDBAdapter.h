@@ -21,7 +21,6 @@
  
  ------------------------------------------------------------------------ */
 
-#import <Foundation/Foundation.h>
 #import "MLMedication.h"
 
 @interface MLDBAdapter : NSObject

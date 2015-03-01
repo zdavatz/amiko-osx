@@ -141,7 +141,7 @@ static BOOL mSearchInteractions = false;
     mSearchQueue = dispatch_queue_create("com.ywesee.searchdb", nil);
     mSearchInProgress = false;
     
-    if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
+    if ([MLUtilities isGermanApp]) {
         SEARCH_STRING = @"Suche";
         SEARCH_TITLE = @"Präparat";
         SEARCH_AUTHOR = @"Inhaber";
@@ -149,7 +149,7 @@ static BOOL mSearchInteractions = false;
         SEARCH_REGNR = @"Reg. Nr.";
         SEARCH_THERAPY = @"Therapie";
         SEARCH_FACHINFO = @"in Fachinformation";
-    } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+    } else if ([MLUtilities isFrenchApp]) {
         SEARCH_STRING = @"Recherche";
         SEARCH_TITLE = @"Préparation";
         SEARCH_AUTHOR = @"Titulaire";
@@ -199,9 +199,9 @@ static BOOL mSearchInteractions = false;
     mUsedDatabase = kAips;
     [myToolbar setSelectedItemIdentifier:@"AIPS"];
     
-    if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+    if ([MLUtilities isGermanApp])
         [[myToolbar items][3] setLabel:@"Drucken"];
-    else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+    else if ([MLUtilities isFrenchApp])
         [[myToolbar items][3] setLabel:@"Imprimer"];
     
     // Set search state
@@ -297,11 +297,11 @@ static BOOL mSearchInteractions = false;
 
 - (void) openInteractionsCsvFile
 {
-    if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
+    if ([MLUtilities isGermanApp]) {
         if (![mDb openInteractionsCsvFile:@"drug_interactions_csv_de"]) {
             NSLog(@"No German drug interactions file!");
         }
-    } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+    } else if ([MLUtilities isFrenchApp]) {
         if (![mDb openInteractionsCsvFile:@"drug_interactions_csv_fr"]) {
             NSLog(@"No French drug interactions file!");
         }
@@ -311,12 +311,12 @@ static BOOL mSearchInteractions = false;
 - (void) openSQLiteDatabase
 {
     mDb = [[MLDBAdapter alloc] init];
-    if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
+    if ([MLUtilities isGermanApp]) {
         if (![mDb openDatabase:@"amiko_db_full_idx_de"]) {
             NSLog(@"No German database!");
             mDb = nil;
         }
-    } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+    } else if ([MLUtilities isFrenchApp]) {
         if (![mDb openDatabase:@"amiko_db_full_idx_fr"]) {
             NSLog(@"No French database!");
             mDb = nil;
@@ -356,10 +356,10 @@ static BOOL mSearchInteractions = false;
             NSAlert *alert = [[NSAlert alloc] init];
             
             [alert addButtonWithTitle:@"OK"];
-            if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
+            if ([MLUtilities isGermanApp]) {
                 [alert setMessageText:@"AIPS Datenbank aktualisiert!"];
                 [alert setInformativeText:[NSString stringWithFormat:@"Die Datenbank enthält:\n- %ld Produkte\n- %ld Fachinfos\n- %d Interaktionen", numProducts, numSearchRes, numInteractions]];
-            } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+            } else if ([MLUtilities isFrenchApp]) {
                 [alert setMessageText:@"Banque des donnees AIPS mises à jour!"];
                 [alert setInformativeText:[NSString stringWithFormat:@"La banque des données contien:\n- %ld produits\n- %ld notices infopro\n- %d interactions", numProducts, numSearchRes, numInteractions]];
             }
@@ -374,10 +374,10 @@ static BOOL mSearchInteractions = false;
         NSAlert *alert = [[NSAlert alloc] init];
         
         [alert addButtonWithTitle:@"OK"];
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
+        if ([MLUtilities isGermanApp]) {
             [alert setMessageText:@"Datenbank kann nicht aktualisiert werden!"];
             [alert setInformativeText:[NSString stringWithFormat:@"Bitte wenden Sie sich an:\nzdavatz@ywesee.com\n+41 43 540 05 50"]];
-        } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+        } else if ([MLUtilities isFrenchApp]) {
             [alert setMessageText:@"Mise à jour n'est pas possible!"];
             [alert setInformativeText:[NSString stringWithFormat:@"S'il vous plaît contacter:\nzdavatz@ywesee.com\n+41 43 540 05 50"]];
         }
@@ -590,9 +590,9 @@ static BOOL mSearchInteractions = false;
     // Check if there is an active internet connection
     if ([MLUtilities isConnected]) {
         // Update database
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+        if ([MLUtilities isGermanApp])
             [mDb updateDatabase:@"de" for:[MLUtilities appOwner]];
-        else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+        else if ([MLUtilities isFrenchApp])
             [mDb updateDatabase:@"fr" for:[MLUtilities appOwner]];
     } else {
         NSAlert *alert = [[NSAlert alloc] init];
@@ -656,7 +656,7 @@ static BOOL mSearchInteractions = false;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // Get documents directory
     NSString *documentsDir = [MLUtilities documentsDirectory];
-    if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
+    if ([MLUtilities isGermanApp]) {
         NSString *filePath = [[documentsDir stringByAppendingPathComponent:@"amiko_report_de"] stringByAppendingPathExtension:@"html"];
         if ([fileManager fileExistsAtPath:filePath]) {
             // Starts Safari            
@@ -666,7 +666,7 @@ static BOOL mSearchInteractions = false;
             // Starts Safari
             [[NSWorkspace sharedWorkspace] openURL:aboutFile];
         }
-    } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+    } else if ([MLUtilities isFrenchApp]) {
         NSString *filePath = [[documentsDir stringByAppendingPathComponent:@"amiko_report_fr"] stringByAppendingPathExtension:@"html"];
         if ([fileManager fileExistsAtPath:filePath]) {
             // Starts Safari
@@ -684,9 +684,9 @@ static BOOL mSearchInteractions = false;
 {
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *creditsPath = nil;
-    if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+    if ([MLUtilities isGermanApp])
         creditsPath = [mainBundle pathForResource:@"Credits-de" ofType:@"rtf"];
-    else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+    else if ([MLUtilities isFrenchApp])
         creditsPath = [mainBundle pathForResource:@"Credits-fr" ofType:@"rtf"];
     NSAttributedString *credits = [[NSAttributedString alloc] initWithPath:creditsPath documentAttributes:nil];
     
@@ -722,10 +722,10 @@ static BOOL mSearchInteractions = false;
     // Starts mail client
     NSString* subject = [NSString stringWithFormat:@"%@ OS X", APP_NAME];
     NSString* body = nil;
-    if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+    if ([MLUtilities isGermanApp])
         body = [NSString stringWithFormat:@"%@ OS X: Schweizer Arzneimittelkompendium\r\n\n"
                 "Get it now: https://itunes.apple.com/us/app/amiko/id%@?mt=12\r\n\nEnjoy!\r\n", APP_NAME, APP_ID];
-    else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+    else if ([MLUtilities isFrenchApp])
         body = [NSString stringWithFormat:@"%@ OS X: Compendium des Médicaments Suisse\r\n\n"
                 "Get it now: https://itunes.apple.com/us/app/amiko/id%@?mt=12\r\n\nEnjoy!\r\n", APP_NAME, APP_ID];
     NSString *encodedSubject = [NSString stringWithFormat:@"subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -1340,9 +1340,9 @@ static BOOL mSearchInteractions = false;
     // basket_html_str + delete_all_button_str + "<br><br>" + top_note_html_str
     int medCnt = 0;
     NSString *medBasketStr = @"";
-    if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+    if ([MLUtilities isGermanApp])
         medBasketStr = [medBasketStr stringByAppendingString:@"<div id=\"Medikamentenkorb\"><fieldset><legend>Medikamentenkorb</legend></fieldset></div><table id=\"InterTable\" width=\"100%25\">"];
-    else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+    else if ([MLUtilities isFrenchApp])
         medBasketStr = [medBasketStr stringByAppendingString:@"<div id=\"Medikamentenkorb\"><fieldset><legend>Panier des Médicaments</legend></fieldset></div><table id=\"InterTable\" width=\"100%25\">"];
     
     // Check if there are meds in the "Medikamentenkorb"
@@ -1371,15 +1371,15 @@ static BOOL mSearchInteractions = false;
                             @"</tr>", medCnt, name, atc_code, active_ingredient];
         }
         // Add delete all button
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+        if ([MLUtilities isGermanApp])
             medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Korb leeren\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
-        else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+        else if ([MLUtilities isFrenchApp])
             medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Tout supprimer\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
     } else {
         // Medikamentenkorb is empty
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+        if ([MLUtilities isGermanApp])
             medBasketStr = @"<div>Ihr Medikamentenkorb ist leer.<br><br></div>";
-        else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+        else if ([MLUtilities isFrenchApp])
             medBasketStr = @"<div>Votre panier des médicaments est vide.<br><br></div>";
     }
     
@@ -1392,9 +1392,9 @@ static BOOL mSearchInteractions = false;
     
     if ([mMedBasket count]>1) {
         // Add note to indicate that there are no interactions
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+        if ([MLUtilities isGermanApp])
             topNote = @"<fieldset><legend>Bekannte Interaktionen</legend></fieldset><p>Zur Zeit sind keine Interaktionen zwischen diesen Medikamenten in der EPha.ch-Datenbank vorhanden. Weitere Informationen finden Sie in der Fachinformation.</p>";
-        else  if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+        else  if ([MLUtilities isFrenchApp])
             topNote = @"<fieldset><legend>Interactions Connues</legend></fieldset><p>Il n’y a aucune information dans la banque de données EPha.ch à propos d’une interaction entre les médicaments sélectionnés. Veuillez consulter les informations professionelles.</p>";
     }
     
@@ -1411,17 +1411,17 @@ static BOOL mSearchInteractions = false;
     NSMutableArray *sectionTitles = nil;
 
     if ([mMedBasket count]>0) {
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+        if ([MLUtilities isGermanApp])
             sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Medikamentenkorb", nil];
-        else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+        else if ([MLUtilities isFrenchApp])
             sectionTitles = [[NSMutableArray alloc] initWithObjects:@"Panier des médicaments", nil];
     }
     
     // Check if there are meds in the "Medikamentenkorb"
     if ([mMedBasket count]>1) {
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+        if ([MLUtilities isGermanApp])
             [interactionStr appendString:@"<fieldset><legend>Bekannte Interaktionen</legend></fieldset>"];
-        else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+        else if ([MLUtilities isFrenchApp])
             [interactionStr appendString:@"<fieldset><legend>Interactions Connues</legend></fieldset>"];
         // First sort them alphabetically
         NSArray *sortedNames = [[mMedBasket allKeys] sortedArrayUsingSelector: @selector(compare:)];
@@ -1469,9 +1469,9 @@ static BOOL mSearchInteractions = false;
             }
         }
         if ([sectionTitles count]<2) {
-            if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+            if ([MLUtilities isGermanApp])
                 [interactionStr appendString:@"<p class=\"paragraph0\">Zur Zeit sind keine Interaktionen zwischen diesen Medikamenten bekannt.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Interaktion melden\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>"];
-            else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+            else if ([MLUtilities isFrenchApp])
                 [interactionStr appendString:@"<p class=\"paragraph0\">Jusqu’ici il n’y pas d’interaction connue entre les médicaments.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Signaler une interaction\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>"];
         } else if ([sectionTitles count]>2) {
             [interactionStr appendString:@"<br>"];
@@ -1480,9 +1480,9 @@ static BOOL mSearchInteractions = false;
     
     if ([mMedBasket count]>0) {
         [sectionIds addObject:@"Farblegende"];
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+        if ([MLUtilities isGermanApp])
             [sectionTitles addObject:@"Farblegende"];
-        else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+        else if ([MLUtilities isFrenchApp])
             [sectionTitles addObject:@"Légende des couleurs"];
     }
 
@@ -1507,7 +1507,7 @@ static BOOL mSearchInteractions = false;
      0: Keine Angaben (grau)
      */
     if ([mMedBasket count]>0) {
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
+        if ([MLUtilities isGermanApp]) {
             NSString *legend = {
                 @"<fieldset><legend>Fussnoten</legend></fieldset>"
                 @"<p class=\"footnote\">1. Farblegende: </p>"
@@ -1522,7 +1522,7 @@ static BOOL mSearchInteractions = false;
                 @"<p class=\"footnote\">3. Unterstützt durch:  IBSA Institut Biochimique SA.</p>"
             };
             return legend;
-        } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+        } else if ([MLUtilities isFrenchApp]) {
             NSString *legend = {
                 @"<fieldset><legend>Notes</legend></fieldset>"
                 @"<p class=\"footnote\">1. Légende des couleurs: </p>"

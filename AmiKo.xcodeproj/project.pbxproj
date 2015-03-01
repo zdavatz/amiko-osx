@@ -29,6 +29,10 @@
 		D53877851A9E5AE700AEFDB4 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
 		D538778C1AA202E400AEFDB4 /* AmiKo-zR.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2917E8BC3900DCBD16 /* AmiKo-zR.entitlements */; };
 		D538778D1AA202E700AEFDB4 /* CoMed-zR.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2A17E8BC3C00DCBD16 /* CoMed-zR.entitlements */; };
+		D53877941AA37CC900AEFDB4 /* MLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877931AA37CC900AEFDB4 /* MLUtilities.m */; };
+		D53877951AA37CC900AEFDB4 /* MLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877931AA37CC900AEFDB4 /* MLUtilities.m */; };
+		D53877961AA37CC900AEFDB4 /* MLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877931AA37CC900AEFDB4 /* MLUtilities.m */; };
+		D53877971AA37CC900AEFDB4 /* MLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877931AA37CC900AEFDB4 /* MLUtilities.m */; };
 		D539C10617DCED1D00759260 /* MLSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D539C10517DCED1D00759260 /* MLSplashScreen.m */; };
 		D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
 		D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
@@ -237,6 +241,7 @@
 		D53877781A9E5AE700AEFDB4 /* interactions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interactions@2x.png"; sourceTree = "<group>"; };
 		D53877791A9E5AE700AEFDB4 /* maindb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "maindb@2x.png"; sourceTree = "<group>"; };
 		D53877861A9E63BA00AEFDB4 /* MLUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLUtilities.h; sourceTree = "<group>"; };
+		D53877931AA37CC900AEFDB4 /* MLUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLUtilities.m; sourceTree = "<group>"; };
 		D539C10417DCED1D00759260 /* MLSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSplashScreen.h; sourceTree = "<group>"; };
 		D539C10517DCED1D00759260 /* MLSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSplashScreen.m; sourceTree = "<group>"; };
 		D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zur_Rose_1000x670px.png; sourceTree = "<group>"; };
@@ -539,6 +544,7 @@
 				D545C90F18A5725900491511 /* MLCustomView.h */,
 				D545C91018A5725900491511 /* MLCustomView.m */,
 				D53877861A9E63BA00AEFDB4 /* MLUtilities.h */,
+				D53877931AA37CC900AEFDB4 /* MLUtilities.m */,
 			);
 			name = Classes;
 			path = ..;
@@ -872,6 +878,7 @@
 				D5E91B5A17E5E24000B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B5B17E5E24000B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF9189522AD00C4525C /* MLProgressSheetController.m in Sources */,
+				D53877961AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D545C90D18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D5B010631927C472007BE838 /* deleterow.js in Sources */,
 				D5E91B5C17E5E24000B66B27 /* MLSQLiteDatabase.m in Sources */,
@@ -902,6 +909,7 @@
 				D5E91B8917E5E8E400B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
+				D53877941AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D545C90B18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D5B010611927C472007BE838 /* deleterow.js in Sources */,
 				D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */,
@@ -932,6 +940,7 @@
 				D5E91BB817E5E8E800B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */,
 				D545C8EE18A2CDD100491511 /* MLProgressSheetController.m in Sources */,
+				D53877951AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D5B010621927C472007BE838 /* deleterow.js in Sources */,
 				D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */,
@@ -962,6 +971,7 @@
 				D5EBC69417C912FF00EBEF39 /* MLAppDelegate.m in Sources */,
 				D5EBC6A417C913B100EBEF39 /* MLMainWindowController.m in Sources */,
 				D545C8EF18A2CDD200491511 /* MLProgressSheetController.m in Sources */,
+				D53877971AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D545C90E18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D5B010641927C472007BE838 /* deleterow.js in Sources */,
 				D5EBC6AD17C9202600EBEF39 /* MLSQLiteDatabase.m in Sources */,
