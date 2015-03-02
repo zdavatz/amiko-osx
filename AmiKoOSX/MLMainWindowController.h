@@ -24,6 +24,7 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #import "MLCustomWebView.h"
+#import "SHCWebView.h"
 
 #if defined (AMIKO)
 extern NSString* const APP_NAME;
@@ -50,7 +51,8 @@ extern NSString* const APP_ID;
     IBOutlet NSSearchField *mySearchField;
     IBOutlet NSTableView *myTableView;
     IBOutlet NSTableView *mySectionTitles;
-    IBOutlet MLCustomWebView *myWebView;
+    // IBOutlet MLCustomWebView *myWebView;
+    IBOutlet SHCWebView *myWebView;
 }
 
 @property (nonatomic, retain) IBOutlet NSView *myView;
@@ -59,7 +61,9 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSSearchField *mySearchField;
 @property (nonatomic, retain) IBOutlet NSTableView *myTableView;
 @property (nonatomic, retain) IBOutlet NSTableView *mySectionTitles;
+@property (weak) IBOutlet NSTextFinder *myTextFinder;
 
+- (IBAction) performFindAction:(id)sender;
 - (IBAction) tappedOnStar:(id)sender;
 - (IBAction) searchNow:(id)sender;
 - (IBAction) onButtonPressed:(id)sender;

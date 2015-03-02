@@ -56,23 +56,46 @@
                 <menuItem title="Datei" id="83">
                     <menu key="submenu" title="Datei" id="81">
                         <items>
-                            <menuItem title="Fachinformation Drucken..." keyEquivalent="p" id="551">
+                            <menuItem title="In Fachinformation Suchen" id="XgX-Op-cTu">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="In Fachinformation Suchen" id="SQZ-c8-pmH">
+                                    <items>
+                                        <menuItem title="Suchen..." tag="1" keyEquivalent="f" id="OKR-aa-8kP">
+                                            <connections>
+                                                <action selector="performFindAction:" target="-1" id="a7T-DA-y60"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Nächster Treffer..." tag="2" keyEquivalent="g" id="N6Q-Uu-VdU">
+                                            <connections>
+                                                <action selector="performFindAction:" target="-1" id="8eT-0g-nr5"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Vorheriger Treffer..." tag="3" keyEquivalent="G" id="OOG-n8-IlT">
+                                            <connections>
+                                                <action selector="performFindAction:" target="-1" id="uI7-hm-V61"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="NbF-VN-IM4"/>
+                            <menuItem title="Fachinformation Drucken..." tag="5" keyEquivalent="p" id="1h6-hI-Md1">
                                 <connections>
-                                    <action selector="printDocument:" target="-1" id="556"/>
+                                    <action selector="printDocument:" target="-1" id="lzr-67-XQb"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Suchresultat Drucken..." tag="1" keyEquivalent="t" id="78">
+                            <menuItem title="Suchresultat Drucken..." tag="6" keyEquivalent="t" id="78">
                                 <connections>
                                     <action selector="printSearchResult:" target="-1" id="554"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ld7-WO-ECc"/>
-                            <menuItem title="Aktualisieren via Internet" tag="2" keyEquivalent="a" id="sQD-fz-4he">
+                            <menuItem title="Aktualisieren via Internet" tag="7" keyEquivalent="a" id="sQD-fz-4he">
                                 <connections>
                                     <action selector="updateAipsDatabase:" target="-1" id="CYl-0r-8uP"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Aktualisieren via Datei" tag="2" keyEquivalent="l" id="JrV-kr-dKG">
+                            <menuItem title="Aktualisieren via Datei" tag="8" keyEquivalent="l" id="JrV-kr-dKG">
                                 <connections>
                                     <action selector="loadAipsDatabase:" target="-1" id="0PG-Ua-WCB"/>
                                 </connections>

@@ -80,6 +80,7 @@ static BOOL mSearchInteractions = false;
 
 @end
 
+
 @implementation MLMainWindowController
 {
     // Instance variable declarations go here
@@ -118,6 +119,7 @@ static BOOL mSearchInteractions = false;
 @synthesize mySearchField;
 @synthesize myTableView;
 @synthesize mySectionTitles;
+@synthesize myTextFinder;
 
 
 - (id) init
@@ -231,35 +233,38 @@ static BOOL mSearchInteractions = false;
     */
     
     [[self window] setBackgroundColor:[NSColor whiteColor]];
-    
-    // 09/02/2014: TextFinder in Xib file... IBOutlet...
-    /*
-    mTextFinder = [[NSTextFinder alloc] init];
-    [mTextFinder setClient:myWebView];
-    [mTextFinder setFindBarContainer:[myWebView scrollView]];
 
-    [[myWebView scrollView] setFindBarPosition:NSScrollViewFindBarPositionAboveContent];
-    [[myWebView scrollView] setFindBarVisible:YES];
-    
-    [mTextFinder setIncrementalSearchingEnabled:YES];   // type-as-you-go
-    [mTextFinder setIncrementalSearchingShouldDimContentView:YES];
-    
-    // change the NSFindPboard NSPasteboardTypeString
-    NSPasteboard* pBoard = [NSPasteboard pasteboardWithName:NSFindPboard];
-    [pBoard declareTypes:[NSArray arrayWithObjects:NSPasteboardTypeString, NSPasteboardTypeTextFinderOptions, nil] owner:nil];
-    [pBoard setString:@"Abilify" forType:NSStringPboardType];
-    NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSTextFinderCaseInsensitiveKey, [NSNumber numberWithInteger:NSTextFinderMatchingTypeContains], NSTextFinderMatchingTypeKey, nil];
-    [pBoard setPropertyList:options forType:NSPasteboardTypeTextFinderOptions];
-
-    [mTextFinder cancelFindIndicator];
-    [mTextFinder noteClientStringWillChange];
-    [mTextFinder performAction:NSTextFinderActionShowFindInterface];
-    
-    // [mTextFinder performAction:NSTextFinderActionSetSearchString];
-    
-    // [self showFinderInterface];
-     */
     return self;
+}
+
+- (void) windowDidLoad {
+    
+    [super windowDidLoad];
+
+    // NOTE: These properties are set in NIB file, but to be verbose what we need to do:
+    // Set container for NSTextFinder panel (NSScrollView hosting our SHCWebView)
+    myTextFinder.findBarContainer = myWebView.enclosingScrollView;
+    // Set client to work with the NSTextFinder object
+    myTextFinder.client  = myWebView;
+    // And vice versa: inform our SHCVebView about which of the NSTextFinder instance to work with
+    myWebView.textFinder = myTextFinder;
+    // Configure NSTextFinder
+    myTextFinder.incrementalSearchingEnabled = YES;
+    myTextFinder.incrementalSearchingShouldDimContentView = YES;
+}
+
+#pragma mark - NSTextFinder actions
+
+- (IBAction) performFindAction:(id)sender
+{
+    if ([sender isKindOfClass:[NSMenuItem class]] ) {
+        NSMenuItem *menuItem = (NSMenuItem*)sender;
+        if( menuItem.tag == NSTextFinderActionShowFindInterface) {
+            // Causes NSTextFinder asks its client about a string
+            [myTextFinder performAction:NSTextFinderActionSetSearchString];
+        }
+        [myTextFinder performAction:menuItem.tag];
+    }
 }
 
 /**

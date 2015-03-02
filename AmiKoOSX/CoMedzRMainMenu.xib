@@ -56,6 +56,29 @@
                 <menuItem title="Fichier" id="83">
                     <menu key="submenu" title="Fichier" id="81">
                         <items>
+                            <menuItem title="Chercher la Notice Infopro" id="OPn-s6-LUs">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Chercher la Notice Infopro" id="ZbW-lv-FWK">
+                                    <items>
+                                        <menuItem title="Rechercher..." tag="1" keyEquivalent="f" id="f5H-TV-Xyu">
+                                            <connections>
+                                                <action selector="performFindAction:" target="-1" id="fPF-5g-69Q"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Rechercher Suivant..." tag="2" keyEquivalent="g" id="dUn-XF-vLJ">
+                                            <connections>
+                                                <action selector="performFindAction:" target="-1" id="iHr-IN-3No"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Rechercher le Précédent..." tag="3" keyEquivalent="G" id="hwL-gR-sZn">
+                                            <connections>
+                                                <action selector="performFindAction:" target="-1" id="Cfc-1b-bcd"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="UbO-F8-UYB"/>
                             <menuItem title="Imprimer Notice Infopro..." keyEquivalent="p" id="551">
                                 <connections>
                                     <action selector="printDocument:" target="-1" id="556"/>

@@ -56,6 +56,29 @@
                 <menuItem title="Datei" id="83">
                     <menu key="submenu" title="Datei" id="81">
                         <items>
+                            <menuItem title="In Fachinformation Suchen" id="Hxi-o5-9Zy">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="In Fachinformation Suchen" id="DG6-4p-5Fx">
+                                    <items>
+                                        <menuItem title="Suchen..." tag="1" keyEquivalent="f" id="afC-p7-YFh">
+                                            <connections>
+                                                <action selector="performFindAction:" target="-1" id="jqa-v4-DcN"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Nächster Treffer..." tag="2" keyEquivalent="g" id="hbc-MR-x46">
+                                            <connections>
+                                                <action selector="performFindAction:" target="-1" id="ffj-zR-o69"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Vorheriger Treffer..." tag="3" keyEquivalent="G" id="alp-gi-aI7">
+                                            <connections>
+                                                <action selector="performFindAction:" target="-1" id="0BH-fC-P2d"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="d8r-f2-Hmi"/>
                             <menuItem title="Fachinformation Drucken..." keyEquivalent="p" id="551">
                                 <connections>
                                     <action selector="printDocument:" target="-1" id="556"/>
