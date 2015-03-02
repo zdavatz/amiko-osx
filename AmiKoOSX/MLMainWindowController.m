@@ -257,13 +257,17 @@ static BOOL mSearchInteractions = false;
 
 - (IBAction) performFindAction:(id)sender
 {
-    if ([sender isKindOfClass:[NSMenuItem class]] ) {
-        NSMenuItem *menuItem = (NSMenuItem*)sender;
-        if( menuItem.tag == NSTextFinderActionShowFindInterface) {
-            // Causes NSTextFinder asks its client about a string
-            [myTextFinder performAction:NSTextFinderActionSetSearchString];
+    if ([[myWebView mainFrame] dataSource]!=nil) {
+        if ([sender isKindOfClass:[NSMenuItem class]] ) {
+            NSMenuItem *menuItem = (NSMenuItem*)sender;
+            if (menuItem.tag == NSTextFinderActionShowFindInterface)
+                [myTextFinder performAction:NSTextFinderActionSetSearchString];
+            else if (menuItem.tag == NSTextFinderActionNextMatch)
+                [myTextFinder performAction:NSTextFinderActionNextMatch];
+            else if (menuItem.tag == NSTextFinderActionPreviousMatch)
+                [myTextFinder performAction:NSTextFinderActionPreviousMatch];
+            [myTextFinder performAction:menuItem.tag];
         }
-        [myTextFinder performAction:menuItem.tag];
     }
 }
 
@@ -442,7 +446,7 @@ static BOOL mSearchInteractions = false;
             [self.myTableView reloadData];
         }
     } else {
-        [[mySearchField cell] setStringValue:mCurrentSearchKey];
+        // [[mySearchField cell] setStringValue:mCurrentSearchKey];
     }
 }
 
@@ -524,10 +528,12 @@ static BOOL mSearchInteractions = false;
             }
         });
     } else {
+        /*
         if ([searchText length] > 2)
             [myWebView highlightAllOccurencesOfString:searchText];
         else
             [myWebView removeAllHighlights];
+        */
     }
 }
 
@@ -949,9 +955,20 @@ static BOOL mSearchInteractions = false;
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_THERAPY]];
             break;
         case kWebView:
+            
+            // Discard previous data structures
+            [myWebView invalidateTextRanges];
+            // inform NSTextFinder the text is going to change
+            [myTextFinder noteClientStringWillChange];
+            [myTextFinder cancelFindIndicator];
+            [myTextFinder performAction:NSTextFinderActionHideFindInterface];
+            
+            // NOTE: Commented because we're using SHCWebView now (02.03.2015)
+            /*
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kWebView;
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_FACHINFO]];
+            */
             break;
     }
     mCurrentSearchState = searchState;
@@ -1712,7 +1729,7 @@ static BOOL mSearchInteractions = false;
             NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
             [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
             // [[myWebView preferences] setDefaultFontSize:14];
-            [self setSearchState:kWebView];
+            // [self setSearchState:kWebView];
             
             NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
             [myRowView setEmphasized:YES];

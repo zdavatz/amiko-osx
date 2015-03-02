@@ -226,6 +226,7 @@ static BOOL NodeIsSpanElementWithTextContent(DOMNode* node) {
 	self.rectsCacheForTextRanges = nil;
 	self.webViewTextRanges       = nil;
 	
+    [self.textFinder cancelFindIndicator];
 	[self.textFinder setFindIndicatorNeedsUpdate:YES];
 }
 
@@ -488,13 +489,13 @@ static BOOL NodeIsSpanElementWithTextContent(DOMNode* node) {
 #pragma mark - NSTextFinderClient
 
 - (NSString *)string {
-	
+    
 	// invalidate previous DOM text data
 	[self invalidateTextRanges];
 	
 	NSArray *textRanges = [self webViewTextRanges];
 	NSString *string = [self stringFromWebViewTextRanges:textRanges];
-	
+    
 	return string;
 }
 
@@ -609,8 +610,10 @@ static BOOL NodeIsSpanElementWithTextContent(DOMNode* node) {
 		NSNumber *width = [scriptObject evaluateWebScript:@"rect.width"];
 		NSNumber *height = [scriptObject evaluateWebScript:@"rect.height"];
 	
-		NSRect calcRect = NSMakeRect(left.floatValue, top.floatValue, width.floatValue, height.floatValue);
-		
+        // @maxl: 02.03.2015
+		NSRect calcRect = NSMakeRect(left.floatValue-1, top.floatValue-1, width.floatValue+2, height.floatValue+2);
+        // NSRect calcRect = NSMakeRect(left.floatValue, top.floatValue, width.floatValue, height.floatValue);
+        
 		// convert screen coordinates to WebView document
 		calcRect = CGRectOffset(calcRect, bounds.origin.x, bounds.origin.y);
 		
