@@ -253,19 +253,34 @@ static BOOL mSearchInteractions = false;
     myTextFinder.incrementalSearchingShouldDimContentView = YES;
 }
 
+- (void) hideTextFinder
+{
+    // Inform NSTextFinder the text is going to change
+    [myTextFinder noteClientStringWillChange];
+    // Hide text finder
+    [myTextFinder performAction:NSTextFinderActionHideFindInterface];
+    // Discard previous data structures
+    [myWebView invalidateTextRanges];
+}
+
 #pragma mark - NSTextFinder actions
 
 - (IBAction) performFindAction:(id)sender
 {
+    /*
+    NSTextFinderActionShowFindInterface = 1,
+    NSTextFinderActionNextMatch = 2,
+    NSTextFinderActionPreviousMatch = 3,
+    NSTextFinderActionSetSearchString = 7,
+    NSTextFinderActionHideFindInterface = 11,
+    */
     if ([[myWebView mainFrame] dataSource]!=nil) {
         if ([sender isKindOfClass:[NSMenuItem class]] ) {
             NSMenuItem *menuItem = (NSMenuItem*)sender;
-            if (menuItem.tag == NSTextFinderActionShowFindInterface)
+            if (menuItem.tag == NSTextFinderActionShowFindInterface) {
+                // This is a special tag
                 [myTextFinder performAction:NSTextFinderActionSetSearchString];
-            else if (menuItem.tag == NSTextFinderActionNextMatch)
-                [myTextFinder performAction:NSTextFinderActionNextMatch];
-            else if (menuItem.tag == NSTextFinderActionPreviousMatch)
-                [myTextFinder performAction:NSTextFinderActionPreviousMatch];
+            }
             [myTextFinder performAction:menuItem.tag];
         }
     }
@@ -955,14 +970,8 @@ static BOOL mSearchInteractions = false;
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_THERAPY]];
             break;
         case kWebView:
-            
-            // Discard previous data structures
-            [myWebView invalidateTextRanges];
-            // inform NSTextFinder the text is going to change
-            [myTextFinder noteClientStringWillChange];
-            [myTextFinder cancelFindIndicator];
-            [myTextFinder performAction:NSTextFinderActionHideFindInterface];
-            
+            // Hide textfinder
+            [self hideTextFinder];
             // NOTE: Commented because we're using SHCWebView now (02.03.2015)
             /*
             [[mySearchField cell] setStringValue:@""];
@@ -1715,6 +1724,9 @@ static BOOL mSearchInteractions = false;
         // Get medi
         mMed = [mDb searchId:mId];
     
+        // Hide textfinder
+        [self hideTextFinder];
+        
         if (mSearchInteractions==false) {
             // Load style sheet from file
             NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
