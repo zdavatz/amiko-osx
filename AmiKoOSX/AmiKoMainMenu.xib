@@ -56,35 +56,43 @@
                 <menuItem title="Datei" id="83">
                     <menu key="submenu" title="Datei" id="81">
                         <items>
-                            <menuItem title="In Fachinformation Suchen" id="XgX-Op-cTu">
+                            <menuItem title="In Fachinformation suchen" id="XgX-Op-cTu">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="In Fachinformation Suchen" id="SQZ-c8-pmH">
+                                <menu key="submenu" title="In Fachinformation suchen" id="SQZ-c8-pmH">
                                     <items>
                                         <menuItem title="Suchen..." tag="1" keyEquivalent="f" id="OKR-aa-8kP">
                                             <connections>
                                                 <action selector="performFindAction:" target="-1" id="a7T-DA-y60"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Nächster Treffer..." tag="2" keyEquivalent="g" id="N6Q-Uu-VdU">
-                                            <connections>
-                                                <action selector="performFindAction:" target="-1" id="8eT-0g-nr5"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Vorheriger Treffer..." tag="3" keyEquivalent="G" id="OOG-n8-IlT">
-                                            <connections>
-                                                <action selector="performFindAction:" target="-1" id="uI7-hm-V61"/>
-                                            </connections>
-                                        </menuItem>
+                                        <menuItem title="Nächster Treffer..." tag="2" keyEquivalent="g" id="N6Q-Uu-VdU"/>
+                                        <menuItem title="Vorheriger Treffer..." tag="3" keyEquivalent="G" id="OOG-n8-IlT"/>
                                     </items>
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="NbF-VN-IM4"/>
-                            <menuItem title="Fachinformation Drucken..." tag="5" keyEquivalent="p" id="1h6-hI-Md1">
+                            <menuItem title="Standardgrösse..." tag="5" keyEquivalent="0" id="a1B-cX-QPv">
                                 <connections>
-                                    <action selector="printDocument:" target="-1" id="lzr-67-XQb"/>
+                                    <action selector="makeTextStandardSize:" target="-1" id="AyE-xI-miB"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Suchresultat Drucken..." tag="6" keyEquivalent="t" id="78">
+                            <menuItem title="Text vergrössern..." tag="5" keyEquivalent="+" id="1h6-hI-Md1">
+                                <connections>
+                                    <action selector="makeTextLarger:" target="-1" id="9IA-b7-U9O"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Text verkleinern..." tag="5" keyEquivalent="-" id="K7i-NM-In7">
+                                <connections>
+                                    <action selector="makeTextSmaller:" target="-1" id="mmX-K6-wtz"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="8pQ-6p-PFv"/>
+                            <menuItem title="Fachinformation drucken..." tag="5" keyEquivalent="p" id="dmj-qe-rdW">
+                                <connections>
+                                    <action selector="printDocument:" target="-1" id="VQi-wt-Fgf"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Suchresultat drucken..." tag="6" keyEquivalent="t" id="78">
                                 <connections>
                                     <action selector="printSearchResult:" target="-1" id="554"/>
                                 </connections>

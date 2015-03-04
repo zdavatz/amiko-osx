@@ -281,9 +281,24 @@ static BOOL mSearchInteractions = false;
                 // This is a special tag
                 [myTextFinder performAction:NSTextFinderActionSetSearchString];
             }
-            [myTextFinder performAction:menuItem.tag];
+            [myTextFinder performAction:menuItem.tag];            
         }
     }
+}
+
+- (IBAction) maketTextStandardSize:(id)sender
+{
+    [myWebView makeTextStandardSize:sender];
+}
+
+- (IBAction) makeTextLarger:(id)sender
+{
+    [myWebView makeTextLarger:sender];
+}
+
+- (IBAction) makeTextSmaller:(id)sender
+{
+    [myWebView makeTextSmaller:sender];
 }
 
 /**
@@ -291,7 +306,7 @@ static BOOL mSearchInteractions = false;
  - setUIDelegate
  - add the following function
  */
-- (void) webView: (WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message
+- (void) webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message
 {
     NSAlert* jsAlert = [NSAlert alertWithMessageText:@"JavaScript"
                                        defaultButton:@"OK"
