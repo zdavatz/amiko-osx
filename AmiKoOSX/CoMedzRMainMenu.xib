@@ -79,6 +79,22 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="UbO-F8-UYB"/>
+                            <menuItem title="Taille standard..." tag="5" keyEquivalent="0" id="IA7-ky-HLg">
+                                <connections>
+                                    <action selector="makeTextStandardSize:" target="-1" id="odq-NT-ohj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom avant..." tag="5" keyEquivalent="+" id="KOf-au-ZD8">
+                                <connections>
+                                    <action selector="makeTextLarger:" target="-1" id="g1n-DU-MvR"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom arrière..." tag="5" keyEquivalent="-" id="Kg1-zz-6Lv">
+                                <connections>
+                                    <action selector="makeTextSmaller:" target="-1" id="MaX-Nc-tRS"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Ylf-dP-YSO"/>
                             <menuItem title="Imprimer Notice Infopro..." keyEquivalent="p" id="551">
                                 <connections>
                                     <action selector="printDocument:" target="-1" id="556"/>
