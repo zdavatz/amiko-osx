@@ -286,7 +286,7 @@ static BOOL mSearchInteractions = false;
     }
 }
 
-- (IBAction) maketTextStandardSize:(id)sender
+- (IBAction) makeTextStandardSize:(id)sender
 {
     [myWebView makeTextStandardSize:sender];
 }

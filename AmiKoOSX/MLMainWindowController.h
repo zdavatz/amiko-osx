@@ -76,7 +76,7 @@ extern NSString* const APP_ID;
 - (IBAction) sendFeedback:(id)sender;
 - (IBAction) shareApp:(id)sender;
 - (IBAction) rateApp:(id)sender;
-- (IBAction) maketTextStandardSize:(id)sender;
+- (IBAction) makeTextStandardSize:(id)sender;
 - (IBAction) makeTextLarger:(id)sender;
 - (IBAction) makeTextSmaller:(id)sender;
 

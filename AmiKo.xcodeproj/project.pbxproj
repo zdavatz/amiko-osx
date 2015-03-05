@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9310EB361AA88FE100C0EB9B /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9310EB381AA88FE100C0EB9B /* AmiKoMainMenu.xib */; };
 		D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */; };
 		D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
 		D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */; };
@@ -168,7 +169,6 @@
 		D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
 		D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
 		D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD317E3888700B66B27 /* MLAmiKoMainWindow.xib */; };
-		D5E91BAE17E5E8E400B66B27 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD917E3956C00B66B27 /* AmiKoMainMenu.xib */; };
 		D5E91BAF17E5E8E400B66B27 /* Credits-fr.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */; };
 		D5E91BB717E5E8E800B66B27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC68C17C912FF00EBEF39 /* main.m */; };
 		D5E91BB817E5E8E800B66B27 /* MLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC69317C912FF00EBEF39 /* MLAppDelegate.m */; };
@@ -238,6 +238,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9310EB371AA88FE100C0EB9B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amikoosx_splash_1000x670.png; sourceTree = "<group>"; };
 		D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comedosx_splash_1000x670.png; sourceTree = "<group>"; };
 		D536126517E770A80087B132 /* amiko.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = amiko.iconset; sourceTree = "<group>"; };
@@ -286,7 +287,6 @@
 		D5E91AD317E3888700B66B27 /* MLAmiKoMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKoMainWindow.xib; sourceTree = "<group>"; };
 		D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoMedzRMainMenu.xib; sourceTree = "<group>"; };
 		D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoMedMainMenu.xib; sourceTree = "<group>"; };
-		D5E91AD917E3956C00B66B27 /* AmiKoMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		D5E91B5517E4C6C100B66B27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = "en.lproj/Credits-fr.rtf"; sourceTree = "<group>"; };
 		D5E91B8417E5E24000B66B27 /* AmiKo-zR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AmiKo-zR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-zR-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -423,7 +423,7 @@
 		D5E91B3717E39C1100B66B27 /* MainNibs */ = {
 			isa = PBXGroup;
 			children = (
-				D5E91AD917E3956C00B66B27 /* AmiKoMainMenu.xib */,
+				9310EB381AA88FE100C0EB9B /* AmiKoMainMenu.xib */,
 				D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */,
 				D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */,
 				D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */,
@@ -795,7 +795,7 @@
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
 				D53877821A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
-				D5E91BAE17E5E8E400B66B27 /* AmiKoMainMenu.xib in Resources */,
+				9310EB361AA88FE100C0EB9B /* AmiKoMainMenu.xib in Resources */,
 				D5E91BAF17E5E8E400B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
@@ -1008,6 +1008,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		9310EB381AA88FE100C0EB9B /* AmiKoMainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9310EB371AA88FE100C0EB9B /* en */,
+			);
+			name = AmiKoMainMenu.xib;
+			sourceTree = "<group>";
+		};
 		D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1075,7 +1083,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1094,7 +1101,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

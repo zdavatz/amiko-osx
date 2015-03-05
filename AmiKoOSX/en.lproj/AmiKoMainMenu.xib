@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
@@ -57,7 +57,6 @@
                     <menu key="submenu" title="Datei" id="81">
                         <items>
                             <menuItem title="In Fachinformation suchen" id="XgX-Op-cTu">
-                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="In Fachinformation suchen" id="SQZ-c8-pmH">
                                     <items>
                                         <menuItem title="Suchen..." tag="1" keyEquivalent="f" id="OKR-aa-8kP">
@@ -65,13 +64,23 @@
                                                 <action selector="performFindAction:" target="-1" id="a7T-DA-y60"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Nächster Treffer..." tag="2" keyEquivalent="g" id="N6Q-Uu-VdU"/>
-                                        <menuItem title="Vorheriger Treffer..." tag="3" keyEquivalent="G" id="OOG-n8-IlT"/>
+                                        <menuItem title="Nächster Treffer..." tag="2" id="N6Q-Uu-VdU">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Vorheriger Treffer..." tag="3" id="OOG-n8-IlT">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="NbF-VN-IM4"/>
-                            <menuItem title="Standardgrösse..." tag="5" keyEquivalent="0" id="a1B-cX-QPv">
+                            <menuItem isSeparatorItem="YES" tag="-1" id="NbF-VN-IM4"/>
+                            <menuItem title="Standardgrösse..." tag="4" keyEquivalent="0" id="a1B-cX-QPv">
                                 <connections>
                                     <action selector="makeTextStandardSize:" target="-1" id="AyE-xI-miB"/>
                                 </connections>
@@ -81,29 +90,29 @@
                                     <action selector="makeTextLarger:" target="-1" id="9IA-b7-U9O"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Text verkleinern..." tag="5" keyEquivalent="-" id="K7i-NM-In7">
+                            <menuItem title="Text verkleinern..." tag="6" keyEquivalent="-" id="K7i-NM-In7">
                                 <connections>
                                     <action selector="makeTextSmaller:" target="-1" id="mmX-K6-wtz"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="8pQ-6p-PFv"/>
-                            <menuItem title="Fachinformation drucken..." tag="5" keyEquivalent="p" id="dmj-qe-rdW">
+                            <menuItem isSeparatorItem="YES" tag="-1" id="8pQ-6p-PFv"/>
+                            <menuItem title="Fachinformation drucken..." tag="7" keyEquivalent="p" id="dmj-qe-rdW">
                                 <connections>
                                     <action selector="printDocument:" target="-1" id="VQi-wt-Fgf"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Suchresultat drucken..." tag="6" keyEquivalent="t" id="78">
+                            <menuItem title="Suchresultat drucken..." tag="8" keyEquivalent="t" id="78">
                                 <connections>
                                     <action selector="printSearchResult:" target="-1" id="554"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="ld7-WO-ECc"/>
-                            <menuItem title="Aktualisieren via Internet" tag="7" keyEquivalent="a" id="sQD-fz-4he">
+                            <menuItem isSeparatorItem="YES" tag="-1" id="ld7-WO-ECc"/>
+                            <menuItem title="Aktualisieren via Internet" tag="9" keyEquivalent="a" id="sQD-fz-4he">
                                 <connections>
                                     <action selector="updateAipsDatabase:" target="-1" id="CYl-0r-8uP"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Aktualisieren via Datei" tag="8" keyEquivalent="l" id="JrV-kr-dKG">
+                            <menuItem title="Aktualisieren via Datei" tag="10" keyEquivalent="l" id="JrV-kr-dKG">
                                 <connections>
                                     <action selector="loadAipsDatabase:" target="-1" id="0PG-Ua-WCB"/>
                                 </connections>
@@ -179,7 +188,7 @@
         </menu>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="371">
             <rect key="contentRect" x="335" y="390" width="960" height="640"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="960" height="640"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -205,6 +214,7 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
+        <userDefaultsController representsSharedInstance="YES" id="kna-vu-lKh"/>
     </objects>
     <resources>
         <image name="amikoosx_splash_1000x670" width="1000" height="670"/>
