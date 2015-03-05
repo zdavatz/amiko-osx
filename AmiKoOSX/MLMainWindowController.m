@@ -277,11 +277,13 @@ static BOOL mSearchInteractions = false;
     if ([[myWebView mainFrame] dataSource]!=nil) {
         if ([sender isKindOfClass:[NSMenuItem class]] ) {
             NSMenuItem *menuItem = (NSMenuItem*)sender;
-            if (menuItem.tag == NSTextFinderActionShowFindInterface) {
-                // This is a special tag
-                [myTextFinder performAction:NSTextFinderActionSetSearchString];
+            if ([myTextFinder validateAction:menuItem.tag]) {
+                if (menuItem.tag == NSTextFinderActionShowFindInterface) {
+                    // This is a special tag
+                    [myTextFinder performAction:NSTextFinderActionSetSearchString];
+                }
+                [myTextFinder performAction:menuItem.tag];
             }
-            [myTextFinder performAction:menuItem.tag];            
         }
     }
 }

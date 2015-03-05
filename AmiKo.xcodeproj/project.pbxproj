@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9310EB361AA88FE100C0EB9B /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9310EB381AA88FE100C0EB9B /* AmiKoMainMenu.xib */; };
 		D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */; };
 		D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
 		D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */; };
@@ -84,6 +83,7 @@
 		D545C91318A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
 		D545C91418A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
 		D57AB17A193E6B68000DB3F2 /* deleterow.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D59774471AA8F6FC001AAC31 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59774461AA8F6FC001AAC31 /* AmiKoMainMenu.xib */; };
 		D5A22508193FB19F0078FEFF /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
 		D5A22509193FB19F0078FEFF /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
 		D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
@@ -238,7 +238,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9310EB371AA88FE100C0EB9B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amikoosx_splash_1000x670.png; sourceTree = "<group>"; };
 		D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comedosx_splash_1000x670.png; sourceTree = "<group>"; };
 		D536126517E770A80087B132 /* amiko.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = amiko.iconset; sourceTree = "<group>"; };
@@ -272,6 +271,7 @@
 		D545C90F18A5725900491511 /* MLCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomView.h; sourceTree = "<group>"; };
 		D545C91018A5725900491511 /* MLCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomView.m; sourceTree = "<group>"; };
 		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		D59774461AA8F6FC001AAC31 /* AmiKoMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		D5A22507193FB19F0078FEFF /* 216-compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "216-compose.png"; sourceTree = "<group>"; };
 		D5AB1772180886810050DC12 /* 28-star-ye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star-ye.png"; sourceTree = "<group>"; };
 		D5B0105B1927C451007BE838 /* interactions_css.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = interactions_css.css; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
@@ -423,7 +423,7 @@
 		D5E91B3717E39C1100B66B27 /* MainNibs */ = {
 			isa = PBXGroup;
 			children = (
-				9310EB381AA88FE100C0EB9B /* AmiKoMainMenu.xib */,
+				D59774461AA8F6FC001AAC31 /* AmiKoMainMenu.xib */,
 				D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */,
 				D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */,
 				D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */,
@@ -715,6 +715,9 @@
 					D5E91B8617E5E8E400B66B27 = {
 						DevelopmentTeam = 4B37356EGR;
 					};
+					D5E91BB517E5E8E800B66B27 = {
+						DevelopmentTeam = 4B37356EGR;
+					};
 				};
 			};
 			buildConfigurationList = D5EBC67817C912FF00EBEF39 /* Build configuration list for PBXProject "AmiKo" */;
@@ -795,9 +798,9 @@
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
 				D53877821A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
-				9310EB361AA88FE100C0EB9B /* AmiKoMainMenu.xib in Resources */,
 				D5E91BAF17E5E8E400B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
+				D59774471AA8F6FC001AAC31 /* AmiKoMainMenu.xib in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				D536126617E770A80087B132 /* amiko.iconset in Resources */,
 				D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */,
@@ -1008,14 +1011,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9310EB381AA88FE100C0EB9B /* AmiKoMainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9310EB371AA88FE100C0EB9B /* en */,
-			);
-			name = AmiKoMainMenu.xib;
-			sourceTree = "<group>";
-		};
 		D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1083,6 +1078,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1101,6 +1097,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
