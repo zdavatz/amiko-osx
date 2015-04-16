@@ -252,8 +252,8 @@ static NSString *FULL_TABLE = nil;
  */
 - (NSArray *) searchTitle:(NSString *)title
 {
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%'",
-                       SHORT_TABLE, DATABASE_TABLE, KEY_TITLE, title];
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%' or %@ like '%%%@%%'",
+                       SHORT_TABLE, DATABASE_TABLE, KEY_TITLE, title, KEY_TITLE, title];
     NSArray *results = [mySqliteDb performQuery:query];
     
     return [self extractShortMedInfoFrom:results];
