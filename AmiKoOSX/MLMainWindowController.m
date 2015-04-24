@@ -1440,10 +1440,11 @@ static BOOL mSearchInteractions = false;
     
     if ([mMedBasket count]>1) {
         // Add note to indicate that there are no interactions
-        if ([MLUtilities isGermanApp])
-            topNote = @"<fieldset><legend>Bekannte Interaktionen</legend></fieldset><p>Zur Zeit sind keine Interaktionen zwischen diesen Medikamenten in der EPha.ch-Datenbank vorhanden. Weitere Informationen finden Sie in der Fachinformation.</p>";
-        else  if ([MLUtilities isFrenchApp])
-            topNote = @"<fieldset><legend>Interactions Connues</legend></fieldset><p>Il n’y a aucune information dans la banque de données EPha.ch à propos d’une interaction entre les médicaments sélectionnés. Veuillez consulter les informations professionelles.</p>";
+        if ([MLUtilities isGermanApp]) {
+            topNote = @"<fieldset><legend>Bekannte Interaktionen</legend></fieldset><p class=\"paragraph0\">Zur Zeit sind keine Interaktionen zwischen diesen Medikamenten in der EPha.ch-Datenbank vorhanden. Weitere Informationen finden Sie in der Fachinformation.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Interaktion melden\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>";
+        } else if ([MLUtilities isFrenchApp]) {
+            topNote = @"<fieldset><legend>Interactions Connues</legend></fieldset><p class=\"paragraph0\">Il n’y a aucune information dans la banque de données EPha.ch à propos d’une interaction entre les médicaments sélectionnés. Veuillez consulter les informations professionelles.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Signaler une interaction\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>";
+        }
     }
     
     return topNote;
@@ -1467,10 +1468,6 @@ static BOOL mSearchInteractions = false;
     
     // Check if there are meds in the "Medikamentenkorb"
     if ([mMedBasket count]>1) {
-        if ([MLUtilities isGermanApp])
-            [interactionStr appendString:@"<fieldset><legend>Bekannte Interaktionen</legend></fieldset>"];
-        else if ([MLUtilities isFrenchApp])
-            [interactionStr appendString:@"<fieldset><legend>Interactions Connues</legend></fieldset>"];
         // First sort them alphabetically
         NSArray *sortedNames = [[mMedBasket allKeys] sortedArrayUsingSelector: @selector(compare:)];
         // Big loop
@@ -1517,10 +1514,7 @@ static BOOL mSearchInteractions = false;
             }
         }
         if ([sectionTitles count]<2) {
-            if ([MLUtilities isGermanApp])
-                [interactionStr appendString:@"<p class=\"paragraph0\">Zur Zeit sind keine Interaktionen zwischen diesen Medikamenten bekannt.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Interaktion melden\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>"];
-            else if ([MLUtilities isFrenchApp])
-                [interactionStr appendString:@"<p class=\"paragraph0\">Jusqu’ici il n’y pas d’interaction connue entre les médicaments.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Signaler une interaction\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>"];
+            [interactionStr appendString:[self topNoteHtml]];
         } else if ([sectionTitles count]>2) {
             [interactionStr appendString:@"<br>"];
         }
