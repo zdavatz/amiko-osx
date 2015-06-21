@@ -195,13 +195,13 @@ static NSString *FULL_TABLE = nil;
     MLCustomURLConnection *interConn = [[MLCustomURLConnection alloc] init];
  
     if ([language isEqualToString:@"de"]) {
-        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"]) {
+        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"] || [owner isEqualToString:@"desitin"]) {
             [reportConn downloadFileWithName:@"amiko_report_de.html" andModal:NO];
             [interConn downloadFileWithName:@"drug_interactions_csv_de.zip" andModal:NO];
             [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
         }
     } else if ([language isEqualToString:@"fr"]) {
-        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"]) {
+        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"] || [owner isEqualToString:@"desitin"]) {
             [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:NO];
             [interConn downloadFileWithName:@"drug_interactions_csv_fr.zip" andModal:NO];
             [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:YES];

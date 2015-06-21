@@ -32,10 +32,16 @@ extern NSString* const APP_ID;
 #elif defined (AMIKO_ZR)
 extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
+#elif defined (AMIKO_DESITIN)
+extern NSString* const APP_NAME;
+extern NSString* const APP_ID;
 #elif defined (COMED)
 extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
 #elif defined (COMED_ZR)
+extern NSString* const APP_NAME;
+extern NSString* const APP_ID;
+#elif defined (COMED_DESITIN)
 extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
 #else

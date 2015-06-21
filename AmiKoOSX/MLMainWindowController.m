@@ -130,10 +130,14 @@ static BOOL mSearchInteractions = false;
         self = [super initWithWindowNibName:@"MLAmiKoMainWindow"];
     else if ([APP_NAME isEqualToString:@"AmiKo-zR"])
         self = [super initWithWindowNibName:@"MLAmiKozRMainWindow"];
+    else if ([APP_NAME isEqualToString:@"AmiKo-Desitin"])
+        self = [super initWithWindowNibName:@"MLAmiKoDesitinMainWindow"];
     else if ([APP_NAME isEqualToString:@"CoMed"])
         self = [super initWithWindowNibName:@"MLCoMedMainWindow"];
     else if ([APP_NAME isEqualToString:@"CoMed-zR"])
         self = [super initWithWindowNibName:@"MLCoMedzRMainWindow"];
+    else if ([APP_NAME isEqualToString:@"CoMed-Desitin"])
+        self = [super initWithWindowNibName:@"MLCoMedDesitinMainWindow"];
     else return nil;
     
     if (!self)
@@ -792,6 +796,9 @@ static BOOL mSearchInteractions = false;
         NSURL *helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     } else if ([[MLUtilities appOwner] isEqualToString:@"ywesee"]) {
+        NSURL *helpFile = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/amiko/id%@?mt=12", APP_ID]];
+        [[NSWorkspace sharedWorkspace] openURL:helpFile];
+    } else if ([[MLUtilities appOwner] isEqualToString:@"desitin"]) {
         NSURL *helpFile = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/amiko/id%@?mt=12", APP_ID]];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     }

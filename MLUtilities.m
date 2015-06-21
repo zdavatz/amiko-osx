@@ -29,11 +29,17 @@ NSString* const APP_ID = @"708142753";
 #elif defined (AMIKO_ZR)
 NSString* const APP_NAME = @"AmiKo-zR";
 NSString* const APP_ID = @"708142753";
+#elif defined (AMIKO_DESITIN)
+NSString* const APP_NAME = @"AmiKo-Desitin";
+NSString* const APP_ID = @"708142753";
 #elif defined (COMED)
 NSString* const APP_NAME = @"CoMed";
 NSString* const APP_ID = @"710472327";
 #elif defined (COMED_ZR)
 NSString* const APP_NAME = @"CoMed-zR";
+NSString* const APP_ID = @"710472327";
+#elif defined (COMED_DESITIN)
+NSString* const APP_NAME = @"CoMed-Desitin";
 NSString* const APP_ID = @"710472327";
 #else
 NSString* const APP_NAME = @"AmiKo";
@@ -44,23 +50,20 @@ NSString* const APP_ID = @"708142753";
 
 + (NSString *) appOwner
 {
-    if ([APP_NAME isEqualToString:@"AmiKo"]
-        || [APP_NAME isEqualToString:@"CoMed"])
+    if ([APP_NAME isEqualToString:@"AmiKo"] || [APP_NAME isEqualToString:@"CoMed"])
         return @"ywesee";
-    else if ([APP_NAME isEqualToString:@"AmiKo-zR"]
-             || [APP_NAME isEqualToString:@"CoMed-zR"])
+    else if ([APP_NAME isEqualToString:@"AmiKo-zR"] || [APP_NAME isEqualToString:@"CoMed-zR"])
         return @"zurrose";
-    
+    else if ([APP_NAME isEqualToString:@"AmiKo-Desitin"] || [APP_NAME isEqualToString:@"CoMed-Desitin"])
+        return @"desitin";
     return nil;
 }
 
 + (NSString *) appLanguage
 {
-    if ([APP_NAME isEqualToString:@"AmiKo"]
-        || [APP_NAME isEqualToString:@"AmiKo-zR"])
+    if ([APP_NAME isEqualToString:@"AmiKo"] || [APP_NAME isEqualToString:@"AmiKo-zR"] || [APP_NAME isEqualToString:@"AmiKo-Desitin"])
         return @"de";
-    else if ([APP_NAME isEqualToString:@"CoMed"]
-             || [APP_NAME isEqualToString:@"CoMed-zR"])
+    else if ([APP_NAME isEqualToString:@"CoMed"] || [APP_NAME isEqualToString:@"CoMed-zR"] || [APP_NAME isEqualToString:@"CoMed-Desitin"])
         return @"fr";
     
     return nil;
@@ -78,11 +81,9 @@ NSString* const APP_ID = @"708142753";
 
 + (NSString *) notSpecified
 {
-    if ([APP_NAME isEqualToString:@"AmiKo"]
-        || [APP_NAME isEqualToString:@"AmiKo-zR"])
+    if ([[self appLanguage] isEqualToString:@"de"])
         return @"k.A.";
-    else if ([APP_NAME isEqualToString:@"CoMed"]
-             || [APP_NAME isEqualToString:@"CoMed-zR"])
+    else if ([[self appLanguage] isEqualToString:@"fr"])
         return @"n.s.";
     
     return nil;
