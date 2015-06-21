@@ -4,29 +4,67 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AmiKo-desitin.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>AmiKoOSX-zR.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
 		<key>AmiKoOSX.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>CoMed-desitin.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>CoMedOSX-zR.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
 		<key>CoMedOSX.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>D5E730BA1B3346F4007771D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D5E730CC1B3346F5007771D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D5E731101B33480A007771D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D5E731541B334829007771D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D5E91ADB17E398CB00B66B27</key>
 		<dict>
 			<key>primary</key>

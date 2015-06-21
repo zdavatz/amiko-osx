@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MLMainWindowController">
@@ -447,7 +447,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="4"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="7"/>
-                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="AmiKo" paletteLabel="AmiKo" toolTip="AmiKo" tag="4" image="app_icon_512x512" id="9">
+                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="AmiKo" paletteLabel="AmiKo" toolTip="AmiKo" tag="4" image="desitin" id="9">
                         <connections>
                             <action selector="showAboutPanel:" target="-2" id="1639"/>
                         </connections>
@@ -466,13 +466,13 @@
         <imageView id="1535" customClass="MLSplashScreen">
             <rect key="frame" x="0.0" y="0.0" width="1006" height="676"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="app_icon_512x512" id="1536"/>
+            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="desitin" id="1536"/>
         </imageView>
     </objects>
     <resources>
         <image name="28-star-gy" width="26" height="26"/>
         <image name="28-star-ye" width="26" height="26"/>
-        <image name="app_icon_512x512" width="512" height="512"/>
+        <image name="desitin" width="512" height="512"/>
         <image name="favorites" width="418.90908813476562" height="418.90908813476562"/>
         <image name="interactions" width="17.130111694335938" height="17.130111694335938"/>
         <image name="maindb" width="121.26316070556641" height="121.26316070556641"/>

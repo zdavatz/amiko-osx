@@ -11,8 +11,6 @@
 		D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
 		D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */; };
 		D52A0D7A17EDC60E003BF272 /* AmiKo.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */; };
-		D536126617E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
-		D536126717E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D536126817E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D536126917E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877771A9E5AE700AEFDB4 /* favorites@2x.png */; };
@@ -90,6 +88,21 @@
 		D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
 		D5AB1776180886810050DC12 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
+		D5AE31791B36F078006BC60E /* desitin.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31781B36F078006BC60E /* desitin.iconset */; };
+		D5AE317A1B36F078006BC60E /* desitin.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31781B36F078006BC60E /* desitin.iconset */; };
+		D5AE31811B36FAE6006BC60E /* CoMed.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */; };
+		D5AE31821B37203D006BC60E /* desitin.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31781B36F078006BC60E /* desitin.iconset */; };
+		D5AE31831B37203E006BC60E /* desitin.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31781B36F078006BC60E /* desitin.iconset */; };
+		D5AE31851B372085006BC60E /* desitin_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31841B372085006BC60E /* desitin_icon_512x512.png */; };
+		D5AE31861B372085006BC60E /* desitin_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31841B372085006BC60E /* desitin_icon_512x512.png */; };
+		D5AE31871B372093006BC60E /* desitin_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31841B372085006BC60E /* desitin_icon_512x512.png */; };
+		D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31841B372085006BC60E /* desitin_icon_512x512.png */; };
+		D5AE31891B3720F9006BC60E /* AmiKo-desitin-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E731531B33480A007771D7 /* AmiKo-desitin-Info.plist */; };
+		D5AE318A1B3720FD006BC60E /* CoMed-desitin-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E731971B334829007771D7 /* CoMed-desitin-Info.plist */; };
+		D5AE318B1B372100006BC60E /* AmiKo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */; };
+		D5AE318C1B372103006BC60E /* CoMed-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */; };
+		D5AE318D1B372106006BC60E /* AmiKo-zR-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */; };
+		D5AE318E1B372108006BC60E /* CoMed-zR-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68817C912FF00EBEF39 /* CoMed-zR-Info.plist */; };
 		D5B0105C1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
 		D5B0105D1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
 		D5B0105E1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
@@ -115,6 +128,121 @@
 		D5DD5769193B4EB40094244E /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DD5765193B4EB40094244E /* 218-trash2.png */; };
 		D5DD576B193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */; };
 		D5DD576C193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */; };
+		D5E731121B33480A007771D7 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8E01898527C00491511 /* unzip.c */; };
+		D5E731131B33480A007771D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC68C17C912FF00EBEF39 /* main.m */; };
+		D5E731141B33480A007771D7 /* MLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC69317C912FF00EBEF39 /* MLAppDelegate.m */; };
+		D5E731151B33480A007771D7 /* MLMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6A217C913B100EBEF39 /* MLMainWindowController.m */; };
+		D5E731161B33480A007771D7 /* MLProgressSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */; };
+		D5E731171B33480A007771D7 /* MLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877931AA37CC900AEFDB4 /* MLUtilities.m */; };
+		D5E731181B33480A007771D7 /* MLCustomWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C90A18A4286B00491511 /* MLCustomWebView.m */; };
+		D5E731191B33480A007771D7 /* SHCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877991AA386AC00AEFDB4 /* SHCWebView.m */; };
+		D5E7311A1B33480A007771D7 /* deleterow.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D5E7311B1B33480A007771D7 /* MLSQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6AC17C9202600EBEF39 /* MLSQLiteDatabase.m */; };
+		D5E7311C1B33480A007771D7 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8E21898527C00491511 /* zip.c */; };
+		D5E7311D1B33480A007771D7 /* MLSearchWebView.js in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B017C9205E00EBEF39 /* MLSearchWebView.js */; };
+		D5E7311E1B33480A007771D7 /* MLDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B517C9206800EBEF39 /* MLDBAdapter.m */; };
+		D5E7311F1B33480A007771D7 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8DE1898527C00491511 /* mztools.c */; };
+		D5E731201B33480A007771D7 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5FB9EC319351C700050B1B1 /* WebViewJavascriptBridge.m */; };
+		D5E731211B33480A007771D7 /* MLMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B717C9206800EBEF39 /* MLMedication.m */; };
+		D5E731221B33480A007771D7 /* MLDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6BB17C9207200EBEF39 /* MLDataStore.m */; };
+		D5E731231B33480A007771D7 /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
+		D5E731241B33480A007771D7 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
+		D5E731251B33480A007771D7 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8DC1898527C00491511 /* ioapi.c */; };
+		D5E731261B33480A007771D7 /* MLItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6C417CBBCE900EBEF39 /* MLItemCellView.m */; };
+		D5E731271B33480A007771D7 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C8D81898527300491511 /* SSZipArchive.m */; };
+		D5E731281B33480A007771D7 /* MLSearchWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6CC17D0F08700EBEF39 /* MLSearchWebView.m */; };
+		D5E731291B33480A007771D7 /* MLCustomTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6DE17D5113700EBEF39 /* MLCustomTableRowView.m */; };
+		D5E7312A1B33480A007771D7 /* MLSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D539C10517DCED1D00759260 /* MLSplashScreen.m */; };
+		D5E7312C1B33480A007771D7 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D54AB37518984B5800637257 /* libz.1.2.5.dylib */; };
+		D5E7312D1B33480A007771D7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D541211817DFA96800ACDB81 /* QuartzCore.framework */; };
+		D5E7312E1B33480A007771D7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBC6C617CD21C200EBEF39 /* WebKit.framework */; };
+		D5E7312F1B33480A007771D7 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBC6BD17C9247A00EBEF39 /* libsqlite3.0.dylib */; };
+		D5E731301B33480A007771D7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBC68017C912FF00EBEF39 /* Cocoa.framework */; };
+		D5E731321B33480A007771D7 /* deleterow.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D5E731331B33480A007771D7 /* MLSearchWebView.js in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6B017C9205E00EBEF39 /* MLSearchWebView.js */; };
+		D5E731341B33480A007771D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */; };
+		D5E731351B33480A007771D7 /* Credits-de.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68F17C912FF00EBEF39 /* Credits-de.rtf */; };
+		D5E731361B33480A007771D7 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
+		D5E731371B33480A007771D7 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
+		D5E731381B33480A007771D7 /* amiko_stylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6C917CFDD7000EBEF39 /* amiko_stylesheet.css */; };
+		D5E731391B33480A007771D7 /* 28-star-gy.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6CF17D256EC00EBEF39 /* 28-star-gy.png */; };
+		D5E7313A1B33480A007771D7 /* interactions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877781A9E5AE700AEFDB4 /* interactions@2x.png */; };
+		D5E7313B1B33480A007771D7 /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DD5765193B4EB40094244E /* 218-trash2.png */; };
+		D5E7313C1B33480A007771D7 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
+		D5E7313D1B33480A007771D7 /* app_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */; };
+		D5E7313E1B33480A007771D7 /* 217-trash.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DD5760193B49260094244E /* 217-trash.png */; };
+		D5E7313F1B33480A007771D7 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
+		D5E731401B33480A007771D7 /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
+		D5E731411B33480A007771D7 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FB9EC219351C700050B1B1 /* WebViewJavascriptBridge.js.txt */; };
+		D5E731421B33480A007771D7 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
+		D5E731441B33480A007771D7 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
+		D5E731451B33480A007771D7 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
+		D5E731461B33480A007771D7 /* favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877771A9E5AE700AEFDB4 /* favorites@2x.png */; };
+		D5E731471B33480A007771D7 /* Credits-fr.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */; };
+		D5E731481B33480A007771D7 /* amiko_db_full_idx_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */; };
+		D5E7314A1B33480A007771D7 /* amiko_report_de.html in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BF417E6065C00B66B27 /* amiko_report_de.html */; };
+		D5E7314C1B33480A007771D7 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */; };
+		D5E7314D1B33480A007771D7 /* AmiKo.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */; };
+		D5E7314E1B33480A007771D7 /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
+		D5E731561B334829007771D7 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8E01898527C00491511 /* unzip.c */; };
+		D5E731571B334829007771D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC68C17C912FF00EBEF39 /* main.m */; };
+		D5E731581B334829007771D7 /* MLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC69317C912FF00EBEF39 /* MLAppDelegate.m */; };
+		D5E731591B334829007771D7 /* MLMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6A217C913B100EBEF39 /* MLMainWindowController.m */; };
+		D5E7315A1B334829007771D7 /* MLProgressSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */; };
+		D5E7315B1B334829007771D7 /* MLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877931AA37CC900AEFDB4 /* MLUtilities.m */; };
+		D5E7315C1B334829007771D7 /* MLCustomWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C90A18A4286B00491511 /* MLCustomWebView.m */; };
+		D5E7315D1B334829007771D7 /* SHCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877991AA386AC00AEFDB4 /* SHCWebView.m */; };
+		D5E7315E1B334829007771D7 /* deleterow.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D5E7315F1B334829007771D7 /* MLSQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6AC17C9202600EBEF39 /* MLSQLiteDatabase.m */; };
+		D5E731601B334829007771D7 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8E21898527C00491511 /* zip.c */; };
+		D5E731611B334829007771D7 /* MLSearchWebView.js in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B017C9205E00EBEF39 /* MLSearchWebView.js */; };
+		D5E731621B334829007771D7 /* MLDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B517C9206800EBEF39 /* MLDBAdapter.m */; };
+		D5E731631B334829007771D7 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8DE1898527C00491511 /* mztools.c */; };
+		D5E731641B334829007771D7 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5FB9EC319351C700050B1B1 /* WebViewJavascriptBridge.m */; };
+		D5E731651B334829007771D7 /* MLMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B717C9206800EBEF39 /* MLMedication.m */; };
+		D5E731661B334829007771D7 /* MLDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6BB17C9207200EBEF39 /* MLDataStore.m */; };
+		D5E731671B334829007771D7 /* MLCustomURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */; };
+		D5E731681B334829007771D7 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
+		D5E731691B334829007771D7 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = D545C8DC1898527C00491511 /* ioapi.c */; };
+		D5E7316A1B334829007771D7 /* MLItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6C417CBBCE900EBEF39 /* MLItemCellView.m */; };
+		D5E7316B1B334829007771D7 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C8D81898527300491511 /* SSZipArchive.m */; };
+		D5E7316C1B334829007771D7 /* MLSearchWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6CC17D0F08700EBEF39 /* MLSearchWebView.m */; };
+		D5E7316D1B334829007771D7 /* MLCustomTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6DE17D5113700EBEF39 /* MLCustomTableRowView.m */; };
+		D5E7316E1B334829007771D7 /* MLSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D539C10517DCED1D00759260 /* MLSplashScreen.m */; };
+		D5E731701B334829007771D7 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D54AB37518984B5800637257 /* libz.1.2.5.dylib */; };
+		D5E731711B334829007771D7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D541211817DFA96800ACDB81 /* QuartzCore.framework */; };
+		D5E731721B334829007771D7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBC6C617CD21C200EBEF39 /* WebKit.framework */; };
+		D5E731731B334829007771D7 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBC6BD17C9247A00EBEF39 /* libsqlite3.0.dylib */; };
+		D5E731741B334829007771D7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBC68017C912FF00EBEF39 /* Cocoa.framework */; };
+		D5E731761B334829007771D7 /* deleterow.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* deleterow.js */; };
+		D5E731771B334829007771D7 /* MLSearchWebView.js in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6B017C9205E00EBEF39 /* MLSearchWebView.js */; };
+		D5E731781B334829007771D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */; };
+		D5E731791B334829007771D7 /* Credits-de.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68F17C912FF00EBEF39 /* Credits-de.rtf */; };
+		D5E7317A1B334829007771D7 /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
+		D5E7317B1B334829007771D7 /* 28-star-ye.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AB1772180886810050DC12 /* 28-star-ye.png */; };
+		D5E7317C1B334829007771D7 /* amiko_stylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6C917CFDD7000EBEF39 /* amiko_stylesheet.css */; };
+		D5E7317D1B334829007771D7 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
+		D5E7317E1B334829007771D7 /* interactions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877781A9E5AE700AEFDB4 /* interactions@2x.png */; };
+		D5E7317F1B334829007771D7 /* 28-star-gy.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6CF17D256EC00EBEF39 /* 28-star-gy.png */; };
+		D5E731801B334829007771D7 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FB9EC219351C700050B1B1 /* WebViewJavascriptBridge.js.txt */; };
+		D5E731811B334829007771D7 /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DD5765193B4EB40094244E /* 218-trash2.png */; };
+		D5E731821B334829007771D7 /* app_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */; };
+		D5E731831B334829007771D7 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */; };
+		D5E731841B334829007771D7 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
+		D5E731851B334829007771D7 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
+		D5E731881B334829007771D7 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
+		D5E731891B334829007771D7 /* favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877771A9E5AE700AEFDB4 /* favorites@2x.png */; };
+		D5E7318A1B334829007771D7 /* Credits-fr.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */; };
+		D5E7318B1B334829007771D7 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BF117E6061900B66B27 /* amiko_db_full_idx_fr.db */; };
+		D5E7318C1B334829007771D7 /* amiko_report_fr.html in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BFA17E6074D00B66B27 /* amiko_report_fr.html */; };
+		D5E7318E1B334829007771D7 /* drug_interactions_csv_fr.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */; };
+		D5E7318F1B334829007771D7 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
+		D5E731901B334829007771D7 /* 217-trash.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DD5760193B49260094244E /* 217-trash.png */; };
+		D5E731921B334829007771D7 /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
+		D5E7319E1B3351BA007771D7 /* MLAmiKoDesitinMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E7319D1B3351BA007771D7 /* MLAmiKoDesitinMainWindow.xib */; };
+		D5E731A01B3351DB007771D7 /* MLCoMedDesitinMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E7319F1B3351DB007771D7 /* MLCoMedDesitinMainWindow.xib */; };
+		D5E731A21B335229007771D7 /* AmiKoDesitinMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E731A11B335229007771D7 /* AmiKoDesitinMainMenu.xib */; };
+		D5E731A41B335234007771D7 /* CoMedDesitinMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E731A31B335234007771D7 /* CoMedDesitinMainMenu.xib */; };
 		D5E91AD017E387F100B66B27 /* MLCoMedzRMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91ACF17E387F100B66B27 /* MLCoMedzRMainWindow.xib */; };
 		D5E91AD617E3955300B66B27 /* CoMedzRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */; };
 		D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */; };
@@ -274,6 +402,8 @@
 		D59774461AA8F6FC001AAC31 /* AmiKoMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		D5A22507193FB19F0078FEFF /* 216-compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "216-compose.png"; sourceTree = "<group>"; };
 		D5AB1772180886810050DC12 /* 28-star-ye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star-ye.png"; sourceTree = "<group>"; };
+		D5AE31781B36F078006BC60E /* desitin.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = desitin.iconset; sourceTree = "<group>"; };
+		D5AE31841B372085006BC60E /* desitin_icon_512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desitin_icon_512x512.png; sourceTree = "<group>"; };
 		D5B0105B1927C451007BE838 /* interactions_css.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = interactions_css.css; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
 		D5B010601927C472007BE838 /* deleterow.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = deleterow.js; sourceTree = "<group>"; };
 		D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drug_interactions_csv_de.csv; sourceTree = "<group>"; };
@@ -282,6 +412,14 @@
 		D5DD5760193B49260094244E /* 217-trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "217-trash.png"; sourceTree = "<group>"; };
 		D5DD5765193B4EB40094244E /* 218-trash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2.png"; sourceTree = "<group>"; };
 		D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drug_interactions_csv_fr.csv; sourceTree = "<group>"; };
+		D5E731521B33480A007771D7 /* AmiKo-Desitin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AmiKo-Desitin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5E731531B33480A007771D7 /* AmiKo-desitin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AmiKo-desitin-Info.plist"; path = "/Users/maxl/Projects/Pharmax/MacOS/AmiKoOSX/AmiKo-desitin-Info.plist"; sourceTree = "<absolute>"; };
+		D5E731961B334829007771D7 /* CoMed-Desitin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoMed-Desitin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5E731971B334829007771D7 /* CoMed-desitin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CoMed-desitin-Info.plist"; path = "/Users/maxl/Projects/Pharmax/MacOS/AmiKoOSX/CoMed-desitin-Info.plist"; sourceTree = "<absolute>"; };
+		D5E7319D1B3351BA007771D7 /* MLAmiKoDesitinMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKoDesitinMainWindow.xib; sourceTree = "<group>"; };
+		D5E7319F1B3351DB007771D7 /* MLCoMedDesitinMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedDesitinMainWindow.xib; sourceTree = "<group>"; };
+		D5E731A11B335229007771D7 /* AmiKoDesitinMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKoDesitinMainMenu.xib; sourceTree = "<group>"; };
+		D5E731A31B335234007771D7 /* CoMedDesitinMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoMedDesitinMainMenu.xib; sourceTree = "<group>"; };
 		D5E91ACF17E387F100B66B27 /* MLCoMedzRMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedzRMainWindow.xib; sourceTree = "<group>"; };
 		D5E91AD117E3886500B66B27 /* MLCoMedMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedMainWindow.xib; sourceTree = "<group>"; };
 		D5E91AD317E3888700B66B27 /* MLAmiKoMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKoMainWindow.xib; sourceTree = "<group>"; };
@@ -345,6 +483,30 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D5E7312B1B33480A007771D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5E7312C1B33480A007771D7 /* libz.1.2.5.dylib in Frameworks */,
+				D5E7312D1B33480A007771D7 /* QuartzCore.framework in Frameworks */,
+				D5E7312E1B33480A007771D7 /* WebKit.framework in Frameworks */,
+				D5E7312F1B33480A007771D7 /* libsqlite3.0.dylib in Frameworks */,
+				D5E731301B33480A007771D7 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5E7316F1B334829007771D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5E731701B334829007771D7 /* libz.1.2.5.dylib in Frameworks */,
+				D5E731711B334829007771D7 /* QuartzCore.framework in Frameworks */,
+				D5E731721B334829007771D7 /* WebKit.framework in Frameworks */,
+				D5E731731B334829007771D7 /* libsqlite3.0.dylib in Frameworks */,
+				D5E731741B334829007771D7 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5E91B6517E5E24000B66B27 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,6 +589,8 @@
 				D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */,
 				D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */,
 				D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */,
+				D5E731A11B335229007771D7 /* AmiKoDesitinMainMenu.xib */,
+				D5E731A31B335234007771D7 /* CoMedDesitinMainMenu.xib */,
 			);
 			name = MainNibs;
 			sourceTree = "<group>";
@@ -438,6 +602,8 @@
 				D5E91AD117E3886500B66B27 /* MLCoMedMainWindow.xib */,
 				D5EBC6E617D79F2400EBEF39 /* MLAmiKozRMainWindow.xib */,
 				D5E91ACF17E387F100B66B27 /* MLCoMedzRMainWindow.xib */,
+				D5E7319D1B3351BA007771D7 /* MLAmiKoDesitinMainWindow.xib */,
+				D5E7319F1B3351DB007771D7 /* MLCoMedDesitinMainWindow.xib */,
 			);
 			name = MainWindows;
 			sourceTree = "<group>";
@@ -460,6 +626,8 @@
 				D5E91B8417E5E24000B66B27 /* AmiKo-zR.app */,
 				D5E91BB317E5E8E400B66B27 /* AmiKo.app */,
 				D5E91BE217E5E8E800B66B27 /* CoMed.app */,
+				D5E731521B33480A007771D7 /* AmiKo-Desitin.app */,
+				D5E731961B334829007771D7 /* CoMed-Desitin.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -511,6 +679,8 @@
 				D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */,
 				D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */,
 				D5EBC68817C912FF00EBEF39 /* CoMed-zR-Info.plist */,
+				D5E731531B33480A007771D7 /* AmiKo-desitin-Info.plist */,
+				D5E731971B334829007771D7 /* CoMed-desitin-Info.plist */,
 				D5EBC68F17C912FF00EBEF39 /* Credits-de.rtf */,
 				D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */,
 				D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */,
@@ -594,6 +764,9 @@
 		D5EBC6C817CFDD3800EBEF39 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D5AE31841B372085006BC60E /* desitin_icon_512x512.png */,
+				D5AE31781B36F078006BC60E /* desitin.iconset */,
+				D536126517E770A80087B132 /* amiko.iconset */,
 				D53877771A9E5AE700AEFDB4 /* favorites@2x.png */,
 				D53877781A9E5AE700AEFDB4 /* interactions@2x.png */,
 				D53877791A9E5AE700AEFDB4 /* maindb@2x.png */,
@@ -601,7 +774,6 @@
 				D5B0105B1927C451007BE838 /* interactions_css.css */,
 				D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */,
 				D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */,
-				D536126517E770A80087B132 /* amiko.iconset */,
 				D5E91BFA17E6074D00B66B27 /* amiko_report_fr.html */,
 				D5E91BF417E6065C00B66B27 /* amiko_report_de.html */,
 				D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */,
@@ -631,6 +803,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D5E731101B33480A007771D7 /* AmiKo-desitin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5E7314F1B33480A007771D7 /* Build configuration list for PBXNativeTarget "AmiKo-desitin" */;
+			buildPhases = (
+				D5E731111B33480A007771D7 /* Sources */,
+				D5E7312B1B33480A007771D7 /* Frameworks */,
+				D5E731311B33480A007771D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AmiKo-desitin";
+			productName = AmiKoOSX;
+			productReference = D5E731521B33480A007771D7 /* AmiKo-Desitin.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D5E731541B334829007771D7 /* CoMed-desitin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5E731931B334829007771D7 /* Build configuration list for PBXNativeTarget "CoMed-desitin" */;
+			buildPhases = (
+				D5E731551B334829007771D7 /* Sources */,
+				D5E7316F1B334829007771D7 /* Frameworks */,
+				D5E731751B334829007771D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoMed-desitin";
+			productName = AmiKoOSX;
+			productReference = D5E731961B334829007771D7 /* CoMed-Desitin.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D5E91B5717E5E24000B66B27 /* AmiKo-zR */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5E91B8117E5E24000B66B27 /* Build configuration list for PBXNativeTarget "AmiKo-zR" */;
@@ -709,6 +915,12 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Ywesee GmbH";
 				TargetAttributes = {
+					D5E731101B33480A007771D7 = {
+						DevelopmentTeam = 4B37356EGR;
+					};
+					D5E731541B334829007771D7 = {
+						DevelopmentTeam = 4B37356EGR;
+					};
 					D5E91B5717E5E24000B66B27 = {
 						DevelopmentTeam = 4B37356EGR;
 					};
@@ -716,6 +928,9 @@
 						DevelopmentTeam = 4B37356EGR;
 					};
 					D5E91BB517E5E8E800B66B27 = {
+						DevelopmentTeam = 4B37356EGR;
+					};
+					D5EBC67C17C912FF00EBEF39 = {
 						DevelopmentTeam = 4B37356EGR;
 					};
 				};
@@ -726,6 +941,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = D5EBC67417C912FF00EBEF39;
 			productRefGroup = D5EBC67E17C912FF00EBEF39 /* Products */;
@@ -736,11 +952,89 @@
 				D5E91BB517E5E8E800B66B27 /* CoMed */,
 				D5E91B5717E5E24000B66B27 /* AmiKo-zR */,
 				D5EBC67C17C912FF00EBEF39 /* CoMed-zR */,
+				D5E731101B33480A007771D7 /* AmiKo-desitin */,
+				D5E731541B334829007771D7 /* CoMed-desitin */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D5E731311B33480A007771D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5E731321B33480A007771D7 /* deleterow.js in Resources */,
+				D5E731331B33480A007771D7 /* MLSearchWebView.js in Resources */,
+				D5E731341B33480A007771D7 /* InfoPlist.strings in Resources */,
+				D5E731351B33480A007771D7 /* Credits-de.rtf in Resources */,
+				D5E731361B33480A007771D7 /* 28-star-ye.png in Resources */,
+				D5E731371B33480A007771D7 /* drug_interactions_csv_de.csv in Resources */,
+				D5E731A21B335229007771D7 /* AmiKoDesitinMainMenu.xib in Resources */,
+				D5E731381B33480A007771D7 /* amiko_stylesheet.css in Resources */,
+				D5E731391B33480A007771D7 /* 28-star-gy.png in Resources */,
+				D5E7313A1B33480A007771D7 /* interactions@2x.png in Resources */,
+				D5E7319E1B3351BA007771D7 /* MLAmiKoDesitinMainWindow.xib in Resources */,
+				D5E7313B1B33480A007771D7 /* 218-trash2.png in Resources */,
+				D5E7313C1B33480A007771D7 /* interactions_css.css in Resources */,
+				D5E7313D1B33480A007771D7 /* app_icon_512x512.png in Resources */,
+				D5AE31851B372085006BC60E /* desitin_icon_512x512.png in Resources */,
+				D5E7313E1B33480A007771D7 /* 217-trash.png in Resources */,
+				D5E7313F1B33480A007771D7 /* 28-star@2x.png in Resources */,
+				D5E731401B33480A007771D7 /* MLProgressSheet.xib in Resources */,
+				D5E731411B33480A007771D7 /* WebViewJavascriptBridge.js.txt in Resources */,
+				D5E731421B33480A007771D7 /* Zur_Rose_1000x670px.png in Resources */,
+				D5E731441B33480A007771D7 /* comedosx_splash_1000x670.png in Resources */,
+				D5E731451B33480A007771D7 /* maindb@2x.png in Resources */,
+				D5AE31791B36F078006BC60E /* desitin.iconset in Resources */,
+				D5E731461B33480A007771D7 /* favorites@2x.png in Resources */,
+				D5E731471B33480A007771D7 /* Credits-fr.rtf in Resources */,
+				D5AE31891B3720F9006BC60E /* AmiKo-desitin-Info.plist in Resources */,
+				D5E731481B33480A007771D7 /* amiko_db_full_idx_de.db in Resources */,
+				D5E7314A1B33480A007771D7 /* amiko_report_de.html in Resources */,
+				D5E7314C1B33480A007771D7 /* amikoosx_splash_1000x670.png in Resources */,
+				D5E7314D1B33480A007771D7 /* AmiKo.entitlements in Resources */,
+				D5E7314E1B33480A007771D7 /* 216-compose.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5E731751B334829007771D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5E731761B334829007771D7 /* deleterow.js in Resources */,
+				D5E731771B334829007771D7 /* MLSearchWebView.js in Resources */,
+				D5E731781B334829007771D7 /* InfoPlist.strings in Resources */,
+				D5AE31811B36FAE6006BC60E /* CoMed.entitlements in Resources */,
+				D5E731791B334829007771D7 /* Credits-de.rtf in Resources */,
+				D5E7317A1B334829007771D7 /* MLProgressSheet.xib in Resources */,
+				D5E731A41B335234007771D7 /* CoMedDesitinMainMenu.xib in Resources */,
+				D5E7317B1B334829007771D7 /* 28-star-ye.png in Resources */,
+				D5E7317C1B334829007771D7 /* amiko_stylesheet.css in Resources */,
+				D5E7317D1B334829007771D7 /* interactions_css.css in Resources */,
+				D5E7317E1B334829007771D7 /* interactions@2x.png in Resources */,
+				D5E7317F1B334829007771D7 /* 28-star-gy.png in Resources */,
+				D5E731801B334829007771D7 /* WebViewJavascriptBridge.js.txt in Resources */,
+				D5E731811B334829007771D7 /* 218-trash2.png in Resources */,
+				D5AE31861B372085006BC60E /* desitin_icon_512x512.png in Resources */,
+				D5E731821B334829007771D7 /* app_icon_512x512.png in Resources */,
+				D5AE318A1B3720FD006BC60E /* CoMed-desitin-Info.plist in Resources */,
+				D5E731831B334829007771D7 /* amikoosx_splash_1000x670.png in Resources */,
+				D5E731841B334829007771D7 /* 28-star@2x.png in Resources */,
+				D5E731A01B3351DB007771D7 /* MLCoMedDesitinMainWindow.xib in Resources */,
+				D5E731851B334829007771D7 /* Zur_Rose_1000x670px.png in Resources */,
+				D5E731881B334829007771D7 /* maindb@2x.png in Resources */,
+				D5E731891B334829007771D7 /* favorites@2x.png in Resources */,
+				D5E7318A1B334829007771D7 /* Credits-fr.rtf in Resources */,
+				D5E7318B1B334829007771D7 /* amiko_db_full_idx_fr.db in Resources */,
+				D5AE317A1B36F078006BC60E /* desitin.iconset in Resources */,
+				D5E7318C1B334829007771D7 /* amiko_report_fr.html in Resources */,
+				D5E7318E1B334829007771D7 /* drug_interactions_csv_fr.csv in Resources */,
+				D5E7318F1B334829007771D7 /* comedosx_splash_1000x670.png in Resources */,
+				D5E731901B334829007771D7 /* 217-trash.png in Resources */,
+				D5E731921B334829007771D7 /* 216-compose.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5E91B6A17E5E24000B66B27 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -767,6 +1061,7 @@
 				D5E91BF017E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D5E91BF617E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				D5B6F96E192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
+				D5AE318D1B372106006BC60E /* AmiKo-zR-Info.plist in Resources */,
 				D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */,
 				D536126817E770A80087B132 /* amiko.iconset in Resources */,
 				D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */,
@@ -783,6 +1078,7 @@
 				D5E91B9C17E5E8E400B66B27 /* Credits-de.rtf in Resources */,
 				D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
+				D5AE31821B37203D006BC60E /* desitin.iconset in Resources */,
 				D5E91B9F17E5E8E400B66B27 /* amiko_stylesheet.css in Resources */,
 				D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */,
 				D538777E1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
@@ -790,11 +1086,13 @@
 				D5B0105C1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */,
 				D5DD5761193B49260094244E /* 217-trash.png in Resources */,
+				D5AE31871B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
 				D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */,
 				D5FB9EC419351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */,
+				D5AE318B1B372100006BC60E /* AmiKo-Info.plist in Resources */,
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
 				D53877821A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
@@ -802,7 +1100,6 @@
 				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D59774471AA8F6FC001AAC31 /* AmiKoMainMenu.xib in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
-				D536126617E770A80087B132 /* amiko.iconset in Resources */,
 				D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */,
 				D52A0D7A17EDC60E003BF272 /* AmiKo.entitlements in Resources */,
 				D5A22508193FB19F0078FEFF /* 216-compose.png in Resources */,
@@ -819,13 +1116,16 @@
 				D5E91BCB17E5E8E800B66B27 /* Credits-de.rtf in Resources */,
 				D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */,
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
+				D5AE31831B37203E006BC60E /* desitin.iconset in Resources */,
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
 				D538777F1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
+				D5AE318C1B372103006BC60E /* CoMed-Info.plist in Resources */,
 				D5FB9EC519351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5DD5767193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5E91BD117E5E8E800B66B27 /* app_icon_512x512.png in Resources */,
+				D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
 				D5E91BD717E5E8E800B66B27 /* Zur_Rose_1000x670px.png in Resources */,
@@ -836,7 +1136,6 @@
 				D5E91BDE17E5E8E800B66B27 /* Credits-fr.rtf in Resources */,
 				D5E91BF217E6061900B66B27 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
-				D536126717E770A80087B132 /* amiko.iconset in Resources */,
 				D5DD576B193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */,
 				D5DD5762193B49260094244E /* 217-trash.png in Resources */,
@@ -858,6 +1157,7 @@
 				D5DD5769193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5DD576C193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
+				D5AE318E1B372108006BC60E /* CoMed-zR-Info.plist in Resources */,
 				D5EBC6D117D256EC00EBEF39 /* 28-star-gy.png in Resources */,
 				D53877851A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538778D1AA202E700AEFDB4 /* CoMed-zR.entitlements in Resources */,
@@ -880,6 +1180,70 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D5E731111B33480A007771D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5E731121B33480A007771D7 /* unzip.c in Sources */,
+				D5E731131B33480A007771D7 /* main.m in Sources */,
+				D5E731141B33480A007771D7 /* MLAppDelegate.m in Sources */,
+				D5E731151B33480A007771D7 /* MLMainWindowController.m in Sources */,
+				D5E731161B33480A007771D7 /* MLProgressSheetController.m in Sources */,
+				D5E731171B33480A007771D7 /* MLUtilities.m in Sources */,
+				D5E731181B33480A007771D7 /* MLCustomWebView.m in Sources */,
+				D5E731191B33480A007771D7 /* SHCWebView.m in Sources */,
+				D5E7311A1B33480A007771D7 /* deleterow.js in Sources */,
+				D5E7311B1B33480A007771D7 /* MLSQLiteDatabase.m in Sources */,
+				D5E7311C1B33480A007771D7 /* zip.c in Sources */,
+				D5E7311D1B33480A007771D7 /* MLSearchWebView.js in Sources */,
+				D5E7311E1B33480A007771D7 /* MLDBAdapter.m in Sources */,
+				D5E7311F1B33480A007771D7 /* mztools.c in Sources */,
+				D5E731201B33480A007771D7 /* WebViewJavascriptBridge.m in Sources */,
+				D5E731211B33480A007771D7 /* MLMedication.m in Sources */,
+				D5E731221B33480A007771D7 /* MLDataStore.m in Sources */,
+				D5E731231B33480A007771D7 /* MLCustomURLConnection.m in Sources */,
+				D5E731241B33480A007771D7 /* MLCustomView.m in Sources */,
+				D5E731251B33480A007771D7 /* ioapi.c in Sources */,
+				D5E731261B33480A007771D7 /* MLItemCellView.m in Sources */,
+				D5E731271B33480A007771D7 /* SSZipArchive.m in Sources */,
+				D5E731281B33480A007771D7 /* MLSearchWebView.m in Sources */,
+				D5E731291B33480A007771D7 /* MLCustomTableRowView.m in Sources */,
+				D5E7312A1B33480A007771D7 /* MLSplashScreen.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5E731551B334829007771D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5E731561B334829007771D7 /* unzip.c in Sources */,
+				D5E731571B334829007771D7 /* main.m in Sources */,
+				D5E731581B334829007771D7 /* MLAppDelegate.m in Sources */,
+				D5E731591B334829007771D7 /* MLMainWindowController.m in Sources */,
+				D5E7315A1B334829007771D7 /* MLProgressSheetController.m in Sources */,
+				D5E7315B1B334829007771D7 /* MLUtilities.m in Sources */,
+				D5E7315C1B334829007771D7 /* MLCustomWebView.m in Sources */,
+				D5E7315D1B334829007771D7 /* SHCWebView.m in Sources */,
+				D5E7315E1B334829007771D7 /* deleterow.js in Sources */,
+				D5E7315F1B334829007771D7 /* MLSQLiteDatabase.m in Sources */,
+				D5E731601B334829007771D7 /* zip.c in Sources */,
+				D5E731611B334829007771D7 /* MLSearchWebView.js in Sources */,
+				D5E731621B334829007771D7 /* MLDBAdapter.m in Sources */,
+				D5E731631B334829007771D7 /* mztools.c in Sources */,
+				D5E731641B334829007771D7 /* WebViewJavascriptBridge.m in Sources */,
+				D5E731651B334829007771D7 /* MLMedication.m in Sources */,
+				D5E731661B334829007771D7 /* MLDataStore.m in Sources */,
+				D5E731671B334829007771D7 /* MLCustomURLConnection.m in Sources */,
+				D5E731681B334829007771D7 /* MLCustomView.m in Sources */,
+				D5E731691B334829007771D7 /* ioapi.c in Sources */,
+				D5E7316A1B334829007771D7 /* MLItemCellView.m in Sources */,
+				D5E7316B1B334829007771D7 /* SSZipArchive.m in Sources */,
+				D5E7316C1B334829007771D7 /* MLSearchWebView.m in Sources */,
+				D5E7316D1B334829007771D7 /* MLCustomTableRowView.m in Sources */,
+				D5E7316E1B334829007771D7 /* MLSplashScreen.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5E91B5817E5E24000B66B27 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1038,6 +1402,78 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D5E731501B33480A007771D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/AmiKo-desitin-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "-DAMIKO_DESITIN";
+				PRODUCT_NAME = "AmiKo-Desitin";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D5E731511B33480A007771D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/AmiKo-desitin-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "-DAMIKO_DESITIN";
+				PRODUCT_NAME = "AmiKo-Desitin";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D5E731941B334829007771D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CoMed.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/CoMed-desitin-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "-DCOMED_DESITIN";
+				PRODUCT_NAME = "CoMed-Desitin";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D5E731951B334829007771D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CoMed.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/CoMed-desitin-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "-DCOMED_DESITIN";
+				PRODUCT_NAME = "CoMed-Desitin";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		D5E91B8217E5E24000B66B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1228,7 +1664,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "CoMed-zR.entitlements";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: ywesee GmbH (4B37356EGR)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
@@ -1244,6 +1680,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D5E7314F1B33480A007771D7 /* Build configuration list for PBXNativeTarget "AmiKo-desitin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5E731501B33480A007771D7 /* Debug */,
+				D5E731511B33480A007771D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5E731931B334829007771D7 /* Build configuration list for PBXNativeTarget "CoMed-desitin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5E731941B334829007771D7 /* Debug */,
+				D5E731951B334829007771D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D5E91B8117E5E24000B66B27 /* Build configuration list for PBXNativeTarget "AmiKo-zR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
