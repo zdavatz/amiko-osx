@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>amiko</string>
+	<string>desitin</string>
 	<key>CFBundleIdentifier</key>
 	<string>amikoosx</string>
 	<key>CFBundleInfoDictionaryVersion</key>
