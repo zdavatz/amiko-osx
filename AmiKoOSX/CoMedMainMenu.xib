@@ -217,6 +217,6 @@
         <customObject id="420" customClass="NSFontManager"/>
     </objects>
     <resources>
-        <image name="comedosx_splash_1000x670" width="240" height="160.80000305175781"/>
+        <image name="comedosx_splash_1000x670" width="480" height="321.60000610351562"/>
     </resources>
 </document>
