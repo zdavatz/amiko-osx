@@ -241,9 +241,9 @@ static bool logging = false;
     _webViewDelegate = webViewDelegate;
     _messageHandlers = [NSMutableDictionary dictionary];
     
-    _webView.frameLoadDelegate = self;
-    _webView.resourceLoadDelegate = self;
-    _webView.policyDelegate = self;
+    _webView.frameLoadDelegate = (id)self;
+    _webView.resourceLoadDelegate = (id)self;
+    _webView.policyDelegate = (id)self;
     
     _resourceBundle = bundle;
 }

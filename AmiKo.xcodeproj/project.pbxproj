@@ -97,12 +97,6 @@
 		D5AE31861B372085006BC60E /* desitin_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31841B372085006BC60E /* desitin_icon_512x512.png */; };
 		D5AE31871B372093006BC60E /* desitin_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31841B372085006BC60E /* desitin_icon_512x512.png */; };
 		D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31841B372085006BC60E /* desitin_icon_512x512.png */; };
-		D5AE31891B3720F9006BC60E /* AmiKo-desitin-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E731531B33480A007771D7 /* AmiKo-desitin-Info.plist */; };
-		D5AE318A1B3720FD006BC60E /* CoMed-desitin-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E731971B334829007771D7 /* CoMed-desitin-Info.plist */; };
-		D5AE318B1B372100006BC60E /* AmiKo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */; };
-		D5AE318C1B372103006BC60E /* CoMed-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */; };
-		D5AE318D1B372106006BC60E /* AmiKo-zR-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */; };
-		D5AE318E1B372108006BC60E /* CoMed-zR-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68817C912FF00EBEF39 /* CoMed-zR-Info.plist */; };
 		D5B0105C1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
 		D5B0105D1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
 		D5B0105E1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
@@ -912,7 +906,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = ML;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Ywesee GmbH";
 				TargetAttributes = {
 					D5E731101B33480A007771D7 = {
@@ -988,7 +982,6 @@
 				D5AE31791B36F078006BC60E /* desitin.iconset in Resources */,
 				D5E731461B33480A007771D7 /* favorites@2x.png in Resources */,
 				D5E731471B33480A007771D7 /* Credits-fr.rtf in Resources */,
-				D5AE31891B3720F9006BC60E /* AmiKo-desitin-Info.plist in Resources */,
 				D5E731481B33480A007771D7 /* amiko_db_full_idx_de.db in Resources */,
 				D5E7314A1B33480A007771D7 /* amiko_report_de.html in Resources */,
 				D5E7314C1B33480A007771D7 /* amikoosx_splash_1000x670.png in Resources */,
@@ -1017,7 +1010,6 @@
 				D5E731811B334829007771D7 /* 218-trash2.png in Resources */,
 				D5AE31861B372085006BC60E /* desitin_icon_512x512.png in Resources */,
 				D5E731821B334829007771D7 /* app_icon_512x512.png in Resources */,
-				D5AE318A1B3720FD006BC60E /* CoMed-desitin-Info.plist in Resources */,
 				D5E731831B334829007771D7 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E731841B334829007771D7 /* 28-star@2x.png in Resources */,
 				D5E731A01B3351DB007771D7 /* MLCoMedDesitinMainWindow.xib in Resources */,
@@ -1061,7 +1053,6 @@
 				D5E91BF017E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D5E91BF617E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				D5B6F96E192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
-				D5AE318D1B372106006BC60E /* AmiKo-zR-Info.plist in Resources */,
 				D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */,
 				D536126817E770A80087B132 /* amiko.iconset in Resources */,
 				D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */,
@@ -1092,7 +1083,6 @@
 				D5FB9EC419351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */,
-				D5AE318B1B372100006BC60E /* AmiKo-Info.plist in Resources */,
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
 				D53877821A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
@@ -1121,7 +1111,6 @@
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
 				D538777F1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
-				D5AE318C1B372103006BC60E /* CoMed-Info.plist in Resources */,
 				D5FB9EC519351C700050B1B1 /* WebViewJavascriptBridge.js.txt in Resources */,
 				D5DD5767193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5E91BD117E5E8E800B66B27 /* app_icon_512x512.png in Resources */,
@@ -1157,7 +1146,6 @@
 				D5DD5769193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5DD576C193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
-				D5AE318E1B372108006BC60E /* CoMed-zR-Info.plist in Resources */,
 				D5EBC6D117D256EC00EBEF39 /* 28-star-gy.png in Resources */,
 				D53877851A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538778D1AA202E700AEFDB4 /* CoMed-zR.entitlements in Resources */,
@@ -1414,6 +1402,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/AmiKo-desitin-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO_DESITIN";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.amikodesitin;
 				PRODUCT_NAME = "AmiKo-Desitin";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -1433,6 +1422,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/AmiKo-desitin-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO_DESITIN";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.amikodesitin;
 				PRODUCT_NAME = "AmiKo-Desitin";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -1451,6 +1441,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/CoMed-desitin-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DCOMED_DESITIN";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.comeddesitin;
 				PRODUCT_NAME = "CoMed-Desitin";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1468,6 +1459,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/CoMed-desitin-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DCOMED_DESITIN";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.comeddesitin;
 				PRODUCT_NAME = "CoMed-Desitin";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1486,6 +1478,7 @@
 				INFOPLIST_FILE = "AmiKo-zR-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO_ZR";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ywesee.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "AmiKo-zR";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1504,6 +1497,7 @@
 				INFOPLIST_FILE = "AmiKo-zR-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO_ZR";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ywesee.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "AmiKo-zR";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1522,6 +1516,7 @@
 				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO";
+				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
 				PRODUCT_NAME = AmiKo;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -1541,6 +1536,7 @@
 				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO";
+				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
 				PRODUCT_NAME = AmiKo;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -1559,6 +1555,7 @@
 				INFOPLIST_FILE = "CoMed-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DCOMED";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.comedosx;
 				PRODUCT_NAME = CoMed;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1576,6 +1573,7 @@
 				INFOPLIST_FILE = "CoMed-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DCOMED";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.comedosx;
 				PRODUCT_NAME = CoMed;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1586,7 +1584,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1597,6 +1594,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1620,7 +1618,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1654,6 +1651,7 @@
 				INFOPLIST_FILE = "CoMed-zR-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DCOMED_ZR";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ywesee.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1671,6 +1669,7 @@
 				INFOPLIST_FILE = "CoMed-zR-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DCOMED_ZR";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ywesee.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

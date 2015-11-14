@@ -124,4 +124,29 @@ NSString* const APP_ID = @"708142753";
     
     return false;
 }
+
++ (NSNumber*) timeIntervalInSecondsSince1970:(NSDate *)date
+{
+    // Result in seconds
+    NSNumber* timeInterval = [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+    return timeInterval;
+}
+
++ (double) timeIntervalSinceLastDBSync
+{
+    double timeInterval = 0.0;
+    
+    if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
+        NSDate* lastUpdated = [[NSUserDefaults standardUserDefaults] objectForKey:@"germanDBLastUpdate"];
+        if (lastUpdated!=nil)
+            timeInterval = [[NSDate date] timeIntervalSinceDate:lastUpdated];
+    } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+        NSDate* lastUpdated = [[NSUserDefaults standardUserDefaults] objectForKey:@"frenchDBLastUpdate"];
+        if (lastUpdated!=nil)
+            timeInterval = [[NSDate date] timeIntervalSinceDate:lastUpdated];
+    }
+    
+    return timeInterval;
+}
+
 @end

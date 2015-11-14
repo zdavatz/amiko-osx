@@ -175,6 +175,23 @@ static BOOL mSearchInteractions = false;
     medi = [NSMutableArray array];
     favoriteKeyData = [NSMutableArray array];
     
+    // Register applications defaults if necessary
+    NSMutableDictionary *appDefaults = [NSMutableDictionary dictionary];
+    if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
+        [appDefaults setValue:[NSDate date] forKey:@"germanDBLastUpdate"];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+        [appDefaults setValue:[NSDate date] forKey:@"frenchDBLastUpdate"];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    }
+    
+    // Start timer to check if database needs to be updatd (checks every hour)
+    [NSTimer scheduledTimerWithTimeInterval:3600
+                                     target:self
+                                   selector:@selector(checkLastDBSync)
+                                   userInfo:nil
+                                    repeats:YES];
+    
     // Open sqlite database
     [self openSQLiteDatabase];
 #ifdef DEBUG
@@ -255,6 +272,52 @@ static BOOL mSearchInteractions = false;
     // Configure NSTextFinder
     myTextFinder.incrementalSearchingEnabled = YES;
     myTextFinder.incrementalSearchingShouldDimContentView = YES;
+    
+    if ([MLUtilities isGermanApp]) {
+        NSDate* lastUpdated = [[NSUserDefaults standardUserDefaults] objectForKey:@"germanDBLastUpdate"];
+        if (lastUpdated==nil)
+            [self updateUserDefaultsForKey:@"germanDBLastUpdate"];
+        else
+            [self checkLastDBSync];
+    } else if ([MLUtilities isFrenchApp]) {
+        NSDate* lastUpdated = [[NSUserDefaults standardUserDefaults] objectForKey:@"frenchDBLastUpdate"];
+        if (lastUpdated==nil)
+            [self updateUserDefaultsForKey:@"frenchDBLastUpdate"];
+        else
+            [self checkLastDBSync];
+    }
+}
+
+- (void) updateUserDefaultsForKey:(NSString *)key
+{
+    // Store current date, and bother user again in a month
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:[NSDate date] forKey:key];
+    // Make sure it's saved immediately
+    [defaults synchronize];
+}
+
+- (void) checkLastDBSync
+{
+    // Nag user all 30 days! = 60 x 60 x 24 x 30 seconds
+    NSLog(@"Time since last interval in seconds = %.1f", [MLUtilities timeIntervalSinceLastDBSync]);
+    if ([MLUtilities timeIntervalSinceLastDBSync]>60*60*24*30) {
+        // Show alert with OK button
+        NSAlert *alert = [[NSAlert alloc] init];
+        if ([MLUtilities isGermanApp]) {
+            [alert setMessageText:@"Ihre Datenbank ist älter als 30 Tage. Wir empfehlen eine Aktualisierung auf die tagesaktuellen Daten."];
+            [self updateUserDefaultsForKey:@"germanDBLastUpdate"];
+        } else if ([MLUtilities isFrenchApp]) {
+            [alert setMessageText:@"Votre banque des données est âgé de plus de 30 jours. Nous vous recommandons une mise à jour."];
+            [self updateUserDefaultsForKey:@"frenchDBLastUpdate"];
+        }
+        [alert setAlertStyle:NSInformationalAlertStyle];
+        
+        [alert beginSheetModalForWindow:[self window]
+                          modalDelegate:self
+                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                            contextInfo:nil];
+    }
 }
 
 - (void) hideTextFinder
@@ -391,6 +454,13 @@ static BOOL mSearchInteractions = false;
             [self resetDataInTableView];
             mCurrentSearchState = _mySearchState;
             mCurrentSearchKey = _mySearchKey;
+            
+            // Update
+            if ([MLUtilities isGermanApp])
+                [self updateUserDefaultsForKey:@"germanDBLastUpdate"];
+            else if ([MLUtilities isFrenchApp])
+                [self updateUserDefaultsForKey:@"frenchDBLastUpdate"];
+
             // Display friendly message
             NSBeep();
             // Get number of products in database

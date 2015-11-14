@@ -53,4 +53,6 @@ extern NSString* const APP_ID;
 + (BOOL) isConnected;
 + (NSString *) documentsDirectory;
 + (BOOL) checkFileIsAllowed:(NSString *)name;
++ (NSNumber*) timeIntervalInSecondsSince1970:(NSDate *)date;
++ (double) timeIntervalSinceLastDBSync;
 @end
