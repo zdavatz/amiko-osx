@@ -37,6 +37,7 @@
     long mTotDownloadedBytes;
     long mStatusCode;
     bool mModal;
+    int mFileCounter;
     NSString *mFileName;
 }
 
@@ -123,7 +124,6 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
         [mProgressSheet update:mTotDownloadedBytes max:mTotExceptedBytes];
 }
 
-
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection
 {
     [self releaseStuff];
@@ -147,6 +147,10 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
             filePath = [[NSBundle mainBundle] pathForResource:@"drug_interactions_csv_de" ofType:@"csv"];
         if ([mFileName isEqualToString:@"drug_interactions_csv_fr.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"drug_interactions_csv_fr" ofType:@"csv"];
+        if ([mFileName isEqualToString:@"amiko_frequency_de.db.zip"])
+            filePath = [[NSBundle mainBundle] pathForResource:@"amiko_frequency_de" ofType:@"db"];
+        if ([mFileName isEqualToString:@"amiko_frequency_fr.db.zip"])
+            filePath = [[NSBundle mainBundle] pathForResource:@"amiko_frequency_fr" ofType:@"db"];
         
         if (filePath!=nil) {
             NSString *output = [documentsDirectory stringByAppendingPathComponent:@"."];

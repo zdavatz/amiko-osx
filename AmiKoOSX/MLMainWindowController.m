@@ -23,11 +23,14 @@
 
 #import "MLMainWindowController.h"
 #import "MLDBAdapter.h"
+#import "MLFullTextDBAdapter.h"
+#import "MLInteractionsAdapter.h"
 #import "MLItemCellView.h"
 #import "MLSearchWebView.h"
 #import "MLDataStore.h"
 #import "MLCustomTableRowView.h"
 #import "MLCustomView.h"
+#import "MLCustomURLConnection.h"
 
 #import "MLUtilities.h"
 
@@ -47,7 +50,7 @@ enum {
  Search states
  */
 enum {
-    kTitle=0, kAuthor=1, kAtcCode=2, kRegNr=3, kTherapy=4, kWebView=5
+    kTitle=0, kAuthor=1, kAtcCode=2, kRegNr=3, kTherapy=4, kWebView=5, kFullText=6
 };
 
 static NSString *SEARCH_STRING = @"Suche";
@@ -56,6 +59,7 @@ static NSString *SEARCH_AUTHOR = @"Inhaber";
 static NSString *SEARCH_ATCCODE = @"Wirkstoff / ATC Code";
 static NSString *SEARCH_REGNR = @"Reg. Nr.";
 static NSString *SEARCH_THERAPY = @"Therapie";
+static NSString *SEARCH_FULLTEXT = @"Volltext";
 static NSString *SEARCH_FACHINFO = @"in Fachinformation";
 
 static NSInteger mUsedDatabase = kAips;
@@ -69,6 +73,7 @@ static BOOL mSearchInteractions = false;
 @property NSString *title;
 @property NSString *subTitle;
 @property long medId;
+@property NSString *hashId;
 
 @end
 
@@ -77,14 +82,16 @@ static BOOL mSearchInteractions = false;
 @synthesize title;
 @synthesize subTitle;
 @synthesize medId;
+@synthesize hashId;
 
 @end
-
 
 @implementation MLMainWindowController
 {
     // Instance variable declarations go here
     MLDBAdapter *mDb;
+    MLFullTextDBAdapter *mFullTextDb;
+    MLInteractionsAdapter *mInteractions;
     MLMedication *mMed;
     
     NSMutableArray *medi;
@@ -154,14 +161,16 @@ static BOOL mSearchInteractions = false;
         SEARCH_ATCCODE = @"Wirkstoff / ATC Code";
         SEARCH_REGNR = @"Reg. Nr.";
         SEARCH_THERAPY = @"Therapie";
+        SEARCH_FULLTEXT = @"Volltext";
         SEARCH_FACHINFO = @"in Fachinformation";
     } else if ([MLUtilities isFrenchApp]) {
         SEARCH_STRING = @"Recherche";
         SEARCH_TITLE = @"Préparation";
         SEARCH_AUTHOR = @"Titulaire";
         SEARCH_ATCCODE = @"Principe Actif / Code ATC";
-        SEARCH_REGNR = @"No d'autorisation";
+        SEARCH_REGNR = @"No d'Autorisation";
         SEARCH_THERAPY = @"Thérapie";
+        SEARCH_FULLTEXT = @"Plein Texte";
         SEARCH_FACHINFO = @"Notice Infopro";
     }
     
@@ -195,13 +204,19 @@ static BOOL mSearchInteractions = false;
     // Open sqlite database
     [self openSQLiteDatabase];
 #ifdef DEBUG
-    NSLog(@"Number of records in main sqlite database = %ld", (long)[mDb getNumRecords]);
+    NSLog(@"Number of records in AIPS database = %ld", (long)[mDb getNumRecords]);
+#endif
+    
+    // Open fulltext database
+    [self openFullTextDatabase];
+#ifdef DEBUG
+    NSLog(@"Number of records in fulltext database = %ld", (long)[mFullTextDb getNumRecords]);
 #endif
     
     // Open drug interactions csv file
     [self openInteractionsCsvFile];
 #ifdef DEBUG
-     NSLog(@"Number of records in interaction file = %lu", (unsigned long)[mDb getNumInteractions]);
+     NSLog(@"Number of records in interaction file = %lu", (unsigned long)[mInteractions getNumInteractions]);
 #endif
     
     // Initialize medication basket
@@ -403,14 +418,41 @@ static BOOL mSearchInteractions = false;
     }
 }
 
+- (void) updateDatabase:(NSString *)language for:(NSString *)owner
+{
+    // Initialize custom URL connections for files that will be downloaded...
+    MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
+    MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
+    MLCustomURLConnection *interConn = [[MLCustomURLConnection alloc] init];
+    MLCustomURLConnection *fulltextConn = [[MLCustomURLConnection alloc] init];
+    
+    if ([language isEqualToString:@"de"]) {
+        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"] || [owner isEqualToString:@"desitin"]) {
+            [reportConn downloadFileWithName:@"amiko_report_de.html" andModal:NO];
+            [interConn downloadFileWithName:@"drug_interactions_csv_de.zip" andModal:NO];
+            [fulltextConn downloadFileWithName:@"amiko_frequency_de.db.zip" andModal:NO];
+            [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
+        }
+    } else if ([language isEqualToString:@"fr"]) {
+        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"] || [owner isEqualToString:@"desitin"]) {
+            [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:NO];
+            [interConn downloadFileWithName:@"drug_interactions_csv_fr.zip" andModal:NO];
+            [fulltextConn downloadFileWithName:@"amiko_frequency_fr.db.zip" andModal:NO];
+            [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:YES];
+        }
+    }
+    
+}
+
 - (void) openInteractionsCsvFile
 {
+    mInteractions = [[MLInteractionsAdapter alloc] init];
     if ([MLUtilities isGermanApp]) {
-        if (![mDb openInteractionsCsvFile:@"drug_interactions_csv_de"]) {
+        if (![mInteractions openInteractionsCsvFile:@"drug_interactions_csv_de"]) {
             NSLog(@"No German drug interactions file!");
         }
     } else if ([MLUtilities isFrenchApp]) {
-        if (![mDb openInteractionsCsvFile:@"drug_interactions_csv_fr"]) {
+        if (![mInteractions openInteractionsCsvFile:@"drug_interactions_csv_fr"]) {
             NSLog(@"No French drug interactions file!");
         }
     }
@@ -421,13 +463,29 @@ static BOOL mSearchInteractions = false;
     mDb = [[MLDBAdapter alloc] init];
     if ([MLUtilities isGermanApp]) {
         if (![mDb openDatabase:@"amiko_db_full_idx_de"]) {
-            NSLog(@"No German database!");
+            NSLog(@"No German AIPS database!");
             mDb = nil;
         }
     } else if ([MLUtilities isFrenchApp]) {
         if (![mDb openDatabase:@"amiko_db_full_idx_fr"]) {
-            NSLog(@"No French database!");
+            NSLog(@"No French AIPS database!");
             mDb = nil;
+        }
+    }
+}
+
+- (void) openFullTextDatabase
+{
+    mFullTextDb = [[MLFullTextDBAdapter alloc] init];
+    if ([MLUtilities isGermanApp]) {
+        if (![mFullTextDb openDatabase:@"amiko_frequency_de"]) {
+            NSLog(@"No German Fulltext database!");
+            mFullTextDb = nil;
+        }
+    } else if ([MLUtilities isFrenchApp]) {
+        if (![mFullTextDb openDatabase:@"amiko_frequency_fr"]) {
+            NSLog(@"No French Fulltext database!");
+            mFullTextDb = nil;
         }
     }
 }
@@ -438,13 +496,17 @@ static BOOL mSearchInteractions = false;
 - (void) finishedDownloading:(NSNotification *)notification
 {
     if ([[notification name] isEqualToString:@"MLDidFinishLoading"]) {
-        if (mDb!=nil) {
+        if (mDb!=nil && mFullTextDb!=nil && mInteractions!=nil) {
             // Close database
             [mDb closeDatabase];
             // Re-open database
             [self openSQLiteDatabase];
+            // Close fulltext database
+            [mFullTextDb closeDatabase];
+            // Re-open database
+            [self openFullTextDatabase];
             // Close interaction database
-            [mDb closeInteractionsCsvFile];
+            [mInteractions closeInteractionsCsvFile];
             // Re-open interaction database
             [self openInteractionsCsvFile];
             // Reload table
@@ -463,20 +525,21 @@ static BOOL mSearchInteractions = false;
 
             // Display friendly message
             NSBeep();
-            // Get number of products in database
+            // Get number of products/search terms/interactions in databases
             long numProducts = [mDb getNumProducts];
-            long numSearchRes = [searchResults count];
-            int numInteractions = (int)[mDb getNumInteractions];
+            long numFachinfos = [searchResults count];
+            long numSearchTerms = [mFullTextDb getNumRecords];
+            int numInteractions = (int)[mInteractions getNumInteractions];
             
             NSAlert *alert = [[NSAlert alloc] init];
             
             [alert addButtonWithTitle:@"OK"];
             if ([MLUtilities isGermanApp]) {
-                [alert setMessageText:@"AIPS Datenbank aktualisiert!"];
-                [alert setInformativeText:[NSString stringWithFormat:@"Die Datenbank enthält:\n- %ld Produkte\n- %ld Fachinfos\n- %d Interaktionen", numProducts, numSearchRes, numInteractions]];
+                [alert setMessageText:@"AmiKo Datenbank aktualisiert!"];
+                [alert setInformativeText:[NSString stringWithFormat:@"Die Datenbank enthält:\n- %ld Produkte\n- %ld Fachinfos\n- %ld Suchbegriffe\n- %d Interaktionen", numProducts, numFachinfos, numSearchTerms, numInteractions]];
             } else if ([MLUtilities isFrenchApp]) {
-                [alert setMessageText:@"Banque des donnees AIPS mises à jour!"];
-                [alert setInformativeText:[NSString stringWithFormat:@"La banque des données contien:\n- %ld produits\n- %ld notices infopro\n- %d interactions", numProducts, numSearchRes, numInteractions]];
+                [alert setMessageText:@"Banque des donnees CoMed mises à jour!"];
+                [alert setInformativeText:[NSString stringWithFormat:@"La banque des données contien:\n- %ld produits\n- %ld notices infopro\n- %ld mot-clés\n- %d interactions", numProducts, numFachinfos, numSearchTerms, numInteractions]];
             }
             [alert setAlertStyle:NSInformationalAlertStyle];
             
@@ -502,7 +565,6 @@ static BOOL mSearchInteractions = false;
                           modalDelegate:self
                          didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
                             contextInfo:nil];
-
     }
 }
 
@@ -516,6 +578,18 @@ static BOOL mSearchInteractions = false;
 }
 
 /**
+ */
+- (void) updateSearchResults
+{
+    if (mUsedDatabase==kAips) {
+        searchResults = [self searchDatabasesWith:mCurrentSearchKey];
+    }
+    else if (mUsedDatabase==kFavorites) {
+        searchResults = [self retrieveAllFavorites];
+    }
+}
+
+/**
  Resets search state and data in search results table
  */
 - (void) resetDataInTableView
@@ -523,7 +597,7 @@ static BOOL mSearchInteractions = false;
     // Reset search state
     [self setSearchState:kTitle];
     
-    searchResults = [self searchAipsDatabaseWith:@""];
+    searchResults = [self searchDatabasesWith:@""];
     if (searchResults) {
         [self updateTableView];
         [self.myTableView reloadData];
@@ -540,12 +614,7 @@ static BOOL mSearchInteractions = false;
     [self setSearchState:mCurrentSearchState];
     // Search
     if (mCurrentSearchState!=kWebView) {
-        if (mUsedDatabase==kAips) {
-            searchResults = [self searchAipsDatabaseWith:mCurrentSearchKey];
-        }
-        else if (mUsedDatabase==kFavorites) {
-            searchResults = [self retrieveAllFavorites];
-        }
+        [self updateSearchResults];
         if (searchResults) {
             [[mySearchField cell] setStringValue:mCurrentSearchKey];
             [self updateTableView];
@@ -618,7 +687,7 @@ static BOOL mSearchInteractions = false;
                     mSearchInProgress = true;
                 }
                 if ([searchText length]>0)
-                    searchResults = [scopeSelf searchAipsDatabaseWith:searchText];
+                    searchResults = [scopeSelf searchDatabasesWith:searchText];
                 else {
                     if (mUsedDatabase == kFavorites)
                         searchResults = [scopeSelf retrieveAllFavorites];
@@ -663,7 +732,12 @@ static BOOL mSearchInteractions = false;
         case 4:
             [self setSearchState:kTherapy];
             break;
+        case 5:
+            [self setSearchState:kFullText];
+            break;
     }
+    
+    [self updateSearchResults];
     
     if (searchResults) {
         [self updateTableView];
@@ -708,9 +782,9 @@ static BOOL mSearchInteractions = false;
     if ([MLUtilities isConnected]) {
         // Update database
         if ([MLUtilities isGermanApp])
-            [mDb updateDatabase:@"de" for:[MLUtilities appOwner]];
+            [self updateDatabase:@"de" for:[MLUtilities appOwner]];
         else if ([MLUtilities isFrenchApp])
-            [mDb updateDatabase:@"fr" for:[MLUtilities appOwner]];
+            [self updateDatabase:@"fr" for:[MLUtilities appOwner]];
     } else {
         NSAlert *alert = [[NSAlert alloc] init];
         
@@ -920,7 +994,7 @@ static BOOL mSearchInteractions = false;
                         mSearchInProgress = true;
                     }
                     mCurrentSearchState = kTitle;
-                    searchResults = [scopeSelf searchAipsDatabaseWith:@""];
+                    searchResults = [scopeSelf searchDatabasesWith:@""];
                 
                     // Update tableview
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -1073,11 +1147,16 @@ static BOOL mSearchInteractions = false;
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_FACHINFO]];
             */
             break;
+        case kFullText:
+            [[mySearchField cell] setStringValue:@""];
+            mCurrentSearchState = kFullText;
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_FULLTEXT]];
+            break;
     }
     mCurrentSearchState = searchState;
 }
 
-- (NSArray *) searchAipsDatabaseWith:(NSString *)searchQuery
+- (NSArray *) searchDatabasesWith:(NSString *)searchQuery
 {    
     NSArray *searchRes = [NSArray array];
     
@@ -1086,7 +1165,7 @@ static BOOL mSearchInteractions = false;
 #endif
     
     if (mCurrentSearchState == kTitle) {
-        searchRes = [mDb searchTitle:searchQuery];
+        searchRes = [mDb searchTitle:searchQuery];  // NSArray of MLMedication
     }
     else if (mCurrentSearchState == kAuthor) {
         searchRes = [mDb searchAuthor:searchQuery];
@@ -1099,6 +1178,10 @@ static BOOL mSearchInteractions = false;
     }
     else if (mCurrentSearchState == kTherapy) {
         searchRes = [mDb searchApplication:searchQuery];
+    }
+    else if (mCurrentSearchState == kFullText) {
+        if ([searchQuery length]>2)
+            searchRes = [mFullTextDb searchKeyword:searchQuery];    // NSArray of FullTextEntry
     }
 
     mCurrentSearchKey = searchQuery;
@@ -1297,6 +1380,20 @@ static BOOL mSearchInteractions = false;
     [medi addObject:m];
 }
 
+- (void) addKeyword: (NSString *)keyword andNumHits: (unsigned long)numHits andHash: (NSString *)hash
+{
+    DataObject *m = [[DataObject alloc] init];
+    
+    if (![keyword isEqual:[NSNull null]])
+        m.title = keyword;
+    else
+        m.title = [MLUtilities notSpecified]; // @"k.A.";
+    m.subTitle = [NSString stringWithFormat:@"%ld Treffer", numHits];
+    m.hashId = hash;
+    
+    [medi addObject:m];
+}
+
 - (void) updateTableView
 {
     if (searchResults) {
@@ -1318,8 +1415,7 @@ static BOOL mSearchInteractions = false;
                             [self addTitle:m.title andPackInfo:m.atccode andMedId:m.medId];
                     }
                 }
-            }
-            else if (mUsedDatabase == kFavorites) {
+            } else if (mUsedDatabase == kFavorites) {
                 for (MLMedication *m in searchResults) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         if ([favoriteMedsSet containsObject:m.regnrs]) {
@@ -1329,15 +1425,14 @@ static BOOL mSearchInteractions = false;
                     }
                 }
             }
-        }  else if (mCurrentSearchState == kAuthor) {
+        } else if (mCurrentSearchState == kAuthor) {
             for (MLMedication *m in searchResults) {
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:m.regnrs];
                         [self addTitle:m.title andAuthor:m.auth andMedId:m.medId];
                     }
-                }
-                else if (mUsedDatabase == kFavorites) {
+                } else if (mUsedDatabase == kFavorites) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         if ([favoriteMedsSet containsObject:m.regnrs]) {
                             [favoriteKeyData addObject:m.regnrs];
@@ -1346,16 +1441,14 @@ static BOOL mSearchInteractions = false;
                     }
                 }
             }
-        }
-        else if (mCurrentSearchState == kAtcCode) {
+        } else if (mCurrentSearchState == kAtcCode) {
             for (MLMedication *m in searchResults) {
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:m.regnrs];
                         [self addTitle:m.title andAtcCode:m.atccode andAtcClass:m.atcClass andMedId:m.medId];
                     }
-                }
-                else if (mUsedDatabase == kFavorites) {
+                } else if (mUsedDatabase == kFavorites) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         if ([favoriteMedsSet containsObject:m.regnrs]) {
                             [favoriteKeyData addObject:m.regnrs];
@@ -1364,8 +1457,7 @@ static BOOL mSearchInteractions = false;
                     }
                 }
             }
-        }
-        else if (mCurrentSearchState == kRegNr) {
+        } else if (mCurrentSearchState == kRegNr) {
             for (MLMedication *m in searchResults) {
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
@@ -1382,8 +1474,7 @@ static BOOL mSearchInteractions = false;
                     }
                 }
             }
-        }
-        else if (mCurrentSearchState == kTherapy) {
+        } else if (mCurrentSearchState == kTherapy) {
             for (MLMedication *m in searchResults) {
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
@@ -1398,6 +1489,18 @@ static BOOL mSearchInteractions = false;
                             [self addTitle:m.title andApplications:m.application andMedId:m.medId];
                         }
                     }
+                }
+            }
+        } else if (mCurrentSearchState == kFullText) {
+            for (MLFullTextEntry *e in searchResults) {
+                if (mUsedDatabase == kAips) {
+                    if (![e.hash isEqual:[NSNull null]]) {
+                         [favoriteKeyData addObject:e.hash];
+                        [self addKeyword:e.keyword andNumHits:e.numHits andHash:e.hash];
+                    }
+                }
+                else if (mUsedDatabase == kFavorites) {
+                    // NOTE: TODO
                 }
             }
         }
@@ -1570,7 +1673,7 @@ static BOOL mSearchInteractions = false;
                         for (atc_code1 in atc1) {
                             if (atc2!=nil && [atc2 count]>0) {
                                 for (atc_code2 in atc2) {
-                                    NSString *html = [mDb getInteractionHtmlBetween:atc_code1 and:atc_code2];
+                                    NSString *html = [mInteractions getInteractionHtmlBetween:atc_code1 and:atc_code2];
                                     if (html!=nil) {
                                         // Replace all occurrences of atc codes by med names apart from the FIRST one!
                                         NSRange range1 = [html rangeOfString:atc_code1 options:NSBackwardsSearch];
@@ -1761,13 +1864,14 @@ static BOOL mSearchInteractions = false;
             cellView.textField.stringValue = [medi[row] title];
             cellView.detailTextField.stringValue = [medi[row] subTitle];
             // Check if cell.textLabel.text is in starred NSSet
-            NSString *regnrStr = favoriteKeyData[row];
-            if ([favoriteMedsSet containsObject:regnrStr])
-                cellView.favoritesCheckBox.state = 1;
-            else
-                cellView.favoritesCheckBox.state = 0;
-            cellView.favoritesCheckBox.tag = row;
-
+            if (favoriteKeyData!=nil) {
+                NSString *regnrStr = favoriteKeyData[row];
+                if ([favoriteMedsSet containsObject:regnrStr])
+                    cellView.favoritesCheckBox.state = 1;
+                else
+                    cellView.favoritesCheckBox.state = 0;
+                cellView.favoritesCheckBox.tag = row;
+            }
             // Set colors
             if ([cellView.detailTextField.stringValue rangeOfString:@", O]"].location == NSNotFound) {
                 if ([cellView.detailTextField.stringValue rangeOfString:@", G]"].location == NSNotFound) {
@@ -1807,49 +1911,62 @@ static BOOL mSearchInteractions = false;
          * Check if table is search result (=myTableView)
         */
         NSInteger row = [[notification object] selectedRow];
-        long mId = [medi[row] medId];
-    
-        // Get medi
-        mMed = [mDb searchId:mId];
-    
-        // Hide textfinder
-        [self hideTextFinder];
         
-        if (mSearchInteractions==false) {
-            // Load style sheet from file
-            NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
-            NSString *amikoCss = nil;
-            if (amikoCssPath)
-                amikoCss = [NSString stringWithContentsOfFile:amikoCssPath encoding:NSUTF8StringEncoding error:nil];
-            else
-                amikoCss = [NSString stringWithString:mMed.styleStr];
+        if (mCurrentSearchState!=kFullText) {
+            long mId = [medi[row] medId];
+            // Get medi
+            mMed = [mDb searchId:mId];
+            // Hide textfinder
+            [self hideTextFinder];
             
-            // Extract html string
-            NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, mMed.contentStr];
-            NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-            [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
-            // [[myWebView preferences] setDefaultFontSize:14];
-            // [self setSearchState:kWebView];
-            
-            NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
-            [myRowView setEmphasized:YES];
-            
-            // Extract section ids
-            if (![mMed.sectionIds isEqual:[NSNull null]])
-                listofSectionIds = [mMed.sectionIds componentsSeparatedByString:@","];
-            // Extract section titles
-            if (![mMed.sectionTitles isEqual:[NSNull null]])
-                listofSectionTitles = [mMed.sectionTitles componentsSeparatedByString:@";"];
-
-            [mySectionTitles reloadData];
-        } else {
-            [self pushToMedBasket];
-            [self updateWebView];
-            
-            NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
-            [myRowView setEmphasized:YES];
+            if (mSearchInteractions==false) {
+                // Load style sheet from file
+                NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
+                NSString *amikoCss = nil;
+                if (amikoCssPath)
+                    amikoCss = [NSString stringWithContentsOfFile:amikoCssPath encoding:NSUTF8StringEncoding error:nil];
+                else
+                    amikoCss = [NSString stringWithString:mMed.styleStr];
+                
+                // Extract html string
+                NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, mMed.contentStr];
+                NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+                [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+                // [[myWebView preferences] setDefaultFontSize:14];
+                // [self setSearchState:kWebView];
+                
+                NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
+                [myRowView setEmphasized:YES];
+                
+                // Extract section ids
+                if (![mMed.sectionIds isEqual:[NSNull null]])
+                    listofSectionIds = [mMed.sectionIds componentsSeparatedByString:@","];
+                // Extract section titles
+                if (![mMed.sectionTitles isEqual:[NSNull null]])
+                    listofSectionTitles = [mMed.sectionTitles componentsSeparatedByString:@";"];
+                
+                [mySectionTitles reloadData];
+            } else {
+                [self pushToMedBasket];
+                [self updateWebView];
+                
+                NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
+                [myRowView setEmphasized:YES];
+            }
         }
-    } else if ([notification object] == self.mySectionTitles) {
+        else
+        {
+            NSString *hashId = [medi[row] hashId];
+            // Get entry
+            MLFullTextEntry *entry = [mFullTextDb searchHash:hashId];
+            // Hide text finder
+            [self hideTextFinder];
+            
+            NSArray *listOfRegnrs = [entry getRegnrsAsArray];
+            NSArray *listOfMedis = [mDb searchRegnrsFromList:listOfRegnrs];
+        }
+    }
+    else if ([notification object] == self.mySectionTitles) {
         /* 
          * Check if table is list of chapter titles (=mySectionTitles)
         */

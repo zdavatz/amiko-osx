@@ -23,7 +23,6 @@
 
 #import "MLDBAdapter.h"
 #import "MLSQLiteDatabase.h"
-#import "MLCustomURLConnection.h"
 #import "MLUtilities.h"
 
 enum {
@@ -58,7 +57,6 @@ static NSString *FULL_TABLE = nil;
 @implementation MLDBAdapter
 {
     MLSQLiteDatabase *mySqliteDb;
-    NSMutableDictionary *myDrugInteractionMap;
 }
 
 /** Class functions
@@ -83,77 +81,6 @@ static NSString *FULL_TABLE = nil;
  */
 #pragma mark Instance functions
 
-- (BOOL) openInteractionsCsvFile:(NSString *)name
-{    
-    NSString *documentsDir = [MLUtilities documentsDirectory];;
-    
-    // ** A. Check first users documents folder
-    NSString *filePath = [[documentsDir stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"csv"];
-    // Check if database exists
-    if (filePath!=nil) {
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if ([fileManager fileExistsAtPath:filePath]) {
-            NSLog(@"Drug interactions csv found in documents folder - %@", filePath);
-            return [self readDrugInteractionMap:filePath];
-        }
-    }
-    
-    // ** B. If no database is available, check if db is in app bundle
-    filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"csv"];
-    if (filePath!=nil ) {
-        NSLog(@"Drug interactions csv found in app bundle - %@", filePath);
-        // Read drug interactions csv line after line
-        return [self readDrugInteractionMap:filePath];
-    }
-    
-    return FALSE;
-}
-
-- (void) closeInteractionsCsvFile
-{
-    if ([myDrugInteractionMap count]>0) {
-        [myDrugInteractionMap removeAllObjects];
-    }
-}
-
-- (BOOL) readDrugInteractionMap:(NSString *)filePath
-{
-    // Read drug interactions csv line after line
-    NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    NSArray *rows = [content componentsSeparatedByString:@"\n"];
-    myDrugInteractionMap = [[NSMutableDictionary alloc] init];
-    /*
-     token[0]: ATC-Code1
-     token[1]: ATC-Code2
-     token[2]: Html
-    */
-    for (NSString *s in rows) {
-        if (![s isEqualToString:@""]) {
-            NSArray *token = [s componentsSeparatedByString:@"||"];
-            NSString *key = [NSString stringWithFormat:@"%@-%@", token[0], token[1]];            
-            [myDrugInteractionMap setObject:token[2] forKey:key];
-        }
-    }
-    return TRUE;
-}
-
-- (NSInteger) getNumInteractions
-{
-    if (myDrugInteractionMap!=nil)
-        return [myDrugInteractionMap count];
-    
-    return 0;
-}
-
-- (NSString *) getInteractionHtmlBetween:(NSString *)atc1 and:(NSString *)atc2
-{
-    if ([myDrugInteractionMap count]>0) {
-        NSString *key = [NSString stringWithFormat:@"%@-%@", atc1, atc2];
-        return [myDrugInteractionMap valueForKey:key];
-    }
-    return @"";
-}
-
 - (BOOL) openDatabase: (NSString *)dbName
 {
     // A. Check first users documents folder
@@ -164,7 +91,7 @@ static NSString *FULL_TABLE = nil;
     // Check if database exists
     if (filePath!=nil) {
         if ([fileManager fileExistsAtPath:filePath]) {
-            NSLog(@"Database found documents folder - %@", filePath);            
+            NSLog(@"AIPS DB found documents folder - %@", filePath);
             mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
             return true;
         }
@@ -174,7 +101,7 @@ static NSString *FULL_TABLE = nil;
     filePath = [[NSBundle mainBundle] pathForResource:dbName ofType:@"db"];
     if (filePath!=nil ) {
         mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
-        NSLog(@"Database found in app bundle - %@", filePath);
+        NSLog(@"AIPS DB found in app bundle - %@", filePath);
         return true;
     }
     
@@ -185,29 +112,6 @@ static NSString *FULL_TABLE = nil;
 {
     if (mySqliteDb)
         [mySqliteDb close];
-}
-
-- (void) updateDatabase:(NSString *)language for:(NSString *)owner
-{
-    // Initialize custom URL connections for files that will be downloaded...
-    MLCustomURLConnection *reportConn = [[MLCustomURLConnection alloc] init];
-    MLCustomURLConnection *dbConn = [[MLCustomURLConnection alloc] init];
-    MLCustomURLConnection *interConn = [[MLCustomURLConnection alloc] init];
- 
-    if ([language isEqualToString:@"de"]) {
-        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"] || [owner isEqualToString:@"desitin"]) {
-            [reportConn downloadFileWithName:@"amiko_report_de.html" andModal:NO];
-            [interConn downloadFileWithName:@"drug_interactions_csv_de.zip" andModal:NO];
-            [dbConn downloadFileWithName:@"amiko_db_full_idx_de.zip" andModal:YES];
-        }
-    } else if ([language isEqualToString:@"fr"]) {
-        if ([owner isEqualToString:@"ywesee"] || [owner isEqualToString:@"zurrose"] || [owner isEqualToString:@"desitin"]) {
-            [reportConn downloadFileWithName:@"amiko_report_fr.html" andModal:NO];
-            [interConn downloadFileWithName:@"drug_interactions_csv_fr.zip" andModal:NO];
-            [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:YES];
-        }
-    }
-    
 }
 
 - (NSInteger) getNumRecords
@@ -325,6 +229,34 @@ static NSString *FULL_TABLE = nil;
     return [self extractShortMedInfoFrom:results];
 }
 
+/** Search Reg. Nrs. given a list of reg. nr.
+ */
+- (NSArray *) searchRegnrsFromList:(NSArray *)listOfRegnrs
+{
+    NSArray *results = [[NSArray alloc] init];
+    for (NSString *r in listOfRegnrs) {
+        NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%'",
+                           FULL_TABLE, DATABASE_TABLE, KEY_REGNRS, r, KEY_REGNRS, r];
+        NSArray *res = [mySqliteDb performQuery:query];
+        MLMedication *m = [self cursorToVeryShortMedInfo:[res firstObject]];
+    }
+    return results;
+}
+
+- (MLMedication *) cursorToVeryShortMedInfo:(NSArray *)cursor
+{
+    MLMedication *medi = [[MLMedication alloc] init];
+    
+    [medi setMedId:[(NSString *)[cursor objectAtIndex:kMedId] longLongValue]];
+    [medi setTitle:(NSString *)[cursor objectAtIndex:kTitle]];
+    [medi setAuth:(NSString *)[cursor objectAtIndex:kAuth]];
+    [medi setRegnrs:(NSString *)[cursor objectAtIndex:kRegnrs]];
+    [medi setSectionIds:(NSString *)[cursor objectAtIndex:kIdsStr]];
+    [medi setSectionTitles:(NSString *)[cursor objectAtIndex:kSectionsStr]];
+    
+    return medi;
+}
+
 - (MLMedication *) cursorToShortMedInfo:(NSArray *)cursor
 {
     MLMedication *medi = [[MLMedication alloc] init];
@@ -370,26 +302,24 @@ static NSString *FULL_TABLE = nil;
     return medi;
 }
 
+- (NSArray *) extractVeryShortMedInfoFrom:(NSArray *)results
+{
+    NSMutableArray *medList = [NSMutableArray array];
+    
+    for (NSArray *cursor in results)  {
+        MLMedication *medi = [self cursorToVeryShortMedInfo:cursor];
+        [medList addObject:medi];
+    }
+    
+    return medList;
+}
+
 - (NSArray *) extractShortMedInfoFrom:(NSArray *)results
 {
     NSMutableArray *medList = [NSMutableArray array];
 
     for (NSArray *cursor in results)  {
-        MLMedication *medi = [[MLMedication alloc] init];
-        
-        [medi setMedId:[(NSString *)[cursor objectAtIndex:kMedId] longLongValue]];
-        [medi setTitle:(NSString *)[cursor objectAtIndex:kTitle]];
-        [medi setAuth:(NSString *)[cursor objectAtIndex:kAuth]];
-        [medi setAtccode:(NSString *)[cursor objectAtIndex:kAtcCode]];
-        [medi setSubstances:(NSString *)[cursor objectAtIndex:kSubstances]];
-        [medi setRegnrs:(NSString *)[cursor objectAtIndex:kRegnrs]];
-        [medi setAtcClass:(NSString *)[cursor objectAtIndex:kAtcClass]];
-        [medi setTherapy:(NSString *)[cursor objectAtIndex:kTherapy]];
-        [medi setApplication:(NSString *)[cursor objectAtIndex:kApplication]];
-        [medi setIndications:(NSString *)[cursor objectAtIndex:kIndications]];
-        [medi setCustomerId:[(NSString *)[cursor objectAtIndex:kCustomerId] intValue]];
-        [medi setPackInfo:(NSString *)[cursor objectAtIndex:kPackInfo]];
-        
+        MLMedication *medi = [self cursorToShortMedInfo:cursor];
         [medList addObject:medi];
     }
     
@@ -401,26 +331,7 @@ static NSString *FULL_TABLE = nil;
     NSMutableArray *medList = [NSMutableArray array];
     
     for (NSArray *cursor in results) {
-        MLMedication *medi = [[MLMedication alloc] init];
-        
-        [medi setMedId:[(NSString *)[cursor objectAtIndex:kMedId] longLongValue]];
-        [medi setTitle:(NSString *)[cursor objectAtIndex:kTitle]];
-        [medi setAuth:(NSString *)[cursor objectAtIndex:kAuth]];
-        [medi setAtccode:(NSString *)[cursor objectAtIndex:kAtcCode]];
-        [medi setSubstances:(NSString *)[cursor objectAtIndex:kSubstances]];
-        [medi setRegnrs:(NSString *)[cursor objectAtIndex:kRegnrs]];
-        [medi setAtcClass:(NSString *)[cursor objectAtIndex:kAtcClass]];
-        [medi setTherapy:(NSString *)[cursor objectAtIndex:kTherapy]];
-        [medi setApplication:(NSString *)[cursor objectAtIndex:kApplication]];
-        [medi setIndications:(NSString *)[cursor objectAtIndex:kIndications]];
-        [medi setCustomerId:[(NSString *)[cursor objectAtIndex:kCustomerId] intValue]];
-        [medi setPackInfo:(NSString *)[cursor objectAtIndex:kPackInfo]];
-        [medi setAddInfo:(NSString *)[cursor objectAtIndex:kAddInfo]];
-        [medi setSectionIds:(NSString *)[cursor objectAtIndex:kIdsStr]];
-        [medi setSectionTitles:(NSString *)[cursor objectAtIndex:kSectionsStr]];
-        [medi setContentStr:(NSString *)[cursor objectAtIndex:kContentStr]];
-        [medi setStyleStr:(NSString *)[cursor objectAtIndex:kStyleStr]];
-        
+        MLMedication *medi = [self cursorToFullMedInfo:cursor];
         [medList addObject:medi];
     }
     

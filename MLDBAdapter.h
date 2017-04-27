@@ -25,13 +25,8 @@
 
 @interface MLDBAdapter : NSObject
 
-- (BOOL) openInteractionsCsvFile: (NSString *)name;
-- (void) closeInteractionsCsvFile;
-- (NSInteger) getNumInteractions;
-- (NSString *) getInteractionHtmlBetween:(NSString *)atc1 and:(NSString *)atc2;
 - (BOOL) openDatabase: (NSString *)name;
 - (void) closeDatabase;
-- (void) updateDatabase: (NSString *)language for: (NSString *)owner;
 - (NSInteger) getNumRecords;
 - (NSInteger) getNumProducts;
 - (MLMedication *) searchId: (long)rowId;
@@ -44,9 +39,12 @@
 - (NSArray *) searchRegNr: (NSString *)regnr;
 - (NSArray *) searchTherapy: (NSString *)therapy;
 - (NSArray *) searchApplication: (NSString *)application;
+- (NSArray *) searchRegnrsFromList:(NSArray *)listOfRegnrs;
+- (MLMedication *) cursorToVeryShortMedInfo: (NSArray *)cursor;
 - (MLMedication *) cursorToShortMedInfo: (NSArray *)cursor;
 - (MLMedication *) cursorToFullMedInfo: (NSArray *)cursor;
-- (NSArray *) extractShortMedInfoFrom: (NSArray *)cursor;
+- (NSArray *) extractVeryShortMedInfoFrom: (NSArray *)results;
+- (NSArray *) extractShortMedInfoFrom: (NSArray *)results;
 - (NSArray *) extractFullMedInfoFrom: (NSArray *)results;
 
 @end
