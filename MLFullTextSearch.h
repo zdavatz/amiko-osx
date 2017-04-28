@@ -22,18 +22,12 @@
  ------------------------------------------------------------------------ */
 
 #import <Foundation/Foundation.h>
-#import "MLInteractionsAdapter.h"
 
-@interface MLInteractionsCart : NSObject
+@interface MLFullTextSearch : NSObject
 
-@property (atomic) NSArray *listofSectionIds;
-@property (atomic) NSArray *listofSectionTitles;
+@property (atomic) NSArray *listOfSectionIds;
+@property (atomic) NSArray *listOfSectionTitles;
 
-- (NSUInteger) basketSize;
-- (void) updateMedBasket:(NSMutableDictionary *)medBasket;
-- (NSString *) medBasketHtml;
-- (NSString *) interactionsHtml:(MLInteractionsAdapter *)interactions;
-- (NSString *) footNoteHtml;
-- (void) sendInteractionNotice;
+- (NSString *) tableWithArticles:(NSArray *)listOfArticles andRegChaptersDict:(NSDictionary *)dict andFilter:(NSString *)filter;
 
 @end

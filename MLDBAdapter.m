@@ -133,18 +133,25 @@ static NSString *FULL_TABLE = nil;
     return numProducts;
 }
 
-- (NSArray *) getFullRecord: (long)rowId
+- (NSArray *) getFullRecord:(long)rowId
 {
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@=%ld",
-                       FULL_TABLE, DATABASE_TABLE, KEY_ROWID, rowId];
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@=%ld", FULL_TABLE, DATABASE_TABLE, KEY_ROWID, rowId];
     
     return [mySqliteDb performQuery:query];
 }
 
-- (MLMedication *) searchId: (long)rowId
+- (MLMedication *) getMediWithId:(long)rowId
 {
     // getRecord returns an NSArray* hence the objectAtIndex!!   
     return [self cursorToFullMedInfo:[[self getFullRecord:rowId] firstObject]];
+}
+
+- (MLMedication *) getMediWithRegnr:(NSString *)regnr
+{
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%'", FULL_TABLE, DATABASE_TABLE, KEY_REGNRS, regnr, KEY_REGNRS, regnr];
+    NSArray *cursor = [[mySqliteDb performQuery:query] firstObject];
+    
+    return [self cursorToFullMedInfo:cursor];
 }
 
 - (NSArray *) searchWithQuery:(NSString *)query;
@@ -156,8 +163,7 @@ static NSString *FULL_TABLE = nil;
  */
 - (NSArray *) searchTitle:(NSString *)title
 {
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%' or %@ like '%%%@%%'",
-                       SHORT_TABLE, DATABASE_TABLE, KEY_TITLE, title, KEY_TITLE, title];
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%' or %@ like '%%%@%%'", SHORT_TABLE, DATABASE_TABLE, KEY_TITLE, title, KEY_TITLE, title];
     NSArray *results = [mySqliteDb performQuery:query];
     
     return [self extractShortMedInfoFrom:results];
@@ -167,8 +173,7 @@ static NSString *FULL_TABLE = nil;
  */
 - (NSArray *) searchAuthor:(NSString *)author
 {
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%'",
-                       SHORT_TABLE, DATABASE_TABLE, KEY_AUTH, author];
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%'", SHORT_TABLE, DATABASE_TABLE, KEY_AUTH, author];
     NSArray *results = [mySqliteDb performQuery:query];
     
     return [self extractShortMedInfoFrom:results];

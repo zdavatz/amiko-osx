@@ -43,4 +43,8 @@
 @property (nonatomic, copy) NSString *styleStr;
 @property (nonatomic, copy) NSString *contentStr;
 
+- (NSArray *) listOfSectionIds;
+- (NSArray *) listOfSectionTitles;
+- (NSDictionary *) indexToTitlesDict;
+
 @end

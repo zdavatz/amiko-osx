@@ -22,6 +22,7 @@
  ------------------------------------------------------------------------ */
 
 #import "MLMedication.h"
+#import "MLUtilities.h"
 
 @implementation MLMedication
 
@@ -42,5 +43,37 @@
 @synthesize sectionTitles;
 @synthesize styleStr;
 @synthesize contentStr;
+
+- (NSArray *) listOfSectionIds
+{
+    return [sectionIds componentsSeparatedByString:@","];
+}
+
+- (NSArray *) listOfSectionTitles
+{
+    return [sectionTitles componentsSeparatedByString:@";"];
+}
+
+- (NSDictionary *) indexToTitlesDict
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    
+    NSArray *ids = [self listOfSectionIds];
+    NSArray *titles = [self listOfSectionTitles];
+    
+    NSUInteger n1 = [ids count];
+    NSUInteger n2 = [titles count];
+    NSUInteger n = n1 < n2 ? n1 : n2;
+    for (NSUInteger i=0; i<n; ++i) {
+        NSString *id = ids[i];
+        id = [id stringByReplacingOccurrencesOfString:@"section" withString:@""];
+        id = [id stringByReplacingOccurrencesOfString:@"Section" withString:@""];
+        if ([id length]>0) {
+            dict[id] = titles[i];
+        }
+    }
+    
+    return dict;
+}
 
 @end

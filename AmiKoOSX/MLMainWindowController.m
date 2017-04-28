@@ -26,6 +26,7 @@
 #import "MLFullTextDBAdapter.h"
 #import "MLInteractionsAdapter.h"
 #import "MLInteractionsCart.h"
+#import "MLFullTextSearch.h"
 #import "MLItemCellView.h"
 #import "MLSearchWebView.h"
 #import "MLDataStore.h"
@@ -44,7 +45,7 @@
  Database types
  */
 enum {
-    kAips=0, kHospital=1, kFavorites=2
+    kAips=0, kHospital=1, kFavorites=2, kInteractions=4
 };
 
 /**
@@ -52,6 +53,13 @@ enum {
  */
 enum {
     kTitle=0, kAuthor=1, kAtcCode=2, kRegNr=3, kTherapy=4, kWebView=5, kFullText=6
+};
+
+/**
+ Webview
+ */
+enum {
+    kExpertInfo=0, kFullTextSearch=1, kInteractionsCart=2
 };
 
 static NSString *SEARCH_STRING = @"Suche";
@@ -65,6 +73,7 @@ static NSString *SEARCH_FACHINFO = @"in Fachinformation";
 
 static NSInteger mUsedDatabase = kAips;
 static NSInteger mCurrentSearchState = kTitle;
+static NSInteger mCurrentWebView = kExpertInfo;
 static NSString *mCurrentSearchKey = @"";
 
 static BOOL mSearchInteractions = false;
@@ -90,11 +99,13 @@ static BOOL mSearchInteractions = false;
 @implementation MLMainWindowController
 {
     // Instance variable declarations go here
+    MLMedication *mMed;
     MLDBAdapter *mDb;
     MLFullTextDBAdapter *mFullTextDb;
     MLInteractionsAdapter *mInteractions;
+
     MLInteractionsCart *mInteractionsCart;
-    MLMedication *mMed;
+    MLFullTextSearch *mFullTextSearch;
     
     NSMutableArray *medi;
     NSMutableArray *favoriteKeyData;
@@ -104,8 +115,8 @@ static BOOL mSearchInteractions = false;
     
     NSArray *searchResults;
     
-    NSArray *listofSectionIds;
-    NSArray *listofSectionTitles;
+    NSArray *mListOfSectionIds;
+    NSArray *mListOfSectionTitles;
 
     NSMutableDictionary *mMedBasket;
     
@@ -129,7 +140,6 @@ static BOOL mSearchInteractions = false;
 @synthesize myTableView;
 @synthesize mySectionTitles;
 @synthesize myTextFinder;
-
 
 - (id) init
 {
@@ -229,6 +239,9 @@ static BOOL mSearchInteractions = false;
     
     // Create bridge between JScript and ObjC
     [self createJSBridge];
+    
+    // Initialize full text search
+    mFullTextSearch = [[MLFullTextSearch alloc] init];
     
     // Initialize webview
     [[myWebView preferences] setJavaScriptEnabled:YES];
@@ -739,6 +752,7 @@ static BOOL mSearchInteractions = false;
             break;
         case 5:
             [self setSearchState:kFullText];
+            mCurrentWebView = kFullTextSearch;
             break;
     }
     
@@ -1056,7 +1070,7 @@ static BOOL mSearchInteractions = false;
             [self stopProgressIndicator];
             [self setSearchState:kTitle];            
             [self pushToMedBasket];
-            [self updateWebView];
+            [self updateInteractionsView];
         }
         default:
             break;
@@ -1520,33 +1534,6 @@ static BOOL mSearchInteractions = false;
     [self stopProgressIndicator];
 }
 
-- (void) sendInteractionNotice
-{
-    NSMutableString *bodyStr = [[NSMutableString alloc] initWithString:@""];
-    
-    // Starts mail client
-    NSString *subject = [NSString stringWithFormat:@"%@ OS X: Unbekannte Interaktionen", APP_NAME];
-    
-    NSString* body = nil;
-    if ([mMedBasket count]>0) {
-        NSArray *sortedNames = [[mMedBasket allKeys] sortedArrayUsingSelector: @selector(compare:)];
-        for (NSString *name in sortedNames) {
-            [bodyStr appendString:[NSString stringWithFormat:@"- %@\r\n", name]];
-        }
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"])
-            body = [NSString stringWithFormat:@"Sehr geehrter Herr Davatz\r\n\nMedikamentenkorb:\r\n\n%@\r\nBeste Grüsse\r\n\n", bodyStr];
-        else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
-            body = [NSString stringWithFormat:@"Sehr geehrter Herr Davatz\r\n\nPanier des médicaments:\r\n\n%@\r\nBeste Grüsse\r\n\n", bodyStr];
-    }
-    NSString *encodedSubject = [NSString stringWithFormat:@"subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSString *encodedBody = [NSString stringWithFormat:@"body=%@", [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:?%@&%@", encodedSubject, encodedBody];
-    
-    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
-    
-    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
-}
-
 /**
  Add med in the buffer to the interaction basket
  */
@@ -1574,26 +1561,67 @@ static BOOL mSearchInteractions = false;
 - (void) createJSBridge
 {
     mJSBridge = [WebViewJavascriptBridge bridgeForWebView:myWebView handler:^(id msg, WVJBResponseCallback responseCallback) {
-        if ([msg isEqualToString:@"notify_interaction"]) {
-            [self sendInteractionNotice];
-        } else if ([msg isEqualToString:@"delete_all"]) {
-            // NSLog(@"Delete all");
-            [mMedBasket removeAllObjects];
-        } else {
-            // NSLog(@"Delete number %@", msg);
-            [mMedBasket removeObjectForKey:msg];
+        if ([msg count]==3) {
+            // --- Interactions ---
+            if ([msg[0] isEqualToString:@"interactions_cb"]) {
+                if ([msg[1] isEqualToString:@"notify_interaction"])
+                    [mInteractionsCart sendInteractionNotice];
+                else if ([msg[1] isEqualToString:@"delete_all"])
+                    [mMedBasket removeAllObjects];
+                else if ([msg[1] isEqualToString:@"delete_row"])
+                    [mMedBasket removeObjectForKey:msg[2]];
+
+                // Update med basket
+                mCurrentWebView = kInteractionsCart;
+                [mInteractionsCart updateMedBasket:mMedBasket];
+                [self updateInteractionsView];
+            }
+        } else if ([msg count]==4) {
+            // --- Full text search ---
+            if ([msg[0] isEqualToString:@"main_cb"]) {
+                if ([msg[1] isEqualToString:@"display_fachinfo"]) {
+                    NSString *ean = msg[2];
+                    NSString *anchor = msg[3];
+                    if ([ean isNotEqualTo:[NSNull null]]) {
+                        mCurrentWebView = kExpertInfo;
+                        mMed = [mDb getMediWithRegnr:ean];
+                        [self updateExpertInfoView];
+                    }
+                }
+            }
         }
-        // Updated med baskat
-        [mInteractionsCart updateMedBasket:mMedBasket];
-        
-        [self updateWebView];
-        
         // Reponse to javascript...
         // responseCallback(@"Right back atcha");
     }];
 }
 
-- (void) updateWebView
+- (void) updateExpertInfoView
+{
+    // Load style sheet from file
+    NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
+    NSString *amikoCss = nil;
+    if (amikoCssPath)
+        amikoCss = [NSString stringWithContentsOfFile:amikoCssPath encoding:NSUTF8StringEncoding error:nil];
+    else
+        amikoCss = [NSString stringWithString:mMed.styleStr];
+    
+    // Extract html string
+    NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, mMed.contentStr];
+    NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+    // [[myWebView preferences] setDefaultFontSize:14];
+    // [self setSearchState:kWebView];
+    
+    // Extract section ids
+    if (![mMed.sectionIds isEqual:[NSNull null]])
+        mListOfSectionIds = [mMed listOfSectionIds];
+    // Extract section titles
+    if (![mMed.sectionTitles isEqual:[NSNull null]])
+        mListOfSectionTitles = [mMed listOfSectionTitles];
+    [mySectionTitles reloadData];
+}
+
+- (void) updateInteractionsView
 {
     // --> OPTIMIZE!! Pre-load the following files!
     
@@ -1602,7 +1630,7 @@ static BOOL mSearchInteractions = false;
     NSString *interactionsCss = [NSString stringWithContentsOfFile:interactionsCssPath encoding:NSUTF8StringEncoding error:nil];
     
     // Load javascript from file
-    NSString *jscriptPath = [[NSBundle mainBundle] pathForResource:@"deleterow" ofType:@"js"];
+    NSString *jscriptPath = [[NSBundle mainBundle] pathForResource:@"interactions_callbacks" ofType:@"js"];
     NSString *jscriptStr = [NSString stringWithContentsOfFile:jscriptPath encoding:NSUTF8StringEncoding error:nil];
     
     // Generate main interaction table
@@ -1614,21 +1642,48 @@ static BOOL mSearchInteractions = false;
                [mInteractionsCart interactionsHtml:mInteractions],
                [mInteractionsCart footNoteHtml]];
     
-    // Update section title anchors
-    listofSectionIds = mInteractionsCart.listofSectionIds;
-    // Update section titles (here: identical to anchors)
-    listofSectionTitles = mInteractionsCart.listofSectionTitles;
-    
     // With the following implementation, the images are not loaded
     // NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     // [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
     
     [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:[[NSBundle mainBundle] resourceURL]];
     
+    // Update section title anchors
+    mListOfSectionIds = mInteractionsCart.listofSectionIds;
+    // Update section titles (here: identical to anchors)
+    mListOfSectionTitles = mInteractionsCart.listofSectionTitles;
+    
     [mySectionTitles reloadData];
 }
 
-/** 
+- (void) updateFullTextSearchView:(NSString *)contentStr
+{
+    // Load style sheet from file
+    NSString *fullTextCssPath = [[NSBundle mainBundle] pathForResource:@"fulltext_style" ofType:@"css"];
+    NSString *fullTextCss = [NSString stringWithContentsOfFile:fullTextCssPath encoding:NSUTF8StringEncoding error:nil];
+    
+    // Load javascript from file
+    NSString *jscriptPath = [[NSBundle mainBundle] pathForResource:@"main_callbacks" ofType:@"js"];
+    NSString *jscriptStr = [NSString stringWithContentsOfFile:jscriptPath encoding:NSUTF8StringEncoding error:nil];
+    
+    NSString *htmlStr = [NSString stringWithFormat:@"<html><head><meta charset=\"utf-8\" />"];
+    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head><body><div id=\"fulltext\">%@</body></div></html>",
+               jscriptStr,
+               fullTextCss,
+               contentStr];
+  
+    [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:[[NSBundle mainBundle] resourceURL]];
+    
+    // Update middle pane (section titles)
+    if (![mFullTextSearch.listOfSectionIds isEqual:[NSNull null]])
+        mListOfSectionIds = mFullTextSearch.listOfSectionIds;
+    if (![mFullTextSearch.listOfSectionTitles isEqual:[NSNull null]])
+        mListOfSectionTitles = mFullTextSearch.listOfSectionTitles;
+    
+    [mySectionTitles reloadData];
+}
+
+/**
  - NSTableViewDataSource -
  Get number of rows of a table view
  */
@@ -1644,7 +1699,7 @@ static BOOL mSearchInteractions = false;
         }
     } else if (tableView == self.mySectionTitles) {
         // NSLog(@"num sections: %ld", (unsigned long)[listofSectionTitles count]);
-        return [listofSectionTitles count];
+        return [mListOfSectionTitles count];
     }
 
     return 0;
@@ -1704,7 +1759,7 @@ static BOOL mSearchInteractions = false;
          * Check if table is list of chapter titles (=mySectionTitles)
         */
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
-            cellView.textField.stringValue = listofSectionTitles[row];
+            cellView.textField.stringValue = mListOfSectionTitles[row];
             return cellView;
         }
     }
@@ -1719,53 +1774,34 @@ static BOOL mSearchInteractions = false;
     if ([notification object] == self.myTableView) {
         /*
          * Check if table is search result (=myTableView)
+         * Left pane
         */
         NSInteger row = [[notification object] selectedRow];
         
         if (mCurrentSearchState!=kFullText) {
+            /* Search in Aips DB or Interactions DB
+             */
             long mId = [medi[row] medId];
             // Get medi
-            mMed = [mDb searchId:mId];
+            mMed = [mDb getMediWithId:mId];
             // Hide textfinder
             [self hideTextFinder];
             
             if (mSearchInteractions==false) {
-                // Load style sheet from file
-                NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
-                NSString *amikoCss = nil;
-                if (amikoCssPath)
-                    amikoCss = [NSString stringWithContentsOfFile:amikoCssPath encoding:NSUTF8StringEncoding error:nil];
-                else
-                    amikoCss = [NSString stringWithString:mMed.styleStr];
-                
-                // Extract html string
-                NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, mMed.contentStr];
-                NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-                [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
-                // [[myWebView preferences] setDefaultFontSize:14];
-                // [self setSearchState:kWebView];
+                [self updateExpertInfoView];
                 
                 NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
                 [myRowView setEmphasized:YES];
-                
-                // Extract section ids
-                if (![mMed.sectionIds isEqual:[NSNull null]])
-                    listofSectionIds = [mMed.sectionIds componentsSeparatedByString:@","];
-                // Extract section titles
-                if (![mMed.sectionTitles isEqual:[NSNull null]])
-                    listofSectionTitles = [mMed.sectionTitles componentsSeparatedByString:@";"];
-                
-                [mySectionTitles reloadData];
             } else {
                 [self pushToMedBasket];
-                [self updateWebView];
+                [self updateInteractionsView];
                 
                 NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
                 [myRowView setEmphasized:YES];
             }
-        }
-        else
-        {
+        } else {
+            /* Search in full text search DB
+             */
             NSString *hashId = [medi[row] hashId];
             // Get entry
             MLFullTextEntry *entry = [mFullTextDb searchHash:hashId];
@@ -1773,24 +1809,31 @@ static BOOL mSearchInteractions = false;
             [self hideTextFinder];
             
             NSArray *listOfRegnrs = [entry getRegnrsAsArray];
-            NSArray *listOfMedis = [mDb searchRegnrsFromList:listOfRegnrs];
+            NSArray *listOfArticles = [mDb searchRegnrsFromList:listOfRegnrs];
+            NSDictionary *dict = [entry getRegChaptersDict];
             
-            for (MLMedication *m in listOfMedis) {
-                NSLog(@"%@", m.title);
-            }
+            NSString *contentStr = [mFullTextSearch tableWithArticles:listOfArticles
+                                                   andRegChaptersDict:dict
+                                                            andFilter:@""];
+            [self updateFullTextSearchView:contentStr];
         }
-    }
-    else if ([notification object] == self.mySectionTitles) {
+    } else if ([notification object] == self.mySectionTitles) {
         /* 
          * Check if table is list of chapter titles (=mySectionTitles)
+         * Middle pane
         */
         NSInteger row = [[notification object] selectedRow];
-        
-        // NSLog(@"%@", listofSectionIds[row]);
-        
-        NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", listofSectionIds[row]];
-        [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
-        
+       
+        if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearch) {
+            NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
+            [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
+        } else {
+            // Update webviewer's content without changing anything else
+            NSString *contentStr = [mFullTextSearch tableWithArticles:nil
+                                                   andRegChaptersDict:nil
+                                                            andFilter:mListOfSectionIds[row]];
+            [self updateFullTextSearchView:contentStr];
+        }
     }
     
 #ifdef DEBUG
@@ -1825,7 +1868,7 @@ static BOOL mSearchInteractions = false;
                                                                                                       forKey:NSFontAttributeName]]);
         return (textSize.height + subTextSize.height + PADDING);
     } else if (tableView == mySectionTitles) {
-        NSString *text = listofSectionTitles[row];
+        NSString *text = mListOfSectionTitles[row];
         NSFont *textFont = [NSFont boldSystemFontOfSize:11.0f];
         CGSize textSize = NSSizeFromCGSize([text sizeWithAttributes:[NSDictionary dictionaryWithObject:textFont
                                                                                                 forKey:NSFontAttributeName]]);        

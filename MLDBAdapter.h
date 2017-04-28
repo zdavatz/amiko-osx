@@ -29,7 +29,8 @@
 - (void) closeDatabase;
 - (NSInteger) getNumRecords;
 - (NSInteger) getNumProducts;
-- (MLMedication *) searchId: (long)rowId;
+- (MLMedication *) getMediWithId: (long)rowId;
+- (MLMedication *) getMediWithRegnr: (NSString *)regnr;
 - (NSArray *) getFullRecord: (long)rowId;
 - (NSArray *) searchWithQuery: (NSString *)query;
 - (NSArray *) searchTitle: (NSString *)title;

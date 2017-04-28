@@ -38,10 +38,13 @@ static NSString *DATABASE_TABLE = @"frequency";
 
 @implementation MLFullTextDBAdapter
 {
+    // Instance variable declarations go here
     MLSQLiteDatabase *myFullTextDb;
 }
 
-#pragma mark Instance functions
+/** Instance functions
+ */
+#pragma mark public methods
 
 - (BOOL) openDatabase:(NSString *)dbName
 {
@@ -170,9 +173,7 @@ static NSString *DATABASE_TABLE = @"frequency";
             }
             // Update dictionary
             dict[regnr] = chaptersSet;
-        }
-        else
-        {
+        } else {
             // No chapters for this regnr -> do nothing
         }
     }

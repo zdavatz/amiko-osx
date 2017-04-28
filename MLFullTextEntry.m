@@ -25,16 +25,30 @@
 
 @implementation MLFullTextEntry
 {
+    // Instance variable declarations go here
     NSDictionary *regChaptersDict;
 }
+
+/** Properties
+ */
+#pragma mark properties
 
 @synthesize hash;
 @synthesize keyword;
 @synthesize regnrs;
 
+/** Instance functions
+ */
+#pragma mark public methods
+
 - (void) setRegChaptersDict:(NSMutableDictionary *)dict
 {
     regChaptersDict = [NSDictionary dictionaryWithDictionary:dict];
+}
+
+- (NSDictionary *) getRegChaptersDict
+{
+    return regChaptersDict;
 }
 
 - (NSString *) getRegnrs

@@ -32,7 +32,7 @@
 
 /** Class functions
 */
-#pragma mark Class functions
+#pragma mark class functions
 
 + (void) createEditableCopyOfDatabaseIfNeeded: (NSString *)dbName
 {
@@ -59,7 +59,7 @@
 
 /** Instance functions
 */
-#pragma mark Instance functions
+#pragma mark public methods
 
 - (void) dealloc
 {

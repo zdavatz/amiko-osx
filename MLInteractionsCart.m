@@ -248,4 +248,31 @@
     return @"";
 }
 
+- (void) sendInteractionNotice
+{
+    NSMutableString *bodyStr = [[NSMutableString alloc] initWithString:@""];
+    
+    // Starts mail client
+    NSString *subject = [NSString stringWithFormat:@"%@ OS X: Unbekannte Interaktionen", APP_NAME];
+    
+    NSString* body = nil;
+    if ([medBasket count]>0) {
+        NSArray *sortedNames = [[medBasket allKeys] sortedArrayUsingSelector: @selector(compare:)];
+        for (NSString *name in sortedNames) {
+            [bodyStr appendString:[NSString stringWithFormat:@"- %@\r\n", name]];
+        }
+        if ([[MLUtilities appLanguage] isEqualToString:@"de"])
+            body = [NSString stringWithFormat:@"Sehr geehrter Herr Davatz\r\n\nMedikamentenkorb:\r\n\n%@\r\nBeste Grüsse\r\n\n", bodyStr];
+        else if ([[MLUtilities appLanguage] isEqualToString:@"fr"])
+            body = [NSString stringWithFormat:@"Sehr geehrter Herr Davatz\r\n\nPanier des médicaments:\r\n\n%@\r\nBeste Grüsse\r\n\n", bodyStr];
+    }
+    NSString *encodedSubject = [NSString stringWithFormat:@"subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *encodedBody = [NSString stringWithFormat:@"body=%@", [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:?%@&%@", encodedSubject, encodedBody];
+    
+    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
+    
+    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+}
+
 @end

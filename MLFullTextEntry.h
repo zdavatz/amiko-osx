@@ -30,6 +30,8 @@
 @property (nonatomic, copy) NSString *regnrs;
 
 - (void) setRegChaptersDict:(NSMutableDictionary *)dict;
+- (NSDictionary *) getRegChaptersDict;
+
 - (NSString *) getRegnrs;
 - (NSSet *) getChaptersForKey:(NSString *)key;
 - (NSArray *) getRegnrsAsArray;
