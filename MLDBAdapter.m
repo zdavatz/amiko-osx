@@ -211,8 +211,7 @@ static NSString *FULL_TABLE = nil;
  */
 - (NSArray *) searchTherapy:(NSString *)therapy
 {
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%% %@%%'",
-                       SHORT_TABLE, DATABASE_TABLE, KEY_THERAPY, therapy, KEY_THERAPY, therapy, KEY_THERAPY, therapy];
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%% %@%%'", SHORT_TABLE, DATABASE_TABLE, KEY_THERAPY, therapy, KEY_THERAPY, therapy, KEY_THERAPY, therapy];
     NSArray *results = [mySqliteDb performQuery:query];
 
     return [self extractShortMedInfoFrom:results];
@@ -222,8 +221,7 @@ static NSString *FULL_TABLE = nil;
  */
 - (NSArray *) searchApplication:(NSString *)application
 {
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%% %@%%' or %@ like '%%;%@%%' or %@ like '%@%%' or %@ like '%%;%@%%'",
-                       SHORT_TABLE, DATABASE_TABLE, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_INDICATIONS, application, KEY_INDICATIONS, application];
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%' or %@ like '%% %@%%' or %@ like '%%;%@%%' or %@ like '%@%%' or %@ like '%%;%@%%'", SHORT_TABLE, DATABASE_TABLE, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_APPLICATION, application, KEY_INDICATIONS, application, KEY_INDICATIONS, application];
     NSArray *results = [mySqliteDb performQuery:query];
 
     return [self extractShortMedInfoFrom:results];
@@ -233,14 +231,16 @@ static NSString *FULL_TABLE = nil;
  */
 - (NSArray *) searchRegnrsFromList:(NSArray *)listOfRegnrs
 {
-    NSArray *results = [[NSArray alloc] init];
-    for (NSString *r in listOfRegnrs) {
-        NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%'",
-                           FULL_TABLE, DATABASE_TABLE, KEY_REGNRS, r, KEY_REGNRS, r];
-        NSArray *res = [mySqliteDb performQuery:query];
-        MLMedication *m = [self cursorToVeryShortMedInfo:[res firstObject]];
+    NSMutableArray *listOfMedis = [[NSMutableArray alloc] init];
+    // Search all medis with the regnrs in the list
+    for (NSString *regnr in listOfRegnrs) {
+        NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%%, %@%%' or %@ like '%@%%'", FULL_TABLE, DATABASE_TABLE, KEY_REGNRS, regnr, KEY_REGNRS, regnr];
+        NSArray *results = [mySqliteDb performQuery:query];
+        MLMedication *m = [self cursorToVeryShortMedInfo:[results firstObject]];
+        [listOfMedis addObject:m];
     }
-    return results;
+
+    return listOfMedis;
 }
 
 - (MLMedication *) cursorToVeryShortMedInfo:(NSArray *)cursor
