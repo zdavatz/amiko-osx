@@ -24,6 +24,14 @@
 #import "MLMedication.h"
 #import "MLUtilities.h"
 
+static NSString* SectionTitle_DE[] = {@"Zusammensetzung", @"Galenische Form", @"Kontraindikationen", @"Indikationen", @"Dosierung/Anwendung",
+    @"Vorsichtsmassnahmen", @"Interaktionen", @"Schwangerschaft", @"Fahrtüchtigkeit", @"Unerwünschte Wirk.", @"Überdosierung", @"Eig./Wirkung",
+    @"Kinetik", @"Präklinik", @"Sonstige Hinweise", @"Zulassungsnummer", @"Packungen", @"Inhaberin", @"Stand der Information"};
+
+static NSString* SectionTitle_FR[] = {@"Composition", @"Forme galénique", @"Contre-indications", @"Indications", @"Posologie", @"Précautions",
+    @"Interactions", @"Grossesse/All.", @"Conduite", @"Effets indésir.", @"Surdosage", @"Propriétés/Effets", @"Cinétique", @"Préclinique", @"Remarques",
+    @"Numéro d'autorisation", @"Présentation", @"Titulaire", @"Mise à jour"};
+
 @implementation MLMedication
 
 @synthesize medId;
@@ -51,7 +59,12 @@
 
 - (NSArray *) listOfSectionTitles
 {
-    return [sectionTitles componentsSeparatedByString:@";"];
+    NSMutableArray *titles = [[sectionTitles componentsSeparatedByString:@";"] mutableCopy];
+    NSUInteger n = [titles count];
+    for (int i=0; i<n; ++i) {
+        titles[i] = [self shortTitle:titles[i]];
+    }
+    return titles;
 }
 
 - (NSDictionary *) indexToTitlesDict
@@ -69,11 +82,38 @@
         id = [id stringByReplacingOccurrencesOfString:@"section" withString:@""];
         id = [id stringByReplacingOccurrencesOfString:@"Section" withString:@""];
         if ([id length]>0) {
-            dict[id] = titles[i];
+            dict[id] = [self shortTitle:titles[i]];
         }
     }
     
     return dict;
+}
+
+- (NSString *) shortTitle:(NSString *)longTitle
+{
+    NSString *t = [longTitle lowercaseString];
+    if ([MLUtilities isGermanApp]) {
+        for (int i=0; i<19; i++) {
+            NSString *compareString = [SectionTitle_DE[i] lowercaseString];
+            if (compareString!=nil) {
+                if ([t rangeOfString:compareString].location != NSNotFound) {
+                    t = SectionTitle_DE[i];
+                    return t;
+                }
+            }
+        }
+    } else if ([MLUtilities isFrenchApp]) {
+        for (int i=0; i<19; i++) {
+            NSString *compareString = [SectionTitle_FR[i] lowercaseString];
+            if (compareString!=nil) {
+                if ([t rangeOfString:compareString].location != NSNotFound) {
+                    t = SectionTitle_FR[i];
+                    return t;
+                }
+            }
+        }
+    }
+    return longTitle;
 }
 
 @end
