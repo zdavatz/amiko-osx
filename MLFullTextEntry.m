@@ -64,7 +64,7 @@
     return regStr;
 }
 
-- (NSSet *) getChaptersForKey:(NSString *) regnr
+- (NSSet *) getChaptersForKey:(NSString *)regnr
 {
     return [regChaptersDict objectForKey:regnr];
 }

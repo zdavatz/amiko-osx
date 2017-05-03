@@ -122,14 +122,14 @@
                                                     <action selector="onButtonPressed:" target="-2" id="ZeO-ig-GeF"/>
                                                 </connections>
                                             </button>
-                                            <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" hasHorizontalScroller="NO" verticalScrollElasticity="allowed" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="167">
-                                                <rect key="frame" x="11" y="60" width="342" height="525"/>
+                                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" hasHorizontalScroller="NO" verticalScrollElasticity="allowed" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="167">
+                                                <rect key="frame" x="11" y="60" width="342" height="530"/>
                                                 <clipView key="contentView" id="fga-sD-hNm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="525"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="530"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="32" rowSizeStyle="automatic" viewBased="YES" id="170">
-                                                            <rect key="frame" x="0.0" y="0.0" width="342" height="525"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="342" height="530"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -241,7 +241,7 @@
                                             <constraint firstItem="136" firstAttribute="trailing" secondItem="135" secondAttribute="trailing" id="157"/>
                                             <constraint firstItem="135" firstAttribute="top" secondItem="136" secondAttribute="bottom" constant="8" symbolic="YES" id="158"/>
                                             <constraint firstItem="135" firstAttribute="leading" secondItem="136" secondAttribute="leading" id="159"/>
-                                            <constraint firstItem="167" firstAttribute="top" secondItem="132" secondAttribute="top" constant="215" id="689"/>
+                                            <constraint firstItem="167" firstAttribute="top" secondItem="132" secondAttribute="top" constant="230" id="689"/>
                                             <constraint firstItem="167" firstAttribute="bottom" secondItem="132" secondAttribute="bottom" constant="-60" id="691"/>
                                             <constraint firstItem="139" firstAttribute="trailing" secondItem="133" secondAttribute="trailing" id="741"/>
                                             <constraint firstAttribute="centerX" secondItem="167" secondAttribute="centerX" id="810"/>
@@ -274,7 +274,7 @@
                                                                             <subviews>
                                                                                 <webView translatesAutoresizingMaskIntoConstraints="NO" id="227" customClass="SHCWebView">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="509" height="770"/>
-                                                                                    <webPreferences key="preferences" defaultFontSize="13" defaultFixedFontSize="13" minimumFontSize="13" javaEnabled="NO">
+                                                                                    <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12" javaEnabled="NO">
                                                                                         <nil key="identifier"/>
                                                                                     </webPreferences>
                                                                                     <connections>

@@ -26,7 +26,9 @@
 @interface MLDataStore : NSObject <NSCoding>
 
 @property (nonatomic) NSSet *favMedsSet;
+@property (nonatomic) NSSet *favFTEntrySet;
 
-+ (MLDataStore *) initWithFavMedsSet: (NSMutableSet *)favMedsSet;
++ (MLDataStore *) initWithFavMedsSet:(NSMutableSet *)favMedsSet;
++ (MLDataStore *) initWithFavFTEntrySet:(NSMutableSet *)favFTEntrySet;
 
 @end

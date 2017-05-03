@@ -22,10 +22,17 @@ function displayFachinfo(ean, anchor) {
  */
 function moveToHighlight(anchor) {
     if (typeof anchor !== 'undefined') {
-        var elem = document.getElementById(anchor);
-        var marks = elem.getElementsByClassName('mark')
-        if (marks.length > 0) {
-            marks[0].scrollIntoView(true);
+        try {
+            var elem = document.getElementById('section15');
+            if (elem !== null) {
+                var marks = elem.getElementsByClassName('mark')
+                if (marks.length > 0) {
+                    marks[0].scrollIntoView(true);
+                }
+            }
+        }
+        catch(e) {
+            alert(e);
         }
     }
 }

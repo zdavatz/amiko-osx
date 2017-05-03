@@ -59,7 +59,7 @@ enum {
  Webview
  */
 enum {
-    kExpertInfo=0, kFullTextSearch=1, kInteractionsCart=2
+    kExpertInfoView=0, kFullTextSearchView=1, kInteractionsCartView=2
 };
 
 static NSString *SEARCH_STRING = @"Suche";
@@ -73,7 +73,7 @@ static NSString *SEARCH_FACHINFO = @"in Fachinformation";
 
 static NSInteger mUsedDatabase = kAips;
 static NSInteger mCurrentSearchState = kTitle;
-static NSInteger mCurrentWebView = kExpertInfo;
+static NSInteger mCurrentWebView = kExpertInfoView;
 static NSString *mCurrentSearchKey = @"";
 
 static BOOL mSearchInteractions = false;
@@ -103,7 +103,7 @@ static BOOL mSearchInteractions = false;
     MLDBAdapter *mDb;
     MLFullTextDBAdapter *mFullTextDb;
     MLInteractionsAdapter *mInteractions;
-
+    MLFullTextEntry *mFullTextEntry;
     MLInteractionsCart *mInteractionsCart;
     MLFullTextSearch *mFullTextSearch;
     
@@ -111,7 +111,7 @@ static BOOL mSearchInteractions = false;
     NSMutableArray *favoriteKeyData;
     
     NSMutableSet *favoriteMedsSet;
-    MLDataStore *favoriteData;    
+    NSMutableSet *favoriteFTEntrySet;
     
     NSArray *searchResults;
     
@@ -247,9 +247,11 @@ static BOOL mSearchInteractions = false;
     [[myWebView preferences] setJavaScriptEnabled:YES];
     [myWebView setUIDelegate:self];
     
-    favoriteData = [[MLDataStore alloc] init];
-    [self loadData];
-    favoriteMedsSet = [[NSMutableSet alloc] initWithSet:favoriteData.favMedsSet];
+    // Initialize favorites (articles + full text entries)
+    MLDataStore *favorites = [[MLDataStore alloc] init];
+    [self loadFavorites:favorites];
+    favoriteMedsSet = [[NSMutableSet alloc] initWithSet:favorites.favMedsSet];
+    favoriteFTEntrySet = [[NSMutableSet alloc] initWithSet:favorites.favFTEntrySet];
     
     // Set default database
     mUsedDatabase = kAips;
@@ -673,15 +675,21 @@ static BOOL mSearchInteractions = false;
 #ifdef DEBUG
     NSLog(@"Tapped on star: %ld", row);
 #endif
-    NSString *medRegnrs = [NSString stringWithString:[favoriteKeyData objectAtIndex:row]];
+    if (mCurrentSearchState!=kFullText) {
+        NSString *medRegnrs = [NSString stringWithString:[favoriteKeyData objectAtIndex:row]];
+        if ([favoriteMedsSet containsObject:medRegnrs])
+            [favoriteMedsSet removeObject:medRegnrs];
+        else
+            [favoriteMedsSet addObject:medRegnrs];
+    } else {
+        NSString *hashId = [NSString stringWithString:[favoriteKeyData objectAtIndex:row]];
+        if ([favoriteFTEntrySet containsObject:hashId])
+            [favoriteFTEntrySet removeObject:hashId];
+        else
+            [favoriteFTEntrySet addObject:hashId];
+    }
     
-    if ([favoriteMedsSet containsObject:medRegnrs])
-        [favoriteMedsSet removeObject:medRegnrs];
-    else
-        [favoriteMedsSet addObject:medRegnrs];
-     
-    favoriteData = [MLDataStore initWithFavMedsSet:favoriteMedsSet];
-    [self saveData];
+    [self saveFavorites];
 }
 
 - (IBAction) searchNow: (id)sender
@@ -752,7 +760,7 @@ static BOOL mSearchInteractions = false;
             break;
         case 5:
             [self setSearchState:kFullText];
-            mCurrentWebView = kFullTextSearch;
+            mCurrentWebView = kFullTextSearchView;
             break;
     }
     
@@ -1047,7 +1055,7 @@ static BOOL mSearchInteractions = false;
                     @synchronized(self) {
                         mSearchInProgress = true;
                     }
-                    mCurrentSearchState = kTitle;
+                    // mCurrentSearchState = kTitle;
                     searchResults = [scopeSelf retrieveAllFavorites];
 
                     // Update tableview
@@ -1085,37 +1093,51 @@ static BOOL mSearchInteractions = false;
     NSDate *startTime = [NSDate date];
 #endif
     
-    if (mDb!=nil) {
-        for (NSString *regnrs in favoriteMedsSet) {
-            NSArray *med = [mDb searchRegNr:regnrs];
-            if (med!=nil && [med count]>0)
-                [medList addObject:med[0]];
+    if (mCurrentSearchState!=kFullText) {
+        if (mDb!=nil) {
+            for (NSString *regnrs in favoriteMedsSet) {
+                NSArray *med = [mDb searchRegNr:regnrs];
+                if (med!=nil && [med count]>0)
+                    [medList addObject:med[0]];
+            }
         }
-        
+    } else {
+        if (mFullTextDb!=nil) {
+            for (NSString *hashId in favoriteFTEntrySet) {
+                MLFullTextEntry *entry = [mFullTextDb searchHash:hashId];
+                if (entry!=nil)
+                    [medList addObject:entry];
+            }
+        }
+    }
+
 #ifdef DEBUG
         NSDate *endTime = [NSDate date];
         NSTimeInterval execTime = [endTime timeIntervalSinceDate:startTime];
         NSLog(@"%ld Favoriten in %dms", [medList count], (int)(1000*execTime+0.5));
 #endif
-        return medList;
-    }
-    return nil;
+    
+    return medList;
 }
 
-- (void) saveData
+- (void) saveFavorites
 {
     NSString *path = @"~/Library/Preferences/data";
     path = [path stringByExpandingTildeInPath];
     
     NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
     
-    [rootObject setValue:favoriteData forKey:@"kFavMedsSet"];
+    if (favoriteMedsSet!=nil)
+        [rootObject setValue:favoriteMedsSet forKey:@"kFavMedsSet"];
+    
+    if (favoriteFTEntrySet!=nil)
+        [rootObject setValue:favoriteFTEntrySet forKey:@"kFavFTEntrySet"];
     
     // Save contents of rootObject by key, value must conform to NSCoding protocolw
     [NSKeyedArchiver archiveRootObject:rootObject toFile:path];
 }
 
-- (void) loadData
+- (void) loadFavorites:(MLDataStore *)favorites
 {
     NSString *path = @"~/Library/Preferences/data";
     path = [path stringByExpandingTildeInPath];
@@ -1124,7 +1146,10 @@ static BOOL mSearchInteractions = false;
     NSMutableDictionary *rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
     
     if ([rootObject valueForKey:@"kFavMedsSet"]) {
-        favoriteData = [rootObject valueForKey:@"kFavMedsSet"];
+        favorites.favMedsSet = (NSSet *)[rootObject valueForKey:@"kFavMedsSet"];
+    }
+    if ([rootObject valueForKey:@"kFavFTEntrySet"]) {
+        favorites.favFTEntrySet = (NSSet *)[rootObject valueForKey:@"kFavFTEntrySet"];
     }
 }
 
@@ -1512,14 +1537,11 @@ static BOOL mSearchInteractions = false;
             }
         } else if (mCurrentSearchState == kFullText) {
             for (MLFullTextEntry *e in searchResults) {
-                if (mUsedDatabase == kAips) {
+                if (mUsedDatabase == kAips || mUsedDatabase == kFavorites) {
                     if (![e.hash isEqual:[NSNull null]]) {
                          [favoriteKeyData addObject:e.hash];
                         [self addKeyword:e.keyword andNumHits:e.numHits andHash:e.hash];
                     }
-                }
-                else if (mUsedDatabase == kFavorites) {
-                    // NOTE: TODO
                 }
             }
         }
@@ -1572,7 +1594,7 @@ static BOOL mSearchInteractions = false;
                     [mMedBasket removeObjectForKey:msg[2]];
 
                 // Update med basket
-                mCurrentWebView = kInteractionsCart;
+                mCurrentWebView = kInteractionsCartView;
                 [mInteractionsCart updateMedBasket:mMedBasket];
                 [self updateInteractionsView];
             }
@@ -1583,9 +1605,9 @@ static BOOL mSearchInteractions = false;
                     NSString *ean = msg[2];
                     NSString *anchor = msg[3];
                     if ([ean isNotEqualTo:[NSNull null]]) {
-                        mCurrentWebView = kExpertInfo;
+                        mCurrentWebView = kExpertInfoView;
                         mMed = [mDb getMediWithRegnr:ean];
-                        [self updateExpertInfoView];
+                        [self updateExpertInfoView:anchor];
                     }
                 }
             }
@@ -1595,22 +1617,44 @@ static BOOL mSearchInteractions = false;
     }];
 }
 
-- (void) updateExpertInfoView
+- (void) updateExpertInfoView:(NSString *)anchor
 {
     // Load style sheet from file
     NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
-    NSString *amikoCss = nil;
-    if (amikoCssPath)
+    NSString *amikoCss = @"";
+    if ([amikoCssPath isNotEqualTo:[NSNull null]])
         amikoCss = [NSString stringWithContentsOfFile:amikoCssPath encoding:NSUTF8StringEncoding error:nil];
     else
         amikoCss = [NSString stringWithString:mMed.styleStr];
     
-    // Extract html string
-    NSString *htmlStr = [NSString stringWithFormat:@"<head><style>%@</style></head>%@", amikoCss, mMed.contentStr];
+    // Load javascript from file
+    NSString *jscriptPath = [[NSBundle mainBundle] pathForResource:@"main_callbacks" ofType:@"js"];
+    NSString *jscriptStr = [NSString stringWithContentsOfFile:jscriptPath encoding:NSUTF8StringEncoding error:nil];
+    
+    // Generate html string
+    NSString *htmlStr = mMed.contentStr;
+    htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<html>"
+                                                 withString:@"<html><head><meta charset=\"utf-8\" />"];
+    htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<head></head>"
+                                                 withString:[NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head>", jscriptStr, amikoCss]];
+
+    if (mCurrentSearchState == kFullText) {
+        NSString *keyword = [mFullTextEntry keyword];
+        if ([keyword isNotEqualTo:[NSNull null]]) {
+            htmlStr = [htmlStr stringByReplacingOccurrencesOfString:keyword
+                                                         withString:[NSString stringWithFormat:@"<span class=\"mark\" style=\"background-color: yellow\">%@</span>", keyword]];
+        }
+    }
+    
     NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
     // [[myWebView preferences] setDefaultFontSize:14];
     // [self setSearchState:kWebView];
+    
+    if ([anchor isNotEqualTo:[NSNull null]]) {
+        NSString *jsCallback = [NSString stringWithFormat:@"moveToHighlight('%@')", anchor];
+        [myWebView stringByEvaluatingJavaScriptFromString:jsCallback];
+    }
     
     // Extract section ids
     if (![mMed.sectionIds isEqual:[NSNull null]])
@@ -1730,12 +1774,21 @@ static BOOL mSearchInteractions = false;
             cellView.detailTextField.stringValue = [medi[row] subTitle];
             // Check if cell.textLabel.text is in starred NSSet
             if (favoriteKeyData!=nil) {
-                NSString *regnrStr = favoriteKeyData[row];
-                if ([favoriteMedsSet containsObject:regnrStr])
-                    cellView.favoritesCheckBox.state = 1;
-                else
-                    cellView.favoritesCheckBox.state = 0;
-                cellView.favoritesCheckBox.tag = row;
+                if (mCurrentSearchState!=kFullText) {
+                    NSString *regnrStr = favoriteKeyData[row];
+                    if ([favoriteMedsSet containsObject:regnrStr])
+                        cellView.favoritesCheckBox.state = 1;
+                    else
+                        cellView.favoritesCheckBox.state = 0;
+                    cellView.favoritesCheckBox.tag = row;
+                } else {
+                    NSString *hashId = favoriteKeyData[row];
+                    if ([favoriteFTEntrySet containsObject:hashId])
+                        cellView.favoritesCheckBox.state = 1;
+                    else
+                        cellView.favoritesCheckBox.state = 0;
+                    cellView.favoritesCheckBox.tag = row;
+                }
             }
             // Set colors
             if ([cellView.detailTextField.stringValue rangeOfString:@", O]"].location == NSNotFound) {
@@ -1788,7 +1841,7 @@ static BOOL mSearchInteractions = false;
             [self hideTextFinder];
             
             if (mSearchInteractions==false) {
-                [self updateExpertInfoView];
+                [self updateExpertInfoView:nil];
                 
                 NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
                 [myRowView setEmphasized:YES];
@@ -1804,17 +1857,18 @@ static BOOL mSearchInteractions = false;
              */
             NSString *hashId = [medi[row] hashId];
             // Get entry
-            MLFullTextEntry *entry = [mFullTextDb searchHash:hashId];
+            mFullTextEntry = [mFullTextDb searchHash:hashId];
             // Hide text finder
             [self hideTextFinder];
             
-            NSArray *listOfRegnrs = [entry getRegnrsAsArray];
+            NSArray *listOfRegnrs = [mFullTextEntry getRegnrsAsArray];
             NSArray *listOfArticles = [mDb searchRegnrsFromList:listOfRegnrs];
-            NSDictionary *dict = [entry getRegChaptersDict];
+            NSDictionary *dict = [mFullTextEntry getRegChaptersDict];
             
             NSString *contentStr = [mFullTextSearch tableWithArticles:listOfArticles
                                                    andRegChaptersDict:dict
                                                             andFilter:@""];
+            mCurrentWebView = kFullTextSearchView;
             [self updateFullTextSearchView:contentStr];
         }
     } else if ([notification object] == self.mySectionTitles) {
@@ -1824,7 +1878,7 @@ static BOOL mSearchInteractions = false;
         */
         NSInteger row = [[notification object] selectedRow];
        
-        if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearch) {
+        if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
             NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
             [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
         } else {

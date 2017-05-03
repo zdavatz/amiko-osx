@@ -1,7 +1,7 @@
 #menue{z-index:1;position:fixed;left:0px;top:0px;}
 #monographie{margin-left:0px;margin-right:0px;margin-top:20px;margin-bottom:20px;font-family:"Lucida Grande","Arial","Tahoma","Helvetica","Geneva","sans-serif";color:black;}
 #monographie .MonTitle{font-size:1.5em;font-weight:bold;margin-bottom:0.2em;}
-#monographie .absTitle{font-size:0.9em;font-weight:bold;font-style:italic;margin-bottom:0.0em;}
+#monographie .absTitle{font-size:0.9em;font-weight:bold;font-style:normal;margin-bottom:0.0em;}
 #monographie .untertitle{font-size:0.9em;font-weight:normal;margin-top:0.5em;margin-bottom:0.0em;}
 #monographie .untertitle1{font-size:0.9em;font-weight:normal;font-style:italic;margin-top:0.2em;margin-bottom:0.0em;}
 #monographie .header{font-size:0.85em;font-weight:normal;color:#999999;text-align:left;margin-bottom:2em;visibility:hidden;display:none;}
