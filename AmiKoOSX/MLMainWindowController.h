@@ -49,7 +49,7 @@ extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
 #endif
 
-@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate>
+@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {
     IBOutlet NSView *myView;
     IBOutlet NSView *mySplashScreen;

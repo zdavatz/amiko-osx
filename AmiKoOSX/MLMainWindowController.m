@@ -126,6 +126,8 @@ static BOOL mSearchInteractions = false;
     
     WebViewJavascriptBridge *mJSBridge;
     
+    NSString *mAnchor;
+    
     dispatch_queue_t mSearchQueue;
     volatile bool mSearchInProgress;
 
@@ -245,7 +247,9 @@ static BOOL mSearchInteractions = false;
     
     // Initialize webview
     [[myWebView preferences] setJavaScriptEnabled:YES];
+    [[myWebView preferences] setJavaScriptCanOpenWindowsAutomatically:YES];
     [myWebView setUIDelegate:self];
+    [myWebView setFrameLoadDelegate:self];
     
     // Initialize favorites (articles + full text entries)
     MLDataStore *favorites = [[MLDataStore alloc] init];
@@ -601,12 +605,10 @@ static BOOL mSearchInteractions = false;
  */
 - (void) updateSearchResults
 {
-    if (mUsedDatabase==kAips) {
-        searchResults = [self searchDatabasesWith:mCurrentSearchKey];
-    }
-    else if (mUsedDatabase==kFavorites) {
+    if (mUsedDatabase==kAips)
+        searchResults = [self searchAnyDatabasesWith:mCurrentSearchKey];
+    else if (mUsedDatabase==kFavorites)
         searchResults = [self retrieveAllFavorites];
-    }
 }
 
 /**
@@ -617,7 +619,9 @@ static BOOL mSearchInteractions = false;
     // Reset search state
     [self setSearchState:kTitle];
     
-    searchResults = [self searchDatabasesWith:@""];
+    mCurrentSearchKey = @"";
+    searchResults = [self searchAnyDatabasesWith:mCurrentSearchKey];
+
     if (searchResults) {
         [self updateTableView];
         [self.myTableView reloadData];
@@ -713,7 +717,7 @@ static BOOL mSearchInteractions = false;
                     mSearchInProgress = true;
                 }
                 if ([searchText length]>0)
-                    searchResults = [scopeSelf searchDatabasesWith:searchText];
+                    searchResults = [scopeSelf searchAnyDatabasesWith:searchText];
                 else {
                     if (mUsedDatabase == kFavorites)
                         searchResults = [scopeSelf retrieveAllFavorites];
@@ -1020,9 +1024,14 @@ static BOOL mSearchInteractions = false;
                     @synchronized(self) {
                         mSearchInProgress = true;
                     }
-                    mCurrentSearchState = kTitle;
-                    searchResults = [scopeSelf searchDatabasesWith:@""];
-                
+                    
+                    if (mCurrentSearchState!=kFullText) {
+                        mCurrentSearchState = kTitle;
+                        mCurrentSearchKey = @"";
+                        searchResults = [scopeSelf searchAnyDatabasesWith:mCurrentSearchKey];
+                    } else {
+                        searchResults = [scopeSelf searchAnyDatabasesWith:mCurrentSearchKey];
+                    }
                     // Update tableview
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [scopeSelf updateTableView];
@@ -1197,32 +1206,28 @@ static BOOL mSearchInteractions = false;
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_FULLTEXT]];
             break;
     }
+    mCurrentSearchKey = @"";
     mCurrentSearchState = searchState;
 }
 
-- (NSArray *) searchDatabasesWith:(NSString *)searchQuery
-{    
+- (NSArray *) searchAnyDatabasesWith:(NSString *)searchQuery
+{
     NSArray *searchRes = [NSArray array];
     
 #ifdef DEBUG
     NSDate *startTime = [NSDate date];
 #endif
     
-    if (mCurrentSearchState == kTitle) {
+    if (mCurrentSearchState == kTitle)
         searchRes = [mDb searchTitle:searchQuery];  // NSArray of MLMedication
-    }
-    else if (mCurrentSearchState == kAuthor) {
+    else if (mCurrentSearchState == kAuthor)
         searchRes = [mDb searchAuthor:searchQuery];
-    }
-    else if (mCurrentSearchState == kAtcCode) {
+    else if (mCurrentSearchState == kAtcCode)
         searchRes = [mDb searchATCCode:searchQuery];
-    }
-    else if (mCurrentSearchState == kRegNr) {
+    else if (mCurrentSearchState == kRegNr)
         searchRes = [mDb searchRegNr:searchQuery];
-    }
-    else if (mCurrentSearchState == kTherapy) {
+    else if (mCurrentSearchState == kTherapy)
         searchRes = [mDb searchApplication:searchQuery];
-    }
     else if (mCurrentSearchState == kFullText) {
         if ([searchQuery length]>2)
             searchRes = [mFullTextDb searchKeyword:searchQuery];    // NSArray of FullTextEntry
@@ -1582,7 +1587,9 @@ static BOOL mSearchInteractions = false;
  */
 - (void) createJSBridge
 {
-    mJSBridge = [WebViewJavascriptBridge bridgeForWebView:myWebView handler:^(id msg, WVJBResponseCallback responseCallback) {
+    mJSBridge = [WebViewJavascriptBridge bridgeForWebView:myWebView];
+    
+    [mJSBridge registerHandler:@"JSToObjC_" handler:^(id msg, WVJBResponseCallback responseCallback) {
         if ([msg count]==3) {
             // --- Interactions ---
             if ([msg[0] isEqualToString:@"interactions_cb"]) {
@@ -1592,7 +1599,7 @@ static BOOL mSearchInteractions = false;
                     [mMedBasket removeAllObjects];
                 else if ([msg[1] isEqualToString:@"delete_row"])
                     [mMedBasket removeObjectForKey:msg[2]];
-
+                
                 // Update med basket
                 mCurrentWebView = kInteractionsCartView;
                 [mInteractionsCart updateMedBasket:mMedBasket];
@@ -1612,9 +1619,16 @@ static BOOL mSearchInteractions = false;
                 }
             }
         }
-        // Reponse to javascript...
-        // responseCallback(@"Right back atcha");
     }];
+}
+
+- (void) webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+{
+    // Inject JS into webview
+    if ([mAnchor isNotEqualTo:[NSNull null]]) {
+        NSString *jsCallback = [NSString stringWithFormat:@"moveToHighlight('%@')", mAnchor];
+        [myWebView stringByEvaluatingJavaScriptFromString:jsCallback];
+    }
 }
 
 - (void) updateExpertInfoView:(NSString *)anchor
@@ -1634,7 +1648,7 @@ static BOOL mSearchInteractions = false;
     // Generate html string
     NSString *htmlStr = mMed.contentStr;
     htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<html>"
-                                                 withString:@"<html><head><meta charset=\"utf-8\" />"];
+                                                 withString:@"<!DOCTYPE html><html><head><meta charset=\"utf-8\" />"];
     htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<head></head>"
                                                  withString:[NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head>", jscriptStr, amikoCss]];
 
@@ -1644,17 +1658,14 @@ static BOOL mSearchInteractions = false;
             htmlStr = [htmlStr stringByReplacingOccurrencesOfString:keyword
                                                          withString:[NSString stringWithFormat:@"<span class=\"mark\" style=\"background-color: yellow\">%@</span>", keyword]];
         }
+        mAnchor = anchor;
     }
     
     NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+    
     // [[myWebView preferences] setDefaultFontSize:14];
     // [self setSearchState:kWebView];
-    
-    if ([anchor isNotEqualTo:[NSNull null]]) {
-        NSString *jsCallback = [NSString stringWithFormat:@"moveToHighlight('%@')", anchor];
-        [myWebView stringByEvaluatingJavaScriptFromString:jsCallback];
-    }
     
     // Extract section ids
     if (![mMed.sectionIds isEqual:[NSNull null]])
