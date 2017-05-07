@@ -70,6 +70,7 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSTextFinder *myTextFinder;
 
 - (IBAction) performFindAction:(id)sender;
+- (IBAction) clickedTableView: (id)sender;
 - (IBAction) tappedOnStar:(id)sender;
 - (IBAction) searchNow:(id)sender;
 - (IBAction) onButtonPressed:(id)sender;

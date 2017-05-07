@@ -127,6 +127,7 @@ static BOOL mSearchInteractions = false;
     WebViewJavascriptBridge *mJSBridge;
     
     NSString *mAnchor;
+    NSString *mFullTextContentStr;
     
     dispatch_queue_t mSearchQueue;
     volatile bool mSearchInProgress;
@@ -962,6 +963,14 @@ static BOOL mSearchInteractions = false;
 - (IBAction) rateApp:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"macappstore://itunes.apple.com/app/id%@?mt=12", APP_ID]]];
+}
+
+- (IBAction) clickedTableView: (id)sender
+{
+    if (mCurrentSearchState==kFullText) {
+        mCurrentWebView = kFullTextSearchView;
+        [self updateFullTextSearchView:mFullTextContentStr];
+    }
 }
 
 - (void) showHelp: (id)sender
@@ -1838,7 +1847,7 @@ static BOOL mSearchInteractions = false;
     if ([notification object] == self.myTableView) {
         /*
          * Check if table is search result (=myTableView)
-         * Left pane
+         * Left-most pane
         */
         NSInteger row = [[notification object] selectedRow];
         
@@ -1876,16 +1885,16 @@ static BOOL mSearchInteractions = false;
             NSArray *listOfArticles = [mDb searchRegnrsFromList:listOfRegnrs];
             NSDictionary *dict = [mFullTextEntry getRegChaptersDict];
             
-            NSString *contentStr = [mFullTextSearch tableWithArticles:listOfArticles
+            mFullTextContentStr = [mFullTextSearch tableWithArticles:listOfArticles
                                                    andRegChaptersDict:dict
                                                             andFilter:@""];
             mCurrentWebView = kFullTextSearchView;
-            [self updateFullTextSearchView:contentStr];
+            [self updateFullTextSearchView:mFullTextContentStr];
         }
     } else if ([notification object] == self.mySectionTitles) {
         /* 
          * Check if table is list of chapter titles (=mySectionTitles)
-         * Middle pane
+         * Right-most pane
         */
         NSInteger row = [[notification object] selectedRow];
        
