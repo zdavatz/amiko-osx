@@ -206,6 +206,7 @@
                                                                 </tableColumn>
                                                             </tableColumns>
                                                             <connections>
+                                                                <action selector="clickedTableView:" target="-2" id="Rgf-7b-zf6"/>
                                                                 <outlet property="dataSource" destination="-2" id="533"/>
                                                                 <outlet property="delegate" destination="-2" id="534"/>
                                                             </connections>
