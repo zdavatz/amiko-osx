@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
-		D517E4AD1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */; };
 		D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
 		D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
 		D517E4B31EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
@@ -21,6 +20,11 @@
 		D517E4C51EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4C11EB1E5B700187AC8 /* MLFullTextEntry.m */; };
 		D517E4C61EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4C11EB1E5B700187AC8 /* MLFullTextEntry.m */; };
 		D517E4C71EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4C11EB1E5B700187AC8 /* MLFullTextEntry.m */; };
+		D52795F91EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */; };
+		D52795FA1EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */; };
+		D52795FB1EBF10AB00B92794 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */; };
+		D52795FC1EBF10B000B92794 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
+		D52795FD1EBF10B100B92794 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
 		D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */; };
 		D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
 		D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */; };
@@ -1157,6 +1161,7 @@
 				D5E731451B33480A007771D7 /* maindb@2x.png in Resources */,
 				D5AE31791B36F078006BC60E /* desitin.iconset in Resources */,
 				D5E731461B33480A007771D7 /* favorites@2x.png in Resources */,
+				D52795FD1EBF10B100B92794 /* amiko_frequency_de.db in Resources */,
 				D5E731481B33480A007771D7 /* amiko_db_full_idx_de.db in Resources */,
 				D5C6443E1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5E7314A1B33480A007771D7 /* amiko_report_de.html in Resources */,
@@ -1188,6 +1193,7 @@
 				D5AE31861B372085006BC60E /* desitin_icon_512x512.png in Resources */,
 				D5E731821B334829007771D7 /* app_icon_512x512.png in Resources */,
 				D5E731831B334829007771D7 /* amikoosx_splash_1000x670.png in Resources */,
+				D52795FB1EBF10AB00B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E731841B334829007771D7 /* 28-star@2x.png in Resources */,
 				D5E731A01B3351DB007771D7 /* MLCoMedDesitinMainWindow.xib in Resources */,
 				D5E731851B334829007771D7 /* Zur_Rose_1000x670px.png in Resources */,
@@ -1218,6 +1224,7 @@
 				D5E91B7317E5E24000B66B27 /* app_icon_512x512.png in Resources */,
 				D53877841A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538778C1AA202E400AEFDB4 /* AmiKo-zR.entitlements in Resources */,
+				D52795FC1EBF10B000B92794 /* amiko_frequency_de.db in Resources */,
 				D5C6443C1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5E91B7517E5E24000B66B27 /* 28-star@2x.png in Resources */,
 				D5E91B7617E5E24000B66B27 /* MLAmiKozRMainWindow.xib in Resources */,
@@ -1259,7 +1266,6 @@
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
 				D5C6442C1EB345A300438E6F /* fulltext_style.css in Resources */,
 				D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */,
-				D517E4AD1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91BAB17E5E8E400B66B27 /* MLAmiKoMainWindow.xib in Resources */,
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
@@ -1296,6 +1302,7 @@
 				D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
+				D52795F91EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BD717E5E8E800B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E91BD917E5E8E800B66B27 /* MLCoMedMainWindow.xib in Resources */,
 				D5E91BDC17E5E8E800B66B27 /* CoMedMainMenu.xib in Resources */,
@@ -1339,6 +1346,7 @@
 				D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */,
 				D5AB1776180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5E91BFC17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
+				D52795FA1EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				D536126917E770A80087B132 /* amiko.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1742,7 +1750,7 @@
 				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO";
-				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.amikoosx;
 				PRODUCT_NAME = AmiKo;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -1762,7 +1770,7 @@
 				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO";
-				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.amikoosx;
 				PRODUCT_NAME = AmiKo;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
