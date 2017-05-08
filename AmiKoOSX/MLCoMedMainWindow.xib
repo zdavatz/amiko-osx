@@ -474,7 +474,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="4"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="7"/>
-                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="CoMed" paletteLabel="CoMed" toolTip="CoMed" tag="4" image="desitin" id="9">
+                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="CoMed" paletteLabel="CoMed" toolTip="CoMed" tag="4" image="amiko" id="9">
                         <connections>
                             <action selector="showAboutPanel:" target="-2" id="1639"/>
                         </connections>
@@ -496,7 +496,7 @@
         <image name="28-star-gy" width="26" height="26"/>
         <image name="28-star-ye" width="26" height="26"/>
         <image name="Zur_Rose_1000x670px" width="1000" height="670"/>
-        <image name="desitin" width="512" height="512"/>
+        <image name="amiko" width="512" height="512"/>
         <image name="favorites" width="418.90908813476562" height="418.90908813476562"/>
         <image name="interactions" width="17.130111694335938" height="17.130111694335938"/>
         <image name="maindb" width="121.26316070556641" height="121.26316070556641"/>
