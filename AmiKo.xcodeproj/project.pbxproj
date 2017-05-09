@@ -1750,7 +1750,7 @@
 				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.amikoosx;
+				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
 				PRODUCT_NAME = AmiKo;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -1770,7 +1770,7 @@
 				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.amikoosx;
+				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
 				PRODUCT_NAME = AmiKo;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
