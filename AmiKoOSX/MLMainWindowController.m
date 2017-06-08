@@ -747,6 +747,8 @@ static BOOL mSearchInteractions = false;
 {  
     NSButton *btn = (NSButton *)sender;
     
+    NSInteger prevState = mCurrentSearchState;
+    
     switch (btn.tag) {
         case 0:
             [self setSearchState:kTitle];
@@ -769,7 +771,8 @@ static BOOL mSearchInteractions = false;
             break;
     }
     
-    [self updateSearchResults];
+    if (prevState == kFullText || mCurrentSearchState == kFullText)
+        [self updateSearchResults];
     
     if (searchResults) {
         [self updateTableView];
@@ -885,7 +888,7 @@ static BOOL mSearchInteractions = false;
             // Starts Safari            
             [[NSWorkspace sharedWorkspace] openFile:filePath];
         } else {
-            NSURL * aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_de" withExtension:@"html"];
+            NSURL *aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_de" withExtension:@"html"];
             // Starts Safari
             [[NSWorkspace sharedWorkspace] openURL:aboutFile];
         }
@@ -895,7 +898,7 @@ static BOOL mSearchInteractions = false;
             // Starts Safari
             [[NSWorkspace sharedWorkspace] openFile:filePath];
         } else {
-            NSURL * aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_fr" withExtension:@"html"];
+            NSURL *aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_fr" withExtension:@"html"];
             // Starts Safari
             [[NSWorkspace sharedWorkspace] openURL:aboutFile];
         }
@@ -967,7 +970,7 @@ static BOOL mSearchInteractions = false;
 
 - (IBAction) clickedTableView: (id)sender
 {
-    if (mCurrentSearchState==kFullText) {
+    if (mCurrentSearchState == kFullText) {
         mCurrentWebView = kFullTextSearchView;
         [self updateFullTextSearchView:mFullTextContentStr];
     }
@@ -1455,7 +1458,6 @@ static BOOL mSearchInteractions = false;
 - (void) updateTableView
 {
     if (searchResults) {
-        
         if (medi != nil)
             [medi removeAllObjects];
         
@@ -1467,7 +1469,7 @@ static BOOL mSearchInteractions = false;
                 for (MLMedication *m in searchResults) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:m.regnrs];
-                        if (mSearchInteractions==false)
+                        if (mSearchInteractions == false)
                             [self addTitle:m.title andPackInfo:m.packInfo andMedId:m.medId];
                         else
                             [self addTitle:m.title andPackInfo:m.atccode andMedId:m.medId];
