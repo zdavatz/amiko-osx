@@ -294,7 +294,7 @@ static BOOL mSearchInteractions = false;
     */
     
     [[self window] setBackgroundColor:[NSColor whiteColor]];
-
+    
     return self;
 }
 
@@ -1771,14 +1771,6 @@ static BOOL mSearchInteractions = false;
     return 0;
 }
 
-- (NSTableRowView *) tableView: (NSTableView *)tableView rowViewForRow:(NSInteger)row
-{
-    MLCustomTableRowView *rowView = [[MLCustomTableRowView alloc] initWithFrame:NSZeroRect];
-    [rowView setRowIndex:row];
-    
-    return rowView;
-}
-
 /**
  - NSTableViewDataDelegate -
  Update tableviews (search result and section titles)
@@ -1793,7 +1785,8 @@ static BOOL mSearchInteractions = false;
 
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
             cellView.textField.stringValue = [medi[row] title];
-            cellView.detailTextField.stringValue = [medi[row] subTitle];
+            cellView.packagesStr = [medi[row] subTitle];
+            [cellView.packagesView reloadData];
             // Check if cell.textLabel.text is in starred NSSet
             if (favoriteKeyData!=nil) {
                 if (mCurrentSearchState!=kFullText) {
@@ -1811,19 +1804,6 @@ static BOOL mSearchInteractions = false;
                         cellView.favoritesCheckBox.state = 0;
                     cellView.favoritesCheckBox.tag = row;
                 }
-            }
-            // Set colors
-            if ([cellView.detailTextField.stringValue rangeOfString:@", O]"].location == NSNotFound) {
-                if ([cellView.detailTextField.stringValue rangeOfString:@", G]"].location == NSNotFound) {
-                    // Anything else ...
-                    [cellView setDetailTextColor:[NSColor grayColor]];
-                } else {
-                    // Generika
-                    [cellView setDetailTextColor:[NSColor colorWithCalibratedRed:0.0 green:0.8 blue:0.2 alpha:1.0]];
-                }
-            } else {
-                // Original
-                [cellView setDetailTextColor:[NSColor redColor]];
             }
             
             return cellView;
@@ -1844,6 +1824,13 @@ static BOOL mSearchInteractions = false;
 /*
  Update webview
  */
+- (NSTableRowView *) tableView: (NSTableView *)tableView rowViewForRow:(NSInteger)row
+{
+    MLCustomTableRowView *rowView = [[MLCustomTableRowView alloc] initWithFrame:NSZeroRect];
+    [rowView setRowIndex:row];   
+    return rowView;
+}
+
 - (void) tableViewSelectionDidChange: (NSNotification *)notification
 {
     if ([notification object] == self.myTableView) {
@@ -1853,6 +1840,12 @@ static BOOL mSearchInteractions = false;
         */
         NSInteger row = [[notification object] selectedRow];
         
+        NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
+        [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
+
+        // Colors whole row red... useless
+        // [myRowView setBackgroundColor:[NSColor redColor]];
+               
         if (mCurrentSearchState!=kFullText) {
             /* Search in Aips DB or Interactions DB
              */
@@ -1864,15 +1857,9 @@ static BOOL mSearchInteractions = false;
             
             if (mSearchInteractions==false) {
                 [self updateExpertInfoView:nil];
-                
-                NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
-                [myRowView setEmphasized:YES];
             } else {
                 [self pushToMedBasket];
                 [self updateInteractionsView];
-                
-                NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
-                [myRowView setEmphasized:YES];
             }
         } else {
             /* Search in full text search DB
@@ -1900,6 +1887,9 @@ static BOOL mSearchInteractions = false;
         */
         NSInteger row = [[notification object] selectedRow];
        
+        NSTableRowView *myRowView = [self.mySectionTitles rowViewAtRow:row makeIfNecessary:NO];
+        [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
+        
         if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
             NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
             [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
@@ -1929,26 +1919,24 @@ static BOOL mSearchInteractions = false;
 }
 */
 
-#define PADDING 5.0f
 - (CGFloat) tableView: (NSTableView *)tableView heightOfRow: (NSInteger)row
 {
     if (tableView == self.myTableView) {
         NSString *text = [medi[row] title];
-        NSString *subText = [medi[row] subTitle];
-    
         NSFont *textFont = [NSFont boldSystemFontOfSize:13.0f];
         CGSize textSize = NSSizeFromCGSize([text sizeWithAttributes:[NSDictionary dictionaryWithObject:textFont
                                                                                                 forKey:NSFontAttributeName]]);
-        NSFont *subTextFont = [NSFont boldSystemFontOfSize:11.0f];
+        NSString *subText = [medi[row] subTitle];
+        NSFont *subTextFont = [NSFont boldSystemFontOfSize:12.0f];
         CGSize subTextSize = NSSizeFromCGSize([subText sizeWithAttributes:[NSDictionary dictionaryWithObject:subTextFont
                                                                                                       forKey:NSFontAttributeName]]);
-        return (textSize.height + subTextSize.height + PADDING);
+        return (textSize.height + subTextSize.height + 12.0f);
     } else if (tableView == mySectionTitles) {
         NSString *text = mListOfSectionTitles[row];
         NSFont *textFont = [NSFont boldSystemFontOfSize:11.0f];
         CGSize textSize = NSSizeFromCGSize([text sizeWithAttributes:[NSDictionary dictionaryWithObject:textFont
                                                                                                 forKey:NSFontAttributeName]]);        
-        return (textSize.height + PADDING);
+        return (textSize.height + 5.0f);
     }
     
     return 0.0f;

@@ -22,16 +22,20 @@
  ------------------------------------------------------------------------ */
 
 #import "MLCustomTableRowView.h"
+#import "MLColors.h"
 
 @implementation MLCustomTableRowView
 
 @synthesize rowIndex = _rowIndex;
+@synthesize color;
+@synthesize radius;
 
 - (id) initWithFrame: (NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
+        color = [NSColor selectBlue];
+        radius = 0;
     }
     
     return self;
@@ -49,21 +53,13 @@
     // Draw selected row rectangle here
     if (self.selectionHighlightStyle != NSTableViewSelectionHighlightStyleNone) {
         NSRect selectionRect = NSInsetRect(self.bounds, 0.0, 0.0);
-        /* 
-        [[NSColor colorWithCalibratedRed:228/255.0 green:228/255.0 blue:255/255.0 alpha:1.0] setStroke];
-        [[NSColor colorWithCalibratedRed:228/255.0 green:228/255.0 blue:255/255.0 alpha:1.0] setFill];
-         
-        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:8 yRadius:8];
-        [selectionPath fill];
-        [selectionPath stroke];
-        */
         // Define gradient colors
-        NSColor* gradientStartColor = [NSColor colorWithCalibratedRed:230/255.0 green:230/255.0 blue:255/255.0 alpha:1.0];
-        NSColor* gradientEndColor = [NSColor colorWithCalibratedRed:230/255.0 green:230/255.0 blue:255/255.0 alpha:1.0];
+        NSColor* gradientStartColor = color;
+        NSColor* gradientEndColor = color;
         // Gradient Declarations
         NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:gradientStartColor endingColor:gradientEndColor];
         // Rounded Rectangle Drawing
-        NSBezierPath *roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:7 yRadius:7];
+        NSBezierPath *roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:radius yRadius:radius];
         [gradient drawInBezierPath:roundedRectanglePath angle:90];
     }
 }

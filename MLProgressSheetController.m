@@ -26,6 +26,7 @@
 
 @implementation MLProgressSheetController
 {
+    @private
     NSModalSession mModalSession;
 }
 

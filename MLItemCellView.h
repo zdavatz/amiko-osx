@@ -23,12 +23,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MLItemCellView : NSTableCellView
+@interface MLItemCellView : NSTableCellView <NSTableViewDelegate, NSTableViewDataSource>
 
 @property (nonatomic, weak) IBOutlet NSButtonCell *favoritesCheckBox;
-@property (nonatomic, weak) IBOutlet NSTextField *detailTextField;
+@property (nonatomic, weak) IBOutlet NSTableView *packagesView;
 
-- (void) setDetailTextColor: (NSColor *)color;
+@property (atomic) NSString *packagesStr;
+@property (atomic) NSInteger numPackages;
 
 @end
 

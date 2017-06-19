@@ -29,6 +29,18 @@
 		D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
 		D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */; };
 		D52A0D7A17EDC60E003BF272 /* AmiKo.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */; };
+		D52EA4A51EF4377C001ADFEC /* MLCellPackagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */; };
+		D52EA4A61EF4377C001ADFEC /* MLCellPackagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */; };
+		D52EA4A71EF4377C001ADFEC /* MLCellPackagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */; };
+		D52EA4A81EF4377C001ADFEC /* MLCellPackagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */; };
+		D52EA4A91EF4377C001ADFEC /* MLCellPackagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */; };
+		D52EA4AA1EF4377C001ADFEC /* MLCellPackagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */; };
+		D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4AB1EF43B96001ADFEC /* MLColors.m */; };
+		D52EA4AD1EF43B96001ADFEC /* MLColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4AB1EF43B96001ADFEC /* MLColors.m */; };
+		D52EA4AE1EF43B96001ADFEC /* MLColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4AB1EF43B96001ADFEC /* MLColors.m */; };
+		D52EA4AF1EF43B96001ADFEC /* MLColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4AB1EF43B96001ADFEC /* MLColors.m */; };
+		D52EA4B01EF43B96001ADFEC /* MLColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4AB1EF43B96001ADFEC /* MLColors.m */; };
+		D52EA4B11EF43B96001ADFEC /* MLColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4AB1EF43B96001ADFEC /* MLColors.m */; };
 		D536126817E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D536126917E770A80087B132 /* amiko.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D536126517E770A80087B132 /* amiko.iconset */; };
 		D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877771A9E5AE700AEFDB4 /* favorites@2x.png */; };
@@ -423,6 +435,10 @@
 		D517E4C11EB1E5B700187AC8 /* MLFullTextEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFullTextEntry.m; sourceTree = "<group>"; };
 		D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amikoosx_splash_1000x670.png; sourceTree = "<group>"; };
 		D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comedosx_splash_1000x670.png; sourceTree = "<group>"; };
+		D52EA4A31EF436E3001ADFEC /* MLCellPackagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCellPackagesView.h; sourceTree = "<group>"; };
+		D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCellPackagesView.m; sourceTree = "<group>"; };
+		D52EA4AB1EF43B96001ADFEC /* MLColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLColors.m; sourceTree = "<group>"; };
+		D52EA4B21EF43BA9001ADFEC /* MLColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLColors.h; sourceTree = "<group>"; };
 		D536126517E770A80087B132 /* amiko.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = amiko.iconset; sourceTree = "<group>"; };
 		D53877771A9E5AE700AEFDB4 /* favorites@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorites@2x.png"; sourceTree = "<group>"; };
 		D53877781A9E5AE700AEFDB4 /* interactions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interactions@2x.png"; sourceTree = "<group>"; };
@@ -722,10 +738,12 @@
 				D545C90A18A4286B00491511 /* MLCustomWebView.m */,
 				D545C90F18A5725900491511 /* MLCustomView.h */,
 				D545C91018A5725900491511 /* MLCustomView.m */,
-				D5EBC6C317CBBCE900EBEF39 /* MLItemCellView.h */,
-				D5EBC6C417CBBCE900EBEF39 /* MLItemCellView.m */,
 				D5EBC6DD17D5113700EBEF39 /* MLCustomTableRowView.h */,
 				D5EBC6DE17D5113700EBEF39 /* MLCustomTableRowView.m */,
+				D5EBC6C317CBBCE900EBEF39 /* MLItemCellView.h */,
+				D5EBC6C417CBBCE900EBEF39 /* MLItemCellView.m */,
+				D52EA4A31EF436E3001ADFEC /* MLCellPackagesView.h */,
+				D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -744,6 +762,8 @@
 			children = (
 				D53877861A9E63BA00AEFDB4 /* MLUtilities.h */,
 				D53877931AA37CC900AEFDB4 /* MLUtilities.m */,
+				D52EA4B21EF43BA9001ADFEC /* MLColors.h */,
+				D52EA4AB1EF43B96001ADFEC /* MLColors.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1364,6 +1384,7 @@
 				D5E731141B33480A007771D7 /* MLAppDelegate.m in Sources */,
 				D5E731151B33480A007771D7 /* MLMainWindowController.m in Sources */,
 				D5E731161B33480A007771D7 /* MLProgressSheetController.m in Sources */,
+				D52EA4A91EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D5E731171B33480A007771D7 /* MLUtilities.m in Sources */,
 				D5BACC041EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D5E731181B33480A007771D7 /* MLCustomWebView.m in Sources */,
@@ -1382,6 +1403,7 @@
 				D5BACBFE1EBB1D2C001812FB /* WebViewJavascriptBridge.m in Sources */,
 				D5E731241B33480A007771D7 /* MLCustomView.m in Sources */,
 				D5E731251B33480A007771D7 /* ioapi.c in Sources */,
+				D52EA4B01EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E731261B33480A007771D7 /* MLItemCellView.m in Sources */,
 				D517E4B51EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC101EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
@@ -1404,6 +1426,7 @@
 				D5E731581B334829007771D7 /* MLAppDelegate.m in Sources */,
 				D5E731591B334829007771D7 /* MLMainWindowController.m in Sources */,
 				D5E7315A1B334829007771D7 /* MLProgressSheetController.m in Sources */,
+				D52EA4AA1EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D5E7315B1B334829007771D7 /* MLUtilities.m in Sources */,
 				D5BACC051EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D5E7315C1B334829007771D7 /* MLCustomWebView.m in Sources */,
@@ -1422,6 +1445,7 @@
 				D5BACBFF1EBB1D2C001812FB /* WebViewJavascriptBridge.m in Sources */,
 				D5E731681B334829007771D7 /* MLCustomView.m in Sources */,
 				D5E731691B334829007771D7 /* ioapi.c in Sources */,
+				D52EA4B11EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E7316A1B334829007771D7 /* MLItemCellView.m in Sources */,
 				D517E4B61EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC111EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
@@ -1444,6 +1468,7 @@
 				D5E91B5A17E5E24000B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B5B17E5E24000B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF9189522AD00C4525C /* MLProgressSheetController.m in Sources */,
+				D52EA4A71EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D53877961AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D5BACC021EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90D18A4286B00491511 /* MLCustomWebView.m in Sources */,
@@ -1462,6 +1487,7 @@
 				D5BACBFC1EBB1D2C001812FB /* WebViewJavascriptBridge.m in Sources */,
 				D545C91318A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8F418A2CE0200491511 /* ioapi.c in Sources */,
+				D52EA4AE1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E91B6117E5E24000B66B27 /* MLItemCellView.m in Sources */,
 				D517E4B31EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0E1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
@@ -1484,6 +1510,7 @@
 				D5E91B8917E5E8E400B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
+				D52EA4A51EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D53877941AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D5BACC001EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90B18A4286B00491511 /* MLCustomWebView.m in Sources */,
@@ -1502,6 +1529,7 @@
 				D5BACBFA1EBB1D2C001812FB /* WebViewJavascriptBridge.m in Sources */,
 				D545C91118A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8E41898527C00491511 /* ioapi.c in Sources */,
+				D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E91B9017E5E8E400B66B27 /* MLItemCellView.m in Sources */,
 				D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0C1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
@@ -1524,6 +1552,7 @@
 				D5E91BB817E5E8E800B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */,
 				D545C8EE18A2CDD100491511 /* MLProgressSheetController.m in Sources */,
+				D52EA4A61EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D53877951AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D5BACC011EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */,
@@ -1542,6 +1571,7 @@
 				D5BACBFB1EBB1D2C001812FB /* WebViewJavascriptBridge.m in Sources */,
 				D545C91218A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8F318A2CE0100491511 /* ioapi.c in Sources */,
+				D52EA4AD1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
 				D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
@@ -1564,6 +1594,7 @@
 				D5EBC69417C912FF00EBEF39 /* MLAppDelegate.m in Sources */,
 				D5EBC6A417C913B100EBEF39 /* MLMainWindowController.m in Sources */,
 				D545C8EF18A2CDD200491511 /* MLProgressSheetController.m in Sources */,
+				D52EA4A81EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D53877971AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D5BACC031EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90E18A4286B00491511 /* MLCustomWebView.m in Sources */,
@@ -1582,6 +1613,7 @@
 				D5BACBFD1EBB1D2C001812FB /* WebViewJavascriptBridge.m in Sources */,
 				D545C91418A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8F518A2CE0200491511 /* ioapi.c in Sources */,
+				D52EA4AF1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5EBC6C517CBBCEA00EBEF39 /* MLItemCellView.m in Sources */,
 				D517E4B41EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0F1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,

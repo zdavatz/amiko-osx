@@ -26,5 +26,7 @@
 @interface MLCustomTableRowView : NSTableRowView
 
 @property (nonatomic) NSInteger rowIndex;
+@property (atomic) NSColor *color;
+@property (atomic) NSInteger radius;
 
 @end

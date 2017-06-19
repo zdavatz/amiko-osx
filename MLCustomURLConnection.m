@@ -28,6 +28,7 @@
 
 @implementation MLCustomURLConnection
 {
+    @private
     NSURLConnection *myConnection;
     NSFileHandle *mFile;        // writes directly to disk
     // NSMutableData *mData;    // caches in memory

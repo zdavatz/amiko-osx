@@ -1,8 +1,8 @@
 /*
  
- Copyright (c) 2014 Max Lungarella <cybrmx@gmail.com>
+ Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 26/01/2014.
+ Created on 14/06/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -23,24 +23,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MLProgressSheetController : NSWindowController
-{
-    @private
-    IBOutlet NSWindow *mProgressPanel;
-    IBOutlet NSImageCell *mSplashImage;
-    IBOutlet NSTextField *mDownloadMsg;
-    IBOutlet NSTextField *mDownloadPercent;
-    IBOutlet NSProgressIndicator *mProgressIndicator;
-    bool mDownloadInProgress;
-}
-
-@property (nonatomic, assign) bool mDownloadInProgress;
-
-- (IBAction) onCancelPressed: (id)sender;
-
-- (void) show: (NSWindow *)window;
-- (void) remove;
-- (void) update: (long)value max: (long long)maxValue;
-- (void) updateMsg:(NSString *)msg;
+@interface MLCellPackagesView : NSTableCellView
 
 @end
