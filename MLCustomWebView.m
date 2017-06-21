@@ -25,6 +25,9 @@
 
 @implementation MLCustomWebView
 
+/*
+ In case you generate the view manually
+ */
 - (id) initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];

@@ -1,8 +1,8 @@
 /*
  
- Copyright (c) 2013 Max Lungarella <cybrmx@gmail.com>
+ Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 24/08/2013.
+ Created on 20/06/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -22,12 +22,12 @@
  ------------------------------------------------------------------------ */
 
 #import <Cocoa/Cocoa.h>
-#import <WebKit/WebKit.h>
 
-// Defines a category!
-@interface WebView (MLSearchWebView)
+@interface MyScrollView : NSScrollView
 
-- (NSInteger) highlightAllOccurencesOfString:(NSString*)str;
-- (void) removeAllHighlights;
+- (id) initWithFrame:(NSRect)frameRect;     // In case you generate the scroll view manually
+- (void) awakeFromNib;                      // In case you generate the scroll view via IB
+- (void) hideScrollers;                     // Programmatically hide the scrollers, so it works all the time
+- (void) scrollWheel:(NSEvent *)theEvent;   // Disable scrolling
 
 @end

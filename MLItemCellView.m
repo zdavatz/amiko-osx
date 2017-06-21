@@ -39,7 +39,10 @@
 @synthesize packagesStr;
 @synthesize numPackages;
 
-- (id) initWithFrame: (NSRect)frame
+/*
+ In case you generate the table cell view manually
+ */
+- (id) initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -49,15 +52,16 @@
     return self;
 }
 
-- (void) setBackgroundStyle: (NSBackgroundStyle)backgroundStyle
+- (void) setBackgroundStyle:(NSBackgroundStyle)backgroundStyle
 {
     [super setBackgroundStyle:backgroundStyle];
 }
 
-- (void) drawRect: (NSRect)dirtyRect
+- (void) drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
 
+    // Sets transparent background color
     [self.packagesView setBackgroundColor:[NSColor clearColor]];
     [[self.packagesView enclosingScrollView] setDrawsBackground:NO];
     
@@ -97,23 +101,7 @@
     [super updateTrackingAreas]; // Needed, according to the NSView documentation
 }
 
-- (void) mouseEntered: (NSEvent *)theEvent
-{
-    /*
-    [self.textField setTextColor:[NSColor mainTextFieldBlue]];
-    [[NSCursor pointingHandCursor] set];
-    */
-}
-
-- (void) mouseExited: (NSEvent *)theEvent
-{
-    /*
-    [self.textField setTextColor:[NSColor mainTextFieldGray]];
-    [[NSCursor arrowCursor] set];
-    */
-}
-
-- (NSTableRowView *) tableView: (NSTableView *)tableView rowViewForRow:(NSInteger)row
+- (NSTableRowView *) tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
 {
     if (row>=0) {
         MLCustomTableRowView *rowView = [[MLCustomTableRowView alloc] initWithFrame:NSZeroRect];
@@ -129,7 +117,7 @@
  - NSTableViewDataSource -
  Get number of rows of a table view
  */
-- (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
+- (NSInteger) numberOfRowsInTableView:(NSTableView *)tableView
 {
     if (tableView == self.packagesView) {
         listOfPackages = [packagesStr componentsSeparatedByString:@"\n"];
@@ -139,7 +127,7 @@
     return 0;
 }
 
-- (CGFloat) tableView: (NSTableView *)tableView heightOfRow: (NSInteger)row
+- (CGFloat) tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
     if (tableView == self.packagesView) {
         NSFont *subTextFont = [NSFont boldSystemFontOfSize:11.0f];
@@ -154,7 +142,7 @@
  - NSTableViewDataDelegate -
  Update tableviews (search result and section titles)
  */
-- (NSView *) tableView: (NSTableView *)tableView viewForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
+- (NSView *) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row: (NSInteger)row
 {
     if (tableView == self.packagesView) {
         listOfPackages = [packagesStr componentsSeparatedByString:@"\n"];
@@ -185,19 +173,6 @@
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
     if ([notification object] == self.packagesView) {
-        /*
-         * Check if table is search result (=myTableView)
-         * Left-most pane
-         */
-        // UNCOMMENT THE FOLLOWING LINES TO ONLY BRIEFLY EMPHASIZE THE SELECTED ROW
-        /*
-        NSInteger row = [[notification object] selectedRow];
-        if (row>=0) {
-            NSTableRowView *myRowView = [self.packagesView rowViewAtRow:row makeIfNecessary:NO];
-            [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
-            [myRowView setEmphasized:YES];
-        }
-         */
         [self.packagesView reloadData];
     }
 }

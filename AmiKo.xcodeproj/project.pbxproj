@@ -111,6 +111,12 @@
 		D545C91318A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
 		D545C91418A5725900491511 /* MLCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D545C91018A5725900491511 /* MLCustomView.m */; };
 		D57AB17A193E6B68000DB3F2 /* interactions_callbacks.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* interactions_callbacks.js */; };
+		D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
+		D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
+		D5962E8D1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
+		D5962E8E1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
+		D5962E8F1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
+		D5962E901EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
 		D59774471AA8F6FC001AAC31 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59774461AA8F6FC001AAC31 /* AmiKoMainMenu.xib */; };
 		D5A22508193FB19F0078FEFF /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
 		D5A22509193FB19F0078FEFF /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
@@ -470,6 +476,8 @@
 		D545C90F18A5725900491511 /* MLCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomView.h; sourceTree = "<group>"; };
 		D545C91018A5725900491511 /* MLCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomView.m; sourceTree = "<group>"; };
 		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		D5962E891EF9C4160034B964 /* MLCustomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomScrollView.h; sourceTree = "<group>"; };
+		D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomScrollView.m; sourceTree = "<group>"; };
 		D59774461AA8F6FC001AAC31 /* AmiKoMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		D5A22507193FB19F0078FEFF /* 216-compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "216-compose.png"; sourceTree = "<group>"; };
 		D5AAB3ED1EB20F3400002F47 /* MLFullTextDBAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFullTextDBAdapter.m; sourceTree = "<group>"; };
@@ -744,6 +752,8 @@
 				D5EBC6C417CBBCE900EBEF39 /* MLItemCellView.m */,
 				D52EA4A31EF436E3001ADFEC /* MLCellPackagesView.h */,
 				D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */,
+				D5962E891EF9C4160034B964 /* MLCustomScrollView.h */,
+				D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1407,6 +1417,7 @@
 				D5E731261B33480A007771D7 /* MLItemCellView.m in Sources */,
 				D517E4B51EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC101EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D5962E8F1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C61EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D5E731271B33480A007771D7 /* SSZipArchive.m in Sources */,
 				D5E731281B33480A007771D7 /* MLSearchWebView.m in Sources */,
@@ -1449,6 +1460,7 @@
 				D5E7316A1B334829007771D7 /* MLItemCellView.m in Sources */,
 				D517E4B61EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC111EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D5962E901EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C71EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D5E7316B1B334829007771D7 /* SSZipArchive.m in Sources */,
 				D5E7316C1B334829007771D7 /* MLSearchWebView.m in Sources */,
@@ -1491,6 +1503,7 @@
 				D5E91B6117E5E24000B66B27 /* MLItemCellView.m in Sources */,
 				D517E4B31EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0E1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D5962E8D1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C41EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8F118A2CDEA00491511 /* SSZipArchive.m in Sources */,
 				D5E91B6217E5E24000B66B27 /* MLSearchWebView.m in Sources */,
@@ -1533,6 +1546,7 @@
 				D5E91B9017E5E8E400B66B27 /* MLItemCellView.m in Sources */,
 				D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0C1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C21EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8D91898527300491511 /* SSZipArchive.m in Sources */,
 				D5E91B9117E5E8E400B66B27 /* MLSearchWebView.m in Sources */,
@@ -1575,6 +1589,7 @@
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
 				D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C31EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8F018A2CDE900491511 /* SSZipArchive.m in Sources */,
 				D5E91BC017E5E8E800B66B27 /* MLSearchWebView.m in Sources */,
@@ -1617,6 +1632,7 @@
 				D5EBC6C517CBBCEA00EBEF39 /* MLItemCellView.m in Sources */,
 				D517E4B41EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0F1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D5962E8E1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C51EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8F218A2CDEB00491511 /* SSZipArchive.m in Sources */,
 				D5EBC6CD17D0F08700EBEF39 /* MLSearchWebView.m in Sources */,

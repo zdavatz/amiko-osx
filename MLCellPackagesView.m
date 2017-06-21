@@ -32,6 +32,9 @@
     BOOL first;
 }
 
+/*
+ In case you generate the table cell view manually
+ */
 - (id) initWithFrame: (NSRect)frame
 {
     self = [super initWithFrame:frame];
@@ -50,16 +53,12 @@
 {
     [super drawRect:dirtyRect];
     
+    int opts = (NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways);
     NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:self.bounds
-                                                                options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveInKeyWindow )
+                                                                options:opts
                                                                   owner:self
                                                                userInfo:nil];
     [self addTrackingArea:trackingArea];
-    
-    /*
-    self.wantsLayer = YES;
-    self.layer.backgroundColor = [[NSColor redColor] CGColor];
-    */
 }
 
 - (void) mouseEntered: (NSEvent *)theEvent
@@ -67,7 +66,7 @@
     if (first == false) {
         saveColor = self.textField.textColor;
         [self.textField setTextColor:[NSColor mainTextFieldBlue]];
-        [[NSCursor pointingHandCursor] set];
+        // [[NSCursor pointingHandCursor] set];
         first = true;
     }
 }
@@ -76,7 +75,7 @@
 {
     if (first == true) {
         [self.textField setTextColor:saveColor];
-        [[NSCursor arrowCursor] set];
+        // [[NSCursor arrowCursor] set];
         first = false;
     }
 }

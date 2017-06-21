@@ -25,7 +25,7 @@
 
 @implementation WebView (MLSearchWebView)
 
-- (NSInteger) highlightAllOccurencesOfString: (NSString*)str
+- (NSInteger) highlightAllOccurencesOfString:(NSString*)str
 {
     // Load Javascript file
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MLSearchWebView" ofType:@"js"];

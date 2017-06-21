@@ -30,7 +30,10 @@
 @synthesize color;
 @synthesize radius;
 
-- (id) initWithFrame: (NSRect)frame
+/*
+ In case you generate the view manually
+ */
+- (id) initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -41,17 +44,24 @@
     return self;
 }
 
-/*
-- (void)drawRect:(NSRect)dirtyRect
+- (void) setEmphasized:(BOOL)emphasized
 {
-    // Draw row rectangle here ...
+    // This avoids an "emphasized" font when row/cell is selected in a source list that has first responder status.
 }
-*/
 
-- (void) drawSelectionInRect: (NSRect)dirtyRect
+- (void) drawSelectionInRect:(NSRect)dirtyRect
 {
-    // Draw selected row rectangle here
+    // Check the selectionHighlightStyle, in case it was set to None
     if (self.selectionHighlightStyle != NSTableViewSelectionHighlightStyleNone) {
+        // We want a hard-crisp stroke, and stroking 1 pixel will border half on one side and half on another, so we offset by the 0.5 to handle this
+        /*
+        NSRect selectionRect = NSInsetRect(self.bounds, 5.5, 5.5);
+        [[NSColor colorWithCalibratedWhite:.72 alpha:1.0] setStroke];
+        [[NSColor colorWithCalibratedWhite:.82 alpha:1.0] setFill];
+        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:10 yRadius:10];
+        [selectionPath fill];
+        [selectionPath stroke];
+        */
         NSRect selectionRect = NSInsetRect(self.bounds, 0.0, 0.0);
         // Define gradient colors
         NSColor* gradientStartColor = color;

@@ -1829,6 +1829,10 @@ static BOOL mSearchInteractions = false;
     MLCustomTableRowView *rowView = [[MLCustomTableRowView alloc] initWithFrame:NSZeroRect];
     [rowView setRowIndex:row];   
     return rowView;
+    /*
+    NSTableRowView *rowView = [[NSTableRowView alloc] initWithFrame:NSZeroRect];
+    return rowView;
+    */
 }
 
 - (void) tableViewSelectionDidChange: (NSNotification *)notification
@@ -1842,7 +1846,7 @@ static BOOL mSearchInteractions = false;
         
         NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
         [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
-
+       
         // Colors whole row red... useless
         // [myRowView setBackgroundColor:[NSColor redColor]];
                
