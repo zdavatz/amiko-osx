@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -53,7 +54,7 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Datei" id="83">
+                <menuItem title="Datei" id="83" userLabel="File">
                     <menu key="submenu" title="Datei" id="81">
                         <items>
                             <menuItem title="In Fachinformation suchen" id="Hxi-o5-9Zy">
@@ -79,17 +80,17 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="d8r-f2-Hmi"/>
-                            <menuItem title="Standardgrösse..." tag="5" keyEquivalent="0" id="Cwp-fC-Nh5">
+                            <menuItem title="Standardgrösse" tag="5" keyEquivalent="0" id="Cwp-fC-Nh5">
                                 <connections>
                                     <action selector="makeTextStandardSize:" target="-1" id="bWt-XJ-Wcy"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Text vergrössern..." tag="5" keyEquivalent="+" id="YdI-4O-vC0">
+                            <menuItem title="Text vergrössern" tag="5" keyEquivalent="+" id="YdI-4O-vC0">
                                 <connections>
                                     <action selector="makeTextLarger:" target="-1" id="KmL-hd-jKs"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Text verkleinern..." tag="5" keyEquivalent="-" id="lvC-1g-0xo">
+                            <menuItem title="Text verkleinern" tag="5" keyEquivalent="-" id="lvC-1g-0xo">
                                 <connections>
                                     <action selector="makeTextSmaller:" target="-1" id="QO3-9v-Fjw"/>
                                 </connections>
@@ -121,8 +122,35 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Window" id="19">
-                    <menu key="submenu" title="Window" systemMenu="window" id="24">
+                <menuItem title="Rezept" id="uhw-HQ-GGx">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Rezept" id="2wd-qf-r9D">
+                        <items>
+                            <menuItem title="Neuer Patient..." id="tsG-5e-hg5" userLabel="Neuer Patient...">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="addPatient:" target="-1" id="FDl-T2-xXp"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Patient Suchen..." id="DTB-ad-X1T">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="bQr-f2-yIV"/>
+                            <menuItem title="Neues Rezept..." id="mSU-TQ-1vk" userLabel="Neues Rezept...">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Rezept Suchen..." id="8Q5-jy-JWg">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="umh-nI-TRT"/>
+                            <menuItem title="Digitale Signatur..." id="5Du-8q-WQJ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Fenster" id="19" userLabel="Window">
+                    <menu key="submenu" title="Fenster" systemMenu="window" id="24">
                         <items>
                             <menuItem title="Show Toolbar" keyEquivalent="t" id="297">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
@@ -133,7 +161,7 @@
                             <menuItem isSeparatorItem="YES" id="550">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Minimize" keyEquivalent="m" id="23">
+                            <menuItem title="Minimieren" keyEquivalent="m" id="23">
                                 <connections>
                                     <action selector="performMiniaturize:" target="-1" id="37"/>
                                 </connections>
@@ -154,7 +182,7 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Hilfe" id="490">
+                <menuItem title="Hilfe" id="490" userLabel="Help">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Hilfe" systemMenu="help" id="561">
                         <items>
@@ -199,7 +227,6 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="645" id="rTg-Se-Soa"/>
                         </constraints>
-                        <animations/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="amikoosx_splash_1000x670" id="X20-E7-Bic"/>
                     </imageView>
                 </subviews>
@@ -208,7 +235,6 @@
                     <constraint firstItem="Z19-up-B2h" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="Yrl-q9-t7d"/>
                     <constraint firstItem="Z19-up-B2h" firstAttribute="top" secondItem="372" secondAttribute="top" constant="-2" id="szh-i4-D8a"/>
                 </constraints>
-                <animations/>
             </view>
         </window>
         <customObject id="494" customClass="MLAppDelegate">

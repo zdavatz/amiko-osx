@@ -73,11 +73,7 @@
         [mSplashImage setImage:splash];
     }
     
-    [NSApp beginSheet:mProgressPanel
-       modalForWindow:window
-        modalDelegate:self
-       didEndSelector:nil
-          contextInfo:nil];
+    [NSApp beginSheet:mProgressPanel modalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];
 
     [mProgressIndicator setStyle:NSProgressIndicatorBarStyle]; // NSProgressIndicatorSpinningStyle];
     [mProgressIndicator setIndeterminate:NO];

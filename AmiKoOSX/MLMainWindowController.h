@@ -76,15 +76,23 @@ extern NSString* const APP_ID;
 - (IBAction) onButtonPressed:(id)sender;
 - (IBAction) toolbarAction:(id)sender;
 - (IBAction) printSearchResult:(id)sender;
+- (IBAction) makeTextStandardSize:(id)sender;
+- (IBAction) makeTextLarger:(id)sender;
+- (IBAction) makeTextSmaller:(id)sender;
+// Update database
 - (IBAction) updateAipsDatabase:(id)sender;
 - (IBAction) loadAipsDatabase:(id)sender;
+// Prescription function
+- (IBAction) addPatient:(id)sender;
+- (IBAction) searchPatient:(id)sender;
+- (IBAction) newPrescription:(id)sender;
+- (IBAction) searchPrescription:(id)sender;
+- (IBAction) operatorIdentity:(id)sender;
+// Help
 - (IBAction) showAboutFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;
 - (IBAction) sendFeedback:(id)sender;
 - (IBAction) shareApp:(id)sender;
 - (IBAction) rateApp:(id)sender;
-- (IBAction) makeTextStandardSize:(id)sender;
-- (IBAction) makeTextLarger:(id)sender;
-- (IBAction) makeTextSmaller:(id)sender;
 
 @end

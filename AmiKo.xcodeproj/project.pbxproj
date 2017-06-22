@@ -117,6 +117,24 @@
 		D5962E8E1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
 		D5962E8F1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
 		D5962E901EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
+		D5962E921EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
+		D5962E931EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
+		D5962E941EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
+		D5962E951EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
+		D5962E961EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
+		D5962E971EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
+		D5962E9A1EFBC2720034B964 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
+		D5962E9B1EFBC2720034B964 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
+		D5962E9C1EFBC2720034B964 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
+		D5962E9D1EFBC2720034B964 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
+		D5962E9E1EFBC2720034B964 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
+		D5962E9F1EFBC2720034B964 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
+		D5962EA11EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */; };
+		D5962EA21EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */; };
+		D5962EA31EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */; };
+		D5962EA41EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */; };
+		D5962EA51EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */; };
+		D5962EA61EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */; };
 		D59774471AA8F6FC001AAC31 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59774461AA8F6FC001AAC31 /* AmiKoMainMenu.xib */; };
 		D5A22508193FB19F0078FEFF /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
 		D5A22509193FB19F0078FEFF /* 216-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A22507193FB19F0078FEFF /* 216-compose.png */; };
@@ -478,6 +496,11 @@
 		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D5962E891EF9C4160034B964 /* MLCustomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomScrollView.h; sourceTree = "<group>"; };
 		D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomScrollView.m; sourceTree = "<group>"; };
+		D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLPatientSheet.xib; sourceTree = "<group>"; };
+		D5962E981EFBC25C0034B964 /* MLPatientSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPatientSheetController.h; sourceTree = "<group>"; };
+		D5962E991EFBC2720034B964 /* MLPatientSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPatientSheetController.m; sourceTree = "<group>"; };
+		D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPatientDBAdapter.m; sourceTree = "<group>"; };
+		D5962EA71EFC26BF0034B964 /* MLPatientDBAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPatientDBAdapter.h; sourceTree = "<group>"; };
 		D59774461AA8F6FC001AAC31 /* AmiKoMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		D5A22507193FB19F0078FEFF /* 216-compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "216-compose.png"; sourceTree = "<group>"; };
 		D5AAB3ED1EB20F3400002F47 /* MLFullTextDBAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFullTextDBAdapter.m; sourceTree = "<group>"; };
@@ -649,12 +672,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D53ABBF2189521D400C4525C /* MainSheets */ = {
+		D53ABBF2189521D400C4525C /* SubWindows */ = {
 			isa = PBXGroup;
 			children = (
 				D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */,
+				D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */,
 			);
-			name = MainSheets;
+			name = SubWindows;
 			sourceTree = "<group>";
 		};
 		D545C8DA1898527C00491511 /* minizip */ = {
@@ -740,8 +764,6 @@
 				D5EBC6CC17D0F08700EBEF39 /* MLSearchWebView.m */,
 				D5CD48BB18944E11005CEC4C /* MLCustomURLConnection.h */,
 				D5CD48BC18944E11005CEC4C /* MLCustomURLConnection.m */,
-				D53ABBF6189522AD00C4525C /* MLProgressSheetController.h */,
-				D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */,
 				D545C90918A4286B00491511 /* MLCustomWebView.h */,
 				D545C90A18A4286B00491511 /* MLCustomWebView.m */,
 				D545C90F18A5725900491511 /* MLCustomView.h */,
@@ -787,13 +809,17 @@
 			name = Favorites;
 			sourceTree = "<group>";
 		};
-		D5C644291EB337CB00438E6F /* Main */ = {
+		D5C644291EB337CB00438E6F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				D5EBC6A117C913B100EBEF39 /* MLMainWindowController.h */,
 				D5EBC6A217C913B100EBEF39 /* MLMainWindowController.m */,
+				D53ABBF6189522AD00C4525C /* MLProgressSheetController.h */,
+				D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */,
+				D5962E981EFBC25C0034B964 /* MLPatientSheetController.h */,
+				D5962E991EFBC2720034B964 /* MLPatientSheetController.m */,
 			);
-			name = Main;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		D5C6442A1EB337D800438E6F /* Database */ = {
@@ -805,6 +831,8 @@
 				D5EBC6B717C9206800EBEF39 /* MLMedication.m */,
 				D5EBC6AE17C9203F00EBEF39 /* MLSQLiteDatabase.h */,
 				D5EBC6AC17C9202600EBEF39 /* MLSQLiteDatabase.m */,
+				D5962EA71EFC26BF0034B964 /* MLPatientDBAdapter.h */,
+				D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -940,7 +968,7 @@
 		D5EBC6A017C9137600EBEF39 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D5C644291EB337CB00438E6F /* Main */,
+				D5C644291EB337CB00438E6F /* Controllers */,
 				D5C6442A1EB337D800438E6F /* Database */,
 				D5C644261EB3378300438E6F /* SplashScreen */,
 				D5C644281EB337AA00438E6F /* Favorites */,
@@ -956,7 +984,7 @@
 		D5EBC6A617C913B900EBEF39 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D53ABBF2189521D400C4525C /* MainSheets */,
+				D53ABBF2189521D400C4525C /* SubWindows */,
 				D5E91B3717E39C1100B66B27 /* MainNibs */,
 				D5E91B3817E39C3700B66B27 /* MainWindows */,
 			);
@@ -1177,6 +1205,7 @@
 				D5E731A21B335229007771D7 /* AmiKoDesitinMainMenu.xib in Resources */,
 				D5E731381B33480A007771D7 /* amiko_stylesheet.css in Resources */,
 				D5E731391B33480A007771D7 /* 28-star-gy.png in Resources */,
+				D5962E961EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
 				D5E7313A1B33480A007771D7 /* interactions@2x.png in Resources */,
 				D5E7319E1B3351BA007771D7 /* MLAmiKoDesitinMainWindow.xib in Resources */,
 				D5E7313B1B33480A007771D7 /* 218-trash2.png in Resources */,
@@ -1215,6 +1244,7 @@
 				D5E7317B1B334829007771D7 /* 28-star-ye.png in Resources */,
 				D5C6443F1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5E7317C1B334829007771D7 /* amiko_stylesheet.css in Resources */,
+				D5962E971EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
 				D5E7317D1B334829007771D7 /* interactions_css.css in Resources */,
 				D5E7317E1B334829007771D7 /* interactions@2x.png in Resources */,
 				D5E7317F1B334829007771D7 /* 28-star-gy.png in Resources */,
@@ -1247,6 +1277,7 @@
 				D5DD5763193B49260094244E /* 217-trash.png in Resources */,
 				D5E91B6C17E5E24000B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B6D17E5E24000B66B27 /* Credits-de.rtf in Resources */,
+				D5962E941EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
 				D538777C1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5DD5768193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5E91B7017E5E24000B66B27 /* amiko_stylesheet.css in Resources */,
@@ -1286,6 +1317,7 @@
 				D5E91B9F17E5E8E400B66B27 /* amiko_stylesheet.css in Resources */,
 				D5C6443A1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */,
+				D5962E921EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
 				D538777E1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5DD5766193B4EB40094244E /* 218-trash2.png in Resources */,
 				D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */,
@@ -1324,6 +1356,7 @@
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5C6443B1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
+				D5962E931EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
 				D538777F1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
 				D5DD5767193B4EB40094244E /* 218-trash2.png in Resources */,
@@ -1356,6 +1389,7 @@
 				D5DD5764193B49260094244E /* 217-trash.png in Resources */,
 				D5EBC68B17C912FF00EBEF39 /* InfoPlist.strings in Resources */,
 				D538777D1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
+				D5962E951EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
 				D5DD5769193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5DD576C193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
@@ -1424,6 +1458,8 @@
 				D5E731291B33480A007771D7 /* MLCustomTableRowView.m in Sources */,
 				D5C644211EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E7312A1B33480A007771D7 /* MLSplashScreen.m in Sources */,
+				D5962E9E1EFBC2720034B964 /* MLPatientSheetController.m in Sources */,
+				D5962EA51EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1467,6 +1503,8 @@
 				D5E7316D1B334829007771D7 /* MLCustomTableRowView.m in Sources */,
 				D5C644221EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E7316E1B334829007771D7 /* MLSplashScreen.m in Sources */,
+				D5962E9F1EFBC2720034B964 /* MLPatientSheetController.m in Sources */,
+				D5962EA61EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1510,6 +1548,8 @@
 				D5E91B6317E5E24000B66B27 /* MLCustomTableRowView.m in Sources */,
 				D5C6441F1EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E91B6417E5E24000B66B27 /* MLSplashScreen.m in Sources */,
+				D5962E9C1EFBC2720034B964 /* MLPatientSheetController.m in Sources */,
+				D5962EA31EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1553,6 +1593,8 @@
 				D5E91B9217E5E8E400B66B27 /* MLCustomTableRowView.m in Sources */,
 				D5C6441D1EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E91B9317E5E8E400B66B27 /* MLSplashScreen.m in Sources */,
+				D5962E9A1EFBC2720034B964 /* MLPatientSheetController.m in Sources */,
+				D5962EA11EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,6 +1638,8 @@
 				D5E91BC117E5E8E800B66B27 /* MLCustomTableRowView.m in Sources */,
 				D5C6441E1EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E91BC217E5E8E800B66B27 /* MLSplashScreen.m in Sources */,
+				D5962E9B1EFBC2720034B964 /* MLPatientSheetController.m in Sources */,
+				D5962EA21EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1639,6 +1683,8 @@
 				D5EBC6DF17D5113700EBEF39 /* MLCustomTableRowView.m in Sources */,
 				D5C644201EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D539C10617DCED1D00759260 /* MLSplashScreen.m in Sources */,
+				D5962E9D1EFBC2720034B964 /* MLPatientSheetController.m in Sources */,
+				D5962EA41EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
