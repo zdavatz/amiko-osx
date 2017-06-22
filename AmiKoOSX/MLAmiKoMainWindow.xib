@@ -122,13 +122,13 @@
                                                     <action selector="onButtonPressed:" target="-2" id="ZeO-ig-GeF"/>
                                                 </connections>
                                             </button>
-                                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="50" horizontalPageScroll="10" verticalLineScroll="50" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="167">
+                                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="50" horizontalPageScroll="10" verticalLineScroll="50" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="167" userLabel="Main Scroll View">
                                                 <rect key="frame" x="11" y="60" width="342" height="530"/>
-                                                <clipView key="contentView" id="fga-sD-hNm">
+                                                <clipView key="contentView" id="fga-sD-hNm" userLabel="Main Clip View">
                                                     <rect key="frame" x="0.0" y="0.0" width="342" height="530"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="48" rowSizeStyle="automatic" viewBased="YES" id="170">
+                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="48" rowSizeStyle="automatic" viewBased="YES" id="170" userLabel="Main Table View">
                                                             <rect key="frame" x="0.0" y="0.0" width="342" height="530"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -136,7 +136,7 @@
                                                             <tableViewGridLines key="gridStyleMask" dashed="YES"/>
                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                             <tableColumns>
-                                                                <tableColumn identifier="MLSimpleCell" width="339" minWidth="40" maxWidth="1000" id="171">
+                                                                <tableColumn identifier="MLSimpleCell" width="339" minWidth="40" maxWidth="1000" id="171" userLabel="Main Table Column">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -149,11 +149,11 @@
                                                                     </textFieldCell>
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
-                                                                        <tableCellView id="172" customClass="MLItemCellView">
+                                                                        <tableCellView id="172" userLabel="ML Item Cell View" customClass="MLItemCellView">
                                                                             <rect key="frame" x="1" y="1" width="339" height="48"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="182">
+                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="182" userLabel="Title Text Field">
                                                                                     <rect key="frame" x="26" y="29" width="480" height="17"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="476" id="1638"/>
@@ -164,7 +164,7 @@
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
                                                                                 </textField>
-                                                                                <button identifier="checkbox" translatesAutoresizingMaskIntoConstraints="NO" id="174">
+                                                                                <button identifier="checkbox" translatesAutoresizingMaskIntoConstraints="NO" id="174" userLabel="Star">
                                                                                     <rect key="frame" x="1" y="27" width="22" height="21"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="22" id="187"/>
@@ -178,20 +178,20 @@
                                                                                         <action selector="tappedOnStar:" target="-2" id="248"/>
                                                                                     </connections>
                                                                                 </button>
-                                                                                <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zP-uE-5Iy" userLabel="Inner Scroll View - Table View" customClass="MyScrollView">
+                                                                                <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zP-uE-5Iy" userLabel="Package Scroll View" customClass="MyScrollView">
                                                                                     <rect key="frame" x="28" y="6" width="480" height="20"/>
-                                                                                    <clipView key="contentView" id="n8p-jO-XR8">
+                                                                                    <clipView key="contentView" id="n8p-jO-XR8" userLabel="Package Clip View">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="480" height="20"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
-                                                                                            <tableView identifier="PackagesView" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="16" rowSizeStyle="automatic" viewBased="YES" id="fVP-Mn-Owg">
+                                                                                            <tableView identifier="PackagesView" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="16" rowSizeStyle="automatic" viewBased="YES" id="fVP-Mn-Owg" userLabel="Packages Table View">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="480" height="20"/>
                                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                                                 <tableColumns>
-                                                                                                    <tableColumn identifier="InnerCell" width="477" minWidth="40" maxWidth="1000" id="2Ef-7z-tts">
+                                                                                                    <tableColumn identifier="InnerCell" width="477" minWidth="40" maxWidth="1000" id="2Ef-7z-tts" userLabel="Packages Table Column">
                                                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                                                             <font key="font" metaFont="smallSystem"/>
                                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -204,11 +204,11 @@
                                                                                                         </textFieldCell>
                                                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                                         <prototypeCellViews>
-                                                                                                            <tableCellView id="gz9-7f-9FE" customClass="MLCellPackagesView">
+                                                                                                            <tableCellView id="gz9-7f-9FE" userLabel="ML Cell Packages View" customClass="MLCellPackagesView">
                                                                                                                 <rect key="frame" x="1" y="1" width="480" height="16"/>
                                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                                 <subviews>
-                                                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4d-Cn-FJr">
+                                                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4d-Cn-FJr" userLabel="Packages Text Field">
                                                                                                                         <rect key="frame" x="-2" y="1" width="484" height="14"/>
                                                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" usesSingleLineMode="YES" id="NWx-wp-Pr5">
                                                                                                                             <font key="font" metaFont="system" size="11"/>
