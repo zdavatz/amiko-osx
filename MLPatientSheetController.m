@@ -28,10 +28,17 @@
 {
     @private
     NSModalSession mModalSession;
+    NSArray *nameArray;
 }
 
 - (id) init
 {
+    nameArray = [NSArray arrayWithObjects: @"Jill Valentine", @"Peter Griffin", @"Meg Griffin", @"Jack Lolwut",
+                        @"Mike Roflcoptor", @"Cindy Woods", @"Jessica Windmill", @"Alexander The Great",
+                        @"Sarah Peterson", @"Scott Scottland", @"Geoff Fanta", @"Amanda Pope", @"Michael Meyers",
+                        @"Richard Biggus", @"Montey Python", @"Mike Wut", @"Fake Person", @"Chair",
+                        nil];
+
     if (self = [super init]) {
         return self;
     }
@@ -71,5 +78,24 @@
     [mPanel orderOut:nil];
     [mPanel close];
 }
+
+/**
+ - NSTableViewDataSource -
+ */
+- (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
+{
+    return [nameArray count];
+}
+
+/**
+ - NSTableViewDataDelegate -
+ */
+- (NSView *) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+    cellView.textField.stringValue = nameArray[row];
+    return cellView;
+}
+
 
 @end

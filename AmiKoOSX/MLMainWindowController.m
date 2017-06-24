@@ -1630,7 +1630,7 @@ static BOOL mSearchInteractions = false;
 {
     mJSBridge = [WebViewJavascriptBridge bridgeForWebView:myWebView];
     
-    [mJSBridge registerHandler:@"JSToObjC_" handler:^(id msg, WVJBResponseCallback responseCallback) {
+    [mJSBridge registerHandler:@"JSToObjC_" handler:^(id msg, WVJBResponseCallback responseCallback) {        
         if ([msg count]==3) {
             // --- Interactions ---
             if ([msg[0] isEqualToString:@"interactions_cb"]) {
@@ -1805,7 +1805,7 @@ static BOOL mSearchInteractions = false;
  - NSTableViewDataDelegate -
  Update tableviews (search result and section titles)
 */
-- (NSView *) tableView: (NSTableView *)tableView viewForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
+- (NSView *) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     if (tableView == self.myTableView) {
         /*

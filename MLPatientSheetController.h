@@ -27,6 +27,7 @@
 {
     @private
     IBOutlet NSWindow *mPanel;
+    IBOutlet NSTableView *mTableView;
 }
 
 - (IBAction) onCancelPressed:(id)sender;

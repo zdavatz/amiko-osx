@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MLPatientSheetController">
             <connections>
                 <outlet property="mPanel" destination="QvC-M9-y7g" id="QX3-Tb-tKJ"/>
+                <outlet property="mTableView" destination="2um-EN-YQx" id="Pax-Nd-aUm"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -220,6 +221,10 @@ DQ
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="-2" id="vIf-JL-dOR"/>
+                                                        <outlet property="delegate" destination="-2" id="jrk-bn-90T"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                         </clipView>
