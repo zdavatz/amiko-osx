@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
+		930251551EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 930251531EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db */; };
+		930251561EFFAC1400BCEDC6 /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 930251541EFFAC1400BCEDC6 /* amiko_frequency_fr.db */; };
 		D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
 		D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
 		D517E4B31EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
@@ -20,11 +21,6 @@
 		D517E4C51EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4C11EB1E5B700187AC8 /* MLFullTextEntry.m */; };
 		D517E4C61EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4C11EB1E5B700187AC8 /* MLFullTextEntry.m */; };
 		D517E4C71EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4C11EB1E5B700187AC8 /* MLFullTextEntry.m */; };
-		D52795F91EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */; };
-		D52795FA1EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */; };
-		D52795FB1EBF10AB00B92794 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */; };
-		D52795FC1EBF10B000B92794 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
-		D52795FD1EBF10B100B92794 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
 		D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */; };
 		D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
 		D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */; };
@@ -156,9 +152,6 @@
 		D5BACC0F1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BACBF91EBB1D2C001812FB /* WKWebViewJavascriptBridge.m */; };
 		D5BACC101EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BACBF91EBB1D2C001812FB /* WKWebViewJavascriptBridge.m */; };
 		D5BACC111EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BACBF91EBB1D2C001812FB /* WKWebViewJavascriptBridge.m */; };
-		D5BACC141EBE051D001812FB /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */; };
-		D5BACC151EBE051D001812FB /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */; };
-		D5BACC161EBE051D001812FB /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */; };
 		D5C5C4FE1EFF8C5500DF851F /* comed.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C4FD1EFF8C5500DF851F /* comed.iconset */; };
 		D5C5C4FF1EFF8C5500DF851F /* comed.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C4FD1EFF8C5500DF851F /* comed.iconset */; };
 		D5C5C5001EFF8C5500DF851F /* comed.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C4FD1EFF8C5500DF851F /* comed.iconset */; };
@@ -248,7 +241,6 @@
 		D5E731441B33480A007771D7 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
 		D5E731451B33480A007771D7 /* maindb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877791A9E5AE700AEFDB4 /* maindb@2x.png */; };
 		D5E731461B33480A007771D7 /* favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D53877771A9E5AE700AEFDB4 /* favorites@2x.png */; };
-		D5E731481B33480A007771D7 /* amiko_db_full_idx_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */; };
 		D5E7314A1B33480A007771D7 /* amiko_report_de.html in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BF417E6065C00B66B27 /* amiko_report_de.html */; };
 		D5E7314C1B33480A007771D7 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */; };
 		D5E7314D1B33480A007771D7 /* AmiKo.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */; };
@@ -387,8 +379,6 @@
 		D5E91BD917E5E8E800B66B27 /* MLCoMedMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD117E3886500B66B27 /* MLCoMedMainWindow.xib */; };
 		D5E91BDC17E5E8E800B66B27 /* CoMedMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */; };
 		D5E91BDE17E5E8E800B66B27 /* Credits-fr.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5E91B5417E4C6C100B66B27 /* Credits-fr.rtf */; };
-		D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */; };
-		D5E91BF017E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */; };
 		D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BF417E6065C00B66B27 /* amiko_report_de.html */; };
 		D5E91BF617E6065C00B66B27 /* amiko_report_de.html in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BF417E6065C00B66B27 /* amiko_report_de.html */; };
 		D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BFA17E6074D00B66B27 /* amiko_report_fr.html */; };
@@ -417,8 +407,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_de.db; sourceTree = "<group>"; };
-		D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_fr.db; sourceTree = "<group>"; };
+		930251531EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_fr.db; sourceTree = "<group>"; };
+		930251541EFFAC1400BCEDC6 /* amiko_frequency_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_fr.db; sourceTree = "<group>"; };
 		D517E4AE1EA8B8C400187AC8 /* MLInteractionsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLInteractionsAdapter.h; sourceTree = "<group>"; };
 		D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInteractionsAdapter.m; sourceTree = "<group>"; };
 		D517E4BE1EA8E5E500187AC8 /* MLFullTextDBAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLFullTextDBAdapter.h; sourceTree = "<group>"; };
@@ -474,7 +464,6 @@
 		D5BACBF71EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
 		D5BACBF81EBB1D2C001812FB /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		D5BACBF91EBB1D2C001812FB /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
-		D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_fr.db; sourceTree = "<group>"; };
 		D5C5C4FD1EFF8C5500DF851F /* comed.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = comed.iconset; sourceTree = "<group>"; };
 		D5C6440B1EB32F5300438E6F /* MLInteractionsCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInteractionsCart.h; sourceTree = "<group>"; };
 		D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInteractionsCart.m; sourceTree = "<group>"; };
@@ -507,7 +496,6 @@
 		D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D5E91BE217E5E8E800B66B27 /* CoMed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoMed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoMed-Info.plist"; sourceTree = SOURCE_ROOT; };
-		D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_de.db; sourceTree = "<group>"; };
 		D5E91BF417E6065C00B66B27 /* amiko_report_de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = amiko_report_de.html; sourceTree = "<group>"; };
 		D5E91BFA17E6074D00B66B27 /* amiko_report_fr.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = amiko_report_fr.html; sourceTree = "<group>"; };
 		D5EBC67D17C912FF00EBEF39 /* CoMed-zR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoMed-zR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -940,11 +928,9 @@
 		D5EBC6A717C91FAC00EBEF39 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */,
-				D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */,
-				D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */,
-				D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */,
 				D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */,
+				930251531EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db */,
+				930251541EFFAC1400BCEDC6 /* amiko_frequency_fr.db */,
 				D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */,
 			);
 			name = Database;
@@ -1166,8 +1152,6 @@
 				D5E731451B33480A007771D7 /* maindb@2x.png in Resources */,
 				D5AE31791B36F078006BC60E /* desitin.iconset in Resources */,
 				D5E731461B33480A007771D7 /* favorites@2x.png in Resources */,
-				D52795FD1EBF10B100B92794 /* amiko_frequency_de.db in Resources */,
-				D5E731481B33480A007771D7 /* amiko_db_full_idx_de.db in Resources */,
 				D5C6443E1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5E7314A1B33480A007771D7 /* amiko_report_de.html in Resources */,
 				D5E7314C1B33480A007771D7 /* amikoosx_splash_1000x670.png in Resources */,
@@ -1194,11 +1178,9 @@
 				D5E7317E1B334829007771D7 /* interactions@2x.png in Resources */,
 				D5E7317F1B334829007771D7 /* 28-star-gy.png in Resources */,
 				D5E731811B334829007771D7 /* 218-trash2.png in Resources */,
-				D5BACC161EBE051D001812FB /* amiko_frequency_fr.db in Resources */,
 				D5AE31861B372085006BC60E /* desitin_icon_512x512.png in Resources */,
 				D5E731821B334829007771D7 /* app_icon_512x512.png in Resources */,
 				D5E731831B334829007771D7 /* amikoosx_splash_1000x670.png in Resources */,
-				D52795FB1EBF10AB00B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E731841B334829007771D7 /* 28-star@2x.png in Resources */,
 				D5E731A01B3351DB007771D7 /* MLCoMedDesitinMainWindow.xib in Resources */,
 				D5E731851B334829007771D7 /* Zur_Rose_1000x670px.png in Resources */,
@@ -1230,7 +1212,6 @@
 				D5E91B7317E5E24000B66B27 /* app_icon_512x512.png in Resources */,
 				D53877841A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538778C1AA202E400AEFDB4 /* AmiKo-zR.entitlements in Resources */,
-				D52795FC1EBF10B000B92794 /* amiko_frequency_de.db in Resources */,
 				D5C6443C1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5E91B7517E5E24000B66B27 /* 28-star@2x.png in Resources */,
 				D5E91B7617E5E24000B66B27 /* MLAmiKozRMainWindow.xib in Resources */,
@@ -1239,7 +1220,6 @@
 				D53877801A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5B0105E1927C451007BE838 /* interactions_css.css in Resources */,
 				D5C6442E1EB345A300438E6F /* fulltext_style.css in Resources */,
-				D5E91BF017E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D5E91BF617E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				D5B6F96E192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */,
@@ -1264,7 +1244,6 @@
 				D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */,
 				D538777E1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5DD5766193B4EB40094244E /* 218-trash2.png in Resources */,
-				D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */,
 				D5B0105C1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */,
 				D5DD5761193B49260094244E /* 217-trash.png in Resources */,
@@ -1277,7 +1256,6 @@
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
 				D53877821A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
-				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D59774471AA8F6FC001AAC31 /* AmiKoMainMenu.xib in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */,
@@ -1292,6 +1270,7 @@
 			files = (
 				D57AB17A193E6B68000DB3F2 /* interactions_callbacks.js in Resources */,
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
+				930251561EFFAC1400BCEDC6 /* amiko_frequency_fr.db in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
 				D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */,
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
@@ -1304,12 +1283,11 @@
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
 				D5DD5767193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5E91BD117E5E8E800B66B27 /* app_icon_512x512.png in Resources */,
-				D5BACC141EBE051D001812FB /* amiko_frequency_fr.db in Resources */,
 				D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
-				D52795F91EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BD717E5E8E800B66B27 /* Zur_Rose_1000x670px.png in Resources */,
+				930251551EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BD917E5E8E800B66B27 /* MLCoMedMainWindow.xib in Resources */,
 				D5E91BDC17E5E8E800B66B27 /* CoMedMainMenu.xib in Resources */,
 				D53877831A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
@@ -1339,7 +1317,6 @@
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
 				D5C6443D1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5EBC6D117D256EC00EBEF39 /* 28-star-gy.png in Resources */,
-				D5BACC151EBE051D001812FB /* amiko_frequency_fr.db in Resources */,
 				D5C6442F1EB345A300438E6F /* fulltext_style.css in Resources */,
 				D53877851A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538778D1AA202E700AEFDB4 /* CoMed-zR.entitlements in Resources */,
@@ -1354,7 +1331,6 @@
 				D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */,
 				D5AB1776180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5E91BFC17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
-				D52795FA1EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				D536126917E770A80087B132 /* amiko.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
