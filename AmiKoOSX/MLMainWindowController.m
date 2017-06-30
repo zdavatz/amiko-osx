@@ -301,8 +301,8 @@ static BOOL mSearchInteractions = false;
     return self;
 }
 
-- (void) windowDidLoad {
-    
+- (void) windowDidLoad
+{
     [super windowDidLoad];
 
     // NOTE: These properties are set in NIB file, but to be verbose what we need to do:
@@ -879,16 +879,11 @@ static BOOL mSearchInteractions = false;
     }];
 }
 
-- (IBAction) addPatient:(id)sender
+- (IBAction) managePatients:(id)sender
 {
     if (!mPatientSheet)
         mPatientSheet = [[MLPatientSheetController alloc] init];
     [mPatientSheet show:[NSApp mainWindow]];
-}
-
-- (IBAction) searchPatient:(id)sender
-{
-
 }
 
 - (IBAction) newPrescription:(id)sender
@@ -896,12 +891,7 @@ static BOOL mSearchInteractions = false;
 
 }
 
-- (IBAction) searchPrescription:(id)sender
-{
-
-}
-
-- (IBAction) operatorIdentity:(id)sender
+- (IBAction) setOperatorIdentity:(id)sender
 {
 
 }

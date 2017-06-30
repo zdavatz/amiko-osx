@@ -2,7 +2,7 @@
  
  Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 21/06/2017.
+ Created on 28/06/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -23,14 +23,21 @@
 
 #import "MLPatient.h"
 
-@interface MLPatientDBAdapter : NSObject
+@implementation MLPatient
 
-- (BOOL) openDatabase:(NSString *)dbName;
-- (void) closeDatabase;
-- (BOOL) insertEntry:(MLPatient *)patient;
-- (BOOL) modifyEntry:(MLPatient *)patient;
-- (BOOL) deleteEntry:(MLPatient *)patient;
-- (NSInteger) getNumPatients;
-- (long) getLargestRowId;
+@synthesize rowId;
+@synthesize uniqueId;
+@synthesize familyName;
+@synthesize givenName;
+@synthesize birthDate;
+@synthesize gender;
+@synthesize weightKg;
+@synthesize heightCm;
+@synthesize zipCode;
+@synthesize city;
+@synthesize country;
+@synthesize address;
+@synthesize phone;
+@synthesize email;
 
 @end

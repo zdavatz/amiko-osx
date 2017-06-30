@@ -28,12 +28,30 @@
     @private
     IBOutlet NSWindow *mPanel;
     IBOutlet NSTableView *mTableView;
+    // References to text fields in table
+    IBOutlet NSTextField *mFamilyName;
+    IBOutlet NSTextField *mGivenName;
+    IBOutlet NSTextField *mBirthDate;
+    IBOutlet NSTextField *mGender;
+    IBOutlet NSTextField *mWeight_kg;
+    IBOutlet NSTextField *mHeight_cm;
+    IBOutlet NSTextField *mZipCode;
+    IBOutlet NSTextField *mStreet;
+    IBOutlet NSTextField *mHouseNumber;
+    IBOutlet NSTextField *mCity;
+    IBOutlet NSTextField *mCountry;
+    IBOutlet NSTextField *mPhone;
+    IBOutlet NSTextField *mEmail;
 }
 
-- (IBAction) onCancelPressed:(id)sender;
-- (IBAction) onConfirmPressed:(id)sender;
+- (IBAction) onSelectGender:(id)sender;
+- (IBAction) onAddPatient:(id)sender;
+- (IBAction) onEditPatient:(id)sender;
+- (IBAction) onDeletePatient:(id)sender;
+- (IBAction) onCancel:(id)sender;
 
 - (void) show:(NSWindow *)window;
 - (void) remove;
+- (BOOL) stringIsNilOrEmpty:(NSString*)str;
 
 @end

@@ -2,7 +2,7 @@
  
  Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 21/06/2017.
+ Created on 28/06/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -21,16 +21,23 @@
  
  ------------------------------------------------------------------------ */
 
-#import "MLPatient.h"
+#import <Foundation/Foundation.h>
 
-@interface MLPatientDBAdapter : NSObject
+@interface MLPatient : NSObject
 
-- (BOOL) openDatabase:(NSString *)dbName;
-- (void) closeDatabase;
-- (BOOL) insertEntry:(MLPatient *)patient;
-- (BOOL) modifyEntry:(MLPatient *)patient;
-- (BOOL) deleteEntry:(MLPatient *)patient;
-- (NSInteger) getNumPatients;
-- (long) getLargestRowId;
+@property (atomic, assign) long rowId;
+@property (atomic, copy) NSString *uniqueId;
+@property (atomic, copy) NSString *familyName;
+@property (atomic, copy) NSString *givenName;
+@property (atomic, copy) NSString *birthDate;
+@property (atomic, copy) NSString *gender;
+@property (atomic, assign) int weightKg;
+@property (atomic, assign) int heightCm;
+@property (atomic, copy) NSString *zipCode;
+@property (atomic, copy) NSString *city;
+@property (atomic, copy) NSString *country;
+@property (atomic, copy) NSString *address;
+@property (atomic, copy) NSString *phone;
+@property (atomic, copy) NSString *email;
 
 @end

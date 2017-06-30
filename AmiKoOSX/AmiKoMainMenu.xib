@@ -126,25 +126,25 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Rezept" id="2wd-qf-r9D">
                         <items>
-                            <menuItem title="Neuer Patient..." id="tsG-5e-hg5" userLabel="Neuer Patient...">
+                            <menuItem title="Patienten Verwalten..." id="tsG-5e-hg5" userLabel="Neuer Patient...">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="addPatient:" target="-1" id="FDl-T2-xXp"/>
+                                    <action selector="managePatients:" target="-1" id="wUp-yB-hoH"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Patient Suchen..." id="DTB-ad-X1T">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="bQr-f2-yIV"/>
-                            <menuItem title="Neues Rezept..." id="mSU-TQ-1vk" userLabel="Neues Rezept...">
+                            <menuItem title="Rezept Erstellen..." id="mSU-TQ-1vk" userLabel="Neues Rezept...">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Rezept Suchen..." id="8Q5-jy-JWg">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="newPrescription:" target="-1" id="ayx-Rn-v6K"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="umh-nI-TRT"/>
                             <menuItem title="Digitale Signatur..." id="5Du-8q-WQJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="setOperatorIdentity:" target="-1" id="psZ-Gg-9AA"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>

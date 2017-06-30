@@ -34,7 +34,7 @@
 */
 #pragma mark class functions
 
-+ (void) createEditableCopyOfDatabaseIfNeeded: (NSString *)dbName
++ (void) createEditableCopyOfDatabaseIfNeeded:(NSString *)dbName
 {
     // Create NSFileManager object to check the status of the database and to copy it if required
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -63,16 +63,16 @@
 
 - (void) dealloc
 {
-    //
 }
 
-- (id) initWithPath: (NSString *)path
+- (id) initReadOnlyWithPath:(NSString *)path
 {
     if (self = [super init]) {
         // Setup database object
         sqlite3 *dbConnection;
         // Open database from users filesystem
         NSFileManager *fileMgr = [[NSFileManager alloc] init];
+        
         NSArray *content = [fileMgr contentsOfDirectoryAtPath:path error:nil];
         for (NSString *p in content) {
             NSLog(@"%@\n", p);
@@ -89,7 +89,57 @@
     return self;
 }
 
-- (NSInteger) numberRecordsForTable: (NSString *)table
+- (id) initReadWriteWithPath:(NSString *)path
+{
+    if (self = [super init]) {
+        // Setup database object
+        sqlite3 *dbConnection;
+        // Open database from user's filesystem
+        NSFileManager *fileMgr = [[NSFileManager alloc] init];
+        
+        NSArray *content = [fileMgr contentsOfDirectoryAtPath:path error:nil];
+        for (NSString *p in content) {
+            NSLog(@"%@\n", p);
+        }
+        
+        // Let's open it in read write mode
+        if (sqlite3_open([path UTF8String], &dbConnection) != SQLITE_OK) {
+            NSLog(@"%s Unable to open read/write database!", __FUNCTION__);
+            return nil;
+        }
+        database = dbConnection;
+        // Force using disk for temp storage to reduce memory footprint
+        sqlite3_exec(database, "PRAGMA temp_store=1", nil, nil, nil);
+    }
+    return self;
+}
+
+- (BOOL) createWithPath:(NSString *)path andTable:(NSString *)table andColumns:(NSString *)columns
+{
+    NSFileManager *fileMgr = [[NSFileManager alloc] init];
+    
+    if (![fileMgr fileExistsAtPath:path]) {
+        // Setup database object
+        sqlite3 *dbConnection;
+        // Database does not exist yet. Let's open and create an empty table
+        if (sqlite3_open([path UTF8String], &dbConnection) == SQLITE_OK) {
+            NSString *queryStr = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ %@", table, columns];
+            if (sqlite3_exec(dbConnection, [queryStr UTF8String], NULL, NULL, NULL) == SQLITE_OK) {
+                NSLog(@"%@ table created successfully...", table);
+                database = dbConnection;
+            } else {
+                NSLog(@"Failed to create table %@ for database with path %@", table, path);
+                return FALSE;
+            }
+        } else {
+            NSLog(@"Failed to create database with path %@", path);
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+- (NSInteger) numberRecordsForTable:(NSString *)table
 {
     NSInteger numTableRecords = -1;
     sqlite3_stmt *sqlClause = nil;
@@ -107,7 +157,7 @@
     return numTableRecords;
 }
 
-- (NSArray *) performQuery: (NSString *)query
+- (NSArray *) performQuery:(NSString *)query
 {
     sqlite3_stmt *compiledStatement = nil;
     // Convert NSString to a C String
@@ -155,6 +205,28 @@
         return result;
     }
     return nil;
+}
+
+- (BOOL) insertRowIntoTable:(NSString *)table forColumns:(NSString *)columns andValues:(NSString *)values
+{
+    char *errMsg;
+    NSString *query = [NSString stringWithFormat:@"insert into %@ %@ values %@", table, columns, values];
+    if (sqlite3_exec(database, [query UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
+        NSLog(@"Failed to insert record into table %@ with query %@: %s", table, query, errMsg);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+- (BOOL) deleteRowFromTable:(NSString *)table withRowId:(long)rowId
+{
+    char *errMsg;
+    NSString *query = [NSString stringWithFormat:@"delete from %@ where rowId=%ld", table, rowId];
+    if (sqlite3_exec(database, [query UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
+        NSLog(@"Failed to delete record from db: %s", errMsg);
+        return FALSE;
+    }
+    return TRUE;
 }
 
 - (void) close

@@ -195,6 +195,22 @@
 		D5BACC141EBE051D001812FB /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */; };
 		D5BACC151EBE051D001812FB /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */; };
 		D5BACC161EBE051D001812FB /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */; };
+		D5C5C5021EFF8D6B00DF851F /* comed.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5011EFF8D6B00DF851F /* comed.iconset */; };
+		D5C5C5031EFF8D6B00DF851F /* comed.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5011EFF8D6B00DF851F /* comed.iconset */; };
+		D5C5C5041EFF8D6B00DF851F /* comed.iconset in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5011EFF8D6B00DF851F /* comed.iconset */; };
+		D5C5C5071F03AE2E00DF851F /* MLPatient.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5061F03AE2E00DF851F /* MLPatient.m */; };
+		D5C5C5081F03AE2E00DF851F /* MLPatient.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5061F03AE2E00DF851F /* MLPatient.m */; };
+		D5C5C5091F03AE2E00DF851F /* MLPatient.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5061F03AE2E00DF851F /* MLPatient.m */; };
+		D5C5C50A1F03AE2E00DF851F /* MLPatient.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5061F03AE2E00DF851F /* MLPatient.m */; };
+		D5C5C50B1F03AE2E00DF851F /* MLPatient.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5061F03AE2E00DF851F /* MLPatient.m */; };
+		D5C5C50C1F03AE2E00DF851F /* MLPatient.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5061F03AE2E00DF851F /* MLPatient.m */; };
+		D5C5C50E1F0640E100DF851F /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C5C50D1F0640E100DF851F /* Contacts.framework */; };
+		D5C5C5101F06416800DF851F /* MLContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C50F1F06416800DF851F /* MLContacts.m */; };
+		D5C5C5111F06416800DF851F /* MLContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C50F1F06416800DF851F /* MLContacts.m */; };
+		D5C5C5121F06416800DF851F /* MLContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C50F1F06416800DF851F /* MLContacts.m */; };
+		D5C5C5131F06416800DF851F /* MLContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C50F1F06416800DF851F /* MLContacts.m */; };
+		D5C5C5141F06416800DF851F /* MLContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C50F1F06416800DF851F /* MLContacts.m */; };
+		D5C5C5151F06416800DF851F /* MLContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C50F1F06416800DF851F /* MLContacts.m */; };
 		D5C6440D1EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
 		D5C6440E1EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
 		D5C6440F1EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
@@ -519,6 +535,12 @@
 		D5BACBF81EBB1D2C001812FB /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		D5BACBF91EBB1D2C001812FB /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_fr.db; sourceTree = "<group>"; };
+		D5C5C5011EFF8D6B00DF851F /* comed.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = comed.iconset; sourceTree = "<group>"; };
+		D5C5C5051F03AE1A00DF851F /* MLPatient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPatient.h; sourceTree = "<group>"; };
+		D5C5C5061F03AE2E00DF851F /* MLPatient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPatient.m; sourceTree = "<group>"; };
+		D5C5C50D1F0640E100DF851F /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		D5C5C50F1F06416800DF851F /* MLContacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLContacts.m; sourceTree = "<group>"; };
+		D5C5C5161F06417800DF851F /* MLContacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLContacts.h; sourceTree = "<group>"; };
 		D5C6440B1EB32F5300438E6F /* MLInteractionsCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInteractionsCart.h; sourceTree = "<group>"; };
 		D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInteractionsCart.m; sourceTree = "<group>"; };
 		D5C6441B1EB3360300438E6F /* MLFullTextSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFullTextSearch.h; sourceTree = "<group>"; };
@@ -637,6 +659,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5C5C50E1F0640E100DF851F /* Contacts.framework in Frameworks */,
 				D545C8D61898522400491511 /* libz.1.2.5.dylib in Frameworks */,
 				D5E91B9517E5E8E400B66B27 /* QuartzCore.framework in Frameworks */,
 				D5E91B9617E5E8E400B66B27 /* WebKit.framework in Frameworks */,
@@ -822,19 +845,23 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		D5C6442A1EB337D800438E6F /* Database */ = {
+		D5C6442A1EB337D800438E6F /* Databases */ = {
 			isa = PBXGroup;
 			children = (
-				D5EBC6B417C9206800EBEF39 /* MLDBAdapter.h */,
-				D5EBC6B517C9206800EBEF39 /* MLDBAdapter.m */,
-				D5EBC6B617C9206800EBEF39 /* MLMedication.h */,
-				D5EBC6B717C9206800EBEF39 /* MLMedication.m */,
 				D5EBC6AE17C9203F00EBEF39 /* MLSQLiteDatabase.h */,
 				D5EBC6AC17C9202600EBEF39 /* MLSQLiteDatabase.m */,
+				D5EBC6B617C9206800EBEF39 /* MLMedication.h */,
+				D5EBC6B717C9206800EBEF39 /* MLMedication.m */,
+				D5C5C5051F03AE1A00DF851F /* MLPatient.h */,
+				D5C5C5061F03AE2E00DF851F /* MLPatient.m */,
+				D5EBC6B417C9206800EBEF39 /* MLDBAdapter.h */,
+				D5EBC6B517C9206800EBEF39 /* MLDBAdapter.m */,
 				D5962EA71EFC26BF0034B964 /* MLPatientDBAdapter.h */,
 				D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */,
+				D5C5C5161F06417800DF851F /* MLContacts.h */,
+				D5C5C50F1F06416800DF851F /* MLContacts.m */,
 			);
-			name = Database;
+			name = Databases;
 			sourceTree = "<group>";
 		};
 		D5C644401EB37A7E00438E6F /* JScripts */ = {
@@ -910,6 +937,7 @@
 		D5EBC67F17C912FF00EBEF39 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D5C5C50D1F0640E100DF851F /* Contacts.framework */,
 				D54AB37518984B5800637257 /* libz.1.2.5.dylib */,
 				D5EBC68017C912FF00EBEF39 /* Cocoa.framework */,
 				D5EBC68217C912FF00EBEF39 /* Other Frameworks */,
@@ -969,7 +997,7 @@
 			isa = PBXGroup;
 			children = (
 				D5C644291EB337CB00438E6F /* Controllers */,
-				D5C6442A1EB337D800438E6F /* Database */,
+				D5C6442A1EB337D800438E6F /* Databases */,
 				D5C644261EB3378300438E6F /* SplashScreen */,
 				D5C644281EB337AA00438E6F /* Favorites */,
 				D5C644271EB3379100438E6F /* Utilities */,
@@ -1026,6 +1054,7 @@
 				D5C644401EB37A7E00438E6F /* JScripts */,
 				D5AE31781B36F078006BC60E /* desitin.iconset */,
 				D536126517E770A80087B132 /* amiko.iconset */,
+				D5C5C5011EFF8D6B00DF851F /* comed.iconset */,
 				D5E91BFA17E6074D00B66B27 /* amiko_report_fr.html */,
 				D5E91BF417E6065C00B66B27 /* amiko_report_de.html */,
 			);
@@ -1235,6 +1264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5E731761B334829007771D7 /* interactions_callbacks.js in Resources */,
+				D5C5C5041EFF8D6B00DF851F /* comed.iconset in Resources */,
 				D5E731771B334829007771D7 /* MLSearchWebView.js in Resources */,
 				D5E731781B334829007771D7 /* InfoPlist.strings in Resources */,
 				D5AE31811B36FAE6006BC60E /* CoMed.entitlements in Resources */,
@@ -1347,6 +1377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D57AB17A193E6B68000DB3F2 /* interactions_callbacks.js in Resources */,
+				D5C5C5021EFF8D6B00DF851F /* comed.iconset in Resources */,
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
 				D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */,
@@ -1401,6 +1432,7 @@
 				D538778D1AA202E700AEFDB4 /* CoMed-zR.entitlements in Resources */,
 				D5EBC6D917D3ADCA00EBEF39 /* app_icon_512x512.png in Resources */,
 				D5EBC6E317D521A500EBEF39 /* 28-star@2x.png in Resources */,
+				D5C5C5031EFF8D6B00DF851F /* comed.iconset in Resources */,
 				D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */,
 				D545C90818A3FC0800491511 /* MLProgressSheet.xib in Resources */,
 				D5E91AD017E387F100B66B27 /* MLCoMedzRMainWindow.xib in Resources */,
@@ -1429,6 +1461,7 @@
 				D5E731151B33480A007771D7 /* MLMainWindowController.m in Sources */,
 				D5E731161B33480A007771D7 /* MLProgressSheetController.m in Sources */,
 				D52EA4A91EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
+				D5C5C5141F06416800DF851F /* MLContacts.m in Sources */,
 				D5E731171B33480A007771D7 /* MLUtilities.m in Sources */,
 				D5BACC041EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D5E731181B33480A007771D7 /* MLCustomWebView.m in Sources */,
@@ -1438,6 +1471,7 @@
 				D5E7311C1B33480A007771D7 /* zip.c in Sources */,
 				D5E7311D1B33480A007771D7 /* MLSearchWebView.js in Sources */,
 				D5C644111EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C5C50B1F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E7311E1B33480A007771D7 /* MLDBAdapter.m in Sources */,
 				D5BACC0A1EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
 				D5E7311F1B33480A007771D7 /* mztools.c in Sources */,
@@ -1474,6 +1508,7 @@
 				D5E731591B334829007771D7 /* MLMainWindowController.m in Sources */,
 				D5E7315A1B334829007771D7 /* MLProgressSheetController.m in Sources */,
 				D52EA4AA1EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
+				D5C5C5151F06416800DF851F /* MLContacts.m in Sources */,
 				D5E7315B1B334829007771D7 /* MLUtilities.m in Sources */,
 				D5BACC051EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D5E7315C1B334829007771D7 /* MLCustomWebView.m in Sources */,
@@ -1483,6 +1518,7 @@
 				D5E731601B334829007771D7 /* zip.c in Sources */,
 				D5E731611B334829007771D7 /* MLSearchWebView.js in Sources */,
 				D5C644121EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C5C50C1F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E731621B334829007771D7 /* MLDBAdapter.m in Sources */,
 				D5BACC0B1EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
 				D5E731631B334829007771D7 /* mztools.c in Sources */,
@@ -1519,6 +1555,7 @@
 				D5E91B5B17E5E24000B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF9189522AD00C4525C /* MLProgressSheetController.m in Sources */,
 				D52EA4A71EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
+				D5C5C5121F06416800DF851F /* MLContacts.m in Sources */,
 				D53877961AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D5BACC021EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90D18A4286B00491511 /* MLCustomWebView.m in Sources */,
@@ -1528,6 +1565,7 @@
 				D545C8FD18A2CE0D00491511 /* zip.c in Sources */,
 				D5E91B5D17E5E24000B66B27 /* MLSearchWebView.js in Sources */,
 				D5C6440F1EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C5C5091F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E91B5E17E5E24000B66B27 /* MLDBAdapter.m in Sources */,
 				D5BACC081EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
 				D545C8F718A2CE0500491511 /* mztools.c in Sources */,
@@ -1564,6 +1602,7 @@
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
 				D52EA4A51EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
+				D5C5C5101F06416800DF851F /* MLContacts.m in Sources */,
 				D53877941AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D5BACC001EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90B18A4286B00491511 /* MLCustomWebView.m in Sources */,
@@ -1573,6 +1612,7 @@
 				D545C8E71898527C00491511 /* zip.c in Sources */,
 				D5E91B8C17E5E8E400B66B27 /* MLSearchWebView.js in Sources */,
 				D5C6440D1EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C5C5071F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E91B8D17E5E8E400B66B27 /* MLDBAdapter.m in Sources */,
 				D5BACC061EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
 				D545C8E51898527C00491511 /* mztools.c in Sources */,
@@ -1609,6 +1649,7 @@
 				D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */,
 				D545C8EE18A2CDD100491511 /* MLProgressSheetController.m in Sources */,
 				D52EA4A61EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
+				D5C5C5111F06416800DF851F /* MLContacts.m in Sources */,
 				D53877951AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D5BACC011EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */,
@@ -1618,6 +1659,7 @@
 				D545C8FC18A2CE0D00491511 /* zip.c in Sources */,
 				D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */,
 				D5C6440E1EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C5C5081F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E91BBC17E5E8E800B66B27 /* MLDBAdapter.m in Sources */,
 				D5BACC071EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
 				D545C8F618A2CE0500491511 /* mztools.c in Sources */,
@@ -1654,6 +1696,7 @@
 				D5EBC6A417C913B100EBEF39 /* MLMainWindowController.m in Sources */,
 				D545C8EF18A2CDD200491511 /* MLProgressSheetController.m in Sources */,
 				D52EA4A81EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
+				D5C5C5131F06416800DF851F /* MLContacts.m in Sources */,
 				D53877971AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D5BACC031EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90E18A4286B00491511 /* MLCustomWebView.m in Sources */,
@@ -1663,6 +1706,7 @@
 				D545C8FE18A2CE0D00491511 /* zip.c in Sources */,
 				D5EBC6B217C9205E00EBEF39 /* MLSearchWebView.js in Sources */,
 				D5C644101EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C5C50A1F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5EBC6B817C9206800EBEF39 /* MLDBAdapter.m in Sources */,
 				D5BACC091EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
 				D545C8F818A2CE0600491511 /* mztools.c in Sources */,

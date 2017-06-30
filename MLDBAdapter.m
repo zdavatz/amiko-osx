@@ -81,7 +81,7 @@ static NSString *FULL_TABLE = nil;
  */
 #pragma mark Instance functions
 
-- (BOOL) openDatabase: (NSString *)dbName
+- (BOOL) openDatabase:(NSString *)dbName
 {
     // A. Check first users documents folder
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -91,21 +91,21 @@ static NSString *FULL_TABLE = nil;
     // Check if database exists
     if (filePath!=nil) {
         if ([fileManager fileExistsAtPath:filePath]) {
-            NSLog(@"AIPS DB found documents folder - %@", filePath);
-            mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
-            return true;
+            NSLog(@"AIPS DB found in user's documents folder - %@", filePath);
+            mySqliteDb = [[MLSQLiteDatabase alloc] initReadOnlyWithPath:filePath];
+            return TRUE;
         }
     }
     
     // B. If no database is available, check if db is in app bundle
     filePath = [[NSBundle mainBundle] pathForResource:dbName ofType:@"db"];
     if (filePath!=nil ) {
-        mySqliteDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
+        mySqliteDb = [[MLSQLiteDatabase alloc] initReadOnlyWithPath:filePath];
         NSLog(@"AIPS DB found in app bundle - %@", filePath);
-        return true;
+        return TRUE;
     }
     
-    return false;
+    return FALSE;
 }
 
 - (void) closeDatabase

@@ -28,9 +28,13 @@
 
 + (void) createEditableCopyOfDatabaseIfNeeded: (NSString *)dbName;
 
-- (id) initWithPath: (NSString *)path;
-- (NSArray *) performQuery: (NSString *)query;
-- (NSInteger) numberRecordsForTable: (NSString *)table;
+- (id) initReadOnlyWithPath:(NSString *)path;
+- (id) initReadWriteWithPath:(NSString *)path;
+- (BOOL) createWithPath:(NSString *)path andTable:(NSString *)table andColumns:(NSString *)columns;
+- (NSArray *) performQuery:(NSString *)query;
+- (NSInteger) numberRecordsForTable:(NSString *)table;
+- (BOOL) insertRowIntoTable:(NSString *)table forColumns:(NSString *)columns andValues:(NSString *)values;
+- (BOOL) deleteRowFromTable:(NSString *)table withRowId:(long)rowId;
 - (void) close;
 
 @end

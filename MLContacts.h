@@ -2,7 +2,7 @@
  
  Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 21/06/2017.
+ Created on 30/06/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -21,16 +21,13 @@
  
  ------------------------------------------------------------------------ */
 
-#import "MLPatient.h"
+#import <Foundation/Foundation.h>
+#import <Contacts/Contacts.h>
 
-@interface MLPatientDBAdapter : NSObject
+@interface MLContacts : NSObject
 
-- (BOOL) openDatabase:(NSString *)dbName;
-- (void) closeDatabase;
-- (BOOL) insertEntry:(MLPatient *)patient;
-- (BOOL) modifyEntry:(MLPatient *)patient;
-- (BOOL) deleteEntry:(MLPatient *)patient;
-- (NSInteger) getNumPatients;
-- (long) getLargestRowId;
+@property (nonatomic, strong) NSMutableArray *groupOfContacts;
+
+- (void) getAllContacts;
 
 @end

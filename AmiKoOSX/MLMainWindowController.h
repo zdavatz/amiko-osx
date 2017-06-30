@@ -83,11 +83,9 @@ extern NSString* const APP_ID;
 - (IBAction) updateAipsDatabase:(id)sender;
 - (IBAction) loadAipsDatabase:(id)sender;
 // Prescription function
-- (IBAction) addPatient:(id)sender;
-- (IBAction) searchPatient:(id)sender;
+- (IBAction) managePatients:(id)sender;
 - (IBAction) newPrescription:(id)sender;
-- (IBAction) searchPrescription:(id)sender;
-- (IBAction) operatorIdentity:(id)sender;
+- (IBAction) setOperatorIdentity:(id)sender;
 // Help
 - (IBAction) showAboutFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;

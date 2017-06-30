@@ -57,7 +57,7 @@ static NSString *DATABASE_TABLE = @"frequency";
     if (filePath!=nil) {
         if ([fileManager fileExistsAtPath:filePath]) {
             NSLog(@"Fulltext DB found documents folder - %@", filePath);
-            myFullTextDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
+            myFullTextDb = [[MLSQLiteDatabase alloc] initReadOnlyWithPath:filePath];
             return true;
         }
     }
@@ -65,7 +65,7 @@ static NSString *DATABASE_TABLE = @"frequency";
     // B. If no database is available, check if db is in app bundle
     filePath = [[NSBundle mainBundle] pathForResource:dbName ofType:@"db"];
     if (filePath!=nil ) {
-        myFullTextDb = [[MLSQLiteDatabase alloc] initWithPath:filePath];
+        myFullTextDb = [[MLSQLiteDatabase alloc] initReadOnlyWithPath:filePath];
         NSLog(@"Fulltext DB found in app bundle - %@", filePath);
         return true;
     }

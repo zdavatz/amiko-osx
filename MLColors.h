@@ -30,5 +30,6 @@
 + (NSColor *) mainTextFieldBlue;
 + (NSColor *) selectBlue;
 + (NSColor *) lightYellow;
++ (NSColor *) lightRed;
 
 @end
