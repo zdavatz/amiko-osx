@@ -29,31 +29,40 @@
 {
     self.groupOfContacts = [@[] mutableCopy];
     
-    CNContactStore *addressBook = [[CNContactStore alloc] init];
+    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    if (status == CNAuthorizationStatusDenied) {
+        NSLog(@"This app was refused permissions to contacts. Go to settings and grant permission to this app so it can use contacts.");
+    }
     
-    NSArray *keys = @[CNContactFamilyNameKey,
-                      CNContactGivenNameKey,
-                      CNContactPostalAddressesKey,
-                      CNContactPhoneNumbersKey,
-                      CNContactEmailAddressesKey];
-    
-    CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:keys];
-    
-    NSError *error;
-    [addressBook enumerateContactsWithFetchRequest:request
-                                             error:&error
-                                        usingBlock:^(CNContact * __nonnull contact, BOOL * __nonnull stop) {
-                                            if (error) {
-                                                NSLog(@"error fetching contacts %@", error);
-                                            } else {
-                                                [self.groupOfContacts addObject:contact];
-                                            }
-                                        }];
-    
-    NSLog(@"Num contacts in address book: %lu", (unsigned long)[self.groupOfContacts count]);
-    
-    for (CNContact *contact in self.groupOfContacts) {
-        NSLog(@"Family name: %@ / Given name : %@", contact.familyName, contact.givenName);
+    if ([CNContactStore class]) {
+        CNContactStore *addressBook = [[CNContactStore alloc] init];
+        
+        NSArray *keys = @[CNContactIdentifierKey,
+                          CNContactFamilyNameKey,
+                          CNContactGivenNameKey,
+                          CNContactBirthdayKey,
+                          CNContactPostalAddressesKey,
+                          CNContactPhoneNumbersKey,
+                          CNContactEmailAddressesKey];
+        
+        CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:keys];
+        
+        NSError *error;
+        [addressBook enumerateContactsWithFetchRequest:request
+                                                 error:&error
+                                            usingBlock:^(CNContact * __nonnull contact, BOOL * __nonnull stop) {
+                                                if (error) {
+                                                    NSLog(@"error fetching contacts %@", error);
+                                                } else {
+                                                    [self.groupOfContacts addObject:contact];
+                                                }
+                                            }];
+        
+        NSLog(@"Num contacts in address book: %lu", (unsigned long)[self.groupOfContacts count]);
+        
+        for (CNContact *contact in self.groupOfContacts) {
+            NSLog(@"%@ - %@ %@", contact.identifier, contact.familyName, contact.givenName);
+        }
     }
 }
 

@@ -140,7 +140,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="umh-nI-TRT"/>
-                            <menuItem title="Digitale Signatur..." id="5Du-8q-WQJ">
+                            <menuItem title="Unterschrift Arzt..." id="5Du-8q-WQJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="setOperatorIdentity:" target="-1" id="psZ-Gg-9AA"/>
