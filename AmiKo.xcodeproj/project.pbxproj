@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		930251551EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 930251531EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db */; };
-		930251561EFFAC1400BCEDC6 /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 930251541EFFAC1400BCEDC6 /* amiko_frequency_fr.db */; };
+		939ECCF31F0248DE0016309E /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 939ECCF11F0248DE0016309E /* amiko_db_full_idx_fr.db */; };
+		939ECCF41F0248DE0016309E /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 939ECCF11F0248DE0016309E /* amiko_db_full_idx_fr.db */; };
+		939ECCF51F0248DE0016309E /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 939ECCF11F0248DE0016309E /* amiko_db_full_idx_fr.db */; };
+		939ECCF61F0248DE0016309E /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 939ECCF21F0248DE0016309E /* amiko_frequency_fr.db */; };
+		939ECCF71F0248DE0016309E /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 939ECCF21F0248DE0016309E /* amiko_frequency_fr.db */; };
+		939ECCF81F0248DE0016309E /* amiko_frequency_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = 939ECCF21F0248DE0016309E /* amiko_frequency_fr.db */; };
 		D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
 		D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
 		D517E4B31EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
@@ -407,8 +411,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		930251531EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_fr.db; sourceTree = "<group>"; };
-		930251541EFFAC1400BCEDC6 /* amiko_frequency_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_fr.db; sourceTree = "<group>"; };
+		939ECCF11F0248DE0016309E /* amiko_db_full_idx_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_fr.db; sourceTree = "<group>"; };
+		939ECCF21F0248DE0016309E /* amiko_frequency_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_fr.db; sourceTree = "<group>"; };
 		D517E4AE1EA8B8C400187AC8 /* MLInteractionsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLInteractionsAdapter.h; sourceTree = "<group>"; };
 		D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInteractionsAdapter.m; sourceTree = "<group>"; };
 		D517E4BE1EA8E5E500187AC8 /* MLFullTextDBAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLFullTextDBAdapter.h; sourceTree = "<group>"; };
@@ -929,9 +933,9 @@
 			isa = PBXGroup;
 			children = (
 				D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */,
-				930251531EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db */,
-				930251541EFFAC1400BCEDC6 /* amiko_frequency_fr.db */,
 				D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */,
+				939ECCF11F0248DE0016309E /* amiko_db_full_idx_fr.db */,
+				939ECCF21F0248DE0016309E /* amiko_frequency_fr.db */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -1166,6 +1170,7 @@
 			files = (
 				D5E731761B334829007771D7 /* interactions_callbacks.js in Resources */,
 				D5E731771B334829007771D7 /* MLSearchWebView.js in Resources */,
+				939ECCF81F0248DE0016309E /* amiko_frequency_fr.db in Resources */,
 				D5E731781B334829007771D7 /* InfoPlist.strings in Resources */,
 				D5AE31811B36FAE6006BC60E /* CoMed.entitlements in Resources */,
 				D5E7317A1B334829007771D7 /* MLProgressSheet.xib in Resources */,
@@ -1182,6 +1187,7 @@
 				D5E731821B334829007771D7 /* app_icon_512x512.png in Resources */,
 				D5E731831B334829007771D7 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E731841B334829007771D7 /* 28-star@2x.png in Resources */,
+				939ECCF51F0248DE0016309E /* amiko_db_full_idx_fr.db in Resources */,
 				D5E731A01B3351DB007771D7 /* MLCoMedDesitinMainWindow.xib in Resources */,
 				D5E731851B334829007771D7 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E731881B334829007771D7 /* maindb@2x.png in Resources */,
@@ -1270,7 +1276,7 @@
 			files = (
 				D57AB17A193E6B68000DB3F2 /* interactions_callbacks.js in Resources */,
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
-				930251561EFFAC1400BCEDC6 /* amiko_frequency_fr.db in Resources */,
+				939ECCF61F0248DE0016309E /* amiko_frequency_fr.db in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
 				D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */,
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
@@ -1287,7 +1293,7 @@
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
 				D5E91BD717E5E8E800B66B27 /* Zur_Rose_1000x670px.png in Resources */,
-				930251551EFFAC1400BCEDC6 /* amiko_db_full_idx_fr.db in Resources */,
+				939ECCF31F0248DE0016309E /* amiko_db_full_idx_fr.db in Resources */,
 				D5E91BD917E5E8E800B66B27 /* MLCoMedMainWindow.xib in Resources */,
 				D5E91BDC17E5E8E800B66B27 /* CoMedMainMenu.xib in Resources */,
 				D53877831A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
@@ -1309,6 +1315,7 @@
 			files = (
 				D5EBC6CE17D218D900EBEF39 /* MLSearchWebView.js in Resources */,
 				D5DD5764193B49260094244E /* 217-trash.png in Resources */,
+				939ECCF71F0248DE0016309E /* amiko_frequency_fr.db in Resources */,
 				D5EBC68B17C912FF00EBEF39 /* InfoPlist.strings in Resources */,
 				D538777D1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5C5C4FF1EFF8C5500DF851F /* comed.iconset in Resources */,
@@ -1331,6 +1338,7 @@
 				D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */,
 				D5AB1776180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5E91BFC17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
+				939ECCF41F0248DE0016309E /* amiko_db_full_idx_fr.db in Resources */,
 				D536126917E770A80087B132 /* amiko.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
