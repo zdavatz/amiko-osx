@@ -698,8 +698,8 @@
 		D53ABBF2189521D400C4525C /* SubWindows */ = {
 			isa = PBXGroup;
 			children = (
-				D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */,
 				D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */,
+				D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */,
 			);
 			name = SubWindows;
 			sourceTree = "<group>";

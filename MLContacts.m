@@ -22,16 +22,20 @@
  ------------------------------------------------------------------------ */
 
 #import "MLContacts.h"
+#import "MLPatient.h"
 
 @implementation MLContacts
-
-- (void) getAllContacts
 {
-    self.groupOfContacts = [@[] mutableCopy];
+    NSMutableArray *groupOfContacts;
+}
+
+- (NSArray *) getAllContacts
+{
+    groupOfContacts = [@[] mutableCopy];
     
     CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
     if (status == CNAuthorizationStatusDenied) {
-        NSLog(@"This app was refused permissions to contacts. Go to settings and grant permission to this app so it can use contacts.");
+        NSLog(@"This app was refused permissions to contacts.");
     }
     
     if ([CNContactStore class]) {
@@ -54,16 +58,26 @@
                                                 if (error) {
                                                     NSLog(@"error fetching contacts %@", error);
                                                 } else {
-                                                    [self.groupOfContacts addObject:contact];
+                                                    MLPatient *patient = [[MLPatient alloc] init];
+                                                    patient.familyName = contact.familyName;
+                                                    patient.givenName = contact.givenName;
+                                                    patient.birthDate = @"";
+                                                    patient.phoneNumber = @"";  
+                                                    if (contact.birthday.year>1900)
+                                                        patient.birthDate = [NSString stringWithFormat:@"%ld-%ld-%ld", contact.birthday.day, contact.birthday.month, contact.birthday.year];
+                                                    if ([contact.phoneNumbers count]>0)
+                                                        patient.phoneNumber = [[contact.phoneNumbers[0] value] stringValue];
+                                                    if ([patient.familyName length]>0 && [patient.givenName length]>0)
+                                                        [groupOfContacts addObject:patient];
                                                 }
                                             }];
-        
-        NSLog(@"Num contacts in address book: %lu", (unsigned long)[self.groupOfContacts count]);
-        
-        for (CNContact *contact in self.groupOfContacts) {
-            NSLog(@"%@ - %@ %@", contact.identifier, contact.familyName, contact.givenName);
+        // Sort alphabetically
+        if ([groupOfContacts count]>0) {
+            NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"familyName" ascending:YES];
+            [groupOfContacts sortUsingDescriptors:[NSArray arrayWithObject:nameSort]];
         }
     }
+    return groupOfContacts;
 }
 
 @end

@@ -27,6 +27,7 @@
 #import "MLContacts.h"
 
 static NSString *KEY_ROWID = @"_id";
+static NSString *KEY_TIMESTAMP = @"time_stamp";
 static NSString *KEY_UID = @"uid";
 static NSString *KEY_FAMILYNAME = @"family_name";
 static NSString *KEY_GIVENNAME = @"given_name";
@@ -45,7 +46,7 @@ static NSString *DATABASE_TABLE = @"patients";
 
 /** Table columns for fast queries
  */
-static NSString *FULL_TABLE = nil;
+static NSString *ALL_COLUMNS = nil;
 static NSString *DATABASE_COLUMNS = nil;
 
 @implementation MLPatientDBAdapter
@@ -60,11 +61,11 @@ static NSString *DATABASE_COLUMNS = nil;
 + (void) initialize
 {
     if (self == [MLPatientDBAdapter class]) {
-        if (FULL_TABLE == nil) {
-            FULL_TABLE = [NSString stringWithFormat: @"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@", KEY_ROWID, KEY_UID, KEY_FAMILYNAME, KEY_GIVENNAME, KEY_BIRTHDATE, KEY_GENDER, KEY_WEIGHT_KG, KEY_HEIGHT_CM, KEY_ZIPCODE, KEY_CITY, KEY_COUNTRY, KEY_ADDRESS, KEY_PHONE, KEY_EMAIL];
+        if (ALL_COLUMNS == nil) {
+            ALL_COLUMNS = [NSString stringWithFormat: @"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@", KEY_ROWID, KEY_TIMESTAMP, KEY_UID, KEY_FAMILYNAME, KEY_GIVENNAME, KEY_BIRTHDATE, KEY_GENDER, KEY_WEIGHT_KG, KEY_HEIGHT_CM, KEY_ZIPCODE, KEY_CITY, KEY_COUNTRY, KEY_ADDRESS, KEY_PHONE, KEY_EMAIL];
         }
         if (DATABASE_COLUMNS == nil) {
-            DATABASE_COLUMNS = [NSString stringWithFormat: @"(%@ INTEGER, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ INTEGER, %@ INTEGER, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT)", KEY_ROWID, KEY_UID, KEY_FAMILYNAME, KEY_GIVENNAME, KEY_BIRTHDATE, KEY_GENDER, KEY_WEIGHT_KG, KEY_HEIGHT_CM, KEY_ZIPCODE, KEY_CITY, KEY_COUNTRY, KEY_ADDRESS, KEY_PHONE, KEY_EMAIL];
+            DATABASE_COLUMNS = [NSString stringWithFormat: @"(%@ INTEGER, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ INTEGER, %@ INTEGER, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT)", KEY_ROWID, KEY_TIMESTAMP, KEY_UID, KEY_FAMILYNAME, KEY_GIVENNAME, KEY_BIRTHDATE, KEY_GENDER, KEY_WEIGHT_KG, KEY_HEIGHT_CM, KEY_ZIPCODE, KEY_CITY, KEY_COUNTRY, KEY_ADDRESS, KEY_PHONE, KEY_EMAIL];
         }
     }
 }
@@ -74,14 +75,7 @@ static NSString *DATABASE_COLUMNS = nil;
 #pragma mark Instance functions
 
 - (BOOL) openDatabase:(NSString *)dbName
-{
-    
-    // ********************
-    MLContacts *contacts = [[MLContacts alloc] init];
-    [contacts getAllContacts];
-    
-    // ********************
-    
+{   
     if (myPatientDb == nil) {
         // Patient DB should be in the user's documents folder
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -114,14 +108,23 @@ static NSString *DATABASE_COLUMNS = nil;
         [myPatientDb close];
 }
 
+- (NSString *) currentTime
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm";
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    return [dateFormatter stringFromDate:[NSDate date]];
+}
+
 - (BOOL) insertEntry:(MLPatient *)patient
 {
     if (myPatientDb) {
         // Creates and returns a new UUID with RFC 4122 version 4 random bytes
         NSUUID *uuid = [NSUUID UUID];
-        NSString *uuidStr = [uuid UUIDString];        
-        NSString *columnStr = [NSString stringWithFormat:@"(%@)", FULL_TABLE];
-        NSString *valueStr = [NSString stringWithFormat:@"(%ld, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %d, %d, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", patient.rowId, uuidStr, patient.familyName, patient.givenName, patient.birthDate, patient.gender, patient.weightKg, patient.heightCm, patient.zipCode, patient.city, patient.country, patient.address, patient.phone, patient.email];
+        NSString *uuidStr = [uuid UUIDString];
+        NSString *timeStr = [self currentTime];
+        NSString *columnStr = [NSString stringWithFormat:@"(%@)", ALL_COLUMNS];
+        NSString *valueStr = [NSString stringWithFormat:@"(%ld, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %d, %d, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", patient.rowId, timeStr, uuidStr, patient.familyName, patient.givenName, patient.birthDate, patient.gender, patient.weightKg, patient.heightCm, patient.zipCode, patient.city, patient.country, patient.postalAddress, patient.phoneNumber, patient.emailAddress];
         [myPatientDb insertRowIntoTable:@"patients" forColumns:columnStr andValues:valueStr];
         return TRUE;
     }
@@ -144,6 +147,21 @@ static NSString *DATABASE_COLUMNS = nil;
     return FALSE;
 }
 
+- (NSArray *) getAllPatients
+{
+    NSMutableArray *listOfPatients = [NSMutableArray array];
+    
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@", ALL_COLUMNS, DATABASE_TABLE];
+    NSArray *results = [myPatientDb performQuery:query];
+    if ([results count]>0) {
+        for (NSArray *cursor in results) {
+            [listOfPatients addObject:[self cursorToPatient:cursor]];
+        }
+    }
+    
+    return listOfPatients;
+}
+
 - (NSInteger) getNumPatients
 {
     NSInteger numRecords = [myPatientDb numberRecordsForTable:DATABASE_TABLE];
@@ -163,6 +181,27 @@ static NSString *DATABASE_COLUMNS = nil;
         }
     }
     return 0;
+}
+
+- (MLPatient *) cursorToPatient:(NSArray *)cursor
+{
+    MLPatient *patient = [[MLPatient alloc] init];
+    
+    patient.rowId = [[cursor objectAtIndex:0] longLongValue];
+    patient.familyName = (NSString *)[cursor objectAtIndex:3];
+    patient.givenName = (NSString *)[cursor objectAtIndex:4];
+    patient.birthDate = (NSString *)[cursor objectAtIndex:5];
+    patient.gender = (NSString *)[cursor objectAtIndex:6];
+    patient.weightKg = [[cursor objectAtIndex:7] intValue];
+    patient.heightCm = [[cursor objectAtIndex:8] intValue];
+    patient.zipCode = (NSString *)[cursor objectAtIndex:9];
+    patient.city = (NSString *)[cursor objectAtIndex:10];
+    patient.country = (NSString *)[cursor objectAtIndex:11];
+    patient.postalAddress = (NSString *)[cursor objectAtIndex:12];
+    patient.phoneNumber = (NSString *)[cursor objectAtIndex:13];
+    patient.emailAddress = (NSString *)[cursor objectAtIndex:14];
+    
+    return patient;
 }
 
 @end

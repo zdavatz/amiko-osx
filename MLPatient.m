@@ -36,8 +36,8 @@
 @synthesize zipCode;
 @synthesize city;
 @synthesize country;
-@synthesize address;
-@synthesize phone;
-@synthesize email;
+@synthesize postalAddress;
+@synthesize phoneNumber;
+@synthesize emailAddress;
 
 @end

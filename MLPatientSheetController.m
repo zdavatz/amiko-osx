@@ -24,6 +24,7 @@
 #import "MLPatientDBAdapter.h"
 #import "MLPatientSheetController.h"
 #import "MLMainWindowController.h"
+#import "MLContacts.h"
 #import "MLColors.h"
 
 @implementation MLPatientSheetController
@@ -31,17 +32,13 @@
     @private
     MLPatientDBAdapter *mPatientDb;
     NSModalSession mModalSession;
-    NSArray *nameArray;
+    NSArray *mArrayOfPatients;
     BOOL mFemale;
 }
 
 - (id) init
 {
-    nameArray = [NSArray arrayWithObjects: @"Jill Valentine", @"Peter Griffin", @"Meg Griffin", @"Jack Lolwut",
-                        @"Mike Roflcoptor", @"Cindy Woods", @"Jessica Windmill", @"Alexander The Great",
-                        @"Sarah Peterson", @"Scott Scottland", @"Geoff Fanta", @"Amanda Pope", @"Michael Meyers",
-                        @"Richard Biggus", @"Montey Python", @"Mike Wut", @"Fake Person", @"Chair",
-                        nil];
+    mArrayOfPatients = nil;
 
     // Open patient DB
     mPatientDb = [[MLPatientDBAdapter alloc] init];
@@ -56,11 +53,27 @@
     return nil;
 }
 
-
-
 - (BOOL) stringIsNilOrEmpty:(NSString*)str
 {
     return !(str && str.length);
+}
+
+- (void) resetAllFields
+{
+    [mFamilyName setStringValue:@""];
+    [mGivenName setStringValue:@""];
+    [mBirthDate setStringValue:@""];
+    [mCity setStringValue:@""];
+    [mZipCode setStringValue:@""];
+    [mWeight_kg setStringValue:@""];
+    [mHeight_cm setStringValue:@""];
+    [mZipCode setStringValue:@""];
+    [mStreet setStringValue:@""];
+    [mHouseNumber setStringValue:@""];
+    [mCity setStringValue:@""];
+    [mCountry setStringValue:@""];
+    [mPhone setStringValue:@""];
+    [mEmail setStringValue:@""];
 }
 
 - (BOOL) validateFields:(MLPatient *)patient
@@ -96,7 +109,7 @@
         mZipCode.backgroundColor = [NSColor lightRed];
         valid = FALSE;
     }
-    if ([self stringIsNilOrEmpty:patient.address]) {
+    if ([self stringIsNilOrEmpty:patient.postalAddress]) {
         mStreet.backgroundColor = [NSColor lightRed];
         mHouseNumber.backgroundColor = [NSColor lightRed];
         valid = FALSE;
@@ -120,7 +133,12 @@
     }
 }
 
-- (IBAction) onAddPatient:(id)sender
+- (IBAction) onCancel:(id)sender
+{
+    [self remove];
+}
+
+- (IBAction) onSavePatient:(id)sender
 {
     if (mPatientDb!=nil) {
         long largetRowId = [mPatientDb getLargestRowId];
@@ -134,25 +152,25 @@
         patient.zipCode = [mZipCode stringValue];
         if (![self stringIsNilOrEmpty:[mStreet stringValue]]) {
             if (![self stringIsNilOrEmpty:[mHouseNumber stringValue]])
-                patient.address = [NSString stringWithFormat:@"%@, %@", [mStreet stringValue], [mHouseNumber stringValue]];
+                patient.postalAddress = [NSString stringWithFormat:@"%@, %@", [mStreet stringValue], [mHouseNumber stringValue]];
             else
-                patient.address = [NSString stringWithFormat:@"%@", [mStreet stringValue]];
+                patient.postalAddress = [NSString stringWithFormat:@"%@", [mStreet stringValue]];
         }
         patient.gender = mFemale ? @"woman" : @"man";
         patient.weightKg = [mWeight_kg intValue];
         patient.heightCm = [mHeight_cm intValue];
         patient.country = [mCountry stringValue];
-        patient.phone = [mPhone stringValue];
-        patient.email = [mEmail stringValue];
+        patient.phoneNumber = [mPhone stringValue];
+        patient.emailAddress = [mEmail stringValue];
         
         if ([self validateFields:patient])
             [mPatientDb insertEntry:patient];
     }
 }
 
-- (IBAction) onEditPatient:(id)sender
+- (IBAction) onNewPatient:(id)sender
 {
-    
+    [self resetAllFields];
 }
 
 - (IBAction) onDeletePatient:(id)sender
@@ -160,9 +178,14 @@
     
 }
 
-- (IBAction) onCancel:(id)sender
+- (IBAction) onShowContacts:(id)sender
 {
-    [self remove];
+    [self resetAllFields];
+    
+    MLContacts *contacts = [[MLContacts alloc] init];
+    mArrayOfPatients = [contacts getAllContacts];
+    
+    [mTableView reloadData];
 }
 
 - (void) show:(NSWindow *)window
@@ -185,6 +208,10 @@
     // Start modal session
     mModalSession = [NSApp beginModalSessionForWindow:mPanel];
     [NSApp runModalSession:mModalSession];
+    
+    // File mTableView
+    mArrayOfPatients = [mPatientDb getAllPatients];
+    [mTableView reloadData];
 }
 
 - (void) remove
@@ -200,7 +227,9 @@
  */
 - (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
 {
-    return [nameArray count];
+    if (mArrayOfPatients!=nil)
+        return [mArrayOfPatients count];
+    return 0;
 }
 
 /**
@@ -209,8 +238,55 @@
 - (NSView *) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-    cellView.textField.stringValue = nameArray[row];
-    return cellView;
+    if (mArrayOfPatients!=nil) {
+        MLPatient *p = mArrayOfPatients[row];
+        NSString *cellStr = [NSString stringWithFormat:@"%@ %@", p.familyName, p.givenName];
+        cellView.textField.stringValue = cellStr;
+        return cellView;
+    }
+    return nil;
+}
+
+- (void) tableViewSelectionDidChange: (NSNotification *)notification
+{
+    if ([notification object] == mTableView) {
+        NSInteger row = [[notification object] selectedRow];
+        NSTableRowView *rowView = [mTableView rowViewAtRow:row makeIfNecessary:NO];
+        MLPatient *p = mArrayOfPatients[row];
+        if (p.familyName!=nil)
+            [mFamilyName setStringValue:p.familyName];
+        if (p.givenName!=nil)
+            [mGivenName setStringValue:p.givenName];
+        if (p.birthDate!=nil)
+            [mBirthDate setStringValue:p.birthDate];
+        if (p.city!=nil)
+            [mCity setStringValue:p.city];
+        if (p.zipCode!=nil)
+            [mZipCode setStringValue:p.zipCode];
+        if (p.weightKg>0)
+            [mWeight_kg setStringValue:[NSString stringWithFormat:@"%d", p.weightKg]];
+        if (p.heightCm>0)
+            [mHeight_cm setStringValue:[NSString stringWithFormat:@"%d", p.heightCm]];
+        if (p.phoneNumber!=nil)
+            [mPhone setStringValue:p.phoneNumber];
+        if (p.country!=nil)
+            [mCity setStringValue:p.city];
+        if (p.postalAddress!=nil) {
+            NSArray* address = [p.postalAddress componentsSeparatedByString:@","];
+            if ([address count]>0) {
+                [mStreet setStringValue:address[0]];
+                if ([address count]>1) {
+                    [mHouseNumber setStringValue:address[1]];
+                }
+            }
+        }
+        if (p.emailAddress!=nil)
+            [mEmail setStringValue:p.emailAddress];
+        if (p.phoneNumber!=nil)
+            [mPhone setStringValue:p.phoneNumber];
+        
+        [rowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
+    }
 }
 
 @end

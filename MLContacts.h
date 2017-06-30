@@ -26,8 +26,6 @@
 
 @interface MLContacts : NSObject
 
-@property (nonatomic, strong) NSMutableArray *groupOfContacts;
-
-- (void) getAllContacts;
+- (NSArray *) getAllContacts;
 
 @end

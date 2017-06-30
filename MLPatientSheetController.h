@@ -45,10 +45,11 @@
 }
 
 - (IBAction) onSelectGender:(id)sender;
-- (IBAction) onAddPatient:(id)sender;
-- (IBAction) onEditPatient:(id)sender;
-- (IBAction) onDeletePatient:(id)sender;
 - (IBAction) onCancel:(id)sender;
+- (IBAction) onSavePatient:(id)sender;
+- (IBAction) onNewPatient:(id)sender;
+- (IBAction) onDeletePatient:(id)sender;
+- (IBAction) onShowContacts:(id)sender;
 
 - (void) show:(NSWindow *)window;
 - (void) remove;

@@ -36,8 +36,8 @@
 @property (atomic, copy) NSString *zipCode;
 @property (atomic, copy) NSString *city;
 @property (atomic, copy) NSString *country;
-@property (atomic, copy) NSString *address;
-@property (atomic, copy) NSString *phone;
-@property (atomic, copy) NSString *email;
+@property (atomic, copy) NSString *postalAddress;
+@property (atomic, copy) NSString *phoneNumber;
+@property (atomic, copy) NSString *emailAddress;
 
 @end

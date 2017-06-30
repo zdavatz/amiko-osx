@@ -30,6 +30,7 @@
 - (BOOL) insertEntry:(MLPatient *)patient;
 - (BOOL) modifyEntry:(MLPatient *)patient;
 - (BOOL) deleteEntry:(MLPatient *)patient;
+- (NSArray *) getAllPatients;
 - (NSInteger) getNumPatients;
 - (long) getLargestRowId;
 
