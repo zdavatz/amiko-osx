@@ -39,5 +39,6 @@
 @synthesize postalAddress;
 @synthesize phoneNumber;
 @synthesize emailAddress;
+@synthesize databaseType;
 
 @end

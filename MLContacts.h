@@ -27,5 +27,6 @@
 @interface MLContacts : NSObject
 
 - (NSArray *) getAllContacts;
+- (NSArray *) addAllContactsToArray:(NSMutableArray *)arrayOfContacts;
 
 @end

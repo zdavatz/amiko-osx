@@ -23,6 +23,10 @@
 
 #import <Foundation/Foundation.h>
 
+enum database_t {
+    eLocal=0, eAddressBook=1
+};
+
 @interface MLPatient : NSObject
 
 @property (atomic, assign) long rowId;
@@ -39,5 +43,6 @@
 @property (atomic, copy) NSString *postalAddress;
 @property (atomic, copy) NSString *phoneNumber;
 @property (atomic, copy) NSString *emailAddress;
+@property (atomic, assign) enum database_t databaseType;
 
 @end

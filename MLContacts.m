@@ -32,7 +32,14 @@
 - (NSArray *) getAllContacts
 {
     groupOfContacts = [@[] mutableCopy];
+
+    [self addAllContactsToArray:groupOfContacts];
     
+    return groupOfContacts;
+}
+
+- (NSArray *) addAllContactsToArray:(NSMutableArray *)arrayOfContacts
+{
     CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
     if (status == CNAuthorizationStatusDenied) {
         NSLog(@"This app was refused permissions to contacts.");
@@ -61,23 +68,45 @@
                                                     MLPatient *patient = [[MLPatient alloc] init];
                                                     patient.familyName = contact.familyName;
                                                     patient.givenName = contact.givenName;
+                                                    // Postal address
+                                                    patient.postalAddress = @"";
+                                                    patient.zipCode = @"";
+                                                    patient.city = @"";
+                                                    patient.country = @"";
+                                                    if ([contact.postalAddresses count]>0) {
+                                                        CNPostalAddress *pa = [contact.postalAddresses[0] value];
+                                                        patient.postalAddress = pa.street;
+                                                        patient.zipCode = pa.postalCode;
+                                                        patient.city = pa.city;
+                                                        patient.country = pa.country;
+                                                    }
+                                                    // Email address
+                                                    patient.emailAddress = @"";
+                                                    if ([contact.emailAddresses count]>0)
+                                                        patient.emailAddress = [contact.emailAddresses[0] value];
+                                                    // Birthdate
                                                     patient.birthDate = @"";
-                                                    patient.phoneNumber = @"";  
                                                     if (contact.birthday.year>1900)
                                                         patient.birthDate = [NSString stringWithFormat:@"%ld-%ld-%ld", contact.birthday.day, contact.birthday.month, contact.birthday.year];
+                                                    // Phone number
+                                                    patient.phoneNumber = @"";
                                                     if ([contact.phoneNumbers count]>0)
                                                         patient.phoneNumber = [[contact.phoneNumbers[0] value] stringValue];
-                                                    if ([patient.familyName length]>0 && [patient.givenName length]>0)
-                                                        [groupOfContacts addObject:patient];
+                                                    // Add only if patients names are meaningful
+                                                    if ([patient.familyName length]>0 && [patient.givenName length]>0) {
+                                                        patient.databaseType = eAddressBook;
+                                                        [arrayOfContacts addObject:patient];
+                                                    }
                                                 }
                                             }];
         // Sort alphabetically
-        if ([groupOfContacts count]>0) {
+        if ([arrayOfContacts count]>0) {
             NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"familyName" ascending:YES];
-            [groupOfContacts sortUsingDescriptors:[NSArray arrayWithObject:nameSort]];
+            [arrayOfContacts sortUsingDescriptors:[NSArray arrayWithObject:nameSort]];
         }
     }
-    return groupOfContacts;
+    
+    return arrayOfContacts;
 }
 
 @end

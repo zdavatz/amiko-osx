@@ -33,19 +33,26 @@
     MLPatientDBAdapter *mPatientDb;
     NSModalSession mModalSession;
     NSArray *mArrayOfPatients;
+    NSMutableArray *mFilteredArrayOfPatients;
     BOOL mFemale;
+    BOOL mABContactsVisible;    // These are the contacts in the address book
+    BOOL mSearchFiltered;
 }
 
 - (id) init
 {
-    mArrayOfPatients = nil;
-
+    mArrayOfPatients = [[NSArray alloc] init];;
+    mFilteredArrayOfPatients = [[NSMutableArray alloc] init];
+    mSearchFiltered = FALSE;
+    
     // Open patient DB
     mPatientDb = [[MLPatientDBAdapter alloc] init];
     if (![mPatientDb openDatabase:@"patient_db"]) {
         NSLog(@"Could not open patient DB!");
         mPatientDb = nil;
     }
+    
+    mABContactsVisible = FALSE;
     
     if (self = [super init]) {
         return self;
@@ -67,9 +74,8 @@
     [mZipCode setStringValue:@""];
     [mWeight_kg setStringValue:@""];
     [mHeight_cm setStringValue:@""];
+    [mPostalAddress setStringValue:@""];
     [mZipCode setStringValue:@""];
-    [mStreet setStringValue:@""];
-    [mHouseNumber setStringValue:@""];
     [mCity setStringValue:@""];
     [mCountry setStringValue:@""];
     [mPhone setStringValue:@""];
@@ -83,10 +89,9 @@
     mFamilyName.backgroundColor = [NSColor whiteColor];
     mGivenName.backgroundColor = [NSColor whiteColor];
     mBirthDate.backgroundColor = [NSColor whiteColor];
+    mPostalAddress.backgroundColor = [NSColor whiteColor];
     mCity.backgroundColor = [NSColor whiteColor];
     mZipCode.backgroundColor = [NSColor whiteColor];
-    mStreet.backgroundColor = [NSColor whiteColor];
-    mHouseNumber.backgroundColor = [NSColor whiteColor];
     mGender.backgroundColor = [NSColor whiteColor];
     
     if ([self stringIsNilOrEmpty:patient.familyName]) {
@@ -110,8 +115,7 @@
         valid = FALSE;
     }
     if ([self stringIsNilOrEmpty:patient.postalAddress]) {
-        mStreet.backgroundColor = [NSColor lightRed];
-        mHouseNumber.backgroundColor = [NSColor lightRed];
+        mPostalAddress.backgroundColor = [NSColor lightRed];
         valid = FALSE;
     }
     if ([self stringIsNilOrEmpty:patient.gender]) {
@@ -120,6 +124,27 @@
     }
     
     return valid;
+}
+
+- (IBAction) onSearchDatabase:(id)sender
+{
+    NSString *searchKey = [mSearchKey stringValue];
+    [mFilteredArrayOfPatients removeAllObjects];
+    if (![self stringIsNilOrEmpty:searchKey]) {
+        for (MLPatient *p in mArrayOfPatients) {
+            if ([p.familyName hasPrefix:searchKey] || [p.givenName hasPrefix:searchKey]) {
+                [mFilteredArrayOfPatients addObject:p];
+            }
+        }
+    }
+    if (mFilteredArrayOfPatients!=nil && [mFilteredArrayOfPatients count]>0) {
+        mSearchFiltered = TRUE;
+        [self setNumPatients:[mFilteredArrayOfPatients count]];
+    } else {
+        [self setNumPatients:[mArrayOfPatients count]];
+        mSearchFiltered = FALSE;
+    }
+    [mTableView reloadData];
 }
 
 - (IBAction) onSelectGender:(id)sender
@@ -150,12 +175,7 @@
         patient.birthDate = [mBirthDate stringValue];
         patient.city = [mCity stringValue];
         patient.zipCode = [mZipCode stringValue];
-        if (![self stringIsNilOrEmpty:[mStreet stringValue]]) {
-            if (![self stringIsNilOrEmpty:[mHouseNumber stringValue]])
-                patient.postalAddress = [NSString stringWithFormat:@"%@, %@", [mStreet stringValue], [mHouseNumber stringValue]];
-            else
-                patient.postalAddress = [NSString stringWithFormat:@"%@", [mStreet stringValue]];
-        }
+        patient.postalAddress = [mPostalAddress stringValue];
         patient.gender = mFemale ? @"woman" : @"man";
         patient.weightKg = [mWeight_kg intValue];
         patient.heightCm = [mHeight_cm intValue];
@@ -181,11 +201,21 @@
 - (IBAction) onShowContacts:(id)sender
 {
     [self resetAllFields];
+
+    if (mABContactsVisible==NO) {
+        MLContacts *contacts = [[MLContacts alloc] init];
+        // Retrieves contacts from address book
+        mArrayOfPatients = [contacts getAllContacts];
+        [mTableView reloadData];
+        mABContactsVisible = YES;
+    } else {
+        // Retrieves contacts from local patient database
+        mArrayOfPatients = [mPatientDb getAllPatients];
+        [mTableView reloadData];
+        mABContactsVisible = NO;
+    }
     
-    MLContacts *contacts = [[MLContacts alloc] init];
-    mArrayOfPatients = [contacts getAllContacts];
-    
-    [mTableView reloadData];
+    [self setNumPatients:[mArrayOfPatients count]];
 }
 
 - (void) show:(NSWindow *)window
@@ -209,9 +239,10 @@
     mModalSession = [NSApp beginModalSessionForWindow:mPanel];
     [NSApp runModalSession:mModalSession];
     
-    // File mTableView
+    // Retrieves contacts from local patient database
     mArrayOfPatients = [mPatientDb getAllPatients];
     [mTableView reloadData];
+    [self setNumPatients:[mArrayOfPatients count]];
 }
 
 - (void) remove
@@ -222,13 +253,28 @@
     [mPanel close];
 }
 
+- (void) setNumPatients:(NSInteger)numPatients
+{
+    if (numPatients>1) {
+        [mNumPatients setStringValue:[NSString stringWithFormat:@"%ld Einträge", numPatients]];
+    } else if (numPatients==1) {
+        [mNumPatients setStringValue:@"1 Eintrag"];
+    } else {
+        [mNumPatients setStringValue:@"kein Eintrag"];
+    }
+}
+
 /**
  - NSTableViewDataSource -
  */
 - (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
 {
-    if (mArrayOfPatients!=nil)
+    if (mSearchFiltered) {
+        return [mFilteredArrayOfPatients count];
+    }
+    if (mArrayOfPatients!=nil) {
         return [mArrayOfPatients count];
+    }
     return 0;
 }
 
@@ -239,9 +285,19 @@
 {
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
     if (mArrayOfPatients!=nil) {
-        MLPatient *p = mArrayOfPatients[row];
+        MLPatient *p = nil;
+        if (mSearchFiltered) {
+            p = mFilteredArrayOfPatients[row];
+        } else {
+            p = mArrayOfPatients[row];
+        }
         NSString *cellStr = [NSString stringWithFormat:@"%@ %@", p.familyName, p.givenName];
         cellView.textField.stringValue = cellStr;
+        if (p.databaseType==eAddressBook) {
+            cellView.textField.textColor = [NSColor grayColor];
+        } else {
+            cellView.textField.textColor = [NSColor blackColor];
+        }
         return cellView;
     }
     return nil;
@@ -271,15 +327,8 @@
             [mPhone setStringValue:p.phoneNumber];
         if (p.country!=nil)
             [mCity setStringValue:p.city];
-        if (p.postalAddress!=nil) {
-            NSArray* address = [p.postalAddress componentsSeparatedByString:@","];
-            if ([address count]>0) {
-                [mStreet setStringValue:address[0]];
-                if ([address count]>1) {
-                    [mHouseNumber setStringValue:address[1]];
-                }
-            }
-        }
+        if (p.postalAddress!=nil)
+            [mPostalAddress setStringValue:p.postalAddress];
         if (p.emailAddress!=nil)
             [mEmail setStringValue:p.emailAddress];
         if (p.phoneNumber!=nil)

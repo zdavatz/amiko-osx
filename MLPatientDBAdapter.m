@@ -200,6 +200,7 @@ static NSString *DATABASE_COLUMNS = nil;
     patient.postalAddress = (NSString *)[cursor objectAtIndex:12];
     patient.phoneNumber = (NSString *)[cursor objectAtIndex:13];
     patient.emailAddress = (NSString *)[cursor objectAtIndex:14];
+    patient.databaseType = eLocal;
     
     return patient;
 }

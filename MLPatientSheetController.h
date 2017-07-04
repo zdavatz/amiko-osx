@@ -28,6 +28,8 @@
     @private
     IBOutlet NSWindow *mPanel;
     IBOutlet NSTableView *mTableView;
+    IBOutlet NSTextField *mNumPatients;
+    IBOutlet NSSearchField *mSearchKey;
     // References to text fields in table
     IBOutlet NSTextField *mFamilyName;
     IBOutlet NSTextField *mGivenName;
@@ -36,8 +38,7 @@
     IBOutlet NSTextField *mWeight_kg;
     IBOutlet NSTextField *mHeight_cm;
     IBOutlet NSTextField *mZipCode;
-    IBOutlet NSTextField *mStreet;
-    IBOutlet NSTextField *mHouseNumber;
+    IBOutlet NSTextField *mPostalAddress;
     IBOutlet NSTextField *mCity;
     IBOutlet NSTextField *mCountry;
     IBOutlet NSTextField *mPhone;
