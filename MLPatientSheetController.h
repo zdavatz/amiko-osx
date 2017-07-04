@@ -29,6 +29,7 @@
     IBOutlet NSWindow *mPanel;
     IBOutlet NSTableView *mTableView;
     IBOutlet NSTextField *mNumPatients;
+    IBOutlet NSTextField *mSavedLabel;
     IBOutlet NSSearchField *mSearchKey;
     // References to text fields in table
     IBOutlet NSTextField *mFamilyName;

@@ -19,6 +19,7 @@
                 <outlet property="mPanel" destination="QvC-M9-y7g" id="QX3-Tb-tKJ"/>
                 <outlet property="mPhone" destination="hZw-Gw-EME" id="hik-nh-Oc7"/>
                 <outlet property="mPostalAddress" destination="Cy8-w1-8bz" id="h0P-3i-7Z4"/>
+                <outlet property="mSavedLabel" destination="W5m-It-N0f" id="f2S-Wa-ATC"/>
                 <outlet property="mSearchKey" destination="bRe-gg-1GQ" id="nHv-xI-rsr"/>
                 <outlet property="mTableView" destination="2um-EN-YQx" id="Pax-Nd-aUm"/>
                 <outlet property="mWeight_kg" destination="Sa7-S2-K02" id="3TX-zT-adv"/>
@@ -318,6 +319,15 @@ Gw
                                             <action selector="onCancel:" target="-2" id="vtg-kK-DHB"/>
                                         </connections>
                                     </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5m-It-N0f">
+                                        <rect key="frame" x="35" y="77" width="221" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save..." id="k2s-uB-Bsu">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                             </customView>
                             <customView fixedFrame="YES" id="2VC-JB-JPI">

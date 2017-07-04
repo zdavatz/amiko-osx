@@ -80,6 +80,8 @@
     [mCountry setStringValue:@""];
     [mPhone setStringValue:@""];
     [mEmail setStringValue:@""];
+    
+    [mSavedLabel setStringValue:@""];
 }
 
 - (BOOL) validateFields:(MLPatient *)patient
@@ -183,8 +185,10 @@
         patient.phoneNumber = [mPhone stringValue];
         patient.emailAddress = [mEmail stringValue];
         
-        if ([self validateFields:patient])
+        if ([self validateFields:patient]) {
             [mPatientDb insertEntry:patient];
+            [mSavedLabel setStringValue:@"Erfolgreich gespeichert!"];
+        }
     }
 }
 
@@ -243,6 +247,7 @@
     mArrayOfPatients = [mPatientDb getAllPatients];
     [mTableView reloadData];
     [self setNumPatients:[mArrayOfPatients count]];
+    [mSavedLabel setStringValue:@""];
 }
 
 - (void) remove
@@ -335,6 +340,8 @@
             [mPhone setStringValue:p.phoneNumber];
         
         [rowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
+
+        [mSavedLabel setStringValue:@""];
     }
 }
 
