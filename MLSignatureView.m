@@ -104,4 +104,9 @@
     [signaturePath stroke];
 }
 
+- (NSBezierPath *) getSignature
+{
+    return signaturePath;
+}
+
 @end

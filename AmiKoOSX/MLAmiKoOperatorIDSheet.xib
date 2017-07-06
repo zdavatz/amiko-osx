@@ -8,10 +8,16 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MLOperatorIDSheetController">
             <connections>
+                <outlet property="mCity" destination="Vlh-fh-uA4" id="Sjf-5o-8AF"/>
+                <outlet property="mEmailAddress" destination="Lb7-i4-X4I" id="pah-Y7-Snc"/>
                 <outlet property="mFamilyName" destination="GAJ-iw-ZgX" id="hTo-H9-AFm"/>
                 <outlet property="mGivenName" destination="y4Q-T7-wK0" id="eZe-O8-R9c"/>
                 <outlet property="mPanel" destination="QvC-M9-y7g" id="bCk-U5-HFY"/>
+                <outlet property="mPhoneNumber" destination="gp5-ZA-rL6" id="gwA-Bh-P5p"/>
+                <outlet property="mPostalAddress" destination="r8G-p7-SpE" id="Fqy-Ko-dQw"/>
                 <outlet property="mSignView" destination="bfB-Bo-aGK" id="yCO-c0-CFJ"/>
+                <outlet property="mTitle" destination="GiL-qb-Q0q" id="QOT-eK-Eec"/>
+                <outlet property="mZipCode" destination="Own-HF-YWZ" id="zNY-fK-rDx"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -202,7 +208,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zVb-v4-DPF">
-                                <rect key="frame" x="369" y="140" width="13" height="21"/>
+                                <rect key="frame" x="369" y="142" width="11" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="lfk-7x-pwS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

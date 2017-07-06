@@ -185,8 +185,8 @@
         }
     }
     if (mFilteredArrayOfPatients!=nil && [mFilteredArrayOfPatients count]>0) {
-        mSearchFiltered = TRUE;
         [self setNumPatients:[mFilteredArrayOfPatients count]];
+        mSearchFiltered = TRUE;
     } else {
         [self setNumPatients:[mArrayOfPatients count]];
         mSearchFiltered = FALSE;
@@ -235,6 +235,8 @@
                 patient.uniqueId = mPatientUUID;
             }            
             [mPatientDb insertEntry:patient];
+            mSearchFiltered = FALSE;
+            [mSearchKey setStringValue:@""];
             [self updateAmiKoAddressBookTableView];
             [mNotification setStringValue:@"Kontakt wurde im AmiKo Addressbuch gespeichert."];
         }
@@ -257,6 +259,24 @@
         } else {
             p = mArrayOfPatients[row];
         }
+        
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Kontakt löschen?"];
+        [alert setInformativeText:@"Wollen Sie diesen Kontakt wirklich aus dem AmiKo Adressbuch löschen?"];
+        [alert setAlertStyle:NSInformationalAlertStyle];        
+        [alert beginSheetModalForWindow:[self window]
+                          modalDelegate:self
+                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                            contextInfo:(__bridge void * _Nullable)(p)];
+    }
+}
+
+- (void) alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode==NSAlertSecondButtonReturn) {
+        MLPatient *p = (__bridge MLPatient *)contextInfo;
         if ([mPatientDb deleteEntry:p]) {
             [self updateAmiKoAddressBookTableView];
             [mNotification setStringValue:@"Kontakt wurde vom AmiKo Addressbuch gelöscht."];
@@ -267,7 +287,9 @@
 - (IBAction) onShowContacts:(id)sender
 {
     [self resetAllFields];
-
+    mSearchFiltered = FALSE;
+    [mSearchKey setStringValue:@""];
+    
     if (mABContactsVisible==NO) {
         MLContacts *contacts = [[MLContacts alloc] init];
         // Retrieves contacts from address book

@@ -31,15 +31,15 @@
     IBOutlet NSWindow *mPanel;
     IBOutlet MLSignatureView *mSignView;
     // Reference to text fields
+    IBOutlet NSTextField *mTitle;
     IBOutlet NSTextField *mFamilyName;
     IBOutlet NSTextField *mGivenName;
-    IBOutlet NSTextField *mTitles;
     IBOutlet NSTextField *mPostalAddress;
     IBOutlet NSTextField *mZipCode;
     IBOutlet NSTextField *mCity;
     IBOutlet NSTextField *mCountry;
-    IBOutlet NSTextField *mPhone;
-    IBOutlet NSTextField *mEmail;
+    IBOutlet NSTextField *mPhoneNumber;
+    IBOutlet NSTextField *mEmailAddress;
 }
 
 - (IBAction) onCancel:(id)sender;
