@@ -44,7 +44,6 @@
 - (IBAction) onCancelPressed:(id)sender
 {
     mDownloadInProgress = NO;
-    
 }
 
 - (void) show:(NSWindow *)window

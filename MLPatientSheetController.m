@@ -21,8 +21,9 @@
  
  ------------------------------------------------------------------------ */
 
-#import "MLPatientDBAdapter.h"
 #import "MLPatientSheetController.h"
+
+#import "MLPatientDBAdapter.h"
 #import "MLMainWindowController.h"
 #import "MLContacts.h"
 #import "MLColors.h"
@@ -42,21 +43,21 @@
 
 - (id) init
 {
-    mArrayOfPatients = [[NSArray alloc] init];;
-    mFilteredArrayOfPatients = [[NSMutableArray alloc] init];
-    mSearchFiltered = FALSE;
-    mPatientUUID = nil;
-    
-    // Open patient DB
-    mPatientDb = [[MLPatientDBAdapter alloc] init];
-    if (![mPatientDb openDatabase:@"patient_db"]) {
-        NSLog(@"Could not open patient DB!");
-        mPatientDb = nil;
-    }
-    
-    mABContactsVisible = FALSE;
-    
     if (self = [super init]) {
+        mArrayOfPatients = [[NSArray alloc] init];;
+        mFilteredArrayOfPatients = [[NSMutableArray alloc] init];
+        mSearchFiltered = FALSE;
+        mPatientUUID = nil;
+        
+        // Open patient DB
+        mPatientDb = [[MLPatientDBAdapter alloc] init];
+        if (![mPatientDb openDatabase:@"patient_db"]) {
+            NSLog(@"Could not open patient DB!");
+            mPatientDb = nil;
+        }
+        
+        mABContactsVisible = FALSE;
+        
         return self;
     }    
     return nil;
@@ -164,6 +165,14 @@
     return valid;
 }
 
+- (void) updateAmiKoAddressBookTableView
+{
+    mArrayOfPatients = [mPatientDb getAllPatients];
+    mABContactsVisible=NO;
+    [mTableView reloadData];
+    [self setNumPatients:[mArrayOfPatients count]];
+}
+
 - (IBAction) onSearchDatabase:(id)sender
 {
     NSString *searchKey = [mSearchKey stringValue];
@@ -226,10 +235,8 @@
                 patient.uniqueId = mPatientUUID;
             }            
             [mPatientDb insertEntry:patient];
-            mArrayOfPatients = [mPatientDb getAllPatients];
-            [mTableView reloadData];
-            mABContactsVisible=NO;
-            [mNotification setStringValue:@"Kontakt wurde in der Amiko-DB gespeichert!"];
+            [self updateAmiKoAddressBookTableView];
+            [mNotification setStringValue:@"Kontakt wurde im AmiKo Addressbuch gespeichert."];
         }
     }
 }
@@ -237,6 +244,7 @@
 - (IBAction) onNewPatient:(id)sender
 {
     [self resetAllFields];
+    [self updateAmiKoAddressBookTableView];
 }
 
 - (IBAction) onDeletePatient:(id)sender
@@ -250,10 +258,8 @@
             p = mArrayOfPatients[row];
         }
         if ([mPatientDb deleteEntry:p]) {
-            mArrayOfPatients = [mPatientDb getAllPatients];
-            [mTableView reloadData];
-            mABContactsVisible=NO;
-            [mNotification setStringValue:@"Kontakt wurde von der Amiko-DB gelöscht!"];
+            [self updateAmiKoAddressBookTableView];
+            [mNotification setStringValue:@"Kontakt wurde vom AmiKo Addressbuch gelöscht."];
         }
     }
 }
@@ -268,21 +274,18 @@
         mArrayOfPatients = [contacts getAllContacts];
         [mTableView reloadData];
         mABContactsVisible = YES;
+        [self setNumPatients:[mArrayOfPatients count]];
     } else {
         // Retrieves contacts from local patient database
-        mArrayOfPatients = [mPatientDb getAllPatients];
-        [mTableView reloadData];
-        mABContactsVisible = NO;
+        [self updateAmiKoAddressBookTableView];
     }
-    
-    [self setNumPatients:[mArrayOfPatients count]];
 }
 
 - (void) show:(NSWindow *)window
 {
     if (!mPanel) {
         // Load xib file
-        [NSBundle loadNibNamed:@"MLPatientSheet" owner:self];
+        [NSBundle loadNibNamed:@"MLAmiKoPatientSheet" owner:self];
         // Set formatters
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -300,9 +303,7 @@
     [NSApp runModalSession:mModalSession];
     
     // Retrieves contacts from local patient database
-    mArrayOfPatients = [mPatientDb getAllPatients];
-    [mTableView reloadData];
-    [self setNumPatients:[mArrayOfPatients count]];
+    [self updateAmiKoAddressBookTableView];
     [mNotification setStringValue:@""];
 }
 
@@ -317,9 +318,9 @@
 - (void) setNumPatients:(NSInteger)numPatients
 {
     if (mABContactsVisible==YES) {
-        [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch (%ld)", numPatients]];
+        [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch Mac (%ld)", numPatients]];
     } else {
-        [mNumPatients setStringValue:[NSString stringWithFormat:@"Amiko-DB (%ld)", numPatients]];        
+        [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch AmiKo (%ld)", numPatients]];
     }
 }
 

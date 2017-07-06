@@ -33,7 +33,9 @@
 #import "MLCustomTableRowView.h"
 #import "MLCustomView.h"
 #import "MLCustomURLConnection.h"
+
 #import "MLPatientSheetController.h"
+#import "MLOperatorIDSheetController.h"
 
 #import "MLUtilities.h"
 
@@ -109,6 +111,7 @@ static BOOL mSearchInteractions = false;
     MLFullTextSearch *mFullTextSearch;
     
     MLPatientSheetController *mPatientSheet;
+    MLOperatorIDSheetController *mOperatorIDSheet;
     
     NSMutableArray *medi;
     NSMutableArray *favoriteKeyData;
@@ -879,21 +882,25 @@ static BOOL mSearchInteractions = false;
     }];
 }
 
-- (IBAction) managePatients:(id)sender
-{
-    if (!mPatientSheet)
-        mPatientSheet = [[MLPatientSheetController alloc] init];
-    [mPatientSheet show:[NSApp mainWindow]];
-}
-
 - (IBAction) newPrescription:(id)sender
 {
 
 }
 
+- (IBAction) managePatients:(id)sender
+{
+    if (!mPatientSheet) {
+        mPatientSheet = [[MLPatientSheetController alloc] init];
+    }
+    [mPatientSheet show:[NSApp mainWindow]];
+}
+
 - (IBAction) setOperatorIdentity:(id)sender
 {
-
+    if (!mOperatorIDSheet) {
+        mOperatorIDSheet = [[MLOperatorIDSheetController alloc] init];
+    }
+    [mOperatorIDSheet show:[NSApp mainWindow]];
 }
 
 - (IBAction) showAboutFile:(id)sender

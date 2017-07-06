@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AmiKoOSX/MLMainWindowController.m"
-            timestampString = "520326609.328968"
+            timestampString = "521029116.331198"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1624"
-            endingLineNumber = "1624"
+            startingLineNumber = "1631"
+            endingLineNumber = "1631"
             landmarkName = "-createJSBridge"
             landmarkType = "7">
          </BreakpointContent>

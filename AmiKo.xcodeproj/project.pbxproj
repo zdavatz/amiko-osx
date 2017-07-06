@@ -117,12 +117,12 @@
 		D5962E8E1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
 		D5962E8F1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
 		D5962E901EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
-		D5962E921EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
-		D5962E931EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
-		D5962E941EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
-		D5962E951EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
-		D5962E961EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
-		D5962E971EFBBFF20034B964 /* MLPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */; };
+		D5962E921EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */; };
+		D5962E931EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */; };
+		D5962E941EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */; };
+		D5962E951EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */; };
+		D5962E961EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */; };
+		D5962E971EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */; };
 		D5962E9A1EFBC2720034B964 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
 		D5962E9B1EFBC2720034B964 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
 		D5962E9C1EFBC2720034B964 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
@@ -217,6 +217,24 @@
 		D5C5C51B1F0C276E00DF851F /* checked_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5171F0C276E00DF851F /* checked_icon.png */; };
 		D5C5C51C1F0C276E00DF851F /* checked_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5171F0C276E00DF851F /* checked_icon.png */; };
 		D5C5C51D1F0C276E00DF851F /* checked_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5171F0C276E00DF851F /* checked_icon.png */; };
+		D5C5C5211F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5201F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib */; };
+		D5C5C5221F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5201F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib */; };
+		D5C5C5231F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5201F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib */; };
+		D5C5C5241F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5201F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib */; };
+		D5C5C5251F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5201F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib */; };
+		D5C5C5261F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5201F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib */; };
+		D5C5C5291F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
+		D5C5C52A1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
+		D5C5C52B1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
+		D5C5C52C1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
+		D5C5C52D1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
+		D5C5C52E1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
+		D5C5C5311F0E5A1D00DF851F /* MLSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */; };
+		D5C5C5321F0E5A1D00DF851F /* MLSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */; };
+		D5C5C5331F0E5A1D00DF851F /* MLSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */; };
+		D5C5C5341F0E5A1D00DF851F /* MLSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */; };
+		D5C5C5351F0E5A1D00DF851F /* MLSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */; };
+		D5C5C5361F0E5A1D00DF851F /* MLSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */; };
 		D5C6440D1EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
 		D5C6440E1EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
 		D5C6440F1EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
@@ -518,7 +536,7 @@
 		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D5962E891EF9C4160034B964 /* MLCustomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomScrollView.h; sourceTree = "<group>"; };
 		D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomScrollView.m; sourceTree = "<group>"; };
-		D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLPatientSheet.xib; sourceTree = "<group>"; };
+		D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKoPatientSheet.xib; sourceTree = "<group>"; };
 		D5962E981EFBC25C0034B964 /* MLPatientSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPatientSheetController.h; sourceTree = "<group>"; };
 		D5962E991EFBC2720034B964 /* MLPatientSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPatientSheetController.m; sourceTree = "<group>"; };
 		D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPatientDBAdapter.m; sourceTree = "<group>"; };
@@ -548,6 +566,11 @@
 		D5C5C50F1F06416800DF851F /* MLContacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLContacts.m; sourceTree = "<group>"; };
 		D5C5C5161F06417800DF851F /* MLContacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLContacts.h; sourceTree = "<group>"; };
 		D5C5C5171F0C276E00DF851F /* checked_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked_icon.png; sourceTree = "<group>"; };
+		D5C5C5201F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKoOperatorIDSheet.xib; sourceTree = "<group>"; };
+		D5C5C5271F0E357F00DF851F /* MLOperatorIDSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLOperatorIDSheetController.h; sourceTree = "<group>"; };
+		D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLOperatorIDSheetController.m; sourceTree = "<group>"; };
+		D5C5C52F1F0E59F300DF851F /* MLSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSignatureView.h; sourceTree = "<group>"; };
+		D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSignatureView.m; sourceTree = "<group>"; };
 		D5C6440B1EB32F5300438E6F /* MLInteractionsCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInteractionsCart.h; sourceTree = "<group>"; };
 		D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInteractionsCart.m; sourceTree = "<group>"; };
 		D5C6441B1EB3360300438E6F /* MLFullTextSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFullTextSearch.h; sourceTree = "<group>"; };
@@ -705,7 +728,6 @@
 		D53ABBF2189521D400C4525C /* SubWindows */ = {
 			isa = PBXGroup;
 			children = (
-				D5962E911EFBBFF20034B964 /* MLPatientSheet.xib */,
 				D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */,
 			);
 			name = SubWindows;
@@ -764,6 +786,22 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		D5C5C51E1F0E33F000DF851F /* PatientSheets */ = {
+			isa = PBXGroup;
+			children = (
+				D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */,
+			);
+			name = PatientSheets;
+			sourceTree = "<group>";
+		};
+		D5C5C51F1F0E34CF00DF851F /* OperatorIDSheets */ = {
+			isa = PBXGroup;
+			children = (
+				D5C5C5201F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib */,
+			);
+			name = OperatorIDSheets;
+			sourceTree = "<group>";
+		};
 		D5C644231EB3366200438E6F /* FullTextSearch */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +845,8 @@
 				D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */,
 				D5962E891EF9C4160034B964 /* MLCustomScrollView.h */,
 				D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */,
+				D5C5C52F1F0E59F300DF851F /* MLSignatureView.h */,
+				D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -849,6 +889,8 @@
 				D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */,
 				D5962E981EFBC25C0034B964 /* MLPatientSheetController.h */,
 				D5962E991EFBC2720034B964 /* MLPatientSheetController.m */,
+				D5C5C5271F0E357F00DF851F /* MLOperatorIDSheetController.h */,
+				D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1020,6 +1062,8 @@
 		D5EBC6A617C913B900EBEF39 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D5C5C51F1F0E34CF00DF851F /* OperatorIDSheets */,
+				D5C5C51E1F0E33F000DF851F /* PatientSheets */,
 				D53ABBF2189521D400C4525C /* SubWindows */,
 				D5E91B3717E39C1100B66B27 /* MainNibs */,
 				D5E91B3817E39C3700B66B27 /* MainWindows */,
@@ -1242,7 +1286,7 @@
 				D5E731A21B335229007771D7 /* AmiKoDesitinMainMenu.xib in Resources */,
 				D5E731381B33480A007771D7 /* amiko_stylesheet.css in Resources */,
 				D5E731391B33480A007771D7 /* 28-star-gy.png in Resources */,
-				D5962E961EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
+				D5962E961EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */,
 				D5E7313A1B33480A007771D7 /* interactions@2x.png in Resources */,
 				D5E7319E1B3351BA007771D7 /* MLAmiKoDesitinMainWindow.xib in Resources */,
 				D5E7313B1B33480A007771D7 /* 218-trash2.png in Resources */,
@@ -1261,6 +1305,7 @@
 				D5E731481B33480A007771D7 /* amiko_db_full_idx_de.db in Resources */,
 				D5C6443E1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5E7314A1B33480A007771D7 /* amiko_report_de.html in Resources */,
+				D5C5C5251F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D5E7314C1B33480A007771D7 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E7314D1B33480A007771D7 /* AmiKo.entitlements in Resources */,
 				D5E7314E1B33480A007771D7 /* 216-compose.png in Resources */,
@@ -1282,8 +1327,9 @@
 				D5E731A41B335234007771D7 /* CoMedDesitinMainMenu.xib in Resources */,
 				D5E7317B1B334829007771D7 /* 28-star-ye.png in Resources */,
 				D5C6443F1EB37A6F00438E6F /* main_callbacks.js in Resources */,
+				D5C5C5261F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D5E7317C1B334829007771D7 /* amiko_stylesheet.css in Resources */,
-				D5962E971EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
+				D5962E971EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */,
 				D5E7317D1B334829007771D7 /* interactions_css.css in Resources */,
 				D5E7317E1B334829007771D7 /* interactions@2x.png in Resources */,
 				D5E7317F1B334829007771D7 /* 28-star-gy.png in Resources */,
@@ -1317,7 +1363,8 @@
 				D5DD5763193B49260094244E /* 217-trash.png in Resources */,
 				D5E91B6C17E5E24000B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B6D17E5E24000B66B27 /* Credits-de.rtf in Resources */,
-				D5962E941EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
+				D5962E941EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */,
+				D5C5C5231F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D538777C1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5DD5768193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5E91B7017E5E24000B66B27 /* amiko_stylesheet.css in Resources */,
@@ -1358,7 +1405,7 @@
 				D5E91B9F17E5E8E400B66B27 /* amiko_stylesheet.css in Resources */,
 				D5C6443A1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */,
-				D5962E921EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
+				D5962E921EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */,
 				D538777E1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5DD5766193B4EB40094244E /* 218-trash2.png in Resources */,
 				D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */,
@@ -1377,6 +1424,7 @@
 				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				D59774471AA8F6FC001AAC31 /* AmiKoMainMenu.xib in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
+				D5C5C5211F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */,
 				D52A0D7A17EDC60E003BF272 /* AmiKo.entitlements in Resources */,
 				D5A22508193FB19F0078FEFF /* 216-compose.png in Resources */,
@@ -1398,8 +1446,9 @@
 				D5AE31831B37203E006BC60E /* desitin.iconset in Resources */,
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5C6443B1EB37A6F00438E6F /* main_callbacks.js in Resources */,
+				D5C5C5221F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
-				D5962E931EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
+				D5962E931EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */,
 				D538777F1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
 				D5DD5767193B4EB40094244E /* 218-trash2.png in Resources */,
@@ -1433,7 +1482,7 @@
 				D5DD5764193B49260094244E /* 217-trash.png in Resources */,
 				D5EBC68B17C912FF00EBEF39 /* InfoPlist.strings in Resources */,
 				D538777D1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
-				D5962E951EFBBFF20034B964 /* MLPatientSheet.xib in Resources */,
+				D5962E951EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */,
 				D5DD5769193B4EB40094244E /* 218-trash2.png in Resources */,
 				D5DD576C193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
@@ -1454,6 +1503,7 @@
 				D5B0105F1927C451007BE838 /* interactions_css.css in Resources */,
 				D5E91B5617E4C6C100B66B27 /* Credits-fr.rtf in Resources */,
 				D5AB1776180886810050DC12 /* 28-star-ye.png in Resources */,
+				D5C5C5241F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D5E91BFC17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
 				D52795FA1EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				D5C5C51B1F0C276E00DF851F /* checked_icon.png in Resources */,
@@ -1471,6 +1521,7 @@
 				D5AAB3F21EB20F4100002F47 /* MLFullTextDBAdapter.m in Sources */,
 				D5E731121B33480A007771D7 /* unzip.c in Sources */,
 				D5E731131B33480A007771D7 /* main.m in Sources */,
+				D5C5C52D1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */,
 				D5E731141B33480A007771D7 /* MLAppDelegate.m in Sources */,
 				D5E731151B33480A007771D7 /* MLMainWindowController.m in Sources */,
 				D5E731161B33480A007771D7 /* MLProgressSheetController.m in Sources */,
@@ -1497,6 +1548,7 @@
 				D5E731251B33480A007771D7 /* ioapi.c in Sources */,
 				D52EA4B01EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E731261B33480A007771D7 /* MLItemCellView.m in Sources */,
+				D5C5C5351F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B51EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC101EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				D5962E8F1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
@@ -1518,6 +1570,7 @@
 				D5AAB3F31EB20F4100002F47 /* MLFullTextDBAdapter.m in Sources */,
 				D5E731561B334829007771D7 /* unzip.c in Sources */,
 				D5E731571B334829007771D7 /* main.m in Sources */,
+				D5C5C52E1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */,
 				D5E731581B334829007771D7 /* MLAppDelegate.m in Sources */,
 				D5E731591B334829007771D7 /* MLMainWindowController.m in Sources */,
 				D5E7315A1B334829007771D7 /* MLProgressSheetController.m in Sources */,
@@ -1544,6 +1597,7 @@
 				D5E731691B334829007771D7 /* ioapi.c in Sources */,
 				D52EA4B11EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E7316A1B334829007771D7 /* MLItemCellView.m in Sources */,
+				D5C5C5361F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B61EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC111EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				D5962E901EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
@@ -1565,6 +1619,7 @@
 				D5AAB3F01EB20F4000002F47 /* MLFullTextDBAdapter.m in Sources */,
 				D545C8FA18A2CE0900491511 /* unzip.c in Sources */,
 				D5E91B5917E5E24000B66B27 /* main.m in Sources */,
+				D5C5C52B1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */,
 				D5E91B5A17E5E24000B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B5B17E5E24000B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF9189522AD00C4525C /* MLProgressSheetController.m in Sources */,
@@ -1591,6 +1646,7 @@
 				D545C8F418A2CE0200491511 /* ioapi.c in Sources */,
 				D52EA4AE1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E91B6117E5E24000B66B27 /* MLItemCellView.m in Sources */,
+				D5C5C5331F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B31EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0E1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				D5962E8D1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
@@ -1612,6 +1668,7 @@
 				D5AAB3EE1EB20F3400002F47 /* MLFullTextDBAdapter.m in Sources */,
 				D545C8E61898527C00491511 /* unzip.c in Sources */,
 				D5E91B8817E5E8E400B66B27 /* main.m in Sources */,
+				D5C5C5291F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */,
 				D5E91B8917E5E8E400B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
@@ -1638,6 +1695,7 @@
 				D545C8E41898527C00491511 /* ioapi.c in Sources */,
 				D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E91B9017E5E8E400B66B27 /* MLItemCellView.m in Sources */,
+				D5C5C5311F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0C1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
@@ -1659,6 +1717,7 @@
 				D5AAB3EF1EB20F3F00002F47 /* MLFullTextDBAdapter.m in Sources */,
 				D545C8F918A2CE0800491511 /* unzip.c in Sources */,
 				D5E91BB717E5E8E800B66B27 /* main.m in Sources */,
+				D5C5C52A1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */,
 				D5E91BB817E5E8E800B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */,
 				D545C8EE18A2CDD100491511 /* MLProgressSheetController.m in Sources */,
@@ -1685,6 +1744,7 @@
 				D545C8F318A2CE0100491511 /* ioapi.c in Sources */,
 				D52EA4AD1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
+				D5C5C5321F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
@@ -1706,6 +1766,7 @@
 				D5AAB3F11EB20F4000002F47 /* MLFullTextDBAdapter.m in Sources */,
 				D545C8FB18A2CE0900491511 /* unzip.c in Sources */,
 				D5EBC68D17C912FF00EBEF39 /* main.m in Sources */,
+				D5C5C52C1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */,
 				D5EBC69417C912FF00EBEF39 /* MLAppDelegate.m in Sources */,
 				D5EBC6A417C913B100EBEF39 /* MLMainWindowController.m in Sources */,
 				D545C8EF18A2CDD200491511 /* MLProgressSheetController.m in Sources */,
@@ -1732,6 +1793,7 @@
 				D545C8F518A2CE0200491511 /* ioapi.c in Sources */,
 				D52EA4AF1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5EBC6C517CBBCEA00EBEF39 /* MLItemCellView.m in Sources */,
+				D5C5C5341F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B41EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0F1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				D5962E8E1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
