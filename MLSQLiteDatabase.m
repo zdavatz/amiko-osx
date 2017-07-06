@@ -218,6 +218,17 @@
     return TRUE;
 }
 
+- (BOOL) updateRowIntoTable:(NSString *)table forExpressions:(NSString *)expressions andConditions:(NSString *)conditions
+{
+    char *errMsg;
+    NSString *query = [NSString stringWithFormat:@"update %@ set %@ where %@", table, expressions, conditions];
+    if (sqlite3_exec(database, [query UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
+        NSLog(@"Failed to replace record into table %@ with query %@: %s", table, query, errMsg);
+        return FALSE;
+    }
+    return TRUE;
+}
+
 - (BOOL) deleteRowFromTable:(NSString *)table withRowId:(long)rowId
 {
     char *errMsg;

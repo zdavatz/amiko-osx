@@ -34,6 +34,7 @@
     NSModalSession mModalSession;
     NSArray *mArrayOfPatients;
     NSMutableArray *mFilteredArrayOfPatients;
+    NSString *mPatientUUID;
     BOOL mFemale;
     BOOL mABContactsVisible;    // These are the contacts in the address book
     BOOL mSearchFiltered;
@@ -44,6 +45,7 @@
     mArrayOfPatients = [[NSArray alloc] init];;
     mFilteredArrayOfPatients = [[NSMutableArray alloc] init];
     mSearchFiltered = FALSE;
+    mPatientUUID = nil;
     
     // Open patient DB
     mPatientDb = [[MLPatientDBAdapter alloc] init];
@@ -81,7 +83,41 @@
     [mPhone setStringValue:@""];
     [mEmail setStringValue:@""];
     
-    [mSavedLabel setStringValue:@""];
+    mPatientUUID = nil;
+    
+    [mNotification setStringValue:@""];
+}
+
+- (void) setAllFields:(MLPatient *)p
+{
+    if (p.familyName!=nil)
+        [mFamilyName setStringValue:p.familyName];
+    if (p.givenName!=nil)
+        [mGivenName setStringValue:p.givenName];
+    if (p.birthDate!=nil)
+        [mBirthDate setStringValue:p.birthDate];
+    if (p.city!=nil)
+        [mCity setStringValue:p.city];
+    if (p.zipCode!=nil)
+        [mZipCode setStringValue:p.zipCode];
+    if (p.weightKg>0)
+        [mWeight_kg setStringValue:[NSString stringWithFormat:@"%d", p.weightKg]];
+    if (p.heightCm>0)
+        [mHeight_cm setStringValue:[NSString stringWithFormat:@"%d", p.heightCm]];
+    if (p.phoneNumber!=nil)
+        [mPhone setStringValue:p.phoneNumber];
+    if (p.country!=nil)
+        [mCity setStringValue:p.city];
+    if (p.country!=nil)
+        [mCountry setStringValue:p.country];
+    if (p.postalAddress!=nil)
+        [mPostalAddress setStringValue:p.postalAddress];
+    if (p.emailAddress!=nil)
+        [mEmail setStringValue:p.emailAddress];
+    if (p.phoneNumber!=nil)
+        [mPhone setStringValue:p.phoneNumber];
+    if (p.uniqueId!=nil)
+        mPatientUUID = p.uniqueId;
 }
 
 - (BOOL) validateFields:(MLPatient *)patient
@@ -186,8 +222,14 @@
         patient.emailAddress = [mEmail stringValue];
         
         if ([self validateFields:patient]) {
+            if (mPatientUUID!=nil && [mPatientUUID length]>0) {
+                patient.uniqueId = mPatientUUID;
+            }            
             [mPatientDb insertEntry:patient];
-            [mSavedLabel setStringValue:@"Erfolgreich gespeichert!"];
+            mArrayOfPatients = [mPatientDb getAllPatients];
+            [mTableView reloadData];
+            mABContactsVisible=NO;
+            [mNotification setStringValue:@"Kontakt wurde in der Amiko-DB gespeichert!"];
         }
     }
 }
@@ -199,7 +241,21 @@
 
 - (IBAction) onDeletePatient:(id)sender
 {
-    
+    NSInteger row = [mTableView selectedRow];
+    if (mABContactsVisible==NO) {
+        MLPatient *p = nil;
+        if (mSearchFiltered) {
+            p = mFilteredArrayOfPatients[row];
+        } else {
+            p = mArrayOfPatients[row];
+        }
+        if ([mPatientDb deleteEntry:p]) {
+            mArrayOfPatients = [mPatientDb getAllPatients];
+            [mTableView reloadData];
+            mABContactsVisible=NO;
+            [mNotification setStringValue:@"Kontakt wurde von der Amiko-DB gelöscht!"];
+        }
+    }
 }
 
 - (IBAction) onShowContacts:(id)sender
@@ -247,7 +303,7 @@
     mArrayOfPatients = [mPatientDb getAllPatients];
     [mTableView reloadData];
     [self setNumPatients:[mArrayOfPatients count]];
-    [mSavedLabel setStringValue:@""];
+    [mNotification setStringValue:@""];
 }
 
 - (void) remove
@@ -260,13 +316,22 @@
 
 - (void) setNumPatients:(NSInteger)numPatients
 {
-    if (numPatients>1) {
-        [mNumPatients setStringValue:[NSString stringWithFormat:@"%ld Einträge", numPatients]];
-    } else if (numPatients==1) {
-        [mNumPatients setStringValue:@"1 Eintrag"];
+    if (mABContactsVisible==YES) {
+        [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch (%ld)", numPatients]];
     } else {
-        [mNumPatients setStringValue:@"kein Eintrag"];
+        [mNumPatients setStringValue:[NSString stringWithFormat:@"Amiko-DB (%ld)", numPatients]];        
     }
+}
+
+- (MLPatient *) getContactAtRow:(NSInteger)row
+{
+    if (mSearchFiltered) {
+        return mFilteredArrayOfPatients[row];
+    }
+    if (mArrayOfPatients!=nil) {
+        return mArrayOfPatients[row];
+    }
+    return nil;
 }
 
 /**
@@ -289,13 +354,8 @@
 - (NSView *) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-    if (mArrayOfPatients!=nil) {
-        MLPatient *p = nil;
-        if (mSearchFiltered) {
-            p = mFilteredArrayOfPatients[row];
-        } else {
-            p = mArrayOfPatients[row];
-        }
+    MLPatient *p = [self getContactAtRow:row];
+    if (p!=nil) {
         NSString *cellStr = [NSString stringWithFormat:@"%@ %@", p.familyName, p.givenName];
         cellView.textField.stringValue = cellStr;
         if (p.databaseType==eAddressBook) {
@@ -310,38 +370,19 @@
 
 - (void) tableViewSelectionDidChange: (NSNotification *)notification
 {
-    if ([notification object] == mTableView) {
+    if ([notification object] == mTableView) {       
         NSInteger row = [[notification object] selectedRow];
         NSTableRowView *rowView = [mTableView rowViewAtRow:row makeIfNecessary:NO];
-        MLPatient *p = mArrayOfPatients[row];
-        if (p.familyName!=nil)
-            [mFamilyName setStringValue:p.familyName];
-        if (p.givenName!=nil)
-            [mGivenName setStringValue:p.givenName];
-        if (p.birthDate!=nil)
-            [mBirthDate setStringValue:p.birthDate];
-        if (p.city!=nil)
-            [mCity setStringValue:p.city];
-        if (p.zipCode!=nil)
-            [mZipCode setStringValue:p.zipCode];
-        if (p.weightKg>0)
-            [mWeight_kg setStringValue:[NSString stringWithFormat:@"%d", p.weightKg]];
-        if (p.heightCm>0)
-            [mHeight_cm setStringValue:[NSString stringWithFormat:@"%d", p.heightCm]];
-        if (p.phoneNumber!=nil)
-            [mPhone setStringValue:p.phoneNumber];
-        if (p.country!=nil)
-            [mCity setStringValue:p.city];
-        if (p.postalAddress!=nil)
-            [mPostalAddress setStringValue:p.postalAddress];
-        if (p.emailAddress!=nil)
-            [mEmail setStringValue:p.emailAddress];
-        if (p.phoneNumber!=nil)
-            [mPhone setStringValue:p.phoneNumber];
+        
+        MLPatient *p = [self getContactAtRow:row];
+        mPatientUUID = p.uniqueId;
+        
+        [self resetAllFields];
+        [self setAllFields:p];
         
         [rowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
 
-        [mSavedLabel setStringValue:@""];
+        [mNotification setStringValue:@""];
     }
 }
 

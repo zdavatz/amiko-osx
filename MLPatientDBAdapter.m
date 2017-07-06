@@ -123,9 +123,20 @@ static NSString *DATABASE_COLUMNS = nil;
         NSUUID *uuid = [NSUUID UUID];
         NSString *uuidStr = [uuid UUIDString];
         NSString *timeStr = [self currentTime];
-        NSString *columnStr = [NSString stringWithFormat:@"(%@)", ALL_COLUMNS];
-        NSString *valueStr = [NSString stringWithFormat:@"(%ld, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %d, %d, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", patient.rowId, timeStr, uuidStr, patient.familyName, patient.givenName, patient.birthDate, patient.gender, patient.weightKg, patient.heightCm, patient.zipCode, patient.city, patient.country, patient.postalAddress, patient.phoneNumber, patient.emailAddress];
-        [myPatientDb insertRowIntoTable:@"patients" forColumns:columnStr andValues:valueStr];
+        // If UUID exist re-use it!
+        if (patient.uniqueId!=nil && [patient.uniqueId length]>0) {
+            uuidStr = patient.uniqueId;
+            NSString *expressions = [NSString stringWithFormat:@"%@=%d, %@=%d, %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\"", KEY_WEIGHT_KG, patient.weightKg, KEY_HEIGHT_CM, patient.heightCm, KEY_ZIPCODE, patient.zipCode, KEY_CITY, patient.city, KEY_COUNTRY, patient.country, KEY_ADDRESS, patient.postalAddress, KEY_PHONE, patient.phoneNumber, KEY_EMAIL, patient.emailAddress];
+            NSString *conditions = [NSString stringWithFormat:@"%@=\"%@\"", KEY_UID, patient.uniqueId];
+            // Update existing entry
+            [myPatientDb updateRowIntoTable:@"patients" forExpressions:expressions andConditions:conditions];
+        } else {
+            NSString *columnStr = [NSString stringWithFormat:@"(%@)", ALL_COLUMNS];
+            NSString *valueStr = [NSString stringWithFormat:@"(%ld, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %d, %d, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", patient.rowId, timeStr, uuidStr, patient.familyName, patient.givenName, patient.birthDate, patient.gender, patient.weightKg, patient.heightCm, patient.zipCode, patient.city, patient.country, patient.postalAddress, patient.phoneNumber, patient.emailAddress];
+            // Insert new entry into DB
+            [myPatientDb insertRowIntoTable:@"patients" forColumns:columnStr andValues:valueStr];
+        }
+        
         return TRUE;
     }
     return FALSE;
@@ -142,6 +153,7 @@ static NSString *DATABASE_COLUMNS = nil;
 - (BOOL) deleteEntry:(MLPatient *)patient
 {
     if (myPatientDb) {
+        [myPatientDb deleteRowFromTable:@"patients" withRowId:patient.rowId];
         return TRUE;
     }
     return FALSE;
@@ -157,6 +169,9 @@ static NSString *DATABASE_COLUMNS = nil;
         for (NSArray *cursor in results) {
             [listOfPatients addObject:[self cursorToPatient:cursor]];
         }
+        // Sort alphabetically
+        NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"familyName" ascending:YES];
+        [listOfPatients sortUsingDescriptors:[NSArray arrayWithObject:nameSort]];
     }
     
     return listOfPatients;
@@ -188,6 +203,7 @@ static NSString *DATABASE_COLUMNS = nil;
     MLPatient *patient = [[MLPatient alloc] init];
     
     patient.rowId = [[cursor objectAtIndex:0] longLongValue];
+    patient.uniqueId = (NSString *)[cursor objectAtIndex:2];
     patient.familyName = (NSString *)[cursor objectAtIndex:3];
     patient.givenName = (NSString *)[cursor objectAtIndex:4];
     patient.birthDate = (NSString *)[cursor objectAtIndex:5];
