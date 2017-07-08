@@ -68,8 +68,21 @@
     return !(str && str.length);
 }
 
+- (void) resetFieldsColors
+{
+    mFamilyName.backgroundColor = [NSColor whiteColor];
+    mGivenName.backgroundColor = [NSColor whiteColor];
+    mBirthDate.backgroundColor = [NSColor whiteColor];
+    mPostalAddress.backgroundColor = [NSColor whiteColor];
+    mCity.backgroundColor = [NSColor whiteColor];
+    mZipCode.backgroundColor = [NSColor whiteColor];
+    mGender.backgroundColor = [NSColor whiteColor];
+}
+
 - (void) resetAllFields
 {
+    [self resetFieldsColors];
+    
     [mFamilyName setStringValue:@""];
     [mGivenName setStringValue:@""];
     [mBirthDate setStringValue:@""];
@@ -121,17 +134,33 @@
         mPatientUUID = p.uniqueId;
 }
 
+- (MLPatient *) getAllFields
+{
+    long largetRowId = [mPatientDb getLargestRowId];
+    
+    MLPatient *patient = [[MLPatient alloc] init];
+    patient.rowId = largetRowId + 1;
+    patient.familyName = [mFamilyName stringValue];
+    patient.givenName = [mGivenName stringValue];
+    patient.birthDate = [mBirthDate stringValue];
+    patient.city = [mCity stringValue];
+    patient.zipCode = [mZipCode stringValue];
+    patient.postalAddress = [mPostalAddress stringValue];
+    patient.gender = mFemale ? @"woman" : @"man";
+    patient.weightKg = [mWeight_kg intValue];
+    patient.heightCm = [mHeight_cm intValue];
+    patient.country = [mCountry stringValue];
+    patient.phoneNumber = [mPhone stringValue];
+    patient.emailAddress = [mEmail stringValue];
+    
+    return patient;
+}
+
 - (BOOL) validateFields:(MLPatient *)patient
 {
     BOOL valid = TRUE;
-
-    mFamilyName.backgroundColor = [NSColor whiteColor];
-    mGivenName.backgroundColor = [NSColor whiteColor];
-    mBirthDate.backgroundColor = [NSColor whiteColor];
-    mPostalAddress.backgroundColor = [NSColor whiteColor];
-    mCity.backgroundColor = [NSColor whiteColor];
-    mZipCode.backgroundColor = [NSColor whiteColor];
-    mGender.backgroundColor = [NSColor whiteColor];
+    
+    [self resetFieldsColors];
     
     if ([self stringIsNilOrEmpty:patient.familyName]) {
         mFamilyName.backgroundColor = [NSColor lightRed];
@@ -145,16 +174,16 @@
         mBirthDate.backgroundColor = [NSColor lightRed];
         valid = FALSE;
     }
+    if ([self stringIsNilOrEmpty:patient.postalAddress]) {
+        mPostalAddress.backgroundColor = [NSColor lightRed];
+        valid = FALSE;
+    }
     if ([self stringIsNilOrEmpty:patient.city]) {
         mCity.backgroundColor = [NSColor lightRed];
         valid = FALSE;
     }
     if ([self stringIsNilOrEmpty:patient.zipCode]) {
         mZipCode.backgroundColor = [NSColor lightRed];
-        valid = FALSE;
-    }
-    if ([self stringIsNilOrEmpty:patient.postalAddress]) {
-        mPostalAddress.backgroundColor = [NSColor lightRed];
         valid = FALSE;
     }
     if ([self stringIsNilOrEmpty:patient.gender]) {
@@ -179,7 +208,8 @@
     [mFilteredArrayOfPatients removeAllObjects];
     if (![self stringIsNilOrEmpty:searchKey]) {
         for (MLPatient *p in mArrayOfPatients) {
-            if ([p.familyName hasPrefix:searchKey] || [p.givenName hasPrefix:searchKey]) {
+            if ([p.familyName hasPrefix:searchKey] || [p.givenName hasPrefix:searchKey] ||
+                [p.postalAddress hasPrefix:searchKey] || [p.zipCode hasPrefix:searchKey]) {
                 [mFilteredArrayOfPatients addObject:p];
             }
         }
@@ -213,28 +243,12 @@
 - (IBAction) onSavePatient:(id)sender
 {
     if (mPatientDb!=nil) {
-        long largetRowId = [mPatientDb getLargestRowId];
-
-        MLPatient *patient = [[MLPatient alloc] init];
-        patient.rowId = largetRowId + 1;
-        patient.familyName = [mFamilyName stringValue];
-        patient.givenName = [mGivenName stringValue];
-        patient.birthDate = [mBirthDate stringValue];
-        patient.city = [mCity stringValue];
-        patient.zipCode = [mZipCode stringValue];
-        patient.postalAddress = [mPostalAddress stringValue];
-        patient.gender = mFemale ? @"woman" : @"man";
-        patient.weightKg = [mWeight_kg intValue];
-        patient.heightCm = [mHeight_cm intValue];
-        patient.country = [mCountry stringValue];
-        patient.phoneNumber = [mPhone stringValue];
-        patient.emailAddress = [mEmail stringValue];
-        
+        MLPatient *patient = [self getAllFields];
         if ([self validateFields:patient]) {
             if (mPatientUUID!=nil && [mPatientUUID length]>0) {
                 patient.uniqueId = mPatientUUID;
-            }            
-            [mPatientDb insertEntry:patient];
+            }
+            mPatientUUID = [mPatientDb insertEntry:patient];
             mSearchFiltered = FALSE;
             [mSearchKey setStringValue:@""];
             [self updateAmiKoAddressBookTableView];

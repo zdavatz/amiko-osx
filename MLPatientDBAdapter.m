@@ -116,7 +116,7 @@ static NSString *DATABASE_COLUMNS = nil;
     return [dateFormatter stringFromDate:[NSDate date]];
 }
 
-- (BOOL) insertEntry:(MLPatient *)patient
+- (NSString *) insertEntry:(MLPatient *)patient
 {
     if (myPatientDb) {
         // Creates and returns a new UUID with RFC 4122 version 4 random bytes
@@ -137,9 +137,9 @@ static NSString *DATABASE_COLUMNS = nil;
             [myPatientDb insertRowIntoTable:@"patients" forColumns:columnStr andValues:valueStr];
         }
         
-        return TRUE;
+        return uuidStr;
     }
-    return FALSE;
+    return nil;
 }
 
 - (BOOL) modifyEntry:(MLPatient *)patient

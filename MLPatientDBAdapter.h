@@ -27,7 +27,7 @@
 
 - (BOOL) openDatabase:(NSString *)dbName;
 - (void) closeDatabase;
-- (BOOL) insertEntry:(MLPatient *)patient;
+- (NSString *) insertEntry:(MLPatient *)patient;
 - (BOOL) modifyEntry:(MLPatient *)patient;
 - (BOOL) deleteEntry:(MLPatient *)patient;
 - (NSArray *) getAllPatients;
