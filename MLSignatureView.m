@@ -25,7 +25,8 @@
 
 @implementation MLSignatureView
 {
-    NSBezierPath *signaturePath;
+    NSBezierPath *_signaturePath;
+    NSImage *_image;
 }
 
 /*
@@ -45,19 +46,30 @@
 - (void) awakeFromNib
 {
     // Create a path object
-    signaturePath = [NSBezierPath bezierPath];
-    signaturePath.lineWidth = 2.0f;
-    signaturePath.lineCapStyle = NSRoundLineCapStyle;
-    
+    _signaturePath = [NSBezierPath bezierPath];
+    _signaturePath.lineWidth = 2.0f;
+    _signaturePath.lineCapStyle = NSRoundLineCapStyle;
+
     [self clear];
 }
 
 - (void) clear
 {
-    if (signaturePath!=nil) {
-        [signaturePath removeAllPoints];
+    if (_image!=nil) {
+        _image = nil;
+        [self setNeedsLayout:YES];
+    }
+    if (_signaturePath!=nil) {
+        [_signaturePath removeAllPoints];
         [self setNeedsDisplay:YES];
     }
+}
+
+- (void) setSignature:(NSImage *)image
+{
+    _image = image;
+    _layer.contents = (id)_image;
+    _layer.contentsGravity = kCAGravityResizeAspect;
 }
 
 - (BOOL) acceptsFirstResponder
@@ -79,7 +91,7 @@
     loc.x -= [self frame].origin.x;
     loc.y -= [self frame].origin.y;
     
-    [signaturePath moveToPoint:loc];
+    [_signaturePath moveToPoint:loc];
 }
 
 - (void) mouseDragged:(NSEvent *)theEvent
@@ -88,10 +100,9 @@
     loc.x -= [self frame].origin.x;
     loc.y -= [self frame].origin.y;
     
-    [signaturePath lineToPoint:loc];
+    [_signaturePath lineToPoint:loc];
     [self setNeedsDisplay:YES];
 }
-
 
 - (void) drawRect:(NSRect)rect
 {
@@ -101,12 +112,20 @@
     [background fill];
     
     [[NSColor blackColor] set];
-    [signaturePath stroke];
+    [_signaturePath stroke];
 }
 
-- (NSBezierPath *) getSignature
+- (NSData *) getSignaturePNG
 {
-    return signaturePath;
+    NSData *data = [self dataWithPDFInsideRect:[self bounds]];
+    NSImage *img = [[NSImage alloc] initWithData:data];
+    NSData *tiffPresentation = [img TIFFRepresentation];
+    NSBitmapImageRep *rep = [NSBitmapImageRep imageRepWithData:tiffPresentation];
+
+    NSDictionary* props = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0] forKey:NSImageCompressionFactor];
+    NSData *pngData = [rep representationUsingType:NSPNGFileType properties:props];
+    
+    return pngData;
 }
 
 @end

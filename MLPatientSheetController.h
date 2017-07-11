@@ -55,6 +55,5 @@
 
 - (void) show:(NSWindow *)window;
 - (void) remove;
-- (BOOL) stringIsNilOrEmpty:(NSString*)str;
 
 @end

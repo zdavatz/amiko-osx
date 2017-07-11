@@ -44,6 +44,7 @@
 
 - (IBAction) onCancel:(id)sender;
 - (IBAction) onSaveOperator:(id)sender;
+- (IBAction) onLoadSignature:(id)sender;
 - (IBAction) onClearSignature:(id)sender;
 
 - (void) show:(NSWindow *)window;

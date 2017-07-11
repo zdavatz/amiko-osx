@@ -26,5 +26,7 @@
 @interface MLSignatureView : NSView
 
 - (void) clear;
+- (void) setSignature:(NSImage *)image;
+- (NSData *) getSignaturePNG;
 
 @end
