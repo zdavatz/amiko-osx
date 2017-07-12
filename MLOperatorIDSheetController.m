@@ -215,8 +215,6 @@
         mPhoneNumber.stringValue = phoneNumber;
     if ([self stringIsNilOrEmpty:emailAddress]==NO)
         mEmailAddress.stringValue = emailAddress;
-    
-    [self validateFields];
 }
 
 @end

@@ -49,7 +49,9 @@
     _signaturePath = [NSBezierPath bezierPath];
     _signaturePath.lineWidth = 2.0f;
     _signaturePath.lineCapStyle = NSRoundLineCapStyle;
-
+    
+    [self setWantsLayer:YES];
+    
     [self clear];
 }
 
@@ -68,8 +70,7 @@
 - (void) setSignature:(NSImage *)image
 {
     _image = image;
-    _layer.contents = (id)_image;
-    _layer.contentsGravity = kCAGravityResizeAspect;
+    [self setNeedsDisplay:YES];
 }
 
 - (BOOL) acceptsFirstResponder
@@ -110,9 +111,34 @@
     NSBezierPath *background = [NSBezierPath bezierPathWithRect:bounds];
     [[NSColor whiteColor] set];
     [background fill];
+
+    if (_image!=nil) {
+        // [_image drawInRect:[self bounds]];
+        [self drawInRectAspectFill:_image];
+    }
     
     [[NSColor blackColor] set];
     [_signaturePath stroke];
+}
+
+- (void) drawInRectAspectFill:(NSImage *)img
+{
+    NSRect recto = [self bounds];
+    CGSize targetSize = recto.size;
+
+    // This fits
+    if (targetSize.width <= CGSizeZero.width && targetSize.height <= CGSizeZero.height ) {
+        return [img drawInRect:recto];
+    }
+    
+    float widthRatio = targetSize.width / img.size.width;
+    float heightRatio = targetSize.height / img.size.height;
+    float scalingFactor = fmin(widthRatio, heightRatio);    // fmax() -> fills space up
+    
+    CGSize newSize = CGSizeMake(img.size.width  * scalingFactor, img.size.height * scalingFactor);
+    CGPoint origin = CGPointMake((targetSize.width - newSize.width)/2, (targetSize.height - newSize.height)/2);
+    
+    return [img drawInRect:CGRectMake(origin.x, origin.y, newSize.width, newSize.height)];
 }
 
 - (NSData *) getSignaturePNG

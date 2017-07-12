@@ -184,18 +184,18 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bJK-AM-sRg">
-                        <rect key="frame" x="28" y="13" width="78" height="32"/>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="47f-ag-4PA">
+                        <rect key="frame" x="321" y="14" width="102" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Laden" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yCN-97-a6m">
+                        <buttonCell key="cell" type="push" title="Speichern" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="V8Z-rM-HDQ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
-Gw
+DQ
 </string>
                         </buttonCell>
                         <connections>
-                            <action selector="onLoadSignature:" target="-2" id="Z3R-BP-aib"/>
+                            <action selector="onSaveOperator:" target="-2" id="q0N-HX-zwd"/>
                         </connections>
                     </button>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bfB-Bo-aGK" customClass="MLSignatureView">
@@ -215,18 +215,18 @@ Gw
                             </button>
                         </subviews>
                     </customView>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="47f-ag-4PA">
-                        <rect key="frame" x="321" y="13" width="102" height="32"/>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bJK-AM-sRg">
+                        <rect key="frame" x="28" y="14" width="173" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Speichern" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="V8Z-rM-HDQ">
+                        <buttonCell key="cell" type="push" title="Unterschrift aus Datei" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yCN-97-a6m">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
-DQ
+Gw
 </string>
                         </buttonCell>
                         <connections>
-                            <action selector="onSaveOperator:" target="-2" id="q0N-HX-zwd"/>
+                            <action selector="onLoadSignature:" target="-2" id="Z3R-BP-aib"/>
                         </connections>
                     </button>
                 </subviews>
