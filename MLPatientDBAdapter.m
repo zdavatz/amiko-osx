@@ -126,7 +126,7 @@ static NSString *DATABASE_COLUMNS = nil;
         // If UUID exist re-use it!
         if (patient.uniqueId!=nil && [patient.uniqueId length]>0) {
             uuidStr = patient.uniqueId;
-            NSString *expressions = [NSString stringWithFormat:@"%@=%d, %@=%d, %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\"", KEY_WEIGHT_KG, patient.weightKg, KEY_HEIGHT_CM, patient.heightCm, KEY_ZIPCODE, patient.zipCode, KEY_CITY, patient.city, KEY_COUNTRY, patient.country, KEY_ADDRESS, patient.postalAddress, KEY_PHONE, patient.phoneNumber, KEY_EMAIL, patient.emailAddress];
+            NSString *expressions = [NSString stringWithFormat:@"%@=%d, %@=%d, %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\"", KEY_WEIGHT_KG, patient.weightKg, KEY_HEIGHT_CM, patient.heightCm, KEY_ZIPCODE, patient.zipCode, KEY_CITY, patient.city, KEY_COUNTRY, patient.country, KEY_ADDRESS, patient.postalAddress, KEY_PHONE, patient.phoneNumber, KEY_EMAIL, patient.emailAddress, KEY_GENDER, patient.gender];
             NSString *conditions = [NSString stringWithFormat:@"%@=\"%@\"", KEY_UID, patient.uniqueId];
             // Update existing entry
             [myPatientDb updateRowIntoTable:@"patients" forExpressions:expressions andConditions:conditions];

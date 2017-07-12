@@ -13,8 +13,10 @@
                 <outlet property="mCountry" destination="SgH-X0-4qn" id="9pe-rh-sqy"/>
                 <outlet property="mEmail" destination="WLA-Fr-sh2" id="NoR-iD-UrG"/>
                 <outlet property="mFamilyName" destination="hwO-vN-ot8" id="Bjd-Xm-zMd"/>
+                <outlet property="mFemaleButton" destination="86M-FT-N7L" id="Wrv-zk-lLv"/>
                 <outlet property="mGivenName" destination="QZr-yp-i4B" id="RwO-Da-a5Q"/>
                 <outlet property="mHeight_cm" destination="TcT-Wj-PPX" id="huA-nN-7aN"/>
+                <outlet property="mMaleButton" destination="TDg-Ge-cLX" id="bNx-ff-lXJ"/>
                 <outlet property="mNotification" destination="W5m-It-N0f" id="orx-c4-MdA"/>
                 <outlet property="mNumPatients" destination="paj-9K-a0r" id="bMt-ff-Uxn"/>
                 <outlet property="mPanel" destination="QvC-M9-y7g" id="QX3-Tb-tKJ"/>
@@ -228,7 +230,7 @@ DQ
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="onSelectGender:" target="-2" id="eZQ-Q5-zG6"/>
+                                            <action selector="onSelectFemale:" target="-2" id="duK-9M-UOo"/>
                                         </connections>
                                     </button>
                                     <button fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="TDg-Ge-cLX">
@@ -239,7 +241,7 @@ DQ
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="onSelectGender:" target="-2" id="eTU-7K-kpp"/>
+                                            <action selector="onSelectMale:" target="-2" id="XJD-YE-Lao"/>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwa-gM-SiD">
@@ -273,7 +275,7 @@ DQ
                                         <rect key="frame" x="344" y="479" width="78" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="* Pflichtfelder" id="Cmt-9g-BWI">
-                                            <font key="font" metaFont="system" size="11"/>
+                                            <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>

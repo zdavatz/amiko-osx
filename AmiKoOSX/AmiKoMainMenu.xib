@@ -122,21 +122,14 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Rezept" id="uhw-HQ-GGx">
+                <menuItem title="Kontakte" id="uhw-HQ-GGx">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Rezept" id="2wd-qf-r9D">
+                    <menu key="submenu" title="Kontakte" id="2wd-qf-r9D">
                         <items>
                             <menuItem title="Patienten verwalten..." id="tsG-5e-hg5">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="managePatients:" target="-1" id="wUp-yB-hoH"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="bQr-f2-yIV"/>
-                            <menuItem title="Rezept erstellen..." id="mSU-TQ-1vk">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="newPrescription:" target="-1" id="ayx-Rn-v6K"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="umh-nI-TRT"/>

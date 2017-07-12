@@ -36,9 +36,9 @@
     NSArray *mArrayOfPatients;
     NSMutableArray *mFilteredArrayOfPatients;
     NSString *mPatientUUID;
-    BOOL mFemale;
     BOOL mABContactsVisible;    // These are the contacts in the address book
     BOOL mSearchFiltered;
+    BOOL mFemale;
 }
 
 - (id) init
@@ -76,7 +76,6 @@
     mPostalAddress.backgroundColor = [NSColor whiteColor];
     mCity.backgroundColor = [NSColor whiteColor];
     mZipCode.backgroundColor = [NSColor whiteColor];
-    mGender.backgroundColor = [NSColor whiteColor];
 }
 
 - (void) resetAllFields
@@ -96,6 +95,8 @@
     [mCountry setStringValue:@""];
     [mPhone setStringValue:@""];
     [mEmail setStringValue:@""];
+    [mFemaleButton setState:NSOnState];
+    [mMaleButton setState:NSOffState];
     
     mPatientUUID = nil;
     
@@ -132,6 +133,17 @@
         [mPhone setStringValue:p.phoneNumber];
     if (p.uniqueId!=nil)
         mPatientUUID = p.uniqueId;
+    if (p.gender!=nil) {
+        if ([p.gender isEqualToString:@"woman"]) {
+            mFemale = TRUE;
+            [mFemaleButton setState:NSOnState];
+            [mMaleButton setState:NSOffState];
+        } else {
+            mFemale = FALSE;
+            [mFemaleButton setState:NSOffState];
+            [mMaleButton setState:NSOnState];
+        }
+    }
 }
 
 - (MLPatient *) getAllFields
@@ -146,12 +158,12 @@
     patient.city = [mCity stringValue];
     patient.zipCode = [mZipCode stringValue];
     patient.postalAddress = [mPostalAddress stringValue];
-    patient.gender = mFemale ? @"woman" : @"man";
     patient.weightKg = [mWeight_kg intValue];
     patient.heightCm = [mHeight_cm intValue];
     patient.country = [mCountry stringValue];
     patient.phoneNumber = [mPhone stringValue];
     patient.emailAddress = [mEmail stringValue];
+    patient.gender = [mFemaleButton state]==NSOnState ? @"woman" : @"man";
     
     return patient;
 }
@@ -184,10 +196,6 @@
     }
     if ([self stringIsNilOrEmpty:patient.zipCode]) {
         mZipCode.backgroundColor = [NSColor lightRed];
-        valid = FALSE;
-    }
-    if ([self stringIsNilOrEmpty:patient.gender]) {
-        mGender.backgroundColor = [NSColor lightRed];
         valid = FALSE;
     }
     
@@ -224,14 +232,21 @@
     [mTableView reloadData];
 }
 
-- (IBAction) onSelectGender:(id)sender
+- (IBAction) onSelectFemale:(id)sender
 {
     if ([sender isKindOfClass:[NSButton class]]) {
-        NSButton *radioButton = (NSButton*)sender;
-        if (radioButton.tag==1)
-            mFemale = TRUE;
-        else if (radioButton.tag==2)
-            mFemale = FALSE;
+        mFemale = TRUE;
+        [mFemaleButton setState:NSOnState];
+        [mMaleButton setState:NSOffState];
+    }
+}
+
+- (IBAction) onSelectMale:(id)sender
+{
+    if ([sender isKindOfClass:[NSButton class]]) {
+        mFemale = FALSE;
+        [mFemaleButton setState:NSOffState];
+        [mMaleButton setState:NSOnState];
     }
 }
 

@@ -35,7 +35,6 @@
     IBOutlet NSTextField *mFamilyName;
     IBOutlet NSTextField *mGivenName;
     IBOutlet NSTextField *mBirthDate;
-    IBOutlet NSTextField *mGender;
     IBOutlet NSTextField *mWeight_kg;
     IBOutlet NSTextField *mHeight_cm;
     IBOutlet NSTextField *mZipCode;
@@ -44,9 +43,12 @@
     IBOutlet NSTextField *mCountry;
     IBOutlet NSTextField *mPhone;
     IBOutlet NSTextField *mEmail;
+    IBOutlet NSButton *mFemaleButton;
+    IBOutlet NSButton *mMaleButton;
 }
 
-- (IBAction) onSelectGender:(id)sender;
+- (IBAction) onSelectFemale:(id)sender;
+- (IBAction) onSelectMale:(id)sender;
 - (IBAction) onCancel:(id)sender;
 - (IBAction) onSavePatient:(id)sender;
 - (IBAction) onNewPatient:(id)sender;

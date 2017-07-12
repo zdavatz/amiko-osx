@@ -205,13 +205,13 @@
                                                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                                         <prototypeCellViews>
                                                                                                             <tableCellView id="gz9-7f-9FE" userLabel="ML Cell Packages View" customClass="MLCellPackagesView">
-                                                                                                                <rect key="frame" x="1" y="1" width="480" height="16"/>
+                                                                                                                <rect key="frame" x="1" y="1" width="477" height="16"/>
                                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                                 <subviews>
                                                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4d-Cn-FJr" userLabel="Packages Text Field">
-                                                                                                                        <rect key="frame" x="-2" y="1" width="484" height="14"/>
+                                                                                                                        <rect key="frame" x="-2" y="1" width="481" height="14"/>
                                                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" usesSingleLineMode="YES" id="NWx-wp-Pr5">
-                                                                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                                                                            <font key="font" metaFont="smallSystem"/>
                                                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                                         </textFieldCell>
@@ -515,6 +515,9 @@
                             <action selector="toolbarAction:" target="-2" id="YSO-vW-idM"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="DB9D82F3-91A3-4489-86D6-E18E5597F74A" label="Rezept 1" paletteLabel="Rezept 1" tag="-1" image="prescription" id="Kkv-pT-r1G" userLabel="Rezept 1"/>
+                    <toolbarItem implicitItemIdentifier="016C1EB7-E505-4D82-855E-25D38EA1BDBF" label="Rezept 2" paletteLabel="Rezept 2" tag="-1" image="prescription" id="vNm-Ts-Mmh" userLabel="Rezept 2"/>
+                    <toolbarItem implicitItemIdentifier="33E11EC7-E652-4486-A4D7-6C9F91960852" label="Rezept 3" paletteLabel="Rezept 3" tag="-1" image="prescription" id="Cm8-iw-5Ik" userLabel="Rezept 3"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="6"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="8">
                         <connections>
@@ -523,16 +526,21 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="4"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="7"/>
-                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="AmiKo" paletteLabel="AmiKo" toolTip="AmiKo" tag="4" image="desitin" id="9">
+                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="AmiKo" paletteLabel="AmiKo" toolTip="AmiKo" tag="5" image="desitin" id="9">
                         <connections>
                             <action selector="showAboutPanel:" target="-2" id="1639"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="57CF2253-354A-4561-86A4-7017F77752D0" label="Rezept" paletteLabel="Rezept" tag="4" image="prescription" selectable="YES" id="rvF-dg-jeo"/>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="10"/>
                     <toolbarItem reference="11"/>
                     <toolbarItem reference="zHs-vk-i8q"/>
+                    <toolbarItem reference="4"/>
+                    <toolbarItem reference="Kkv-pT-r1G"/>
+                    <toolbarItem reference="vNm-Ts-Mmh"/>
+                    <toolbarItem reference="Cm8-iw-5Ik"/>
                     <toolbarItem reference="7"/>
                     <toolbarItem reference="8"/>
                     <toolbarItem reference="9"/>
@@ -553,6 +561,7 @@
         <image name="favorites" width="418.90908813476562" height="418.90908813476562"/>
         <image name="interactions" width="17.130111694335938" height="17.130111694335938"/>
         <image name="maindb" width="121.26316070556641" height="121.26316070556641"/>
+        <image name="prescription" width="51.200000762939453" height="51.200000762939453"/>
         <sound name="Ping"/>
     </resources>
 </document>
