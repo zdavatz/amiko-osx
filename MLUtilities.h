@@ -45,6 +45,7 @@ extern NSString* const APP_ID;
 #endif
 
 @interface MLUtilities : NSObject
++ (void) reportMemory;
 + (NSString *) appOwner;
 + (NSString *) appLanguage;
 + (NSString *) notSpecified;

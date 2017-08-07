@@ -22,12 +22,14 @@
  ------------------------------------------------------------------------ */
 
 #import <Cocoa/Cocoa.h>
+#import "MLMedication.h"
 
 @interface MLItemCellView : NSTableCellView <NSTableViewDelegate, NSTableViewDataSource>
 
 @property (nonatomic, weak) IBOutlet NSButtonCell *favoritesCheckBox;
 @property (nonatomic, weak) IBOutlet NSTableView *packagesView;
 
+@property (atomic) MLMedication *selectedMedi;
 @property (atomic) NSString *packagesStr;
 @property (atomic) NSInteger numPackages;
 

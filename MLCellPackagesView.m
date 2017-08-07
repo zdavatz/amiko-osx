@@ -35,7 +35,7 @@
 /*
  In case you generate the table cell view manually
  */
-- (id) initWithFrame: (NSRect)frame
+- (id) initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -44,12 +44,12 @@
     return self;
 }
 
-- (void) setBackgroundStyle: (NSBackgroundStyle)backgroundStyle
+- (void) setBackgroundStyle:(NSBackgroundStyle)backgroundStyle
 {
     [super setBackgroundStyle:backgroundStyle];
 }
 
-- (void) drawRect: (NSRect)dirtyRect
+- (void) drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
     
@@ -61,7 +61,7 @@
     [self addTrackingArea:trackingArea];
 }
 
-- (void) mouseEntered: (NSEvent *)theEvent
+- (void) mouseEntered:(NSEvent *)theEvent
 {
     if (first == false) {
         saveColor = self.textField.textColor;
@@ -71,7 +71,7 @@
     }
 }
 
-- (void) mouseExited: (NSEvent *)theEvent
+- (void) mouseExited:(NSEvent *)theEvent
 {
     if (first == true) {
         [self.textField setTextColor:saveColor];

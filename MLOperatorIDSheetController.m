@@ -217,4 +217,22 @@
         mEmailAddress.stringValue = emailAddress;
 }
 
+- (NSString *) retrieveIDAsString
+{
+    // Load from user defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *title = [defaults stringForKey:@"title"];
+    NSString *familyName = [defaults stringForKey:@"familyname"];
+    NSString *givenName = [defaults stringForKey:@"givenname"];
+    NSString *postalAddress = [defaults stringForKey:@"postaladdress"];
+    NSString *zipCode = [defaults stringForKey:@"zipcode"];
+    NSString *city = [defaults stringForKey:@"city"];
+    NSString *phoneNumber = [defaults stringForKey:@"phonenumber"];
+    NSString *emailAddress = [defaults stringForKey:@"emailaddress"];
+    
+    NSString* idAsString = [NSString stringWithFormat:@"%@ %@ %@\r\n%@\r\n%@ %@\r\n%@\r\n%@",
+                            title, givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];
+    return idAsString;
+}
+
 @end

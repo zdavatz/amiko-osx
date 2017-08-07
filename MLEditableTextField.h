@@ -2,7 +2,7 @@
  
  Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 21/06/2017.
+ Created on 27/07/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -21,18 +21,8 @@
  
  ------------------------------------------------------------------------ */
 
-#import "MLPatient.h"
+#import <Cocoa/Cocoa.h>
 
-@interface MLPatientDBAdapter : NSObject
-
-- (BOOL) openDatabase:(NSString *)dbName;
-- (void) closeDatabase;
-- (NSString *) insertEntry:(MLPatient *)patient;
-- (BOOL) modifyEntry:(MLPatient *)patient;
-- (BOOL) deleteEntry:(MLPatient *)patient;
-- (NSInteger) getNumPatients;
-- (long) getLargestRowId;
-- (NSArray *) getAllPatients;
-- (NSArray *) getPatientsWithKey:(NSString *)key;
+@interface MLEditableTextField : NSTextField <NSTextFieldDelegate>
 
 @end

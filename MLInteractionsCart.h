@@ -31,6 +31,7 @@
 
 - (NSUInteger) basketSize;
 - (void) updateMedBasket:(NSMutableDictionary *)medBasket;
+- (NSString *) fullInteractionsHtml:(MLInteractionsAdapter *)interactions;
 - (NSString *) medBasketHtml;
 - (NSString *) interactionsHtml:(MLInteractionsAdapter *)interactions;
 - (NSString *) footNoteHtml;

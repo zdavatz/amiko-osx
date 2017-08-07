@@ -2,7 +2,7 @@
  
  Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 21/06/2017.
+ Created on 21/07/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -21,18 +21,19 @@
  
  ------------------------------------------------------------------------ */
 
-#import "MLPatient.h"
+#import <Foundation/Foundation.h>
 
-@interface MLPatientDBAdapter : NSObject
+#import "MLMedication.h"
+#import "MLPrescriptionItem.h"
 
-- (BOOL) openDatabase:(NSString *)dbName;
-- (void) closeDatabase;
-- (NSString *) insertEntry:(MLPatient *)patient;
-- (BOOL) modifyEntry:(MLPatient *)patient;
-- (BOOL) deleteEntry:(MLPatient *)patient;
-- (NSInteger) getNumPatients;
-- (long) getLargestRowId;
-- (NSArray *) getAllPatients;
-- (NSArray *) getPatientsWithKey:(NSString *)key;
+@interface MLPrescriptionsCart : NSObject
+
+@property (atomic) NSMutableArray *cart;
+@property (atomic) NSInteger cartId;
+
+- (NSInteger) size;
+- (void) addItemToCart:(MLPrescriptionItem *)item;
+- (void) removeItemFromCart:(MLPrescriptionItem *)item;
+- (MLPrescriptionItem *) getItemAtIndex:(NSInteger)index;
 
 @end

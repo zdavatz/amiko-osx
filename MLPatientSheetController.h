@@ -55,6 +55,7 @@
 - (IBAction) onDeletePatient:(id)sender;
 - (IBAction) onShowContacts:(id)sender;
 
+- (NSString *) retrievePatientAsString:(NSString *)searchKey;
 - (void) show:(NSWindow *)window;
 - (void) remove;
 

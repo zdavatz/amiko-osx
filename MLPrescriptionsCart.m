@@ -2,7 +2,7 @@
  
  Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 21/06/2017.
+ Created on 21/07/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -21,18 +21,41 @@
  
  ------------------------------------------------------------------------ */
 
-#import "MLPatient.h"
+#import "MLPrescriptionsCart.h"
 
-@interface MLPatientDBAdapter : NSObject
+@implementation MLPrescriptionsCart
 
-- (BOOL) openDatabase:(NSString *)dbName;
-- (void) closeDatabase;
-- (NSString *) insertEntry:(MLPatient *)patient;
-- (BOOL) modifyEntry:(MLPatient *)patient;
-- (BOOL) deleteEntry:(MLPatient *)patient;
-- (NSInteger) getNumPatients;
-- (long) getLargestRowId;
-- (NSArray *) getAllPatients;
-- (NSArray *) getPatientsWithKey:(NSString *)key;
+@synthesize cart;
+@synthesize cartId;
+
+- (NSInteger) size
+{
+    if (cart!=nil)
+        return [cart count];
+    return 0;
+}
+
+- (void) addItemToCart:(MLPrescriptionItem *)item
+{
+    if (cart!=nil) {
+        [cart addObject:item];
+        NSLog(@"Num med in basket: %ld -> %ld", cartId, [cart count]);
+    }
+}
+
+- (void) removeItemFromCart:(MLPrescriptionItem *)item
+{
+    if (cart!=nil) {
+        [cart removeObject:item];
+        NSLog(@"Removed med %@ from basket %ld", [item productName], cartId);
+    }
+}
+
+- (MLPrescriptionItem *) getItemAtIndex:(NSInteger)index
+{
+    if (index<[cart count])
+        return [cart objectAtIndex:index];
+    return nil;
+}
 
 @end

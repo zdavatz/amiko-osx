@@ -96,7 +96,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="2Mj-eS-Zde"/>
-                            <menuItem title="Fachinformation drucken..." keyEquivalent="p" id="551">
+                            <menuItem title="Fachinformation drucken..." keyEquivalent="d" id="551">
                                 <connections>
                                     <action selector="printDocument:" target="-1" id="556"/>
                                 </connections>
@@ -126,15 +126,13 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Kontakte" id="2wd-qf-r9D">
                         <items>
-                            <menuItem title="Patienten verwalten..." id="tsG-5e-hg5">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Patienten verwalten..." keyEquivalent="p" id="tsG-5e-hg5">
                                 <connections>
                                     <action selector="managePatients:" target="-1" id="wUp-yB-hoH"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="umh-nI-TRT"/>
-                            <menuItem title="Unterschrift Arzt..." id="5Du-8q-WQJ">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Arztstempel..." keyEquivalent="z" id="5Du-8q-WQJ">
                                 <connections>
                                     <action selector="setOperatorIdentity:" target="-1" id="psZ-Gg-9AA"/>
                                 </connections>
@@ -200,7 +198,7 @@
                             </menuItem>
                             <menuItem title="Report" keyEquivalent="r" id="564">
                                 <connections>
-                                    <action selector="showAboutFile:" target="-1" id="567"/>
+                                    <action selector="showReportFile:" target="-1" id="ReL-cR-huO"/>
                                 </connections>
                             </menuItem>
                         </items>

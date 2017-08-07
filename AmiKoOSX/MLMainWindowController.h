@@ -24,8 +24,10 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
-#import "MLCustomWebView.h"
 #import "SHCWebView.h"
+#import "MLCustomWebView.h"
+#import "MLSignatureView.h"
+#import "MLPrescriptionsCart.h"
 
 #if defined (AMIKO)
 extern NSString* const APP_NAME;
@@ -50,7 +52,7 @@ extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
 #endif
 
-@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
+@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate>
 {
     IBOutlet NSView *myView;
     IBOutlet NSView *mySplashScreen;
@@ -58,7 +60,6 @@ extern NSString* const APP_ID;
     IBOutlet NSSearchField *mySearchField;
     IBOutlet NSTableView *myTableView;
     IBOutlet NSTableView *mySectionTitles;
-    // IBOutlet MLCustomWebView *myWebView;
     IBOutlet SHCWebView *myWebView;
 }
 
@@ -69,9 +70,15 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSTableView *myTableView;
 @property (nonatomic, retain) IBOutlet NSTableView *mySectionTitles;
 @property (nonatomic, retain) IBOutlet NSTextFinder *myTextFinder;
+@property (nonatomic, retain) IBOutlet NSTabView *myTabView;
+@property (nonatomic, retain) IBOutlet NSTextField *myPatientAddressTextField;
+@property (nonatomic, retain) IBOutlet NSTextField *myOperatorIDTextField;
+@property (nonatomic, retain) IBOutlet NSTableView *myPrescriptionsTableView;
+@property (nonatomic, retain) IBOutlet MLSignatureView *mySignView;
+@property (nonatomic, retain) IBOutlet NSSearchField *myPatientSearchField;
 
 - (IBAction) performFindAction:(id)sender;
-- (IBAction) clickedTableView: (id)sender;
+- (IBAction) clickedTableView:(id)sender;
 - (IBAction) tappedOnStar:(id)sender;
 - (IBAction) searchNow:(id)sender;
 - (IBAction) onButtonPressed:(id)sender;
@@ -85,13 +92,16 @@ extern NSString* const APP_ID;
 - (IBAction) loadAipsDatabase:(id)sender;
 // Prescription function
 - (IBAction) managePatients:(id)sender;
-- (IBAction) newPrescription:(id)sender;
 - (IBAction) setOperatorIdentity:(id)sender;
+- (IBAction) findPatient:(id)sender;
+- (IBAction) removeItemFromPrescription:(id)sender;
 // Help
-- (IBAction) showAboutFile:(id)sender;
+- (IBAction) showReportFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;
 - (IBAction) sendFeedback:(id)sender;
 - (IBAction) shareApp:(id)sender;
 - (IBAction) rateApp:(id)sender;
+
+- (void) addItem:(MLPrescriptionItem *)med toPrescriptionCartWithId:(NSInteger)n;
 
 @end

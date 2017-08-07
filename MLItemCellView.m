@@ -21,21 +21,25 @@
  
  ------------------------------------------------------------------------ */
 
+#import "MLMainWindowController.h"
 #import "MLItemCellView.h"
 #import "MLCellPackagesView.h"
 #import "MLCustomTableRowView.h"
 #import "MLColors.h"
+#import "MLPrescriptionItem.h"
 
 @implementation MLItemCellView
 {
     @private
     NSArray *listOfPackages;
     NSTrackingArea *trackingArea;
+    NSString *selectedPackage;
 }
 
 @synthesize favoritesCheckBox;
 @synthesize packagesView;
 
+@synthesize selectedMedi;
 @synthesize packagesStr;
 @synthesize numPackages;
 
@@ -65,40 +69,8 @@
     [self.packagesView setBackgroundColor:[NSColor clearColor]];
     [[self.packagesView enclosingScrollView] setDrawsBackground:NO];
     
-    [self createTrackingArea];
-    
     // Sets title text color
     [self.textField setTextColor:[NSColor mainTextFieldGray]];
-}
-
-- (void) createTrackingArea
-{
-    int opts = (NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways);
-    trackingArea = [[NSTrackingArea alloc] initWithRect:[self bounds]
-                                                                options:opts
-                                                                  owner:self
-                                                               userInfo:nil];
-    [self addTrackingArea:trackingArea];
-    
-    /*
-    NSPoint mouseLocation = [[self window] mouseLocationOutsideOfEventStream];
-    mouseLocation = [self convertPoint: mouseLocation
-                              fromView: nil];
-    
-    if (NSPointInRect(mouseLocation, [self bounds])) {
-        [self mouseEntered: nil];
-    } else {
-        [self mouseExited: nil];
-    }
-    */
-}
-
-- (void) updateTrackingAreas
-{
-    // Called when view is scrolled.
-    [self removeTrackingArea:trackingArea];
-    [self createTrackingArea];
-    [super updateTrackingAreas]; // Needed, according to the NSView documentation
 }
 
 - (NSTableRowView *) tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
@@ -142,29 +114,29 @@
  - NSTableViewDataDelegate -
  Update tableviews (search result and section titles)
  */
-- (NSView *) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row: (NSInteger)row
+- (NSView *) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     if (tableView == self.packagesView) {
         listOfPackages = [packagesStr componentsSeparatedByString:@"\n"];
         if (row < [listOfPackages count]) {
             NSString *str = [NSString stringWithFormat:@"%@", listOfPackages[row]];
-            MLCellPackagesView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-            [cellView.textField setStringValue:str];
+            MLCellPackagesView *packageCellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+            [packageCellView.textField setStringValue:str];
             // Set colors
             if ([str rangeOfString:@", O]"].location == NSNotFound) {
-                if ([cellView.textField.stringValue rangeOfString:@", G]"].location == NSNotFound) {
+                if ([packageCellView.textField.stringValue rangeOfString:@", G]"].location == NSNotFound) {
                     // Anything else ...
-                    [cellView.textField setTextColor:[NSColor typicalGray]];
+                    [packageCellView.textField setTextColor:[NSColor typicalGray]];
                 } else {
                     // Generika
-                    [cellView.textField setTextColor:[NSColor typicalGreen]];
+                    [packageCellView.textField setTextColor:[NSColor typicalGreen]];
                 }
             } else {
                 // Original
-                [cellView.textField setTextColor:[NSColor typicalRed]];
+                [packageCellView.textField setTextColor:[NSColor typicalRed]];
             }
             
-            return cellView;
+            return packageCellView;
         }
     }
     return nil;
@@ -173,7 +145,57 @@
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
     if ([notification object] == self.packagesView) {
+        NSInteger row = [[notification object] selectedRow];
+        if (row < [listOfPackages count]) {
+            // Generates contextual menu
+            NSMenu *ctxtMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+            selectedPackage = listOfPackages[row];
+            [ctxtMenu insertItemWithTitle:selectedPackage action:nil keyEquivalent:@"" atIndex:0];
+            // Populate all menu items
+            NSMenuItem *menuItem;
+            menuItem = [ctxtMenu insertItemWithTitle:@"Rezept" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:1];
+            [menuItem setRepresentedObject:[NSNumber numberWithInt:0]];
+            /*
+            menuItem = [ctxtMenu insertItemWithTitle:@"Rezept 2" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:2];
+            [menuItem setRepresentedObject:[NSNumber numberWithInt:1]];
+            menuItem = [ctxtMenu insertItemWithTitle:@"Rezept 3" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:3];
+            [menuItem setRepresentedObject:[NSNumber numberWithInt:2]];
+             */
+            // Place menu on the screen
+            [ctxtMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
+        }
         [self.packagesView reloadData];
+    }
+}
+
+- (void) selectBasket:(id)sender
+{
+    if (selectedPackage != nil && selectedMedi != nil) {
+        NSNumber *selectedBasket = (NSNumber *)[sender representedObject];
+        NSInteger n = [selectedBasket intValue];
+        
+        // Note: could be replaced by a target-action design pattern (less clear, IMHO)
+        NSResponder* r = [self nextResponder];
+        while (![r isKindOfClass: [MLMainWindowController class]])
+            r = [r nextResponder];
+        MLMainWindowController* vc = (MLMainWindowController*)r;
+        
+        MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
+        item.fullPackageInfo = selectedPackage;
+
+        NSArray *titleComponents = [selectedPackage componentsSeparatedByString:@"["];
+        titleComponents = [titleComponents[0] componentsSeparatedByString:@","];
+        if ([titleComponents count]>0) {
+            item.title = titleComponents[0];
+            if ([titleComponents count]>2) {
+                item.price = [NSString stringWithFormat:@"%@ CHF", titleComponents[2]];
+                item.price = [item.price stringByReplacingOccurrencesOfString:@"ev.nn.i.H. " withString:@""];
+                item.price = [item.price stringByReplacingOccurrencesOfString:@"PP " withString:@""];
+            } else {
+                item.price = @"";
+            }
+            [vc addItem:item toPrescriptionCartWithId:n];
+        }
     }
 }
 

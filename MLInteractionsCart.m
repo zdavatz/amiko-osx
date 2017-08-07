@@ -43,6 +43,33 @@
     medBasket = basket;
 }
 
+/** 
+ Create full interactions html
+ */
+- (NSString *) fullInteractionsHtml:(MLInteractionsAdapter *)interactions
+{
+    // --> OPTIMIZE!! Pre-load the following files!
+    
+    // Load style sheet from file
+    NSString *interactionsCssPath = [[NSBundle mainBundle] pathForResource:@"interactions_css" ofType:@"css"];
+    NSString *interactionsCss = [NSString stringWithContentsOfFile:interactionsCssPath encoding:NSUTF8StringEncoding error:nil];
+    
+    // Load javascript from file
+    NSString *jscriptPath = [[NSBundle mainBundle] pathForResource:@"interactions_callbacks" ofType:@"js"];
+    NSString *jscriptStr = [NSString stringWithContentsOfFile:jscriptPath encoding:NSUTF8StringEncoding error:nil];
+    
+    // Generate main interaction table
+    NSString *htmlStr = [NSString stringWithFormat:@"<html><head><meta charset=\"utf-8\" />"];
+    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head><body><div id=\"interactions\">%@<br><br>%@<br>%@</body></div></html>",
+               jscriptStr,
+               interactionsCss,
+               [self medBasketHtml],
+               [self interactionsHtml:interactions],
+               [self footNoteHtml]];
+    
+    return htmlStr;
+}
+
 /**
  Create interaction basket html string
  */

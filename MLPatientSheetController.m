@@ -168,6 +168,26 @@
     return patient;
 }
 
+- (NSString *) retrievePatientAsString:(NSString *)searchKey
+{
+    NSString *p = @"";
+    // Retrieves first best match from patient sqlite database
+    mArrayOfPatients = [mPatientDb getPatientsWithKey:searchKey];
+    if ([mArrayOfPatients count]>0) {
+        MLPatient *r = [mArrayOfPatients objectAtIndex:0];
+        NSString *familyName = r.familyName;
+        NSString *givenName = r.givenName;
+        NSString *postalAddress = r.postalAddress;
+        NSString *zipCode = r.zipCode;
+        NSString *city = r.city;
+        NSString *phoneNumber = r.phoneNumber;
+        NSString *emailAddress = r.emailAddress;
+        p = [NSString stringWithFormat:@"%@ %@\r\n%@\r\nCH-%@ %@\r\n%@\r\n%@",
+                                givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];        
+    }
+    return p;
+}
+
 - (BOOL) validateFields:(MLPatient *)patient
 {
     BOOL valid = TRUE;

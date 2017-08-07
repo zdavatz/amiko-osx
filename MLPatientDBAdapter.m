@@ -159,24 +159,6 @@ static NSString *DATABASE_COLUMNS = nil;
     return FALSE;
 }
 
-- (NSArray *) getAllPatients
-{
-    NSMutableArray *listOfPatients = [NSMutableArray array];
-    
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@", ALL_COLUMNS, DATABASE_TABLE];
-    NSArray *results = [myPatientDb performQuery:query];
-    if ([results count]>0) {
-        for (NSArray *cursor in results) {
-            [listOfPatients addObject:[self cursorToPatient:cursor]];
-        }
-        // Sort alphabetically
-        NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"familyName" ascending:YES];
-        [listOfPatients sortUsingDescriptors:[NSArray arrayWithObject:nameSort]];
-    }
-    
-    return listOfPatients;
-}
-
 - (NSInteger) getNumPatients
 {
     NSInteger numRecords = [myPatientDb numberRecordsForTable:DATABASE_TABLE];
@@ -196,6 +178,54 @@ static NSString *DATABASE_COLUMNS = nil;
         }
     }
     return 0;
+}
+
+- (NSArray *) getAllPatients
+{
+    NSMutableArray *listOfPatients = [NSMutableArray array];
+    
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@", ALL_COLUMNS, DATABASE_TABLE];
+    NSArray *results = [myPatientDb performQuery:query];
+    if ([results count]>0) {
+        for (NSArray *cursor in results) {
+            [listOfPatients addObject:[self cursorToPatient:cursor]];
+        }
+        // Sort alphabetically
+        NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"familyName" ascending:YES];
+        [listOfPatients sortUsingDescriptors:[NSArray arrayWithObject:nameSort]];
+    }
+    
+    return listOfPatients;
+}
+- (NSArray *) getPatientsWithKey:(NSString *)key
+{
+    NSMutableArray *listOfPatients = [NSMutableArray array];
+
+    NSArray *searchKeys = [key componentsSeparatedByString:@" "];
+    if ([searchKeys count]>0) {
+        /*
+         NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%' or %@ like '%@%%' or %@ like '%@%%' or %@ like '%@%%'", ALL_COLUMNS, DATABASE_TABLE, KEY_FAMILYNAME, key, KEY_GIVENNAME, key, KEY_CITY, key, KEY_ZIPCODE, key];
+         */
+        NSMutableString *wq = [[NSMutableString alloc] init];
+        for (NSString *k in searchKeys) {
+            if ([k length]>0) {
+                NSString *q = [NSString stringWithFormat:@"(%@ like '%@%%' or %@ like '%@%%' or %@ like '%@%%' or %@ like '%@%%') and ", KEY_FAMILYNAME, k, KEY_GIVENNAME, k, KEY_CITY, k, KEY_ZIPCODE, k];
+                [wq appendString:q];
+            }
+        }
+        if ([wq length]>5) {
+            NSString *whereQuery = [wq substringToIndex:[wq length]-5];
+            NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@", ALL_COLUMNS, DATABASE_TABLE, whereQuery];
+            NSArray *results = [myPatientDb performQuery:query];
+            if ([results count]>0) {
+                for (NSArray *cursor in results) {
+                    [listOfPatients addObject:[self cursorToPatient:cursor]];
+                }
+            }
+        }
+    }
+    
+    return listOfPatients;
 }
 
 - (MLPatient *) cursorToPatient:(NSArray *)cursor

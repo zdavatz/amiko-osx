@@ -33,10 +33,12 @@
 #import "MLCustomTableRowView.h"
 #import "MLCustomView.h"
 #import "MLCustomURLConnection.h"
+#import "MLEditableTextField.h"
 
 #import "MLPatientSheetController.h"
 #import "MLOperatorIDSheetController.h"
 
+#import "MLAbout.h"
 #import "MLUtilities.h"
 
 #import "WebViewJavascriptBridge.h"
@@ -104,10 +106,10 @@ static BOOL mSearchInteractions = false;
     // Instance variable declarations go here
     MLMedication *mMed;
     MLDBAdapter *mDb;
-    MLFullTextDBAdapter *mFullTextDb;
     MLInteractionsAdapter *mInteractions;
-    MLFullTextEntry *mFullTextEntry;
     MLInteractionsCart *mInteractionsCart;
+    MLFullTextDBAdapter *mFullTextDb;
+    MLFullTextEntry *mFullTextEntry;
     MLFullTextSearch *mFullTextSearch;
     
     MLPatientSheetController *mPatientSheet;
@@ -149,6 +151,29 @@ static BOOL mSearchInteractions = false;
 @synthesize myTableView;
 @synthesize mySectionTitles;
 @synthesize myTextFinder;
+@synthesize myTabView;
+@synthesize myPrescriptionsTableView;
+@synthesize myPatientAddressTextField;
+@synthesize myOperatorIDTextField;
+@synthesize mySignView;
+@synthesize myPatientSearchField;
+
+#pragma mark Class methods
+static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active prescriptions
+
++ (MLPrescriptionsCart *) prescriptionsCartWithId:(NSInteger)id
+{
+    if (id<3) {
+        if (mPrescriptionsCart[id].cart == nil) {
+            mPrescriptionsCart[id].cart = [[NSMutableArray alloc] init];
+            mPrescriptionsCart[id].cartId = id;
+        }
+        return mPrescriptionsCart[id];
+    }
+    return nil;
+}
+
+#pragma mark Instance methods
 
 - (id) init
 {
@@ -252,6 +277,11 @@ static BOOL mSearchInteractions = false;
     // Initialize full text search
     mFullTextSearch = [[MLFullTextSearch alloc] init];
     
+    // Initialize all three prescription baskets
+    for (int i=0; i<3; ++i) {
+        mPrescriptionsCart[i] = [[MLPrescriptionsCart alloc] init];
+    }  
+    
     // Initialize webview
     [[myWebView preferences] setJavaScriptEnabled:YES];
     [[myWebView preferences] setJavaScriptCanOpenWindowsAutomatically:YES];
@@ -269,9 +299,9 @@ static BOOL mSearchInteractions = false;
     [myToolbar setSelectedItemIdentifier:@"AIPS"];
     
     if ([MLUtilities isGermanApp])
-        [[myToolbar items][3] setLabel:@"Drucken"];
+        [[myToolbar items][4] setLabel:@"Drucken"];
     else if ([MLUtilities isFrenchApp])
-        [[myToolbar items][3] setLabel:@"Imprimer"];
+        [[myToolbar items][4] setLabel:@"Imprimer"];
     
     // Set search state
     [self setSearchState:kTitle];
@@ -680,6 +710,19 @@ static BOOL mSearchInteractions = false;
      */
 }
 
+- (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    NSString *tabId = (NSString *)tabViewItem.identifier;
+    if ([tabId isEqualToString:@"TabWebview"]) {
+
+    } else if ([tabId isEqualToString:@"TabInteractions"]) {
+
+    } else if ([tabId isEqualToString:@"TabPrescription1"]) {
+        [self setOperatorID];
+        [myPrescriptionsTableView reloadData];
+    }
+}
+
 - (IBAction) tappedOnStar: (id)sender
 {
     NSInteger row = [self.myTableView rowForView:sender];
@@ -791,7 +834,7 @@ static BOOL mSearchInteractions = false;
     [self launchProgressIndicator];
     
     NSToolbarItem *item = (NSToolbarItem *)sender;
-    [self performSelector:@selector(switchDatabases:) withObject:item afterDelay:0.01];
+    [self performSelector:@selector(switchTabs:) withObject:item afterDelay:0.01];
 }
 
 - (IBAction) printDocument:(id)sender
@@ -882,11 +925,6 @@ static BOOL mSearchInteractions = false;
     }];
 }
 
-- (IBAction) newPrescription:(id)sender
-{
-
-}
-
 - (IBAction) managePatients:(id)sender
 {
     if (!mPatientSheet) {
@@ -903,99 +941,72 @@ static BOOL mSearchInteractions = false;
     [mOperatorIDSheet show:[NSApp mainWindow]];
 }
 
-- (IBAction) showAboutFile:(id)sender
+- (void) setOperatorID
 {
-    // A. Check first users documents folder
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    // Get documents directory
-    NSString *documentsDir = [MLUtilities documentsDirectory];
-    if ([MLUtilities isGermanApp]) {
-        NSString *filePath = [[documentsDir stringByAppendingPathComponent:@"amiko_report_de"] stringByAppendingPathExtension:@"html"];
-        if ([fileManager fileExistsAtPath:filePath]) {
-            // Starts Safari            
-            [[NSWorkspace sharedWorkspace] openFile:filePath];
-        } else {
-            NSURL *aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_de" withExtension:@"html"];
-            // Starts Safari
-            [[NSWorkspace sharedWorkspace] openURL:aboutFile];
-        }
-    } else if ([MLUtilities isFrenchApp]) {
-        NSString *filePath = [[documentsDir stringByAppendingPathComponent:@"amiko_report_fr"] stringByAppendingPathExtension:@"html"];
-        if ([fileManager fileExistsAtPath:filePath]) {
-            // Starts Safari
-            [[NSWorkspace sharedWorkspace] openFile:filePath];
-        } else {
-            NSURL *aboutFile = [[NSBundle mainBundle] URLForResource:@"amiko_report_fr" withExtension:@"html"];
-            // Starts Safari
-            [[NSWorkspace sharedWorkspace] openURL:aboutFile];
-        }
+    if (!mOperatorIDSheet) {
+        mOperatorIDSheet = [[MLOperatorIDSheetController alloc] init];
+    }
+    NSString *operatorIDStr = [mOperatorIDSheet retrieveIDAsString];
+    myOperatorIDTextField.stringValue = operatorIDStr;
+    
+    NSString *documentsDirectory = [MLUtilities documentsDirectory];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"op_signature.png"];
+    if (filePath!=nil) {
+        NSImage *signatureImg = [[NSImage alloc] initWithContentsOfFile:filePath];
+        [mySignView setSignature:signatureImg];
     }
 }
 
-// A small custom about box
+- (IBAction) findPatient:(id)sender
+{
+    if (!mPatientSheet) {
+        mPatientSheet = [[MLPatientSheetController alloc] init];
+    }
+    NSString *searchKey = [myPatientSearchField stringValue];
+    NSString *patientStr = [mPatientSheet retrievePatientAsString:searchKey];
+    myPatientAddressTextField.stringValue = patientStr;
+}
+
+- (IBAction) removeItemFromPrescription:(id)sender
+{
+    NSInteger row = [self.myPrescriptionsTableView rowForView:sender];
+#ifdef DEBUG
+    NSLog(@"Removing item %ld from prescription", row);
+#endif
+    // Get item with index
+    MLPrescriptionItem *item = [mPrescriptionsCart[0] getItemAtIndex:row];
+    if (item!=nil) {
+        [mPrescriptionsCart[0] removeItemFromCart:item];
+        [self.myPrescriptionsTableView reloadData];
+    }
+}
+
+- (IBAction) showReportFile:(id)sender
+{
+    [MLAbout showReportFile];
+}
+
 - (IBAction) showAboutPanel:(id)sender
 {
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    NSString *creditsPath = nil;
-    if ([MLUtilities isGermanApp])
-        creditsPath = [mainBundle pathForResource:@"Credits-de" ofType:@"rtf"];
-    else if ([MLUtilities isFrenchApp])
-        creditsPath = [mainBundle pathForResource:@"Credits-fr" ofType:@"rtf"];
-    NSAttributedString *credits = [[NSAttributedString alloc] initWithPath:creditsPath documentAttributes:nil];
-    
-    NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd.MM.yyyy"];
-    NSString *compileDate = [dateFormat stringFromDate:today];
-    
-    NSString *versionString = [NSString stringWithFormat:@"%@", compileDate];
-   
-    NSDictionary *optionsDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 credits, @"Credits",
-                                 [mainBundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-                                 [mainBundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-                                 [mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-                                 versionString, @"Version",
-                                 nil];
-    
-    [NSApp orderFrontStandardAboutPanelWithOptions:optionsDict];
+    [MLAbout showAboutPanel];
 }
 
 - (IBAction) sendFeedback:(id)sender
 {
-    NSString *subject = [NSString stringWithFormat:@"%@ Feedback", APP_NAME];
-    NSString *encodedSubject = [NSString stringWithFormat:@"mailto:zdavatz@ywesee.com?subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSURL *helpFile = [NSURL URLWithString:encodedSubject];
-    // Starts mail client
-    [[NSWorkspace sharedWorkspace] openURL:helpFile];
+    [MLAbout sendFeedback];
 }
 
 - (IBAction) shareApp:(id)sender
 {
-    // Starts mail client
-    NSString* subject = [NSString stringWithFormat:@"%@ OS X", APP_NAME];
-    NSString* body = nil;
-    if ([MLUtilities isGermanApp])
-        body = [NSString stringWithFormat:@"%@ OS X: Schweizer Arzneimittelkompendium\r\n\n"
-                "Get it now: https://itunes.apple.com/us/app/amiko/id%@?mt=12\r\n\nEnjoy!\r\n", APP_NAME, APP_ID];
-    else if ([MLUtilities isFrenchApp])
-        body = [NSString stringWithFormat:@"%@ OS X: Compendium des Médicaments Suisse\r\n\n"
-                "Get it now: https://itunes.apple.com/us/app/amiko/id%@?mt=12\r\n\nEnjoy!\r\n", APP_NAME, APP_ID];
-    NSString *encodedSubject = [NSString stringWithFormat:@"subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSString *encodedBody = [NSString stringWithFormat:@"body=%@", [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:?%@&%@", encodedSubject, encodedBody];
-
-    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
-    
-    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+    [MLAbout shareApp];
 }
 
 - (IBAction) rateApp:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"macappstore://itunes.apple.com/app/id%@?mt=12", APP_ID]]];
+    [MLAbout rateApp];
 }
 
-- (IBAction) clickedTableView: (id)sender
+- (IBAction) clickedTableView:(id)sender
 {
     if (mCurrentSearchState == kFullText) {
         mCurrentWebView = kFullTextSearchView;
@@ -1003,19 +1014,9 @@ static BOOL mSearchInteractions = false;
     }
 }
 
-- (void) showHelp: (id)sender
+- (void) showHelp:(id)sender
 {
-    // Starts Safari
-    if ([[MLUtilities appOwner] isEqualToString:@"zurrose"]) {
-        NSURL *helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
-        [[NSWorkspace sharedWorkspace] openURL:helpFile];
-    } else if ([[MLUtilities appOwner] isEqualToString:@"ywesee"]) {
-        NSURL *helpFile = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/amiko/id%@?mt=12", APP_ID]];
-        [[NSWorkspace sharedWorkspace] openURL:helpFile];
-    } else if ([[MLUtilities appOwner] isEqualToString:@"desitin"]) {
-        NSURL *helpFile = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/amiko/id%@?mt=12", APP_ID]];
-        [[NSWorkspace sharedWorkspace] openURL:helpFile];
-    }
+    [MLAbout showHelp];
 }
 
 - (void) launchProgressIndicator
@@ -1040,7 +1041,7 @@ static BOOL mSearchInteractions = false;
     [progressIndicator removeFromSuperview];
 }
 
-- (void) switchDatabases: (NSToolbarItem *)item
+- (void) switchTabs:(NSToolbarItem *)item
 {
     switch (item.tag) {
         case 0:
@@ -1081,6 +1082,8 @@ static BOOL mSearchInteractions = false;
                     });
                 }
             });
+            // Switch tab view
+            [myTabView selectTabViewItemAtIndex:0];
             break;
         }
         case 1:
@@ -1116,6 +1119,8 @@ static BOOL mSearchInteractions = false;
                     });
                 }
             });
+            // Switch tab view
+            [myTabView selectTabViewItemAtIndex:0];
             break;
         }
         case 2:
@@ -1127,6 +1132,17 @@ static BOOL mSearchInteractions = false;
             [self setSearchState:kTitle];            
             [self pushToMedBasket];
             [self updateInteractionsView];
+            // Switch tab view
+            [myTabView selectTabViewItemAtIndex:1];
+            break;
+        }
+        case 3:
+        {
+            NSLog(@"Rezept");
+            [self stopProgressIndicator];
+            // Switch tab view
+            [myTabView selectTabViewItemAtIndex:2];
+            break;
         }
         default:
             break;
@@ -1716,24 +1732,8 @@ static BOOL mSearchInteractions = false;
 
 - (void) updateInteractionsView
 {
-    // --> OPTIMIZE!! Pre-load the following files!
-    
-    // Load style sheet from file
-    NSString *interactionsCssPath = [[NSBundle mainBundle] pathForResource:@"interactions_css" ofType:@"css"];
-    NSString *interactionsCss = [NSString stringWithContentsOfFile:interactionsCssPath encoding:NSUTF8StringEncoding error:nil];
-    
-    // Load javascript from file
-    NSString *jscriptPath = [[NSBundle mainBundle] pathForResource:@"interactions_callbacks" ofType:@"js"];
-    NSString *jscriptStr = [NSString stringWithContentsOfFile:jscriptPath encoding:NSUTF8StringEncoding error:nil];
-    
     // Generate main interaction table
-    NSString *htmlStr = [NSString stringWithFormat:@"<html><head><meta charset=\"utf-8\" />"];
-    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head><body><div id=\"interactions\">%@<br><br>%@<br>%@</body></div></html>",
-               jscriptStr,
-               interactionsCss,
-               [mInteractionsCart medBasketHtml],
-               [mInteractionsCart interactionsHtml:mInteractions],
-               [mInteractionsCart footNoteHtml]];
+    NSString *htmlStr = [mInteractionsCart fullInteractionsHtml:mInteractions];
     
     // With the following implementation, the images are not loaded
     // NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
@@ -1742,9 +1742,11 @@ static BOOL mSearchInteractions = false;
     [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:[[NSBundle mainBundle] resourceURL]];
     
     // Update section title anchors
-    mListOfSectionIds = mInteractionsCart.listofSectionIds;
+    if (![mInteractionsCart.listofSectionIds isEqual:[NSNull null]])
+        mListOfSectionIds = mInteractionsCart.listofSectionIds;
     // Update section titles (here: identical to anchors)
-    mListOfSectionTitles = mInteractionsCart.listofSectionTitles;
+    if (![mInteractionsCart.listofSectionTitles isEqual:[NSNull null]])
+        mListOfSectionTitles = mInteractionsCart.listofSectionTitles;
     
     [mySectionTitles reloadData];
 }
@@ -1767,7 +1769,7 @@ static BOOL mSearchInteractions = false;
   
     [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:[[NSBundle mainBundle] resourceURL]];
     
-    // Update middle pane (section titles)
+    // Update right pane (section titles)
     if (![mFullTextSearch.listOfSectionIds isEqual:[NSNull null]])
         mListOfSectionIds = mFullTextSearch.listOfSectionIds;
     if (![mFullTextSearch.listOfSectionTitles isEqual:[NSNull null]])
@@ -1776,44 +1778,110 @@ static BOOL mSearchInteractions = false;
     [mySectionTitles reloadData];
 }
 
+- (void) addItem:(MLPrescriptionItem *)item toPrescriptionCartWithId:(NSInteger)n
+{
+    if (n<3) {
+        if (mPrescriptionsCart[n].cart == nil) {
+            mPrescriptionsCart[n].cart = [[NSMutableArray alloc] init];
+            mPrescriptionsCart[n].cartId = n;
+        }
+        [mPrescriptionsCart[n] addItemToCart:item];
+        [self.myPrescriptionsTableView reloadData];
+    }
+}
+
+- (void) removeItem:(MLPrescriptionItem *)item fromPrescriptionCartWithId:(NSInteger)n
+{
+    if (n<3) {
+        [mPrescriptionsCart[n] removeItemFromCart:item];
+        [self.myPrescriptionsTableView reloadData];
+    }
+}
+
+- (BOOL) validateProposedFirstResponder:(NSResponder *)responder forEvent:(NSEvent *)event
+{
+    if ([responder isKindOfClass:[MLEditableTextField class]])
+        return YES;
+    
+    return [super validateProposedFirstResponder:responder forEvent:event];
+}
+
+
 /**
  - NSTableViewDataSource -
- Get number of rows of a table view
+ */
+- (CGFloat) tableView: (NSTableView *)tableView heightOfRow: (NSInteger)row
+{
+    if (tableView == self.myTableView) {
+        NSString *text = [medi[row] title];
+        NSFont *textFont = [NSFont boldSystemFontOfSize:13.0f];
+        CGSize textSize = NSSizeFromCGSize([text sizeWithAttributes:[NSDictionary dictionaryWithObject:textFont
+                                                                                                forKey:NSFontAttributeName]]);
+        NSString *subText = [medi[row] subTitle];
+        NSFont *subTextFont = [NSFont boldSystemFontOfSize:12.0f];
+        CGSize subTextSize = NSSizeFromCGSize([subText sizeWithAttributes:[NSDictionary dictionaryWithObject:subTextFont
+                                                                                                      forKey:NSFontAttributeName]]);
+        return (textSize.height + subTextSize.height + 12.0f);
+    } else if (tableView == mySectionTitles) {
+        NSString *text = mListOfSectionTitles[row];
+        NSFont *textFont = [NSFont boldSystemFontOfSize:11.0f];
+        CGSize textSize = NSSizeFromCGSize([text sizeWithAttributes:[NSDictionary dictionaryWithObject:textFont
+                                                                                                forKey:NSFontAttributeName]]);
+        return (textSize.height + 5.0f);
+    } else if (tableView == myPrescriptionsTableView) {
+        // Fixed height
+        return 44.0f;
+    }
+    
+    return 0.0f;
+}
+/**
+  Get number of rows of a table view
  */
 - (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
 {
     if (tableView == self.myTableView) {
         if (mUsedDatabase == kAips) {
-            // NSLog(@"table entries (aips): %ld", (unsigned long)[medi count]);
             return [medi count];
         } else if (mUsedDatabase == kFavorites) {
-            // NSLog(@"table entries (favs): %ld", (unsigned long)[favoriteKeyData count]);
             return [favoriteKeyData count];
         }
     } else if (tableView == self.mySectionTitles) {
-        // NSLog(@"num sections: %ld", (unsigned long)[listofSectionTitles count]);
         return [mListOfSectionTitles count];
+    } else if (tableView == self.myPrescriptionsTableView) {
+        return mPrescriptionsCart[0].size;
     }
-
     return 0;
 }
 
 /**
  - NSTableViewDataDelegate -
- Update tableviews (search result and section titles)
 */
+- (NSTableRowView *) tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
+{
+    if (tableView == self.myTableView || tableView == self.mySectionTitles) {
+        MLCustomTableRowView *rowView = [[MLCustomTableRowView alloc] initWithFrame:NSZeroRect];
+        [rowView setRowIndex:row];
+        return rowView;
+    }
+    
+    return nil;
+}
+
 - (NSView *) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     if (tableView == self.myTableView) {
         /*
          * Check if table is search result (=myTableView)
-        */
-        MLItemCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-
+         */
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
+            MLItemCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+
             cellView.textField.stringValue = [medi[row] title];
+            cellView.selectedMedi = medi[row];
             cellView.packagesStr = [medi[row] subTitle];
             [cellView.packagesView reloadData];
+            
             // Check if cell.textLabel.text is in starred NSSet
             if (favoriteKeyData!=nil) {
                 if (mCurrentSearchState!=kFullText) {
@@ -1836,44 +1904,53 @@ static BOOL mSearchInteractions = false;
             return cellView;
         }
     } else if (tableView == self.mySectionTitles) {
-        NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
         /*
          * Check if table is list of chapter titles (=mySectionTitles)
-        */
+         */
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
+            NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+            
             cellView.textField.stringValue = mListOfSectionTitles[row];
+            
             return cellView;
         }
+    } else if (tableView == self.myPrescriptionsTableView) {
+        /*
+         * Check if table is a prescription
+         */
+        NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+        NSArray *prescriptionBasket = mPrescriptionsCart[0].cart;
+
+        if ([tableColumn.identifier isEqualToString:@"PrescriptionMedCounter"]) {
+            cellView.textField.stringValue = [NSString stringWithFormat:@"%ld", row+1];
+        } else if ([tableColumn.identifier isEqualToString:@"PrescriptionRegisteredName"]) {
+            cellView.textField.stringValue = [prescriptionBasket[row] fullPackageInfo];
+        } else if ([tableColumn.identifier isEqualToString:@"PrescriptionPrice"]) {
+            if ([prescriptionBasket[row] price] != nil)
+                cellView.textField.stringValue = [prescriptionBasket[row] price];
+        }
+        
+        return cellView;
     }
+    
     return nil;
 }
 
-/*
- Update webview
- */
-- (NSTableRowView *) tableView: (NSTableView *)tableView rowViewForRow:(NSInteger)row
+- (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
-    MLCustomTableRowView *rowView = [[MLCustomTableRowView alloc] initWithFrame:NSZeroRect];
-    [rowView setRowIndex:row];   
-    return rowView;
-    /*
-    NSTableRowView *rowView = [[NSTableRowView alloc] initWithFrame:NSZeroRect];
-    return rowView;
-    */
-}
-
-- (void) tableViewSelectionDidChange: (NSNotification *)notification
-{
-    if ([notification object] == self.myTableView) {
+    id notifier = [notification object];
+    if (notifier == self.myTableView) {
         /*
          * Check if table is search result (=myTableView)
          * Left-most pane
         */
-        NSInteger row = [[notification object] selectedRow];
+        NSInteger row = [notifier selectedRow];
         
         NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
         [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
-       
+        
+        // [[self window] makeFirstResponder:myRowView];
+        
         // Colors whole row red... useless
         // [myRowView setBackgroundColor:[NSColor redColor]];
                
@@ -1911,12 +1988,12 @@ static BOOL mSearchInteractions = false;
             mCurrentWebView = kFullTextSearchView;
             [self updateFullTextSearchView:mFullTextContentStr];
         }
-    } else if ([notification object] == self.mySectionTitles) {
+    } else if (notifier == self.mySectionTitles) {
         /* 
          * Check if table is list of chapter titles (=mySectionTitles)
          * Right-most pane
         */
-        NSInteger row = [[notification object] selectedRow];
+        NSInteger row = [notifier selectedRow];
        
         NSTableRowView *myRowView = [self.mySectionTitles rowViewAtRow:row makeIfNecessary:NO];
         [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
@@ -1931,60 +2008,16 @@ static BOOL mSearchInteractions = false;
                                                             andFilter:mListOfSectionIds[row]];
             [self updateFullTextSearchView:contentStr];
         }
+    } else if (notifier == self.myPrescriptionsTableView) {
+        NSInteger row = [notifier selectedRow];
+        
+        NSTableRowView *myRowView = [self.myPrescriptionsTableView rowViewAtRow:row makeIfNecessary:NO];
+        [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
     }
-    
+
 #ifdef DEBUG
-    report_memory();
+    [MLUtilities reportMemory];
 #endif
-}
-
-/*
-- (NSString *)tableView:(NSTableView *)aTableView toolTipForCell:(NSCell *)aCell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)row mouseLocation:(NSPoint)mouseLocation
-{
-    
-}
-
-- (void) tableViewColumnDidResize:(NSNotification *)notification
-{
-    NSLog(@"Column resized");
-}
-*/
-
-- (CGFloat) tableView: (NSTableView *)tableView heightOfRow: (NSInteger)row
-{
-    if (tableView == self.myTableView) {
-        NSString *text = [medi[row] title];
-        NSFont *textFont = [NSFont boldSystemFontOfSize:13.0f];
-        CGSize textSize = NSSizeFromCGSize([text sizeWithAttributes:[NSDictionary dictionaryWithObject:textFont
-                                                                                                forKey:NSFontAttributeName]]);
-        NSString *subText = [medi[row] subTitle];
-        NSFont *subTextFont = [NSFont boldSystemFontOfSize:12.0f];
-        CGSize subTextSize = NSSizeFromCGSize([subText sizeWithAttributes:[NSDictionary dictionaryWithObject:subTextFont
-                                                                                                      forKey:NSFontAttributeName]]);
-        return (textSize.height + subTextSize.height + 12.0f);
-    } else if (tableView == mySectionTitles) {
-        NSString *text = mListOfSectionTitles[row];
-        NSFont *textFont = [NSFont boldSystemFontOfSize:11.0f];
-        CGSize textSize = NSSizeFromCGSize([text sizeWithAttributes:[NSDictionary dictionaryWithObject:textFont
-                                                                                                forKey:NSFontAttributeName]]);        
-        return (textSize.height + 5.0f);
-    }
-    
-    return 0.0f;
-}
-
-void report_memory(void) {
-    struct task_basic_info info;
-    mach_msg_type_number_t size = sizeof(info);
-    kern_return_t kerr = task_info(mach_task_self(),
-                                   TASK_BASIC_INFO,
-                                   (task_info_t)&info,
-                                   &size);
-    if( kerr == KERN_SUCCESS ) {
-        NSLog(@"Memory in use (in bytes): %lu", info.resident_size);
-    } else {
-        NSLog(@"Error with task_info(): %s", mach_error_string(kerr));
-    }
 }
 
 @end
