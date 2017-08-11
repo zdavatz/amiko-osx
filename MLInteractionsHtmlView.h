@@ -2,7 +2,7 @@
  
  Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 27/07/2017.
+ Created on 28/04/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -21,16 +21,23 @@
  
  ------------------------------------------------------------------------ */
 
-#import "MLPrescriptionItem.h"
+#import <Foundation/Foundation.h>
 
-@implementation MLPrescriptionItem
+#import "MLInteractionsAdapter.h"
+#import "MLMedication.h"
 
-@synthesize mid;
-@synthesize eanCode;
-@synthesize productName;
-@synthesize title;
-@synthesize owner;
-@synthesize price;
-@synthesize med;
+@interface MLInteractionsHtmlView : NSObject
+
+@property (atomic) NSArray *listofSectionIds;
+@property (atomic) NSArray *listofSectionTitles;
+
+- (void) pushToMedBasket:(MLMedication *)med;
+- (void) removeFromMedBasketForKey:(NSString *)key;
+- (void) clearMedBasket;
+- (NSString *) fullInteractionsHtml:(MLInteractionsAdapter *)interactions;
+- (NSString *) medBasketHtml;
+- (NSString *) interactionsHtml:(MLInteractionsAdapter *)interactions;
+- (NSString *) footNoteHtml;
+- (void) sendInteractionNotice;
 
 @end

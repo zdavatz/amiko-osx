@@ -23,13 +23,17 @@
 
 #import <Foundation/Foundation.h>
 
+#import "MLMedication.h"
+
 @interface MLPrescriptionItem : NSObject
 
-@property (nonatomic, copy) NSString *eanCode;
-@property (nonatomic, copy) NSString *productName;
-@property (nonatomic, copy) NSString *fullPackageInfo;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *owner;
-@property (nonatomic, copy) NSString *price;
+@property (atomic) long mid;
+@property (atomic, copy) NSString *eanCode;
+@property (atomic, copy) NSString *productName;
+@property (atomic, copy) NSString *fullPackageInfo;
+@property (atomic, copy) NSString *title;
+@property (atomic, copy) NSString *owner;
+@property (atomic, copy) NSString *price;
+@property (atomic) MLMedication *med;
 
 @end

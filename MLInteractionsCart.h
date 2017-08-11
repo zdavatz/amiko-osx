@@ -2,7 +2,7 @@
  
  Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 28/04/2017.
+ Created on 11/08/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -22,19 +22,15 @@
  ------------------------------------------------------------------------ */
 
 #import <Foundation/Foundation.h>
+
 #import "MLInteractionsAdapter.h"
 
 @interface MLInteractionsCart : NSObject
 
-@property (atomic) NSArray *listofSectionIds;
-@property (atomic) NSArray *listofSectionTitles;
+@property (atomic) NSMutableDictionary *cart;
 
-- (NSUInteger) basketSize;
-- (void) updateMedBasket:(NSMutableDictionary *)medBasket;
-- (NSString *) fullInteractionsHtml:(MLInteractionsAdapter *)interactions;
-- (NSString *) medBasketHtml;
-- (NSString *) interactionsHtml:(MLInteractionsAdapter *)interactions;
-- (NSString *) footNoteHtml;
-- (void) sendInteractionNotice;
+- (NSInteger) size;
+- (NSString *) interactionsAsHtmlForAdapter:(MLInteractionsAdapter *)adapter withTitles:(NSMutableArray *)titles andIds:(NSMutableArray *)ids;
+- (NSArray *) interactionsAsArrayForAdapter:(MLInteractionsAdapter *)adapter;
 
 @end

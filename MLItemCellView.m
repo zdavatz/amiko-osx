@@ -182,7 +182,8 @@
         
         MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
         item.fullPackageInfo = selectedPackage;
-
+        item.mid = selectedMedi.medId;
+        
         NSArray *titleComponents = [selectedPackage componentsSeparatedByString:@"["];
         titleComponents = [titleComponents[0] componentsSeparatedByString:@","];
         if ([titleComponents count]>0) {

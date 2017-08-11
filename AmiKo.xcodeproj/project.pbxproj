@@ -67,6 +67,12 @@
 		D538779D1AA386AC00AEFDB4 /* SHCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877991AA386AC00AEFDB4 /* SHCWebView.m */; };
 		D539C10617DCED1D00759260 /* MLSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D539C10517DCED1D00759260 /* MLSplashScreen.m */; };
 		D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
+		D53AB5AD1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */; };
+		D53AB5AE1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */; };
+		D53AB5AF1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */; };
+		D53AB5B01F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */; };
+		D53AB5B11F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */; };
+		D53AB5B21F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */; };
 		D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */; };
 		D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */; };
 		D53ABBF9189522AD00C4525C /* MLProgressSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */; };
@@ -247,12 +253,12 @@
 		D5C5C53B1F16515900DF851F /* prescription@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5371F16515900DF851F /* prescription@2x.png */; };
 		D5C5C53C1F16515900DF851F /* prescription@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5371F16515900DF851F /* prescription@2x.png */; };
 		D5C5C53D1F16515900DF851F /* prescription@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C5C5371F16515900DF851F /* prescription@2x.png */; };
-		D5C6440D1EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
-		D5C6440E1EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
-		D5C6440F1EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
-		D5C644101EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
-		D5C644111EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
-		D5C644121EB32F5300438E6F /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */; };
+		D5C6440D1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsHtmlView.m */; };
+		D5C6440E1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsHtmlView.m */; };
+		D5C6440F1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsHtmlView.m */; };
+		D5C644101EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsHtmlView.m */; };
+		D5C644111EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsHtmlView.m */; };
+		D5C644121EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6440C1EB32F5300438E6F /* MLInteractionsHtmlView.m */; };
 		D5C6441D1EB3360300438E6F /* MLFullTextSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6441C1EB3360300438E6F /* MLFullTextSearch.m */; };
 		D5C6441E1EB3360300438E6F /* MLFullTextSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6441C1EB3360300438E6F /* MLFullTextSearch.m */; };
 		D5C6441F1EB3360300438E6F /* MLFullTextSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6441C1EB3360300438E6F /* MLFullTextSearch.m */; };
@@ -552,6 +558,8 @@
 		D539C10417DCED1D00759260 /* MLSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSplashScreen.h; sourceTree = "<group>"; };
 		D539C10517DCED1D00759260 /* MLSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSplashScreen.m; sourceTree = "<group>"; };
 		D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zur_Rose_1000x670px.png; sourceTree = "<group>"; };
+		D53AB5AB1F3DAA1F00B9C059 /* MLInteractionsCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInteractionsCart.h; sourceTree = "<group>"; };
+		D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInteractionsCart.m; sourceTree = "<group>"; };
 		D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLProgressSheet.xib; sourceTree = "<group>"; };
 		D53ABBF6189522AD00C4525C /* MLProgressSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLProgressSheetController.h; sourceTree = "<group>"; };
 		D53ABBF7189522AD00C4525C /* MLProgressSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLProgressSheetController.m; sourceTree = "<group>"; };
@@ -612,8 +620,8 @@
 		D5C5C52F1F0E59F300DF851F /* MLSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSignatureView.h; sourceTree = "<group>"; };
 		D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSignatureView.m; sourceTree = "<group>"; };
 		D5C5C5371F16515900DF851F /* prescription@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prescription@2x.png"; sourceTree = "<group>"; };
-		D5C6440B1EB32F5300438E6F /* MLInteractionsCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInteractionsCart.h; sourceTree = "<group>"; };
-		D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInteractionsCart.m; sourceTree = "<group>"; };
+		D5C6440B1EB32F5300438E6F /* MLInteractionsHtmlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInteractionsHtmlView.h; sourceTree = "<group>"; };
+		D5C6440C1EB32F5300438E6F /* MLInteractionsHtmlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInteractionsHtmlView.m; sourceTree = "<group>"; };
 		D5C6441B1EB3360300438E6F /* MLFullTextSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFullTextSearch.h; sourceTree = "<group>"; };
 		D5C6441C1EB3360300438E6F /* MLFullTextSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFullTextSearch.m; sourceTree = "<group>"; };
 		D5C6442B1EB345A300438E6F /* fulltext_style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = fulltext_style.css; sourceTree = "<group>"; };
@@ -868,10 +876,12 @@
 		D5C644241EB3367300438E6F /* Interactions */ = {
 			isa = PBXGroup;
 			children = (
+				D53AB5AB1F3DAA1F00B9C059 /* MLInteractionsCart.h */,
+				D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */,
 				D517E4AE1EA8B8C400187AC8 /* MLInteractionsAdapter.h */,
 				D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */,
-				D5C6440B1EB32F5300438E6F /* MLInteractionsCart.h */,
-				D5C6440C1EB32F5300438E6F /* MLInteractionsCart.m */,
+				D5C6440B1EB32F5300438E6F /* MLInteractionsHtmlView.h */,
+				D5C6440C1EB32F5300438E6F /* MLInteractionsHtmlView.m */,
 			);
 			name = Interactions;
 			sourceTree = "<group>";
@@ -1612,7 +1622,8 @@
 				D5E7311B1B33480A007771D7 /* MLSQLiteDatabase.m in Sources */,
 				D5E7311C1B33480A007771D7 /* zip.c in Sources */,
 				D5E7311D1B33480A007771D7 /* MLSearchWebView.js in Sources */,
-				D5C644111EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C644111EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
+				D53AB5B11F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5C5C50B1F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E7311E1B33480A007771D7 /* MLDBAdapter.m in Sources */,
 				D5BACC0A1EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
@@ -1666,7 +1677,8 @@
 				D5E7315F1B334829007771D7 /* MLSQLiteDatabase.m in Sources */,
 				D5E731601B334829007771D7 /* zip.c in Sources */,
 				D5E731611B334829007771D7 /* MLSearchWebView.js in Sources */,
-				D5C644121EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C644121EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
+				D53AB5B21F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5C5C50C1F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E731621B334829007771D7 /* MLDBAdapter.m in Sources */,
 				D5BACC0B1EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
@@ -1720,7 +1732,8 @@
 				D5E91B5C17E5E24000B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FD18A2CE0D00491511 /* zip.c in Sources */,
 				D5E91B5D17E5E24000B66B27 /* MLSearchWebView.js in Sources */,
-				D5C6440F1EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C6440F1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
+				D53AB5AF1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5C5C5091F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E91B5E17E5E24000B66B27 /* MLDBAdapter.m in Sources */,
 				D5BACC081EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
@@ -1772,7 +1785,7 @@
 				D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8E71898527C00491511 /* zip.c in Sources */,
 				D5E91B8C17E5E8E400B66B27 /* MLSearchWebView.js in Sources */,
-				D5C6440D1EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C6440D1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
 				D5C5C5071F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E91B8D17E5E8E400B66B27 /* MLDBAdapter.m in Sources */,
 				D5BACC061EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
@@ -1792,6 +1805,7 @@
 				D5C5C5311F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0C1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D53AB5AD1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C21EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8D91898527300491511 /* SSZipArchive.m in Sources */,
@@ -1827,7 +1841,7 @@
 				D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FC18A2CE0D00491511 /* zip.c in Sources */,
 				D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */,
-				D5C6440E1EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C6440E1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
 				D5C5C5081F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E91BBC17E5E8E800B66B27 /* MLDBAdapter.m in Sources */,
 				D5BACC071EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
@@ -1847,6 +1861,7 @@
 				D5C5C5321F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D53AB5AE1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C31EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8F018A2CDE900491511 /* SSZipArchive.m in Sources */,
@@ -1884,7 +1899,8 @@
 				D5EBC6AD17C9202600EBEF39 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FE18A2CE0D00491511 /* zip.c in Sources */,
 				D5EBC6B217C9205E00EBEF39 /* MLSearchWebView.js in Sources */,
-				D5C644101EB32F5300438E6F /* MLInteractionsCart.m in Sources */,
+				D5C644101EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
+				D53AB5B01F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5C5C50A1F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5EBC6B817C9206800EBEF39 /* MLDBAdapter.m in Sources */,
 				D5BACC091EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,

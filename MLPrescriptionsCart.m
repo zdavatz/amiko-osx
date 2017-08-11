@@ -22,11 +22,27 @@
  ------------------------------------------------------------------------ */
 
 #import "MLPrescriptionsCart.h"
+#import "MLInteractionsCart.h"
 
 @implementation MLPrescriptionsCart
+{
+    MLInteractionsAdapter *interactionsAdapter;
+    MLInteractionsCart *interactions;
+}
 
 @synthesize cart;
 @synthesize cartId;
+
+- (id) init
+{
+    interactions = [[MLInteractionsCart alloc] init];
+    return [super init];
+}
+
+- (void) setInteractionsAdapter:(MLInteractionsAdapter *)adapter
+{
+    interactionsAdapter = adapter;
+}
 
 - (NSInteger) size
 {

@@ -25,27 +25,28 @@
 
 @interface MLDBAdapter : NSObject
 
-- (BOOL) openDatabase: (NSString *)name;
+- (BOOL) openDatabase:(NSString *)name;
 - (void) closeDatabase;
 - (NSInteger) getNumRecords;
 - (NSInteger) getNumProducts;
-- (MLMedication *) getMediWithId: (long)rowId;
-- (MLMedication *) getMediWithRegnr: (NSString *)regnr;
-- (NSArray *) getFullRecord: (long)rowId;
-- (NSArray *) searchWithQuery: (NSString *)query;
-- (NSArray *) searchTitle: (NSString *)title;
-- (NSArray *) searchAuthor: (NSString *)author;
-- (NSArray *) searchATCCode: (NSString *)atccode;
-- (NSArray *) searchIngredients: (NSString *)ingredients;
-- (NSArray *) searchRegNr: (NSString *)regnr;
-- (NSArray *) searchTherapy: (NSString *)therapy;
-- (NSArray *) searchApplication: (NSString *)application;
+- (MLMedication *) getMediWithId:(long)rowId;
+- (MLMedication *) getShortMediWithId:(long)rowId;
+- (MLMedication *) getMediWithRegnr:(NSString *)regnr;
+- (NSArray *) getFullRecord:(long)rowId;
+- (NSArray *) searchWithQuery:(NSString *)query;
+- (NSArray *) searchTitle:(NSString *)title;
+- (NSArray *) searchAuthor:(NSString *)author;
+- (NSArray *) searchATCCode:(NSString *)atccode;
+- (NSArray *) searchIngredients:(NSString *)ingredients;
+- (NSArray *) searchRegNr:(NSString *)regnr;
+- (NSArray *) searchTherapy:(NSString *)therapy;
+- (NSArray *) searchApplication:(NSString *)application;
 - (NSArray *) searchRegnrsFromList:(NSArray *)listOfRegnrs;
-- (MLMedication *) cursorToVeryShortMedInfo: (NSArray *)cursor;
-- (MLMedication *) cursorToShortMedInfo: (NSArray *)cursor;
-- (MLMedication *) cursorToFullMedInfo: (NSArray *)cursor;
-- (NSArray *) extractVeryShortMedInfoFrom: (NSArray *)results;
-- (NSArray *) extractShortMedInfoFrom: (NSArray *)results;
-- (NSArray *) extractFullMedInfoFrom: (NSArray *)results;
+- (MLMedication *) cursorToVeryShortMedInfo:(NSArray *)cursor;
+- (MLMedication *) cursorToShortMedInfo:(NSArray *)cursor;
+- (MLMedication *) cursorToFullMedInfo:(NSArray *)cursor;
+- (NSArray *) extractVeryShortMedInfoFrom:(NSArray *)results;
+- (NSArray *) extractShortMedInfoFrom:(NSArray *)results;
+- (NSArray *) extractFullMedInfoFrom:(NSArray *)results;
 
 @end

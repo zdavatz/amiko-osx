@@ -25,7 +25,7 @@
 #import "MLDBAdapter.h"
 #import "MLFullTextDBAdapter.h"
 #import "MLInteractionsAdapter.h"
-#import "MLInteractionsCart.h"
+#import "MLInteractionsHtmlView.h"
 #import "MLFullTextSearch.h"
 #import "MLItemCellView.h"
 #import "MLSearchWebView.h"
@@ -107,7 +107,7 @@ static BOOL mSearchInteractions = false;
     MLMedication *mMed;
     MLDBAdapter *mDb;
     MLInteractionsAdapter *mInteractions;
-    MLInteractionsCart *mInteractionsCart;
+    MLInteractionsHtmlView *mInteractionsView;
     MLFullTextDBAdapter *mFullTextDb;
     MLFullTextEntry *mFullTextEntry;
     MLFullTextSearch *mFullTextSearch;
@@ -125,8 +125,6 @@ static BOOL mSearchInteractions = false;
     
     NSArray *mListOfSectionIds;
     NSArray *mListOfSectionTitles;
-
-    NSMutableDictionary *mMedBasket;
     
     NSProgressIndicator *progressIndicator;
     
@@ -152,11 +150,12 @@ static BOOL mSearchInteractions = false;
 @synthesize mySectionTitles;
 @synthesize myTextFinder;
 @synthesize myTabView;
-@synthesize myPrescriptionsTableView;
+@synthesize myPatientSearchField;
 @synthesize myPatientAddressTextField;
 @synthesize myOperatorIDTextField;
 @synthesize mySignView;
-@synthesize myPatientSearchField;
+@synthesize myPrescriptionsTableView;
+@synthesize myInteractionsTableView;
 
 #pragma mark Class methods
 static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active prescriptions
@@ -265,11 +264,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
      NSLog(@"Number of records in interaction file = %lu", (unsigned long)[mInteractions getNumInteractions]);
 #endif
     
-    // Initialize medication basket
-    mMedBasket = [[NSMutableDictionary alloc] init];
-    
     // Initialize interactions cart
-    mInteractionsCart = [[MLInteractionsCart alloc] init];
+    mInteractionsView = [[MLInteractionsHtmlView alloc] init];
     
     // Create bridge between JScript and ObjC
     [self createJSBridge];
@@ -280,6 +276,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     // Initialize all three prescription baskets
     for (int i=0; i<3; ++i) {
         mPrescriptionsCart[i] = [[MLPrescriptionsCart alloc] init];
+        [mPrescriptionsCart[i] setInteractionsAdapter:mInteractions];
     }  
     
     // Initialize webview
@@ -1133,7 +1130,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             [self pushToMedBasket];
             [self updateInteractionsView];
             // Switch tab view
-            [myTabView selectTabViewItemAtIndex:1];
+            [myTabView selectTabViewItemAtIndex:0];
             break;
         }
         case 3:
@@ -1620,19 +1617,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
  */
 - (void) pushToMedBasket
 {
-    if (mMed!=nil) {
-        NSString *title = [mMed title];
-        title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([title length]>30) {
-            title = [title substringToIndex:30];
-            title = [title stringByAppendingString:@"..."];
-        }
-    
-        // Add med to medication basket
-        [mMedBasket setObject:mMed forKey:title];
-        // Update the interactions cart's med basket -> could be replaced by a signal/slot mechanism!!
-        [mInteractionsCart updateMedBasket:mMedBasket];
-    }
+    [mInteractionsView pushToMedBasket:mMed];
 }
 
 /**
@@ -1648,15 +1633,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             // --- Interactions ---
             if ([msg[0] isEqualToString:@"interactions_cb"]) {
                 if ([msg[1] isEqualToString:@"notify_interaction"])
-                    [mInteractionsCart sendInteractionNotice];
+                    [mInteractionsView sendInteractionNotice];
                 else if ([msg[1] isEqualToString:@"delete_all"])
-                    [mMedBasket removeAllObjects];
+                    [mInteractionsView clearMedBasket];
                 else if ([msg[1] isEqualToString:@"delete_row"])
-                    [mMedBasket removeObjectForKey:msg[2]];
+                    [mInteractionsView removeFromMedBasketForKey:msg[2]];
                 
                 // Update med basket
                 mCurrentWebView = kInteractionsCartView;
-                [mInteractionsCart updateMedBasket:mMedBasket];
                 [self updateInteractionsView];
             }
         } else if ([msg count]==4) {
@@ -1733,7 +1717,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 - (void) updateInteractionsView
 {
     // Generate main interaction table
-    NSString *htmlStr = [mInteractionsCart fullInteractionsHtml:mInteractions];
+    NSString *htmlStr = [mInteractionsView fullInteractionsHtml:mInteractions];
     
     // With the following implementation, the images are not loaded
     // NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
@@ -1742,11 +1726,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:[[NSBundle mainBundle] resourceURL]];
     
     // Update section title anchors
-    if (![mInteractionsCart.listofSectionIds isEqual:[NSNull null]])
-        mListOfSectionIds = mInteractionsCart.listofSectionIds;
+    if (![mInteractionsView.listofSectionIds isEqual:[NSNull null]])
+        mListOfSectionIds = mInteractionsView.listofSectionIds;
     // Update section titles (here: identical to anchors)
-    if (![mInteractionsCart.listofSectionTitles isEqual:[NSNull null]])
-        mListOfSectionTitles = mInteractionsCart.listofSectionTitles;
+    if (![mInteractionsView.listofSectionTitles isEqual:[NSNull null]])
+        mListOfSectionTitles = mInteractionsView.listofSectionTitles;
     
     [mySectionTitles reloadData];
 }
@@ -1785,6 +1769,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             mPrescriptionsCart[n].cart = [[NSMutableArray alloc] init];
             mPrescriptionsCart[n].cartId = n;
         }
+        
+        // Get medi
+        item.med = [mDb getShortMediWithId:item.mid];
         [mPrescriptionsCart[n] addItemToCart:item];
         [self.myPrescriptionsTableView reloadData];
     }

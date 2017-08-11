@@ -71,11 +71,12 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSTableView *mySectionTitles;
 @property (nonatomic, retain) IBOutlet NSTextFinder *myTextFinder;
 @property (nonatomic, retain) IBOutlet NSTabView *myTabView;
+@property (nonatomic, retain) IBOutlet NSSearchField *myPatientSearchField;
 @property (nonatomic, retain) IBOutlet NSTextField *myPatientAddressTextField;
 @property (nonatomic, retain) IBOutlet NSTextField *myOperatorIDTextField;
-@property (nonatomic, retain) IBOutlet NSTableView *myPrescriptionsTableView;
 @property (nonatomic, retain) IBOutlet MLSignatureView *mySignView;
-@property (nonatomic, retain) IBOutlet NSSearchField *myPatientSearchField;
+@property (nonatomic, retain) IBOutlet NSTableView *myPrescriptionsTableView;
+@property (nonatomic, retain) IBOutlet NSTableView *myInteractionsTableView;
 
 - (IBAction) performFindAction:(id)sender;
 - (IBAction) clickedTableView:(id)sender;

@@ -25,6 +25,7 @@
 
 #import "MLMedication.h"
 #import "MLPrescriptionItem.h"
+#import "MLInteractionsAdapter.h"
 
 @interface MLPrescriptionsCart : NSObject
 
@@ -32,6 +33,7 @@
 @property (atomic) NSInteger cartId;
 
 - (NSInteger) size;
+- (void) setInteractionsAdapter:(MLInteractionsAdapter *)adapter;
 - (void) addItemToCart:(MLPrescriptionItem *)item;
 - (void) removeItemFromCart:(MLPrescriptionItem *)item;
 - (MLPrescriptionItem *) getItemAtIndex:(NSInteger)index;
