@@ -528,7 +528,6 @@
 		D5F303461F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F303421F21F42A00CAFED3 /* MLPrescriptionsCart.m */; };
 		D5F303471F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F303421F21F42A00CAFED3 /* MLPrescriptionsCart.m */; };
 		D5F303481F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F303421F21F42A00CAFED3 /* MLPrescriptionsCart.m */; };
-		D5F3034A1F21FE1000CAFED3 /* MLPrescriptionsCart.h in Sources */ = {isa = PBXBuildFile; fileRef = D5F303491F21F43F00CAFED3 /* MLPrescriptionsCart.h */; };
 		D5F3034B1F21FE2200CAFED3 /* MLPrescriptionsCart.h in Sources */ = {isa = PBXBuildFile; fileRef = D5F303491F21F43F00CAFED3 /* MLPrescriptionsCart.h */; };
 		D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */; };
 /* End PBXBuildFile section */
@@ -1767,7 +1766,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5F3034A1F21FE1000CAFED3 /* MLPrescriptionsCart.h in Sources */,
 				D5AAB3EE1EB20F3400002F47 /* MLFullTextDBAdapter.m in Sources */,
 				D545C8E61898527C00491511 /* unzip.c in Sources */,
 				D5E91B8817E5E8E400B66B27 /* main.m in Sources */,

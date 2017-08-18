@@ -32,6 +32,7 @@
 @property (atomic) MLMedication *selectedMedi;
 @property (atomic) NSString *packagesStr;
 @property (atomic) NSInteger numPackages;
+@property (atomic) BOOL showContextualMenu;
 
 @end
 

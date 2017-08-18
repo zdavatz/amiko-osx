@@ -27,15 +27,16 @@
 @implementation MLPrescriptionsCart
 {
     MLInteractionsAdapter *interactionsAdapter;
-    MLInteractionsCart *interactions;
+    MLInteractionsCart *interactionsCart;
 }
 
 @synthesize cart;
 @synthesize cartId;
+@synthesize interactions;
 
 - (id) init
 {
-    interactions = [[MLInteractionsCart alloc] init];
+    interactionsCart = [[MLInteractionsCart alloc] init];
     return [super init];
 }
 
@@ -55,6 +56,8 @@
 {
     if (cart!=nil) {
         [cart addObject:item];
+        // Add item to interactions cart
+        [interactionsCart.cart setObject:item.med forKey:item.title];
         NSLog(@"Num med in basket: %ld -> %ld", cartId, [cart count]);
     }
 }
@@ -63,7 +66,16 @@
 {
     if (cart!=nil) {
         [cart removeObject:item];
+        [interactionsCart.cart removeObjectForKey:item.title];
         NSLog(@"Removed med %@ from basket %ld", [item productName], cartId);
+    }
+}
+
+- (void) clearCart
+{
+    if (cart!=nil) {
+        [cart removeAllObjects];
+        [interactionsCart.cart removeAllObjects];
     }
 }
 

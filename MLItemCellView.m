@@ -42,6 +42,7 @@
 @synthesize selectedMedi;
 @synthesize packagesStr;
 @synthesize numPackages;
+@synthesize showContextualMenu;
 
 /*
  In case you generate the table cell view manually
@@ -145,24 +146,25 @@
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
     if ([notification object] == self.packagesView) {
-        NSInteger row = [[notification object] selectedRow];
-        if (row < [listOfPackages count]) {
-            // Generates contextual menu
-            NSMenu *ctxtMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
-            selectedPackage = listOfPackages[row];
-            [ctxtMenu insertItemWithTitle:selectedPackage action:nil keyEquivalent:@"" atIndex:0];
-            // Populate all menu items
-            NSMenuItem *menuItem;
-            menuItem = [ctxtMenu insertItemWithTitle:@"Rezept" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:1];
-            [menuItem setRepresentedObject:[NSNumber numberWithInt:0]];
-            /*
-            menuItem = [ctxtMenu insertItemWithTitle:@"Rezept 2" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:2];
-            [menuItem setRepresentedObject:[NSNumber numberWithInt:1]];
-            menuItem = [ctxtMenu insertItemWithTitle:@"Rezept 3" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:3];
-            [menuItem setRepresentedObject:[NSNumber numberWithInt:2]];
-             */
-            // Place menu on the screen
-            [ctxtMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
+        if (showContextualMenu == true) {
+            NSInteger row = [[notification object] selectedRow];
+            if (row < [listOfPackages count]) {
+                // Generates contextual menu
+                NSMenu *ctxtMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+                selectedPackage = listOfPackages[row];
+                [ctxtMenu insertItemWithTitle:selectedPackage action:nil keyEquivalent:@"" atIndex:0];
+                // Populate all menu items
+                NSMenuItem *menuItem = [ctxtMenu insertItemWithTitle:@"Rezept" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:1];
+                [menuItem setRepresentedObject:[NSNumber numberWithInt:0]];
+                /*
+                 menuItem = [ctxtMenu insertItemWithTitle:@"Rezept 2" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:2];
+                 [menuItem setRepresentedObject:[NSNumber numberWithInt:1]];
+                 menuItem = [ctxtMenu insertItemWithTitle:@"Rezept 3" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:3];
+                 [menuItem setRepresentedObject:[NSNumber numberWithInt:2]];
+                 */
+                // Place menu on the screen
+                [ctxtMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
+            }
         }
         [self.packagesView reloadData];
     }

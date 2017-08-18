@@ -29,13 +29,15 @@
 
 @interface MLPrescriptionsCart : NSObject
 
-@property (atomic) NSMutableArray *cart;
 @property (atomic) NSInteger cartId;
+@property (atomic) NSMutableArray *cart;
+@property (atomic) NSArray *interactions;
 
-- (NSInteger) size;
 - (void) setInteractionsAdapter:(MLInteractionsAdapter *)adapter;
+- (NSInteger) size;
 - (void) addItemToCart:(MLPrescriptionItem *)item;
 - (void) removeItemFromCart:(MLPrescriptionItem *)item;
+- (void) clearCart;
 - (MLPrescriptionItem *) getItemAtIndex:(NSInteger)index;
 
 @end

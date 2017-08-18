@@ -24,7 +24,6 @@
 #import "MLPatientSheetController.h"
 
 #import "MLPatientDBAdapter.h"
-#import "MLMainWindowController.h"
 #import "MLContacts.h"
 #import "MLColors.h"
 
@@ -32,6 +31,7 @@
 {
     @private
     MLPatientDBAdapter *mPatientDb;
+    MLPatient *mSelectedPatient;
     NSModalSession mModalSession;
     NSArray *mArrayOfPatients;
     NSMutableArray *mFilteredArrayOfPatients;
@@ -166,6 +166,23 @@
     patient.gender = [mFemaleButton state]==NSOnState ? @"woman" : @"man";
     
     return patient;
+}
+
+- (NSString *) retrievePatientAsString
+{
+    NSString *p = @"";
+    if (mSelectedPatient!=nil) {
+        NSString *familyName = mSelectedPatient.familyName;
+        NSString *givenName = mSelectedPatient.givenName;
+        NSString *postalAddress = mSelectedPatient.postalAddress;
+        NSString *zipCode = mSelectedPatient.zipCode;
+        NSString *city = mSelectedPatient.city;
+        NSString *phoneNumber = mSelectedPatient.phoneNumber;
+        NSString *emailAddress = mSelectedPatient.emailAddress;
+        p = [NSString stringWithFormat:@"%@ %@\r\n%@\r\nCH-%@ %@\r\n%@\r\n%@",
+             givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];
+    }
+    return p;
 }
 
 - (NSString *) retrievePatientAsString:(NSString *)searchKey
@@ -350,6 +367,21 @@
         // Retrieves contacts from local patient database
         [self updateAmiKoAddressBookTableView];
     }
+}
+
+- (IBAction) onSelectPatient:(id)sender
+{
+    NSInteger row = [mTableView selectedRow];
+    mSelectedPatient = nil;
+    if (mSearchFiltered) {
+        mSelectedPatient = mFilteredArrayOfPatients[row];
+    } else {
+        mSelectedPatient = mArrayOfPatients[row];
+    }
+    if (mSelectedPatient!=nil) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionPatientChanged" object:self];
+    }
+    [self remove];
 }
 
 - (void) show:(NSWindow *)window

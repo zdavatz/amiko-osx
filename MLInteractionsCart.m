@@ -96,50 +96,21 @@
     return htmlStr;
 }
 
-- (NSArray *) interactionsAsArrayForAdapter:(MLInteractionsAdapter *)adapter
+- (NSInteger) inferRiskClass:(NSString *)str
 {
-    NSMutableArray *interactionsArray;
-    
-    if ([self size]>1) {
-        // First sort them alphabetically
-        NSArray *sortedNames = [[cart allKeys] sortedArrayUsingSelector: @selector(compare:)];
-        // Big loop
-        for (NSString *name1 in sortedNames) {
-            for (NSString *name2 in sortedNames) {
-                if (![name1 isEqualToString:name2]) {
-                    // Extract meds by names from interaction basket
-                    MLMedication *med1 = [cart valueForKey:name1];
-                    MLMedication *med2 = [cart valueForKey:name2];
-                    // Get ATC codes from interaction db
-                    NSArray *m_code1 = [[med1 atccode] componentsSeparatedByString:@";"];
-                    NSArray *m_code2 = [[med2 atccode] componentsSeparatedByString:@";"];
-                    NSArray *atc1 = nil;
-                    NSArray *atc2 = nil;
-                    if ([m_code1 count]>1)
-                        atc1 = [[m_code1 objectAtIndex:0] componentsSeparatedByString:@","];
-                    if ([m_code2 count]>1)
-                        atc2 = [[m_code2 objectAtIndex:0] componentsSeparatedByString:@","];
-                    
-                    NSString *atc_code1 = @"";
-                    NSString *atc_code2 = @"";
-                    if (atc1!=nil && [atc1 count]>0) {
-                        for (atc_code1 in atc1) {
-                            if (atc2!=nil && [atc2 count]>0) {
-                                for (atc_code2 in atc2) {
-                                    NSString *html = [adapter getInteractionHtmlBetween:atc_code1 and:atc_code2];
-                                    if (html!=nil) {
-                                        [interactionsArray addObject:[NSString stringWithFormat:@"%@ \u2192 %@", name1, name2]];
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    if ([str containsString:@"paragraphA"]) {
+        return 0;
+    } else if ([str containsString:@"paragraphB"]) {
+        return 1;
+    } else if ([str containsString:@"paragraphC"]) {
+        return 2;
+    } else if ([str containsString:@"paragraphD"]) {
+        return 3;
+    } else if ([str containsString:@"paragraphX"]) {
+        return 4;
+    } else {
+        return 10;
     }
-    
-    return interactionsArray;
 }
 
 @end

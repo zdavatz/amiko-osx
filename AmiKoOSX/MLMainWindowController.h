@@ -76,7 +76,6 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSTextField *myOperatorIDTextField;
 @property (nonatomic, retain) IBOutlet MLSignatureView *mySignView;
 @property (nonatomic, retain) IBOutlet NSTableView *myPrescriptionsTableView;
-@property (nonatomic, retain) IBOutlet NSTableView *myInteractionsTableView;
 
 - (IBAction) performFindAction:(id)sender;
 - (IBAction) clickedTableView:(id)sender;
@@ -96,6 +95,9 @@ extern NSString* const APP_ID;
 - (IBAction) setOperatorIdentity:(id)sender;
 - (IBAction) findPatient:(id)sender;
 - (IBAction) removeItemFromPrescription:(id)sender;
+- (IBAction) removeAllItemsFromPrescription:(id)sender;
+- (IBAction) onSearchPatient:(id)sender;
+- (IBAction) onCheckForInteractions:(id)sender;
 // Help
 - (IBAction) showReportFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;

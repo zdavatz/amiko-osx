@@ -31,7 +31,6 @@
     IBOutlet NSTextField *mNumPatients;
     IBOutlet NSTextField *mNotification;
     IBOutlet NSSearchField *mSearchKey;
-    // References to text fields in table
     IBOutlet NSTextField *mFamilyName;
     IBOutlet NSTextField *mGivenName;
     IBOutlet NSTextField *mBirthDate;
@@ -54,7 +53,9 @@
 - (IBAction) onNewPatient:(id)sender;
 - (IBAction) onDeletePatient:(id)sender;
 - (IBAction) onShowContacts:(id)sender;
+- (IBAction) onSelectPatient:(id)sender;
 
+- (NSString *) retrievePatientAsString;
 - (NSString *) retrievePatientAsString:(NSString *)searchKey;
 - (void) show:(NSWindow *)window;
 - (void) remove;

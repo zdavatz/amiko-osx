@@ -397,6 +397,7 @@ Gw
                                                         </tableColumn>
                                                     </tableColumns>
                                                     <connections>
+                                                        <action trigger="doubleAction" selector="onSelectPatient:" target="-2" id="hYK-tN-SpA"/>
                                                         <outlet property="dataSource" destination="-2" id="vIf-JL-dOR"/>
                                                         <outlet property="delegate" destination="-2" id="jrk-bn-90T"/>
                                                     </connections>

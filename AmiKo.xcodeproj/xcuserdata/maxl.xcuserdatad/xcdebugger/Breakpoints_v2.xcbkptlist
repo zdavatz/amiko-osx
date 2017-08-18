@@ -121,13 +121,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MLInteractionsHtmlView.m"
-            timestampString = "524152153.825408"
+            filePath = "MLInteractionsAdapter.m"
+            timestampString = "524155644.128515"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
-            landmarkName = "-interactionsHtml:"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-getInteractionHtmlBetween:and:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

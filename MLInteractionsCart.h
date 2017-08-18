@@ -31,6 +31,5 @@
 
 - (NSInteger) size;
 - (NSString *) interactionsAsHtmlForAdapter:(MLInteractionsAdapter *)adapter withTitles:(NSMutableArray *)titles andIds:(NSMutableArray *)ids;
-- (NSArray *) interactionsAsArrayForAdapter:(MLInteractionsAdapter *)adapter;
 
 @end

@@ -26,6 +26,7 @@
 #import "MLFullTextDBAdapter.h"
 #import "MLInteractionsAdapter.h"
 #import "MLInteractionsHtmlView.h"
+#import "MLInteractionsCart.h"
 #import "MLFullTextSearch.h"
 #import "MLItemCellView.h"
 #import "MLSearchWebView.h"
@@ -155,7 +156,6 @@ static BOOL mSearchInteractions = false;
 @synthesize myOperatorIDTextField;
 @synthesize mySignView;
 @synthesize myPrescriptionsTableView;
-@synthesize myInteractionsTableView;
 
 #pragma mark Class methods
 static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active prescriptions
@@ -314,11 +314,20 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                                              selector:@selector(finishedDownloading:)
                                                  name:@"MLStatusCode404"
                                                object:nil];
-    
+
+    // Register observer to notify change of window size
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(windowResized:)
                                                  name:NSWindowDidResizeNotification
                                                object:nil];
+    
+    // Register observer to notify change of patient selected in prescription module
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(prescriptionPatientChanged:)
+                                                 name:@"MLPrescriptionPatientChanged"
+                                               object:nil];
+    
+    
     [[self window] makeFirstResponder:self];
 
     /*
@@ -545,6 +554,21 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             NSLog(@"No French Fulltext database!");
             mFullTextDb = nil;
         }
+    }
+}
+
+/**
+ Notification called when prescription patient has changed
+ */
+- (void) prescriptionPatientChanged:(NSNotification *)notification
+{
+    if ([[notification name] isEqualToString:@"MLPrescriptionPatientChanged"]) {
+        if (!mPatientSheet) {
+            mPatientSheet = [[MLPatientSheetController alloc] init];
+        }
+        // Once modal window closes...
+        NSString *patientStr = [mPatientSheet retrievePatientAsString];
+        myPatientAddressTextField.stringValue = patientStr;
     }
 }
 
@@ -978,6 +1002,34 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
 }
 
+- (IBAction) removeAllItemsFromPrescription:(id)sender
+{
+    [mPrescriptionsCart[0] clearCart];
+    [self.myPrescriptionsTableView reloadData];
+}
+
+- (IBAction) onSearchPatient:(id)sender
+{
+    [self managePatients:sender];
+}
+
+- (IBAction) onCheckForInteractions:(id)sender
+{
+    [mInteractionsView clearMedBasket];
+    // Array of MLPrescriptionItems
+    NSArray *prescriptionMeds = mPrescriptionsCart[0].cart;
+    for (MLPrescriptionItem *item in prescriptionMeds) {
+        [mInteractionsView pushToMedBasket:item.med];
+    }
+    [self updateInteractionsView];
+    // Switch tab view
+    mUsedDatabase = kAips;
+    mSearchInteractions = true;
+    [self setSearchState:kTitle];
+    [myToolbar setSelectedItemIdentifier:@"Interaktionen"];
+    [myTabView selectTabViewItemAtIndex:0];
+}
+
 - (IBAction) showReportFile:(id)sender
 {
     [MLAbout showReportFile];
@@ -1043,7 +1095,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     switch (item.tag) {
         case 0:
         {
-            NSLog(@"AIPS Database");
+            // NSLog(@"AIPS Database");
             mUsedDatabase = kAips;
             mSearchInteractions = false;
             //
@@ -1080,12 +1132,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                 }
             });
             // Switch tab view
+            [self updateExpertInfoView:nil];
             [myTabView selectTabViewItemAtIndex:0];
             break;
         }
         case 1:
         {
-            NSLog(@"Favorites");
+            // NSLog(@"Favorites");
             mUsedDatabase = kFavorites;
             mSearchInteractions = false;
             //
@@ -1117,17 +1170,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                 }
             });
             // Switch tab view
+            [self updateExpertInfoView:nil];
             [myTabView selectTabViewItemAtIndex:0];
             break;
         }
         case 2:
         {
-            NSLog(@"Interactions");
+            // NSLog(@"Interactions");
             mUsedDatabase = kAips;
             mSearchInteractions = true;
             [self stopProgressIndicator];
             [self setSearchState:kTitle];            
-            [self pushToMedBasket];
+            [self pushToMedBasket:mMed];
             [self updateInteractionsView];
             // Switch tab view
             [myTabView selectTabViewItemAtIndex:0];
@@ -1135,8 +1189,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         }
         case 3:
         {
-            NSLog(@"Rezept");
+            // NSLog(@"Rezept");
             [self stopProgressIndicator];
+            [self updatePrescriptionsView];
             // Switch tab view
             [myTabView selectTabViewItemAtIndex:2];
             break;
@@ -1615,9 +1670,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 /**
  Add med in the buffer to the interaction basket
  */
-- (void) pushToMedBasket
+- (void) pushToMedBasket:(MLMedication *)med
 {
-    [mInteractionsView pushToMedBasket:mMed];
+    [mInteractionsView pushToMedBasket:med];
 }
 
 /**
@@ -1711,6 +1766,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     // Extract section titles
     if (![mMed.sectionTitles isEqual:[NSNull null]])
         mListOfSectionTitles = [mMed listOfSectionTitles];
+
     [mySectionTitles reloadData];
 }
 
@@ -1731,6 +1787,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     // Update section titles (here: identical to anchors)
     if (![mInteractionsView.listofSectionTitles isEqual:[NSNull null]])
         mListOfSectionTitles = mInteractionsView.listofSectionTitles;
+    
+    [mySectionTitles reloadData];
+}
+
+- (void) updatePrescriptionsView
+{
+    // Extract section ids
+    if (![mMed.sectionIds isEqual:[NSNull null]])
+        mListOfSectionIds = nil;
+    // Extract section titles
+    if (![mMed.sectionTitles isEqual:[NSNull null]])
+        mListOfSectionTitles = nil;
     
     [mySectionTitles reloadData];
 }
@@ -1838,6 +1906,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     } else if (tableView == self.myPrescriptionsTableView) {
         return mPrescriptionsCart[0].size;
     }
+    
     return 0;
 }
 
@@ -1867,6 +1936,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             cellView.textField.stringValue = [medi[row] title];
             cellView.selectedMedi = medi[row];
             cellView.packagesStr = [medi[row] subTitle];
+            if (mCurrentSearchState == kTitle)
+                cellView.showContextualMenu = true;
+            else
+                cellView.showContextualMenu = false;
             [cellView.packagesView reloadData];
             
             // Check if cell.textLabel.text is in starred NSSet
@@ -1953,7 +2026,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             if (mSearchInteractions==false) {
                 [self updateExpertInfoView:nil];
             } else {
-                [self pushToMedBasket];
+                [self pushToMedBasket:mMed];
                 [self updateInteractionsView];
             }
         } else {
