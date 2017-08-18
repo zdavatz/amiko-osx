@@ -2,7 +2,7 @@
  
  Copyright (c) 2017 Max Lungarella <cybrmx@gmail.com>
  
- Created on 21/07/2017.
+ Created on 18/08/2017.
  
  This file is part of AmiKo for OSX.
  
@@ -21,21 +21,14 @@
  
  ------------------------------------------------------------------------ */
 
-#import "MLMedication.h"
-#import "MLPrescriptionItem.h"
-#import "MLInteractionsAdapter.h"
+#import "MLPatient.h"
 
-@interface MLPrescriptionsCart : NSObject
+@interface MLPrescriptionsAdapter : NSObject
 
-@property (atomic) NSInteger cartId;
-@property (atomic) NSMutableArray *cart;
-@property (atomic) NSArray *interactions;
+@property (atomic) NSArray *cart;
 
-- (void) setInteractionsAdapter:(MLInteractionsAdapter *)adapter;
-- (NSInteger) size;
-- (void) addItemToCart:(MLPrescriptionItem *)item;
-- (void) removeItemFromCart:(MLPrescriptionItem *)item;
-- (void) clearCart;
-- (MLPrescriptionItem *) getItemAtIndex:(NSInteger)index;
+- (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)patient;
+- (void) savePrescriptionForPatient:(MLPatient *)patient;
+- (void) loadPrescriptionForPatient:(MLPatient *)patient;
 
 @end

@@ -168,6 +168,11 @@
     return patient;
 }
 
+- (MLPatient *) retrievePatient
+{
+    return mSelectedPatient;
+}
+
 - (NSString *) retrievePatientAsString
 {
     NSString *p = @"";

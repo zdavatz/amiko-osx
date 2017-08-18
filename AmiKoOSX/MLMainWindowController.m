@@ -35,7 +35,7 @@
 #import "MLCustomView.h"
 #import "MLCustomURLConnection.h"
 #import "MLEditableTextField.h"
-
+#import "MLPrescriptionsAdapter.h"
 #import "MLPatientSheetController.h"
 #import "MLOperatorIDSheetController.h"
 
@@ -83,6 +83,7 @@ static NSInteger mCurrentWebView = kExpertInfoView;
 static NSString *mCurrentSearchKey = @"";
 
 static BOOL mSearchInteractions = false;
+static BOOL mPrescriptionMode = false;
 
 @interface DataObject : NSObject
 
@@ -566,9 +567,26 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         if (!mPatientSheet) {
             mPatientSheet = [[MLPatientSheetController alloc] init];
         }
-        // Once modal window closes...
-        NSString *patientStr = [mPatientSheet retrievePatientAsString];
-        myPatientAddressTextField.stringValue = patientStr;
+        myPatientAddressTextField.stringValue = [mPatientSheet retrievePatientAsString];
+    }
+    // Update prescription history in right most pane
+    [self updatePrescriptionHistory];
+}
+
+- (void) updatePrescriptionHistory
+{
+    MLPrescriptionsAdapter *mp = [[MLPrescriptionsAdapter alloc] init];
+    NSArray *listOfPrescriptions = [mp listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
+    
+    if (mPrescriptionMode) {
+        // Extract section ids
+        if (![mMed.sectionIds isEqual:[NSNull null]])
+            mListOfSectionIds = listOfPrescriptions;
+        // Extract section titles
+        if (![mMed.sectionTitles isEqual:[NSNull null]])
+            mListOfSectionTitles = listOfPrescriptions;
+        
+        [mySectionTitles reloadData];
     }
 }
 
@@ -1030,6 +1048,24 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [myTabView selectTabViewItemAtIndex:0];
 }
 
+- (IBAction) onSavePrescription:(id)sender
+{
+    if (!mPatientSheet) {
+        mPatientSheet = [[MLPatientSheetController alloc] init];
+    }
+    
+    MLPrescriptionsAdapter *mp = [[MLPrescriptionsAdapter alloc] init];
+    mp.cart = mPrescriptionsCart[0].cart;
+    [mp savePrescriptionForPatient:[mPatientSheet retrievePatient]];
+    // Update prescription history
+    [self updatePrescriptionHistory];
+}
+
+- (IBAction) onSendPrescription:(id)sender
+{
+
+}
+
 - (IBAction) showReportFile:(id)sender
 {
     [MLAbout showReportFile];
@@ -1090,6 +1126,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [progressIndicator removeFromSuperview];
 }
 
+/**
+ Switch app state
+ */
 - (void) switchTabs:(NSToolbarItem *)item
 {
     switch (item.tag) {
@@ -1098,6 +1137,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             // NSLog(@"AIPS Database");
             mUsedDatabase = kAips;
             mSearchInteractions = false;
+            mPrescriptionMode = false;
             //
             searchResults = [NSArray array];
             // MLMainWindowController* __weak weakSelf = self;
@@ -1141,6 +1181,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             // NSLog(@"Favorites");
             mUsedDatabase = kFavorites;
             mSearchInteractions = false;
+            mPrescriptionMode = false;
             //
             searchResults = [NSArray array];
             // MLMainWindowController* __weak weakSelf = self;
@@ -1179,6 +1220,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             // NSLog(@"Interactions");
             mUsedDatabase = kAips;
             mSearchInteractions = true;
+            mPrescriptionMode = false;
             [self stopProgressIndicator];
             [self setSearchState:kTitle];            
             [self pushToMedBasket:mMed];
@@ -1190,6 +1232,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         case 3:
         {
             // NSLog(@"Rezept");
+            mPrescriptionMode = true;
             [self stopProgressIndicator];
             [self updatePrescriptionsView];
             // Switch tab view
@@ -1760,14 +1803,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     // [[myWebView preferences] setDefaultFontSize:14];
     // [self setSearchState:kWebView];
     
-    // Extract section ids
-    if (![mMed.sectionIds isEqual:[NSNull null]])
-        mListOfSectionIds = [mMed listOfSectionIds];
-    // Extract section titles
-    if (![mMed.sectionTitles isEqual:[NSNull null]])
-        mListOfSectionTitles = [mMed listOfSectionTitles];
-
-    [mySectionTitles reloadData];
+    if (mPrescriptionMode == false) {
+        // Extract section ids
+        if (![mMed.sectionIds isEqual:[NSNull null]])
+            mListOfSectionIds = [mMed listOfSectionIds];
+        // Extract section titles
+        if (![mMed.sectionTitles isEqual:[NSNull null]])
+            mListOfSectionTitles = [mMed listOfSectionTitles];
+        
+        [mySectionTitles reloadData];
+    }
 }
 
 - (void) updateInteractionsView
@@ -1781,14 +1826,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     
     [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:[[NSBundle mainBundle] resourceURL]];
     
-    // Update section title anchors
-    if (![mInteractionsView.listofSectionIds isEqual:[NSNull null]])
-        mListOfSectionIds = mInteractionsView.listofSectionIds;
-    // Update section titles (here: identical to anchors)
-    if (![mInteractionsView.listofSectionTitles isEqual:[NSNull null]])
-        mListOfSectionTitles = mInteractionsView.listofSectionTitles;
-    
-    [mySectionTitles reloadData];
+    if (mPrescriptionMode == false) {
+        // Update section title anchors
+        if (![mInteractionsView.listofSectionIds isEqual:[NSNull null]])
+            mListOfSectionIds = mInteractionsView.listofSectionIds;
+        // Update section titles (here: identical to anchors)
+        if (![mInteractionsView.listofSectionTitles isEqual:[NSNull null]])
+            mListOfSectionTitles = mInteractionsView.listofSectionTitles;
+        
+        [mySectionTitles reloadData];
+    }
 }
 
 - (void) updatePrescriptionsView

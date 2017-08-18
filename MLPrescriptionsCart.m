@@ -22,7 +22,9 @@
  ------------------------------------------------------------------------ */
 
 #import "MLPrescriptionsCart.h"
+
 #import "MLInteractionsCart.h"
+#import "MLUtilities.h"
 
 @implementation MLPrescriptionsCart
 {

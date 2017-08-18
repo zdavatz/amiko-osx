@@ -22,6 +22,7 @@
  ------------------------------------------------------------------------ */
 
 #import "MLPatientDBAdapter.h"
+
 #import "MLSQLiteDatabase.h"
 #import "MLUtilities.h"
 #import "MLContacts.h"
@@ -108,21 +109,13 @@ static NSString *DATABASE_COLUMNS = nil;
         [myPatientDb close];
 }
 
-- (NSString *) currentTime
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm";
-    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-    return [dateFormatter stringFromDate:[NSDate date]];
-}
-
 - (NSString *) insertEntry:(MLPatient *)patient
 {
     if (myPatientDb) {
         // Creates and returns a new UUID with RFC 4122 version 4 random bytes
         NSUUID *uuid = [NSUUID UUID];
         NSString *uuidStr = [uuid UUIDString];
-        NSString *timeStr = [self currentTime];
+        NSString *timeStr = [MLUtilities currentTime];
         // If UUID exist re-use it!
         if (patient.uniqueId!=nil && [patient.uniqueId length]>0) {
             uuidStr = patient.uniqueId;

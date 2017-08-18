@@ -98,6 +98,8 @@ extern NSString* const APP_ID;
 - (IBAction) removeAllItemsFromPrescription:(id)sender;
 - (IBAction) onSearchPatient:(id)sender;
 - (IBAction) onCheckForInteractions:(id)sender;
+- (IBAction) onSavePrescription:(id)sender;
+- (IBAction) onSendPrescription:(id)sender;
 // Help
 - (IBAction) showReportFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;

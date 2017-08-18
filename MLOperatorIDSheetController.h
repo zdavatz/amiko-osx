@@ -30,7 +30,6 @@
     @private
     IBOutlet NSWindow *mPanel;
     IBOutlet MLSignatureView *mSignView;
-    // Reference to text fields
     IBOutlet NSTextField *mTitle;
     IBOutlet NSTextField *mFamilyName;
     IBOutlet NSTextField *mGivenName;

@@ -21,7 +21,7 @@
  
  ------------------------------------------------------------------------ */
 
-#import <Cocoa/Cocoa.h>
+#import "MLPatient.h"
 
 @interface MLPatientSheetController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource>
 {
@@ -55,6 +55,7 @@
 - (IBAction) onShowContacts:(id)sender;
 - (IBAction) onSelectPatient:(id)sender;
 
+- (MLPatient *) retrievePatient;
 - (NSString *) retrievePatientAsString;
 - (NSString *) retrievePatientAsString:(NSString *)searchKey;
 - (void) show:(NSWindow *)window;

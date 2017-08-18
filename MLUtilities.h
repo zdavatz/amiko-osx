@@ -45,6 +45,7 @@ extern NSString* const APP_ID;
 #endif
 
 @interface MLUtilities : NSObject
+
 + (void) reportMemory;
 + (NSString *) appOwner;
 + (NSString *) appLanguage;
@@ -56,4 +57,7 @@ extern NSString* const APP_ID;
 + (BOOL) checkFileIsAllowed:(NSString *)name;
 + (NSNumber*) timeIntervalInSecondsSince1970:(NSDate *)date;
 + (double) timeIntervalSinceLastDBSync;
++ (NSString *) currentTime;
++ (NSString*) encodeStringTo64:(NSString*)fromString;
+
 @end

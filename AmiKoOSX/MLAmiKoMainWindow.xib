@@ -556,6 +556,9 @@
                                                                                                         <buttonCell key="cell" type="push" title="Speichern" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2Bd-3O-fif">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
+                                                                                                            <connections>
+                                                                                                                <action selector="onSavePrescription:" target="-2" id="weY-m9-V1S"/>
+                                                                                                            </connections>
                                                                                                         </buttonCell>
                                                                                                     </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h3A-OZ-Ito">
@@ -564,6 +567,9 @@
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
                                                                                                         </buttonCell>
+                                                                                                        <connections>
+                                                                                                            <action selector="onSendPrescription:" target="-2" id="fRL-pN-J5t"/>
+                                                                                                        </connections>
                                                                                                     </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TwZ-Xx-Fuz">
                                                                                                         <rect key="frame" x="145" y="7" width="191" height="32"/>

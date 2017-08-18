@@ -164,5 +164,18 @@ NSString* const APP_ID = @"708142753";
     return timeInterval;
 }
 
++ (NSString *) currentTime
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm.ss";
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    return [dateFormatter stringFromDate:[NSDate date]];
+}
+
++ (NSString*)encodeStringTo64:(NSString*)fromString
+{
+    NSData *plainData = [fromString dataUsingEncoding:NSUTF8StringEncoding];
+    return [plainData base64Encoding];
+}
 
 @end
