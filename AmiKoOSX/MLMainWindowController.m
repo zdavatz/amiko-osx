@@ -117,6 +117,9 @@ static BOOL mPrescriptionMode = false;
     MLPatientSheetController *mPatientSheet;
     MLOperatorIDSheetController *mOperatorIDSheet;
     
+    MLPrescriptionsAdapter *mPrescriptionAdapter;
+    NSString *mCartHash;
+    
     NSMutableArray *medi;
     NSMutableArray *favoriteKeyData;
     
@@ -278,7 +281,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     for (int i=0; i<3; ++i) {
         mPrescriptionsCart[i] = [[MLPrescriptionsCart alloc] init];
         [mPrescriptionsCart[i] setInteractionsAdapter:mInteractions];
-    }  
+    }
+    mPrescriptionAdapter = [[MLPrescriptionsAdapter alloc] init];
     
     // Initialize webview
     [[myWebView preferences] setJavaScriptEnabled:YES];
@@ -575,8 +579,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (void) updatePrescriptionHistory
 {
-    MLPrescriptionsAdapter *mp = [[MLPrescriptionsAdapter alloc] init];
-    NSArray *listOfPrescriptions = [mp listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
+    NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
     
     if (mPrescriptionMode) {
         // Extract section ids
@@ -1020,7 +1023,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
 }
 
-- (IBAction) removeAllItemsFromPrescription:(id)sender
+- (IBAction) onNewPrescription:(id)sender
 {
     [mPrescriptionsCart[0] clearCart];
     [self.myPrescriptionsTableView reloadData];
@@ -1048,22 +1051,39 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [myTabView selectTabViewItemAtIndex:0];
 }
 
+- (IBAction) onLoadPrescription:(id)sender
+{
+    // Create a file open dialog class
+    NSOpenPanel* openDlgPanel = [NSOpenPanel openPanel];
+    // Set array of file types
+    NSArray *fileTypesArray;
+    fileTypesArray = [NSArray arrayWithObjects:@"amk",nil];
+    // Enable options in the dialog
+    [openDlgPanel setCanChooseFiles:YES];
+    [openDlgPanel setAllowedFileTypes:fileTypesArray];
+    [openDlgPanel setAllowsMultipleSelection:false];
+    [openDlgPanel beginWithCompletionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            // Grab reference to what has been selected
+            NSURL *fileURL = [[openDlgPanel  URLs] firstObject];
+            [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
+            mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
+            mCartHash = mPrescriptionsCart[0].uniqueHash;
+            [self.myPrescriptionsTableView reloadData];
+            // Switch tab view
+            [myTabView selectTabViewItemAtIndex:2];
+        }
+    }];
+}
+
 - (IBAction) onSavePrescription:(id)sender
 {
-    if (!mPatientSheet) {
-        mPatientSheet = [[MLPatientSheetController alloc] init];
-    }
-    
-    MLPrescriptionsAdapter *mp = [[MLPrescriptionsAdapter alloc] init];
-    mp.cart = mPrescriptionsCart[0].cart;
-    [mp savePrescriptionForPatient:[mPatientSheet retrievePatient]];
-    // Update prescription history
-    [self updatePrescriptionHistory];
+    [self savePrescriptionThenSend:NO];
 }
 
 - (IBAction) onSendPrescription:(id)sender
 {
-
+    [self savePrescriptionThenSend:YES];
 }
 
 - (IBAction) showReportFile:(id)sender
@@ -1102,6 +1122,82 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 - (void) showHelp:(id)sender
 {
     [MLAbout showHelp];
+}
+
+- (void) loadPrescription:(NSString *)filename
+{
+    if (!mPatientSheet) {
+        mPatientSheet = [[MLPatientSheetController alloc] init];
+    }
+    [mPrescriptionAdapter loadPrescriptionWithName:filename forPatient:[mPatientSheet retrievePatient]];
+    mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
+    mCartHash = mPrescriptionsCart[0].uniqueHash;
+}
+
+- (void) savePrescriptionThenSend:(BOOL)send
+{
+    if (!mPatientSheet) {
+        mPatientSheet = [[MLPatientSheetController alloc] init];
+    }
+    mPrescriptionAdapter.cart = mPrescriptionsCart[0].cart;
+
+    MLPatient *patient = [mPatientSheet retrievePatient];
+    NSString *cartHash = mPrescriptionsCart[0].uniqueHash;
+    
+    // Overwrite existing prescription?
+    if ([cartHash isEqualToString:mCartHash]) {
+        // Show alert with OK button
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Ja"];
+        [alert addButtonWithTitle:@"Nein"];
+        [alert setMessageText:@"Rezept überschreiben?"];
+        [alert setInformativeText:@"Wollen Sie dieses Rezept überschreiben?"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
+            NSURL *url = nil;
+            if (returnCode == NSAlertFirstButtonReturn) {
+                url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:YES];
+            } else if (returnCode == NSAlertSecondButtonReturn) {
+                if (send) {
+                    url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:NO];
+                }
+            }
+            if (url != nil && send == YES) {
+                [self sendPrescription:[[url absoluteURL] absoluteString]];
+            }
+            // Update prescription history
+            [self updatePrescriptionHistory];
+            return;
+        }];
+    }
+}
+
+- (void) sendPrescription:(NSString *)filePath
+{
+    NSString *subject = @"AmiKo Rezept";
+    NSString *encodedSubject = [NSString stringWithFormat:@"%@", [subject stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    NSString *attachment = [NSString stringWithFormat:@"%@", filePath];
+    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@?subject=%@&attachment=%@", @"", encodedSubject, attachment];
+    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
+    
+    // Detect default mail client
+    CFURLRef mailURL = CFURLCreateWithString(kCFAllocatorDefault, CFSTR("mailto://"), NULL);
+    CFURLRef mailAppURL = NULL;
+    OSStatus ret = 0;
+    if ((ret = LSGetApplicationForURL(mailURL, kLSRolesAll, NULL, &mailAppURL)) == 0) {
+        CFStringRef path = CFURLCopyFileSystemPath(mailAppURL, kCFURLPOSIXPathStyle);
+        CFShow(path);
+        CFRelease(path);
+        CFRelease(mailAppURL);
+    }
+    
+    NSString *app = [(__bridge NSURL *)(mailAppURL) absoluteString];
+    
+    if ([app containsString:@"Thunderbird"]) {
+        [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+    } else if ([app containsString:@"Mail"]) {
+        [[NSWorkspace sharedWorkspace] openFile:filePath withApplication:@"Mail"];
+    }
 }
 
 - (void) launchProgressIndicator
@@ -2101,11 +2197,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
          * Right-most pane
         */
         NSInteger row = [notifier selectedRow];
-       
         NSTableRowView *myRowView = [self.mySectionTitles rowViewAtRow:row makeIfNecessary:NO];
         [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
         
-        if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
+        if (mPrescriptionMode) {
+            [self loadPrescription:mListOfSectionTitles[row]];
+            [self.myPrescriptionsTableView reloadData];
+        } else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
             NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
             [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
         } else {

@@ -30,6 +30,7 @@
 @property (atomic) NSInteger cartId;
 @property (atomic) NSMutableArray *cart;
 @property (atomic) NSArray *interactions;
+@property (atomic) NSString *uniqueHash;
 
 - (void) setInteractionsAdapter:(MLInteractionsAdapter *)adapter;
 - (NSInteger) size;

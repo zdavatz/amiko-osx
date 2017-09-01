@@ -35,9 +35,12 @@
 @synthesize cart;
 @synthesize cartId;
 @synthesize interactions;
+@synthesize uniqueHash;
 
 - (id) init
 {
+    // Creates and returns a new UUID with RFC 4122 version 4 random bytes
+    uniqueHash = [[NSUUID UUID] UUIDString];
     interactionsCart = [[MLInteractionsCart alloc] init];
     return [super init];
 }
@@ -78,6 +81,8 @@
     if (cart!=nil) {
         [cart removeAllObjects];
         [interactionsCart.cart removeAllObjects];
+        // Creates and returns a new UUID with RFC 4122 version 4 random bytes
+        uniqueHash = [[NSUUID UUID] UUIDString];
     }
 }
 

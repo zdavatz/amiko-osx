@@ -52,7 +52,7 @@ extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
 #endif
 
-@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate>
+@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSSharingServiceDelegate>
 {
     IBOutlet NSView *myView;
     IBOutlet NSView *mySplashScreen;
@@ -95,9 +95,10 @@ extern NSString* const APP_ID;
 - (IBAction) setOperatorIdentity:(id)sender;
 - (IBAction) findPatient:(id)sender;
 - (IBAction) removeItemFromPrescription:(id)sender;
-- (IBAction) removeAllItemsFromPrescription:(id)sender;
+- (IBAction) onNewPrescription:(id)sender;
 - (IBAction) onSearchPatient:(id)sender;
 - (IBAction) onCheckForInteractions:(id)sender;
+- (IBAction) onLoadPrescription:(id)sender;
 - (IBAction) onSavePrescription:(id)sender;
 - (IBAction) onSendPrescription:(id)sender;
 // Help

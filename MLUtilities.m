@@ -172,10 +172,16 @@ NSString* const APP_ID = @"708142753";
     return [dateFormatter stringFromDate:[NSDate date]];
 }
 
-+ (NSString*)encodeStringTo64:(NSString*)fromString
++ (NSString*) encodeStringToBase64:(NSString*)string
 {
-    NSData *plainData = [fromString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *plainData = [string dataUsingEncoding:NSUTF8StringEncoding];
     return [plainData base64Encoding];
+}
+
++ (NSString*) decodeBase64ToString:(NSString*)base64String
+{
+    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:base64String options:0];
+    return [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
 }
 
 @end

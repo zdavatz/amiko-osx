@@ -26,9 +26,11 @@
 @interface MLPrescriptionsAdapter : NSObject
 
 @property (atomic) NSArray *cart;
+@property (atomic) MLPatient *patient;
 
-- (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)patient;
-- (void) savePrescriptionForPatient:(MLPatient *)patient;
-- (void) loadPrescriptionForPatient:(MLPatient *)patient;
+- (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p;
+- (NSURL *) savePrescriptionForPatient:(MLPatient *)p withUniqueHash:(NSString *)hash andOverwrite:(BOOL)overwrite;
+- (void) loadPrescriptionWithName:(NSString *)fileName forPatient:(MLPatient *)p;
+- (void) loadPrescriptionFromFile:(NSString *)filePath;
 
 @end

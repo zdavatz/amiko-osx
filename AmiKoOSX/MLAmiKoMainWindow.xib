@@ -535,18 +535,18 @@
                                                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                                                         </scroller>
                                                                                                     </scrollView>
-                                                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UhN-cF-QcR" userLabel="Rezept Löschen">
+                                                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UhN-cF-QcR" userLabel="Neues Rezept">
                                                                                                         <rect key="frame" x="0.0" y="7" width="130" height="32"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="width" constant="118" id="RE8-dI-HYH"/>
                                                                                                         </constraints>
-                                                                                                        <buttonCell key="cell" type="push" title="Rezept löschen" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="73B-fa-Zhz" userLabel="Rezept Löschen">
+                                                                                                        <buttonCell key="cell" type="push" title="Neues Rezept" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="73B-fa-Zhz" userLabel="Neues Rezept">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
+                                                                                                            <connections>
+                                                                                                                <action selector="onNewPrescription:" target="-1" id="bGI-CX-PbX"/>
+                                                                                                            </connections>
                                                                                                         </buttonCell>
-                                                                                                        <connections>
-                                                                                                            <action selector="removeAllItemsFromPrescription:" target="-2" id="2j1-KG-C4S"/>
-                                                                                                        </connections>
                                                                                                     </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dYR-Rj-qjN">
                                                                                                         <rect key="frame" x="336" y="7" width="92" height="32"/>

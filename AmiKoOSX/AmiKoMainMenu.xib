@@ -122,6 +122,25 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Rezept" id="NcS-1e-ymc">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Rezept" id="JjD-6m-Mnl">
+                        <items>
+                            <menuItem title="Rezept laden..." id="iaD-dX-JgR">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="onLoadPrescription:" target="-1" id="Yqz-NS-6PB"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Rezept speichern..." id="Zio-eg-fPZ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="onSavePrescription:" target="-1" id="CNF-fP-sJ4"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Kontakte" id="uhw-HQ-GGx">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Kontakte" id="2wd-qf-r9D">

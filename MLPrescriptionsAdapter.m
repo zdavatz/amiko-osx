@@ -27,16 +27,20 @@
 #import "MLPrescriptionItem.h"
 
 @implementation MLPrescriptionsAdapter
+{
+    NSString *currentFileName;
+}
 
 @synthesize cart;
+@synthesize patient;
 
-- (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)patient
+- (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p
 {
     NSMutableArray *amkFiles = [[NSMutableArray alloc] init];
 
     NSString *documentsDir = [MLUtilities documentsDirectory];
     // Check if patient has already a directory, if not create one
-    NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", patient.uniqueId]];
+    NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", p.uniqueId]];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isDir = false;
     [fileManager fileExistsAtPath:patientDir isDirectory:&isDir];
@@ -47,6 +51,7 @@
             NSString *filename = (NSString *)obj;
             NSString *extension = [[filename pathExtension] lowercaseString];
             if ([extension isEqualToString:@"amk"]) {
+                filename = [filename stringByReplacingOccurrencesOfString:@".amk" withString:@""];
                 [amkFiles addObject:filename];
             }
         }];
@@ -55,20 +60,32 @@
     return amkFiles;
 }
 
-- (void) savePrescriptionForPatient:(MLPatient *)patient
+- (NSURL *) savePrescriptionForPatient:(MLPatient *)p withUniqueHash:(NSString *)hash andOverwrite:(BOOL)overwrite
 {
-    if (patient!=nil) {
-        // Creates and returns a new UUID with RFC 4122 version 4 random bytes
-        NSString *uniqueHash = [[NSUUID UUID] UUIDString]; // --> checksum calculated for FILE
-        NSString *currentTime = [[MLUtilities currentTime] stringByReplacingOccurrencesOfString:@":" withString:@""];
-        currentTime = [currentTime stringByReplacingOccurrencesOfString:@"." withString:@""];
-        NSString *fileName = [NSString stringWithFormat:@"RZ_%@.amk", currentTime];
+    if (p!=nil) {
+        patient = p;
         
         NSString *documentsDir = [MLUtilities documentsDirectory];
         // Check if patient has already a directory, if not create one
         NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", patient.uniqueId]];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager createDirectoryAtPath:patientDir withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        if (overwrite) {
+            // Delete old file
+            NSError *error = nil;
+            NSString *path = [NSString stringWithFormat:@"%@/%@.amk", patientDir, currentFileName];
+            BOOL success = [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+            if (!success) {
+                NSLog(@"Error: %@", [error userInfo]);
+            }
+        }
+        
+        NSString *currentTime = [[MLUtilities currentTime] stringByReplacingOccurrencesOfString:@":" withString:@""];
+        currentTime = [currentTime stringByReplacingOccurrencesOfString:@"." withString:@""];
+        NSString *fileName = [NSString stringWithFormat:@"RZ_%@.amk", currentTime];
+        
+        currentFileName = fileName;
+
+        [[NSFileManager defaultManager] createDirectoryAtPath:patientDir withIntermediateDirectories:YES attributes:nil error:nil];
         NSString *path = [NSString stringWithFormat:@"%@/%@", patientDir, fileName];
         
         NSMutableDictionary *prescriptionDict = [[NSMutableDictionary alloc] init];
@@ -119,8 +136,8 @@
             [dict setObject:item.med.regnrs forKey:@"regnrs"];
             [prescription addObject:dict];
         }
-        
-        [prescriptionDict setObject:uniqueHash forKey:@"prescription_hash"];
+                
+        [prescriptionDict setObject:hash forKey:@"prescription_hash"];
         [prescriptionDict setObject:currentTime forKey:@"date"];
         [prescriptionDict setObject:patientDict forKey:@"patient"];
         [prescriptionDict setObject:operatorDict forKey:@"operator"];
@@ -134,23 +151,51 @@
         // BOOL success = [jsonObject writeToFile:path options:NSUTF8StringEncoding error:&error];
         
         NSString *jsonStr = [[NSString alloc] initWithData:jsonObject encoding:NSUTF8StringEncoding];
-        NSString *encodedStr = [MLUtilities encodeStringTo64:jsonStr];
+        NSString *base64Str = [MLUtilities encodeStringToBase64:jsonStr];
         
-        BOOL success = [encodedStr writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        BOOL success = [base64Str writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
         if (!success) {
             NSLog(@"Error: %@", [error userInfo]);
         }
+
+        return [[NSURL alloc] initWithString:path];
     }
+    return nil;
 }
 
-- (void) loadPrescriptionForPatient:(MLPatient *)patient
+- (void) loadPrescriptionFromFile:(NSString *)filePath
 {
-    // TODO
-    /*
-     NSError *error = nil;
-     NSData *json = [NSData dataWithContentsOfFile:path];
-     id object = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:&error];
-     */
+    NSError *error = nil;
+    NSString *base64Str = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+    NSString *jsonStr = [MLUtilities decodeBase64ToString:base64Str];
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]
+                                                             options: NSJSONReadingMutableContainers
+                                                               error:&error];
+    
+    NSMutableArray *prescription = [[NSMutableArray alloc] init];
+    for (NSDictionary *p in [jsonDict objectForKey:@"medications"]) {
+        MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
+        item.title = [p objectForKey:@"product_name"];
+        item.fullPackageInfo = [p objectForKey:@"package"];
+        MLMedication *med = [[MLMedication alloc] init];
+        med.auth = [p objectForKey:@"owner"];
+        med.regnrs = [p objectForKey:@"regnrs"];
+        item.med = med;
+        [prescription addObject:item];
+    }
+    cart = [prescription copy];
+}
+
+- (void) loadPrescriptionWithName:(NSString *)fileName forPatient:(MLPatient *)p
+{
+    NSString *documentsDir = [MLUtilities documentsDirectory];
+    // Check if patient has already a directory, if not create one
+    NSString *filePath = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@/%@.amk", p.uniqueId, fileName]];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:filePath]) {
+        [self loadPrescriptionFromFile:filePath];
+        currentFileName = fileName;
+    }
 }
 
 @end
