@@ -72,7 +72,7 @@
         if (overwrite) {
             // Delete old file
             NSError *error = nil;
-            NSString *path = [NSString stringWithFormat:@"%@/%@.amk", patientDir, currentFileName];
+            NSString *path = [NSString stringWithFormat:@"%@/%@", patientDir, currentFileName];
             BOOL success = [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
             if (!success) {
                 NSLog(@"Error: %@", [error userInfo]);
@@ -194,7 +194,7 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:filePath]) {
         [self loadPrescriptionFromFile:filePath];
-        currentFileName = fileName;
+        currentFileName = [NSString stringWithFormat:@"%@.amk", fileName];
     }
 }
 

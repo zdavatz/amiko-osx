@@ -1169,6 +1169,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             [self updatePrescriptionHistory];
             return;
         }];
+    } else {
+        NSURL *url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:NO];
+        mCartHash = cartHash;
+        if (url != nil && send == YES) {
+            [self sendPrescription:[[url absoluteURL] absoluteString]];
+        }
+        // Update prescription history
+        [self updatePrescriptionHistory];
     }
 }
 
