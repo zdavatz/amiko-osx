@@ -284,6 +284,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
     mPrescriptionAdapter = [[MLPrescriptionsAdapter alloc] init];
     
+    // Register drag and drop on prescription table view
+    // [myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSURLPboardType, nil]];
+    [myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+    
     // Initialize webview
     [[myWebView preferences] setJavaScriptEnabled:YES];
     [[myWebView preferences] setJavaScriptCanOpenWindowsAutomatically:YES];
@@ -572,6 +576,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             mPatientSheet = [[MLPatientSheetController alloc] init];
         }
         myPatientAddressTextField.stringValue = [mPatientSheet retrievePatientAsString];
+        // If prescription cart is not empty, generate new hash
+        if (mPrescriptionsCart[0].cart!=nil)
+            [mPrescriptionsCart[0] makeNewUniqueHash];
     }
     // Update prescription history in right most pane
     [self updatePrescriptionHistory];
@@ -579,16 +586,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (void) updatePrescriptionHistory
 {
-    NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
-    
     if (mPrescriptionMode) {
         // Extract section ids
-        if (![mMed.sectionIds isEqual:[NSNull null]])
+        if (![mMed.sectionIds isEqual:[NSNull null]]) {
+            NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionURLsForPatient:[mPatientSheet retrievePatient]];
             mListOfSectionIds = listOfPrescriptions;
+        }
         // Extract section titles
-        if (![mMed.sectionTitles isEqual:[NSNull null]])
+        if (![mMed.sectionTitles isEqual:[NSNull null]]) {
+            NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
             mListOfSectionTitles = listOfPrescriptions;
-        
+        }
         [mySectionTitles reloadData];
     }
 }
@@ -1019,6 +1027,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     MLPrescriptionItem *item = [mPrescriptionsCart[0] getItemAtIndex:row];
     if (item!=nil) {
         [mPrescriptionsCart[0] removeItemFromCart:item];
+        // If prescription cart is not empty, generate new hash
+        if (mPrescriptionsCart[0].cart!=nil && [mPrescriptionsCart[0] size]>0)
+            [mPrescriptionsCart[0] makeNewUniqueHash];
         [self.myPrescriptionsTableView reloadData];
     }
 }
@@ -1201,6 +1212,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     
     NSString *app = [(__bridge NSURL *)(mailAppURL) absoluteString];
     
+    // [[NSWorkspace sharedWorkspace] openFile:filePath withApplication:@"Mail"];
     if ([app containsString:@"Thunderbird"]) {
         [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
     } else if ([app containsString:@"Mail"]) {
@@ -2145,6 +2157,43 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
     
     return nil;
+}
+
+- (BOOL) tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard
+{
+    if (mPrescriptionMode == true) {
+        if (tableView == self.mySectionTitles) {
+            NSMutableArray *dragFiles = [[NSMutableArray alloc] init];
+            NSString *path = mListOfSectionIds[[rowIndexes lastIndex]];
+            NSURL *url = [[NSURL alloc] initFileURLWithPath:path];
+            [dragFiles addObject:path];
+
+            NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+            NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, NSFileContentsPboardType, NSFilenamesPboardType, NSURLPboardType, nil];
+            [pboard declareTypes:types owner:self];
+            [pboard setString:@"hi mom" forType:NSStringPboardType];
+            [pboard setData:[NSData dataWithContentsOfFile:path] forType:NSFileContentsPboardType];
+            NSAttributedString *contents = [[NSAttributedString alloc] initWithPath:path documentAttributes:nil];
+            // This sets the correct type automatically:
+            [pboard writeObjects:[NSArray arrayWithObject:contents]];
+            /*
+            NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+            [pboard declareTypes:[NSArray arrayWithObject:NSURLPboardType] owner:self];
+            [url writeToPasteboard:pboard];
+            */
+            /*
+            NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+            [pboard writeFileContents:path];
+            */
+            /*
+            [pboard declareTypes:[NSArray arrayWithObject:NSPasteboardTypeString] owner:self];
+            [pboard setPropertyList:dragFiles forType: NSPasteboardTypeString];
+            */
+
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void) tableViewSelectionDidChange:(NSNotification *)notification

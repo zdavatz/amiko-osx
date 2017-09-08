@@ -45,6 +45,12 @@
     return [super init];
 }
 
+- (void) makeNewUniqueHash
+{
+    // Creates and returns a new UUID with RFC 4122 version 4 random bytes
+    uniqueHash = [[NSUUID UUID] UUIDString];
+}
+
 - (void) setInteractionsAdapter:(MLInteractionsAdapter *)adapter
 {
     interactionsAdapter = adapter;
@@ -81,8 +87,7 @@
     if (cart!=nil) {
         [cart removeAllObjects];
         [interactionsCart.cart removeAllObjects];
-        // Creates and returns a new UUID with RFC 4122 version 4 random bytes
-        uniqueHash = [[NSUUID UUID] UUIDString];
+        [self makeNewUniqueHash];
     }
 }
 

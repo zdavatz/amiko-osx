@@ -32,6 +32,7 @@
 @property (atomic) NSArray *interactions;
 @property (atomic) NSString *uniqueHash;
 
+- (void) makeNewUniqueHash;
 - (void) setInteractionsAdapter:(MLInteractionsAdapter *)adapter;
 - (NSInteger) size;
 - (void) addItemToCart:(MLPrescriptionItem *)item;

@@ -29,6 +29,7 @@
 @property (atomic) MLPatient *patient;
 
 - (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p;
+- (NSArray *) listOfPrescriptionURLsForPatient:(MLPatient *)p;
 - (NSURL *) savePrescriptionForPatient:(MLPatient *)p withUniqueHash:(NSString *)hash andOverwrite:(BOOL)overwrite;
 - (void) loadPrescriptionWithName:(NSString *)fileName forPatient:(MLPatient *)p;
 - (void) loadPrescriptionFromFile:(NSString *)filePath;

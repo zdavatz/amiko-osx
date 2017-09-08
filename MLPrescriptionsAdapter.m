@@ -60,6 +60,31 @@
     return amkFiles;
 }
 
+- (NSArray *) listOfPrescriptionURLsForPatient:(MLPatient *)p
+{
+    NSMutableArray *amkURLs = [[NSMutableArray alloc] init];
+    
+    NSString *documentsDir = [MLUtilities documentsDirectory];
+    // Check if patient has already a directory, if not create one
+    NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", p.uniqueId]];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDir = false;
+    [fileManager fileExistsAtPath:patientDir isDirectory:&isDir];
+    if (isDir) {
+        // List content of directory
+        NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:patientDir error:NULL];
+        [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSString *filename = (NSString *)obj;
+            NSString *extension = [[filename pathExtension] lowercaseString];
+            if ([extension isEqualToString:@"amk"]) {
+                [amkURLs addObject:[NSString stringWithFormat:@"%@/%@", patientDir, filename]];
+            }
+        }];
+    }
+    
+    return amkURLs;
+}
+
 - (NSURL *) savePrescriptionForPatient:(MLPatient *)p withUniqueHash:(NSString *)hash andOverwrite:(BOOL)overwrite
 {
     if (p!=nil) {
