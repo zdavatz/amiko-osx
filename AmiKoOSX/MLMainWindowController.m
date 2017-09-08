@@ -286,7 +286,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     
     // Register drag and drop on prescription table view
     // [myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSURLPboardType, nil]];
-    [myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+    [mySectionTitles setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
+    [mySectionTitles registerForDraggedTypes:[NSArray arrayWithObjects:NSFileContentsPboardType, nil]];
     
     // Initialize webview
     [[myWebView preferences] setJavaScriptEnabled:YES];
@@ -2165,31 +2166,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         if (tableView == self.mySectionTitles) {
             NSMutableArray *dragFiles = [[NSMutableArray alloc] init];
             NSString *path = mListOfSectionIds[[rowIndexes lastIndex]];
-            NSURL *url = [[NSURL alloc] initFileURLWithPath:path];
             [dragFiles addObject:path];
-
-            NSPasteboard *pboard = [NSPasteboard generalPasteboard];
-            NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, NSFileContentsPboardType, NSFilenamesPboardType, NSURLPboardType, nil];
+            
+            NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+            NSArray *types = [NSArray arrayWithObject:NSFilenamesPboardType];
             [pboard declareTypes:types owner:self];
-            [pboard setString:@"hi mom" forType:NSStringPboardType];
-            [pboard setData:[NSData dataWithContentsOfFile:path] forType:NSFileContentsPboardType];
-            NSAttributedString *contents = [[NSAttributedString alloc] initWithPath:path documentAttributes:nil];
-            // This sets the correct type automatically:
-            [pboard writeObjects:[NSArray arrayWithObject:contents]];
-            /*
-            NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
-            [pboard declareTypes:[NSArray arrayWithObject:NSURLPboardType] owner:self];
-            [url writeToPasteboard:pboard];
-            */
-            /*
-            NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
-            [pboard writeFileContents:path];
-            */
-            /*
-            [pboard declareTypes:[NSArray arrayWithObject:NSPasteboardTypeString] owner:self];
-            [pboard setPropertyList:dragFiles forType: NSPasteboardTypeString];
-            */
-
+            [pboard setPropertyList:dragFiles forType:NSFilenamesPboardType];
+            
             return YES;
         }
     }
