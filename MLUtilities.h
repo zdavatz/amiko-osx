@@ -58,6 +58,7 @@ extern NSString* const APP_ID;
 + (NSNumber*) timeIntervalInSecondsSince1970:(NSDate *)date;
 + (double) timeIntervalSinceLastDBSync;
 + (NSString *) currentTime;
++ (NSString *) prettyTime;
 + (NSString *) encodeStringToBase64:(NSString *)string;
 + (NSString *) decodeBase64ToString:(NSString *)base64String;
 

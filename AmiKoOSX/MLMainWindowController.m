@@ -157,6 +157,7 @@ static BOOL mPrescriptionMode = false;
 @synthesize myTabView;
 @synthesize myPatientSearchField;
 @synthesize myPatientAddressTextField;
+@synthesize myPlaceDateField;
 @synthesize myOperatorIDTextField;
 @synthesize mySignView;
 @synthesize myPrescriptionsTableView;
@@ -286,9 +287,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     
     // Register drag and drop on prescription table view
     // [myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSURLPboardType, nil]];
-    [mySectionTitles setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
-    [mySectionTitles registerForDraggedTypes:[NSArray arrayWithObjects:NSFileContentsPboardType, nil]];
-    
+    [self.mySectionTitles setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
+    [self.mySectionTitles registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, NSURLPboardType, nil]];
+
     // Initialize webview
     [[myWebView preferences] setJavaScriptEnabled:YES];
     [[myWebView preferences] setJavaScriptCanOpenWindowsAutomatically:YES];
@@ -998,7 +999,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         mOperatorIDSheet = [[MLOperatorIDSheetController alloc] init];
     }
     NSString *operatorIDStr = [mOperatorIDSheet retrieveIDAsString];
+    NSString *operatorPlace = [mOperatorIDSheet retrieveCity];
     myOperatorIDTextField.stringValue = operatorIDStr;
+    myPlaceDateField.stringValue = [NSString stringWithFormat:@"%@, %@", operatorPlace, [MLUtilities prettyTime]];
     
     NSString *documentsDirectory = [MLUtilities documentsDirectory];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"op_signature.png"];
@@ -1081,9 +1084,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
             mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
             mCartHash = mPrescriptionsCart[0].uniqueHash;
-            [self.myPrescriptionsTableView reloadData];
-            // Switch tab view
-            [myTabView selectTabViewItemAtIndex:2];
+            [self updatePrescriptionsView];
         }
     }];
 }
@@ -1141,9 +1142,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (!mPatientSheet) {
         mPatientSheet = [[MLPatientSheetController alloc] init];
     }
-    [mPrescriptionAdapter loadPrescriptionWithName:filename forPatient:[mPatientSheet retrievePatient]];
+    MLPatient *patient = [mPatientSheet retrievePatient];
+    if (patient!=nil) {
+        [mPrescriptionAdapter loadPrescriptionWithName:filename forPatient:patient];
+    } else {
+        [mPrescriptionAdapter loadPrescriptionFromFile:filename];
+    }
     mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
     mCartHash = mPrescriptionsCart[0].uniqueHash;
+    [self updatePrescriptionsView];
 }
 
 - (void) savePrescriptionThenSend:(BOOL)send
@@ -1964,7 +1971,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (![mMed.sectionTitles isEqual:[NSNull null]])
         mListOfSectionTitles = nil;
     
-    [mySectionTitles reloadData];
+    [self.myPrescriptionsTableView reloadData];
+    [self.mySectionTitles reloadData];
+    // Switch tab view
+    [myTabView selectTabViewItemAtIndex:2];
 }
 
 - (void) updateFullTextSearchView:(NSString *)contentStr
@@ -2179,6 +2189,36 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     return NO;
 }
 
+- (NSDragOperation) tableView:(NSTableView*)tableView validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op
+{    
+    // Highlight table
+    [self.mySectionTitles setDropRow:-1 dropOperation:NSTableViewDropOn];
+    
+    return NSDragOperationEvery;
+}
+
+
+- (BOOL) tableView:(NSTableView *)tableView acceptDrop:(id <NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation
+{
+    NSPasteboard *pboard = [info draggingPasteboard];
+    NSArray *classes = [NSArray arrayWithObject:[NSURL class]];
+    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
+                                                        forKey:NSPasteboardURLReadingFileURLsOnlyKey];
+    NSArray *fileURLs = [pboard readObjectsForClasses:classes options:options];
+    if ([fileURLs count]>0) {
+        NSURL *fileURL = [fileURLs objectAtIndex:0];
+        if ([[fileURL pathExtension] isEqualToString:@"amk"]) {
+            [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
+            mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
+            mCartHash = mPrescriptionsCart[0].uniqueHash;
+            [self updatePrescriptionsView];
+        }
+    }
+    
+    // Move the specified row to its new location...
+    return YES;
+}
+
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
     id notifier = [notification object];
@@ -2242,7 +2282,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         
         if (mPrescriptionMode) {
             [self loadPrescription:mListOfSectionTitles[row]];
-            [self.myPrescriptionsTableView reloadData];
         } else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
             NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
             [myWebView stringByEvaluatingJavaScriptFromString:javaScript];

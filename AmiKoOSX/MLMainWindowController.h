@@ -52,7 +52,7 @@ extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
 #endif
 
-@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate>
+@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSDraggingDestination>
 {
     IBOutlet NSView *myView;
     IBOutlet NSView *mySplashScreen;
@@ -73,6 +73,7 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSTabView *myTabView;
 @property (nonatomic, retain) IBOutlet NSSearchField *myPatientSearchField;
 @property (nonatomic, retain) IBOutlet NSTextField *myPatientAddressTextField;
+@property (nonatomic, retain) IBOutlet NSTextField *myPlaceDateField;
 @property (nonatomic, retain) IBOutlet NSTextField *myOperatorIDTextField;
 @property (nonatomic, retain) IBOutlet MLSignatureView *mySignView;
 @property (nonatomic, retain) IBOutlet NSTableView *myPrescriptionsTableView;
@@ -109,5 +110,6 @@ extern NSString* const APP_ID;
 - (IBAction) rateApp:(id)sender;
 
 - (void) addItem:(MLPrescriptionItem *)med toPrescriptionCartWithId:(NSInteger)n;
+- (void) loadPrescription:(NSString *)filename;
 
 @end

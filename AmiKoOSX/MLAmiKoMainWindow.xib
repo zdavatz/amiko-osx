@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="myOperatorIDTextField" destination="71t-rm-v3N" id="2a8-KE-0dA"/>
                 <outlet property="myPatientAddressTextField" destination="fKp-CD-kdl" id="uIl-oN-JO4"/>
+                <outlet property="myPlaceDateField" destination="tNE-hK-XN9" id="mZW-3B-2Ly"/>
                 <outlet property="myPrescriptionsTableView" destination="7gl-38-P2j" id="xai-7c-7tj"/>
                 <outlet property="mySearchField" destination="133" id="242"/>
                 <outlet property="mySectionTitles" destination="213" id="yeE-sH-etw"/>
@@ -377,9 +378,9 @@
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                 <subviews>
                                                                                                     <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKp-CD-kdl">
-                                                                                                        <rect key="frame" x="6" y="644" width="235" height="124"/>
+                                                                                                        <rect key="frame" x="6" y="666" width="235" height="102"/>
                                                                                                         <constraints>
-                                                                                                            <constraint firstAttribute="height" constant="124" id="TGH-Rh-sJq"/>
+                                                                                                            <constraint firstAttribute="height" constant="102" id="TGH-Rh-sJq"/>
                                                                                                         </constraints>
                                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="aRZ-eu-r6L">
                                                                                                             <font key="font" metaFont="cellTitle"/>
@@ -592,6 +593,15 @@
                                                                                                             <action selector="onSearchPatient:" target="-2" id="aVN-p3-0Fd"/>
                                                                                                         </connections>
                                                                                                     </button>
+                                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNE-hK-XN9">
+                                                                                                        <rect key="frame" x="6" y="643" width="237" height="17"/>
+                                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Place and Date" id="cje-ee-T0Y">
+                                                                                                            <font key="font" metaFont="system"/>
+                                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                                        </textFieldCell>
+                                                                                                    </textField>
                                                                                                 </subviews>
                                                                                                 <constraints>
                                                                                                     <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="centerY" secondItem="UhN-cF-QcR" secondAttribute="centerY" id="3HC-xm-T6r"/>
@@ -601,13 +611,13 @@
                                                                                                     <constraint firstItem="h3A-OZ-Ito" firstAttribute="bottom" secondItem="UhN-cF-QcR" secondAttribute="bottom" id="DTE-ie-4aP"/>
                                                                                                     <constraint firstItem="dYR-Rj-qjN" firstAttribute="bottom" secondItem="UhN-cF-QcR" secondAttribute="bottom" id="Eo0-M8-YFt"/>
                                                                                                     <constraint firstItem="hmt-dn-3hz" firstAttribute="leading" secondItem="Oaf-El-vf2" secondAttribute="leading" constant="6" id="Flg-3A-Jo3"/>
-                                                                                                    <constraint firstItem="71t-rm-v3N" firstAttribute="centerY" secondItem="fKp-CD-kdl" secondAttribute="centerY" constant="-48.5" id="IYo-Qh-Ct7"/>
+                                                                                                    <constraint firstItem="71t-rm-v3N" firstAttribute="centerY" secondItem="fKp-CD-kdl" secondAttribute="centerY" constant="-37.5" id="IYo-Qh-Ct7"/>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="top" secondItem="71t-rm-v3N" secondAttribute="bottom" constant="8" id="MN7-CA-o9Z"/>
                                                                                                     <constraint firstItem="hmt-dn-3hz" firstAttribute="top" secondItem="Oaf-El-vf2" secondAttribute="top" constant="182" id="NjY-qN-1vg"/>
-                                                                                                    <constraint firstItem="hmt-dn-3hz" firstAttribute="top" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="6" id="P7v-zA-bh4"/>
+                                                                                                    <constraint firstItem="hmt-dn-3hz" firstAttribute="top" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="28" id="P7v-zA-bh4"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="hmt-dn-3hz" secondAttribute="trailing" constant="6" id="V6T-59-drI"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="71t-rm-v3N" secondAttribute="trailing" constant="6" id="bnE-Se-xtR"/>
-                                                                                                    <constraint firstItem="0c5-KW-ZdG" firstAttribute="bottom" secondItem="fKp-CD-kdl" secondAttribute="bottom" id="fBG-0z-AcA"/>
+                                                                                                    <constraint firstItem="0c5-KW-ZdG" firstAttribute="bottom" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="22" id="fBG-0z-AcA"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="dYR-Rj-qjN" secondAttribute="trailing" constant="87" id="kdG-7V-hjG"/>
                                                                                                     <constraint firstItem="UhN-cF-QcR" firstAttribute="leading" secondItem="hmt-dn-3hz" secondAttribute="leading" id="kup-HH-Kh6"/>
                                                                                                     <constraint firstAttribute="bottom" secondItem="UhN-cF-QcR" secondAttribute="bottom" constant="14" id="q1o-l5-fsj"/>
@@ -825,7 +835,7 @@
                     <toolbarItem reference="9"/>
                 </defaultToolbarItems>
             </toolbar>
-            <point key="canvasLocation" x="-1755.5" y="-1988"/>
+            <point key="canvasLocation" x="-1752" y="-1978"/>
         </window>
         <imageView id="1535" customClass="MLSplashScreen">
             <rect key="frame" x="0.0" y="0.0" width="1006" height="676"/>

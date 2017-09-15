@@ -53,7 +53,7 @@
 }
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification
-{
+{ 
     m_alpha = 1.0;
     m_delta = 0.01;
     
@@ -102,34 +102,21 @@
     [mainWindowController showWindow:nil];
 }
 
-
-// @synthesize masterViewController;
-
-/*
-- (void) applicationDidFinishLaunching: (NSNotification *)aNotification
+- (BOOL) application:(NSApplication *)sender openFile:(NSString *)filename
 {
-    // Create masterViewController
-    // self.masterViewController = [[MLMasterViewController alloc] initWithNibName:@"MLMasterViewController" bundle:nil];
-    self.masterViewController = [[MLMasterViewController alloc] init];
+    if (!mainWindowController) {
+        mainWindowController = [[MLMainWindowController alloc] init];
+        [mainWindowController showWindow:nil];
+    }
     
-    // Add view controller to window's content view
-    [self.window.contentView addSubview:self.masterViewController.view];
-    
-    // Makes sure that window can be resized
-    [self.masterViewController.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    
-    // Set background color
-    self.window.backgroundColor = NSColor.whiteColor;
-    
-    // Set frame
-    self.masterViewController.view.frame = ((NSView*)self.window.contentView).bounds;
+    [mainWindowController loadPrescription:filename];
+        
+    return YES;
 }
-*/
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)application
 {
     return YES;
 }
-
 
 @end

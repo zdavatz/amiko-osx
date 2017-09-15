@@ -236,4 +236,10 @@
     return idAsString;
 }
 
+- (NSString *) retrieveCity
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"city"];
+}
+
 @end
