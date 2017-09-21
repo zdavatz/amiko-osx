@@ -88,6 +88,7 @@
 - (NSURL *) savePrescriptionForPatient:(MLPatient *)p withUniqueHash:(NSString *)hash andOverwrite:(BOOL)overwrite
 {
     if (p!=nil) {
+        // Assign patient
         patient = p;
         
         NSString *documentsDir = [MLUtilities documentsDirectory];
@@ -107,7 +108,8 @@
         NSString *currentTime = [[MLUtilities currentTime] stringByReplacingOccurrencesOfString:@":" withString:@""];
         currentTime = [currentTime stringByReplacingOccurrencesOfString:@"." withString:@""];
         NSString *fileName = [NSString stringWithFormat:@"RZ_%@.amk", currentTime];
-        
+
+        // Assign filename
         currentFileName = fileName;
 
         [[NSFileManager defaultManager] createDirectoryAtPath:patientDir withIntermediateDirectories:YES attributes:nil error:nil];
@@ -159,6 +161,7 @@
             [dict setObject:item.fullPackageInfo forKey:@"package"];
             [dict setObject:item.med.auth forKey:@"owner"];
             [dict setObject:item.med.regnrs forKey:@"regnrs"];
+            [dict setObject:item.comment forKey:@"comment"];
             [prescription addObject:dict];
         }
                 
@@ -202,6 +205,7 @@
         MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
         item.title = [p objectForKey:@"product_name"];
         item.fullPackageInfo = [p objectForKey:@"package"];
+        item.comment = [p objectForKey:@"comment"];
         MLMedication *med = [[MLMedication alloc] init];
         med.auth = [p objectForKey:@"owner"];
         med.regnrs = [p objectForKey:@"regnrs"];

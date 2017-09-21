@@ -38,6 +38,7 @@
 #import "MLPrescriptionsAdapter.h"
 #import "MLPatientSheetController.h"
 #import "MLOperatorIDSheetController.h"
+#import "MLPrescriptionCellView.h"
 
 #import "MLAbout.h"
 #import "MLUtilities.h"
@@ -1160,6 +1161,22 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
     mPrescriptionAdapter.cart = mPrescriptionsCart[0].cart;
 
+    // Get all comments
+    NSMutableArray *comments = [[NSMutableArray alloc] init];
+    NSInteger numRows = [self.myPrescriptionsTableView numberOfRows];
+    for (int r=0; r<numRows; ++r) {
+        MLPrescriptionCellView *cellView = [self.myPrescriptionsTableView viewAtColumn:0 row:r makeIfNecessary:YES];
+        NSTextField *textField = [cellView editableTextField];
+        [comments addObject:[textField stringValue]];
+    }
+    int row = 0;
+    for (MLPrescriptionItem *item in mPrescriptionAdapter.cart) {
+        if (row < numRows) {
+            item.comment = [comments objectAtIndex:row];
+        }
+        row++;
+    }
+    
     MLPatient *patient = [mPatientSheet retrievePatient];
     NSString *cartHash = mPrescriptionsCart[0].uniqueHash;
     
@@ -1964,17 +1981,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (void) updatePrescriptionsView
 {
-    // Extract section ids
-    if (![mMed.sectionIds isEqual:[NSNull null]])
-        mListOfSectionIds = nil;
-    // Extract section titles
-    if (![mMed.sectionTitles isEqual:[NSNull null]])
-        mListOfSectionTitles = nil;
-    
-    [self.myPrescriptionsTableView reloadData];
-    [self.mySectionTitles reloadData];
     // Switch tab view
     [myTabView selectTabViewItemAtIndex:2];
+    [self.myPrescriptionsTableView reloadData];
+    // [self.mySectionTitles reloadData];
 }
 
 - (void) updateFullTextSearchView:(NSString *)contentStr
@@ -2152,18 +2162,22 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         /*
          * Check if table is a prescription
          */
-        NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+        MLPrescriptionCellView *cellView = (MLPrescriptionCellView*)[tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
         NSArray *prescriptionBasket = mPrescriptionsCart[0].cart;
 
         if ([tableColumn.identifier isEqualToString:@"PrescriptionMedCounter"]) {
             cellView.textField.stringValue = [NSString stringWithFormat:@"%ld", row+1];
         } else if ([tableColumn.identifier isEqualToString:@"PrescriptionRegisteredName"]) {
             cellView.textField.stringValue = [prescriptionBasket[row] fullPackageInfo];
+            NSString *comment = [prescriptionBasket[row] comment];
+            if (comment==nil)
+                comment = @"";
+            cellView.editableTextField.stringValue = comment;
         } else if ([tableColumn.identifier isEqualToString:@"PrescriptionPrice"]) {
             if ([prescriptionBasket[row] price] != nil)
                 cellView.textField.stringValue = [prescriptionBasket[row] price];
         }
-        
+       
         return cellView;
     }
     
@@ -2222,81 +2236,81 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
     id notifier = [notification object];
-    if (notifier == self.myTableView) {
-        /*
-         * Check if table is search result (=myTableView)
-         * Left-most pane
-        */
-        NSInteger row = [notifier selectedRow];
-        
-        NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
-        [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
-        
-        // [[self window] makeFirstResponder:myRowView];
-        
-        // Colors whole row red... useless
-        // [myRowView setBackgroundColor:[NSColor redColor]];
-               
-        if (mCurrentSearchState!=kFullText) {
-            /* Search in Aips DB or Interactions DB
+    
+    NSInteger row = [notifier selectedRow];
+    
+    if (row>=0) {
+        if (notifier == self.myTableView) {
+            /*
+             * Check if table is search result (=myTableView)
+             * Left-most pane
              */
-            long mId = [medi[row] medId];
-            // Get medi
-            mMed = [mDb getMediWithId:mId];
-            // Hide textfinder
-            [self hideTextFinder];
+            NSTableRowView *myRowView = [self.myTableView rowViewAtRow:row makeIfNecessary:NO];
+            [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
             
-            if (mSearchInteractions==false) {
-                [self updateExpertInfoView:nil];
+            // [[self window] makeFirstResponder:myRowView];
+            
+            // Colors whole row red... useless
+            // [myRowView setBackgroundColor:[NSColor redColor]];
+            
+            if (mCurrentSearchState!=kFullText) {
+                /* Search in Aips DB or Interactions DB
+                 */
+                long mId = [medi[row] medId];
+                // Get medi
+                mMed = [mDb getMediWithId:mId];
+                // Hide textfinder
+                [self hideTextFinder];
+                
+                if (mSearchInteractions==false) {
+                    [self updateExpertInfoView:nil];
+                } else {
+                    [self pushToMedBasket:mMed];
+                    [self updateInteractionsView];
+                }
             } else {
-                [self pushToMedBasket:mMed];
-                [self updateInteractionsView];
+                /* Search in full text search DB
+                 */
+                NSString *hashId = [medi[row] hashId];
+                // Get entry
+                mFullTextEntry = [mFullTextDb searchHash:hashId];
+                // Hide text finder
+                [self hideTextFinder];
+                
+                NSArray *listOfRegnrs = [mFullTextEntry getRegnrsAsArray];
+                NSArray *listOfArticles = [mDb searchRegnrsFromList:listOfRegnrs];
+                NSDictionary *dict = [mFullTextEntry getRegChaptersDict];
+                
+                mFullTextContentStr = [mFullTextSearch tableWithArticles:listOfArticles
+                                                      andRegChaptersDict:dict
+                                                               andFilter:@""];
+                mCurrentWebView = kFullTextSearchView;
+                [self updateFullTextSearchView:mFullTextContentStr];
             }
-        } else {
-            /* Search in full text search DB
+        } else if (notifier == self.mySectionTitles) {
+            /*
+             * Check if table is list of chapter titles (=mySectionTitles)
+             * Right-most pane
              */
-            NSString *hashId = [medi[row] hashId];
-            // Get entry
-            mFullTextEntry = [mFullTextDb searchHash:hashId];
-            // Hide text finder
-            [self hideTextFinder];
+            NSTableRowView *myRowView = [self.mySectionTitles rowViewAtRow:row makeIfNecessary:NO];
+            [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
             
-            NSArray *listOfRegnrs = [mFullTextEntry getRegnrsAsArray];
-            NSArray *listOfArticles = [mDb searchRegnrsFromList:listOfRegnrs];
-            NSDictionary *dict = [mFullTextEntry getRegChaptersDict];
-            
-            mFullTextContentStr = [mFullTextSearch tableWithArticles:listOfArticles
-                                                   andRegChaptersDict:dict
-                                                            andFilter:@""];
-            mCurrentWebView = kFullTextSearchView;
-            [self updateFullTextSearchView:mFullTextContentStr];
+            if (mPrescriptionMode) {
+                [self loadPrescription:mListOfSectionTitles[row]];
+            } else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
+                NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
+                [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
+            } else {
+                // Update webviewer's content without changing anything else
+                NSString *contentStr = [mFullTextSearch tableWithArticles:nil
+                                                       andRegChaptersDict:nil
+                                                                andFilter:mListOfSectionIds[row]];
+                [self updateFullTextSearchView:contentStr];
+            }
+        } else if (notifier == self.myPrescriptionsTableView) {
+            NSTableRowView *myRowView = [self.myPrescriptionsTableView rowViewAtRow:row makeIfNecessary:NO];
+            [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
         }
-    } else if (notifier == self.mySectionTitles) {
-        /* 
-         * Check if table is list of chapter titles (=mySectionTitles)
-         * Right-most pane
-        */
-        NSInteger row = [notifier selectedRow];
-        NSTableRowView *myRowView = [self.mySectionTitles rowViewAtRow:row makeIfNecessary:NO];
-        [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
-        
-        if (mPrescriptionMode) {
-            [self loadPrescription:mListOfSectionTitles[row]];
-        } else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
-            NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
-            [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
-        } else {
-            // Update webviewer's content without changing anything else
-            NSString *contentStr = [mFullTextSearch tableWithArticles:nil
-                                                   andRegChaptersDict:nil
-                                                            andFilter:mListOfSectionIds[row]];
-            [self updateFullTextSearchView:contentStr];
-        }
-    } else if (notifier == self.myPrescriptionsTableView) {
-        NSInteger row = [notifier selectedRow];
-        
-        NSTableRowView *myRowView = [self.myPrescriptionsTableView rowViewAtRow:row makeIfNecessary:NO];
-        [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
     }
 
 #ifdef DEBUG

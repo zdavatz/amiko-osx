@@ -34,6 +34,7 @@
 @property (atomic, copy) NSString *title;
 @property (atomic, copy) NSString *owner;
 @property (atomic, copy) NSString *price;
+@property (atomic, copy) NSString *comment;
 @property (atomic) MLMedication *med;
 
 @end
