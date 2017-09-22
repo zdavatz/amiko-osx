@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AmiKoOSX/MLMainWindowController.m"
-            timestampString = "527798628.900451"
+            timestampString = "527800358.234884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2062"
-            endingLineNumber = "2062"
+            startingLineNumber = "2070"
+            endingLineNumber = "2070"
             landmarkName = "-addItem:toPrescriptionCartWithId:"
             landmarkType = "7">
          </BreakpointContent>

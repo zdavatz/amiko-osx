@@ -1196,20 +1196,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     mPrescriptionAdapter.cart = mPrescriptionsCart[0].cart;
 
     // Get all comments
-    NSMutableArray *comments = [[NSMutableArray alloc] init];
-    NSInteger numRows = [self.myPrescriptionsTableView numberOfRows];
-    for (int r=0; r<numRows; ++r) {
-        MLPrescriptionCellView *cellView = [self.myPrescriptionsTableView viewAtColumn:0 row:r makeIfNecessary:YES];
-        NSTextField *textField = [cellView editableTextField];
-        [comments addObject:[textField stringValue]];
-    }
-    int row = 0;
-    for (MLPrescriptionItem *item in mPrescriptionAdapter.cart) {
-        if (row < numRows) {
-            item.comment = [comments objectAtIndex:row];
-        }
-        row++;
-    }
+    [self storeAllPrescriptionComments];
     
     MLPatient *patient = [mPatientSheet retrievePatient];
     NSString *cartHash = mPrescriptionsCart[0].uniqueHash;
@@ -2049,6 +2036,25 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [mySectionTitles reloadData];
 }
 
+- (void) storeAllPrescriptionComments
+{
+    // Get all comments
+    NSMutableArray *comments = [[NSMutableArray alloc] init];
+    NSInteger numRows = [self.myPrescriptionsTableView numberOfRows];
+    for (int r=0; r<numRows; ++r) {
+        MLPrescriptionCellView *cellView = [self.myPrescriptionsTableView viewAtColumn:0 row:r makeIfNecessary:YES];
+        NSTextField *textField = [cellView editableTextField];
+        [comments addObject:[textField stringValue]];
+    }
+    int row = 0;
+    for (MLPrescriptionItem *item in mPrescriptionsCart[0].cart) {
+        if (row < numRows) {
+            item.comment = [comments objectAtIndex:row];
+        }
+        row++;
+    }
+}
+
 - (void) addItem:(MLPrescriptionItem *)item toPrescriptionCartWithId:(NSInteger)n
 {
     if (n<3) {
@@ -2056,6 +2062,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             mPrescriptionsCart[n].cart = [[NSMutableArray alloc] init];
             mPrescriptionsCart[n].cartId = n;
         }
+        // Get all prescription comments from table
+        [self storeAllPrescriptionComments];
         
         // Get medi
         item.med = [mDb getShortMediWithId:item.mid];
