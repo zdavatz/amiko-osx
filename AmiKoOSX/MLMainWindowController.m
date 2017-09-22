@@ -287,11 +287,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     mPrescriptionAdapter = [[MLPrescriptionsAdapter alloc] init];
     
     // Register drag and drop on prescription table view
-    // [myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSURLPboardType, nil]];
-    /*
     [self.mySectionTitles setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
     [self.mySectionTitles registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, NSURLPboardType, nil]];
-    */
+    
     [self.myPrescriptionsTableView setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
     [self.myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, NSURLPboardType, nil]];
     
