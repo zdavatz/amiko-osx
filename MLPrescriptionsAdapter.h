@@ -30,6 +30,7 @@
 
 - (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p;
 - (NSArray *) listOfPrescriptionURLsForPatient:(MLPatient *)p;
+- (void) deletePrescriptionWithName:(NSString *)name forPatient:(MLPatient *)p;
 - (NSURL *) savePrescriptionForPatient:(MLPatient *)p withUniqueHash:(NSString *)hash andOverwrite:(BOOL)overwrite;
 - (void) loadPrescriptionWithName:(NSString *)fileName forPatient:(MLPatient *)p;
 - (void) loadPrescriptionFromFile:(NSString *)filePath;

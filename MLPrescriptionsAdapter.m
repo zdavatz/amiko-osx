@@ -85,6 +85,26 @@
     return amkURLs;
 }
 
+- (void) deletePrescriptionWithName:(NSString *)name forPatient:(MLPatient *)p
+{
+    if (p!=nil) {
+        // Assign patient
+        patient = p;
+        
+        NSString *documentsDir = [MLUtilities documentsDirectory];
+        // Check if patient has already a directory, if not create one
+        NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", patient.uniqueId]];
+        
+        // Delete file
+        NSError *error = nil;
+        NSString *path = [NSString stringWithFormat:@"%@/%@.amk", patientDir, name];
+        BOOL success = [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+        if (!success) {
+            NSLog(@"Error: %@", [error userInfo]);
+        }
+    }
+}
+
 - (NSURL *) savePrescriptionForPatient:(MLPatient *)p withUniqueHash:(NSString *)hash andOverwrite:(BOOL)overwrite
 {
     if (p!=nil) {

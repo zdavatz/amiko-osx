@@ -102,6 +102,7 @@ extern NSString* const APP_ID;
 - (IBAction) onLoadPrescription:(id)sender;
 - (IBAction) onSavePrescription:(id)sender;
 - (IBAction) onSendPrescription:(id)sender;
+- (IBAction) onDeletePrescription:(id)sender;
 // Help
 - (IBAction) showReportFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;

@@ -78,7 +78,7 @@
     if (cart!=nil) {
         [cart removeObject:item];
         [interactionsCart.cart removeObjectForKey:item.title];
-        NSLog(@"Removed med %@ from basket %ld", [item productName], cartId);
+        NSLog(@"Removed med %@ from basket %ld", item.title, cartId);
     }
 }
 

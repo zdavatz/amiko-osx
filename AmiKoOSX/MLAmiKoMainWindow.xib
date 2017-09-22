@@ -744,6 +744,18 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                             </scrollView>
+                                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e4r-BI-lei">
+                                                                <rect key="frame" x="1" y="800" width="16" height="16"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="EG9-tB-cVG">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <string key="keyEquivalent"></string>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="onDeletePrescription:" target="-2" id="ORS-Zv-uaG"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstItem="205" firstAttribute="leading" secondItem="204" secondAttribute="leading" id="208"/>
@@ -835,7 +847,7 @@
                     <toolbarItem reference="9"/>
                 </defaultToolbarItems>
             </toolbar>
-            <point key="canvasLocation" x="-1752" y="-1978"/>
+            <point key="canvasLocation" x="-1752.5" y="-1978"/>
         </window>
         <imageView id="1535" customClass="MLSplashScreen">
             <rect key="frame" x="0.0" y="0.0" width="1006" height="676"/>

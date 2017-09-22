@@ -288,9 +288,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     
     // Register drag and drop on prescription table view
     // [myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSURLPboardType, nil]];
+    /*
     [self.mySectionTitles setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
     [self.mySectionTitles registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, NSURLPboardType, nil]];
-
+    */
+    [self.myPrescriptionsTableView setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
+    [self.myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, NSURLPboardType, nil]];
+    
     // Initialize webview
     [[myWebView preferences] setJavaScriptEnabled:YES];
     [[myWebView preferences] setJavaScriptCanOpenWindowsAutomatically:YES];
@@ -1098,6 +1102,36 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 - (IBAction) onSendPrescription:(id)sender
 {
     [self savePrescriptionThenSend:YES];
+}
+
+- (IBAction) onDeletePrescription:(id)sender
+{
+    if (mPrescriptionMode) {
+        NSInteger row = [mySectionTitles selectedRow];
+        if (row>-1) {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert addButtonWithTitle:@"OK"];
+            [alert setMessageText:@"Rezept löschen?"];
+            [alert setInformativeText:@"Wollen Sie dieses Rezept wirklich löschen?"];
+            [alert setAlertStyle:NSInformationalAlertStyle];
+            [alert beginSheetModalForWindow:[self window]
+                              modalDelegate:self
+                             didEndSelector:@selector(deletePrescription:returnCode:contextInfo:)
+                                contextInfo:nil];
+        }
+    }
+}
+
+- (void) deletePrescription:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode==NSAlertSecondButtonReturn) {
+        if (mPrescriptionMode) {
+            NSInteger row = [mySectionTitles selectedRow];
+            [mPrescriptionAdapter deletePrescriptionWithName:mListOfSectionTitles[row] forPatient:[mPatientSheet retrievePatient]];
+            [self updatePrescriptionHistory];
+        }
+    }
 }
 
 - (IBAction) showReportFile:(id)sender
@@ -2206,7 +2240,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 - (NSDragOperation) tableView:(NSTableView*)tableView validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op
 {    
     // Highlight table
-    [self.mySectionTitles setDropRow:-1 dropOperation:NSTableViewDropOn];
+    // [self.mySectionTitles setDropRow:-1 dropOperation:NSTableViewDropOn];
+    [self.myPrescriptionsTableView setDropRow:-1 dropOperation:NSTableViewDropOn];
     
     return NSDragOperationEvery;
 }
