@@ -1128,6 +1128,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             NSInteger row = [mySectionTitles selectedRow];
             [mPrescriptionAdapter deletePrescriptionWithName:mListOfSectionTitles[row] forPatient:[mPatientSheet retrievePatient]];
             [self updatePrescriptionHistory];
+            [mPrescriptionsCart[0] clearCart];
+            [self.myPrescriptionsTableView reloadData];
         }
     }
 }
