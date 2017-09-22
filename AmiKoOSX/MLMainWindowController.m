@@ -1410,6 +1410,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             mPrescriptionMode = true;
             [self stopProgressIndicator];
             [self updatePrescriptionsView];
+            [self updatePrescriptionHistory];
             // Switch tab view
             [myTabView selectTabViewItemAtIndex:2];
             break;
@@ -2259,7 +2260,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         if ([[fileURL pathExtension] isEqualToString:@"amk"]) {
             [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
             mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
-            mCartHash = mPrescriptionsCart[0].uniqueHash;
+            // mCartHash = mPrescriptionsCart[0].uniqueHash;
             [self updatePrescriptionsView];
         }
     }

@@ -213,7 +213,7 @@
     return nil;
 }
 
-- (void) loadPrescriptionFromFile:(NSString *)filePath
+- (NSString *) loadPrescriptionFromFile:(NSString *)filePath
 {
     NSError *error = nil;
     NSString *base64Str = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
@@ -239,18 +239,23 @@
         [prescription addObject:item];
     }
     cart = [prescription copy];
+    
+    return [jsonDict objectForKey:@"prescription_hash"];
 }
 
-- (void) loadPrescriptionWithName:(NSString *)fileName forPatient:(MLPatient *)p
+- (NSString *) loadPrescriptionWithName:(NSString *)fileName forPatient:(MLPatient *)p
 {
+    NSString *prescription_hash = @"";
     NSString *documentsDir = [MLUtilities documentsDirectory];
     // Check if patient has already a directory, if not create one
     NSString *filePath = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@/%@.amk", p.uniqueId, fileName]];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:filePath]) {
-        [self loadPrescriptionFromFile:filePath];
+        prescription_hash = [self loadPrescriptionFromFile:filePath];
         currentFileName = [NSString stringWithFormat:@"%@.amk", fileName];
     }
+    
+    return prescription_hash;
 }
 
 @end
