@@ -159,9 +159,11 @@
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [dict setObject:item.title forKey:@"product_name"];
             [dict setObject:item.fullPackageInfo forKey:@"package"];
+            [dict setObject:item.comment forKey:@"comment"];
+            [dict setObject:item.med.title forKey:@"title"];
             [dict setObject:item.med.auth forKey:@"owner"];
             [dict setObject:item.med.regnrs forKey:@"regnrs"];
-            [dict setObject:item.comment forKey:@"comment"];
+            [dict setObject:item.med.atccode forKey:@"atccode"];
             [prescription addObject:dict];
         }
                 
@@ -206,10 +208,14 @@
         item.title = [p objectForKey:@"product_name"];
         item.fullPackageInfo = [p objectForKey:@"package"];
         item.comment = [p objectForKey:@"comment"];
+        
         MLMedication *med = [[MLMedication alloc] init];
+        med.title = [p objectForKey:@"title"];
         med.auth = [p objectForKey:@"owner"];
         med.regnrs = [p objectForKey:@"regnrs"];
+        med.atccode = [p objectForKey:@"atccode"];
         item.med = med;
+        
         [prescription addObject:item];
     }
     cart = [prescription copy];
