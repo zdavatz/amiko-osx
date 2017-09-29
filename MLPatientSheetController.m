@@ -258,15 +258,26 @@
     [mFilteredArrayOfPatients removeAllObjects];
     if (![self stringIsNilOrEmpty:searchKey]) {
         for (MLPatient *p in mArrayOfPatients) {
-            if ([p.familyName hasPrefix:searchKey] || [p.givenName hasPrefix:searchKey] ||
-                [p.postalAddress hasPrefix:searchKey] || [p.zipCode hasPrefix:searchKey]) {
+            NSString *searchKeyLower = [searchKey lowercaseString];
+            if ([[p.familyName lowercaseString] hasPrefix:searchKeyLower] || [[p.givenName lowercaseString] hasPrefix:searchKeyLower] ||
+                [[p.postalAddress lowercaseString] hasPrefix:searchKeyLower] || [p.zipCode hasPrefix:searchKeyLower]) {
                 [mFilteredArrayOfPatients addObject:p];
             }
         }
     }
-    if (mFilteredArrayOfPatients!=nil && [mFilteredArrayOfPatients count]>0) {
-        [self setNumPatients:[mFilteredArrayOfPatients count]];
-        mSearchFiltered = TRUE;
+    if (mFilteredArrayOfPatients!=nil) {
+        if ([mFilteredArrayOfPatients count]>0) {
+            [self setNumPatients:[mFilteredArrayOfPatients count]];
+            mSearchFiltered = TRUE;
+        } else {
+            if ([searchKey length]>0) {
+                [self setNumPatients:0];
+                mSearchFiltered = TRUE;
+            } else {
+                [self setNumPatients:[mArrayOfPatients count]];
+                mSearchFiltered = FALSE;
+            }
+        }
     } else {
         [self setNumPatients:[mArrayOfPatients count]];
         mSearchFiltered = FALSE;
