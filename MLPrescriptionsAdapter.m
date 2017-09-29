@@ -224,7 +224,7 @@
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]
                                                              options: NSJSONReadingMutableContainers
                                                                error:&error];
-    
+    // Prescription
     NSMutableArray *prescription = [[NSMutableArray alloc] init];
     for (NSDictionary *p in [jsonDict objectForKey:@"medications"]) {
         MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
@@ -241,7 +241,23 @@
         
         [prescription addObject:item];
     }
-    cart = [prescription copy];    
+    cart = [prescription copy];
+    
+    // Patient
+    patient = [[MLPatient alloc] init];
+    NSDictionary *patientDict = [jsonDict objectForKey:@"patient"];
+    patient.uniqueId = [patientDict objectForKey:@"patient_id"];
+    patient.familyName = [patientDict objectForKey:@"family_name"];
+    patient.givenName = [patientDict objectForKey:@"given_name"];
+    patient.birthDate = [patientDict objectForKey:@"birth_date"];
+    patient.gender = [patientDict objectForKey:@"gender"];
+    patient.postalAddress = [patientDict objectForKey:@"postal_address"];
+    patient.zipCode = [patientDict objectForKey:@"zip_code"];
+    patient.city = [patientDict objectForKey:@"city"];
+    patient.country = [patientDict objectForKey:@"country"];
+    patient.phoneNumber = [patientDict objectForKey:@"phone_number"];
+    patient.emailAddress = [patientDict objectForKey:@"email_address"];
+    
     placeDate = [jsonDict objectForKey:@"place_date"];
     if (placeDate == nil)
         placeDate = [jsonDict objectForKey:@"date"];

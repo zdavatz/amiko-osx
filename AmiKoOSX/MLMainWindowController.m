@@ -2275,6 +2275,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         if ([[fileURL pathExtension] isEqualToString:@"amk"]) {
             [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
             mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
+            
+            // Patient id
+            MLPatient *p = [mPrescriptionAdapter patient];
+            if (p!=nil) {
+                NSString *patientHash = [p uniqueId];
+                if (!mPatientSheet) {
+                    mPatientSheet = [[MLPatientSheetController alloc] init];
+                }
+                if ([mPatientSheet patientExistsWithID:patientHash]) {
+                    NSLog(@"Found patient in DB!");
+                }                    
+            }
             // mCartHash = mPrescriptionsCart[0].uniqueHash;
             [self updatePrescriptionsView];
         }

@@ -45,4 +45,6 @@ enum database_t {
 @property (atomic, copy) NSString *emailAddress;
 @property (atomic, assign) enum database_t databaseType;
 
+- (NSString *) generateUniqueID;
+
 @end

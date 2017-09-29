@@ -112,9 +112,7 @@ static NSString *DATABASE_COLUMNS = nil;
 - (NSString *) insertEntry:(MLPatient *)patient
 {
     if (myPatientDb) {
-        // Creates and returns a new UUID with RFC 4122 version 4 random bytes
-        NSUUID *uuid = [NSUUID UUID];
-        NSString *uuidStr = [uuid UUIDString];
+        NSString *uuidStr = [patient generateUniqueID];    // e.g. 3466684318797166812        
         NSString *timeStr = [MLUtilities currentTime];
         // If UUID exist re-use it!
         if (patient.uniqueId!=nil && [patient.uniqueId length]>0) {
@@ -219,6 +217,20 @@ static NSString *DATABASE_COLUMNS = nil;
     }
     
     return listOfPatients;
+}
+
+- (MLPatient *) getPatientWithUniqueID:(NSString *)uniqueID
+{
+    if (uniqueID!=nil) {
+        NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@'", ALL_COLUMNS, DATABASE_TABLE, KEY_UID, uniqueID];
+        NSArray *results = [myPatientDb performQuery:query];
+        if ([results count]>0) {
+            for (NSArray *cursor in results) {
+                return [self cursorToPatient:cursor];
+            }
+        }
+    }
+    return nil;
 }
 
 - (MLPatient *) cursorToPatient:(NSArray *)cursor

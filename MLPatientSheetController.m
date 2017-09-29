@@ -173,6 +173,17 @@
     return mSelectedPatient;
 }
 
+- (MLPatient *) retrievePatientWithUniqueID:(NSString *)uniqueID
+{
+    return [mPatientDb getPatientWithUniqueID:uniqueID];
+}
+
+- (BOOL) patientExistsWithID:(NSString *)uniqueID
+{
+    MLPatient *p = [self retrievePatientWithUniqueID:uniqueID];
+    return p!=nil;
+}
+
 - (NSString *) retrievePatientAsString
 {
     NSString *p = @"";

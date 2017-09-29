@@ -56,6 +56,8 @@
 - (IBAction) onSelectPatient:(id)sender;
 
 - (MLPatient *) retrievePatient;
+- (MLPatient *) retrievePatientWithUniqueID:(NSString *)uniqueID;
+- (BOOL) patientExistsWithID:(NSString *)uniqueID;
 - (NSString *) retrievePatientAsString;
 - (NSString *) retrievePatientAsString:(NSString *)searchKey;
 - (void) show:(NSWindow *)window;

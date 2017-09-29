@@ -34,5 +34,6 @@
 - (long) getLargestRowId;
 - (NSArray *) getAllPatients;
 - (NSArray *) getPatientsWithKey:(NSString *)key;
+- (MLPatient *) getPatientWithUniqueID:(NSString *)uniqueID;
 
 @end

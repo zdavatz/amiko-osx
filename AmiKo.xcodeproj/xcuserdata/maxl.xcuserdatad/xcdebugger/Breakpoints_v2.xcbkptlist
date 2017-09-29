@@ -134,32 +134,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AmiKoOSX/MLMainWindowController.m"
-            timestampString = "528375539.421604"
+            timestampString = "528393992.927939"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2014"
-            endingLineNumber = "2014"
-            landmarkName = "-updatePrescriptionsView"
+            startingLineNumber = "2286"
+            endingLineNumber = "2286"
+            landmarkName = "-tableView:acceptDrop:row:dropOperation:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AmiKoOSX/MLMainWindowController.m"
-            timestampString = "528375583.323175"
+            timestampString = "528394009.279947"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2012"
-            endingLineNumber = "2012"
-            landmarkName = "-updatePrescriptionsView"
+            startingLineNumber = "2288"
+            endingLineNumber = "2288"
+            landmarkName = "-tableView:acceptDrop:row:dropOperation:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
