@@ -883,7 +883,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
 }
 
-- (IBAction) toolbarAction: (id)sender
+- (IBAction) toolbarAction:(id)sender
 {
     [self launchProgressIndicator];
     
@@ -905,7 +905,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [printJob runOperation];
 }
 
-- (IBAction) printSearchResult: (id)sender
+- (IBAction) printSearchResult:(id)sender
 {
     NSPrintInfo *printInfo = [[NSPrintInfo alloc] init];
     [printInfo setOrientation:NSPaperOrientationPortrait];
@@ -1184,6 +1184,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
     mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
     mCartHash = mPrescriptionsCart[0].uniqueHash;
+    
+    [myToolbar setSelectedItemIdentifier:@"Rezept"];
+    
     [self updatePrescriptionsView];
 }
 

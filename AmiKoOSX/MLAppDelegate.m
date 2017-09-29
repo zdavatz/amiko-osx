@@ -102,6 +102,9 @@
     [mainWindowController showWindow:nil];
 }
 
+///
+/// Opens up a file that has been double-clicked upon
+///
 - (BOOL) application:(NSApplication *)sender openFile:(NSString *)filename
 {
     if (!mainWindowController) {
