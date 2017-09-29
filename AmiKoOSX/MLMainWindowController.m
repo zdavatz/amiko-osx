@@ -341,7 +341,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                                                  name:@"MLPrescriptionPatientChanged"
                                                object:nil];
     
-    
     [[self window] makeFirstResponder:self];
 
     /*
@@ -1108,8 +1107,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         NSInteger row = [mySectionTitles selectedRow];
         if (row>-1) {
             NSAlert *alert = [[NSAlert alloc] init];
-            [alert addButtonWithTitle:@"Cancel"];
             [alert addButtonWithTitle:@"OK"];
+            [alert addButtonWithTitle:@"Cancel"];
             [alert setMessageText:@"Rezept löschen?"];
             [alert setInformativeText:@"Wollen Sie dieses Rezept wirklich löschen?"];
             [alert setAlertStyle:NSInformationalAlertStyle];
@@ -1123,7 +1122,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (void) deletePrescription:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
-    if (returnCode==NSAlertSecondButtonReturn) {
+    if (returnCode==NSAlertFirstButtonReturn) {
         if (mPrescriptionMode) {
             NSInteger row = [mySectionTitles selectedRow];
             [mPrescriptionAdapter deletePrescriptionWithName:mListOfSectionTitles[row] forPatient:[mPatientSheet retrievePatient]];
@@ -1205,19 +1204,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if ([cartHash isEqualToString:mCartHash]) {
         // Show alert with OK button
         NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"Ja"];
-        [alert addButtonWithTitle:@"Nein"];
+        [alert addButtonWithTitle:@"Überschreiben"];
+        [alert addButtonWithTitle:@"Neues Rezept"];
+        [alert addButtonWithTitle:@"Cancel"];
         [alert setMessageText:@"Rezept überschreiben?"];
-        [alert setInformativeText:@"Wollen Sie dieses Rezept überschreiben?"];
+        [alert setInformativeText:@"Wollen Sie dieses Rezept überschreiben oder ein neues Rezept erstellen?"];
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
             NSURL *url = nil;
             if (returnCode == NSAlertFirstButtonReturn) {
                 url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:YES];
             } else if (returnCode == NSAlertSecondButtonReturn) {
-                if (send) {
-                    url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:NO];
-                }
+                url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:NO];
             }
             if (url != nil && send == YES) {
                 [self sendPrescription:[[url absoluteURL] absoluteString]];
@@ -1394,6 +1392,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         case 3:
         {
             // NSLog(@"Rezept");
+            mUsedDatabase = kAips;
+            mSearchInteractions = false;
             mPrescriptionMode = true;
             [self stopProgressIndicator];
             [self updatePrescriptionsView];
