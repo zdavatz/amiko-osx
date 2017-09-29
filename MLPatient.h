@@ -46,5 +46,6 @@ enum database_t {
 @property (atomic, assign) enum database_t databaseType;
 
 - (NSString *) generateUniqueID;
+- (NSString *) asString;
 
 @end

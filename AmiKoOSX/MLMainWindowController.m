@@ -2013,6 +2013,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (placeDate!=nil)
         myPlaceDateField.stringValue = placeDate;
     [self.myPrescriptionsTableView reloadData];
+    mPrescriptionMode = true;
+    [myToolbar setSelectedItemIdentifier:@"Rezept"];
     // [self.mySectionTitles reloadData];
 }
 
@@ -2262,7 +2264,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     return NSDragOperationEvery;
 }
 
-
 - (BOOL) tableView:(NSTableView *)tableView acceptDrop:(id <NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation
 {
     NSPasteboard *pboard = [info draggingPasteboard];
@@ -2283,12 +2284,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                 if (!mPatientSheet) {
                     mPatientSheet = [[MLPatientSheetController alloc] init];
                 }
-                if ([mPatientSheet patientExistsWithID:patientHash]) {
-                    NSLog(@"Found patient in DB!");
-                }                    
+                if (![mPatientSheet patientExistsWithID:patientHash]) {
+                    // Import patient...
+                    [mPatientSheet addPatient:p];
+                }
+                myPatientAddressTextField.stringValue = [p asString];
+                [mPatientSheet setSelectedPatient:p];
             }
             // mCartHash = mPrescriptionsCart[0].uniqueHash;
             [self updatePrescriptionsView];
+            [self updatePrescriptionHistory];
         }
     }
     

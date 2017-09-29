@@ -109,26 +109,34 @@ static NSString *DATABASE_COLUMNS = nil;
         [myPatientDb close];
 }
 
+- (NSString *) addEntry:(MLPatient *)patient
+{
+    if (myPatientDb) {
+        // Patient entry does not exist (yet)
+        NSString *uuidStr = [patient generateUniqueID];    // e.g. 3466684318797166812
+        NSString *timeStr = [MLUtilities currentTime];
+        NSString *columnStr = [NSString stringWithFormat:@"(%@)", ALL_COLUMNS];
+        NSString *valueStr = [NSString stringWithFormat:@"(%ld, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %d, %d, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", patient.rowId, timeStr, uuidStr, patient.familyName, patient.givenName, patient.birthDate, patient.gender, patient.weightKg, patient.heightCm, patient.zipCode, patient.city, patient.country, patient.postalAddress, patient.phoneNumber, patient.emailAddress];
+        // Insert new entry into DB
+        [myPatientDb insertRowIntoTable:@"patients" forColumns:columnStr andValues:valueStr];
+        return uuidStr;
+    }
+    return nil;
+}
+
 - (NSString *) insertEntry:(MLPatient *)patient
 {
     if (myPatientDb) {
-        NSString *uuidStr = [patient generateUniqueID];    // e.g. 3466684318797166812        
-        NSString *timeStr = [MLUtilities currentTime];
         // If UUID exist re-use it!
         if (patient.uniqueId!=nil && [patient.uniqueId length]>0) {
-            uuidStr = patient.uniqueId;
             NSString *expressions = [NSString stringWithFormat:@"%@=%d, %@=%d, %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\", %@=\"%@\"", KEY_WEIGHT_KG, patient.weightKg, KEY_HEIGHT_CM, patient.heightCm, KEY_ZIPCODE, patient.zipCode, KEY_CITY, patient.city, KEY_COUNTRY, patient.country, KEY_ADDRESS, patient.postalAddress, KEY_PHONE, patient.phoneNumber, KEY_EMAIL, patient.emailAddress, KEY_GENDER, patient.gender];
             NSString *conditions = [NSString stringWithFormat:@"%@=\"%@\"", KEY_UID, patient.uniqueId];
             // Update existing entry
             [myPatientDb updateRowIntoTable:@"patients" forExpressions:expressions andConditions:conditions];
+            return patient.uniqueId;
         } else {
-            NSString *columnStr = [NSString stringWithFormat:@"(%@)", ALL_COLUMNS];
-            NSString *valueStr = [NSString stringWithFormat:@"(%ld, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %d, %d, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", patient.rowId, timeStr, uuidStr, patient.familyName, patient.givenName, patient.birthDate, patient.gender, patient.weightKg, patient.heightCm, patient.zipCode, patient.city, patient.country, patient.postalAddress, patient.phoneNumber, patient.emailAddress];
-            // Insert new entry into DB
-            [myPatientDb insertRowIntoTable:@"patients" forColumns:columnStr andValues:valueStr];
+            return [self addEntry:patient];
         }
-        
-        return uuidStr;
     }
     return nil;
 }

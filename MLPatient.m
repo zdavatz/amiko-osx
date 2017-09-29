@@ -48,4 +48,9 @@
     return [NSString stringWithFormat:@"%lu", uniqueHash];    // e.g. 3466684318797166812
 }
 
+- (NSString *) asString
+{
+    return [NSString stringWithFormat:@"%@ %@\r\n%@\r\nCH-%@ %@\r\n%@\r\n%@", givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];
+}
+
 @end

@@ -168,6 +168,21 @@
     return patient;
 }
 
+- (void) addPatient:(MLPatient *)patient
+{
+    mSelectedPatient = patient;
+    mPatientUUID = [mPatientDb addEntry:patient];
+    mSearchFiltered = FALSE;
+    [mSearchKey setStringValue:@""];
+    [self updateAmiKoAddressBookTableView];
+    [mNotification setStringValue:@"Kontakt wurde im AmiKo Addressbuch gespeichert."];
+}
+
+- (void) setSelectedPatient:(MLPatient *)patient
+{
+    mSelectedPatient = patient;
+}
+
 - (MLPatient *) retrievePatient
 {
     return mSelectedPatient;
@@ -188,15 +203,7 @@
 {
     NSString *p = @"";
     if (mSelectedPatient!=nil) {
-        NSString *familyName = mSelectedPatient.familyName;
-        NSString *givenName = mSelectedPatient.givenName;
-        NSString *postalAddress = mSelectedPatient.postalAddress;
-        NSString *zipCode = mSelectedPatient.zipCode;
-        NSString *city = mSelectedPatient.city;
-        NSString *phoneNumber = mSelectedPatient.phoneNumber;
-        NSString *emailAddress = mSelectedPatient.emailAddress;
-        p = [NSString stringWithFormat:@"%@ %@\r\n%@\r\nCH-%@ %@\r\n%@\r\n%@",
-             givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];
+        return [mSelectedPatient asString];
     }
     return p;
 }
@@ -208,15 +215,7 @@
     mArrayOfPatients = [mPatientDb getPatientsWithKey:searchKey];
     if ([mArrayOfPatients count]>0) {
         MLPatient *r = [mArrayOfPatients objectAtIndex:0];
-        NSString *familyName = r.familyName;
-        NSString *givenName = r.givenName;
-        NSString *postalAddress = r.postalAddress;
-        NSString *zipCode = r.zipCode;
-        NSString *city = r.city;
-        NSString *phoneNumber = r.phoneNumber;
-        NSString *emailAddress = r.emailAddress;
-        p = [NSString stringWithFormat:@"%@ %@\r\n%@\r\nCH-%@ %@\r\n%@\r\n%@",
-                                givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];        
+        return [r asString];
     }
     return p;
 }

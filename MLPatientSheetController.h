@@ -55,6 +55,8 @@
 - (IBAction) onShowContacts:(id)sender;
 - (IBAction) onSelectPatient:(id)sender;
 
+- (void) addPatient:(MLPatient *)patient;
+- (void) setSelectedPatient:(MLPatient *)patient;
 - (MLPatient *) retrievePatient;
 - (MLPatient *) retrievePatientWithUniqueID:(NSString *)uniqueID;
 - (BOOL) patientExistsWithID:(NSString *)uniqueID;
