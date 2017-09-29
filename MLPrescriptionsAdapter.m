@@ -33,6 +33,7 @@
 
 @synthesize cart;
 @synthesize patient;
+@synthesize placeDate;
 
 - (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p
 {
@@ -128,7 +129,7 @@
         NSString *currentTime = [[MLUtilities currentTime] stringByReplacingOccurrencesOfString:@":" withString:@""];
         currentTime = [currentTime stringByReplacingOccurrencesOfString:@"." withString:@""];
         NSString *fileName = [NSString stringWithFormat:@"RZ_%@.amk", currentTime];
-
+        
         // Assign filename
         currentFileName = fileName;
 
@@ -163,6 +164,8 @@
         [operatorDict setObject:[defaults stringForKey:@"phonenumber"] forKey:@"phone_number"];
         [operatorDict setObject:[defaults stringForKey:@"emailaddress"] forKey:@"email_address"];
         
+        placeDate = [NSString stringWithFormat:@"%@, %@", [defaults stringForKey:@"city"], [MLUtilities prettyTime]];
+        
         NSString *encodedImgStr = @"";
         NSString *filePath = [[MLUtilities documentsDirectory] stringByAppendingPathComponent:@"op_signature.png"];
         if (filePath!=nil) {
@@ -188,7 +191,7 @@
         }
                 
         [prescriptionDict setObject:hash forKey:@"prescription_hash"];
-        [prescriptionDict setObject:currentTime forKey:@"date"];
+        [prescriptionDict setObject:placeDate forKey:@"place_date"];
         [prescriptionDict setObject:patientDict forKey:@"patient"];
         [prescriptionDict setObject:operatorDict forKey:@"operator"];
         [prescriptionDict setObject:prescription forKey:@"medications"];
@@ -238,9 +241,13 @@
         
         [prescription addObject:item];
     }
-    cart = [prescription copy];
+    cart = [prescription copy];    
+    placeDate = [jsonDict objectForKey:@"place_date"];
+    if (placeDate == nil)
+        placeDate = [jsonDict objectForKey:@"date"];
+    NSString *hash = [jsonDict objectForKey:@"prescription_hash"];
     
-    return [jsonDict objectForKey:@"prescription_hash"];
+    return hash;
 }
 
 - (NSString *) loadPrescriptionWithName:(NSString *)fileName forPatient:(MLPatient *)p

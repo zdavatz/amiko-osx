@@ -175,7 +175,7 @@ NSString* const APP_ID = @"708142753";
 + (NSString *) prettyTime
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"dd.MM.yyyy";
+    dateFormatter.dateFormat = @"dd.MM.yyyy (HH:mm:ss)";
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     return [dateFormatter stringFromDate:[NSDate date]];
 }

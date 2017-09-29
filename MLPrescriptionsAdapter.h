@@ -27,6 +27,7 @@
 
 @property (atomic) NSArray *cart;
 @property (atomic) MLPatient *patient;
+@property (atomic) NSString *placeDate;
 
 - (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p;
 - (NSArray *) listOfPrescriptionURLsForPatient:(MLPatient *)p;

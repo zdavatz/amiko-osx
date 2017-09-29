@@ -2008,6 +2008,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 {
     // Switch tab view
     [myTabView selectTabViewItemAtIndex:2];
+    // Update date
+    NSString *placeDate = [mPrescriptionAdapter placeDate];
+    if (placeDate!=nil)
+        myPlaceDateField.stringValue = placeDate;
     [self.myPrescriptionsTableView reloadData];
     // [self.mySectionTitles reloadData];
 }
