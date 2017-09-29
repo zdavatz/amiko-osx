@@ -1184,7 +1184,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
     mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
     mCartHash = mPrescriptionsCart[0].uniqueHash;
-    
+    mPrescriptionMode = true;
     [myToolbar setSelectedItemIdentifier:@"Rezept"];
     
     [self updatePrescriptionsView];
