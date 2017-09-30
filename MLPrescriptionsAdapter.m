@@ -261,6 +261,7 @@
     placeDate = [jsonDict objectForKey:@"place_date"];
     if (placeDate == nil)
         placeDate = [jsonDict objectForKey:@"date"];
+
     NSString *hash = [jsonDict objectForKey:@"prescription_hash"];
     
     return hash;

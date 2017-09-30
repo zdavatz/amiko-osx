@@ -2274,8 +2274,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if ([fileURLs count]>0) {
         NSURL *fileURL = [fileURLs objectAtIndex:0];
         if ([[fileURL pathExtension] isEqualToString:@"amk"]) {
-            [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
+            NSString *hash = [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
             mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
+            mPrescriptionsCart[0].uniqueHash = hash;
             
             // Patient id
             MLPatient *p = [mPrescriptionAdapter patient];
