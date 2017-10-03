@@ -240,6 +240,17 @@
     return TRUE;
 }
 
+- (BOOL) deleteRowFromTable:(NSString *)table withUId:(NSString *)uId
+{
+    char *errMsg;
+    NSString *query = [NSString stringWithFormat:@"delete from %@ where uid='%@'", table, uId];
+    if (sqlite3_exec(database, [query UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
+        NSLog(@"Failed to delete record from db: %s", errMsg);
+        return FALSE;
+    }
+    return TRUE;
+}
+
 - (void) close
 {
     sqlite3_close(database);

@@ -326,7 +326,11 @@
             if (mPatientUUID!=nil && [mPatientUUID length]>0) {
                 patient.uniqueId = mPatientUUID;
             }
-            mPatientUUID = [mPatientDb insertEntry:patient];
+            if ([mPatientDb getPatientWithUniqueID:mPatientUUID]==nil) {
+                mPatientUUID = [mPatientDb addEntry:patient];
+            } else {
+                mPatientUUID = [mPatientDb insertEntry:patient];
+            }
             mSearchFiltered = FALSE;
             [mSearchKey setStringValue:@""];
             [self updateAmiKoAddressBookTableView];

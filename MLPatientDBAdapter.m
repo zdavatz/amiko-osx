@@ -152,7 +152,7 @@ static NSString *DATABASE_COLUMNS = nil;
 - (BOOL) deleteEntry:(MLPatient *)patient
 {
     if (myPatientDb) {
-        [myPatientDb deleteRowFromTable:@"patients" withRowId:patient.rowId];
+        [myPatientDb deleteRowFromTable:@"patients" withUId:patient.uniqueId];
         return TRUE;
     }
     return FALSE;

@@ -2256,7 +2256,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 }
 
 - (NSDragOperation) tableView:(NSTableView*)tableView validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op
-{    
+{
     // Highlight table
     // [self.mySectionTitles setDropRow:-1 dropOperation:NSTableViewDropOn];
     [self.myPrescriptionsTableView setDropRow:-1 dropOperation:NSTableViewDropOn];
