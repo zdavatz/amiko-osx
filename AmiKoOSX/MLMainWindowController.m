@@ -340,6 +340,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                                              selector:@selector(prescriptionPatientChanged:)
                                                  name:@"MLPrescriptionPatientChanged"
                                                object:nil];
+
+    // Register observer to notify change of patient selected in prescription module
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(prescriptionPatientDeleted:)
+                                                 name:@"MLPrescriptionPatientDeleted"
+                                               object:nil];
     
     [[self window] makeFirstResponder:self];
 
@@ -584,8 +590,33 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         if (mPrescriptionsCart[0].cart!=nil)
             [mPrescriptionsCart[0] makeNewUniqueHash];
     }
+    mPrescriptionMode = true;
     // Update prescription history in right most pane
     [self updatePrescriptionHistory];
+    // Switch tab view
+    [myTabView selectTabViewItemAtIndex:2];
+    [myToolbar setSelectedItemIdentifier:@"Rezept"];
+}
+
+/**
+ Notification called when prescription patient has been deleted
+ */
+- (void) prescriptionPatientDeleted:(NSNotification *)notification
+{
+    if ([[notification name] isEqualToString:@"MLPrescriptionPatientDeleted"]) {
+        myPatientAddressTextField.stringValue = @"";
+        [self setOperatorID];
+        [mPrescriptionsCart[0] clearCart];
+        [myPrescriptionsTableView reloadData];
+        [self resetPrescriptionHistory];
+    }
+}
+
+- (void) resetPrescriptionHistory
+{
+    mListOfSectionTitles = [[NSArray alloc] init];
+    mListOfSectionIds = [[NSArray alloc] init];
+    [mySectionTitles reloadData];
 }
 
 - (void) updatePrescriptionHistory

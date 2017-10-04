@@ -376,6 +376,7 @@
         if ([mPatientDb deleteEntry:p]) {
             [self updateAmiKoAddressBookTableView];
             [mNotification setStringValue:@"Kontakt wurde vom AmiKo Addressbuch gelöscht."];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionPatientDeleted" object:self];
         }
     }
 }
