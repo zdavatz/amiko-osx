@@ -26,6 +26,7 @@
 #import "MLPatientDBAdapter.h"
 #import "MLContacts.h"
 #import "MLColors.h"
+#import "MLUtilities.h"
 
 @implementation MLPatientSheetController
 {
@@ -374,10 +375,25 @@
     if (returnCode==NSAlertSecondButtonReturn) {
         MLPatient *p = (__bridge MLPatient *)contextInfo;
         if ([mPatientDb deleteEntry:p]) {
+            [self deletePatientFolder:p withBackup:YES];
+            [self resetAllFields];
             [self updateAmiKoAddressBookTableView];
             [mNotification setStringValue:@"Kontakt wurde vom AmiKo Addressbuch gelöscht."];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionPatientDeleted" object:self];
         }
+    }
+}
+
+- (void) deletePatientFolder:(MLPatient *)patient withBackup:(BOOL)backup
+{
+    NSString *documentsDir = [MLUtilities documentsDirectory];
+    NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", patient.uniqueId]];
+    
+    if (backup==YES) {
+        NSString *backupDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/.%@", patient.uniqueId]];
+        [[NSFileManager defaultManager] moveItemAtPath:patientDir toPath:backupDir error:nil];
+    } else {
+        [[NSFileManager defaultManager] removeItemAtPath:patientDir error:nil];
     }
 }
 

@@ -106,6 +106,24 @@
     }
 }
 
+- (void) deleteAllPrescriptionsForPatient:(MLPatient *)p withBackup:(BOOL)backup
+{
+    if (p!=nil) {
+        // Assign patient
+        patient = p;
+        
+        NSString *documentsDir = [MLUtilities documentsDirectory];
+        NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", patient.uniqueId]];
+        
+        if (backup==YES) {
+            NSString *backupDir = [NSString stringWithFormat:@".%@", patientDir];
+            [[NSFileManager defaultManager] moveItemAtPath:patientDir toPath:backupDir error:nil];
+        } else {
+            [[NSFileManager defaultManager] removeItemAtPath:patientDir error:nil];
+        }
+    }
+}
+
 - (NSURL *) savePrescriptionForPatient:(MLPatient *)p withUniqueHash:(NSString *)hash andOverwrite:(BOOL)overwrite
 {
     if (p!=nil) {
@@ -250,6 +268,8 @@
     patient.familyName = [patientDict objectForKey:@"family_name"];
     patient.givenName = [patientDict objectForKey:@"given_name"];
     patient.birthDate = [patientDict objectForKey:@"birth_date"];
+    patient.weightKg = [[patientDict objectForKey:@"weight_kg"] intValue];
+    patient.heightCm = [[patientDict objectForKey:@"height_cm"] intValue];
     patient.gender = [patientDict objectForKey:@"gender"];
     patient.postalAddress = [patientDict objectForKey:@"postal_address"];
     patient.zipCode = [patientDict objectForKey:@"zip_code"];
