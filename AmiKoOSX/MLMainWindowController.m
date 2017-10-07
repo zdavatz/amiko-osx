@@ -1204,21 +1204,29 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (void) loadPrescription:(NSString *)filename
 {
-    if (!mPatientSheet) {
-        mPatientSheet = [[MLPatientSheetController alloc] init];
-    }
-    MLPatient *patient = [mPatientSheet retrievePatient];
-    if (patient!=nil) {
-        [mPrescriptionAdapter loadPrescriptionWithName:filename forPatient:patient];
-    } else {
-        [mPrescriptionAdapter loadPrescriptionFromFile:filename];
-    }
+    // Load prescription
+    NSString *hash = [mPrescriptionAdapter loadPrescriptionFromFile:filename];
     mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
-    mCartHash = mPrescriptionsCart[0].uniqueHash;
-    mPrescriptionMode = true;
-    [myToolbar setSelectedItemIdentifier:@"Rezept"];
+    mPrescriptionsCart[0].uniqueHash = hash;
     
+    // Set patient found in prescription
+    MLPatient *p = [mPrescriptionAdapter patient];
+    if (p!=nil) {
+        NSString *patientHash = [p uniqueId];
+        if (!mPatientSheet) {
+            mPatientSheet = [[MLPatientSheetController alloc] init];
+        }
+        if (![mPatientSheet patientExistsWithID:patientHash]) {
+            // Import patient...
+            [mPatientSheet addPatient:p];
+        }
+        myPatientAddressTextField.stringValue = [p asString];
+        [mPatientSheet setSelectedPatient:p];
+    }
+    
+    // Update views
     [self updatePrescriptionsView];
+    [self updatePrescriptionHistory];
 }
 
 - (void) savePrescriptionThenSend:(BOOL)send
@@ -2289,7 +2297,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 - (NSDragOperation) tableView:(NSTableView*)tableView validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op
 {
     // Highlight table
-    // [self.mySectionTitles setDropRow:-1 dropOperation:NSTableViewDropOn];
     [self.myPrescriptionsTableView setDropRow:-1 dropOperation:NSTableViewDropOn];
     
     return NSDragOperationEvery;
@@ -2305,27 +2312,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if ([fileURLs count]>0) {
         NSURL *fileURL = [fileURLs objectAtIndex:0];
         if ([[fileURL pathExtension] isEqualToString:@"amk"]) {
-            NSString *hash = [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
-            mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
-            mPrescriptionsCart[0].uniqueHash = hash;
-            
-            // Patient id
-            MLPatient *p = [mPrescriptionAdapter patient];
-            if (p!=nil) {
-                NSString *patientHash = [p uniqueId];
-                if (!mPatientSheet) {
-                    mPatientSheet = [[MLPatientSheetController alloc] init];
-                }
-                if (![mPatientSheet patientExistsWithID:patientHash]) {
-                    // Import patient...
-                    [mPatientSheet addPatient:p];
-                }
-                myPatientAddressTextField.stringValue = [p asString];
-                [mPatientSheet setSelectedPatient:p];
-            }
-            // mCartHash = mPrescriptionsCart[0].uniqueHash;
-            [self updatePrescriptionsView];
-            [self updatePrescriptionHistory];
+            // Load prescription
+            [self loadPrescription:[fileURL path]];
         }
     }
     
