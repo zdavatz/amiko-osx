@@ -102,38 +102,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MLEditableTextField.m"
-            timestampString = "527711122.269782"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "-beginEditing"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MLEditableTextField.m"
-            timestampString = "527711130.77339"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "-_commonInit"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -192,22 +160,6 @@
             startingLineNumber = "367"
             endingLineNumber = "367"
             landmarkName = "-extractShortMedInfoFrom:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MLPrescriptionsAdapter.m"
-            timestampString = "529592564.945307"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
-            landmarkName = "-savePrescriptionForPatient:withUniqueHash:andOverwrite:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

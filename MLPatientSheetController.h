@@ -23,7 +23,7 @@
 
 #import "MLPatient.h"
 
-@interface MLPatientSheetController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource>
+@interface MLPatientSheetController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate>
 {
     @private
     IBOutlet NSWindow *mPanel;

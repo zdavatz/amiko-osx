@@ -59,6 +59,10 @@
         
         mABContactsVisible = FALSE;
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(controlTextDidChange:)
+                                                     name:NSControlTextDidChangeNotification
+                                                   object:nil];
         return self;
     }    
     return nil;
@@ -69,14 +73,50 @@
     return !(str && str.length);
 }
 
+/**
+ NSTextFieldDelegate
+ */
+- (void) controlTextDidChange:(NSNotification *)notification {
+    /*
+    NSTextField *textField = [notification object];
+    if (textField==mFamilyName)
+        NSLog(@"%@", [textField stringValue]);
+    */
+    [self checkFields];
+}
+
 - (void) resetFieldsColors
 {
-    mFamilyName.backgroundColor = [NSColor whiteColor];
-    mGivenName.backgroundColor = [NSColor whiteColor];
-    mBirthDate.backgroundColor = [NSColor whiteColor];
-    mPostalAddress.backgroundColor = [NSColor whiteColor];
-    mCity.backgroundColor = [NSColor whiteColor];
-    mZipCode.backgroundColor = [NSColor whiteColor];
+    mFamilyName.backgroundColor = [NSColor clearColor];
+    mGivenName.backgroundColor = [NSColor clearColor];
+    mBirthDate.backgroundColor = [NSColor clearColor];
+    mPostalAddress.backgroundColor = [NSColor clearColor];
+    mCity.backgroundColor = [NSColor clearColor];
+    mZipCode.backgroundColor = [NSColor clearColor];
+}
+
+- (void) checkFields
+{
+    [self resetFieldsColors];
+    
+    if ([self stringIsNilOrEmpty:[mFamilyName stringValue]]) {
+        mFamilyName.backgroundColor = [NSColor lightRed];
+    }
+    if ([self stringIsNilOrEmpty:[mGivenName stringValue]]) {
+        mGivenName.backgroundColor = [NSColor lightRed];
+    }
+    if ([self stringIsNilOrEmpty:[mBirthDate stringValue]]) {
+        mBirthDate.backgroundColor = [NSColor lightRed];
+    }
+    if ([self stringIsNilOrEmpty:[mPostalAddress stringValue]]) {
+        mPostalAddress.backgroundColor = [NSColor lightRed];
+    }
+    if ([self stringIsNilOrEmpty:[mCity stringValue]]) {
+        mCity.backgroundColor = [NSColor lightRed];
+    }
+    if ([self stringIsNilOrEmpty:[mZipCode stringValue]]) {
+        mZipCode.backgroundColor = [NSColor lightRed];
+    }
 }
 
 - (void) resetAllFields
