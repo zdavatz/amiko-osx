@@ -200,6 +200,7 @@
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [dict setObject:item.title forKey:@"product_name"];
             [dict setObject:item.fullPackageInfo forKey:@"package"];
+            [dict setObject:item.eanCode forKey:@"eancode"];
             [dict setObject:item.comment forKey:@"comment"];
             [dict setObject:item.med.title forKey:@"title"];
             [dict setObject:item.med.auth forKey:@"owner"];
@@ -248,6 +249,7 @@
         MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
         item.title = [p objectForKey:@"product_name"];
         item.fullPackageInfo = [p objectForKey:@"package"];
+        item.eanCode = [p objectForKey:@"eancode"];
         item.comment = [p objectForKey:@"comment"];
         
         MLMedication *med = [[MLMedication alloc] init];

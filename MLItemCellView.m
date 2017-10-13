@@ -185,6 +185,25 @@
         MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
         item.fullPackageInfo = selectedPackage;
         item.mid = selectedMedi.medId;
+
+        // Extract EAN/GTIN
+        MLMedication *m = [vc getShortMediWithId:[selectedMedi medId]];
+        if (m != nil) {
+            NSArray *listOfPackInfos = [[m packInfo] componentsSeparatedByString:@"\n"];
+            NSArray *listOfPacks = [[m packages] componentsSeparatedByString:@"\n"];
+            NSString *eanCode = @"";
+            NSInteger row = 0;
+            for (NSString *s in listOfPackInfos) {
+                if ([s containsString:selectedPackage]) {
+                    NSString *package = [listOfPacks objectAtIndex:row];
+                    NSArray *p = [package componentsSeparatedByString:@"|"];
+                    eanCode = [p objectAtIndex:9];
+                    break;
+                }
+                row++;
+            }
+            item.eanCode = eanCode;
+        }
         
         NSArray *titleComponents = [selectedPackage componentsSeparatedByString:@"["];
         titleComponents = [titleComponents[0] componentsSeparatedByString:@","];

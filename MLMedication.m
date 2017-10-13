@@ -51,6 +51,7 @@ static NSString* SectionTitle_FR[] = {@"Composition", @"Forme galénique", @"Con
 @synthesize sectionTitles;
 @synthesize styleStr;
 @synthesize contentStr;
+@synthesize packages;
 
 - (NSArray *) listOfSectionIds
 {

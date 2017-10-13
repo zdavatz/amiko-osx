@@ -348,11 +348,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                                                object:nil];
     
     [[self window] makeFirstResponder:self];
-
-    /*
-    [myToolbar setVisible:NO];
-    [[self.window contentView] addSubview:mySplashScreen];
-    */
     
     [[self window] setBackgroundColor:[NSColor whiteColor]];
     
@@ -794,6 +789,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
      [myToolbar setVisible:YES];
      */
 }
+
+- (MLMedication *) getShortMediWithId:(long)mid
+{
+    if (mDb != nil)
+        return [mDb getShortMediWithId:mid];
+    else
+        return nil;
+}
+
 
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
@@ -2136,7 +2140,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     return [super validateProposedFirstResponder:responder forEvent:event];
 }
 
-
 /**
  - NSTableViewDataSource -
  */
@@ -2384,7 +2387,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
             
             if (mPrescriptionMode) {
-                [self loadPrescription:mListOfSectionTitles[row]];
+                [self loadPrescription:mListOfSectionIds[row]];
             } else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
                 NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
                 [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
