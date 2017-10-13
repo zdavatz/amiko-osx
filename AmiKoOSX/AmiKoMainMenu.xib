@@ -122,6 +122,56 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Edit" id="SBf-jg-8kW">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Edit" id="4xr-bz-rPZ">
+                        <items>
+                            <menuItem title="Undo" keyEquivalent="z" id="fWF-Ur-1gj">
+                                <connections>
+                                    <action selector="undo:" target="-1" id="1PW-aC-QfH"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Redo" keyEquivalent="Z" id="zuN-8U-bRS">
+                                <connections>
+                                    <action selector="redo:" target="-1" id="Svh-5W-G8Y"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Vce-bZ-xsq"/>
+                            <menuItem title="Cut" keyEquivalent="x" id="ahg-j4-NCC">
+                                <connections>
+                                    <action selector="cut:" target="-1" id="bjs-ps-cOj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Copy" keyEquivalent="c" id="ecT-Vg-yKm">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="i5o-vl-qhj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="6C4-wL-IXh">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="cTz-Ga-vnx"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste and Match Style" keyEquivalent="V" id="Ug2-Yh-EQ7">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="pasteAsPlainText:" target="-1" id="bis-oV-Weg"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete" id="IE4-Bi-KSo">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="delete:" target="-1" id="mGP-W4-ucC"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="P52-Re-Wjz">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="AiK-Ub-SqG"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Rezept" id="NcS-1e-ymc">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Rezept" id="JjD-6m-Mnl">
@@ -146,6 +196,7 @@
                     <menu key="submenu" title="Kontakte" id="2wd-qf-r9D">
                         <items>
                             <menuItem title="Patienten verwalten..." keyEquivalent="p" id="tsG-5e-hg5">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="managePatients:" target="-1" id="wUp-yB-hoH"/>
                                 </connections>

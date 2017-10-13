@@ -200,7 +200,8 @@
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [dict setObject:item.title forKey:@"product_name"];
             [dict setObject:item.fullPackageInfo forKey:@"package"];
-            [dict setObject:item.eanCode forKey:@"eancode"];
+            if (item.eanCode!=nil)
+                [dict setObject:item.eanCode forKey:@"eancode"];
             [dict setObject:item.comment forKey:@"comment"];
             [dict setObject:item.med.title forKey:@"title"];
             [dict setObject:item.med.auth forKey:@"owner"];
