@@ -137,13 +137,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AmiKoOSX/MLMainWindowController.m"
-            timestampString = "529592186.028477"
+            filePath = "MLDBAdapter.m"
+            timestampString = "529589816.503632"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1241"
-            endingLineNumber = "1241"
-            landmarkName = "-savePrescriptionThenSend:"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
+            landmarkName = "-extractShortMedInfoFrom:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,13 +153,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MLDBAdapter.m"
-            timestampString = "529589816.503632"
+            filePath = "AmiKoOSX/MLMainWindowController.m"
+            timestampString = "529654091.008297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
-            landmarkName = "-extractShortMedInfoFrom:"
+            startingLineNumber = "2252"
+            endingLineNumber = "2252"
+            landmarkName = "-tableView:viewForTableColumn:row:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

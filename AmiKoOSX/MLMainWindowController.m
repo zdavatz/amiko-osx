@@ -1206,7 +1206,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [MLAbout showHelp];
 }
 
-- (void) loadPrescription:(NSString *)filename
+- (void) loadPrescription:(NSString *)filename andRefreshHistory:(bool)refresh
 {
     // Load prescription
     NSString *hash = [mPrescriptionAdapter loadPrescriptionFromFile:filename];
@@ -1230,7 +1230,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     
     // Update views
     [self updatePrescriptionsView];
-    [self updatePrescriptionHistory];
+    if (refresh)
+        [self updatePrescriptionHistory];
 }
 
 - (void) savePrescriptionThenSend:(BOOL)send
@@ -2316,7 +2317,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         NSURL *fileURL = [fileURLs objectAtIndex:0];
         if ([[fileURL pathExtension] isEqualToString:@"amk"]) {
             // Load prescription
-            [self loadPrescription:[fileURL path]];
+            [self loadPrescription:[fileURL path] andRefreshHistory:YES];
         }
     }
     
@@ -2387,7 +2388,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
             
             if (mPrescriptionMode) {
-                [self loadPrescription:mListOfSectionIds[row]];
+                [self loadPrescription:mListOfSectionIds[row] andRefreshHistory:NO];
             } else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
                 NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
                 [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
