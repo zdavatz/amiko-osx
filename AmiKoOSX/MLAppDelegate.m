@@ -112,7 +112,7 @@
         [mainWindowController showWindow:nil];
     }
     
-    [mainWindowController loadPrescription:filename];
+    [mainWindowController loadPrescription:filename andRefreshHistory:YES];
         
     return YES;
 }
