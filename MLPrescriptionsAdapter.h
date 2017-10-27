@@ -23,11 +23,13 @@
 
 #import "MLPatient.h"
 #import "MLContacts.h"
+#import "MLOperator.h"
 
 @interface MLPrescriptionsAdapter : NSObject
 
 @property (atomic) NSArray *cart;
 @property (atomic) MLPatient *patient;
+@property (atomic) MLOperator *doctor;
 @property (atomic) NSString *placeDate;
 
 - (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p;

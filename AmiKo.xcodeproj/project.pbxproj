@@ -65,6 +65,12 @@
 		D538779B1AA386AC00AEFDB4 /* SHCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877991AA386AC00AEFDB4 /* SHCWebView.m */; };
 		D538779C1AA386AC00AEFDB4 /* SHCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877991AA386AC00AEFDB4 /* SHCWebView.m */; };
 		D538779D1AA386AC00AEFDB4 /* SHCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D53877991AA386AC00AEFDB4 /* SHCWebView.m */; };
+		D53973CD1FA37B9200D7E444 /* MLOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = D53973CC1FA37B9200D7E444 /* MLOperator.m */; };
+		D53973CE1FA37B9200D7E444 /* MLOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = D53973CC1FA37B9200D7E444 /* MLOperator.m */; };
+		D53973CF1FA37B9200D7E444 /* MLOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = D53973CC1FA37B9200D7E444 /* MLOperator.m */; };
+		D53973D01FA37B9200D7E444 /* MLOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = D53973CC1FA37B9200D7E444 /* MLOperator.m */; };
+		D53973D11FA37B9200D7E444 /* MLOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = D53973CC1FA37B9200D7E444 /* MLOperator.m */; };
+		D53973D21FA37B9200D7E444 /* MLOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = D53973CC1FA37B9200D7E444 /* MLOperator.m */; };
 		D539C10617DCED1D00759260 /* MLSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D539C10517DCED1D00759260 /* MLSplashScreen.m */; };
 		D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
 		D53AB5AD1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */; };
@@ -567,6 +573,8 @@
 		D53877931AA37CC900AEFDB4 /* MLUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLUtilities.m; sourceTree = "<group>"; };
 		D53877981AA386AC00AEFDB4 /* SHCWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCWebView.h; sourceTree = "<group>"; };
 		D53877991AA386AC00AEFDB4 /* SHCWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCWebView.m; sourceTree = "<group>"; };
+		D53973CB1FA37B7D00D7E444 /* MLOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLOperator.h; sourceTree = "<group>"; };
+		D53973CC1FA37B9200D7E444 /* MLOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLOperator.m; sourceTree = "<group>"; };
 		D539C10417DCED1D00759260 /* MLSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSplashScreen.h; sourceTree = "<group>"; };
 		D539C10517DCED1D00759260 /* MLSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSplashScreen.m; sourceTree = "<group>"; };
 		D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zur_Rose_1000x670px.png; sourceTree = "<group>"; };
@@ -993,6 +1001,8 @@
 				D5962EA01EFC26AD0034B964 /* MLPatientDBAdapter.m */,
 				D5C5C5161F06417800DF851F /* MLContacts.h */,
 				D5C5C50F1F06416800DF851F /* MLContacts.m */,
+				D53973CB1FA37B7D00D7E444 /* MLOperator.h */,
+				D53973CC1FA37B9200D7E444 /* MLOperator.m */,
 			);
 			name = Databases;
 			sourceTree = "<group>";
@@ -1669,6 +1679,7 @@
 				D5C5C5351F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B51EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC101EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D53973D11FA37B9200D7E444 /* MLOperator.m in Sources */,
 				D5962E8F1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C61EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D5E731271B33480A007771D7 /* SSZipArchive.m in Sources */,
@@ -1725,6 +1736,7 @@
 				D5C5C5361F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B61EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC111EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D53973D21FA37B9200D7E444 /* MLOperator.m in Sources */,
 				D5962E901EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C71EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D5E7316B1B334829007771D7 /* SSZipArchive.m in Sources */,
@@ -1781,6 +1793,7 @@
 				D5C5C5331F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B31EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0E1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D53973CF1FA37B9200D7E444 /* MLOperator.m in Sources */,
 				D5962E8D1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C41EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8F118A2CDEA00491511 /* SSZipArchive.m in Sources */,
@@ -1837,6 +1850,7 @@
 				D5BACC0C1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				D53AB5AD1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
+				D53973CD1FA37B9200D7E444 /* MLOperator.m in Sources */,
 				D517E4C21EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8D91898527300491511 /* SSZipArchive.m in Sources */,
 				D5ECDE1C1F2B24CB00970133 /* MLPrescriptionCellView.m in Sources */,
@@ -1871,6 +1885,7 @@
 				D5B010621927C472007BE838 /* interactions_callbacks.js in Sources */,
 				D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FC18A2CE0D00491511 /* zip.c in Sources */,
+				D53973CE1FA37B9200D7E444 /* MLOperator.m in Sources */,
 				D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */,
 				D5C6440E1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
 				D5C5C5081F03AE2E00DF851F /* MLPatient.m in Sources */,
@@ -1950,6 +1965,7 @@
 				D5C5C5341F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B41EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0F1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				D53973D01FA37B9200D7E444 /* MLOperator.m in Sources */,
 				D5962E8E1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				D517E4C51EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8F218A2CDEB00491511 /* SSZipArchive.m in Sources */,

@@ -25,6 +25,7 @@
 
 #import "MLUtilities.h"
 #import "MLColors.h"
+#import "MLOperator.h"
 
 @implementation MLOperatorIDSheetController
 {
@@ -181,6 +182,25 @@
     [defaults synchronize];
 }
 
+- (MLOperator *) loadOperator
+{
+    // Load from user defaults
+    MLOperator *operator = [[MLOperator alloc] init];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    operator.title = [defaults stringForKey:@"title"];
+    operator.familyName = [defaults stringForKey:@"familyname"];
+    operator.givenName = [defaults stringForKey:@"givenname"];
+    operator.postalAddress = [defaults stringForKey:@"postaladdress"];
+    operator.zipCode = [defaults stringForKey:@"zipcode"];
+    operator.city = [defaults stringForKey:@"city"];
+    operator.country = [defaults stringForKey:@"country"];
+    operator.phoneNumber = [defaults stringForKey:@"phonenumber"];
+    operator.emailAddress = [defaults stringForKey:@"emailaddress"];
+    
+    return operator;
+}
+
 - (void) loadSettings
 {
     NSString *documentsDirectory = [MLUtilities documentsDirectory];
@@ -190,67 +210,34 @@
         [mSignView setSignature:signatureImg];
     }
     
-    // Load from user defaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *title = [defaults stringForKey:@"title"];
-    NSString *familyName = [defaults stringForKey:@"familyname"];
-    NSString *givenName = [defaults stringForKey:@"givenname"];
-    NSString *postalAddress = [defaults stringForKey:@"postaladdress"];
-    NSString *zipCode = [defaults stringForKey:@"zipcode"];
-    NSString *city = [defaults stringForKey:@"city"];
-    NSString *country = [defaults stringForKey:@"country"];
-    NSString *phoneNumber = [defaults stringForKey:@"phonenumber"];
-    NSString *emailAddress = [defaults stringForKey:@"emailaddress"];
+    MLOperator *operator = [self loadOperator];
     
-    if ([self stringIsNilOrEmpty:title]==NO)
-        mTitle.stringValue = title;
-    if ([self stringIsNilOrEmpty:familyName]==NO)
-        mFamilyName.stringValue = familyName;
-    if ([self stringIsNilOrEmpty:givenName]==NO)
-        mGivenName.stringValue = givenName;
-    if ([self stringIsNilOrEmpty:postalAddress]==NO)
-        mPostalAddress.stringValue = postalAddress;
-    if ([self stringIsNilOrEmpty:zipCode]==NO)
-        mZipCode.stringValue = zipCode;
-    if ([self stringIsNilOrEmpty:city]==NO)
-        mCity.stringValue = city;
-    if ([self stringIsNilOrEmpty:country]==NO)
-        mCountry.stringValue = country;
-    if ([self stringIsNilOrEmpty:phoneNumber]==NO)
-        mPhoneNumber.stringValue = phoneNumber;
-    if ([self stringIsNilOrEmpty:emailAddress]==NO)
-        mEmailAddress.stringValue = emailAddress;
+    if ([self stringIsNilOrEmpty:operator.title]==NO)
+        mTitle.stringValue = operator.title;
+    if ([self stringIsNilOrEmpty:operator.familyName]==NO)
+        mFamilyName.stringValue = operator.familyName;
+    if ([self stringIsNilOrEmpty:operator.givenName]==NO)
+        mGivenName.stringValue = operator.givenName;
+    if ([self stringIsNilOrEmpty:operator.postalAddress]==NO)
+        mPostalAddress.stringValue = operator.postalAddress;
+    if ([self stringIsNilOrEmpty:operator.zipCode]==NO)
+        mZipCode.stringValue = operator.zipCode;
+    if ([self stringIsNilOrEmpty:operator.city]==NO)
+        mCity.stringValue = operator.city;
+    if ([self stringIsNilOrEmpty:operator.country]==NO)
+        mCountry.stringValue = operator.country;
+    if ([self stringIsNilOrEmpty:operator.phoneNumber]==NO)
+        mPhoneNumber.stringValue = operator.phoneNumber;
+    if ([self stringIsNilOrEmpty:operator.emailAddress]==NO)
+        mEmailAddress.stringValue = operator.emailAddress;
 }
 
 - (NSString *) retrieveIDAsString
 {
-    // Load from user defaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *title = [defaults stringForKey:@"title"];
-    NSString *familyName = [defaults stringForKey:@"familyname"];
-    NSString *givenName = [defaults stringForKey:@"givenname"];
-    NSString *postalAddress = [defaults stringForKey:@"postaladdress"];
-    NSString *zipCode = [defaults stringForKey:@"zipcode"];
-    NSString *city = [defaults stringForKey:@"city"];
-    NSString *phoneNumber = [defaults stringForKey:@"phonenumber"];
-    NSString *emailAddress = [defaults stringForKey:@"emailaddress"];
-
-    if (title==nil)
-        title = @"";
-    if (postalAddress==nil)
-        postalAddress = @"";
-    if (zipCode==nil)
-        zipCode = @"";
-    if (city==nil)
-        city = @"";
-    if (phoneNumber==nil)
-        phoneNumber = @"";
-    if (emailAddress==nil)
-        emailAddress = @"";
+    MLOperator *operator = [self loadOperator];
     
-    if (familyName!=nil && givenName!=nil) {
-        return [NSString stringWithFormat:@"%@ %@ %@\r\n%@\r\n%@ %@\r\n%@\r\n%@",
-                title, givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];
+    if (operator.familyName!=nil && operator.givenName!=nil) {
+        return [operator retrieveOperatorAsString];
     } else {
         if ([MLUtilities isGermanApp])
             return @"Bitte Arztstempel ergänzen";

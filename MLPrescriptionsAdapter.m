@@ -33,6 +33,7 @@
 
 @synthesize cart;
 @synthesize patient;
+@synthesize doctor;
 @synthesize placeDate;
 
 - (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p
@@ -281,6 +282,19 @@
     patient.phoneNumber = [patientDict objectForKey:@"phone_number"];
     patient.emailAddress = [patientDict objectForKey:@"email_address"];
     
+    // Operator/Doctor
+    doctor = [[MLOperator alloc] init];
+    NSDictionary *operatorDict = [jsonDict objectForKey:@"operator"];
+    doctor.title = [operatorDict objectForKey:@"title"];
+    doctor.familyName = [operatorDict objectForKey:@"family_mame"];
+    doctor.givenName = [operatorDict objectForKey:@"given_name"];
+    doctor.postalAddress = [operatorDict objectForKey:@"postal_address"];
+    doctor.zipCode = [operatorDict objectForKey:@"zip_code"];
+    doctor.city = [operatorDict objectForKey:@"city"];
+    doctor.country = @"";
+    doctor.phoneNumber = [operatorDict objectForKey:@"phone_number"];
+    doctor.emailAddress = [operatorDict objectForKey:@"email_address"];
+        
     placeDate = [jsonDict objectForKey:@"place_date"];
     if (placeDate == nil)
         placeDate = [jsonDict objectForKey:@"date"];

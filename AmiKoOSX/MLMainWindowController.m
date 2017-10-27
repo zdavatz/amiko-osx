@@ -1232,6 +1232,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [self updatePrescriptionsView];
     if (refresh)
         [self updatePrescriptionHistory];
+    
+    // Set operator / doctor found in prescription
+    /*
+    MLOperator *o = [mPrescriptionAdapter doctor];
+    if (o!=nil) {
+        myOperatorIDTextField.stringValue = [o retrieveOperatorAsString];
+    }
+    */
 }
 
 - (void) savePrescriptionThenSend:(BOOL)send
