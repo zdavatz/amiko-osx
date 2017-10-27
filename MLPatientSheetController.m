@@ -209,6 +209,15 @@
     return patient;
 }
 
+- (void) friendlyNote
+{
+    if ([MLUtilities isGermanApp]) {
+        [mNotification setStringValue:@"Kontakt wurde im AmiKo Addressbuch gespeichert."];
+    } else if ([MLUtilities isFrenchApp]) {
+        [mNotification setStringValue:@"Contact enregistré dans le carnet d'adresses CoMed."];
+    }
+}
+
 - (void) addPatient:(MLPatient *)patient
 {
     mSelectedPatient = patient;
@@ -216,7 +225,7 @@
     mSearchFiltered = FALSE;
     [mSearchKey setStringValue:@""];
     [self updateAmiKoAddressBookTableView];
-    [mNotification setStringValue:@"Kontakt wurde im AmiKo Addressbuch gespeichert."];
+    [self friendlyNote];
 }
 
 - (void) setSelectedPatient:(MLPatient *)patient
@@ -375,7 +384,7 @@
             mSearchFiltered = FALSE;
             [mSearchKey setStringValue:@""];
             [self updateAmiKoAddressBookTableView];
-            [mNotification setStringValue:@"Kontakt wurde im AmiKo Addressbuch gespeichert."];
+            [self friendlyNote];
         }
     }
 }
@@ -400,9 +409,14 @@
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"Cancel"];
         [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:@"Kontakt löschen?"];
-        [alert setInformativeText:@"Wollen Sie diesen Kontakt wirklich aus dem AmiKo Adressbuch löschen?"];
-        [alert setAlertStyle:NSInformationalAlertStyle];        
+        if ([MLUtilities isGermanApp]) {
+            [alert setMessageText:@"Kontakt löschen?"];
+            [alert setInformativeText:@"Wollen Sie diesen Kontakt wirklich aus dem AmiKo Adressbuch löschen?"];
+        } else if ([MLUtilities isFrenchApp]) {
+            [alert setMessageText:@"Supprimer le contact?"];
+            [alert setInformativeText:@"Êtes-vous sûr de vouloir supprimer ce contact du carnet d'adresses CoMed?"];
+        }
+        [alert setAlertStyle:NSInformationalAlertStyle];
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self
                          didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
@@ -418,7 +432,11 @@
             [self deletePatientFolder:p withBackup:YES];
             [self resetAllFields];
             [self updateAmiKoAddressBookTableView];
-            [mNotification setStringValue:@"Kontakt wurde vom AmiKo Addressbuch gelöscht."];
+            if ([MLUtilities isGermanApp]) {
+                [mNotification setStringValue:@"Kontakt wurde vom AmiKo Addressbuch gelöscht."];
+            } else if ([MLUtilities isFrenchApp]) {
+                [mNotification setStringValue:@"Le contact a été supprimé du carnet d'adresses CoMed."];
+            }
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionPatientDeleted" object:self];
         }
     }
@@ -475,7 +493,10 @@
 {
     if (!mPanel) {
         // Load xib file
-        [NSBundle loadNibNamed:@"MLAmiKoPatientSheet" owner:self];
+        if ([APP_NAME isEqualToString:@"AmiKo"])
+            [NSBundle loadNibNamed:@"MLAmiKoPatientSheet" owner:self];
+        else if ([APP_NAME isEqualToString:@"CoMed"])
+            [NSBundle loadNibNamed:@"MLCoMedPatientSheet" owner:self];
         // Set formatters
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -507,10 +528,18 @@
 
 - (void) setNumPatients:(NSInteger)numPatients
 {
-    if (mABContactsVisible==YES) {
-        [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch Mac (%ld)", numPatients]];
-    } else {
-        [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch AmiKo (%ld)", numPatients]];
+    if ([MLUtilities isGermanApp]) {
+        if (mABContactsVisible==YES) {
+            [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch Mac (%ld)", numPatients]];
+        } else {
+            [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch AmiKo (%ld)", numPatients]];
+        }
+    } else if ([MLUtilities isFrenchApp]) {
+        if (mABContactsVisible==YES) {
+            [mNumPatients setStringValue:[NSString stringWithFormat:@"Carnet d'adresses Mac (%ld)", numPatients]];
+        } else {
+            [mNumPatients setStringValue:[NSString stringWithFormat:@"Carnet d'adresses CoMed (%ld)", numPatients]];
+        }
     }
 }
 

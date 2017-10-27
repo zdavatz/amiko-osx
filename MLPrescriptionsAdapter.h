@@ -22,6 +22,7 @@
  ------------------------------------------------------------------------ */
 
 #import "MLPatient.h"
+#import "MLContacts.h"
 
 @interface MLPrescriptionsAdapter : NSObject
 

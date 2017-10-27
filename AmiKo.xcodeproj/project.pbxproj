@@ -123,6 +123,13 @@
 		D58685581F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D58685541F47049D00A250A4 /* MLPrescriptionsAdapter.m */; };
 		D58685591F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D58685541F47049D00A250A4 /* MLPrescriptionsAdapter.m */; };
 		D586855A1F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D58685541F47049D00A250A4 /* MLPrescriptionsAdapter.m */; };
+		D59426D21FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59426D11FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib */; };
+		D59426D31FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59426D11FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib */; };
+		D59426D41FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59426D11FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib */; };
+		D59426D61FA34F870052B32C /* MLCoMedPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59426D51FA34F870052B32C /* MLCoMedPatientSheet.xib */; };
+		D59426D71FA34F870052B32C /* MLCoMedPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59426D51FA34F870052B32C /* MLCoMedPatientSheet.xib */; };
+		D59426D81FA34F870052B32C /* MLCoMedPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59426D51FA34F870052B32C /* MLCoMedPatientSheet.xib */; };
+		D59426D91FA35A8B0052B32C /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C5C50D1F0640E100DF851F /* Contacts.framework */; };
 		D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
 		D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
 		D5962E8D1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */; };
@@ -587,6 +594,8 @@
 		D54AB37518984B5800637257 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D58685541F47049D00A250A4 /* MLPrescriptionsAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionsAdapter.m; sourceTree = "<group>"; };
 		D586855B1F4704B400A250A4 /* MLPrescriptionsAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionsAdapter.h; sourceTree = "<group>"; };
+		D59426D11FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedOperatorIDSheet.xib; sourceTree = "<group>"; };
+		D59426D51FA34F870052B32C /* MLCoMedPatientSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedPatientSheet.xib; sourceTree = "<group>"; };
 		D5962E891EF9C4160034B964 /* MLCustomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomScrollView.h; sourceTree = "<group>"; };
 		D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomScrollView.m; sourceTree = "<group>"; };
 		D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLAmiKoPatientSheet.xib; sourceTree = "<group>"; };
@@ -766,9 +775,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D545C8FF18A2CE6900491511 /* libz.1.2.5.dylib in Frameworks */,
+				D59426D91FA35A8B0052B32C /* Contacts.framework in Frameworks */,
 				D5E91BC417E5E8E800B66B27 /* QuartzCore.framework in Frameworks */,
 				D5E91BC517E5E8E800B66B27 /* WebKit.framework in Frameworks */,
+				D545C8FF18A2CE6900491511 /* libz.1.2.5.dylib in Frameworks */,
 				D5E91BC617E5E8E800B66B27 /* libsqlite3.0.dylib in Frameworks */,
 				D5E91BC717E5E8E800B66B27 /* Cocoa.framework in Frameworks */,
 			);
@@ -855,6 +865,7 @@
 			isa = PBXGroup;
 			children = (
 				D5962E911EFBBFF20034B964 /* MLAmiKoPatientSheet.xib */,
+				D59426D51FA34F870052B32C /* MLCoMedPatientSheet.xib */,
 			);
 			name = PatientSheets;
 			sourceTree = "<group>";
@@ -863,6 +874,7 @@
 			isa = PBXGroup;
 			children = (
 				D5C5C5201F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib */,
+				D59426D11FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib */,
 			);
 			name = OperatorIDSheets;
 			sourceTree = "<group>";
@@ -1417,6 +1429,7 @@
 				D5C6443F1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5C5C5261F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D5E7317C1B334829007771D7 /* amiko_stylesheet.css in Resources */,
+				D59426D41FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib in Resources */,
 				D5962E971EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */,
 				D5E7317D1B334829007771D7 /* interactions_css.css in Resources */,
 				D5E7317E1B334829007771D7 /* interactions@2x.png in Resources */,
@@ -1441,6 +1454,7 @@
 				D5E7318F1B334829007771D7 /* comedosx_splash_1000x670.png in Resources */,
 				D5E731901B334829007771D7 /* 217-trash.png in Resources */,
 				D5E731921B334829007771D7 /* 216-compose.png in Resources */,
+				D59426D81FA34F870052B32C /* MLCoMedPatientSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1539,6 +1553,7 @@
 				D5C6443B1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				D5C5C5221F0E34F400DF851F /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
+				D59426D21FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib in Resources */,
 				D5962E931EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */,
 				D538777F1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
@@ -1563,6 +1578,7 @@
 				D5DD5762193B49260094244E /* 217-trash.png in Resources */,
 				D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */,
 				D5A22509193FB19F0078FEFF /* 216-compose.png in Resources */,
+				D59426D61FA34F870052B32C /* MLCoMedPatientSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1572,6 +1588,7 @@
 			files = (
 				D5EBC6CE17D218D900EBEF39 /* MLSearchWebView.js in Resources */,
 				D5DD5764193B49260094244E /* 217-trash.png in Resources */,
+				D59426D71FA34F870052B32C /* MLCoMedPatientSheet.xib in Resources */,
 				D5EBC68B17C912FF00EBEF39 /* InfoPlist.strings in Resources */,
 				D538777D1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5962E951EFBBFF20034B964 /* MLAmiKoPatientSheet.xib in Resources */,
@@ -1600,6 +1617,7 @@
 				D5E91BFC17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
 				D52795FA1EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				D5C5C51B1F0C276E00DF851F /* checked_icon.png in Resources */,
+				D59426D31FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib in Resources */,
 				D536126917E770A80087B132 /* amiko.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

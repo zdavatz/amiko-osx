@@ -86,7 +86,11 @@
 {
     if (!mPanel) {
         // Load xib file
-        [NSBundle loadNibNamed:@"MLAmiKoOperatorIDSheet" owner:self];
+        if ([APP_NAME isEqualToString:@"AmiKo"]) {
+            [NSBundle loadNibNamed:@"MLAmiKoOperatorIDSheet" owner:self];
+        } else if ([APP_NAME isEqualToString:@"CoMed"]) {
+            [NSBundle loadNibNamed:@"MLCoMedOperatorIDSheet" owner:self];
+        }
     }
     
     [NSApp beginSheet:mPanel modalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];
@@ -248,7 +252,12 @@
         return [NSString stringWithFormat:@"%@ %@ %@\r\n%@\r\n%@ %@\r\n%@\r\n%@",
                 title, givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];
     } else {
-        return @"Bitte Arztstempel ergänzen";
+        if ([MLUtilities isGermanApp])
+            return @"Bitte Arztstempel ergänzen";
+        else if ([MLUtilities isFrenchApp])
+            return @"Bitte Arztstempel ergänzen";
+        else
+            return @"Nirvana";
     }
 }
 

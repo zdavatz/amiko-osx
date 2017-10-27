@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -95,7 +96,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Op2-gj-lZV"/>
-                            <menuItem title="Imprimer la Notice Infopro..." keyEquivalent="p" id="551">
+                            <menuItem title="Imprimer la Notice Infopro..." keyEquivalent="d" id="551">
                                 <connections>
                                     <action selector="printDocument:" target="-1" id="556"/>
                                 </connections>
@@ -121,8 +122,96 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Window" id="19">
-                    <menu key="submenu" title="Window" systemMenu="window" id="24">
+                <menuItem title="Éditer" id="IqL-up-Q6e">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Éditer" id="24M-5F-gZ0">
+                        <items>
+                            <menuItem title="Undo" keyEquivalent="z" id="YZU-6V-e93">
+                                <connections>
+                                    <action selector="undo:" target="-1" id="Rib-t5-g2L"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Redo" keyEquivalent="Z" id="t8Z-Tu-6ab">
+                                <connections>
+                                    <action selector="redo:" target="-1" id="k6F-Fd-sQU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="XUF-Gl-sdQ"/>
+                            <menuItem title="Cut" keyEquivalent="x" id="K8p-G9-zuk">
+                                <connections>
+                                    <action selector="cut:" target="-1" id="cTZ-h9-1ru"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Copy" keyEquivalent="c" id="5UL-q8-cbA">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="NFk-rz-yse"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="2or-Aa-WdG">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="fZX-9A-1vo"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste and Match Style" keyEquivalent="V" id="U5U-oz-q7m">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="pasteAsPlainText:" target="-1" id="4MZ-gS-ool"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete" id="zqc-ZF-0mD">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="delete:" target="-1" id="IQZ-Z2-QkP"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="YBs-oD-I3r">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="Tfa-HP-kTF"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Recette" id="eCU-34-vEP">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Recette" id="pcE-Je-usY">
+                        <items>
+                            <menuItem title="Charger une recette..." id="jbg-J3-Rgg">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="onLoadPrescription:" target="-1" id="ZZR-s8-ocH"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Sauver la recette..." id="th7-fu-HML">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="onSavePrescription:" target="-1" id="vmu-m0-Rg4"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Contacts" id="NUG-SK-Htz">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Contacts" id="Ziq-3b-tqu">
+                        <items>
+                            <menuItem title="Gérer le patients..." keyEquivalent="p" id="hFp-2Y-dqj">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="managePatients:" target="-1" id="S2R-dw-a68"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="pml-Pu-y0y"/>
+                            <menuItem title="Signature du médecin..." keyEquivalent="z" id="z8c-Ia-L6I">
+                                <connections>
+                                    <action selector="setOperatorIdentity:" target="-1" id="AsG-iM-9C8"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Fenêtre" id="19">
+                    <menu key="submenu" title="Fenêtre" systemMenu="window" id="24">
                         <items>
                             <menuItem title="Voir/Cacher Toolbar" keyEquivalent="t" id="297">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
@@ -186,6 +275,7 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="-68" y="-324"/>
         </menu>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="371">
             <rect key="contentRect" x="335" y="390" width="960" height="640"/>
@@ -199,7 +289,6 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="645" id="610"/>
                         </constraints>
-                        <animations/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="comedosx_splash_1000x670" id="600"/>
                     </imageView>
                 </subviews>
@@ -208,7 +297,6 @@
                     <constraint firstItem="599" firstAttribute="top" secondItem="372" secondAttribute="top" id="606"/>
                     <constraint firstItem="599" firstAttribute="trailing" secondItem="372" secondAttribute="trailing" id="609"/>
                 </constraints>
-                <animations/>
             </view>
         </window>
         <customObject id="494" customClass="MLAppDelegate">
