@@ -230,10 +230,26 @@
     NSString *city = [defaults stringForKey:@"city"];
     NSString *phoneNumber = [defaults stringForKey:@"phonenumber"];
     NSString *emailAddress = [defaults stringForKey:@"emailaddress"];
+
+    if (title==nil)
+        title = @"";
+    if (postalAddress==nil)
+        postalAddress = @"";
+    if (zipCode==nil)
+        zipCode = @"";
+    if (city==nil)
+        city = @"";
+    if (phoneNumber==nil)
+        phoneNumber = @"";
+    if (emailAddress==nil)
+        emailAddress = @"";
     
-    NSString* idAsString = [NSString stringWithFormat:@"%@ %@ %@\r\n%@\r\n%@ %@\r\n%@\r\n%@",
-                            title, givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];
-    return idAsString;
+    if (familyName!=nil && givenName!=nil) {
+        return [NSString stringWithFormat:@"%@ %@ %@\r\n%@\r\n%@ %@\r\n%@\r\n%@",
+                title, givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];
+    } else {
+        return @"Bitte Arztstempel ergänzen";
+    }
 }
 
 - (NSString *) retrieveCity
