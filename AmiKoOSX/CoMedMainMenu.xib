@@ -172,9 +172,9 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Recette" id="eCU-34-vEP">
+                <menuItem title="Ordonnance" id="eCU-34-vEP">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Recette" id="pcE-Je-usY">
+                    <menu key="submenu" title="Ordonnance" id="pcE-Je-usY">
                         <items>
                             <menuItem title="Charger une recette..." id="jbg-J3-Rgg">
                                 <modifierMask key="keyEquivalentModifierMask"/>

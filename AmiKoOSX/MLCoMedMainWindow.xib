@@ -818,7 +818,7 @@
                             <action selector="toolbarAction:" target="-2" id="YSO-vW-idM"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="DB9D82F3-91A3-4489-86D6-E18E5597F74A" explicitItemIdentifier="Recette" label="Recette" paletteLabel="Recette" toolTip="Recette" tag="3" image="prescription" selectable="YES" id="Kkv-pT-r1G">
+                    <toolbarItem implicitItemIdentifier="DB9D82F3-91A3-4489-86D6-E18E5597F74A" explicitItemIdentifier="Ordonnance" label="Ordonnance" paletteLabel="Ordonnance" toolTip="Ordonnance" tag="3" image="prescription" selectable="YES" id="Kkv-pT-r1G">
                         <connections>
                             <action selector="toolbarAction:" target="-2" id="Aeq-3z-6u5"/>
                         </connections>

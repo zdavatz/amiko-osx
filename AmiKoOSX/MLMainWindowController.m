@@ -1294,7 +1294,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 {
     NSString *subject = @"AmiKo Rezept";
     if ([MLUtilities isFrenchApp])
-        subject = @"Recette CoMed";
+        subject = @"Ordonnance CoMed";
     NSString *encodedSubject = [NSString stringWithFormat:@"%@", [subject stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     NSString *attachment = [NSString stringWithFormat:@"%@", filePath];
     NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@?subject=%@&attachment=%@", @"", encodedSubject, attachment];
