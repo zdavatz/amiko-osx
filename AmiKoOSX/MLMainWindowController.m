@@ -1077,6 +1077,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (IBAction) onNewPrescription:(id)sender
 {
+    [self setOperatorID];
     [mPrescriptionsCart[0] clearCart];
     [self.myPrescriptionsTableView reloadData];
 }

@@ -122,28 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AmiKoOSX/MLMainWindowController.m"
-            timestampString = "530810177.102232"
+            timestampString = "530879659.271124"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2260"
-            endingLineNumber = "2260"
+            startingLineNumber = "2264"
+            endingLineNumber = "2264"
             landmarkName = "-tableView:viewForTableColumn:row:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AmiKoOSX/MLMainWindowController.m"
-            timestampString = "530810177.102232"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1239"
-            endingLineNumber = "1239"
-            landmarkName = "-loadPrescription:andRefreshHistory:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

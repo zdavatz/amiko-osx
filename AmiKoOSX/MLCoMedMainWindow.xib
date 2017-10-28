@@ -537,28 +537,15 @@
                                                                                                         </scroller>
                                                                                                     </scrollView>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UhN-cF-QcR" userLabel="Neues Rezept">
-                                                                                                        <rect key="frame" x="0.0" y="7" width="130" height="32"/>
+                                                                                                        <rect key="frame" x="0.0" y="7" width="169" height="32"/>
                                                                                                         <constraints>
-                                                                                                            <constraint firstAttribute="width" constant="118" id="RE8-dI-HYH"/>
+                                                                                                            <constraint firstAttribute="width" constant="157" id="RE8-dI-HYH"/>
                                                                                                         </constraints>
-                                                                                                        <buttonCell key="cell" type="push" title="Nouvelle recette" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="73B-fa-Zhz" userLabel="Neues Rezept">
+                                                                                                        <buttonCell key="cell" type="push" title="Nouvelle ordonnance" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="73B-fa-Zhz" userLabel="Neues Rezept">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
                                                                                                             <connections>
                                                                                                                 <action selector="onNewPrescription:" target="-1" id="bGI-CX-PbX"/>
-                                                                                                            </connections>
-                                                                                                        </buttonCell>
-                                                                                                    </button>
-                                                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dYR-Rj-qjN">
-                                                                                                        <rect key="frame" x="336" y="7" width="92" height="32"/>
-                                                                                                        <constraints>
-                                                                                                            <constraint firstAttribute="width" constant="80" id="1l0-Ck-Sy6"/>
-                                                                                                        </constraints>
-                                                                                                        <buttonCell key="cell" type="push" title="Sauver" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2Bd-3O-fif">
-                                                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                                            <font key="font" metaFont="system"/>
-                                                                                                            <connections>
-                                                                                                                <action selector="onSavePrescription:" target="-2" id="weY-m9-V1S"/>
                                                                                                             </connections>
                                                                                                         </buttonCell>
                                                                                                     </button>
@@ -573,7 +560,7 @@
                                                                                                         </connections>
                                                                                                     </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TwZ-Xx-Fuz">
-                                                                                                        <rect key="frame" x="156" y="7" width="180" height="32"/>
+                                                                                                        <rect key="frame" x="164" y="7" width="180" height="32"/>
                                                                                                         <buttonCell key="cell" type="push" title="Vérifier les interactions" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aGv-We-Cfq">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
@@ -602,11 +589,24 @@
                                                                                                             <action selector="onSearchPatient:" target="-2" id="aVN-p3-0Fd"/>
                                                                                                         </connections>
                                                                                                     </button>
+                                                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dYR-Rj-qjN">
+                                                                                                        <rect key="frame" x="338" y="7" width="92" height="32"/>
+                                                                                                        <constraints>
+                                                                                                            <constraint firstAttribute="width" constant="80" id="1l0-Ck-Sy6"/>
+                                                                                                        </constraints>
+                                                                                                        <buttonCell key="cell" type="push" title="Sauver" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2Bd-3O-fif">
+                                                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                                            <font key="font" metaFont="system"/>
+                                                                                                            <connections>
+                                                                                                                <action selector="onSavePrescription:" target="-2" id="weY-m9-V1S"/>
+                                                                                                            </connections>
+                                                                                                        </buttonCell>
+                                                                                                    </button>
                                                                                                 </subviews>
                                                                                                 <constraints>
                                                                                                     <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="centerY" secondItem="UhN-cF-QcR" secondAttribute="centerY" id="3HC-xm-T6r"/>
-                                                                                                    <constraint firstItem="h3A-OZ-Ito" firstAttribute="leading" secondItem="dYR-Rj-qjN" secondAttribute="trailing" constant="7" id="7xU-cD-KxX"/>
-                                                                                                    <constraint firstItem="dYR-Rj-qjN" firstAttribute="leading" secondItem="TwZ-Xx-Fuz" secondAttribute="trailing" constant="12" symbolic="YES" id="CDd-Nq-EpV"/>
+                                                                                                    <constraint firstItem="h3A-OZ-Ito" firstAttribute="leading" secondItem="dYR-Rj-qjN" secondAttribute="trailing" constant="5" id="7xU-cD-KxX"/>
+                                                                                                    <constraint firstItem="dYR-Rj-qjN" firstAttribute="leading" secondItem="TwZ-Xx-Fuz" secondAttribute="trailing" constant="6" id="CDd-Nq-EpV"/>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="centerX" secondItem="71t-rm-v3N" secondAttribute="centerX" constant="-52" id="Cfe-WO-ZG6"/>
                                                                                                     <constraint firstItem="h3A-OZ-Ito" firstAttribute="bottom" secondItem="UhN-cF-QcR" secondAttribute="bottom" id="DTE-ie-4aP"/>
                                                                                                     <constraint firstItem="dYR-Rj-qjN" firstAttribute="bottom" secondItem="UhN-cF-QcR" secondAttribute="bottom" id="Eo0-M8-YFt"/>
@@ -618,7 +618,7 @@
                                                                                                     <constraint firstAttribute="trailing" secondItem="hmt-dn-3hz" secondAttribute="trailing" constant="6" id="V6T-59-drI"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="71t-rm-v3N" secondAttribute="trailing" constant="6" id="bnE-Se-xtR"/>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="bottom" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="22" id="fBG-0z-AcA"/>
-                                                                                                    <constraint firstAttribute="trailing" secondItem="dYR-Rj-qjN" secondAttribute="trailing" constant="87" id="kdG-7V-hjG"/>
+                                                                                                    <constraint firstAttribute="trailing" secondItem="dYR-Rj-qjN" secondAttribute="trailing" constant="85" id="kdG-7V-hjG"/>
                                                                                                     <constraint firstItem="UhN-cF-QcR" firstAttribute="leading" secondItem="hmt-dn-3hz" secondAttribute="leading" id="kup-HH-Kh6"/>
                                                                                                     <constraint firstAttribute="bottom" secondItem="UhN-cF-QcR" secondAttribute="bottom" constant="14" id="q1o-l5-fsj"/>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="leading" secondItem="71t-rm-v3N" secondAttribute="leading" id="qTD-f8-g5B"/>

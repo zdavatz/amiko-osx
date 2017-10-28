@@ -21,12 +21,14 @@
  
  ------------------------------------------------------------------------ */
 
-#import "MLMainWindowController.h"
 #import "MLItemCellView.h"
+
+#import "MLMainWindowController.h"
 #import "MLCellPackagesView.h"
 #import "MLCustomTableRowView.h"
 #import "MLColors.h"
 #import "MLPrescriptionItem.h"
+#import "MLUtilities.h"
 
 @implementation MLItemCellView
 {
@@ -154,7 +156,12 @@
                 selectedPackage = listOfPackages[row];
                 [ctxtMenu insertItemWithTitle:selectedPackage action:nil keyEquivalent:@"" atIndex:0];
                 // Populate all menu items
-                NSMenuItem *menuItem = [ctxtMenu insertItemWithTitle:@"Rezept" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:1];
+                NSMenuItem *menuItem = nil;
+                if ([MLUtilities isGermanApp]) {
+                    menuItem = [ctxtMenu insertItemWithTitle:@"Rezept" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:1];
+                } else if ([MLUtilities isFrenchApp]) {
+                    menuItem = [ctxtMenu insertItemWithTitle:@"Ordonnance" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:1];
+                }
                 [menuItem setRepresentedObject:[NSNumber numberWithInt:0]];
                 /*
                  menuItem = [ctxtMenu insertItemWithTitle:@"Rezept 2" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:2];
