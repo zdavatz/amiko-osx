@@ -671,9 +671,9 @@
 		D5E91B5517E4C6C100B66B27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = "en.lproj/Credits-fr.rtf"; sourceTree = "<group>"; };
 		D5E91B8417E5E24000B66B27 /* AmiKo-zR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AmiKo-zR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-zR-Info.plist"; sourceTree = SOURCE_ROOT; };
-		D5E91BB317E5E8E400B66B27 /* AmiKo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmiKo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5E91BB317E5E8E400B66B27 /* AmiKo Desitin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AmiKo Desitin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-Info.plist"; sourceTree = SOURCE_ROOT; };
-		D5E91BE217E5E8E800B66B27 /* CoMed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoMed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5E91BE217E5E8E800B66B27 /* CoMed Desitin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoMed Desitin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoMed-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_de.db; sourceTree = "<group>"; };
 		D5E91BF417E6065C00B66B27 /* amiko_report_de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = amiko_report_de.html; sourceTree = "<group>"; };
@@ -1069,8 +1069,8 @@
 			children = (
 				D5EBC67D17C912FF00EBEF39 /* CoMed-zR.app */,
 				D5E91B8417E5E24000B66B27 /* AmiKo-zR.app */,
-				D5E91BB317E5E8E400B66B27 /* AmiKo.app */,
-				D5E91BE217E5E8E800B66B27 /* CoMed.app */,
+				D5E91BB317E5E8E400B66B27 /* AmiKo Desitin.app */,
+				D5E91BE217E5E8E800B66B27 /* CoMed Desitin.app */,
 				D5E731521B33480A007771D7 /* AmiKo-Desitin.app */,
 				D5E731961B334829007771D7 /* CoMed-Desitin.app */,
 			);
@@ -1290,7 +1290,7 @@
 			);
 			name = AmiKo;
 			productName = AmiKoOSX;
-			productReference = D5E91BB317E5E8E400B66B27 /* AmiKo.app */;
+			productReference = D5E91BB317E5E8E400B66B27 /* AmiKo Desitin.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D5E91BB517E5E8E800B66B27 /* CoMed */ = {
@@ -1307,7 +1307,7 @@
 			);
 			name = CoMed;
 			productName = AmiKoOSX;
-			productReference = D5E91BE217E5E8E800B66B27 /* CoMed.app */;
+			productReference = D5E91BE217E5E8E800B66B27 /* CoMed Desitin.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D5EBC67C17C912FF00EBEF39 /* CoMed-zR */ = {
@@ -2135,7 +2135,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO";
 				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
-				PRODUCT_NAME = AmiKo;
+				PRODUCT_NAME = "AmiKo Desitin";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -2155,7 +2155,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DAMIKO";
 				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
-				PRODUCT_NAME = AmiKo;
+				PRODUCT_NAME = "AmiKo Desitin";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -2174,7 +2174,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DCOMED";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.comedosx;
-				PRODUCT_NAME = CoMed;
+				PRODUCT_NAME = "CoMed Desitin";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2192,7 +2192,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DCOMED";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.comedosx;
-				PRODUCT_NAME = CoMed;
+				PRODUCT_NAME = "CoMed Desitin";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};

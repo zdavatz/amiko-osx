@@ -242,7 +242,7 @@
         if ([MLUtilities isGermanApp])
             return @"Bitte Arztstempel ergänzen";
         else if ([MLUtilities isFrenchApp])
-            return @"Bitte Arztstempel ergänzen";
+            return @"Saisir l'adresse du médecin";
         else
             return @"Nirvana";
     }

@@ -18,7 +18,7 @@
                 <menuItem title="AmiKo" id="56">
                     <menu key="submenu" title="AmiKo" systemMenu="apple" id="57">
                         <items>
-                            <menuItem title="AmiKo" id="58">
+                            <menuItem title="AmiKo Desitin" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
@@ -27,7 +27,7 @@
                             <menuItem isSeparatorItem="YES" id="144">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="AmiKo verstecken" keyEquivalent="h" id="134">
+                            <menuItem title="AmiKo Desitin verstecken" keyEquivalent="h" id="134">
                                 <connections>
                                     <action selector="hide:" target="-1" id="367"/>
                                 </connections>
@@ -46,7 +46,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="AmiKo Beenden" keyEquivalent="q" id="136">
+                            <menuItem title="AmiKo Desitin Beenden" keyEquivalent="q" id="136">
                                 <connections>
                                     <action selector="terminate:" target="-3" id="449"/>
                                 </connections>

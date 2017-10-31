@@ -39,7 +39,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <point key="canvasLocation" x="-131" y="651"/>
         </view>
-        <window title="AmiKo" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" frameAutosaveName="AmiKoWindow" animationBehavior="default" id="1">
+        <window title="AmiKo Desitin" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" frameAutosaveName="AmiKoWindow" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="400" width="1035" height="820"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
@@ -831,7 +831,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="4"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="7"/>
-                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="AmiKo" paletteLabel="AmiKo" toolTip="AmiKo" tag="5" image="desitin" id="9">
+                    <toolbarItem implicitItemIdentifier="1124C0E4-E354-41FA-A990-AD38BA4C3A70" label="AmiKo Desitin" paletteLabel="AmiKo" toolTip="AmiKo" tag="5" image="desitin" id="9">
                         <connections>
                             <action selector="showAboutPanel:" target="-2" id="1639"/>
                         </connections>

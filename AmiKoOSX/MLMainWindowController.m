@@ -1145,8 +1145,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"OK"];
             [alert addButtonWithTitle:@"Cancel"];
-            [alert setMessageText:@"Rezept löschen?"];
-            [alert setInformativeText:@"Wollen Sie dieses Rezept wirklich löschen?"];
+            if ([MLUtilities isGermanApp]) {
+                [alert setMessageText:@"Rezept löschen?"];
+                [alert setInformativeText:@"Wollen Sie dieses Rezept wirklich löschen?"];
+            } else if ([MLUtilities isFrenchApp]) {
+                [alert setMessageText:@"Effacer l'ordonnance?"];
+                [alert setInformativeText:@"Voulez-vous vraiment effacer cette ordonnance?"];
+            }
             [alert setAlertStyle:NSInformationalAlertStyle];
             [alert beginSheetModalForWindow:[self window]
                               modalDelegate:self
@@ -1261,10 +1266,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         // Show alert with OK button
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"Überschreiben"];
-        [alert addButtonWithTitle:@"Neues Rezept"];
-        [alert addButtonWithTitle:@"Cancel"];
-        [alert setMessageText:@"Rezept überschreiben?"];
-        [alert setInformativeText:@"Wollen Sie dieses Rezept überschreiben oder ein neues Rezept erstellen?"];
+
+        if ([MLUtilities isGermanApp]) {
+            [alert addButtonWithTitle:@"Neues Rezept"];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert setMessageText:@"Rezept überschreiben?"];
+            [alert setInformativeText:@"Wollen Sie dieses Rezept überschreiben oder ein neues Rezept erstellen?"];
+        } else if ([MLUtilities isFrenchApp]) {
+            [alert addButtonWithTitle:@"Nouvelle ordonnance"];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert setMessageText:@"Écraser la version actuelle?"];
+            [alert setInformativeText:@"Voulez-vous vraiment écraser l'ordonnance existante ou générer une nouvelle?"];
+        }
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
             NSURL *url = nil;
