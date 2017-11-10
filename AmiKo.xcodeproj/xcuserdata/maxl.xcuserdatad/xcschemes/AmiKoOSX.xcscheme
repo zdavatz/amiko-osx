@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5E91B8617E5E8E400B66B27"
-               BuildableName = "AmiKo.app"
+               BuildableName = "AmiKo Desitin.app"
                BlueprintName = "AmiKo"
                ReferencedContainer = "container:AmiKo.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5E91B8617E5E8E400B66B27"
-            BuildableName = "AmiKo.app"
+            BuildableName = "AmiKo Desitin.app"
             BlueprintName = "AmiKo"
             ReferencedContainer = "container:AmiKo.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5E91B8617E5E8E400B66B27"
-            BuildableName = "AmiKo.app"
+            BuildableName = "AmiKo Desitin.app"
             BlueprintName = "AmiKo"
             ReferencedContainer = "container:AmiKo.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5E91B8617E5E8E400B66B27"
-            BuildableName = "AmiKo.app"
+            BuildableName = "AmiKo Desitin.app"
             BlueprintName = "AmiKo"
             ReferencedContainer = "container:AmiKo.xcodeproj">
          </BuildableReference>

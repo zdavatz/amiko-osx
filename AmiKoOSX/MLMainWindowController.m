@@ -2414,7 +2414,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             if (mPrescriptionMode) {
                 [self loadPrescription:mListOfSectionIds[row] andRefreshHistory:NO];
             } else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
-                NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
+                // NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
+                NSString *javaScript = [NSString stringWithFormat:@"var hashElement=document.getElementById('%@');if(hashElement) {hashElement.scrollIntoView();}", mListOfSectionIds[row]];
                 [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
             } else {
                 // Update webviewer's content without changing anything else
