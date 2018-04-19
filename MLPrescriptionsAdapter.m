@@ -57,6 +57,11 @@
                 [amkFiles addObject:filename];
             }
         }];
+        
+        // Sort prescriptions
+        NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:nil ascending:NO];
+        NSArray *sortedArray = [[NSArray arrayWithArray:amkFiles] sortedArrayUsingDescriptors:@[sd]];
+        amkFiles = [sortedArray mutableCopy];
     }
     
     return amkFiles;

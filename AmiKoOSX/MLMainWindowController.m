@@ -1283,17 +1283,21 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             NSURL *url = nil;
             if (returnCode == NSAlertFirstButtonReturn) {
                 url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:YES];
-            } else if (returnCode == NSAlertSecondButtonReturn) {
+            }
+            else if (returnCode == NSAlertSecondButtonReturn) {
                 url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:NO];
             }
+
             if (url != nil && send == YES) {
                 [self sendPrescription:[[url absoluteURL] absoluteString]];
             }
+
             // Update prescription history
             [self updatePrescriptionHistory];
             return;
         }];
-    } else {
+    }
+    else {
         NSURL *url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:NO];
         mCartHash = cartHash;
         if (url != nil && send == YES) {
@@ -2201,12 +2205,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (tableView == self.myTableView) {
         if (mUsedDatabase == kAips) {
             return [medi count];
-        } else if (mUsedDatabase == kFavorites) {
+        }
+        else if (mUsedDatabase == kFavorites) {
             return [favoriteKeyData count];
         }
-    } else if (tableView == self.mySectionTitles) {
+    }
+    else if (tableView == self.mySectionTitles) {
         return [mListOfSectionTitles count];
-    } else if (tableView == self.myPrescriptionsTableView) {
+    }
+    else if (tableView == self.myPrescriptionsTableView) {
         return mPrescriptionsCart[0].size;
     }
     
