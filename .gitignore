@@ -1,0 +1,5 @@
+*.xcworkspace
+*.DS_Store
+__MACOSX/
+xcuserdata
+AmiKoOSX/*.db
