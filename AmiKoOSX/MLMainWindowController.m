@@ -240,7 +240,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
         [appDefaults setValue:[NSDate date] forKey:@"germanDBLastUpdate"];
         [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
-    } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+    }
+    else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
         [appDefaults setValue:[NSDate date] forKey:@"frenchDBLastUpdate"];
         [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     }
@@ -958,17 +959,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             [self updateDatabase:@"de" for:[MLUtilities appOwner]];
         else if ([MLUtilities isFrenchApp])
             [self updateDatabase:@"fr" for:[MLUtilities appOwner]];
-    } else {
+    }
+    else {
         NSAlert *alert = [[NSAlert alloc] init];
         
         [alert addButtonWithTitle:@"OK"];
-        if ([[MLUtilities appLanguage] isEqualToString:@"de"]) {
-            [alert setMessageText:@"Für die Aktualisierung der Datenbank benötigen Sie eine aktive Internetverbindung."];
-        } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
-            [alert setMessageText:@"Pour la mise à jour de la banque des données vous devez disposer d’une connexion Internet active."];
-        }
+        [alert setMessageText:NSLocalizedString(@"To update the database you must have an active internet connection", nil)];
+
         [alert setAlertStyle:NSInformationalAlertStyle];
-        
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self
                          didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
@@ -1621,7 +1619,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = [MLUtilities notSpecified]; // @"k.A.";
+        m.title = NSLocalizedString(@"Not specified", nil);
 
     if (![packinfo isEqual:[NSNull null]]) {
         if ([packinfo length]>0) {
@@ -1639,17 +1637,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                         m_atcclass_str = [NSMutableString stringWithString:[m_atc objectAtIndex:1]];
                 }
                 if ([m_atccode_str isEqual:[NSNull null]])
-                    [m_atccode_str setString:[MLUtilities notSpecified]];
+                    [m_atccode_str setString:NSLocalizedString(@"Not specified", nil)];
                 if ([m_atcclass_str isEqual:[NSNull null]])
-                    [m_atcclass_str setString:[MLUtilities notSpecified]];
+                    [m_atcclass_str setString:NSLocalizedString(@"Not specified", nil)];
                 m.subTitle = [NSString stringWithFormat:@"%@ - %@", m_atccode_str, m_atcclass_str];
             }
         } else
-            m.subTitle = [MLUtilities notSpecified]; // @"k.A.";
+            m.subTitle = NSLocalizedString(@"Not specified", nil);
     } else
-        m.subTitle = [MLUtilities notSpecified]; // @"k.A.";
+        m.subTitle = NSLocalizedString(@"Not specified", nil);
+
     m.medId = medId;
-    
     [medi addObject:m];
 }
 
@@ -1660,16 +1658,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = [MLUtilities notSpecified]; // @"k.A.";
+        m.title = NSLocalizedString(@"Not specified", nil);
+
     if (![author isEqual:[NSNull null]]) {
         if ([author length]>0)
             m.subTitle = author;
         else
-            m.subTitle = [MLUtilities notSpecified]; // @"k.A.";
+            m.subTitle = NSLocalizedString(@"Not specified", nil); // @"k.A.";
     } else
-        m.subTitle = [MLUtilities notSpecified]; // @"k.A.";
+        m.subTitle = NSLocalizedString(@"Not specified", nil);
+
     m.medId = medId;
-    
     [medi addObject:m];
 }
 
@@ -1680,12 +1679,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = [MLUtilities notSpecified]; // @"k.A.";
+        m.title = NSLocalizedString(@"Not specified", nil);
     
     if ([atccode isEqual:[NSNull null]])
-        atccode = [MLUtilities notSpecified];
+        atccode = NSLocalizedString(@"Not specified", nil);
+
     if ([atcclass isEqual:[NSNull null]])
-        atcclass = [MLUtilities notSpecified];
+        atcclass = NSLocalizedString(@"Not specified", nil);
 
     NSArray *m_atc = [atccode componentsSeparatedByString:@";"];
     NSArray *m_class = [atcclass componentsSeparatedByString:@";"];
@@ -1697,30 +1697,37 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         if (![[m_atc objectAtIndex:1] isEqual:nil])
             m_atcclass_str = [NSMutableString stringWithString:[m_atc objectAtIndex:1]];
     } else {
-        m_atccode_str = [NSMutableString stringWithString:[MLUtilities notSpecified]];
+        m_atccode_str = [NSMutableString stringWithString:NSLocalizedString(@"Not specified", nil)];
     }
+
     if ([m_atccode_str isEqual:[NSNull null]])
-        [m_atccode_str setString:[MLUtilities notSpecified]];
+        [m_atccode_str setString:NSLocalizedString(@"Not specified", nil)];
+
     if ([m_atcclass_str isEqual:[NSNull null]])
-        [m_atcclass_str setString:[MLUtilities notSpecified]];
+        [m_atcclass_str setString:NSLocalizedString(@"Not specified", nil)];
     
     NSMutableString *m_atcclass = nil;
     if ([m_class count] == 2) {  // *** Ver.<1.2
         m_atcclass = [NSMutableString stringWithString:[m_class objectAtIndex:1]];
         if ([m_atcclass isEqual:[NSNull null]])
-            [m_atcclass setString:[MLUtilities notSpecified]];
+            [m_atcclass setString:NSLocalizedString(@"Not specified", nil)];
+
         m.subTitle = [NSString stringWithFormat:@"%@ - %@\n%@", m_atccode_str, m_atcclass_str, m_atcclass];
-    } else if ([m_class count] == 3) {  // *** Ver.>=1.2
+    }
+    else if ([m_class count] == 3) {  // *** Ver.>=1.2
         NSArray *m_atc_class_l4_and_l5 = [m_class[2] componentsSeparatedByString:@"#"];
         int n = (int)[m_atc_class_l4_and_l5 count];
         if (n>1)
             m_atcclass = [NSMutableString stringWithString:[m_atc_class_l4_and_l5 objectAtIndex:n-2]];
+
         if ([m_atcclass isEqual:[NSNull null]])
-            [m_atcclass setString:[MLUtilities notSpecified]];
+            [m_atcclass setString:NSLocalizedString(@"Not specified", nil)];
+
         m.subTitle = [NSString stringWithFormat:@"%@ - %@\n%@\n%@", m_atccode_str, m_atcclass_str, m_atcclass, m_class[1]];
-    } else {
-        m_atcclass = [NSMutableString stringWithString:[MLUtilities notSpecified]];
-        m.subTitle = [MLUtilities notSpecified];
+    }
+    else {
+        m_atcclass = [NSMutableString stringWithString:NSLocalizedString(@"Not specified", nil)];
+        m.subTitle = NSLocalizedString(@"Not specified", nil);
     }
     m.medId = medId;
     
@@ -1734,13 +1741,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = [MLUtilities notSpecified]; // @"k.A.";
+        m.title = NSLocalizedString(@"Not specified", nil);
+
     NSMutableString *m_regnrs = [NSMutableString stringWithString:regnrs];
     NSMutableString *m_auth = [NSMutableString stringWithString:author];
     if ([m_regnrs isEqual:[NSNull null]])
-        [m_regnrs setString:[MLUtilities notSpecified]];
+        [m_regnrs setString:NSLocalizedString(@"Not specified", nil)];
+
     if ([m_auth isEqual:[NSNull null]])
-        [m_auth setString:[MLUtilities notSpecified]];
+        [m_auth setString:NSLocalizedString(@"Not specified", nil)];
+
     m.subTitle = [NSString stringWithFormat:@"%@ - %@", m_regnrs, m_auth];
     m.medId = medId;
     
@@ -1757,13 +1767,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         m.title = substances;
     }
     else
-        m.title = [MLUtilities notSpecified]; // @"k.A.";
+        m.title = NSLocalizedString(@"Not specified", nil);
+
     NSMutableString *m_title = [NSMutableString stringWithString:title];
     NSMutableString *m_auth = [NSMutableString stringWithString:author];
     if ([m_title isEqual:[NSNull null]])
-        [m_title setString:[MLUtilities notSpecified]];
+        [m_title setString:NSLocalizedString(@"Not specified", nil)];
+    
     if ([m_auth isEqual:[NSNull null]])
-        [m_auth setString:[MLUtilities notSpecified]];
+        [m_auth setString:NSLocalizedString(@"Not specified", nil)];
+    
     m.subTitle = [NSString stringWithFormat:@"%@ - %@", m_title, m_auth];
     m.medId = medId;
     
@@ -1777,7 +1790,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (![title isEqual:[NSNull null]])
         m.title = title;
     else
-        m.title = [MLUtilities notSpecified]; // @"k.A.";
+        m.title = NSLocalizedString(@"Not specified", nil);
+
     NSArray *m_applications = [applications componentsSeparatedByString:@";"];
     NSMutableString *m_swissmedic = nil;
     NSMutableString *m_bag = nil;
@@ -1790,9 +1804,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         }
     }
     if ([m_swissmedic isEqual:[NSNull null]])
-        [m_swissmedic setString:[MLUtilities notSpecified]];
+        [m_swissmedic setString:NSLocalizedString(@"Not specified", nil)];
+
     if ([m_bag isEqual:[NSNull null]])
-        [m_bag setString:[MLUtilities notSpecified]]; // @"k.A.";
+        [m_bag setString:NSLocalizedString(@"Not specified", nil)]; // @"k.A.";
+
     m.subTitle = [NSString stringWithFormat:@"%@\n%@", m_swissmedic, m_bag];
     m.medId = medId;
     
@@ -1806,7 +1822,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (![keyword isEqual:[NSNull null]])
         m.title = keyword;
     else
-        m.title = [MLUtilities notSpecified]; // @"k.A.";
+        m.title = NSLocalizedString(@"Not specified", nil);
+
     m.subTitle = [NSString stringWithFormat:@"%ld Treffer", numHits];
     m.hashId = hash;
     

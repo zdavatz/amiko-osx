@@ -11,4 +11,10 @@
 "Do you really want to delete this prescription?" = "Do you really want to delete this prescription?";
 
 /* No comment provided by engineer. */
+"Not specified" = "n.s.";
+
+/* No comment provided by engineer. */
 "Prescription to patient from doctor" = "Prescription: %1$@ %2$@, %3$@ from %4$@ %5$@ %6$@";
+
+/* No comment provided by engineer. */
+"To update the database you must have an active internet connection" = "To update the database you must have an active internet connection.";

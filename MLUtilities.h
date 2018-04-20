@@ -49,7 +49,6 @@ extern NSString* const APP_ID;
 + (void) reportMemory;
 + (NSString *) appOwner;
 + (NSString *) appLanguage;
-+ (NSString *) notSpecified;
 + (BOOL) isGermanApp;
 + (BOOL) isFrenchApp;
 + (BOOL) isConnected;

@@ -75,10 +75,19 @@ NSString* const APP_ID = @"708142753";
 
 + (NSString *) appLanguage
 {
-    if ([APP_NAME isEqualToString:@"AmiKo"] || [APP_NAME isEqualToString:@"AmiKo-zR"] || [APP_NAME isEqualToString:@"AmiKo-Desitin"])
+    if ([APP_NAME isEqualToString:@"AmiKo"] ||
+        [APP_NAME isEqualToString:@"AmiKo-zR"] ||
+        [APP_NAME isEqualToString:@"AmiKo-Desitin"])
+    {
         return @"de";
-    else if ([APP_NAME isEqualToString:@"CoMed"] || [APP_NAME isEqualToString:@"CoMed-zR"] || [APP_NAME isEqualToString:@"CoMed-Desitin"])
+    }
+
+    else if ([APP_NAME isEqualToString:@"CoMed"] ||
+             [APP_NAME isEqualToString:@"CoMed-zR"] ||
+             [APP_NAME isEqualToString:@"CoMed-Desitin"])
+    {
         return @"fr";
+    }
     
     return nil;
 }
@@ -91,16 +100,6 @@ NSString* const APP_ID = @"708142753";
 + (BOOL) isFrenchApp
 {
     return [[self appLanguage] isEqualToString:@"fr"];
-}
-
-+ (NSString *) notSpecified
-{
-    if ([[self appLanguage] isEqualToString:@"de"])
-        return @"k.A.";
-    else if ([[self appLanguage] isEqualToString:@"fr"])
-        return @"n.s.";
-    
-    return nil;
 }
 
 + (BOOL) isConnected
@@ -128,7 +127,8 @@ NSString* const APP_ID = @"708142753";
             || [name isEqualToString:@"amiko_frequency_de.db"])  {
             return true;
         }
-    } else if ([[self appLanguage] isEqualToString:@"fr"]) {
+    }
+    else if ([[self appLanguage] isEqualToString:@"fr"]) {
         if ([name isEqualToString:@"amiko_db_full_idx_fr.db"]
             || [name isEqualToString:@"amiko_report_de.html"]
             || [name isEqualToString:@"drug_interactions_csv_fr.csv"]
@@ -155,7 +155,8 @@ NSString* const APP_ID = @"708142753";
         NSDate* lastUpdated = [[NSUserDefaults standardUserDefaults] objectForKey:@"germanDBLastUpdate"];
         if (lastUpdated!=nil)
             timeInterval = [[NSDate date] timeIntervalSinceDate:lastUpdated];
-    } else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
+    }
+    else if ([[MLUtilities appLanguage] isEqualToString:@"fr"]) {
         NSDate* lastUpdated = [[NSUserDefaults standardUserDefaults] objectForKey:@"frenchDBLastUpdate"];
         if (lastUpdated!=nil)
             timeInterval = [[NSDate date] timeIntervalSinceDate:lastUpdated];
