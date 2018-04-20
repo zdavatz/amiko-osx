@@ -1144,14 +1144,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         if (row>-1) {
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"OK"];
-            [alert addButtonWithTitle:@"Cancel"];
-            if ([MLUtilities isGermanApp]) {
-                [alert setMessageText:@"Rezept löschen?"];
-                [alert setInformativeText:@"Wollen Sie dieses Rezept wirklich löschen?"];
-            } else if ([MLUtilities isFrenchApp]) {
-                [alert setMessageText:@"Effacer l'ordonnance?"];
-                [alert setInformativeText:@"Voulez-vous vraiment effacer cette ordonnance?"];
-            }
+            [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
+            [alert setMessageText:NSLocalizedString(@"Delete prescription?",nil)];
+            [alert setInformativeText:NSLocalizedString(@"Do you really want to delete this prescription?",nil)];
             [alert setAlertStyle:NSInformationalAlertStyle];
             [alert beginSheetModalForWindow:[self window]
                               modalDelegate:self
@@ -1310,9 +1305,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (void) sendPrescription:(NSString *)filePath
 {
-    NSString *subject = @"AmiKo Rezept";
-    if ([MLUtilities isFrenchApp])
-        subject = @"Ordonnance CoMed";
+    NSString *subject = NSLocalizedString(@"AmiKo Prescription",nil);
     NSString *encodedSubject = [NSString stringWithFormat:@"%@", [subject stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     NSString *attachment = [NSString stringWithFormat:@"%@", filePath];
     NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@?subject=%@&attachment=%@", @"", encodedSubject, attachment];

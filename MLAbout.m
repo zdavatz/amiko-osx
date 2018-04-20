@@ -58,11 +58,7 @@
 + (void) showAboutPanel
 {
     NSBundle *mainBundle = [NSBundle mainBundle];
-    NSString *creditsPath = nil;
-    if ([MLUtilities isGermanApp])
-        creditsPath = [mainBundle pathForResource:@"Credits-de" ofType:@"rtf"];
-    else if ([MLUtilities isFrenchApp])
-        creditsPath = [mainBundle pathForResource:@"Credits-fr" ofType:@"rtf"];
+    NSString *creditsPath = [mainBundle pathForResource:@"Credits" ofType:@"rtf"];  // localized
     NSAttributedString *credits = [[NSAttributedString alloc] initWithPath:creditsPath documentAttributes:nil];
     
     NSDate *today = [NSDate date];
