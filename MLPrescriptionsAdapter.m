@@ -291,7 +291,7 @@
     doctor = [[MLOperator alloc] init];
     NSDictionary *operatorDict = [jsonDict objectForKey:@"operator"];
     doctor.title = [operatorDict objectForKey:@"title"];
-    doctor.familyName = [operatorDict objectForKey:@"family_mame"];
+    doctor.familyName = [operatorDict objectForKey:@"family_name"];
     doctor.givenName = [operatorDict objectForKey:@"given_name"];
     doctor.postalAddress = [operatorDict objectForKey:@"postal_address"];
     doctor.zipCode = [operatorDict objectForKey:@"zip_code"];
