@@ -1,5 +1,5 @@
 /* No comment provided by engineer. */
-"AmiKo Prescription" <= "Ordonnance CoMed""
+"AmiKo Prescription" = "Ordonnance CoMed";
 
 /* No comment provided by engineer. */
 "Cancel" = "Annuler";
@@ -8,5 +8,8 @@
 "Delete prescription?" = "Effacer l'ordonnance?";
 
 /* No comment provided by engineer. */
-"Do you really want to delete this prescription?" = "Voulez-vous vraiment effacer cette ordonnance?"
+"Do you really want to delete this prescription?" = "Voulez-vous vraiment effacer cette ordonnance?";
+
+/* No comment provided by engineer. */
+"Prescription to patient from doctor" = "Ordon.: %1$@ %2$@, %3$@ von %4$@ %5$@ %6$@";
 

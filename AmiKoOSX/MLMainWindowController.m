@@ -1305,31 +1305,19 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (void) sendPrescription:(NSString *)filePath
 {
-    NSString *subject = NSLocalizedString(@"AmiKo Prescription",nil);
-    NSString *encodedSubject = [NSString stringWithFormat:@"%@", [subject stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
-    NSString *attachment = [NSString stringWithFormat:@"%@", filePath];
-    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@?subject=%@&attachment=%@", @"", encodedSubject, attachment];
-    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
+    NSString *mailBody = [NSString stringWithFormat:@"%@\n\niOS: %@\nAndroid: %@\n",
+                          NSLocalizedString(@"Open with", nil),
+                          @"https://itunes.apple.com/ch/app/generika/id520038123?mt=8",
+                          @"https://play.google.com/store/apps/details?id=org.oddb.generika"];
+
+    NSURL *urlAttachment = [NSURL fileURLWithPath:filePath];
+    NSArray *objectsToShare = @[mailBody, urlAttachment];
+    NSSharingServicePicker *sharingServicePicker = [[NSSharingServicePicker alloc] initWithItems:objectsToShare];
+    sharingServicePicker.delegate = self;
     
-    // Detect default mail client
-    CFURLRef mailURL = CFURLCreateWithString(kCFAllocatorDefault, CFSTR("mailto://"), NULL);
-    CFURLRef mailAppURL = NULL;
-    OSStatus ret = 0;
-    if ((ret = LSGetApplicationForURL(mailURL, kLSRolesAll, NULL, &mailAppURL)) == 0) {
-        CFStringRef path = CFURLCopyFileSystemPath(mailAppURL, kCFURLPOSIXPathStyle);
-        CFShow(path);
-        CFRelease(path);
-        CFRelease(mailAppURL);
-    }
-    
-    NSString *app = [(__bridge NSURL *)(mailAppURL) absoluteString];
-    
-    // [[NSWorkspace sharedWorkspace] openFile:filePath withApplication:@"Mail"];
-    if ([app containsString:@"Thunderbird"]) {
-        [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
-    } else if ([app containsString:@"Mail"]) {
-        [[NSWorkspace sharedWorkspace] openFile:filePath withApplication:@"Mail"];
-    }
+    [sharingServicePicker showRelativeToRect:[sendButton bounds]
+                                      ofView:sendButton
+                               preferredEdge:NSMinYEdge];
 }
 
 - (void) launchProgressIndicator
@@ -1634,6 +1622,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         m.title = title;
     else
         m.title = [MLUtilities notSpecified]; // @"k.A.";
+
     if (![packinfo isEqual:[NSNull null]]) {
         if ([packinfo length]>0) {
             if (mSearchInteractions==false)
@@ -1989,6 +1978,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }];
 }
 
+#pragma mark - WebFrameLoadDelegate
+
 - (void) webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
     // Inject JS into webview
@@ -2162,9 +2153,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     return [super validateProposedFirstResponder:responder forEvent:event];
 }
 
-/**
- - NSTableViewDataSource -
- */
+#pragma mark - NSTableViewDelegate
+
 - (CGFloat) tableView: (NSTableView *)tableView heightOfRow: (NSInteger)row
 {
     if (tableView == self.myTableView) {
@@ -2435,4 +2425,28 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 #endif
 }
 
+#pragma mark - NSSharingServiceDelegate
+
+- (nullable id <NSSharingServiceDelegate>)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker
+                                     delegateForSharingService:(NSSharingService *)sharingService
+{
+    if ([sharingService respondsToSelector:@selector(setSubject:)]) {
+        MLPatient *p = [mPrescriptionAdapter patient];
+        MLOperator *o = [mPrescriptionAdapter doctor];
+        
+        NSString * subjectLine =
+        [NSString stringWithFormat:NSLocalizedString(@"Prescription to patient from doctor",nil),
+                  p.givenName,
+                  p.familyName,
+                  p.birthDate,
+                  o.title,
+                  o.givenName,
+                  o.familyName];
+         
+         [sharingService setSubject:subjectLine];
+     }
+
+     return nil;
+}
+         
 @end

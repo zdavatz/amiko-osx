@@ -60,4 +60,10 @@
     }
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ title:%@, givenName:%@, familyName:%@",
+            NSStringFromClass([self class]), title, givenName, familyName];
+}
+
 @end

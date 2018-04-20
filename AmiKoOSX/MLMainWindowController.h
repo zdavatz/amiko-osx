@@ -52,8 +52,9 @@ extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
 #endif
 
-@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSDraggingDestination>
+@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSDraggingDestination, NSSharingServicePickerDelegate>
 {
+    IBOutlet NSButton *sendButton;
     IBOutlet NSView *myView;
     IBOutlet NSView *mySplashScreen;
     IBOutlet NSToolbar *myToolbar;

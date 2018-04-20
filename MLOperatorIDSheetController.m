@@ -238,7 +238,8 @@
     
     if (operator.familyName!=nil && operator.givenName!=nil) {
         return [operator retrieveOperatorAsString];
-    } else {
+    }
+    else {
         if ([MLUtilities isGermanApp])
             return @"Bitte Arztstempel ergänzen";
         else if ([MLUtilities isFrenchApp])

@@ -1,5 +1,5 @@
 /* No comment provided by engineer. */
-"AmiKo Prescription" <= "AmiKo Prescription"
+"AmiKo Prescription" = "AmiKo Prescription";
 
 /* No comment provided by engineer. */
 "Cancel" = "Cancel";
@@ -8,4 +8,7 @@
 "Delete prescription?" = "Delete prescription?";
 
 /* No comment provided by engineer. */
-"Do you really want to delete this prescription?" = "Do you really want to delete this prescription?"
+"Do you really want to delete this prescription?" = "Do you really want to delete this prescription?";
+
+/* No comment provided by engineer. */
+"Prescription to patient from doctor" = "Prescription: %1$@ %2$@, %3$@ from %4$@ %5$@ %6$@";

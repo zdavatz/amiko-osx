@@ -53,4 +53,10 @@
     return [NSString stringWithFormat:@"%@ %@\r\n%@\r\nCH-%@ %@\r\n%@\r\n%@", givenName, familyName, postalAddress, zipCode, city, phoneNumber, emailAddress];
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ givenName:%@, familyName:%@, birthDate:%@, uniqueId:%@",
+            NSStringFromClass([self class]), givenName, familyName, birthDate, uniqueId];
+}
+
 @end
