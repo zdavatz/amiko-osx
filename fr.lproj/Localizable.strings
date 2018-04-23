@@ -11,7 +11,19 @@
 "Do you really want to delete this prescription?" = "Voulez-vous vraiment effacer cette ordonnance?";
 
 /* No comment provided by engineer. */
+"Do you really want to overwrite the existing prescription or generate a new one?" = "Voulez-vous vraiment écraser l'ordonnance existante ou générer une nouvelle?";
+
+/* No comment provided by engineer. */
+"New prescription" = "Nouvelle ordonnance";
+
+/* No comment provided by engineer. */
 "Not specified" = "n.s.";
+
+/* No comment provided by engineer. */
+"Overwrite" = "Écraser";
+
+/* No comment provided by engineer. */
+"Overwrite prescription?" = "Écraser la version actuelle?";
 
 /* No comment provided by engineer. */
 "Prescription to patient from doctor" = "Ordon.: %1$@ %2$@, %3$@ von %4$@ %5$@ %6$@";

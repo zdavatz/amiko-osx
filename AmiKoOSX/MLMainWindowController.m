@@ -129,7 +129,7 @@ static BOOL mPrescriptionMode = false;
     
     NSArray *searchResults;
     
-    NSArray *mListOfSectionIds;
+    NSArray *mListOfSectionIds;  // full paths
     NSArray *mListOfSectionTitles;
     
     NSProgressIndicator *progressIndicator;
@@ -146,6 +146,9 @@ static BOOL mPrescriptionMode = false;
 
     float m_alpha;
     float m_delta;
+
+    bool possibleToOverwrite;
+    bool modifiedPrescription;  // if true, presenting save/overwite option makes sense
 }
 
 @synthesize myView;
@@ -164,11 +167,13 @@ static BOOL mPrescriptionMode = false;
 @synthesize myPrescriptionsTableView;
 
 #pragma mark Class methods
-static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active prescriptions
+
+#define NUM_ACTIVE_PRESCRIPTIONS   3
+static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 + (MLPrescriptionsCart *) prescriptionsCartWithId:(NSInteger)id
 {
-    if (id<3) {
+    if (id < NUM_ACTIVE_PRESCRIPTIONS) {
         if (mPrescriptionsCart[id].cart == nil) {
             mPrescriptionsCart[id].cart = [[NSMutableArray alloc] init];
             mPrescriptionsCart[id].cartId = id;
@@ -281,7 +286,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     mFullTextSearch = [[MLFullTextSearch alloc] init];
     
     // Initialize all three prescription baskets
-    for (int i=0; i<3; ++i) {
+    for (int i=0; i<NUM_ACTIVE_PRESCRIPTIONS; ++i) {
         mPrescriptionsCart[i] = [[MLPrescriptionsCart alloc] init];
         [mPrescriptionsCart[i] setInteractionsAdapter:mInteractions];
     }
@@ -376,13 +381,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             [self updateUserDefaultsForKey:@"germanDBLastUpdate"];
         else
             [self checkLastDBSync];
-    } else if ([MLUtilities isFrenchApp]) {
+    }
+    else if ([MLUtilities isFrenchApp]) {
         NSDate* lastUpdated = [[NSUserDefaults standardUserDefaults] objectForKey:@"frenchDBLastUpdate"];
         if (lastUpdated==nil)
             [self updateUserDefaultsForKey:@"frenchDBLastUpdate"];
         else
             [self checkLastDBSync];
     }
+
+    [sendButton sendActionOn:NSEventMaskLeftMouseDown];
+    possibleToOverwrite = false;
+    modifiedPrescription = false;
 }
 
 - (void) updateUserDefaultsForKey:(NSString *)key
@@ -617,19 +627,26 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (void) updatePrescriptionHistory
 {
-    if (mPrescriptionMode) {
-        // Extract section ids
-        if (![mMed.sectionIds isEqual:[NSNull null]]) {
-            NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionURLsForPatient:[mPatientSheet retrievePatient]];
-            mListOfSectionIds = listOfPrescriptions;
-        }
-        // Extract section titles
-        if (![mMed.sectionTitles isEqual:[NSNull null]]) {
-            NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
-            mListOfSectionTitles = listOfPrescriptions;
-        }
-        [mySectionTitles reloadData];
+    if (!mPrescriptionMode) {
+#ifdef DEBUG
+        NSLog(@"%s not prescription mode", __FUNCTION__);
+#endif
+        return;
     }
+
+    // Extract section ids
+    if (![mMed.sectionIds isEqual:[NSNull null]]) {
+        NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionURLsForPatient:[mPatientSheet retrievePatient]];
+        mListOfSectionIds = listOfPrescriptions;  // array of full paths
+    }
+
+    // Extract section titles
+    if (![mMed.sectionTitles isEqual:[NSNull null]]) {
+        NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
+        mListOfSectionTitles = listOfPrescriptions; // array of just the basenames
+    }
+
+    [mySectionTitles reloadData];
 }
 
 /**
@@ -1046,6 +1063,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
 }
 
+#pragma mark - Actions
+
 - (IBAction) findPatient:(id)sender
 {
     if (!mPatientSheet) {
@@ -1069,6 +1088,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         // If prescription cart is not empty, generate new hash
         if (mPrescriptionsCart[0].cart!=nil && [mPrescriptionsCart[0] size]>0)
             [mPrescriptionsCart[0] makeNewUniqueHash];
+
         [self.myPrescriptionsTableView reloadData];
     }
 }
@@ -1078,6 +1098,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [self setOperatorID];
     [mPrescriptionsCart[0] clearCart];
     [self.myPrescriptionsTableView reloadData];
+    possibleToOverwrite = false;
+    modifiedPrescription = true;
 }
 
 - (IBAction) onSearchPatient:(id)sender
@@ -1132,14 +1154,63 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (IBAction) onSendPrescription:(id)sender
 {
-    [self savePrescriptionThenSend:YES];
+    [self storeAllPrescriptionComments]; // detect if any comment has been modified
+    MLPatient *patient = [mPatientSheet retrievePatient];
+    NSString *cartHash = mPrescriptionsCart[0].uniqueHash;
+
+    if ([mPrescriptionsCart[0].cart count] < 1) {
+        // TODO: maybe the send button should be disabled to prevent coming here
+#ifdef DEBUG
+        NSLog(@"%s cart is empty", __FUNCTION__);
+#endif
+        return;
+    }
+
+    NSURL *url = nil;
+    // Skip the following if the prescription has not been edited
+    if (modifiedPrescription)
+    {
+        // Handle the decision automatically
+        if (possibleToOverwrite) {
+            url = [mPrescriptionAdapter savePrescriptionForPatient:patient
+                                                    withUniqueHash:cartHash
+                                                      andOverwrite:YES];
+        }
+        else {
+            url = [mPrescriptionAdapter savePrescriptionForPatient:patient
+                                                    withUniqueHash:cartHash
+                                                      andOverwrite:NO];
+            possibleToOverwrite = true;
+        }
+    }
+    else {
+        // We have skipped storing the prescription to file,
+        // but we still need to define which file URL to "share"
+        url = [mPrescriptionAdapter getPrescriptionUrl];  // currentFileName
+    }
+    
+    NSString *filePath = [[url absoluteURL] absoluteString];
+    if (!filePath) {
+        //NSLog(@"%s %d, URL not defined", __FUNCTION__, __LINE__);
+        return;
+    }
+    
+    [self sendPrescription:filePath];
+
+    if (modifiedPrescription) {
+        [self updatePrescriptionHistory];
+        modifiedPrescription = false;
+    }
+
+    // TODO: maybe we should temporarily disable the send button,
+    // unless we want to send the prescription again to another recipient
 }
 
 - (IBAction) onDeletePrescription:(id)sender
 {
     if (mPrescriptionMode) {
         NSInteger row = [mySectionTitles selectedRow];
-        if (row>-1) {
+        if (row > -1) {
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"OK"];
             [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
@@ -1159,7 +1230,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     if (returnCode==NSAlertFirstButtonReturn) {
         if (mPrescriptionMode) {
             NSInteger row = [mySectionTitles selectedRow];
-            [mPrescriptionAdapter deletePrescriptionWithName:mListOfSectionTitles[row] forPatient:[mPatientSheet retrievePatient]];
+            [mPrescriptionAdapter deletePrescriptionWithName:mListOfSectionTitles[row]
+                                                  forPatient:[mPatientSheet retrievePatient]];
             [self updatePrescriptionHistory];
             [mPrescriptionsCart[0] clearCart];
             [self.myPrescriptionsTableView reloadData];
@@ -1200,18 +1272,22 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     }
 }
 
+#pragma mark -
+
 - (void) showHelp:(id)sender
 {
     [MLAbout showHelp];
 }
 
-- (void) loadPrescription:(NSString *)filename andRefreshHistory:(bool)refresh
+// 'filename' contains the full path
+- (void) loadPrescription:(NSString *)filename
+        andRefreshHistory:(bool)refresh
 {
-    // Load prescription
     NSString *hash = [mPrescriptionAdapter loadPrescriptionFromFile:filename];
     mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
-    mPrescriptionsCart[0].uniqueHash = hash;
-    
+    // To fix not showing the alert the first time, we also need to define 'mCartHash'
+    mPrescriptionsCart[0].uniqueHash = mCartHash = hash;
+
     // Set patient found in prescription
     MLPatient *p = [mPrescriptionAdapter patient];
     if (p!=nil) {
@@ -1219,10 +1295,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         if (!mPatientSheet) {
             mPatientSheet = [[MLPatientSheetController alloc] init];
         }
+
         if (![mPatientSheet patientExistsWithID:patientHash]) {
             // Import patient...
             [mPatientSheet addPatient:p];
         }
+
         myPatientAddressTextField.stringValue = [p asString];
         [mPatientSheet setSelectedPatient:p];
     }
@@ -1239,49 +1317,59 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         myOperatorIDTextField.stringValue = [o retrieveOperatorAsString];
     }
     */
+
+    possibleToOverwrite = true;
+    modifiedPrescription = false;
 }
 
 - (void) savePrescriptionThenSend:(BOOL)send
 {
-    if (!mPatientSheet) {
+    if (!mPatientSheet)
         mPatientSheet = [[MLPatientSheetController alloc] init];
-    }
+
     mPrescriptionAdapter.cart = mPrescriptionsCart[0].cart;
 
-    // Get all comments
     [self storeAllPrescriptionComments];
-    
     MLPatient *patient = [mPatientSheet retrievePatient];
     NSString *cartHash = mPrescriptionsCart[0].uniqueHash;
     
-    // Overwrite existing prescription?
+    if ([mPrescriptionsCart[0].cart count] < 1) {
+        // TODO: maybe the save button should be disabled to prevent coming here
+#ifdef DEBUG
+        NSLog(@"%s cart is empty", __FUNCTION__);
+#endif
+        return;
+    }
+    
+    // Ask if we should overwrite the existing prescription
     if ([cartHash isEqualToString:mCartHash]) {
         // Show alert with OK button
+        // FIXME: we get here when we send the same prescription for the second time
         NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"Überschreiben"];
+        [alert addButtonWithTitle:NSLocalizedString(@"Overwrite", nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"New prescription", nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
+        [alert setMessageText:NSLocalizedString(@"Overwrite prescription?", nil)];
+        [alert setInformativeText:NSLocalizedString(@"Do you really want to overwrite the existing prescription or generate a new one?", nil)];
 
-        if ([MLUtilities isGermanApp]) {
-            [alert addButtonWithTitle:@"Neues Rezept"];
-            [alert addButtonWithTitle:@"Cancel"];
-            [alert setMessageText:@"Rezept überschreiben?"];
-            [alert setInformativeText:@"Wollen Sie dieses Rezept überschreiben oder ein neues Rezept erstellen?"];
-        } else if ([MLUtilities isFrenchApp]) {
-            [alert addButtonWithTitle:@"Nouvelle ordonnance"];
-            [alert addButtonWithTitle:@"Cancel"];
-            [alert setMessageText:@"Écraser la version actuelle?"];
-            [alert setInformativeText:@"Voulez-vous vraiment écraser l'ordonnance existante ou générer une nouvelle?"];
-        }
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
             NSURL *url = nil;
             if (returnCode == NSAlertFirstButtonReturn) {
-                url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:YES];
+                url = [mPrescriptionAdapter savePrescriptionForPatient:patient
+                                                        withUniqueHash:cartHash
+                                                          andOverwrite:YES];
             }
             else if (returnCode == NSAlertSecondButtonReturn) {
-                url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:NO];
+                url = [mPrescriptionAdapter savePrescriptionForPatient:patient
+                                                        withUniqueHash:cartHash
+                                                          andOverwrite:NO];
+                possibleToOverwrite = true;
             }
 
             if (url != nil && send == YES) {
+                // When are we getting here ? Maybe one of these cases is redundant.
+                //NSLog(@"%s %d", __FUNCTION__, __LINE__);
                 [self sendPrescription:[[url absoluteURL] absoluteString]];
             }
 
@@ -1291,11 +1379,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         }];
     }
     else {
-        NSURL *url = [mPrescriptionAdapter savePrescriptionForPatient:patient withUniqueHash:cartHash andOverwrite:NO];
+        NSURL *url = [mPrescriptionAdapter savePrescriptionForPatient:patient
+                                                       withUniqueHash:cartHash
+                                                         andOverwrite:NO];
         mCartHash = cartHash;
-        if (url != nil && send == YES) {
+        if (url && send) {
+            //NSLog(@"%s %d", __FUNCTION__, __LINE__);
             [self sendPrescription:[[url absoluteURL] absoluteString]];
         }
+
         // Update prescription history
         [self updatePrescriptionHistory];
     }
@@ -2118,6 +2210,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     [mySectionTitles reloadData];
 }
 
+// Also, possibly set the flag for a modified prescription
 - (void) storeAllPrescriptionComments
 {
     // Get all comments
@@ -2128,22 +2221,30 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         NSTextField *textField = [cellView editableTextField];
         [comments addObject:[textField stringValue]];
     }
+
     int row = 0;
     for (MLPrescriptionItem *item in mPrescriptionsCart[0].cart) {
         if (row < numRows) {
-            item.comment = [comments objectAtIndex:row];
+            //NSLog(@"%d <%@> <%@>", __LINE__, item.comment, [comments objectAtIndex:row]);
+            if (![item.comment isEqualToString:[comments objectAtIndex:row]]) {
+                item.comment = [comments objectAtIndex:row];
+                modifiedPrescription = true;
+            }
         }
+
         row++;
     }
 }
 
 - (void) addItem:(MLPrescriptionItem *)item toPrescriptionCartWithId:(NSInteger)n
 {
-    if (n<3) {
+    if (n < NUM_ACTIVE_PRESCRIPTIONS)
+    {
         if (mPrescriptionsCart[n].cart == nil) {
             mPrescriptionsCart[n].cart = [[NSMutableArray alloc] init];
             mPrescriptionsCart[n].cartId = n;
         }
+
         // Get all prescription comments from table
         [self storeAllPrescriptionComments];
         
@@ -2151,12 +2252,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
         item.med = [mDb getShortMediWithId:item.mid];
         [mPrescriptionsCart[n] addItemToCart:item];
         [self.myPrescriptionsTableView reloadData];
+        
+        modifiedPrescription = true;
     }
 }
 
 - (void) removeItem:(MLPrescriptionItem *)item fromPrescriptionCartWithId:(NSInteger)n
 {
-    if (n<3) {
+    if (n < NUM_ACTIVE_PRESCRIPTIONS) {
         [mPrescriptionsCart[n] removeItemFromCart:item];
         [self.myPrescriptionsTableView reloadData];
     }
@@ -2164,8 +2267,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
 - (BOOL) validateProposedFirstResponder:(NSResponder *)responder forEvent:(NSEvent *)event
 {
-    if ([responder isKindOfClass:[MLEditableTextField class]])
+    if ([responder isKindOfClass:[MLEditableTextField class]]) {
+        //NSLog(@"%s", __FUNCTION__);
         return YES;
+    }
     
     return [super validateProposedFirstResponder:responder forEvent:event];
 }
@@ -2250,6 +2355,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                 cellView.showContextualMenu = true;
             else
                 cellView.showContextualMenu = false;
+
             [cellView.packagesView reloadData];
             
             // Check if cell.textLabel.text is in starred NSSet
@@ -2273,7 +2379,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             
             return cellView;
         }
-    } else if (tableView == self.mySectionTitles) {
+    }
+    else if (tableView == self.mySectionTitles) {
         /*
          * Check if table is list of chapter titles (=mySectionTitles)
          */
@@ -2284,7 +2391,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             
             return cellView;
         }
-    } else if (tableView == self.myPrescriptionsTableView) {
+    }
+    else if (tableView == self.myPrescriptionsTableView) {
         /*
          * Check if table is a prescription
          */
@@ -2293,13 +2401,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
 
         if ([tableColumn.identifier isEqualToString:@"PrescriptionMedCounter"]) {
             cellView.textField.stringValue = [NSString stringWithFormat:@"%ld", row+1];
-        } else if ([tableColumn.identifier isEqualToString:@"PrescriptionRegisteredName"]) {
+        }
+        else if ([tableColumn.identifier isEqualToString:@"PrescriptionRegisteredName"]) {
             cellView.textField.stringValue = [prescriptionBasket[row] fullPackageInfo];
             NSString *comment = [prescriptionBasket[row] comment];
             if (comment==nil)
                 comment = @"";
             cellView.editableTextField.stringValue = comment;
-        } else if ([tableColumn.identifier isEqualToString:@"PrescriptionPrice"]) {
+        }
+        else if ([tableColumn.identifier isEqualToString:@"PrescriptionPrice"]) {
             if ([prescriptionBasket[row] price] != nil)
                 cellView.textField.stringValue = [prescriptionBasket[row] price];
         }
@@ -2362,7 +2472,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
     
     NSInteger row = [notifier selectedRow];
     
-    if (row>=0) {
+    if (row >= 0) {
         if (notifier == self.myTableView) {
             /*
              * Check if table is search result (=myTableView)
@@ -2391,7 +2501,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                     [self pushToMedBasket:mMed];
                     [self updateInteractionsView];
                 }
-            } else {
+            }
+            else {
                 /* Search in full text search DB
                  */
                 NSString *hashId = [medi[row] hashId];
@@ -2410,7 +2521,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                 mCurrentWebView = kFullTextSearchView;
                 [self updateFullTextSearchView:mFullTextContentStr];
             }
-        } else if (notifier == self.mySectionTitles) {
+        }
+        else if (notifier == self.mySectionTitles) {
             /*
              * Check if table is list of chapter titles (=mySectionTitles)
              * Right-most pane
@@ -2419,19 +2531,23 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
             [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
             
             if (mPrescriptionMode) {
+                //NSLog(@"%s row:%ld, %@", __FUNCTION__, row, mListOfSectionIds[row]);
                 [self loadPrescription:mListOfSectionIds[row] andRefreshHistory:NO];
-            } else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
+            }
+            else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
                 // NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
                 NSString *javaScript = [NSString stringWithFormat:@"var hashElement=document.getElementById('%@');if(hashElement) {hashElement.scrollIntoView();}", mListOfSectionIds[row]];
                 [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
-            } else {
+            }
+            else {
                 // Update webviewer's content without changing anything else
                 NSString *contentStr = [mFullTextSearch tableWithArticles:nil
                                                        andRegChaptersDict:nil
                                                                 andFilter:mListOfSectionIds[row]];
                 [self updateFullTextSearchView:contentStr];
             }
-        } else if (notifier == self.myPrescriptionsTableView) {
+        }
+        else if (notifier == self.myPrescriptionsTableView) {
             NSTableRowView *myRowView = [self.myPrescriptionsTableView rowViewAtRow:row makeIfNecessary:NO];
             [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
         }
@@ -2459,11 +2575,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[3]; // We have three active presc
                   o.title,
                   o.givenName,
                   o.familyName];
-         
+        
          [sharingService setSubject:subjectLine];
      }
 
      return nil;
 }
-         
+
 @end

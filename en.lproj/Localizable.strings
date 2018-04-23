@@ -11,7 +11,19 @@
 "Do you really want to delete this prescription?" = "Do you really want to delete this prescription?";
 
 /* No comment provided by engineer. */
+"Do you really want to overwrite the existing prescription or generate a new one?" = "Do you really want to overwrite the existing prescription or generate a new one?";
+
+/* No comment provided by engineer. */
+"New prescription" = "New prescription";
+
+/* No comment provided by engineer. */
 "Not specified" = "n.s.";
+
+/* No comment provided by engineer. */
+"Overwrite" = "Overwrite";
+
+/* No comment provided by engineer. */
+"Overwrite prescription?" = "Overwrite prescription?";
 
 /* No comment provided by engineer. */
 "Prescription to patient from doctor" = "Prescription: %1$@ %2$@, %3$@ from %4$@ %5$@ %6$@";

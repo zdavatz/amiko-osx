@@ -11,7 +11,19 @@
 "Do you really want to delete this prescription?" = "Wollen Sie dieses Rezept wirklich löschen?";
 
 /* No comment provided by engineer. */
+"Do you really want to overwrite the existing prescription or generate a new one?" = "Wollen Sie dieses Rezept überschreiben oder ein neues Rezept erstellen?";
+
+/* No comment provided by engineer. */
+"New prescription" = "Neues Rezept";
+
+/* No comment provided by engineer. */
 "Not specified" = "k.A.";
+
+/* No comment provided by engineer. */
+"Overwrite" = "Überschreiben";
+
+/* No comment provided by engineer. */
+"Overwrite prescription?" = "Rezept überschreiben?";
 
 /* No comment provided by engineer. */
 "Prescription to patient from doctor" = "Rezept: %1$@ %2$@, %3$@ von %4$@ %5$@ %6$@";
