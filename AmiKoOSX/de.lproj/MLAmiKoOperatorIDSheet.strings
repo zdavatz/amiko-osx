@@ -1,0 +1,36 @@
+
+/* Class = "NSTextFieldCell"; title = "PLZ"; ObjectID = "98l-W6-iqN"; */
+"98l-W6-iqN.title" = "PLZ";
+
+/* Class = "NSTextFieldCell"; title = "Arztstempel"; ObjectID = "Afo-H8-RBN"; */
+"Afo-H8-RBN.title" = "Arztstempel";
+
+/* Class = "NSTextFieldCell"; title = "Email"; ObjectID = "Eob-IQ-iXt"; */
+"Eob-IQ-iXt.title" = "Email";
+
+/* Class = "NSTextFieldCell"; title = "Adresse"; ObjectID = "Kz6-a3-QdB"; */
+"Kz6-a3-QdB.title" = "Adresse";
+
+/* Class = "NSTextFieldCell"; title = "Telefonnr."; ObjectID = "Pzw-eX-UuP"; */
+"Pzw-eX-UuP.title" = "Telefonnr.";
+
+/* Class = "NSWindow"; title = "Arztstempel"; ObjectID = "QvC-M9-y7g"; */
+"QvC-M9-y7g.title" = "Arztstempel";
+
+/* Class = "NSTextFieldCell"; title = "Vorname"; ObjectID = "Rwk-rY-x9h"; */
+"Rwk-rY-x9h.title" = "Vorname";
+
+/* Class = "NSTextFieldCell"; title = "Name"; ObjectID = "Tyt-q1-Omh"; */
+"Tyt-q1-Omh.title" = "Name";
+
+/* Class = "NSButtonCell"; title = "Speichern"; ObjectID = "V8Z-rM-HDQ"; */
+"V8Z-rM-HDQ.title" = "Speichern";
+
+/* Class = "NSTextFieldCell"; title = "Stadt"; ObjectID = "am9-gC-CZf"; */
+"am9-gC-CZf.title" = "Stadt";
+
+/* Class = "NSTextFieldCell"; title = "Titel"; ObjectID = "pqA-9Q-sez"; */
+"pqA-9Q-sez.title" = "Titel";
+
+/* Class = "NSButtonCell"; title = "Unterschrift aus Datei"; ObjectID = "yCN-97-a6m"; */
+"yCN-97-a6m.title" = "Unterschrift aus Datei";

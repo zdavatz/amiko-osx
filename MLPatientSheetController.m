@@ -402,7 +402,8 @@
         MLPatient *p = nil;
         if (mSearchFiltered) {
             p = mFilteredArrayOfPatients[row];
-        } else {
+        }
+        else {
             p = mArrayOfPatients[row];
         }
         
@@ -412,7 +413,8 @@
         if ([MLUtilities isGermanApp]) {
             [alert setMessageText:@"Kontakt löschen?"];
             [alert setInformativeText:@"Wollen Sie diesen Kontakt wirklich aus dem AmiKo Adressbuch löschen?"];
-        } else if ([MLUtilities isFrenchApp]) {
+        }
+        else if ([MLUtilities isFrenchApp]) {
             [alert setMessageText:@"Supprimer le contact?"];
             [alert setInformativeText:@"Êtes-vous sûr de vouloir supprimer ce contact du carnet d'adresses CoMed?"];
         }
@@ -468,7 +470,8 @@
         [mTableView reloadData];
         mABContactsVisible = YES;
         [self setNumPatients:[mArrayOfPatients count]];
-    } else {
+    }
+    else {
         // Retrieves contacts from local patient database
         [self updateAmiKoAddressBookTableView];
     }
@@ -492,11 +495,8 @@
 - (void) show:(NSWindow *)window
 {
     if (!mPanel) {
-        // Load xib file
-        if ([APP_NAME isEqualToString:@"AmiKo"])
-            [NSBundle loadNibNamed:@"MLAmiKoPatientSheet" owner:self];
-        else if ([APP_NAME isEqualToString:@"CoMed"])
-            [NSBundle loadNibNamed:@"MLCoMedPatientSheet" owner:self];
+        [NSBundle loadNibNamed:@"MLAmiKoPatientSheet" owner:self];
+
         // Set formatters
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -528,29 +528,24 @@
 
 - (void) setNumPatients:(NSInteger)numPatients
 {
-    if ([MLUtilities isGermanApp]) {
-        if (mABContactsVisible==YES) {
-            [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch Mac (%ld)", numPatients]];
-        } else {
-            [mNumPatients setStringValue:[NSString stringWithFormat:@"Addressbuch AmiKo (%ld)", numPatients]];
-        }
-    } else if ([MLUtilities isFrenchApp]) {
-        if (mABContactsVisible==YES) {
-            [mNumPatients setStringValue:[NSString stringWithFormat:@"Carnet d'adresses Mac (%ld)", numPatients]];
-        } else {
-            [mNumPatients setStringValue:[NSString stringWithFormat:@"Carnet d'adresses CoMed (%ld)", numPatients]];
-        }
+    if (mABContactsVisible) {
+        [mNumPatients setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Address Book Mac (%ld)", nil), numPatients]];
+    }
+    else {
+        [mNumPatients setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Address Book App", nil),
+                                      [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"],
+                                      numPatients]];
     }
 }
 
 - (MLPatient *) getContactAtRow:(NSInteger)row
 {
-    if (mSearchFiltered) {
+    if (mSearchFiltered)
         return mFilteredArrayOfPatients[row];
-    }
-    if (mArrayOfPatients!=nil) {
+
+    if (mArrayOfPatients!=nil)
         return mArrayOfPatients[row];
-    }
+
     return nil;
 }
 

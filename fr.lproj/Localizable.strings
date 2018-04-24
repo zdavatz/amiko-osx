@@ -1,4 +1,10 @@
 /* No comment provided by engineer. */
+"Address Book App" = "Carnet d'adresses %@ (%ld)";
+
+/* No comment provided by engineer. */
+"Address Book Mac (%ld)" = "Carnet d'adresses Mac (%ld)";
+
+/* No comment provided by engineer. */
 "AmiKo Prescription" = "Ordonnance CoMed";
 
 /* No comment provided by engineer. */
@@ -12,6 +18,9 @@
 
 /* No comment provided by engineer. */
 "Do you really want to overwrite the existing prescription or generate a new one?" = "Voulez-vous vraiment écraser l'ordonnance existante ou générer une nouvelle?";
+
+/* No comment provided by engineer. */
+"Enter the doctor's address" = "Saisir l'adresse du médecin";
 
 /* No comment provided by engineer. */
 "New prescription" = "Nouvelle ordonnance";

@@ -2325,9 +2325,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     return 0;
 }
 
-/**
- - NSTableViewDataDelegate -
-*/
+#pragma mark - NSTableViewDataDelegate
+
 - (NSTableRowView *) tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
 {
     if (tableView == self.myTableView || tableView == self.mySectionTitles) {
@@ -2576,7 +2575,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                   o.givenName,
                   o.familyName];
         
-         [sharingService setSubject:subjectLine];
+        [sharingService setSubject:subjectLine];
      }
 
      return nil;

@@ -55,6 +55,7 @@
 {
     [self saveSettings];
     [self remove];
+    [self loadSettings]; // Issue #5
 }
 
 - (IBAction) onLoadSignature:(id)sender
@@ -63,7 +64,7 @@
     NSOpenPanel* openDlgPanel = [NSOpenPanel openPanel];
     // Set array of file types
     NSArray *fileTypesArray;
-    fileTypesArray = [NSArray arrayWithObjects:@"png",@"gif",@"jpg",nil];
+    fileTypesArray = [NSArray arrayWithObjects:@"png", @"gif", @"jpg", nil];
     // Enable options in the dialog
     [openDlgPanel setCanChooseFiles:YES];
     [openDlgPanel setAllowedFileTypes:fileTypesArray];
@@ -85,14 +86,8 @@
 
 - (void) show:(NSWindow *)window
 {
-    if (!mPanel) {
-        // Load xib file
-        if ([APP_NAME isEqualToString:@"AmiKo"]) {
-            [NSBundle loadNibNamed:@"MLAmiKoOperatorIDSheet" owner:self];
-        } else if ([APP_NAME isEqualToString:@"CoMed"]) {
-            [NSBundle loadNibNamed:@"MLCoMedOperatorIDSheet" owner:self];
-        }
-    }
+    if (!mPanel)
+        [NSBundle loadNibNamed:@"MLAmiKoOperatorIDSheet" owner:self];
     
     [NSApp beginSheet:mPanel modalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];
     
@@ -214,20 +209,28 @@
     
     if ([self stringIsNilOrEmpty:operator.title]==NO)
         mTitle.stringValue = operator.title;
+
     if ([self stringIsNilOrEmpty:operator.familyName]==NO)
         mFamilyName.stringValue = operator.familyName;
+
     if ([self stringIsNilOrEmpty:operator.givenName]==NO)
         mGivenName.stringValue = operator.givenName;
+
     if ([self stringIsNilOrEmpty:operator.postalAddress]==NO)
         mPostalAddress.stringValue = operator.postalAddress;
+
     if ([self stringIsNilOrEmpty:operator.zipCode]==NO)
         mZipCode.stringValue = operator.zipCode;
+
     if ([self stringIsNilOrEmpty:operator.city]==NO)
         mCity.stringValue = operator.city;
+
     if ([self stringIsNilOrEmpty:operator.country]==NO)
         mCountry.stringValue = operator.country;
+
     if ([self stringIsNilOrEmpty:operator.phoneNumber]==NO)
         mPhoneNumber.stringValue = operator.phoneNumber;
+
     if ([self stringIsNilOrEmpty:operator.emailAddress]==NO)
         mEmailAddress.stringValue = operator.emailAddress;
 }
@@ -236,17 +239,10 @@
 {
     MLOperator *operator = [self loadOperator];
     
-    if (operator.familyName!=nil && operator.givenName!=nil) {
+    if (operator.familyName && operator.givenName)
         return [operator retrieveOperatorAsString];
-    }
-    else {
-        if ([MLUtilities isGermanApp])
-            return @"Bitte Arztstempel ergänzen";
-        else if ([MLUtilities isFrenchApp])
-            return @"Saisir l'adresse du médecin";
-        else
-            return @"Nirvana";
-    }
+
+    return NSLocalizedString(@"Enter the doctor's address", nil);
 }
 
 - (NSString *) retrieveCity

@@ -1,4 +1,10 @@
 /* No comment provided by engineer. */
+"Address Book App" = "Addressbuch %@ (%ld)";
+
+/* No comment provided by engineer. */
+"Address Book Mac (%ld)" = "Addressbuch Mac (%ld)";
+
+/* No comment provided by engineer. */
 "AmiKo Prescription" = "AmiKo Rezept";
 
 /* No comment provided by engineer. */
@@ -12,6 +18,9 @@
 
 /* No comment provided by engineer. */
 "Do you really want to overwrite the existing prescription or generate a new one?" = "Wollen Sie dieses Rezept überschreiben oder ein neues Rezept erstellen?";
+
+/* No comment provided by engineer. */
+"Enter the doctor's address" = "Bitte Arztstempel ergänzen";
 
 /* No comment provided by engineer. */
 "New prescription" = "Neues Rezept";

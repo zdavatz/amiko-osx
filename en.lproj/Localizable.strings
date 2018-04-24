@@ -1,4 +1,10 @@
 /* No comment provided by engineer. */
+"Address Book App" = "Address Book\n%@ (%ld)";
+
+/* No comment provided by engineer. */
+"Address Book Mac (%ld)" = "Address Book Mac (%ld)";
+
+/* No comment provided by engineer. */
 "AmiKo Prescription" = "AmiKo Prescription";
 
 /* No comment provided by engineer. */
@@ -12,6 +18,9 @@
 
 /* No comment provided by engineer. */
 "Do you really want to overwrite the existing prescription or generate a new one?" = "Do you really want to overwrite the existing prescription or generate a new one?";
+
+/* No comment provided by engineer. */
+"Enter the doctor's address" = "Enter the doctor's address";
 
 /* No comment provided by engineer. */
 "New prescription" = "New prescription";
