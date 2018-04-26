@@ -86,6 +86,8 @@ static NSString *mCurrentSearchKey = @"";
 static BOOL mSearchInteractions = false;
 static BOOL mPrescriptionMode = false;
 
+#pragma mark -
+
 @interface DataObject : NSObject
 
 @property NSString *title;
@@ -103,6 +105,8 @@ static BOOL mPrescriptionMode = false;
 @synthesize hashId;
 
 @end
+
+#pragma mark -
 
 @implementation MLMainWindowController
 {
@@ -352,7 +356,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                              selector:@selector(prescriptionPatientDeleted:)
                                                  name:@"MLPrescriptionPatientDeleted"
                                                object:nil];
-    
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(prescriptionDoctorChanged:)
+                                                 name:@"MLPrescriptionDoctorChanged"
+                                               object:nil];
+
     [[self window] makeFirstResponder:self];
     
     [[self window] setBackgroundColor:[NSColor whiteColor]];
@@ -574,7 +583,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             NSLog(@"No German Fulltext database!");
             mFullTextDb = nil;
         }
-    } else if ([MLUtilities isFrenchApp]) {
+    }
+    else if ([MLUtilities isFrenchApp]) {
         if (![mFullTextDb openDatabase:@"amiko_frequency_fr"]) {
             NSLog(@"No French Fulltext database!");
             mFullTextDb = nil;
@@ -582,9 +592,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     }
 }
 
-/**
- Notification called when prescription patient has changed
- */
+#pragma mark - Notifications
+
+- (void) prescriptionDoctorChanged:(NSNotification *)notification
+{
+    NSLog(@"%s NSNotification:%@", __FUNCTION__, [notification name]);
+    [self setOperatorID];   // issue #5
+}
+
 - (void) prescriptionPatientChanged:(NSNotification *)notification
 {
     if ([[notification name] isEqualToString:@"MLPrescriptionPatientChanged"]) {
@@ -604,9 +619,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [myToolbar setSelectedItemIdentifier:@"Rezept"];
 }
 
-/**
- Notification called when prescription patient has been deleted
- */
 - (void) prescriptionPatientDeleted:(NSNotification *)notification
 {
     if ([[notification name] isEqualToString:@"MLPrescriptionPatientDeleted"]) {
@@ -617,6 +629,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         [self resetPrescriptionHistory];
     }
 }
+
+#pragma mark -
 
 - (void) resetPrescriptionHistory
 {
@@ -660,14 +674,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [mDb closeDatabase];
             // Re-open database
             [self openSQLiteDatabase];
+            
             // Close fulltext database
             [mFullTextDb closeDatabase];
             // Re-open database
             [self openFullTextDatabase];
+            
             // Close interaction database
             [mInteractions closeInteractionsCsvFile];
             // Re-open interaction database
             [self openInteractionsCsvFile];
+            
             // Reload table
             NSInteger _mySearchState = mCurrentSearchState;
             NSString *_mySearchKey = mCurrentSearchKey;
@@ -707,19 +724,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                              didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
                                 contextInfo:nil];
         }
-    } else if ([[notification name] isEqualToString:@"MLStatusCode404"]) {
+    }
+    else if ([[notification name] isEqualToString:@"MLStatusCode404"]) {
         NSAlert *alert = [[NSAlert alloc] init];
         
         [alert addButtonWithTitle:@"OK"];
-        if ([MLUtilities isGermanApp]) {
-            [alert setMessageText:@"Datenbank kann nicht aktualisiert werden!"];
-            [alert setInformativeText:[NSString stringWithFormat:@"Bitte wenden Sie sich an:\nzdavatz@ywesee.com\n+41 43 540 05 50"]];
-        } else if ([MLUtilities isFrenchApp]) {
-            [alert setMessageText:@"Mise à jour n'est pas possible!"];
-            [alert setInformativeText:[NSString stringWithFormat:@"S'il vous plaît contacter:\nzdavatz@ywesee.com\n+41 43 540 05 50"]];
-        }
+        [alert setMessageText:NSLocalizedString(@"Update is not possible", nil)];
+        [alert setInformativeText:NSLocalizedString(@"Please contact", nil)];
         [alert setAlertStyle:NSInformationalAlertStyle];
-        
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self
                          didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
@@ -822,9 +834,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSString *tabId = (NSString *)tabViewItem.identifier;
     if ([tabId isEqualToString:@"TabWebview"]) {
 
-    } else if ([tabId isEqualToString:@"TabInteractions"]) {
+    }
+    else if ([tabId isEqualToString:@"TabInteractions"]) {
 
-    } else if ([tabId isEqualToString:@"TabPrescription1"]) {
+    }
+    else if ([tabId isEqualToString:@"TabPrescription1"]) {
         [self setOperatorID];
         [myPrescriptionsTableView reloadData];
     }
@@ -1039,16 +1053,24 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) setOperatorIdentity:(id)sender
 {
+    NSLog(@"%s %d", __FUNCTION__, __LINE__);
+
     if (!mOperatorIDSheet) {
         mOperatorIDSheet = [[MLOperatorIDSheetController alloc] init];
+        NSLog(@"%s %d, MLOperatorIDSheetController:%p", __FUNCTION__, __LINE__, mOperatorIDSheet);
     }
+
     [mOperatorIDSheet show:[NSApp mainWindow]];
+
+    NSLog(@"%s [END] %d", __FUNCTION__, __LINE__);
 }
 
 - (void) setOperatorID
 {
+    NSLog(@"%s %d", __FUNCTION__, __LINE__);
     if (!mOperatorIDSheet) {
         mOperatorIDSheet = [[MLOperatorIDSheetController alloc] init];
+        NSLog(@"%s %d, MLOperatorIDSheetController:%p", __FUNCTION__, __LINE__, mOperatorIDSheet);
     }
     NSString *operatorIDStr = [mOperatorIDSheet retrieveIDAsString];
     NSString *operatorPlace = [mOperatorIDSheet retrieveCity];
@@ -1061,6 +1083,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         NSImage *signatureImg = [[NSImage alloc] initWithContentsOfFile:filePath];
         [mySignView setSignature:signatureImg];
     }
+
+    NSLog(@"%s [END] %d", __FUNCTION__, __LINE__);
 }
 
 #pragma mark - Actions
@@ -2464,6 +2488,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // Move the specified row to its new location...
     return YES;
 }
+
+#pragma mark - Notifications
 
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {

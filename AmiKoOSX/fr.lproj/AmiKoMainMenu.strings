@@ -1,0 +1,156 @@
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "Bring All to Front";
+
+/* Class = "NSMenuItem"; title = "Fenster"; ObjectID = "19"; */
+"19.title" = "Fenêtre";
+
+/* Class = "NSMenuItem"; title = "Minimieren"; ObjectID = "23"; */
+"23.title" = "Minimieren";
+
+/* Class = "NSMenu"; title = "Fenster"; ObjectID = "24"; */
+"24.title" = "Fenêtre";
+
+/* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
+"29.title" = "AMainMenu";
+
+/* Class = "NSMenuItem"; title = "AmiKo"; ObjectID = "56"; */
+"56.title" = "CoMed Desitin";
+
+/* Class = "NSMenu"; title = "AmiKo"; ObjectID = "57"; */
+"57.title" = "CoMed Desitin";
+
+/* Class = "NSMenuItem"; title = "AmiKo Desitin"; ObjectID = "58"; */
+"58.title" = "AmiKo Desitin";
+
+/* Class = "NSMenuItem"; title = "Suchresultat drucken..."; ObjectID = "78"; */
+"78.title" = "Suchresultat drucken...";
+
+/* Class = "NSMenu"; title = "Datei"; ObjectID = "81"; */
+"81.title" = "Fichier";
+
+/* Class = "NSMenuItem"; title = "Datei"; ObjectID = "83"; */
+"83.title" = "Fichier";
+
+/* Class = "NSMenuItem"; title = "AmiKo Desitin verstecken"; ObjectID = "134"; */
+"134.title" = "Cacher AmiKo Desitin";
+
+/* Class = "NSMenuItem"; title = "AmiKo Desitin Beenden"; ObjectID = "136"; */
+"136.title" = "Terminer";
+
+/* Class = "NSMenuItem"; title = "Übrige Fenster verstecken"; ObjectID = "145"; */
+"145.title" = "Cacher autres fenêtres";
+
+/* Class = "NSMenuItem"; title = "Alle Fenster anzeigen"; ObjectID = "150"; */
+"150.title" = "Show All";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
+"239.title" = "Zoom";
+
+/* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
+"297.title" = "Show Toolbar";
+
+/* Class = "NSMenuItem"; title = "Hilfe"; ObjectID = "490"; */
+"490.title" = "Aide";
+
+/* Class = "NSMenuItem"; title = "Fachinformation drucken..."; ObjectID = "551"; */
+"551.title" = "Fachinformation drucken...";
+
+/* Class = "NSMenu"; title = "Hilfe"; ObjectID = "561"; */
+"561.title" = "Aide";
+
+/* Class = "NSMenuItem"; title = "Report"; ObjectID = "564"; */
+"564.title" = "Report";
+
+/* Class = "NSMenu"; title = "Kontakte"; ObjectID = "2wd-qf-r9D"; */
+"2wd-qf-r9D.title" = "Contacts";
+
+/* Class = "NSMenuItem"; title = "Rate"; ObjectID = "4my-LE-xop"; */
+"4my-LE-xop.title" = "Rate";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "4xr-bz-rPZ"; */
+"4xr-bz-rPZ.title" = "Éditer";
+
+/* Class = "NSMenuItem"; title = "Arztstempel..."; ObjectID = "5Du-8q-WQJ"; */
+"5Du-8q-WQJ.title" = "Signature du médecin...";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "6C4-wL-IXh"; */
+"6C4-wL-IXh.title" = "Paste";
+
+/* Class = "NSMenuItem"; title = "Share"; ObjectID = "6i2-RO-aan"; */
+"6i2-RO-aan.title" = "Share";
+
+/* Class = "NSMenuItem"; title = "Standardgrösse"; ObjectID = "Cwp-fC-Nh5"; */
+"Cwp-fC-Nh5.title" = "Standardgrösse";
+
+/* Class = "NSMenu"; title = "In Fachinformation suchen"; ObjectID = "DG6-4p-5Fx"; */
+"DG6-4p-5Fx.title" = "In Fachinformation suchen";
+
+/* Class = "NSMenuItem"; title = "In Fachinformation suchen"; ObjectID = "Hxi-o5-9Zy"; */
+"Hxi-o5-9Zy.title" = "In Fachinformation suchen";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "IE4-Bi-KSo"; */
+"IE4-Bi-KSo.title" = "Delete";
+
+/* Class = "NSMenu"; title = "Rezept"; ObjectID = "JjD-6m-Mnl"; */
+"JjD-6m-Mnl.title" = "Ordonnance";
+
+/* Class = "NSMenuItem"; title = "Rezept"; ObjectID = "NcS-1e-ymc"; */
+"NcS-1e-ymc.title" = "Ordonnance";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "P52-Re-Wjz"; */
+"P52-Re-Wjz.title" = "Select All";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "SBf-jg-8kW"; */
+"SBf-jg-8kW.title" = "Éditer";
+
+/* Class = "NSMenuItem"; title = "Feedback"; ObjectID = "SJw-Ze-p6n"; */
+"SJw-Ze-p6n.title" = "Feedback";
+
+/* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "Ug2-Yh-EQ7"; */
+"Ug2-Yh-EQ7.title" = "Paste and Match Style";
+
+/* Class = "NSMenuItem"; title = "Text vergrössern"; ObjectID = "YdI-4O-vC0"; */
+"YdI-4O-vC0.title" = "Text vergrössern";
+
+/* Class = "NSMenuItem"; title = "Rezept speichern..."; ObjectID = "Zio-eg-fPZ"; */
+"Zio-eg-fPZ.title" = "Rezept speichern...";
+
+/* Class = "NSMenuItem"; title = "Suchen..."; ObjectID = "afC-p7-YFh"; */
+"afC-p7-YFh.title" = "Suchen...";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "ahg-j4-NCC"; */
+"ahg-j4-NCC.title" = "Cut";
+
+/* Class = "NSMenuItem"; title = "Vorheriger Treffer..."; ObjectID = "alp-gi-aI7"; */
+"alp-gi-aI7.title" = "Vorheriger Treffer...";
+
+/* Class = "NSMenuItem"; title = "Aktualisieren via Internet"; ObjectID = "cuR-Pf-Lft"; */
+"cuR-Pf-Lft.title" = "Aktualisieren via Internet";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "ecT-Vg-yKm"; */
+"ecT-Vg-yKm.title" = "Copy";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "fWF-Ur-1gj"; */
+"fWF-Ur-1gj.title" = "Undo";
+
+/* Class = "NSMenuItem"; title = "Aktualisieren via Datei"; ObjectID = "gKE-5n-N9x"; */
+"gKE-5n-N9x.title" = "Aktualisieren via Datei";
+
+/* Class = "NSMenuItem"; title = "Nächster Treffer..."; ObjectID = "hbc-MR-x46"; */
+"hbc-MR-x46.title" = "Nächster Treffer...";
+
+/* Class = "NSMenuItem"; title = "Rezept laden..."; ObjectID = "iaD-dX-JgR"; */
+"iaD-dX-JgR.title" = "Rezept laden...";
+
+/* Class = "NSMenuItem"; title = "Text verkleinern"; ObjectID = "lvC-1g-0xo"; */
+"lvC-1g-0xo.title" = "Text verkleinern";
+
+/* Class = "NSMenuItem"; title = "Patienten verwalten..."; ObjectID = "tsG-5e-hg5"; */
+"tsG-5e-hg5.title" = "Gérer le patients...";
+
+/* Class = "NSMenuItem"; title = "Kontakte"; ObjectID = "uhw-HQ-GGx"; */
+"uhw-HQ-GGx.title" = "Contacts";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "zuN-8U-bRS"; */
+"zuN-8U-bRS.title" = "Redo";

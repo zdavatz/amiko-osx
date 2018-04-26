@@ -35,7 +35,14 @@
 "Overwrite prescription?" = "Rezept überschreiben?";
 
 /* No comment provided by engineer. */
+"Please contact" = "Bitte wenden Sie sich an:\nzdavatz@ywesee.com\n+41 43 540 05 50";
+
+/* No comment provided by engineer. */
 "Prescription to patient from doctor" = "Rezept: %1$@ %2$@, %3$@ von %4$@ %5$@ %6$@";
 
 /* No comment provided by engineer. */
 "To update the database you must have an active internet connection" = "Für die Aktualisierung der Datenbank benötigen Sie eine aktive Internetverbindung.";
+
+/* No comment provided by engineer. */
+"Update is not possible" = "Datenbank kann nicht aktualisiert werden!";
+

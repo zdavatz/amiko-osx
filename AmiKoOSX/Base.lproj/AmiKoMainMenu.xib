@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,18 +27,18 @@
                             <menuItem isSeparatorItem="YES" id="144">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="AmiKo Desitin verstecken" keyEquivalent="h" id="134">
+                            <menuItem title="Hide AmiKo Desitin" keyEquivalent="h" id="134">
                                 <connections>
                                     <action selector="hide:" target="-1" id="367"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Übrige Fenster verstecken" keyEquivalent="h" id="145">
+                            <menuItem title="Hide Others" keyEquivalent="h" id="145">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="hideOtherApplications:" target="-1" id="368"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Alle Fenster anzeigen" id="150">
+                            <menuItem title="Show All" id="150">
                                 <connections>
                                     <action selector="unhideAllApplications:" target="-1" id="370"/>
                                 </connections>
@@ -46,7 +46,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="AmiKo Desitin Beenden" keyEquivalent="q" id="136">
+                            <menuItem title="Quit" keyEquivalent="q" id="136">
                                 <connections>
                                     <action selector="terminate:" target="-3" id="449"/>
                                 </connections>
@@ -54,8 +54,8 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Datei" id="83" userLabel="File">
-                    <menu key="submenu" title="Datei" id="81">
+                <menuItem title="File" id="83" userLabel="File">
+                    <menu key="submenu" title="File" id="81">
                         <items>
                             <menuItem title="In Fachinformation suchen" id="Hxi-o5-9Zy">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -172,9 +172,9 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Rezept" id="NcS-1e-ymc">
+                <menuItem title="Prescription" id="NcS-1e-ymc">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Rezept" id="JjD-6m-Mnl">
+                    <menu key="submenu" title="Prescription" id="JjD-6m-Mnl">
                         <items>
                             <menuItem title="Rezept laden..." id="iaD-dX-JgR">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -191,18 +191,18 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Kontakte" id="uhw-HQ-GGx">
+                <menuItem title="Contacts" id="uhw-HQ-GGx">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Kontakte" id="2wd-qf-r9D">
+                    <menu key="submenu" title="Contacts" id="2wd-qf-r9D">
                         <items>
-                            <menuItem title="Patienten verwalten..." keyEquivalent="p" id="tsG-5e-hg5">
+                            <menuItem isSeparatorItem="YES" id="umh-nI-TRT"/>
+                            <menuItem title="Patient management..." keyEquivalent="p" id="tsG-5e-hg5">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="managePatients:" target="-1" id="wUp-yB-hoH"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="umh-nI-TRT"/>
-                            <menuItem title="Arztstempel..." keyEquivalent="z" id="5Du-8q-WQJ">
+                            <menuItem title="Doctor signature..." keyEquivalent="z" id="5Du-8q-WQJ">
                                 <connections>
                                     <action selector="setOperatorIdentity:" target="-1" id="psZ-Gg-9AA"/>
                                 </connections>
@@ -210,8 +210,8 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Fenster" id="19" userLabel="Window">
-                    <menu key="submenu" title="Fenster" systemMenu="window" id="24">
+                <menuItem title="Window" id="19" userLabel="Window">
+                    <menu key="submenu" title="Window" systemMenu="window" id="24">
                         <items>
                             <menuItem title="Show Toolbar" keyEquivalent="t" id="297">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
@@ -243,9 +243,9 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Hilfe" id="490" userLabel="Help">
+                <menuItem title="Help" id="490" userLabel="Help">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Hilfe" systemMenu="help" id="561">
+                    <menu key="submenu" title="Help" systemMenu="help" id="561">
                         <items>
                             <menuItem title="Feedback" keyEquivalent="x" id="SJw-Ze-p6n">
                                 <connections>
@@ -275,10 +275,11 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="23" y="-777"/>
         </menu>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="371">
             <rect key="contentRect" x="335" y="390" width="960" height="640"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="960" height="640"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

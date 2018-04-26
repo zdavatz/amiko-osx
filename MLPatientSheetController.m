@@ -483,12 +483,15 @@
     mSelectedPatient = nil;
     if (mSearchFiltered) {
         mSelectedPatient = mFilteredArrayOfPatients[row];
-    } else {
+    }
+    else {
         mSelectedPatient = mArrayOfPatients[row];
     }
-    if (mSelectedPatient!=nil) {
+
+    if (mSelectedPatient) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionPatientChanged" object:self];
     }
+
     [self remove];
 }
 

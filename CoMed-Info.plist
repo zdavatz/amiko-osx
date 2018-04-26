@@ -54,7 +54,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2017 ywesee GmbH. All rights reserved.</string>
 	<key>NSMainNibFile</key>
-	<string>CoMedMainMenu</string>
+	<string>AmiKoMainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>UTExportedTypeDeclarations</key>

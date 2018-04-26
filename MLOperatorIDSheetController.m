@@ -53,9 +53,10 @@
 
 - (IBAction) onSaveOperator:(id)sender
 {
+    //NSLog(@"%s", __FUNCTION__);
     [self saveSettings];
     [self remove];
-    [self loadSettings]; // Issue #5
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionDoctorChanged" object:nil];
 }
 
 - (IBAction) onLoadSignature:(id)sender
