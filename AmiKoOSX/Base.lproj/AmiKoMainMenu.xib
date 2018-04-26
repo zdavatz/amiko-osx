@@ -57,9 +57,9 @@
                 <menuItem title="File" id="83" userLabel="File">
                     <menu key="submenu" title="File" id="81">
                         <items>
-                            <menuItem title="In Fachinformation suchen" id="Hxi-o5-9Zy">
+                            <menuItem title="Prescription Info" id="Hxi-o5-9Zy">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="In Fachinformation suchen" id="DG6-4p-5Fx">
+                                <menu key="submenu" title="Prescription Info" id="DG6-4p-5Fx">
                                     <items>
                                         <menuItem title="Suchen..." tag="1" keyEquivalent="f" id="afC-p7-YFh">
                                             <connections>
@@ -80,28 +80,28 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="d8r-f2-Hmi"/>
-                            <menuItem title="Standardgrösse" tag="5" keyEquivalent="0" id="Cwp-fC-Nh5">
+                            <menuItem title="Standard size" tag="5" keyEquivalent="0" id="Cwp-fC-Nh5">
                                 <connections>
                                     <action selector="makeTextStandardSize:" target="-1" id="bWt-XJ-Wcy"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Text vergrössern" tag="5" keyEquivalent="+" id="YdI-4O-vC0">
+                            <menuItem title="Zoom In" tag="5" keyEquivalent="+" id="YdI-4O-vC0">
                                 <connections>
                                     <action selector="makeTextLarger:" target="-1" id="KmL-hd-jKs"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Text verkleinern" tag="5" keyEquivalent="-" id="lvC-1g-0xo">
+                            <menuItem title="Zoom Out" tag="5" keyEquivalent="-" id="lvC-1g-0xo">
                                 <connections>
                                     <action selector="makeTextSmaller:" target="-1" id="QO3-9v-Fjw"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="2Mj-eS-Zde"/>
-                            <menuItem title="Fachinformation drucken..." keyEquivalent="d" id="551">
+                            <menuItem title="Print technical information..." keyEquivalent="d" id="551">
                                 <connections>
                                     <action selector="printDocument:" target="-1" id="556"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Suchresultat drucken..." tag="1" keyEquivalent="t" id="78">
+                            <menuItem title="Print search result..." tag="1" keyEquivalent="t" id="78">
                                 <connections>
                                     <action selector="printSearchResult:" target="-1" id="554"/>
                                 </connections>
@@ -109,12 +109,12 @@
                             <menuItem isSeparatorItem="YES" id="Aqd-XG-Ud3">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Aktualisieren via Internet" tag="1" keyEquivalent="a" id="cuR-Pf-Lft">
+                            <menuItem title="Update via Internet" tag="1" keyEquivalent="a" id="cuR-Pf-Lft">
                                 <connections>
                                     <action selector="updateAipsDatabase:" target="-1" id="7oS-rg-Fi2"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Aktualisieren via Datei" tag="1" keyEquivalent="l" id="gKE-5n-N9x">
+                            <menuItem title="Update from file" tag="1" keyEquivalent="l" id="gKE-5n-N9x">
                                 <connections>
                                     <action selector="loadAipsDatabase:" target="-1" id="GZK-m6-37r"/>
                                 </connections>
@@ -176,13 +176,13 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Prescription" id="JjD-6m-Mnl">
                         <items>
-                            <menuItem title="Rezept laden..." id="iaD-dX-JgR">
+                            <menuItem title="Load Prescription..." id="iaD-dX-JgR">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="onLoadPrescription:" target="-1" id="Yqz-NS-6PB"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Rezept speichern..." id="Zio-eg-fPZ">
+                            <menuItem title="Save Prescription..." id="Zio-eg-fPZ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="onSavePrescription:" target="-1" id="CNF-fP-sJ4"/>
@@ -222,7 +222,7 @@
                             <menuItem isSeparatorItem="YES" id="550">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Minimieren" keyEquivalent="m" id="23">
+                            <menuItem title="Minimize" keyEquivalent="m" id="23">
                                 <connections>
                                     <action selector="performMiniaturize:" target="-1" id="37"/>
                                 </connections>

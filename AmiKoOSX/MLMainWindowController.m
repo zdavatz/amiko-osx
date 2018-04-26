@@ -1053,24 +1053,21 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) setOperatorIdentity:(id)sender
 {
-    NSLog(@"%s %d", __FUNCTION__, __LINE__);
-
+    //NSLog(@"%s", __FUNCTION__);
     if (!mOperatorIDSheet) {
         mOperatorIDSheet = [[MLOperatorIDSheetController alloc] init];
         NSLog(@"%s %d, MLOperatorIDSheetController:%p", __FUNCTION__, __LINE__, mOperatorIDSheet);
     }
 
     [mOperatorIDSheet show:[NSApp mainWindow]];
-
-    NSLog(@"%s [END] %d", __FUNCTION__, __LINE__);
 }
 
 - (void) setOperatorID
 {
-    NSLog(@"%s %d", __FUNCTION__, __LINE__);
+    //NSLog(@"%s", __FUNCTION__);
     if (!mOperatorIDSheet) {
         mOperatorIDSheet = [[MLOperatorIDSheetController alloc] init];
-        NSLog(@"%s %d, MLOperatorIDSheetController:%p", __FUNCTION__, __LINE__, mOperatorIDSheet);
+        //NSLog(@"%s %d, MLOperatorIDSheetController:%p", __FUNCTION__, __LINE__, mOperatorIDSheet);
     }
     NSString *operatorIDStr = [mOperatorIDSheet retrieveIDAsString];
     NSString *operatorPlace = [mOperatorIDSheet retrieveCity];
@@ -1083,8 +1080,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         NSImage *signatureImg = [[NSImage alloc] initWithContentsOfFile:filePath];
         [mySignView setSignature:signatureImg];
     }
-
-    NSLog(@"%s [END] %d", __FUNCTION__, __LINE__);
 }
 
 #pragma mark - Actions
@@ -1308,6 +1303,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         andRefreshHistory:(bool)refresh
 {
     NSString *hash = [mPrescriptionAdapter loadPrescriptionFromFile:filename];
+#ifdef DEBUG
+    NSLog(@"%s hash: %@", __FUNCTION__, hash);
+#endif
     mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
     // To fix not showing the alert the first time, we also need to define 'mCartHash'
     mPrescriptionsCart[0].uniqueHash = mCartHash = hash;
@@ -2348,8 +2346,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     return 0;
 }
-
-#pragma mark - NSTableViewDataDelegate
 
 - (NSTableRowView *) tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
 {
