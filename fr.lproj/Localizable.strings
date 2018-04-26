@@ -8,6 +8,9 @@
 "AmiKo Prescription" = "Ordonnance CoMed";
 
 /* No comment provided by engineer. */
+"ATC Code" = "Principe Actif / Code ATC";
+
+/* No comment provided by engineer. */
 "Cancel" = "Annuler";
 
 /* No comment provided by engineer. */
@@ -23,6 +26,9 @@
 "Enter the doctor's address" = "Saisir l'adresse du médecin";
 
 /* No comment provided by engineer. */
+"Full Text" = "Plein Texte";
+
+/* No comment provided by engineer. */
 "New prescription" = "Nouvelle ordonnance";
 
 /* No comment provided by engineer. */
@@ -35,10 +41,25 @@
 "Overwrite prescription?" = "Écraser la version actuelle?";
 
 /* No comment provided by engineer. */
+"Owner" = "Titulaire";
+
+/* No comment provided by engineer. */
 "Please contact" = "S'il vous plaît contacter:\nzdavatz@ywesee.com\n+41 43 540 05 50";
 
 /* No comment provided by engineer. */
+"Preparation" = "Préparation";
+
+/* No comment provided by engineer. */
 "Prescription to patient from doctor" = "Ordon.: %1$@ %2$@, %3$@ von %4$@ %5$@ %6$@";
+
+/* No comment provided by engineer. */
+"Reg. No" = "No d'Autorisation";
+
+/* No comment provided by engineer. */
+"Search" = "Recherche";
+
+/* No comment provided by engineer. */
+"Therapy" = "Thérapie";
 
 /* No comment provided by engineer. */
 "To update the database you must have an active internet connection" = "Pour la mise à jour de la banque des données vous devez disposer d’une connexion Internet active.";

@@ -69,15 +69,6 @@ enum {
     kExpertInfoView=0, kFullTextSearchView=1, kInteractionsCartView=2
 };
 
-static NSString *SEARCH_STRING = @"Suche";
-static NSString *SEARCH_TITLE = @"Präparat";
-static NSString *SEARCH_AUTHOR = @"Inhaber";
-static NSString *SEARCH_ATCCODE = @"Wirkstoff / ATC Code";
-static NSString *SEARCH_REGNR = @"Reg. Nr.";
-static NSString *SEARCH_THERAPY = @"Therapie";
-static NSString *SEARCH_FULLTEXT = @"Volltext";
-static NSString *SEARCH_FACHINFO = @"in Fachinformation";
-
 static NSInteger mUsedDatabase = kAips;
 static NSInteger mCurrentSearchState = kTitle;
 static NSInteger mCurrentWebView = kExpertInfoView;
@@ -213,26 +204,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // Initialize global serial dispatch queue
     mSearchQueue = dispatch_queue_create("com.ywesee.searchdb", nil);
     mSearchInProgress = false;
-    
-    if ([MLUtilities isGermanApp]) {
-        SEARCH_STRING = @"Suche";
-        SEARCH_TITLE = @"Präparat";
-        SEARCH_AUTHOR = @"Inhaber";
-        SEARCH_ATCCODE = @"Wirkstoff / ATC Code";
-        SEARCH_REGNR = @"Reg. Nr.";
-        SEARCH_THERAPY = @"Therapie";
-        SEARCH_FULLTEXT = @"Volltext";
-        SEARCH_FACHINFO = @"in Fachinformation";
-    } else if ([MLUtilities isFrenchApp]) {
-        SEARCH_STRING = @"Recherche";
-        SEARCH_TITLE = @"Préparation";
-        SEARCH_AUTHOR = @"Titulaire";
-        SEARCH_ATCCODE = @"Principe Actif / Code ATC";
-        SEARCH_REGNR = @"No d'Autorisation";
-        SEARCH_THERAPY = @"Thérapie";
-        SEARCH_FULLTEXT = @"Plein Texte";
-        SEARCH_FACHINFO = @"Notice Infopro";
-    }
     
     m_alpha = 0.0;
     m_delta = 0.01;
@@ -1649,42 +1620,56 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         case kTitle:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kTitle;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_TITLE]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
+                                                        NSLocalizedString(@"Search", nil),
+                                                        NSLocalizedString(@"Preparation", nil)]];
              break;
         case kAuthor:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kAuthor;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_AUTHOR]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
+                                                        NSLocalizedString(@"Search", nil),
+                                                        NSLocalizedString(@"Owner", nil)]];
             break;
         case kAtcCode:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kAtcCode;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_ATCCODE]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
+                                                        NSLocalizedString(@"Search", nil),
+                                                        NSLocalizedString(@"ATC Code", nil)]];
             break;
         case kRegNr:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kRegNr;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_REGNR]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
+                                                        NSLocalizedString(@"Search", nil),
+                                                        NSLocalizedString(@"Reg. No", nil)]];
             break;
         case kTherapy:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kTherapy;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_THERAPY]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
+                                                        NSLocalizedString(@"Search", nil),
+                                                        NSLocalizedString(@"Therapy", nil)]];
             break;
         case kWebView:
             // Hide textfinder
             [self hideTextFinder];
-            // NOTE: Commented because we're using SHCWebView now (02.03.2015)
+            // NOTE: Commented out because we're using SHCWebView now (02.03.2015)
             /*
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kWebView;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_FACHINFO]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
+             NSLocalizedString(@"Search", nil),
+             @"in Fachinformation"]]; // fr: @"Notice Infopro"
             */
             break;
         case kFullText:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kFullText;
-            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@", SEARCH_STRING, SEARCH_FULLTEXT]];
+            [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
+                                                        NSLocalizedString(@"Search", nil),
+                                                        NSLocalizedString(@"Full Text", nil)]];
             break;
     }
     mCurrentSearchKey = @"";

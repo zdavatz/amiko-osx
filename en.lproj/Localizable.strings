@@ -8,6 +8,9 @@
 "AmiKo Prescription" = "AmiKo Prescription";
 
 /* No comment provided by engineer. */
+"ATC Code" = "ATC Code";
+
+/* No comment provided by engineer. */
 "Cancel" = "Cancel";
 
 /* No comment provided by engineer. */
@@ -23,6 +26,9 @@
 "Enter the doctor's address" = "Enter the doctor's address";
 
 /* No comment provided by engineer. */
+"Full Text" = "Full Text";
+
+/* No comment provided by engineer. */
 "New prescription" = "New prescription";
 
 /* No comment provided by engineer. */
@@ -35,10 +41,25 @@
 "Overwrite prescription?" = "Overwrite prescription?";
 
 /* No comment provided by engineer. */
+"Owner" = "Owner";
+
+/* No comment provided by engineer. */
 "Please contact" = "Please contact:\nzdavatz@ywesee.com\n+41 43 540 05 50";
 
 /* No comment provided by engineer. */
+"Preparation" = "Preparation";
+
+/* No comment provided by engineer. */
 "Prescription to patient from doctor" = "Prescription: %1$@ %2$@, %3$@ from %4$@ %5$@ %6$@";
+
+/* No comment provided by engineer. */
+"Reg. No" = "Reg. No";
+
+/* No comment provided by engineer. */
+"Search" = "Search";
+
+/* No comment provided by engineer. */
+"Therapy" = "Therapy";
 
 /* No comment provided by engineer. */
 "To update the database you must have an active internet connection" = "To update the database you must have an active internet connection.";

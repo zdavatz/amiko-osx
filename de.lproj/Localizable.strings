@@ -8,6 +8,9 @@
 "AmiKo Prescription" = "AmiKo Rezept";
 
 /* No comment provided by engineer. */
+"ATC Code" = "Wirkstoff / ATC Code";
+
+/* No comment provided by engineer. */
 "Cancel" = "Abbrechen";
 
 /* No comment provided by engineer. */
@@ -23,6 +26,9 @@
 "Enter the doctor's address" = "Bitte Arztstempel ergänzen";
 
 /* No comment provided by engineer. */
+"Full Text" = "Volltext";
+
+/* No comment provided by engineer. */
 "New prescription" = "Neues Rezept";
 
 /* No comment provided by engineer. */
@@ -35,10 +41,25 @@
 "Overwrite prescription?" = "Rezept überschreiben?";
 
 /* No comment provided by engineer. */
+"Owner" = "Inhaber";
+
+/* No comment provided by engineer. */
 "Please contact" = "Bitte wenden Sie sich an:\nzdavatz@ywesee.com\n+41 43 540 05 50";
 
 /* No comment provided by engineer. */
+"Preparation" = "Präparat";
+
+/* No comment provided by engineer. */
 "Prescription to patient from doctor" = "Rezept: %1$@ %2$@, %3$@ von %4$@ %5$@ %6$@";
+
+/* No comment provided by engineer. */
+"Reg. No" = "Reg. Nr.";
+
+/* No comment provided by engineer. */
+"Search" = "Suche";
+
+/* No comment provided by engineer. */
+"Therapy" = "Therapie";
 
 /* No comment provided by engineer. */
 "To update the database you must have an active internet connection" = "Für die Aktualisierung der Datenbank benötigen Sie eine aktive Internetverbindung.";
