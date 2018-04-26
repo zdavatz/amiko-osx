@@ -434,11 +434,8 @@
             [self deletePatientFolder:p withBackup:YES];
             [self resetAllFields];
             [self updateAmiKoAddressBookTableView];
-            if ([MLUtilities isGermanApp]) {
-                [mNotification setStringValue:@"Kontakt wurde vom AmiKo Addressbuch gelöscht."];
-            } else if ([MLUtilities isFrenchApp]) {
-                [mNotification setStringValue:@"Le contact a été supprimé du carnet d'adresses CoMed."];
-            }
+            [mNotification setStringValue:[NSString stringWithFormat:NSLocalizedString(@"The contact has been removed from the %@ Address Book", nil), [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"]]];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionPatientDeleted" object:self];
         }
     }

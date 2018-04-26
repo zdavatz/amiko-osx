@@ -114,7 +114,6 @@ static BOOL mPrescriptionMode = false;
     MLOperatorIDSheetController *mOperatorIDSheet;
     
     MLPrescriptionsAdapter *mPrescriptionAdapter;
-    NSString *mCartHash;
     
     NSMutableArray *medi;
     NSMutableArray *favoriteKeyData;
@@ -579,7 +578,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         }
         myPatientAddressTextField.stringValue = [mPatientSheet retrievePatientAsString];
         // If prescription cart is not empty, generate new hash
-        if (mPrescriptionsCart[0].cart!=nil)
+        if (mPrescriptionsCart[0].cart)
             [mPrescriptionsCart[0] makeNewUniqueHash];
     }
     mPrescriptionMode = true;
@@ -1131,7 +1130,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             NSURL *fileURL = [[openDlgPanel  URLs] firstObject];
             [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
             mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
-            mCartHash = mPrescriptionsCart[0].uniqueHash;
             [self updatePrescriptionsView];
         }
     }];
@@ -1139,14 +1137,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) onSavePrescription:(id)sender
 {
-    [self savePrescriptionThenSend:NO];
+    [self savePrescription];
 }
 
 - (IBAction) onSendPrescription:(id)sender
 {
     [self storeAllPrescriptionComments]; // detect if any comment has been modified
     MLPatient *patient = [mPatientSheet retrievePatient];
-    NSString *cartHash = mPrescriptionsCart[0].uniqueHash;
 
     if ([mPrescriptionsCart[0].cart count] < 1) {
         // TODO: maybe the send button should be disabled to prevent coming here
@@ -1160,15 +1157,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // Skip the following if the prescription has not been edited
     if (modifiedPrescription)
     {
+        [mPrescriptionsCart[0] makeNewUniqueHash];  // Issue #9
+
         // Handle the decision automatically
         if (possibleToOverwrite) {
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
-                                                    withUniqueHash:cartHash
+                                                    withUniqueHash:mPrescriptionsCart[0].uniqueHash
                                                       andOverwrite:YES];
         }
         else {
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
-                                                    withUniqueHash:cartHash
+                                                    withUniqueHash:mPrescriptionsCart[0].uniqueHash
                                                       andOverwrite:NO];
             possibleToOverwrite = true;
         }
@@ -1278,8 +1277,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSLog(@"%s hash: %@", __FUNCTION__, hash);
 #endif
     mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
-    // To fix not showing the alert the first time, we also need to define 'mCartHash'
-    mPrescriptionsCart[0].uniqueHash = mCartHash = hash;
+    mPrescriptionsCart[0].uniqueHash = hash;
 
     // Set patient found in prescription
     MLPatient *p = [mPrescriptionAdapter patient];
@@ -1315,7 +1313,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     modifiedPrescription = false;
 }
 
-- (void) savePrescriptionThenSend:(BOOL)send
+/*
+ Save button
+ A) not modified, 2 buttons [Cancel], [Save]
+    4) New file —> new hash
+ 
+ B) modified, 3 buttons [Cancel], [Save], [Overwrite]
+    1) Overwrite —> new hash
+    3) New file —> new hash
+ */
+- (void) savePrescription
 {
     if (!mPatientSheet)
         mPatientSheet = [[MLPatientSheetController alloc] init];
@@ -1324,7 +1331,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     [self storeAllPrescriptionComments];
     MLPatient *patient = [mPatientSheet retrievePatient];
-    NSString *cartHash = mPrescriptionsCart[0].uniqueHash;
     
     if ([mPrescriptionsCart[0].cart count] < 1) {
         // TODO: maybe the save button should be disabled to prevent coming here
@@ -1334,56 +1340,52 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         return;
     }
     
-    // Ask if we should overwrite the existing prescription
-    if ([cartHash isEqualToString:mCartHash]) {
-        // Show alert with OK button
-        // FIXME: we get here when we send the same prescription for the second time
-        NSAlert *alert = [[NSAlert alloc] init];
+    NSAlert *alert = [[NSAlert alloc] init];
+
+    // Buttons are added from right to left
+    
+    if (modifiedPrescription) {
         [alert addButtonWithTitle:NSLocalizedString(@"Overwrite", nil)];
-        [alert addButtonWithTitle:NSLocalizedString(@"New prescription", nil)];
-        [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
+        [[alert.buttons lastObject] setTag:100];
+
         [alert setMessageText:NSLocalizedString(@"Overwrite prescription?", nil)];
         [alert setInformativeText:NSLocalizedString(@"Do you really want to overwrite the existing prescription or generate a new one?", nil)];
-
-        [alert setAlertStyle:NSWarningAlertStyle];
-        [alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
-            NSURL *url = nil;
-            if (returnCode == NSAlertFirstButtonReturn) {
-                url = [mPrescriptionAdapter savePrescriptionForPatient:patient
-                                                        withUniqueHash:cartHash
-                                                          andOverwrite:YES];
-            }
-            else if (returnCode == NSAlertSecondButtonReturn) {
-                url = [mPrescriptionAdapter savePrescriptionForPatient:patient
-                                                        withUniqueHash:cartHash
-                                                          andOverwrite:NO];
-                possibleToOverwrite = true;
-            }
-
-            if (url != nil && send == YES) {
-                // When are we getting here ? Maybe one of these cases is redundant.
-                //NSLog(@"%s %d", __FUNCTION__, __LINE__);
-                [self sendPrescription:[[url absoluteURL] absoluteString]];
-            }
-
-            // Update prescription history
-            [self updatePrescriptionHistory];
-            return;
-        }];
     }
-    else {
-        NSURL *url = [mPrescriptionAdapter savePrescriptionForPatient:patient
-                                                       withUniqueHash:cartHash
-                                                         andOverwrite:NO];
-        mCartHash = cartHash;
-        if (url && send) {
-            //NSLog(@"%s %d", __FUNCTION__, __LINE__);
-            [self sendPrescription:[[url absoluteURL] absoluteString]];
+    
+    [alert addButtonWithTitle:NSLocalizedString(@"New prescription", nil)];
+    [[alert.buttons lastObject] setTag:101];
+
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
+    [[alert.buttons lastObject] setTag:102];
+
+    //NSLog(@"Alert buttons: %ld", [alert.buttons count]);
+
+    [alert setAlertStyle:NSAlertStyleWarning];
+    [alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
+
+        //NSLog(@"returnCode: %ld", returnCode);
+
+        // Create a new hash for both "overwrite" and "new file"
+        if (returnCode != 102)
+            [mPrescriptionsCart[0] makeNewUniqueHash];  // Issue #9
+
+        NSURL *url = nil;
+        if (returnCode == 100) {
+            url = [mPrescriptionAdapter savePrescriptionForPatient:patient
+                                                    withUniqueHash:mPrescriptionsCart[0].uniqueHash
+                                                      andOverwrite:YES];
+        }
+        else if (returnCode == 101) {
+            url = [mPrescriptionAdapter savePrescriptionForPatient:patient
+                                                    withUniqueHash:mPrescriptionsCart[0].uniqueHash
+                                                      andOverwrite:NO];
+            possibleToOverwrite = true;
         }
 
         // Update prescription history
         [self updatePrescriptionHistory];
-    }
+        return;
+    }];
 }
 
 - (void) sendPrescription:(NSString *)filePath
