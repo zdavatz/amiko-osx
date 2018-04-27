@@ -99,6 +99,7 @@
     else if ([MLUtilities isFrenchApp])
         body = [NSString stringWithFormat:@"%@ OS X: Compendium des Médicaments Suisse\r\n\n"
                 "Get it now: https://itunes.apple.com/us/app/amiko/id%@?mt=12\r\n\nEnjoy!\r\n", APP_NAME, APP_ID];
+
     NSString *encodedSubject = [NSString stringWithFormat:@"subject=%@", [subject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSString *encodedBody = [NSString stringWithFormat:@"body=%@", [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSString *encodedURLString = [NSString stringWithFormat:@"mailto:?%@&%@", encodedSubject, encodedBody];
@@ -119,10 +120,12 @@
     if ([[MLUtilities appOwner] isEqualToString:@"zurrose"]) {
         NSURL *helpFile = [NSURL URLWithString:@"http://www.zurrose.ch/amiko"];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
-    } else if ([[MLUtilities appOwner] isEqualToString:@"ywesee"]) {
+    }
+    else if ([[MLUtilities appOwner] isEqualToString:@"ywesee"]) {
         NSURL *helpFile = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/amiko/id%@?mt=12", APP_ID]];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
-    } else if ([[MLUtilities appOwner] isEqualToString:@"desitin"]) {
+    }
+    else if ([[MLUtilities appOwner] isEqualToString:@"desitin"]) {
         NSURL *helpFile = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/amiko/id%@?mt=12", APP_ID]];
         [[NSWorkspace sharedWorkspace] openURL:helpFile];
     }

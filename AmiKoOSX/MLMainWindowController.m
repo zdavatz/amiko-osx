@@ -69,6 +69,12 @@ enum {
     kExpertInfoView=0, kFullTextSearchView=1, kInteractionsCartView=2
 };
 
+typedef NS_ENUM(NSInteger, ButtonTags) {
+    tagButtonOverwrite = 100,
+    tagButtonNewFile,
+    tagButtonCancel
+};
+
 static NSInteger mUsedDatabase = kAips;
 static NSInteger mCurrentSearchState = kTitle;
 static NSInteger mCurrentWebView = kExpertInfoView;
@@ -98,6 +104,10 @@ static BOOL mPrescriptionMode = false;
 @end
 
 #pragma mark -
+
+@interface MLMainWindowController ()
+- (void) setButtonsHidden:(BOOL)flag forView:(NSView *)view;
+@end
 
 @implementation MLMainWindowController
 {
@@ -798,6 +808,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         return nil;
 }
 
+#pragma mark - NSTabViewDelegate
 
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
@@ -930,16 +941,44 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) printDocument:(id)sender
 {
-    WebFrame *webFrame = [myWebView mainFrame];
-    WebFrameView *webFrameView = [webFrame frameView];
-    NSView <WebDocumentView> *webDocumentView = [webFrameView documentView];
-    
     NSPrintInfo *printInfo = [[NSPrintInfo alloc] init];
     [printInfo setOrientation:NSPaperOrientationPortrait];
     [printInfo setHorizontalPagination:NSFitPagination];
-    NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:webDocumentView printInfo:printInfo];
-    // [printJob setPrintPanel:myPrintPanel]; --> needs to be subclassed
+    
+    NSPrintOperation *printJob;
+    NSString *tabId = [[myTabView selectedTabViewItem] identifier];
+
+    if ([tabId isEqualToString:@"TabPrescription1"]) {
+        NSView *view = [[myTabView tabViewItemAtIndex:2] view];
+        [self setButtonsHidden:YES forView:view];   // We don't want to show the buttons in the printout
+        printJob = [NSPrintOperation printOperationWithView:view printInfo:printInfo];
+    }
+    else {
+        WebFrame *webFrame = [myWebView mainFrame];
+        WebFrameView *webFrameView = [webFrame frameView];
+        NSView <WebDocumentView> *webDocumentView = [webFrameView documentView];
+        
+        printJob = [NSPrintOperation printOperationWithView:webDocumentView printInfo:printInfo];
+        // [printJob setPrintPanel:myPrintPanel]; --> needs to be subclassed
+    }
+    
     [printJob runOperation];
+
+    if ([tabId isEqualToString:@"TabPrescription1"]) {
+        NSView *view = [[myTabView tabViewItemAtIndex:2] view];
+        [self setButtonsHidden:NO forView:view];
+    }
+}
+
+- (void) setButtonsHidden:(BOOL)flag forView:(NSView *)view
+{
+    for (NSView *v in [view subviews]) {
+        //NSLog(@"%@", [v class]);
+        if ([v isKindOfClass:[NSButton class]]) {
+            //NSLog(@"\t%@", [(NSButton *)v title]);
+            [v setHidden:flag];
+        }
+    }
 }
 
 - (IBAction) printSearchResult:(id)sender
@@ -1346,17 +1385,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     if (modifiedPrescription) {
         [alert addButtonWithTitle:NSLocalizedString(@"Overwrite", nil)];
-        [[alert.buttons lastObject] setTag:100];
+        [[alert.buttons lastObject] setTag:tagButtonOverwrite];
 
         [alert setMessageText:NSLocalizedString(@"Overwrite prescription?", nil)];
         [alert setInformativeText:NSLocalizedString(@"Do you really want to overwrite the existing prescription or generate a new one?", nil)];
     }
     
     [alert addButtonWithTitle:NSLocalizedString(@"New prescription", nil)];
-    [[alert.buttons lastObject] setTag:101];
+    [[alert.buttons lastObject] setTag:tagButtonNewFile];
 
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
-    [[alert.buttons lastObject] setTag:102];
+    [[alert.buttons lastObject] setTag:tagButtonCancel];
 
     //NSLog(@"Alert buttons: %ld", [alert.buttons count]);
 
@@ -1366,16 +1405,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         //NSLog(@"returnCode: %ld", returnCode);
 
         // Create a new hash for both "overwrite" and "new file"
-        if (returnCode != 102)
+        if (returnCode != tagButtonCancel)
             [mPrescriptionsCart[0] makeNewUniqueHash];  // Issue #9
 
         NSURL *url = nil;
-        if (returnCode == 100) {
+        if (returnCode == tagButtonOverwrite) {
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
                                                     withUniqueHash:mPrescriptionsCart[0].uniqueHash
                                                       andOverwrite:YES];
         }
-        else if (returnCode == 101) {
+        else if (returnCode == tagButtonNewFile) {
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
                                                     withUniqueHash:mPrescriptionsCart[0].uniqueHash
                                                       andOverwrite:NO];
