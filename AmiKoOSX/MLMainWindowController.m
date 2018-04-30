@@ -106,7 +106,12 @@ static BOOL mPrescriptionMode = false;
 #pragma mark -
 
 @interface MLMainWindowController ()
-- (void) setButtonsHidden:(BOOL)flag forView:(NSView *)view;
+
+- (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view;
+- (void) updateButtons;
+- (void) saveButtonOn;
+- (void) saveButtonOff;
+
 @end
 
 @implementation MLMainWindowController
@@ -382,6 +387,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [sendButton sendActionOn:NSEventMaskLeftMouseDown];
     possibleToOverwrite = false;
     modifiedPrescription = false;
+    [self updateButtons];
 }
 
 - (void) updateUserDefaultsForKey:(NSString *)key
@@ -822,6 +828,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     else if ([tabId isEqualToString:@"TabPrescription1"]) {
         [self setOperatorID];
         [myPrescriptionsTableView reloadData];
+        [self updateButtons];
     }
 }
 
@@ -950,7 +957,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     if ([tabId isEqualToString:@"TabPrescription1"]) {
         NSView *view = [[myTabView tabViewItemAtIndex:2] view];
-        [self setButtonsHidden:YES forView:view];   // We don't want to show the buttons in the printout
+        [self hideButtonsForPrinting:YES forView:view];   // We don't want to show the buttons in the printout
         printJob = [NSPrintOperation printOperationWithView:view printInfo:printInfo];
     }
     else {
@@ -966,18 +973,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     if ([tabId isEqualToString:@"TabPrescription1"]) {
         NSView *view = [[myTabView tabViewItemAtIndex:2] view];
-        [self setButtonsHidden:NO forView:view];
-    }
-}
-
-- (void) setButtonsHidden:(BOOL)flag forView:(NSView *)view
-{
-    for (NSView *v in [view subviews]) {
-        //NSLog(@"%@", [v class]);
-        if ([v isKindOfClass:[NSButton class]]) {
-            //NSLog(@"\t%@", [(NSButton *)v title]);
-            [v setHidden:flag];
-        }
+        [self hideButtonsForPrinting:NO forView:view];
     }
 }
 
@@ -1118,6 +1114,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [mPrescriptionsCart[0] makeNewUniqueHash];
 
         [self.myPrescriptionsTableView reloadData];
+        [self updateButtons];
     }
 }
 
@@ -1128,6 +1125,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [self.myPrescriptionsTableView reloadData];
     possibleToOverwrite = false;
     modifiedPrescription = true;
+    [self updateButtons];
 }
 
 - (IBAction) onSearchPatient:(id)sender
@@ -1228,6 +1226,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if (modifiedPrescription) {
         [self updatePrescriptionHistory];
         modifiedPrescription = false;
+        [self updateButtons];
     }
 
     // TODO: maybe we should temporarily disable the send button,
@@ -1350,6 +1349,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     possibleToOverwrite = true;
     modifiedPrescription = false;
+    [self updateButtons];
 }
 
 /*
@@ -2302,6 +2302,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         [self.myPrescriptionsTableView reloadData];
         
         modifiedPrescription = true;
+        [self updateButtons];
     }
 }
 
@@ -2598,6 +2599,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             NSTableRowView *myRowView = [self.myPrescriptionsTableView rowViewAtRow:row makeIfNecessary:NO];
             [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
         }
+
+        [self updateButtons];
     }
 
 #ifdef DEBUG
@@ -2627,6 +2630,50 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
      }
 
      return nil;
+}
+
+#pragma mark -
+- (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view
+{
+    for (NSView *v in [view subviews]) {
+        //NSLog(@"%@", [v class]);
+        if ([v isKindOfClass:[NSButton class]]) {
+            //NSLog(@"\t%@", [(NSButton *)v title]);
+            [v setHidden:flag];
+        }
+    }
+}
+
+- (void) updateButtons
+{
+#if 1
+    bool doctorDefined = myOperatorIDTextField.stringValue.length;
+    bool patientDefined = myPatientAddressTextField.stringValue.length;
+#else
+    bool doctorDefined = [mPrescriptionAdapter doctor];
+    bool patientDefined = [mPrescriptionAdapter patient];
+#endif
+    
+    if (doctorDefined &&
+        patientDefined &&
+        [mPrescriptionsCart[0].cart count] > 0)
+    {
+        [self saveButtonOn];
+    }
+    else
+        [self saveButtonOff];
+}
+
+- (void) saveButtonOn
+{
+    saveButton.enabled = YES;
+    sendButton.enabled = YES;
+}
+
+- (void) saveButtonOff
+{
+    saveButton.enabled = NO;
+    sendButton.enabled = NO;
 }
 
 @end

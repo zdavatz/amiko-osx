@@ -65,7 +65,7 @@
 
 - (void) addItemToCart:(MLPrescriptionItem *)item
 {
-    if (cart!=nil) {
+    if (cart) {
         [cart addObject:item];
         // Add item to interactions cart
         [interactionsCart.cart setObject:item.med forKey:item.title];

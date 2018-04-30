@@ -54,6 +54,7 @@ extern NSString* const APP_ID;
 
 @interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSDraggingDestination, NSSharingServicePickerDelegate>
 {
+    IBOutlet NSButton *saveButton;
     IBOutlet NSButton *sendButton;
     IBOutlet NSView *myView;
     IBOutlet NSView *mySplashScreen;
@@ -78,6 +79,9 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSTextField *myOperatorIDTextField;
 @property (nonatomic, retain) IBOutlet MLSignatureView *mySignView;
 @property (nonatomic, retain) IBOutlet NSTableView *myPrescriptionsTableView;
+
+//@property (weak, nonatomic) IBOutlet NSButton *saveButton;
+//@property (weak, nonatomic) IBOutlet NSButton *sendButton;
 
 - (IBAction) performFindAction:(id)sender;
 - (IBAction) clickedTableView:(id)sender;

@@ -23,6 +23,7 @@
                 <outlet property="myToolbar" destination="3" id="1635"/>
                 <outlet property="myView" destination="2" id="257"/>
                 <outlet property="myWebView" destination="227" id="cwQ-J6-eXc"/>
+                <outlet property="saveButton" destination="dYR-Rj-qjN" id="4W9-Xx-7b8"/>
                 <outlet property="sendButton" destination="h3A-OZ-Ito" id="QL9-nJ-ogL"/>
                 <outlet property="window" destination="1" id="256"/>
             </connections>
