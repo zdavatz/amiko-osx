@@ -109,8 +109,6 @@ static BOOL mPrescriptionMode = false;
 
 - (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view;
 - (void) updateButtons;
-- (void) saveButtonOn;
-- (void) saveButtonOff;
 
 @end
 
@@ -345,6 +343,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(prescriptionDoctorChanged:)
                                                  name:@"MLPrescriptionDoctorChanged"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(controlTextDidChange:)
+                                                 name:NSControlTextDidChangeNotification
                                                object:nil];
 
     [[self window] makeFirstResponder:self];
@@ -796,6 +799,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // [[self window] makeFirstResponder:self];
     
     // Problem with this function is that it is called multiple times...
+    // because we pass 'owner:self' when we create 'MLPrescriptionCellView *cellView'
 }
 
 - (void) windowResized: (NSNotification *)notification;
@@ -812,24 +816,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         return [mDb getShortMediWithId:mid];
     else
         return nil;
-}
-
-#pragma mark - NSTabViewDelegate
-
-- (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
-{
-    NSString *tabId = (NSString *)tabViewItem.identifier;
-    if ([tabId isEqualToString:@"TabWebview"]) {
-
-    }
-    else if ([tabId isEqualToString:@"TabInteractions"]) {
-
-    }
-    else if ([tabId isEqualToString:@"TabPrescription1"]) {
-        [self setOperatorID];
-        [myPrescriptionsTableView reloadData];
-        [self updateButtons];
-    }
 }
 
 - (IBAction) tappedOnStar: (id)sender
@@ -948,6 +934,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) printDocument:(id)sender
 {
+    NSView *printView;
     NSPrintInfo *printInfo = [[NSPrintInfo alloc] init];
     [printInfo setOrientation:NSPaperOrientationPortrait];
     [printInfo setHorizontalPagination:NSFitPagination];
@@ -956,9 +943,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSString *tabId = [[myTabView selectedTabViewItem] identifier];
 
     if ([tabId isEqualToString:@"TabPrescription1"]) {
-        NSView *view = [[myTabView tabViewItemAtIndex:2] view];
-        [self hideButtonsForPrinting:YES forView:view];   // We don't want to show the buttons in the printout
-        printJob = [NSPrintOperation printOperationWithView:view printInfo:printInfo];
+        [printInfo setVerticalPagination: NSAutoPagination];
+
+        printView = [[myTabView tabViewItemAtIndex:2] view];
+        [self hideButtonsForPrinting:YES forView:printView];   // We don't want to show the buttons in the printout
+
+        printJob = [NSPrintOperation printOperationWithView:printView printInfo:printInfo];
     }
     else {
         WebFrame *webFrame = [myWebView mainFrame];
@@ -972,8 +962,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [printJob runOperation];
 
     if ([tabId isEqualToString:@"TabPrescription1"]) {
-        NSView *view = [[myTabView tabViewItemAtIndex:2] view];
-        [self hideButtonsForPrinting:NO forView:view];
+        [self hideButtonsForPrinting:NO forView:printView];
     }
 }
 
@@ -1413,17 +1402,20 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
                                                     withUniqueHash:mPrescriptionsCart[0].uniqueHash
                                                       andOverwrite:YES];
+            modifiedPrescription = false;
+            [self updateButtons];
         }
         else if (returnCode == tagButtonNewFile) {
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
                                                     withUniqueHash:mPrescriptionsCart[0].uniqueHash
                                                       andOverwrite:NO];
             possibleToOverwrite = true;
+            modifiedPrescription = false;
+            [self updateButtons];
         }
 
         // Update prescription history
         [self updatePrescriptionHistory];
-        return;
     }];
 }
 
@@ -2324,6 +2316,24 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     return [super validateProposedFirstResponder:responder forEvent:event];
 }
 
+#pragma mark - NSTabViewDelegate
+
+- (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    NSString *tabId = (NSString *)tabViewItem.identifier;
+    if ([tabId isEqualToString:@"TabWebview"]) {
+        
+    }
+    else if ([tabId isEqualToString:@"TabInteractions"]) {
+        
+    }
+    else if ([tabId isEqualToString:@"TabPrescription1"]) {
+        [self setOperatorID];
+        [myPrescriptionsTableView reloadData];
+        [self updateButtons];
+    }
+}
+
 #pragma mark - NSTableViewDelegate
 
 - (CGFloat) tableView: (NSTableView *)tableView heightOfRow: (NSInteger)row
@@ -2443,6 +2453,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
          * Check if table is a prescription
          */
         MLPrescriptionCellView *cellView = (MLPrescriptionCellView*)[tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+        //[cellView.editableTextField setDelegate:self]; // ng
+
         NSArray *prescriptionBasket = mPrescriptionsCart[0].cart;
 
         if ([tableColumn.identifier isEqualToString:@"PrescriptionMedCounter"]) {
@@ -2513,6 +2525,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 #pragma mark - Notifications
+
+- (void)controlTextDidChange:(NSNotification *)notification
+{
+    modifiedPrescription = true;
+    [self updateButtons];
+}
 
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
@@ -2636,9 +2654,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view
 {
     for (NSView *v in [view subviews]) {
-        //NSLog(@"%@", [v class]);
         if ([v isKindOfClass:[NSButton class]]) {
-            //NSLog(@"\t%@", [(NSButton *)v title]);
             [v setHidden:flag];
         }
     }
@@ -2658,22 +2674,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         patientDefined &&
         [mPrescriptionsCart[0].cart count] > 0)
     {
-        [self saveButtonOn];
+        if (modifiedPrescription)
+            saveButton.enabled = YES;
+
+        sendButton.enabled = YES;
     }
-    else
-        [self saveButtonOff];
-}
-
-- (void) saveButtonOn
-{
-    saveButton.enabled = YES;
-    sendButton.enabled = YES;
-}
-
-- (void) saveButtonOff
-{
-    saveButton.enabled = NO;
-    sendButton.enabled = NO;
+    else {
+        saveButton.enabled = NO;
+        sendButton.enabled = NO;
+    }
 }
 
 @end
