@@ -62,6 +62,9 @@
 "The contact has been removed from the %@ Address Book" = "Kontakt wurde vom %@ Addressbuch gelöscht.";
 
 /* No comment provided by engineer. */
+"The contact was saved in the %@ address book" = "Kontakt wurde im %@ Addressbuch gespeichert.";
+
+/* No comment provided by engineer. */
 "Therapy" = "Therapie";
 
 /* No comment provided by engineer. */

@@ -211,11 +211,7 @@
 
 - (void) friendlyNote
 {
-    if ([MLUtilities isGermanApp]) {
-        [mNotification setStringValue:@"Kontakt wurde im AmiKo Addressbuch gespeichert."];
-    } else if ([MLUtilities isFrenchApp]) {
-        [mNotification setStringValue:@"Contact enregistré dans le carnet d'adresses CoMed."];
-    }
+    [mNotification setStringValue:[NSString stringWithFormat:NSLocalizedString(@"The contact was saved in the %@ address book", nil), [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"]]];
 }
 
 - (void) addPatient:(MLPatient *)patient
