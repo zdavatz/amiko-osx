@@ -24,6 +24,7 @@ AmiKo/CoMed für macOS
 
 ## Datenbankverzeichnis
 * amiko-osx/AmiKoOSX
+
 `wget http://pillbox.oddb.org/amiko_db_full_idx_de.zip`
 `wget http://pillbox.oddb.org/amiko_db_full_idx_fr.zip`
 `wget http://pillbox.oddb.org/amiko_frequency_de.db.zip`
