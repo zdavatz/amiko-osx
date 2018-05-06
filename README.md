@@ -7,6 +7,7 @@ AmiKo/CoMed für macOS
   * importieren
   * exportieren
   * drucken
+* Einnahmeanweisung pro Packung hinterlegen
 * Adresse 
   * aus macOS Adressbuch übernehmen
   * im AmiKo Adressbuch speichern und verwalten
