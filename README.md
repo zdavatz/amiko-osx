@@ -10,11 +10,11 @@ AmiKo/CoMed für macOS
 * Adresse im AmiKo Adressbuch speichern und verwalten
 * Voll-Text-Suche
 * Fachinfo-Suche nach
- * Markennamen
- * ATC-Code (Original/Generikum)
- * Hersteller
- * Swissmedic-Nummer
- * BAG/Swissmedic Kategorie
+  * Markennamen
+  * ATC-Code (Original/Generikum)
+  * Hersteller
+  * Swissmedic-Nummer
+  * BAG/Swissmedic Kategorie
 
 ## Build Target
 * 10.12
