@@ -1,7 +1,7 @@
 amiko-osx
 =========
 
-##AmiKo OS X
+## AmiKo OS X
 * Rezept erstellen
 * Rezept importieren
 * Rezept exportieren
@@ -9,5 +9,5 @@ amiko-osx
 * Adresse aus macOS Adressbuch übernehmen
 * Adresse im AmiKo Adressbuch speichern und verwalten
 
-##Build Target
+## Build Target
 * 10.12
