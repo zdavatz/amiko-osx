@@ -22,5 +22,12 @@ AmiKo/CoMed für macOS
   * Swissmedic-Nummer
   * BAG/Swissmedic Kategorie
 
+## Datenbankverzeichnis
+* amiko-osx/AmiKoOSX
+  * wget http://pillbox.oddb.org/amiko_db_full_idx_de.zip
+  * wget http://pillbox.oddb.org/amiko_db_full_idx_fr.zip
+  * wget http://pillbox.oddb.org/amiko_frequency_de.db.zip
+  * wget http://pillbox.oddb.org/amiko_frequency_fr.db.zip
+
 ## Build Target
 * 10.12
