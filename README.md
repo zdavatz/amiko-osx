@@ -6,6 +6,9 @@ AmiKo/CoMed für macOS
   * erstellen
   * importieren
   * exportieren
+    * Email
+    * AirDrop
+    * Finder
   * drucken
 * Einnahmeanweisung pro Packung hinterlegen
 * Adresse 
