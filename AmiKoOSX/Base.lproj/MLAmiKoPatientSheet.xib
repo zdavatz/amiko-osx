@@ -33,7 +33,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="700" height="512"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="700" height="512"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -222,7 +222,7 @@ DQ
                                         </textFieldCell>
                                     </textField>
                                     <button fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="86M-FT-N7L">
-                                        <rect key="frame" x="140" y="254" width="63" height="18"/>
+                                        <rect key="frame" x="140" y="254" width="80" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="radio" title="female" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="d7D-4K-qft">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
