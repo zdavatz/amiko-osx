@@ -33,4 +33,10 @@
 @synthesize price;
 @synthesize med;
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ title:<%@>, productName:<%@>, _comment:<%@>",
+            NSStringFromClass([self class]), title, productName, _comment];
+}
+
 @end

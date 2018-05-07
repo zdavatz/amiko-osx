@@ -52,6 +52,9 @@ extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
 #endif
 
+#import "MLPrescriptionTableView.h"
+
+#pragma mark -
 @interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSDraggingDestination, NSSharingServicePickerDelegate>
 {
     IBOutlet NSButton *saveButton;
@@ -78,10 +81,8 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSTextField *myPlaceDateField;
 @property (nonatomic, retain) IBOutlet NSTextField *myOperatorIDTextField;
 @property (nonatomic, retain) IBOutlet MLSignatureView *mySignView;
-@property (nonatomic, retain) IBOutlet NSTableView *myPrescriptionsTableView;
-
-//@property (weak, nonatomic) IBOutlet NSButton *saveButton;
-//@property (weak, nonatomic) IBOutlet NSButton *sendButton;
+@property (nonatomic, retain) IBOutlet MLPrescriptionTableView *myPrescriptionsTableView;
+@property (nonatomic, retain) IBOutlet MLPrescriptionTableView *myPrescriptionsPrintTV;
 
 - (IBAction) performFindAction:(id)sender;
 - (IBAction) clickedTableView:(id)sender;
@@ -108,6 +109,9 @@ extern NSString* const APP_ID;
 - (IBAction) onSavePrescription:(id)sender;
 - (IBAction) onSendPrescription:(id)sender;
 - (IBAction) onDeletePrescription:(id)sender;
+- (IBAction) printTechInfo:(id)sender;
+- (IBAction) printPrescription:(id)sender;
+
 // Help
 - (IBAction) showReportFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;

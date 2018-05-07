@@ -544,7 +544,13 @@
 		FA4BC4ED208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4EF208F592000B7BDF3 /* MLAmiKoPatientSheet.xib */; };
 		FA5562D22091ADD500B85266 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5562D42091ADD500B85266 /* AmiKoMainMenu.xib */; };
 		FA5562D92091B33300B85266 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5562D42091ADD500B85266 /* AmiKoMainMenu.xib */; };
+		FA63296D20A088CC002DC9E2 /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
 		FA6371862089CFEE009361D7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA6371882089CFEE009361D7 /* Localizable.strings */; };
+		FA98A7AC20A09CE900B2665B /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
+		FA98A7AD20A09D0500B2665B /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
+		FA98A7AE20A09D0500B2665B /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
+		FA98A7AF20A09D0600B2665B /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
+		FA98A7B020A09D0600B2665B /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -728,6 +734,8 @@
 		FA5562D32091ADD500B85266 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		FA5562D62091ADD700B85266 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AmiKoMainMenu.strings; sourceTree = "<group>"; };
 		FA5562D82091ADD900B85266 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AmiKoMainMenu.strings; sourceTree = "<group>"; };
+		FA63296B20A088CC002DC9E2 /* MLPrescriptionTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLPrescriptionTableView.h; path = AmiKoOSX/MLPrescriptionTableView.h; sourceTree = "<group>"; };
+		FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLPrescriptionTableView.m; path = AmiKoOSX/MLPrescriptionTableView.m; sourceTree = "<group>"; };
 		FA6371812089CE7C009361D7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FA6371822089CE87009361D7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = de; path = de.lproj/Credits.rtf; sourceTree = "<group>"; };
 		FA6371832089CE87009361D7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1226,6 +1234,8 @@
 				D5ECDE1B1F2B24CB00970133 /* MLPrescriptionCellView.m */,
 				D586855B1F4704B400A250A4 /* MLPrescriptionsAdapter.h */,
 				D58685541F47049D00A250A4 /* MLPrescriptionsAdapter.m */,
+				FA63296B20A088CC002DC9E2 /* MLPrescriptionTableView.h */,
+				FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */,
 			);
 			name = Prescriptions;
 			sourceTree = "<group>";
@@ -1659,6 +1669,7 @@
 				D5E731171B33480A007771D7 /* MLUtilities.m in Sources */,
 				D58685591F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,
 				D5BACC041EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
+				FA98A7AF20A09D0600B2665B /* MLPrescriptionTableView.m in Sources */,
 				D5E731181B33480A007771D7 /* MLCustomWebView.m in Sources */,
 				D5E731191B33480A007771D7 /* SHCWebView.m in Sources */,
 				D5ECDE101F2A2B4100970133 /* MLPrescriptionItem.m in Sources */,
@@ -1716,6 +1727,7 @@
 				D5E7315B1B334829007771D7 /* MLUtilities.m in Sources */,
 				D586855A1F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,
 				D5BACC051EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
+				FA98A7B020A09D0600B2665B /* MLPrescriptionTableView.m in Sources */,
 				D5E7315C1B334829007771D7 /* MLCustomWebView.m in Sources */,
 				D5E7315D1B334829007771D7 /* SHCWebView.m in Sources */,
 				D5ECDE111F2A2B4100970133 /* MLPrescriptionItem.m in Sources */,
@@ -1773,6 +1785,7 @@
 				D53877961AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D58685571F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,
 				D5BACC021EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
+				FA98A7AD20A09D0500B2665B /* MLPrescriptionTableView.m in Sources */,
 				D545C90D18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D538779C1AA386AC00AEFDB4 /* SHCWebView.m in Sources */,
 				D5ECDE0E1F2A2B4100970133 /* MLPrescriptionItem.m in Sources */,
@@ -1830,6 +1843,7 @@
 				D545C90B18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D58685551F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,
 				D538779A1AA386AC00AEFDB4 /* SHCWebView.m in Sources */,
+				FA63296D20A088CC002DC9E2 /* MLPrescriptionTableView.m in Sources */,
 				D5B010611927C472007BE838 /* interactions_callbacks.js in Sources */,
 				D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8E71898527C00491511 /* zip.c in Sources */,
@@ -1875,6 +1889,7 @@
 			files = (
 				D5F3034B1F21FE2200CAFED3 /* MLPrescriptionsCart.h in Sources */,
 				D5AAB3EF1EB20F3F00002F47 /* MLFullTextDBAdapter.m in Sources */,
+				FA98A7AC20A09CE900B2665B /* MLPrescriptionTableView.m in Sources */,
 				D545C8F918A2CE0800491511 /* unzip.c in Sources */,
 				D5E91BB717E5E8E800B66B27 /* main.m in Sources */,
 				D5C5C52A1F0E36BC00DF851F /* MLOperatorIDSheetController.m in Sources */,
@@ -1945,6 +1960,7 @@
 				D53877971AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				D58685581F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,
 				D5BACC031EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
+				FA98A7AE20A09D0500B2665B /* MLPrescriptionTableView.m in Sources */,
 				D545C90E18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D538779D1AA386AC00AEFDB4 /* SHCWebView.m in Sources */,
 				D5ECDE0F1F2A2B4100970133 /* MLPrescriptionItem.m in Sources */,
@@ -2167,7 +2183,6 @@
 		D5E91BB117E5E8E400B66B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2187,7 +2202,6 @@
 		D5E91BB217E5E8E400B66B27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = AmiKo.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2207,7 +2221,6 @@
 		D5E91BE017E5E8E800B66B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = CoMed.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2225,7 +2238,6 @@
 		D5E91BE117E5E8E800B66B27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = CoMed.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

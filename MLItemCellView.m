@@ -148,20 +148,19 @@
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
     if ([notification object] == self.packagesView) {
-        if (showContextualMenu == true) {
+        if (showContextualMenu) {
             NSInteger row = [[notification object] selectedRow];
             if (row < [listOfPackages count]) {
                 // Generates contextual menu
                 NSMenu *ctxtMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
                 selectedPackage = listOfPackages[row];
                 [ctxtMenu insertItemWithTitle:selectedPackage action:nil keyEquivalent:@"" atIndex:0];
+
                 // Populate all menu items
-                NSMenuItem *menuItem = nil;
-                if ([MLUtilities isGermanApp]) {
-                    menuItem = [ctxtMenu insertItemWithTitle:@"Rezept" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:1];
-                } else if ([MLUtilities isFrenchApp]) {
-                    menuItem = [ctxtMenu insertItemWithTitle:@"Ordonnance" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:1];
-                }
+                NSMenuItem *menuItem = [ctxtMenu insertItemWithTitle: NSLocalizedString(@"Prescription", nil)
+                                                              action: @selector(selectBasket:)
+                                                       keyEquivalent: @""
+                                                             atIndex: 1];
                 [menuItem setRepresentedObject:[NSNumber numberWithInt:0]];
                 /*
                  menuItem = [ctxtMenu insertItemWithTitle:@"Rezept 2" action:@selector(selectBasket:) keyEquivalent:@"" atIndex:2];
@@ -187,6 +186,7 @@
         NSResponder* r = [self nextResponder];
         while (![r isKindOfClass: [MLMainWindowController class]])
             r = [r nextResponder];
+
         MLMainWindowController* vc = (MLMainWindowController*)r;
         
         MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];

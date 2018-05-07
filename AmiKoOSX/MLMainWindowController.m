@@ -48,6 +48,8 @@
 #import <mach/mach.h>
 #import <unistd.h>
 
+#import "MLPrescriptionTableView.h"
+
 /**
  Database types
  */
@@ -107,7 +109,7 @@ static BOOL mPrescriptionMode = false;
 
 @interface MLMainWindowController ()
 
-- (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view;
+//- (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view;
 - (void) updateButtons;
 
 @end
@@ -172,6 +174,7 @@ static BOOL mPrescriptionMode = false;
 @synthesize myOperatorIDTextField;
 @synthesize mySignView;
 @synthesize myPrescriptionsTableView;
+@synthesize myPrescriptionsPrintTV;
 
 #pragma mark Class methods
 
@@ -601,8 +604,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [mPrescriptionsCart[0] makeNewUniqueHash];
     }
     mPrescriptionMode = true;
+
     // Update prescription history in right most pane
     [self updatePrescriptionHistory];
+
     // Switch tab view
     [myTabView selectTabViewItemAtIndex:2];
     [myToolbar setSelectedItemIdentifier:@"Rezept"];
@@ -932,37 +937,101 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [self performSelector:@selector(switchTabs:) withObject:item afterDelay:0.01];
 }
 
-- (IBAction) printDocument:(id)sender
+- (IBAction) printTechInfo:(id)sender
 {
-    NSView *printView;
+//    NSString *tabId = [[myTabView selectedTabViewItem] identifier];
+//    if (![tabId isEqualToString:@"TabWebView"]) {
+//        [myTabView selectTabViewItemAtIndex:0];
+//    }
+    
+    WebFrame *webFrame = [myWebView mainFrame];
+    WebFrameView *webFrameView = [webFrame frameView];
+    NSView <WebDocumentView> *webDocumentView = [webFrameView documentView];
+    
     NSPrintInfo *printInfo = [[NSPrintInfo alloc] init];
     [printInfo setOrientation:NSPaperOrientationPortrait];
     [printInfo setHorizontalPagination:NSFitPagination];
+    NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:webDocumentView printInfo:printInfo];
+    // [printJob setPrintPanel:myPrintPanel]; --> needs to be subclassed
+    [printJob runOperation];
+}
+
+// With subclass of tableview and custom header
+// Problem: because of the big top margin, the table view is pushed down to span two pages
+// and two pages appear in the preview even if there is a single medicine
+- (IBAction) printPrescription:(id)sender
+{
+    NSView *printView;
     
-    NSPrintOperation *printJob;
-    NSString *tabId = [[myTabView selectedTabViewItem] identifier];
-
-    if ([tabId isEqualToString:@"TabPrescription1"]) {
-        [printInfo setVerticalPagination: NSAutoPagination];
-
-        printView = [[myTabView tabViewItemAtIndex:2] view];
-        [self hideButtonsForPrinting:YES forView:printView];   // We don't want to show the buttons in the printout
-
-        printJob = [NSPrintOperation printOperationWithView:printView printInfo:printInfo];
+    NSPrintInfo *sharedInfo =[NSPrintInfo sharedPrintInfo];
+    NSMutableDictionary *sharedDict = [sharedInfo dictionary];
+    NSMutableDictionary *printInfoDict = [NSMutableDictionary dictionaryWithDictionary:sharedDict];
+    [printInfoDict setObject:@YES forKey:NSPrintHeaderAndFooter];
+    [printInfoDict setObject:@NO forKey:NSPrintVerticallyCentered];
+    
+    NSPrintInfo *printInfo = [[NSPrintInfo alloc] initWithDictionary:printInfoDict];
+    [printInfo setOrientation:NSPaperOrientationPortrait];
+    [printInfo setHorizontalPagination:NSFitPagination];
+    [printInfo setVerticalPagination: NSAutoPagination];
+    //NSLog(@"%s %d printInfo: %@", __FUNCTION__, __LINE__, printInfo);
+    
+#if 1
+    NSRect imageableBounds = [printInfo imageablePageBounds];
+    NSSize paperSize = [printInfo paperSize];
+    if (NSWidth(imageableBounds) > paperSize.width) {
+        imageableBounds.origin.x = 0;
+        imageableBounds.size.width = paperSize.width;
     }
-    else {
-        WebFrame *webFrame = [myWebView mainFrame];
-        WebFrameView *webFrameView = [webFrame frameView];
-        NSView <WebDocumentView> *webDocumentView = [webFrameView documentView];
-        
-        printJob = [NSPrintOperation printOperationWithView:webDocumentView printInfo:printInfo];
-        // [printJob setPrintPanel:myPrintPanel]; --> needs to be subclassed
+    if (NSHeight(imageableBounds) > paperSize.height) {
+        imageableBounds.origin.y = 0;
+        imageableBounds.size.height = paperSize.height;
     }
+    
+    [printInfo setBottomMargin:NSMinY(imageableBounds)];
+    [printInfo setTopMargin:paperSize.height - NSMinY(imageableBounds) - NSHeight(imageableBounds)];
+    [printInfo setLeftMargin:NSMinX(imageableBounds)];
+    [printInfo setRightMargin:paperSize.width - NSMinX(imageableBounds) - NSWidth(imageableBounds)];
+#endif
+    
+    [printInfo setTopMargin: 440];
+    
+    [self.myPrescriptionsPrintTV setPatient:myPatientAddressTextField.stringValue];
+    [self.myPrescriptionsPrintTV setDoctor:myOperatorIDTextField.stringValue];
+    [self.myPrescriptionsPrintTV setPlaceDate:myPlaceDateField.stringValue];
+    
+    NSImage *signature = [[NSImage alloc] initWithData:[mySignView getSignaturePNG]];
+    [signature setFlipped:YES];
+    [self.myPrescriptionsPrintTV setSignature:signature];
+    [self.myPrescriptionsPrintTV reloadData];  // height will change
+    
+    printView = self.myPrescriptionsPrintTV;
+    
+    NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:printView printInfo:printInfo];
+    NSInteger row = [mySectionTitles selectedRow];
+    if (row >= 0) {
+        [printJob setJobTitle:mListOfSectionTitles[row]];
+    }
+
+#ifdef DEBUG
+    NSRange range1;
+    if ([printView knowsPageRange:&range1])// Returns NO if the view uses the default auto-pagination mechanism
+        NSLog(@"%s %d knowsPageRange, %@", __FUNCTION__, __LINE__, NSStringFromRange(range1));
+    
+    NSRange range2 = [printJob pageRange];
+    NSLog(@"%s pageRange %@", __FUNCTION__, NSStringFromRange(range2));
+#endif
     
     [printJob runOperation];
+}
 
+- (IBAction) printDocument:(id)sender
+{
+    NSString *tabId = [[myTabView selectedTabViewItem] identifier];
     if ([tabId isEqualToString:@"TabPrescription1"]) {
-        [self hideButtonsForPrinting:NO forView:printView];
+        [self printPrescription:sender];
+    }
+    else {
+        [self printTechInfo:sender];
     }
 }
 
@@ -1098,6 +1167,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     MLPrescriptionItem *item = [mPrescriptionsCart[0] getItemAtIndex:row];
     if (item!=nil) {
         [mPrescriptionsCart[0] removeItemFromCart:item];
+
         // If prescription cart is not empty, generate new hash
         if (mPrescriptionsCart[0].cart!=nil && [mPrescriptionsCart[0] size]>0)
             [mPrescriptionsCart[0] makeNewUniqueHash];
@@ -1130,7 +1200,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     for (MLPrescriptionItem *item in prescriptionMeds) {
         [mInteractionsView pushToMedBasket:item.med];
     }
+
     [self updateInteractionsView];
+
     // Switch tab view
     mUsedDatabase = kAips;
     mSearchInteractions = true;
@@ -1143,9 +1215,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 {
     // Create a file open dialog class
     NSOpenPanel* openDlgPanel = [NSOpenPanel openPanel];
+
     // Set array of file types
     NSArray *fileTypesArray;
     fileTypesArray = [NSArray arrayWithObjects:@"amk",nil];
+
     // Enable options in the dialog
     [openDlgPanel setCanChooseFiles:YES];
     [openDlgPanel setAllowedFileTypes:fileTypesArray];
@@ -1172,7 +1246,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     MLPatient *patient = [mPatientSheet retrievePatient];
 
     if ([mPrescriptionsCart[0].cart count] < 1) {
-        // TODO: maybe the send button should be disabled to prevent coming here
+        // The send button should be disabled to prevent coming here
 #ifdef DEBUG
         NSLog(@"%s cart is empty", __FUNCTION__);
 #endif
@@ -2330,6 +2404,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     else if ([tabId isEqualToString:@"TabPrescription1"]) {
         [self setOperatorID];
         [myPrescriptionsTableView reloadData];
+        [myPrescriptionsPrintTV reloadData];
         [self updateButtons];
     }
 }
@@ -2348,25 +2423,26 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         CGSize subTextSize = NSSizeFromCGSize([subText sizeWithAttributes:[NSDictionary dictionaryWithObject:subTextFont
                                                                                                       forKey:NSFontAttributeName]]);
         return (textSize.height + subTextSize.height + 12.0f);
-    } else if (tableView == mySectionTitles) {
+    }
+    else if (tableView == mySectionTitles) {
         NSString *text = mListOfSectionTitles[row];
         NSFont *textFont = [NSFont boldSystemFontOfSize:11.0f];
         CGSize textSize = NSSizeFromCGSize([text sizeWithAttributes:[NSDictionary dictionaryWithObject:textFont
                                                                                                 forKey:NSFontAttributeName]]);
         return (textSize.height + 5.0f);
-    } else if (tableView == myPrescriptionsTableView) {
+    }
+    else if (tableView == myPrescriptionsTableView || tableView.tag == 3) {
         // Fixed height
         return 44.0f;
     }
     
     return 0.0f;
 }
-/**
-  Get number of rows of a table view
- */
+
 - (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
 {
-    if (tableView == self.myTableView) {
+    if (tableView == self.myTableView)
+    {
         if (mUsedDatabase == kAips) {
             return [medi count];
         }
@@ -2374,10 +2450,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             return [favoriteKeyData count];
         }
     }
-    else if (tableView == self.mySectionTitles) {
+    else if (tableView == self.mySectionTitles)
+    {
         return [mListOfSectionTitles count];
     }
-    else if (tableView == self.myPrescriptionsTableView) {
+    else if (tableView == self.myPrescriptionsTableView || tableView.tag == 3)
+    {
         return mPrescriptionsCart[0].size;
     }
     
@@ -2395,12 +2473,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     return nil;
 }
 
-- (NSView *) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+- (NSView *) tableView:(NSTableView *)tableView
+    viewForTableColumn:(NSTableColumn *)tableColumn
+                   row:(NSInteger)row
 {
-    if (tableView == self.myTableView) {
-        /*
-         * Check if table is search result (=myTableView)
-         */
+    if (tableView == self.myTableView) { // search results
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
             MLItemCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
 
@@ -2423,7 +2500,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     else
                         cellView.favoritesCheckBox.state = 0;
                     cellView.favoritesCheckBox.tag = row;
-                } else {
+                }
+                else {
                     NSString *hashId = favoriteKeyData[row];
                     if ([favoriteFTEntrySet containsObject:hashId])
                         cellView.favoritesCheckBox.state = 1;
@@ -2436,28 +2514,23 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             return cellView;
         }
     }
-    else if (tableView == self.mySectionTitles) {
-        /*
-         * Check if table is list of chapter titles (=mySectionTitles)
-         */
+    else if (tableView == self.mySectionTitles) { // list of chapter titles
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
             NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-            
             cellView.textField.stringValue = mListOfSectionTitles[row];
-            
             return cellView;
         }
     }
-    else if (tableView == self.myPrescriptionsTableView) {
-        /*
-         * Check if table is a prescription
-         */
-        MLPrescriptionCellView *cellView = (MLPrescriptionCellView*)[tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-        //[cellView.editableTextField setDelegate:self]; // ng
+    else if (tableView == self.myPrescriptionsTableView || tableView.tag == 3) { // prescription
+
+        // Get an existing cell with the specified identifier if it exists
+        MLPrescriptionCellView *cellView;
+        cellView = (MLPrescriptionCellView*)[tableView makeViewWithIdentifier:tableColumn.identifier
+                                                                        owner:self]; // 'owner' gets an 'awakeFromNib:' call
 
         NSArray *prescriptionBasket = mPrescriptionsCart[0].cart;
 
-        if ([tableColumn.identifier isEqualToString:@"PrescriptionMedCounter"]) {
+        if ([tableColumn.identifier isEqualToString:@"PrescriptionMedCounter"]) {  // Unused ?
             cellView.textField.stringValue = [NSString stringWithFormat:@"%ld", row+1];
         }
         else if ([tableColumn.identifier isEqualToString:@"PrescriptionRegisteredName"]) {
@@ -2465,9 +2538,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             NSString *comment = [prescriptionBasket[row] comment];
             if (comment==nil)
                 comment = @"";
+
             cellView.editableTextField.stringValue = comment;
         }
-        else if ([tableColumn.identifier isEqualToString:@"PrescriptionPrice"]) {
+        else if ([tableColumn.identifier isEqualToString:@"PrescriptionPrice"]) {   // Unused ?
             if ([prescriptionBasket[row] price] != nil)
                 cellView.textField.stringValue = [prescriptionBasket[row] price];
         }
@@ -2651,14 +2725,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 #pragma mark -
-- (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view
-{
-    for (NSView *v in [view subviews]) {
-        if ([v isKindOfClass:[NSButton class]]) {
-            [v setHidden:flag];
-        }
-    }
-}
+
+//- (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view
+//{
+//    for (NSView *v in [view subviews]) {
+//        if ([v isKindOfClass:[NSButton class]]) {
+//            [v setHidden:flag];
+//        }
+//    }
+//}
 
 - (void) updateButtons
 {
@@ -2684,5 +2759,4 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         sendButton.enabled = NO;
     }
 }
-
 @end

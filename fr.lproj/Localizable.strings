@@ -50,6 +50,9 @@
 "Preparation" = "Préparation";
 
 /* No comment provided by engineer. */
+"Prescription" = "Ordonnance";
+
+/* No comment provided by engineer. */
 "Prescription to patient from doctor" = "Ordon.: %1$@ %2$@, %3$@ von %4$@ %5$@ %6$@";
 
 /* No comment provided by engineer. */

@@ -97,7 +97,7 @@
                             <menuItem isSeparatorItem="YES" id="2Mj-eS-Zde"/>
                             <menuItem title="Print technical information..." keyEquivalent="d" id="551">
                                 <connections>
-                                    <action selector="printDocument:" target="-1" id="556"/>
+                                    <action selector="printTechInfo:" target="-1" id="dcL-ZH-4P4"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Print search result..." tag="1" keyEquivalent="t" id="78">
@@ -278,7 +278,7 @@
         </menu>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="371">
             <rect key="contentRect" x="335" y="390" width="960" height="640"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="960" height="640"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
