@@ -3,3 +3,6 @@
 __MACOSX/
 xcuserdata
 AmiKoOSX/*.db
+AmiKoOSX/amiko_db_full_idx_de.zip
+AmiKoOSX/amiko_db_full_idx_fr.zip
+AmiKoOSX/amiko_frequency_de.db.zip
