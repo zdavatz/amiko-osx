@@ -866,14 +866,14 @@
             </buttonCell>
         </button>
         <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="46" horizontalPageScroll="10" verticalLineScroll="46" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="Ccd-dh-pYm">
-            <rect key="frame" x="0.0" y="0.0" width="497" height="499"/>
+            <rect key="frame" x="0.0" y="0.0" width="497" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <clipView key="contentView" id="iPa-2v-CIT">
-                <rect key="frame" x="1" y="1" width="495" height="497"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <rect key="frame" x="1" y="1" width="495" height="298"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tableView verticalHuggingPriority="750" tag="3" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="44" rowSizeStyle="automatic" viewBased="YES" id="Sa6-ry-Prj" customClass="MLPrescriptionTableView">
-                        <rect key="frame" x="0.0" y="0.0" width="495" height="497"/>
+                        <rect key="frame" x="0.0" y="0.0" width="495" height="298"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <size key="intercellSpacing" width="3" height="2"/>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
