@@ -958,7 +958,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 // With subclass of tableview and custom header
 // Problem: because of the big top margin, the table view is pushed down to span two pages
-// and two pages appear in the preview even if there is a single medicine
+// and two pages appear in the preview even if there is a single medicine. This should be fixed with issue #15
 - (IBAction) printPrescription:(id)sender
 {
     NSView *printView;
