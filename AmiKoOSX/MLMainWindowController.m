@@ -2738,8 +2738,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) updateButtons
 {
 #if 1
-    bool doctorDefined = myOperatorIDTextField.stringValue.length;
-    bool patientDefined = myPatientAddressTextField.stringValue.length;
+    bool doctorDefined = (myOperatorIDTextField.stringValue.length > 0) &&
+    ![myOperatorIDTextField.stringValue isEqualToString:NSLocalizedString(@"Enter the doctor's address", nil)];
+    bool patientDefined = (myPatientAddressTextField.stringValue.length > 0);
 #else
     bool doctorDefined = [mPrescriptionAdapter doctor];
     bool patientDefined = [mPrescriptionAdapter patient];
