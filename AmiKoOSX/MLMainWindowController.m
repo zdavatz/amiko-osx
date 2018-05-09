@@ -157,7 +157,7 @@ static BOOL mPrescriptionMode = false;
     float m_delta;
 
     bool possibleToOverwrite;
-    bool modifiedPrescription;  // if true, presenting save/overwite option makes sense
+    bool modifiedPrescription;  // if true, presenting save/overwrite option makes sense
 }
 
 @synthesize myView;
@@ -1132,6 +1132,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         mOperatorIDSheet = [[MLOperatorIDSheetController alloc] init];
         //NSLog(@"%s %d, MLOperatorIDSheetController:%p", __FUNCTION__, __LINE__, mOperatorIDSheet);
     }
+
     NSString *operatorIDStr = [mOperatorIDSheet retrieveIDAsString];
     NSString *operatorPlace = [mOperatorIDSheet retrieveCity];
     myOperatorIDTextField.stringValue = operatorIDStr;
@@ -1183,7 +1184,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [mPrescriptionsCart[0] clearCart];
     [self.myPrescriptionsTableView reloadData];
     possibleToOverwrite = false;
-    modifiedPrescription = true;
+    modifiedPrescription = false;
     [self updateButtons];
 }
 
@@ -1417,10 +1418,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 /*
  Save button
- A) not modified, 2 buttons [Cancel], [Save]
-    4) New file —> new hash
+ A) not possible to overwrite: no alert panel, just save
  
- B) modified, 3 buttons [Cancel], [Save], [Overwrite]
+ B) possible to overwrite: 3 buttons [Cancel], [Save], [Overwrite]
     1) Overwrite —> new hash
     3) New file —> new hash
  */
@@ -1441,19 +1441,26 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 #endif
         return;
     }
-    
-    NSAlert *alert = [[NSAlert alloc] init];
 
-    // Buttons are added from right to left
-    
-    if (modifiedPrescription) {
-        [alert addButtonWithTitle:NSLocalizedString(@"Overwrite", nil)];
-        [[alert.buttons lastObject] setTag:tagButtonOverwrite];
-
-        [alert setMessageText:NSLocalizedString(@"Overwrite prescription?", nil)];
-        [alert setInformativeText:NSLocalizedString(@"Do you really want to overwrite the existing prescription or generate a new one?", nil)];
+    if (!possibleToOverwrite) {
+        [mPrescriptionAdapter savePrescriptionForPatient:patient
+                                          withUniqueHash:mPrescriptionsCart[0].uniqueHash
+                                            andOverwrite:NO];
+        possibleToOverwrite = true;
+        modifiedPrescription = false;
+        [self updateButtons];
+        [self updatePrescriptionHistory];
+        return;
     }
     
+    NSAlert *alert = [[NSAlert alloc] init]; // Buttons are added from right to left
+
+    [alert addButtonWithTitle:NSLocalizedString(@"Overwrite", nil)];
+    [[alert.buttons lastObject] setTag:tagButtonOverwrite];
+    
+    [alert setMessageText:NSLocalizedString(@"Overwrite prescription?", nil)];
+    [alert setInformativeText:NSLocalizedString(@"Do you really want to overwrite the existing prescription or generate a new one?", nil)];
+
     [alert addButtonWithTitle:NSLocalizedString(@"New prescription", nil)];
     [[alert.buttons lastObject] setTag:tagButtonNewFile];
 
@@ -1472,6 +1479,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [mPrescriptionsCart[0] makeNewUniqueHash];  // Issue #9
 
         NSURL *url = nil;
+
         if (returnCode == tagButtonOverwrite) {
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
                                                     withUniqueHash:mPrescriptionsCart[0].uniqueHash
@@ -1488,7 +1496,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [self updateButtons];
         }
 
-        // Update prescription history
         [self updatePrescriptionHistory];
     }];
 }
