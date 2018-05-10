@@ -9,7 +9,7 @@ AmiKo/CoMed für macOS
     * Email
     * AirDrop
     * Finder
-  * drucken
+  * [drucken](https://github.com/zdavatz/amiko-osx/files/1992084/RZ_2018-05-08T151321.pdf)
 * Einnahmeanweisung pro Packung hinterlegen
 * Adresse 
   * aus macOS Adressbuch übernehmen
