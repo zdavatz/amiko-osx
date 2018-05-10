@@ -963,10 +963,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 {
     NSView *printView;
     
-    NSPrintInfo *sharedInfo =[NSPrintInfo sharedPrintInfo];
+    NSPrintInfo *sharedInfo = [NSPrintInfo sharedPrintInfo];
     NSMutableDictionary *sharedDict = [sharedInfo dictionary];
     NSMutableDictionary *printInfoDict = [NSMutableDictionary dictionaryWithDictionary:sharedDict];
+#ifdef METHOD_2
+    [printInfoDict setObject:@NO forKey:NSPrintHeaderAndFooter];
+#else
     [printInfoDict setObject:@YES forKey:NSPrintHeaderAndFooter];
+#endif
     [printInfoDict setObject:@NO forKey:NSPrintVerticallyCentered];
     
     NSPrintInfo *printInfo = [[NSPrintInfo alloc] initWithDictionary:printInfoDict];
@@ -977,6 +981,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
 #if 1
     NSRect imageableBounds = [printInfo imageablePageBounds];
+    //NSLog(@"%s %d imageableBounds:%@", __FUNCTION__, __LINE__, NSStringFromRect(imageableBounds));
     NSSize paperSize = [printInfo paperSize];
     if (NSWidth(imageableBounds) > paperSize.width) {
         imageableBounds.origin.x = 0;
@@ -992,18 +997,25 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [printInfo setLeftMargin:NSMinX(imageableBounds)];
     [printInfo setRightMargin:paperSize.width - NSMinX(imageableBounds) - NSWidth(imageableBounds)];
 #endif
-    
+
+#ifdef METHOD_2
+    [printInfo setTopMargin: mm2pix(110)];
+#else
     [printInfo setTopMargin: 440];
+#endif
     
     [self.myPrescriptionsPrintTV setPatient:myPatientAddressTextField.stringValue];
     [self.myPrescriptionsPrintTV setDoctor:myOperatorIDTextField.stringValue];
     [self.myPrescriptionsPrintTV setPlaceDate:myPlaceDateField.stringValue];
     
     NSImage *signature = [[NSImage alloc] initWithData:[mySignView getSignaturePNG]];
+#ifndef METHOD_2
     [signature setFlipped:YES];
+#endif
     [self.myPrescriptionsPrintTV setSignature:signature];
     [self.myPrescriptionsPrintTV reloadData];  // height will change
     
+    //NSLog(@"%d myPrescriptionsPrintTV frame:%@", __LINE__, NSStringFromRect([myPrescriptionsPrintTV frame]));
     printView = self.myPrescriptionsPrintTV;
     
     NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:printView printInfo:printInfo];

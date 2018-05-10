@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define METHOD_2
+
+#define mm2pix(x)   (x * 842.0 / 297.0)
+
 @interface MLPrescriptionTableView : NSTableView
 {
     NSMutableArray *topBorderRows;

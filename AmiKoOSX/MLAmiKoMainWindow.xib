@@ -420,7 +420,7 @@
                                                                                                         <rect key="frame" x="6" y="48" width="497" height="590"/>
                                                                                                         <clipView key="contentView" id="UZ9-kw-amL">
                                                                                                             <rect key="frame" x="1" y="1" width="495" height="588"/>
-                                                                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                                            <autoresizingMask key="autoresizingMask"/>
                                                                                                             <subviews>
                                                                                                                 <tableView verticalHuggingPriority="750" tag="3" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="44" rowSizeStyle="automatic" viewBased="YES" id="7gl-38-P2j" customClass="MLPrescriptionTableView">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="495" height="588"/>
@@ -897,15 +897,15 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="YsW-Cb-Mhb">
-                                                <rect key="frame" x="0.0" y="28" width="496" height="16"/>
+                                                <rect key="frame" x="0.0" y="30" width="496" height="14"/>
                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="dlN-Jf-7hA">
-                                                    <font key="font" metaFont="cellTitle"/>
+                                                    <font key="font" metaFont="system" size="11"/>
                                                     <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pP0-ge-bBH">
-                                                <rect key="frame" x="0.0" y="0.0" width="492" height="28"/>
+                                                <rect key="frame" x="0.0" y="2" width="492" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="rkB-j6-bBa"/>
                                                 </constraints>
