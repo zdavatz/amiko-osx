@@ -21,13 +21,13 @@
 "10.toolTip" = "AIPS Database";
 
 /* Class = "NSToolbarItem"; label = "Favoriten"; ObjectID = "11"; */
-"11.label" = "Favorites";
+"11.label" = "Favoris";
 
 /* Class = "NSToolbarItem"; paletteLabel = "Favoriten"; ObjectID = "11"; */
-"11.paletteLabel" = "Favorites";
+"11.paletteLabel" = "Favoris";
 
 /* Class = "NSToolbarItem"; toolTip = "Favoriten"; ObjectID = "11"; */
-"11.toolTip" = "Favorites";
+"11.toolTip" = "Favoris";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "173"; */
 "173.title" = "Text Cell";
