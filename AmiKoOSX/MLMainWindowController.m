@@ -2725,15 +2725,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                               sharingServicesForItems:(NSArray *)items
                               proposedSharingServices:(NSArray<NSSharingService *> *)proposedServices
 {
-#ifdef DEBUG
-    for (NSSharingService *sharingService in proposedServices)
-        NSLog(@"title %@", [sharingService title] );
-#endif
+    NSMutableArray *result = [proposedServices mutableCopy];
+    [result addObject:[NSSharingService sharingServiceNamed:NSSharingServiceNameSendViaAirDrop]];
 
-    NSArray *result = @[[NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail],
-                        [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeMessage],
-                        [NSSharingService sharingServiceNamed:NSSharingServiceNameSendViaAirDrop],
-                        ];
     return result;
 }
 
