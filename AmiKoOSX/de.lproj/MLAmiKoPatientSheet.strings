@@ -45,7 +45,7 @@
 "Rm4-cT-pmI.title" = "Adresse*";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "VkX-z1-G8I"; */
-"VkX-z1-G8I.title" = "Cancel";
+"VkX-z1-G8I.title" = "Abbrechen";
 
 /* Class = "NSSearchFieldCell"; placeholderString = "Suche Patient..."; ObjectID = "XfM-Wt-ozu"; */
 "XfM-Wt-ozu.placeholderString" = "Suche Patient...";
