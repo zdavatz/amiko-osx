@@ -101,6 +101,9 @@
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "P52-Re-Wjz"; */
 "P52-Re-Wjz.title" = "Select All";
 
+/* Class = "NSMenuItem"; title = "Print prescription..."; ObjectID = "Rdb-Ti-b5z"; */
+"Rdb-Ti-b5z.title" = "Imprimer l'ordonnance...";
+
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "SBf-jg-8kW"; */
 "SBf-jg-8kW.title" = "Éditer";
 

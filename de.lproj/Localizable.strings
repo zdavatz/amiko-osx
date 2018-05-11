@@ -76,3 +76,6 @@
 /* No comment provided by engineer. */
 "Update is not possible" = "Datenbank kann nicht aktualisiert werden!";
 
+/* html */
+"Your medicine basket is empty" = "Ihr Medikamentenkorb ist leer.";
+

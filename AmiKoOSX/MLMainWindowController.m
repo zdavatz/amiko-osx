@@ -206,7 +206,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     else if ([APP_NAME isEqualToString:@"AmiKo-Desitin"])
         self = [super initWithWindowNibName:@"MLAmiKoDesitinMainWindow"];
     else if ([APP_NAME isEqualToString:@"CoMed"])
-        self = [super initWithWindowNibName:@"MLCoMedMainWindow"];
+        self = [super initWithWindowNibName:@"MLAmiKoMainWindow"];//@"MLCoMedMainWindow"];
     else if ([APP_NAME isEqualToString:@"CoMed-zR"])
         self = [super initWithWindowNibName:@"MLCoMedzRMainWindow"];
     else if ([APP_NAME isEqualToString:@"CoMed-Desitin"])

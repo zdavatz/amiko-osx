@@ -135,12 +135,10 @@
             medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Korb leeren\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
         else if ([MLUtilities isFrenchApp])
             medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Tout supprimer\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
-    } else {
-        // Medikamentenkorb is empty
-        if ([MLUtilities isGermanApp])
-            medBasketStr = @"<div>Ihr Medikamentenkorb ist leer.<br><br></div>";
-        else if ([MLUtilities isFrenchApp])
-            medBasketStr = @"<div>Votre panier des médicaments est vide.<br><br></div>";
+    }
+    else {
+        medBasketStr = [NSString stringWithFormat:@"<div>%@<br><br></div>",
+                        NSLocalizedString(@"Your medicine basket is empty", "html")];
     }
     
     return medBasketStr;

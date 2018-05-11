@@ -100,6 +100,11 @@
                                     <action selector="printTechInfo:" target="-1" id="dcL-ZH-4P4"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Print prescription..." keyEquivalent="r" id="Rdb-Ti-b5z">
+                                <connections>
+                                    <action selector="printTechInfo:" target="-1" id="nRt-jT-k11"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Print search result..." tag="1" keyEquivalent="t" id="78">
                                 <connections>
                                     <action selector="printSearchResult:" target="-1" id="554"/>
@@ -278,7 +283,7 @@
         </menu>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="371">
             <rect key="contentRect" x="335" y="390" width="960" height="640"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="960" height="640"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
