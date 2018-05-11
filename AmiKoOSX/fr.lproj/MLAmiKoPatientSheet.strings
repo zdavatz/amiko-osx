@@ -69,7 +69,7 @@
 "pjC-bJ-7po.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Vorname*"; ObjectID = "qej-Ja-Ymi"; */
-"qej-Ja-Ymi.title" = "Prénom**";
+"qej-Ja-Ymi.title" = "Prénom*";
 
 /* Class = "NSTextFieldCell"; title = "Wohnort*"; ObjectID = "vsC-VR-c2J"; */
 "vsC-VR-c2J.title" = "Résidence*";
