@@ -2721,6 +2721,22 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 #pragma mark - NSSharingServiceDelegate
 
+- (NSArray<NSSharingService *> *)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker
+                              sharingServicesForItems:(NSArray *)items
+                              proposedSharingServices:(NSArray<NSSharingService *> *)proposedServices
+{
+#ifdef DEBUG
+    for (NSSharingService *sharingService in proposedServices)
+        NSLog(@"title %@", [sharingService title] );
+#endif
+
+    NSArray *result = @[[NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail],
+                        [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeMessage],
+                        [NSSharingService sharingServiceNamed:NSSharingServiceNameSendViaAirDrop],
+                        ];
+    return result;
+}
+
 - (nullable id <NSSharingServiceDelegate>)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker
                                      delegateForSharingService:(NSSharingService *)sharingService
 {
