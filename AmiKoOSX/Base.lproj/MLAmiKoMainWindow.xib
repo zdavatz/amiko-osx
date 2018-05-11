@@ -83,7 +83,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="138">
                                                 <rect key="frame" x="11" y="708" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Inhaberin" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="191">
+                                                <buttonCell key="cell" type="roundRect" title="Registration Owner" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="191">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="cellTitle"/>
                                                 </buttonCell>
@@ -103,7 +103,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="136">
                                                 <rect key="frame" x="11" y="656" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Registration number" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="193">
+                                                <buttonCell key="cell" type="roundRect" title="Registration Number" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="193">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="cellTitle"/>
                                                 </buttonCell>
@@ -541,7 +541,7 @@
                                                                                                     </scrollView>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UhN-cF-QcR" userLabel="Neues Rezept">
                                                                                                         <rect key="frame" x="0.0" y="7" width="174" height="32"/>
-                                                                                                        <buttonCell key="cell" type="push" title="Neues Rezept" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="73B-fa-Zhz" userLabel="Neues Rezept">
+                                                                                                        <buttonCell key="cell" type="push" title="New Prescription" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="73B-fa-Zhz" userLabel="Neues Rezept">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
                                                                                                             <connections>
