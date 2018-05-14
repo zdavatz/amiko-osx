@@ -45,7 +45,7 @@
         <window title="AmiKo Desitin" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" frameAutosaveName="AmiKoWindow" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="400" width="1035" height="820"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" identifier="MasterView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="1035" height="820"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -560,7 +560,7 @@
                                                                                                         </buttonCell>
                                                                                                     </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h3A-OZ-Ito">
-                                                                                                        <rect key="frame" x="423" y="7" width="71" height="32"/>
+                                                                                                        <rect key="frame" x="439" y="7" width="71" height="32"/>
                                                                                                         <buttonCell key="cell" type="push" title="Send" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ref-Dv-DHp">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
@@ -608,7 +608,7 @@
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="centerX" secondItem="71t-rm-v3N" secondAttribute="centerX" constant="-52" id="Cfe-WO-ZG6"/>
                                                                                                     <constraint firstItem="hmt-dn-3hz" firstAttribute="leading" secondItem="Oaf-El-vf2" secondAttribute="leading" constant="6" id="Flg-3A-Jo3"/>
                                                                                                     <constraint firstItem="UhN-cF-QcR" firstAttribute="baseline" secondItem="TwZ-Xx-Fuz" secondAttribute="baseline" id="GLj-tL-JcE"/>
-                                                                                                    <constraint firstAttribute="trailing" secondItem="h3A-OZ-Ito" secondAttribute="trailing" constant="21" id="HXs-eW-hY0"/>
+                                                                                                    <constraint firstAttribute="trailing" secondItem="h3A-OZ-Ito" secondAttribute="trailing" constant="5" id="HXs-eW-hY0"/>
                                                                                                     <constraint firstItem="71t-rm-v3N" firstAttribute="centerY" secondItem="fKp-CD-kdl" secondAttribute="centerY" constant="-37.5" id="IYo-Qh-Ct7"/>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="top" secondItem="71t-rm-v3N" secondAttribute="bottom" constant="8" id="MN7-CA-o9Z"/>
                                                                                                     <constraint firstItem="hmt-dn-3hz" firstAttribute="top" secondItem="Oaf-El-vf2" secondAttribute="top" constant="182" id="NjY-qN-1vg"/>
