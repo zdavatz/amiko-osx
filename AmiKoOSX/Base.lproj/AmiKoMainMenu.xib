@@ -100,9 +100,9 @@
                                     <action selector="printTechInfo:" target="-1" id="dcL-ZH-4P4"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Print prescription..." keyEquivalent="r" id="Rdb-Ti-b5z">
+                            <menuItem title="Print prescription..." enabled="NO" keyEquivalent="r" id="Rdb-Ti-b5z">
                                 <connections>
-                                    <action selector="printPrescription:" target="-1" id="ncP-ER-oN2"/>
+                                    <action selector="printPrescription:" target="-1" id="Wsy-rj-Fta"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Print search result..." tag="1" keyEquivalent="t" id="78">

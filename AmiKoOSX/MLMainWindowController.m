@@ -2789,4 +2789,25 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         sendButton.enabled = NO;
     }
 }
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    SEL action = [menuItem action];
+    if (action != @selector(printPrescription:))
+        return YES;  // All the other menu entries are enabled
+
+    // Enabling logic for the "print prescription" menu item is the same as for the "Send" button
+    bool doctorDefined = (myOperatorIDTextField.stringValue.length > 0) &&
+    ![myOperatorIDTextField.stringValue isEqualToString:NSLocalizedString(@"Enter the doctor's address", nil)];
+    bool patientDefined = (myPatientAddressTextField.stringValue.length > 0);
+    
+    if (doctorDefined &&
+        patientDefined &&
+        [mPrescriptionsCart[0].cart count] > 0)
+    {
+        return YES;
+    }
+
+    return NO;
+}
 @end
