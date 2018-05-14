@@ -2794,7 +2794,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 {
     SEL action = [menuItem action];
     if (action != @selector(printPrescription:))
-        return YES;  // All the other menu entries are enabled
+        return [menuItem isEnabled];  // All the other menu entries are unchanged
 
     // Enabling logic for the "print prescription" menu item is the same as for the "Send" button
     bool doctorDefined = (myOperatorIDTextField.stringValue.length > 0) &&
