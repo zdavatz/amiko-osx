@@ -50,6 +50,8 @@
 
 #import "MLPrescriptionTableView.h"
 
+#define DYNAMIC_AMK_SELECTION
+
 /**
  Database types
  */
@@ -1020,9 +1022,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:printView printInfo:printInfo];
     NSInteger row = [mySectionTitles selectedRow];
-    if (row >= 0) {
-        [printJob setJobTitle:mListOfSectionTitles[row]];
+    if (row == -1) {
+        NSLog(@"%s no AMK is selected, aborting print operation", __FUNCTION__);
+        return;
     }
+
+    [printJob setJobTitle:mListOfSectionTitles[row]];
 
 #ifdef DEBUG
     NSRange range1;
@@ -1462,6 +1467,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         modifiedPrescription = false;
         [self updateButtons];
         [self updatePrescriptionHistory];
+
+#ifdef DYNAMIC_AMK_SELECTION
+        // Select the topmost entry
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+        [mySectionTitles selectRowIndexes:indexSet byExtendingSelection:NO];
+#endif
+
         return;
     }
     
@@ -1509,6 +1521,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         }
 
         [self updatePrescriptionHistory];
+
+#ifdef DYNAMIC_AMK_SELECTION
+        // Select the topmost entry
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+        [mySectionTitles selectRowIndexes:indexSet byExtendingSelection:NO];
+#endif
     }];
 }
 
@@ -2779,8 +2797,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         patientDefined &&
         [mPrescriptionsCart[0].cart count] > 0)
     {
-        if (modifiedPrescription)
+        if (modifiedPrescription) {
             saveButton.enabled = YES;
+#ifdef DYNAMIC_AMK_SELECTION
+            // Unselect AMK
+            [mySectionTitles deselectAll:nil];
+#endif
+        }
 
         sendButton.enabled = YES;
     }
