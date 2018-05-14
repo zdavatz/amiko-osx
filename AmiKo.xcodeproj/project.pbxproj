@@ -528,6 +528,7 @@
 		D5F303481F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F303421F21F42A00CAFED3 /* MLPrescriptionsCart.m */; };
 		D5F3034B1F21FE2200CAFED3 /* MLPrescriptionsCart.h in Sources */ = {isa = PBXBuildFile; fileRef = D5F303491F21F43F00CAFED3 /* MLPrescriptionsCart.h */; };
 		D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */; };
+		FA22764020A98FD4003BA573 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA6371882089CFEE009361D7 /* Localizable.strings */; };
 		FA4BC4DC208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4E3208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib */; };
 		FA4BC4DD208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4E3208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib */; };
 		FA4BC4DE208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4E3208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib */; };
@@ -1600,6 +1601,7 @@
 				FA4BC4DD208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
 				FA4BC4E9208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */,
+				FA22764020A98FD4003BA573 /* Localizable.strings in Resources */,
 				D538777F1A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
 				D5DD5767193B4EB40094244E /* 218-trash2.png in Resources */,
