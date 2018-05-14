@@ -63,7 +63,7 @@
 "2Bd-3O-fif.title" = "Sauver";
 
 /* Class = "NSButtonCell"; title = "Neues Rezept"; ObjectID = "73B-fa-Zhz"; */
-"73B-fa-Zhz.title" = "Nv. ordonnance";
+"73B-fa-Zhz.title" = "Nouvelle ordonnance";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "9No-ZE-RE0"; */
 "9No-ZE-RE0.title" = "Text Cell";
@@ -99,7 +99,7 @@
 "Wf5-IL-MuY.title" = "Text Cell";
 
 /* Class = "NSButtonCell"; title = "Interaktionen überprüfen"; ObjectID = "aGv-We-Cfq"; */
-"aGv-We-Cfq.title" = "Vérifier interact.";
+"aGv-We-Cfq.title" = "Vérifier les interactions";
 
 /* Class = "NSButtonCell"; title = "Patient suchen"; ObjectID = "agi-3L-00C"; */
 "agi-3L-00C.title" = "Recherche de patient";
