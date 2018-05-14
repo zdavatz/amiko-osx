@@ -102,7 +102,7 @@
                             </menuItem>
                             <menuItem title="Print prescription..." keyEquivalent="r" id="Rdb-Ti-b5z">
                                 <connections>
-                                    <action selector="printTechInfo:" target="-1" id="nRt-jT-k11"/>
+                                    <action selector="printPrescription:" target="-1" id="ncP-ER-oN2"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Print search result..." tag="1" keyEquivalent="t" id="78">
