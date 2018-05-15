@@ -1260,6 +1260,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         labelPrice.stringValue = @"";
 
     NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:self.medicineLabelView printInfo:printInfo];
+    //[printJob setShowsPrintPanel:NO]; // skip preview
     [printJob runOperation];
 }
 
