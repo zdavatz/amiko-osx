@@ -547,6 +547,12 @@
 		FA518CDC20AAED3600F8DE42 /* printerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CD820AAED3600F8DE42 /* printerIcon.png */; };
 		FA518CDD20AAED3600F8DE42 /* printerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CD820AAED3600F8DE42 /* printerIcon.png */; };
 		FA518CDE20AAED3600F8DE42 /* printerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CD820AAED3600F8DE42 /* printerIcon.png */; };
+		FA518CE020AB1BAE00F8DE42 /* deleteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CDF20AB1BAD00F8DE42 /* deleteIcon.png */; };
+		FA518CE120AB1BAE00F8DE42 /* deleteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CDF20AB1BAD00F8DE42 /* deleteIcon.png */; };
+		FA518CE220AB1BAE00F8DE42 /* deleteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CDF20AB1BAD00F8DE42 /* deleteIcon.png */; };
+		FA518CE320AB1BAE00F8DE42 /* deleteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CDF20AB1BAD00F8DE42 /* deleteIcon.png */; };
+		FA518CE420AB1BAE00F8DE42 /* deleteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CDF20AB1BAD00F8DE42 /* deleteIcon.png */; };
+		FA518CE520AB1BAE00F8DE42 /* deleteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CDF20AB1BAD00F8DE42 /* deleteIcon.png */; };
 		FA5562D22091ADD500B85266 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5562D42091ADD500B85266 /* AmiKoMainMenu.xib */; };
 		FA5562D92091B33300B85266 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5562D42091ADD500B85266 /* AmiKoMainMenu.xib */; };
 		FA63296D20A088CC002DC9E2 /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
@@ -740,6 +746,7 @@
 		FA4BC4F1208F592300B7BDF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLAmiKoPatientSheet.strings; sourceTree = "<group>"; };
 		FA4BC4F3208F592500B7BDF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLAmiKoPatientSheet.strings; sourceTree = "<group>"; };
 		FA518CD820AAED3600F8DE42 /* printerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printerIcon.png; sourceTree = "<group>"; };
+		FA518CDF20AB1BAD00F8DE42 /* deleteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteIcon.png; sourceTree = "<group>"; };
 		FA5562D32091ADD500B85266 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		FA5562D62091ADD700B85266 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AmiKoMainMenu.strings; sourceTree = "<group>"; };
 		FA5562D82091ADD900B85266 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AmiKoMainMenu.strings; sourceTree = "<group>"; };
@@ -877,6 +884,7 @@
 		D5BACC121EBB2CAB001812FB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FA518CDF20AB1BAD00F8DE42 /* deleteIcon.png */,
 				FA518CD820AAED3600F8DE42 /* printerIcon.png */,
 				D5C5C5371F16515900DF851F /* prescription@2x.png */,
 				D5AE31841B372085006BC60E /* desitin_icon_512x512.png */,
@@ -1465,6 +1473,7 @@
 				D5E7314C1B33480A007771D7 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E7314D1B33480A007771D7 /* AmiKo.entitlements in Resources */,
 				D5E7314E1B33480A007771D7 /* 216-compose.png in Resources */,
+				FA518CE420AB1BAE00F8DE42 /* deleteIcon.png in Resources */,
 				D5C5C51C1F0C276E00DF851F /* checked_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1487,6 +1496,7 @@
 				FA4BC4E1208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D5E7317C1B334829007771D7 /* amiko_stylesheet.css in Resources */,
 				D59426D41FA34F7E0052B32C /* MLCoMedOperatorIDSheet.xib in Resources */,
+				FA518CE520AB1BAE00F8DE42 /* deleteIcon.png in Resources */,
 				FA4BC4ED208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */,
 				D5E7317D1B334829007771D7 /* interactions_css.css in Resources */,
 				D5E7317E1B334829007771D7 /* interactions@2x.png in Resources */,
@@ -1547,6 +1557,7 @@
 				D5B6F96E192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5AB1775180886810050DC12 /* 28-star-ye.png in Resources */,
 				D536126817E770A80087B132 /* amiko.iconset in Resources */,
+				FA518CE220AB1BAE00F8DE42 /* deleteIcon.png in Resources */,
 				D5C5C51A1F0C276E00DF851F /* checked_icon.png in Resources */,
 				D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */,
 			);
@@ -1587,6 +1598,7 @@
 				D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
 				FA5562D22091ADD500B85266 /* AmiKoMainMenu.xib in Resources */,
+				FA518CE020AB1BAE00F8DE42 /* deleteIcon.png in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				FA4BC4DC208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */,
@@ -1631,6 +1643,7 @@
 				D53877831A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538777B1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
+				FA518CE120AB1BAE00F8DE42 /* deleteIcon.png in Resources */,
 				D5C5C5391F16515900DF851F /* prescription@2x.png in Resources */,
 				D5DD576B193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */,
@@ -1651,6 +1664,7 @@
 				D538777D1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				FA4BC4EB208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */,
 				D5DD5769193B4EB40094244E /* 218-trash2.png in Resources */,
+				FA518CE320AB1BAE00F8DE42 /* deleteIcon.png in Resources */,
 				D5DD576C193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D5EBC6CA17CFDD7000EBEF39 /* amiko_stylesheet.css in Resources */,
 				D5C6443D1EB37A6F00438E6F /* main_callbacks.js in Resources */,
