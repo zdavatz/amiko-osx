@@ -177,7 +177,7 @@ static BOOL mPrescriptionMode = false;
 @synthesize mySignView;
 @synthesize myPrescriptionsTableView;
 @synthesize myPrescriptionsPrintTV;
-@synthesize medicineLabelView, labelDoctor, labelPatient, labelMedicine, labelComment, labelPrice;
+@synthesize medicineLabelView, labelDoctor, labelPatient, labelMedicine, labelComment, labelPrice, labelSwissmed;
 
 #pragma mark Class methods
 
@@ -1250,8 +1250,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 //    NSLog(@"package: <%@>", package);
 //    NSLog(@"packageArray: %lu <%@>", (unsigned long)packageArray.count, packageArray);
     labelMedicine.stringValue = [packageArray objectAtIndex:0];
+
     labelComment.stringValue = [prescriptionBasket[row] comment];
     
+    NSArray *swissmedArray = [package componentsSeparatedByString:@" ["];
+    //NSLog(@"swissmedArray: %lu <%@>", (unsigned long)swissmedArray.count, swissmedArray);
+    labelSwissmed.stringValue = @"";
+    if (swissmedArray.count >= 2)
+        labelSwissmed.stringValue = [NSString stringWithFormat:@"[%@", [swissmedArray objectAtIndex:1]];
+
     labelPrice.stringValue = @"";
     if (packageArray.count >= 2) {
         NSArray *priceArray = [[packageArray objectAtIndex:2] componentsSeparatedByString:@" "];

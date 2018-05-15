@@ -15,6 +15,7 @@
                 <outlet property="labelMedicine" destination="auZ-jX-LIg" id="y61-pQ-lcp"/>
                 <outlet property="labelPatient" destination="AXa-0T-y2a" id="xpH-HD-orp"/>
                 <outlet property="labelPrice" destination="mHW-Kd-svh" id="Hoo-zD-4lZ"/>
+                <outlet property="labelSwissmed" destination="BNV-Sb-9IH" id="edk-DB-ynY"/>
                 <outlet property="medicineLabelView" destination="2Cd-W1-7ot" id="oz0-N8-sSx"/>
                 <outlet property="myOperatorIDTextField" destination="71t-rm-v3N" id="2a8-KE-0dA"/>
                 <outlet property="myPatientAddressTextField" destination="fKp-CD-kdl" id="uIl-oN-JO4"/>
@@ -52,7 +53,7 @@
         <window title="AmiKo Desitin" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" frameAutosaveName="AmiKoWindow" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="400" width="1035" height="820"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" identifier="MasterView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="1035" height="820"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -431,7 +432,7 @@
                                                                                                         <rect key="frame" x="6" y="48" width="501" height="590"/>
                                                                                                         <clipView key="contentView" id="UZ9-kw-amL">
                                                                                                             <rect key="frame" x="1" y="1" width="499" height="588"/>
-                                                                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                                            <autoresizingMask key="autoresizingMask"/>
                                                                                                             <subviews>
                                                                                                                 <tableView verticalHuggingPriority="750" tag="3" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="7gl-38-P2j" customClass="MLPrescriptionTableView">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="530" height="588"/>
@@ -1050,7 +1051,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXa-0T-y2a">
-                    <rect key="frame" x="10" y="60" width="231" height="17"/>
+                    <rect key="frame" x="15" y="60" width="231" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Patient" id="6PY-ZV-QzE">
                         <font key="font" metaFont="miniSystem"/>
@@ -1063,7 +1064,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </box>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="auZ-jX-LIg">
-                    <rect key="frame" x="10" y="42" width="231" height="17"/>
+                    <rect key="frame" x="15" y="42" width="231" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Medicine" id="cKz-YW-WDO">
                         <font key="font" metaFont="miniSystemBold"/>
@@ -1072,7 +1073,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zig-6E-0dQ">
-                    <rect key="frame" x="10" y="30" width="231" height="17"/>
+                    <rect key="frame" x="15" y="30" width="231" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Comment" id="d0T-5w-iXr">
                         <font key="font" metaFont="miniSystem"/>
@@ -1089,8 +1090,17 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BNV-Sb-9IH" userLabel="Label Swissmed">
+                    <rect key="frame" x="15" y="2" width="111" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Swissmed" id="B6b-pn-8Gb">
+                        <font key="font" metaFont="miniSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qis-dS-vbv">
-                    <rect key="frame" x="10" y="77" width="231" height="17"/>
+                    <rect key="frame" x="15" y="77" width="231" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Doctor" id="sML-BJ-0b0">
                         <font key="font" metaFont="miniSystem"/>

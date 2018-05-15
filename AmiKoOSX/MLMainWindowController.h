@@ -90,6 +90,7 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSTextField *labelMedicine;
 @property (nonatomic, retain) IBOutlet NSTextField *labelComment;
 @property (nonatomic, retain) IBOutlet NSTextField *labelPrice;
+@property (nonatomic, retain) IBOutlet NSTextField *labelSwissmed;
 
 - (IBAction) performFindAction:(id)sender;
 - (IBAction) clickedTableView:(id)sender;
