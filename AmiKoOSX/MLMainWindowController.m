@@ -1254,7 +1254,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     if (packageArray.count >= 2) {
         NSArray *priceArray = [[packageArray objectAtIndex:2] componentsSeparatedByString:@" "];
-        labelPrice.stringValue = [NSString stringWithFormat:@"Sfr.\t%@",[priceArray objectAtIndex:1]];
+        labelPrice.stringValue = [NSString stringWithFormat:@"SFr.\t%@",[priceArray objectAtIndex:1]];
     }
     else
         labelPrice.stringValue = @"";
