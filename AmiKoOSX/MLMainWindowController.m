@@ -1252,12 +1252,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     labelMedicine.stringValue = [packageArray objectAtIndex:0];
     labelComment.stringValue = [prescriptionBasket[row] comment];
     
+    labelPrice.stringValue = @"";
     if (packageArray.count >= 2) {
         NSArray *priceArray = [[packageArray objectAtIndex:2] componentsSeparatedByString:@" "];
-        labelPrice.stringValue = [NSString stringWithFormat:@"SFr.\t%@",[priceArray objectAtIndex:1]];
+        //NSLog(@"expected PP: <%@>", [priceArray objectAtIndex:0]);
+        if ([[priceArray objectAtIndex:0] isEqualToString:@"PP"])
+            labelPrice.stringValue = [NSString stringWithFormat:@"CHF\t%@", [priceArray objectAtIndex:1]];
     }
-    else
-        labelPrice.stringValue = @"";
 
     NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:self.medicineLabelView printInfo:printInfo];
     //[printJob setShowsPrintPanel:NO]; // skip preview
