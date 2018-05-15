@@ -177,6 +177,7 @@ static BOOL mPrescriptionMode = false;
 @synthesize mySignView;
 @synthesize myPrescriptionsTableView;
 @synthesize myPrescriptionsPrintTV;
+@synthesize medicineLabelView, labelDoctor, labelPatient, labelMedicine, labelComment, labelPrice;
 
 #pragma mark Class methods
 
@@ -979,8 +980,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [printInfo setOrientation:NSPaperOrientationPortrait];
     [printInfo setHorizontalPagination:NSFitPagination];
     [printInfo setVerticalPagination: NSAutoPagination];
-    //NSLog(@"%s %d printInfo: %@", __FUNCTION__, __LINE__, printInfo);
-    
+
 #if 1
     NSRect imageableBounds = [printInfo imageablePageBounds];
     //NSLog(@"%s %d imageableBounds:%@", __FUNCTION__, __LINE__, NSStringFromRect(imageableBounds));
@@ -1193,6 +1193,74 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         [self.myPrescriptionsTableView reloadData];
         [self updateButtons];
     }
+}
+
+- (IBAction) printMedicineLabel:(id)sender
+{
+    NSInteger row = [self.myPrescriptionsTableView rowForView:sender];
+    //NSLog(@"%s row:%ld", __FUNCTION__, (long)row);
+
+    NSPrintInfo *printInfo = [[NSPrintInfo alloc] init];
+    [printInfo setOrientation:NSPaperOrientationPortrait];
+    [printInfo setHorizontalPagination:NSFitPagination];
+    
+    [printInfo setPaperSize:NSMakeSize(mm2pix(36), mm2pix(89))];
+    [printInfo setOrientation:NSPaperOrientationLandscape];
+    [printInfo setBottomMargin:0];
+    [printInfo setTopMargin:0];
+    [printInfo setLeftMargin:0];
+    [printInfo setRightMargin:0];
+    //NSLog(@"%s %d printInfo: %@", __FUNCTION__, __LINE__, printInfo);
+    
+    MLOperator *d = [mOperatorIDSheet loadOperator];
+    //NSLog(@"doctor title: %@, zip %@, city %@", d.title, d.zipCode, d.city);
+    NSString * firstLine = @"";
+    if (d.title.length > 0)
+        firstLine = [NSString stringWithFormat:@"%@ ", d.title];
+
+    firstLine = [firstLine stringByAppendingString:[NSString stringWithFormat:@"%@ ", d.givenName]];
+    firstLine = [firstLine stringByAppendingString:[NSString stringWithFormat:@"%@ - ", d.familyName]];
+    firstLine = [firstLine stringByAppendingString:[NSString stringWithFormat:@"%@ ", d.zipCode]];
+    //firstLine = [firstLine stringByAppendingString:[NSString stringWithFormat:@"%@ ", d.city]]; // included in placeDate
+
+    NSString *placeDate = myPlaceDateField.stringValue; // TODO: trim trailing time
+    NSArray *placeDateArray = [placeDate componentsSeparatedByString:@" ("];
+//    NSLog(@"operatorPlace: <%@>", placeDate);
+//    NSLog(@"placeDateArray: %lu <%@>", (unsigned long)placeDateArray.count, placeDateArray);
+
+    firstLine = [firstLine stringByAppendingString:[NSString stringWithFormat:@"%@", [placeDateArray objectAtIndex:0]]];
+
+    labelDoctor.stringValue = firstLine;
+
+    
+    NSString *patient = myPatientAddressTextField.stringValue;  // TODO: it doesn't contain the  birthday
+    NSArray *patientArray = [patient componentsSeparatedByString:@"\r\n"];
+//    NSLog(@"patient: <%@>", patient);
+//    NSLog(@"patientArray: %lu <%@>", (unsigned long)patientArray.count, patientArray);
+    MLPatient *p = [mPatientSheet getAllFields];
+    labelPatient.stringValue = [NSString stringWithFormat:@"%@, %@ %@",
+                                [patientArray objectAtIndex:0],
+                                NSLocalizedString(@"born", nil),
+                                p.birthDate];
+
+    NSArray *prescriptionBasket = mPrescriptionsCart[0].cart;
+
+    NSString *package = [prescriptionBasket[row] fullPackageInfo];
+    NSArray *packageArray = [package componentsSeparatedByString:@", "];
+//    NSLog(@"package: <%@>", package);
+//    NSLog(@"packageArray: %lu <%@>", (unsigned long)packageArray.count, packageArray);
+    labelMedicine.stringValue = [packageArray objectAtIndex:0];
+    labelComment.stringValue = [prescriptionBasket[row] comment];
+    
+    if (packageArray.count >= 2) {
+        NSArray *priceArray = [[packageArray objectAtIndex:2] componentsSeparatedByString:@" "];
+        labelPrice.stringValue = [NSString stringWithFormat:@"Sfr.\t%@",[priceArray objectAtIndex:1]];
+    }
+    else
+        labelPrice.stringValue = @"";
+
+    NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:self.medicineLabelView printInfo:printInfo];
+    [printJob runOperation];
 }
 
 - (IBAction) onNewPrescription:(id)sender

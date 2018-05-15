@@ -24,6 +24,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "MLSignatureView.h"
+#import "MLOperator.h"
 
 @interface MLOperatorIDSheetController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource>
 {
@@ -50,5 +51,6 @@
 - (void) remove;
 - (NSString *) retrieveIDAsString;
 - (NSString *) retrieveCity;
+- (MLOperator *) loadOperator;
 
 @end

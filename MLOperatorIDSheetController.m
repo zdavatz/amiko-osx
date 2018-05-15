@@ -25,7 +25,6 @@
 
 #import "MLUtilities.h"
 #import "MLColors.h"
-#import "MLOperator.h"
 
 @implementation MLOperatorIDSheetController
 {

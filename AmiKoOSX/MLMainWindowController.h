@@ -84,6 +84,13 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet MLPrescriptionTableView *myPrescriptionsTableView;
 @property (nonatomic, retain) IBOutlet MLPrescriptionTableView *myPrescriptionsPrintTV;
 
+@property (nonatomic, retain) IBOutlet NSView *medicineLabelView;
+@property (nonatomic, retain) IBOutlet NSTextField *labelDoctor;
+@property (nonatomic, retain) IBOutlet NSTextField *labelPatient;
+@property (nonatomic, retain) IBOutlet NSTextField *labelMedicine;
+@property (nonatomic, retain) IBOutlet NSTextField *labelComment;
+@property (nonatomic, retain) IBOutlet NSTextField *labelPrice;
+
 - (IBAction) performFindAction:(id)sender;
 - (IBAction) clickedTableView:(id)sender;
 - (IBAction) tappedOnStar:(id)sender;
@@ -102,6 +109,7 @@ extern NSString* const APP_ID;
 - (IBAction) setOperatorIdentity:(id)sender;
 - (IBAction) findPatient:(id)sender;
 - (IBAction) removeItemFromPrescription:(id)sender;
+- (IBAction) printMedicineLabel:(id)sender;
 - (IBAction) onNewPrescription:(id)sender;
 - (IBAction) onSearchPatient:(id)sender;
 - (IBAction) onCheckForInteractions:(id)sender;

@@ -541,6 +541,12 @@
 		FA4BC4EB208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4EF208F592000B7BDF3 /* MLAmiKoPatientSheet.xib */; };
 		FA4BC4EC208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4EF208F592000B7BDF3 /* MLAmiKoPatientSheet.xib */; };
 		FA4BC4ED208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4EF208F592000B7BDF3 /* MLAmiKoPatientSheet.xib */; };
+		FA518CD920AAED3600F8DE42 /* printerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CD820AAED3600F8DE42 /* printerIcon.png */; };
+		FA518CDA20AAED3600F8DE42 /* printerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CD820AAED3600F8DE42 /* printerIcon.png */; };
+		FA518CDB20AAED3600F8DE42 /* printerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CD820AAED3600F8DE42 /* printerIcon.png */; };
+		FA518CDC20AAED3600F8DE42 /* printerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CD820AAED3600F8DE42 /* printerIcon.png */; };
+		FA518CDD20AAED3600F8DE42 /* printerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CD820AAED3600F8DE42 /* printerIcon.png */; };
+		FA518CDE20AAED3600F8DE42 /* printerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA518CD820AAED3600F8DE42 /* printerIcon.png */; };
 		FA5562D22091ADD500B85266 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5562D42091ADD500B85266 /* AmiKoMainMenu.xib */; };
 		FA5562D92091B33300B85266 /* AmiKoMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5562D42091ADD500B85266 /* AmiKoMainMenu.xib */; };
 		FA63296D20A088CC002DC9E2 /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
@@ -733,6 +739,7 @@
 		FA4BC4EE208F592000B7BDF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLAmiKoPatientSheet.xib; sourceTree = "<group>"; };
 		FA4BC4F1208F592300B7BDF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLAmiKoPatientSheet.strings; sourceTree = "<group>"; };
 		FA4BC4F3208F592500B7BDF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLAmiKoPatientSheet.strings; sourceTree = "<group>"; };
+		FA518CD820AAED3600F8DE42 /* printerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printerIcon.png; sourceTree = "<group>"; };
 		FA5562D32091ADD500B85266 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AmiKoMainMenu.xib; sourceTree = "<group>"; };
 		FA5562D62091ADD700B85266 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AmiKoMainMenu.strings; sourceTree = "<group>"; };
 		FA5562D82091ADD900B85266 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AmiKoMainMenu.strings; sourceTree = "<group>"; };
@@ -870,6 +877,7 @@
 		D5BACC121EBB2CAB001812FB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FA518CD820AAED3600F8DE42 /* printerIcon.png */,
 				D5C5C5371F16515900DF851F /* prescription@2x.png */,
 				D5AE31841B372085006BC60E /* desitin_icon_512x512.png */,
 				D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */,
@@ -1445,6 +1453,7 @@
 				D5E731401B33480A007771D7 /* MLProgressSheet.xib in Resources */,
 				D5E731421B33480A007771D7 /* Zur_Rose_1000x670px.png in Resources */,
 				D5E731441B33480A007771D7 /* comedosx_splash_1000x670.png in Resources */,
+				FA518CDD20AAED3600F8DE42 /* printerIcon.png in Resources */,
 				D5E731451B33480A007771D7 /* maindb@2x.png in Resources */,
 				D5AE31791B36F078006BC60E /* desitin.iconset in Resources */,
 				D5E731461B33480A007771D7 /* favorites@2x.png in Resources */,
@@ -1465,6 +1474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5E731761B334829007771D7 /* interactions_callbacks.js in Resources */,
+				FA518CDE20AAED3600F8DE42 /* printerIcon.png in Resources */,
 				D5C5C5041EFF8D6B00DF851F /* comed.iconset in Resources */,
 				D5E731771B334829007771D7 /* MLSearchWebView.js in Resources */,
 				D5E731781B334829007771D7 /* InfoPlist.strings in Resources */,
@@ -1512,6 +1522,7 @@
 				D5DD5763193B49260094244E /* 217-trash.png in Resources */,
 				D5E91B6C17E5E24000B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B6D17E5E24000B66B27 /* Credits.rtf in Resources */,
+				FA518CDB20AAED3600F8DE42 /* printerIcon.png in Resources */,
 				FA4BC4EA208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */,
 				FA4BC4DE208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D5C5C53A1F16515900DF851F /* prescription@2x.png in Resources */,
@@ -1546,6 +1557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5B6F970193136A400495873 /* interactions_callbacks.js in Resources */,
+				FA518CD920AAED3600F8DE42 /* printerIcon.png in Resources */,
 				D5E91B9A17E5E8E400B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B9C17E5E8E400B66B27 /* Credits.rtf in Resources */,
@@ -1589,6 +1601,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D57AB17A193E6B68000DB3F2 /* interactions_callbacks.js in Resources */,
+				FA518CDA20AAED3600F8DE42 /* printerIcon.png in Resources */,
 				D5C5C5021EFF8D6B00DF851F /* comed.iconset in Resources */,
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
@@ -1651,6 +1664,7 @@
 				D5EBC6E317D521A500EBEF39 /* 28-star@2x.png in Resources */,
 				D5C5C5031EFF8D6B00DF851F /* comed.iconset in Resources */,
 				D539C10817DE3DAE00759260 /* Zur_Rose_1000x670px.png in Resources */,
+				FA518CDC20AAED3600F8DE42 /* printerIcon.png in Resources */,
 				D545C90818A3FC0800491511 /* MLProgressSheet.xib in Resources */,
 				D5E91AD017E387F100B66B27 /* MLCoMedzRMainWindow.xib in Resources */,
 				D53877811A9E5AE700AEFDB4 /* interactions@2x.png in Resources */,

@@ -64,5 +64,6 @@
 - (NSString *) retrievePatientAsString:(NSString *)searchKey;
 - (void) show:(NSWindow *)window;
 - (void) remove;
+- (MLPatient *) getAllFields;
 
 @end
