@@ -22,6 +22,9 @@ AmiKo/CoMed für macOS
   * Swissmedic-Nummer
   * BAG/Swissmedic Kategorie
 
+## .amk File lesen
+*  `cat RZ_2017-09-22T211907.amk | base64 --decode` wird das JSON File auslesen.
+
 ## Datenbankverzeichnis
 * amiko-osx/AmiKoOSX
   * `wget http://pillbox.oddb.org/amiko_db_full_idx_de.zip`
