@@ -1210,6 +1210,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [printInfo setTopMargin:0];
     [printInfo setLeftMargin:0];
     [printInfo setRightMargin:0];
+    [printInfo setPrinter: [NSPrinter printerWithName:@"DYMO LabelWriter 450"]];
     //NSLog(@"%s %d printInfo: %@", __FUNCTION__, __LINE__, printInfo);
     
     MLOperator *d = [mOperatorIDSheet loadOperator];
@@ -1269,6 +1270,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:self.medicineLabelView printInfo:printInfo];
     //[printJob setShowsPrintPanel:NO]; // skip preview
+
     [printJob runOperation];
 }
 
