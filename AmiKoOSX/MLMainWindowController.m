@@ -605,7 +605,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         // If prescription cart is not empty, generate new hash
         if (mPrescriptionsCart[0].cart)
             [mPrescriptionsCart[0] makeNewUniqueHash];
+        
+        modifiedPrescription = true;
+        [self updateButtons];
     }
+
     mPrescriptionMode = true;
 
     // Update prescription history in right most pane
@@ -1125,9 +1129,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) managePatients:(id)sender
 {
-    if (!mPatientSheet) {
+    if (!mPatientSheet)
         mPatientSheet = [[MLPatientSheetController alloc] init];
-    }
+
     [mPatientSheet show:[NSApp mainWindow]];
 }
 
