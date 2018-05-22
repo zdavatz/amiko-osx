@@ -53,8 +53,10 @@ extern NSString* const APP_ID;
 #endif
 
 #import "MLPrescriptionTableView.h"
+#import "MLHealthCard.h"
 
 #pragma mark -
+
 @interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSDraggingDestination, NSSharingServicePickerDelegate>
 {
     IBOutlet NSButton *saveButton;
@@ -66,6 +68,7 @@ extern NSString* const APP_ID;
     IBOutlet NSTableView *myTableView;
     IBOutlet NSTableView *mySectionTitles;
     IBOutlet SHCWebView *myWebView;
+    MLHealthCard *healthCard;
 }
 
 @property (nonatomic, retain) IBOutlet NSView *myView;

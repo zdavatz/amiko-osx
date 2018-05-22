@@ -22,6 +22,7 @@
  ------------------------------------------------------------------------ */
 
 #import "MLPatientSheetController.h"
+#import "MLPatientSheetController+smartCard.h"
 
 #import "MLPatientDBAdapter.h"
 #import "MLContacts.h"
@@ -63,6 +64,11 @@
                                                  selector:@selector(controlTextDidChange:)
                                                      name:NSControlTextDidChangeNotification
                                                    object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(newSmartCardData:)
+                                                     name:@"smartCardDataAcquired"
+                                                   object:nil];
         return self;
     }    
     return nil;
@@ -73,9 +79,9 @@
     return !(str && str.length);
 }
 
-/**
- NSTextFieldDelegate
- */
+#pragma mark - Notifications
+
+// NSControlTextDidChangeNotification
 - (void) controlTextDidChange:(NSNotification *)notification {
     /*
     NSTextField *textField = [notification object];
@@ -307,6 +313,8 @@
     [mTableView reloadData];
     [self setNumPatients:[mArrayOfPatients count]];
 }
+
+#pragma mark - Actions
 
 - (IBAction) onSearchDatabase:(id)sender
 {

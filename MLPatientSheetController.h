@@ -65,5 +65,6 @@
 - (void) show:(NSWindow *)window;
 - (void) remove;
 - (MLPatient *) getAllFields;
+- (void) resetAllFields;
 
 @end

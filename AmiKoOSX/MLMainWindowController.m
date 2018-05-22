@@ -356,10 +356,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                  name:NSControlTextDidChangeNotification
                                                object:nil];
 
+    healthCard = [[MLHealthCard alloc] init];
+
     [[self window] makeFirstResponder:self];
-    
     [[self window] setBackgroundColor:[NSColor whiteColor]];
-    
     return self;
 }
 
@@ -2720,6 +2720,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 #pragma mark - Notifications
 
+// NSControlTextDidChangeNotification
 - (void)controlTextDidChange:(NSNotification *)notification
 {
     modifiedPrescription = true;
