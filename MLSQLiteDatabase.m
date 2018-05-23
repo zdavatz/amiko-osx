@@ -114,7 +114,9 @@
     return self;
 }
 
-- (BOOL) createWithPath:(NSString *)path andTable:(NSString *)table andColumns:(NSString *)columns
+- (BOOL) createWithPath:(NSString *)path
+               andTable:(NSString *)table
+             andColumns:(NSString *)columns
 {
     NSFileManager *fileMgr = [[NSFileManager alloc] init];
     
@@ -127,11 +129,13 @@
             if (sqlite3_exec(dbConnection, [queryStr UTF8String], NULL, NULL, NULL) == SQLITE_OK) {
                 NSLog(@"%@ table created successfully...", table);
                 database = dbConnection;
-            } else {
+            }
+            else {
                 NSLog(@"Failed to create table %@ for database with path %@", table, path);
                 return FALSE;
             }
-        } else {
+        }
+        else {
             NSLog(@"Failed to create database with path %@", path);
             return FALSE;
         }

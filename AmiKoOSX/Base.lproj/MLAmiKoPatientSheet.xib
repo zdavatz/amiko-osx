@@ -491,8 +491,8 @@ Gw
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sbl-Lq-mj8">
-                                        <rect key="frame" x="8" y="18" width="16" height="24"/>
+                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sbl-Lq-mj8">
+                                        <rect key="frame" x="20" y="18" width="16" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="16" id="XP6-vK-AuG"/>
                                             <constraint firstAttribute="height" constant="24" id="mKk-oN-TAI"/>

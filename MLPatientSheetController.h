@@ -66,5 +66,6 @@
 - (void) remove;
 - (MLPatient *) getAllFields;
 - (void) resetAllFields;
+- (void) setAllFields:(MLPatient *)p;
 
 @end

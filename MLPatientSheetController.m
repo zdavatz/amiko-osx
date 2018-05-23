@@ -64,31 +64,59 @@
                                                  selector:@selector(controlTextDidChange:)
                                                      name:NSControlTextDidChangeNotification
                                                    object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(newSmartCardData:)
-                                                     name:@"smartCardDataAcquired"
-                                                   object:nil];
         return self;
     }    
     return nil;
 }
 
+- (void) show:(NSWindow *)window
+{
+    if (!mPanel) {
+        [NSBundle loadNibNamed:@"MLAmiKoPatientSheet" owner:self];
+        
+        // Set formatters
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        [mWeight_kg setFormatter:formatter];
+        [mHeight_cm setFormatter:formatter];
+    }
+    
+    [NSApp beginSheet:mPanel modalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];
+    
+    // Show the dialog
+    [mPanel makeKeyAndOrderFront:self];
+    
+    // Start modal session
+    mModalSession = [NSApp beginModalSessionForWindow:mPanel];
+    [NSApp runModalSession:mModalSession];
+    
+    // Retrieves contacts from local patient database
+    [self updateAmiKoAddressBookTableView];
+    [mNotification setStringValue:@""];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(newSmartCardData:)
+                                                 name:@"smartCardDataAcquired"
+                                               object:nil];
+}
+
+- (void) remove
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"smartCardDataAcquired"
+                                                  object:nil];
+
+    [NSApp endModalSession:mModalSession];
+    [NSApp endSheet:mPanel];
+    [mPanel orderOut:nil];
+    [mPanel close];
+}
+
+#pragma mark -
+
 - (BOOL) stringIsNilOrEmpty:(NSString*)str
 {
     return !(str && str.length);
-}
-
-#pragma mark - Notifications
-
-// NSControlTextDidChangeNotification
-- (void) controlTextDidChange:(NSNotification *)notification {
-    /*
-    NSTextField *textField = [notification object];
-    if (textField==mFamilyName)
-        NSLog(@"%@", [textField stringValue]);
-    */
-    [self checkFields];
 }
 
 - (void) resetFieldsColors
@@ -314,6 +342,18 @@
     [self setNumPatients:[mArrayOfPatients count]];
 }
 
+#pragma mark - Notifications
+
+// NSControlTextDidChangeNotification
+- (void) controlTextDidChange:(NSNotification *)notification {
+    /*
+     NSTextField *textField = [notification object];
+     if (textField==mFamilyName)
+     NSLog(@"%@", [textField stringValue]);
+     */
+    [self checkFields];
+}
+
 #pragma mark - Actions
 
 - (IBAction) onSearchDatabase:(id)sender
@@ -496,39 +536,6 @@
     [self remove];
 }
 
-- (void) show:(NSWindow *)window
-{
-    if (!mPanel) {
-        [NSBundle loadNibNamed:@"MLAmiKoPatientSheet" owner:self];
-
-        // Set formatters
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        [mWeight_kg setFormatter:formatter];
-        [mHeight_cm setFormatter:formatter];
-    }
-    
-    [NSApp beginSheet:mPanel modalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];
-   
-    // Show the dialog
-    [mPanel makeKeyAndOrderFront:self];
-    
-    // Start modal session
-    mModalSession = [NSApp beginModalSessionForWindow:mPanel];
-    [NSApp runModalSession:mModalSession];
-    
-    // Retrieves contacts from local patient database
-    [self updateAmiKoAddressBookTableView];
-    [mNotification setStringValue:@""];
-}
-
-- (void) remove
-{
-    [NSApp endModalSession:mModalSession];
-    [NSApp endSheet:mPanel];
-    [mPanel orderOut:nil];
-    [mPanel close];
-}
 
 - (void) setNumPatients:(NSInteger)numPatients
 {
