@@ -10,6 +10,6 @@
 
 @interface MLPatientSheetController (smartCard)
 
-- (void) newSmartCardData:(NSNotification *)notification;
+- (void) newHealthCardData:(NSNotification *)notification;
 
 @end

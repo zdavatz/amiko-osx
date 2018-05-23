@@ -134,5 +134,6 @@ extern NSString* const APP_ID;
 - (void) addItem:(MLPrescriptionItem *)med toPrescriptionCartWithId:(NSInteger)n;
 - (void) loadPrescription:(NSString *)filename andRefreshHistory:(bool)refresh;
 - (MLMedication *) getShortMediWithId:(long)mid;
+- (void) newHealthCardData:(NSNotification *)notification;
 
 @end

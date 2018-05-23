@@ -355,6 +355,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                              selector:@selector(controlTextDidChange:)
                                                  name:NSControlTextDidChangeNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(newHealthCardData:)
+                                                 name:@"smartCardDataAcquired"
+                                               object:nil];
 
     healthCard = [[MLHealthCard alloc] init];
 
@@ -588,6 +593,23 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 #pragma mark - Notifications
+
+- (void) newHealthCardData:(NSNotification *)notification
+{
+    NSLog(@"%s NSNotification:%@", __FUNCTION__, [notification object]);
+
+    /* TODO:
+     if not visible && exists in patient_db
+        update patient text in main window
+     else
+        launch patient panel
+     */
+    
+    if (![mPatientSheet.mPanel isVisible])
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self managePatients:nil];
+        });
+}
 
 - (void) prescriptionDoctorChanged:(NSNotification *)notification
 {

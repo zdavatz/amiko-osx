@@ -26,7 +26,6 @@
 @interface MLPatientSheetController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate>
 {
     @private
-    IBOutlet NSWindow *mPanel;
     IBOutlet NSTableView *mTableView;
     IBOutlet NSTextField *mNumPatients;
     IBOutlet NSTextField *mNotification;
@@ -45,6 +44,8 @@
     IBOutlet NSButton *mFemaleButton;
     IBOutlet NSButton *mMaleButton;
 }
+
+@property (nonatomic, weak) IBOutlet NSWindow *mPanel;
 
 - (IBAction) onSelectFemale:(id)sender;
 - (IBAction) onSelectMale:(id)sender;

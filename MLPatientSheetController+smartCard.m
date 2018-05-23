@@ -13,7 +13,7 @@
 
 #pragma mark - Notifications
 
-- (void) newSmartCardData:(NSNotification *)notification
+- (void) newHealthCardData:(NSNotification *)notification
 {
     NSDictionary *d = [notification object];
     //NSLog(@"%s %@", __FUNCTION__, d);

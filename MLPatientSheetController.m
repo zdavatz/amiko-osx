@@ -43,6 +43,8 @@
     BOOL mFemale;
 }
 
+@synthesize mPanel;
+
 - (id) init
 {
     if (self = [super init]) {
@@ -80,12 +82,12 @@
         [mWeight_kg setFormatter:formatter];
         [mHeight_cm setFormatter:formatter];
     }
-    
+
     [NSApp beginSheet:mPanel modalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];
-    
+
     // Show the dialog
     [mPanel makeKeyAndOrderFront:self];
-    
+
     // Start modal session
     mModalSession = [NSApp beginModalSessionForWindow:mPanel];
     [NSApp runModalSession:mModalSession];
@@ -95,7 +97,7 @@
     [mNotification setStringValue:@""];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(newSmartCardData:)
+                                             selector:@selector(newHealthCardData:)
                                                  name:@"smartCardDataAcquired"
                                                object:nil];
 }
