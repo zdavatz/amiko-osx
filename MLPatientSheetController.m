@@ -32,7 +32,6 @@
 @implementation MLPatientSheetController
 {
     @private
-    MLPatientDBAdapter *mPatientDb;
     MLPatient *mSelectedPatient;
     NSModalSession mModalSession;
     NSArray *mArrayOfPatients;
@@ -416,17 +415,20 @@
 
 - (IBAction) onSavePatient:(id)sender
 {
-    if (mPatientDb!=nil) {
+    if (mPatientDb) {
         MLPatient *patient = [self getAllFields];
         if ([self validateFields:patient]) {
             if (mPatientUUID!=nil && [mPatientUUID length]>0) {
                 patient.uniqueId = mPatientUUID;
             }
+
             if ([mPatientDb getPatientWithUniqueID:mPatientUUID]==nil) {
                 mPatientUUID = [mPatientDb addEntry:patient];
-            } else {
-                mPatientUUID = [mPatientDb insertEntry:patient];
             }
+            else {
+                mPatientUUID = [mPatientDb insertEntry:patient]; // Update row
+            }
+
             mSearchFiltered = FALSE;
             [mSearchKey setStringValue:@""];
             [self updateAmiKoAddressBookTableView];

@@ -22,11 +22,15 @@
  ------------------------------------------------------------------------ */
 
 #import "MLPatient.h"
+#import "MLPatientDBAdapter.h"
 
 @interface MLPatientSheetController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate>
 {
-    @private
+@public
+    MLPatientDBAdapter *mPatientDb;
     IBOutlet NSTableView *mTableView;
+
+@private
     IBOutlet NSTextField *mNumPatients;
     IBOutlet NSTextField *mNotification;
     IBOutlet NSSearchField *mSearchKey;
@@ -68,5 +72,6 @@
 - (MLPatient *) getAllFields;
 - (void) resetAllFields;
 - (void) setAllFields:(MLPatient *)p;
+- (MLPatient *) getContactAtRow:(NSInteger)row;
 
 @end
