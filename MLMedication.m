@@ -117,4 +117,12 @@ static NSString* SectionTitle_FR[] = {@"Composition", @"Forme galénique", @"Con
     return longTitle;
 }
 
+- (void)importFromDict:(NSDictionary *)dict
+{    
+    title   = [dict objectForKey:KEY_AMK_MED_TITLE];
+    auth    = [dict objectForKey:KEY_AMK_MED_OWNER];
+    regnrs  = [dict objectForKey:KEY_AMK_MED_REG_N];
+    atccode = [dict objectForKey:KEY_AMK_MED_ATC];
+}
+
 @end

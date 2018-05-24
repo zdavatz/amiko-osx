@@ -415,26 +415,30 @@
 
 - (IBAction) onSavePatient:(id)sender
 {
-    if (mPatientDb) {
-        MLPatient *patient = [self getAllFields];
-        if ([self validateFields:patient]) {
-            if (mPatientUUID!=nil && [mPatientUUID length]>0) {
-                patient.uniqueId = mPatientUUID;
-            }
-
-            if ([mPatientDb getPatientWithUniqueID:mPatientUUID]==nil) {
-                mPatientUUID = [mPatientDb addEntry:patient];
-            }
-            else {
-                mPatientUUID = [mPatientDb insertEntry:patient]; // Update row
-            }
-
-            mSearchFiltered = FALSE;
-            [mSearchKey setStringValue:@""];
-            [self updateAmiKoAddressBookTableView];
-            [self friendlyNote];
-        }
+    if (!mPatientDb) {
+        return;
     }
+    
+    MLPatient *patient = [self getAllFields];
+    if (![self validateFields:patient]) {
+        return;
+    }
+
+    if (mPatientUUID!=nil && [mPatientUUID length]>0) {
+        patient.uniqueId = mPatientUUID;
+    }
+
+    if ([mPatientDb getPatientWithUniqueID:mPatientUUID]==nil) {
+        mPatientUUID = [mPatientDb addEntry:patient];
+    }
+    else {
+        mPatientUUID = [mPatientDb insertEntry:patient]; // Update row
+    }
+
+    mSearchFiltered = FALSE;
+    [mSearchKey setStringValue:@""];
+    [self updateAmiKoAddressBookTableView];
+    [self friendlyNote];
 }
 
 - (IBAction) onNewPatient:(id)sender

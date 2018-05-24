@@ -23,18 +23,14 @@
         [self resetAllFields];
     });
 
-    // Create patient hash
+    // Create patient from health card data (incomplete dictionary)
     MLPatient *incompletePatient = [[MLPatient alloc] init];
-    incompletePatient.familyName = [d objectForKey:@"family_name"];
-    incompletePatient.givenName = [d objectForKey:@"given_name"];
-    incompletePatient.birthDate = [d objectForKey:@"birth_date"];
-    incompletePatient.gender = [d objectForKey:@"gender"];
+    [incompletePatient importFromDict:d];
+    NSLog(@"patient %@", incompletePatient);
+
+    // If the ID exists in the patient_db just select it
     
-    NSString *uuidStr = [incompletePatient generateUniqueID];
-    //NSLog(@"patient %@, uuidStr %@", patient, uuidStr);
-    // TODO: if the ID exists in the patient_db just select it
-    
-    MLPatient *existingPatient = [mPatientDb getPatientWithUniqueID:uuidStr];
+    MLPatient *existingPatient = [self retrievePatientWithUniqueID:incompletePatient.uniqueId];
     //NSLog(@"%s existing patient from DB:%@", __FUNCTION__, existingPatient);
     if (existingPatient) {
         // Search the table view
@@ -42,12 +38,14 @@
         for (int i=0; i<n; i++) {
             MLPatient *p = [self getContactAtRow:i];
             //NSLog(@"Line %d, %i/%ld, %@", __LINE__, i+1, (long)n, p);
-            if ([p.uniqueId isEqualToString:uuidStr]) {
+            if ([p.uniqueId isEqualToString:incompletePatient.uniqueId]) {
                 //NSLog(@"found at %d", i);
-                // TODO select it in the table view
+                // Select it in the table view
                 dispatch_sync(dispatch_get_main_queue(), ^{
+                    // UI API must be called on the main thread
                     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:i];
                     [mTableView selectRowIndexes:indexSet byExtendingSelection:NO];
+                    [mTableView scrollRowToVisible:[mTableView selectedRow]];
                 });
                 break;
             }
@@ -59,8 +57,9 @@
         return;
     }
 
-    // Pre-fill some fields with the dictionary
+    // Just pre-fill some fields with the dictionary
     dispatch_sync(dispatch_get_main_queue(), ^{
+        // UI API must be called on the main thread
         // TODO: maybe call onNewPatient
         [self setAllFields:incompletePatient];
     });

@@ -23,6 +23,28 @@
 
 #import <Foundation/Foundation.h>
 
+#define DEFAULTS_DOC_TITLE      @"title"
+#define DEFAULTS_DOC_NAME       @"givenname"
+#define DEFAULTS_DOC_SURNAME    @"familyname"
+#define DEFAULTS_DOC_ADDRESS    @"postaladdress"
+#define DEFAULTS_DOC_CITY       @"city"
+#define DEFAULTS_DOC_ZIP        @"zipcode"
+#define DEFAULTS_DOC_PHONE      @"phonenumber"
+#define DEFAULTS_DOC_EMAIL      @"emailaddress"
+#define DEFAULTS_DOC_COUNTRY    @"country"
+
+#define KEY_AMK_DOC_TITLE       @"title"
+#define KEY_AMK_DOC_NAME        @"given_name"
+#define KEY_AMK_DOC_SURNAME     @"family_name"
+#define KEY_AMK_DOC_ADDRESS     @"postal_address"
+#define KEY_AMK_DOC_CITY        @"city"
+#define KEY_AMK_DOC_ZIP         @"zip_code"
+#define KEY_AMK_DOC_PHONE       @"phone_number"
+#define KEY_AMK_DOC_EMAIL       @"email_address"
+
+#define KEY_AMK_DOC_SIGNATURE   @"signature"
+#define DOC_SIGNATURE_FILENAME  @"op_signature.png"
+
 @interface MLOperator : NSObject
 
 @property (atomic, copy) NSString *title;
@@ -36,5 +58,6 @@
 @property (atomic, copy) NSString *emailAddress;
 
 - (NSString *) retrieveOperatorAsString;
+- (void)importFromDict:(NSDictionary *)dict;
 
 @end

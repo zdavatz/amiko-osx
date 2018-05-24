@@ -37,4 +37,6 @@
 @property (atomic, copy) NSString *comment;
 @property (atomic) MLMedication *med;
 
+- (void)importFromDict:(NSDictionary *)dict;
+
 @end

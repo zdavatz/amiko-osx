@@ -41,6 +41,32 @@
 @synthesize emailAddress;
 @synthesize databaseType;
 
+- (void)importFromDict:(NSDictionary *)dict
+{
+    uniqueId =      [dict objectForKey: KEY_AMK_PAT_ID];
+    familyName =    [dict objectForKey: KEY_AMK_PAT_SURNAME];
+    givenName =     [dict objectForKey: KEY_AMK_PAT_NAME];
+    birthDate =     [dict objectForKey: KEY_AMK_PAT_BIRTHDATE];
+    weightKg =      [[dict objectForKey:KEY_AMK_PAT_WEIGHT] intValue];
+    heightCm =      [[dict objectForKey:KEY_AMK_PAT_HEIGHT] intValue];
+    gender =        [dict objectForKey: KEY_AMK_PAT_GENDER];
+    postalAddress = [dict objectForKey: KEY_AMK_PAT_ADDRESS];
+    zipCode =       [dict objectForKey: KEY_AMK_PAT_ZIP];
+    city =          [dict objectForKey: KEY_AMK_PAT_CITY];
+    country =       [dict objectForKey: KEY_AMK_PAT_COUNTRY];
+    phoneNumber =   [dict objectForKey: KEY_AMK_PAT_PHONE];
+    emailAddress =  [dict objectForKey: KEY_AMK_PAT_EMAIL];
+    
+    NSString *newUniqueID = [self generateUniqueID];
+    
+    if (!uniqueId.length) { // The ID was not defined from the dictionary
+        uniqueId = newUniqueID; // assign it here
+    }
+    else if (![uniqueId isEqualToString:newUniqueID]) {
+        NSLog(@"WARNING: imported ID:%@, expected ID %@", uniqueId, newUniqueID);
+    }
+}
+
 - (NSString *) generateUniqueID
 {
     // The UUID should be unique and should be based on familyname, givenname, and birthday

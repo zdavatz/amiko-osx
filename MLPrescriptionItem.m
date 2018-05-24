@@ -32,11 +32,20 @@
 @synthesize owner;
 @synthesize price;
 @synthesize med;
+@synthesize fullPackageInfo, comment;
+
+- (void)importFromDict:(NSDictionary *)dict
+{
+    title           = [dict objectForKey:KEY_AMK_MED_PROD_NAME];
+    fullPackageInfo = [dict objectForKey:KEY_AMK_MED_PACKAGE];
+    eanCode         = [dict objectForKey:KEY_AMK_MED_EAN];
+    comment         = [dict objectForKey:KEY_AMK_MED_COMMENT];
+}
 
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"%@ title:<%@>, productName:<%@>, _comment:<%@>",
-            NSStringFromClass([self class]), title, productName, _comment];
+            NSStringFromClass([self class]), title, productName, comment];
 }
 
 @end

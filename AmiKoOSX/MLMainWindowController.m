@@ -111,7 +111,6 @@ static BOOL mPrescriptionMode = false;
 
 @interface MLMainWindowController ()
 
-//- (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view;
 - (void) updateButtons;
 
 @end
@@ -594,16 +593,41 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 #pragma mark - Notifications
 
+/* TODO:
+ if not visible && exists in patient_db
+ update patient text in main window
+ else
+ launch patient panel
+ */
 - (void) newHealthCardData:(NSNotification *)notification
 {
-    NSLog(@"%s NSNotification:%@", __FUNCTION__, [notification object]);
+    NSDictionary *d = [notification object];
+    NSLog(@"%s NSNotification:%@", __FUNCTION__, d);
 
-    /* TODO:
-     if not visible && exists in patient_db
-        update patient text in main window
-     else
-        launch patient panel
-     */
+    MLPatient *incompletePatient = [[MLPatient alloc] init];
+    [incompletePatient importFromDict:d];
+    NSLog(@"patient %@", incompletePatient);
+
+#if 0
+    MLPatientDBAdapter *patientDb = [[MLPatientDBAdapter alloc] init];
+    if (![patientDb openDatabase:@"patient_db"]) {
+        NSLog(@"Could not open patient DB!");
+        return;
+    }
+    
+    MLPatient *existingPatient = [patientDb getPatientWithUniqueID:uuidStr];
+    NSLog(@"%s Existing patient from DB:%@", __FUNCTION__, existingPatient);
+
+    if (![mPatientSheet.mPanel isVisible] && existingPatient) {
+        NSLog(@"%s TODO: update patient text in main window", __FUNCTION__);
+    }
+    else {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            //[mPatientSheet show:[NSApp mainWindow] withUniqueID:uuidStr];
+            [mPatientSheet show:[NSApp mainWindow]];
+        });
+    }
+#endif
     
     if (![mPatientSheet.mPanel isVisible])
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -1182,7 +1206,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     myPlaceDateField.stringValue = [NSString stringWithFormat:@"%@, %@", operatorPlace, [MLUtilities prettyTime]];
     
     NSString *documentsDirectory = [MLUtilities documentsDirectory];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"op_signature.png"];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
     if (filePath!=nil) {
         NSImage *signatureImg = [[NSImage alloc] initWithContentsOfFile:filePath];
         [mySignView setSignature:signatureImg];
@@ -2878,15 +2902,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 #pragma mark -
-
-//- (void) hideButtonsForPrinting:(BOOL)flag forView:(NSView *)view
-//{
-//    for (NSView *v in [view subviews]) {
-//        if ([v isKindOfClass:[NSButton class]]) {
-//            [v setHidden:flag];
-//        }
-//    }
-//}
 
 - (void) updateButtons
 {

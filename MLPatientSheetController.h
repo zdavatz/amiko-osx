@@ -27,7 +27,7 @@
 @interface MLPatientSheetController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate>
 {
 @public
-    MLPatientDBAdapter *mPatientDb;
+    MLPatientDBAdapter *mPatientDb; // public for access by category
     IBOutlet NSTableView *mTableView;
 
 @private

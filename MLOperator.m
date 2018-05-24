@@ -60,6 +60,19 @@
     }
 }
 
+- (void)importFromDict:(NSDictionary *)dict
+{
+    title =         [dict objectForKey:KEY_AMK_DOC_TITLE];
+    familyName =    [dict objectForKey:KEY_AMK_DOC_SURNAME];
+    givenName =     [dict objectForKey:KEY_AMK_DOC_NAME];
+    postalAddress = [dict objectForKey:KEY_AMK_DOC_ADDRESS];
+    zipCode =       [dict objectForKey:KEY_AMK_DOC_ZIP];
+    city =          [dict objectForKey:KEY_AMK_DOC_CITY];
+    country = @"";
+    phoneNumber =   [dict objectForKey:KEY_AMK_DOC_PHONE];
+    emailAddress =  [dict objectForKey:KEY_AMK_DOC_EMAIL];
+}
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"%@ title:%@, givenName:%@, familyName:%@",

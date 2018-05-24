@@ -23,6 +23,17 @@
 
 #import <Foundation/Foundation.h>
 
+#define KEY_AMK_MED_TITLE           @"title"
+#define KEY_AMK_MED_OWNER           @"owner"
+#define KEY_AMK_MED_REG_N           @"regnrs"
+#define KEY_AMK_MED_ATC             @"atccode"
+
+// Used in MLPrescriptionItem
+#define KEY_AMK_MED_PROD_NAME       @"product_name"
+#define KEY_AMK_MED_PACKAGE         @"package"
+#define KEY_AMK_MED_EAN             @"eancode"
+#define KEY_AMK_MED_COMMENT         @"comment"
+
 @interface MLMedication : NSObject
 
 @property (nonatomic, assign) long medId;
@@ -47,5 +58,7 @@
 - (NSArray *) listOfSectionIds;
 - (NSArray *) listOfSectionTitles;
 - (NSDictionary *) indexToTitlesDict;
+
+- (void)importFromDict:(NSDictionary *)dict;
 
 @end

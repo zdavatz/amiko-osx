@@ -23,6 +23,20 @@
 
 #import <Foundation/Foundation.h>
 
+#define KEY_AMK_PAT_ID          @"patient_id"
+#define KEY_AMK_PAT_NAME        @"given_name"
+#define KEY_AMK_PAT_SURNAME     @"family_name"
+#define KEY_AMK_PAT_BIRTHDATE   @"birth_date"
+#define KEY_AMK_PAT_WEIGHT      @"weight_kg"
+#define KEY_AMK_PAT_HEIGHT      @"height_cm"
+#define KEY_AMK_PAT_GENDER      @"gender"
+#define KEY_AMK_PAT_ADDRESS     @"postal_address"
+#define KEY_AMK_PAT_ZIP         @"zip_code"
+#define KEY_AMK_PAT_CITY        @"city"
+#define KEY_AMK_PAT_COUNTRY     @"country"
+#define KEY_AMK_PAT_PHONE       @"phone_number"
+#define KEY_AMK_PAT_EMAIL       @"email_address"
+
 enum database_t {
     eLocal=0, eAddressBook=1
 };
@@ -45,6 +59,7 @@ enum database_t {
 @property (atomic, copy) NSString *emailAddress;
 @property (atomic, assign) enum database_t databaseType;
 
+- (void)importFromDict:(NSDictionary *)dict;
 - (NSString *) generateUniqueID;
 - (NSString *) asString;
 

@@ -210,35 +210,37 @@
     NSMutableDictionary *prescriptionDict = [[NSMutableDictionary alloc] init];
     
     NSMutableDictionary *patientDict = [[NSMutableDictionary alloc] init];
-    [patientDict setObject:patient.uniqueId forKey:@"patient_id"];
-    [patientDict setObject:patient.familyName forKey:@"family_name"];
-    [patientDict setObject:patient.givenName forKey:@"given_name"];
-    [patientDict setObject:patient.birthDate forKey:@"birth_date"];
-    [patientDict setObject:patient.gender forKey:@"gender"];
-    [patientDict setObject:[NSString stringWithFormat:@"%d", patient.weightKg] forKey:@"weight_kg"];
-    [patientDict setObject:[NSString stringWithFormat:@"%d", patient.heightCm] forKey:@"height_cm"];
-    [patientDict setObject:patient.postalAddress forKey:@"postal_address"];
-    [patientDict setObject:patient.zipCode forKey:@"zip_code"];
-    [patientDict setObject:patient.city forKey:@"city"];
-    [patientDict setObject:patient.country forKey:@"country"];
-    [patientDict setObject:patient.phoneNumber forKey:@"phone_number"];
-    [patientDict setObject:patient.emailAddress forKey:@"email_address"];
+    [patientDict setObject:patient.uniqueId      forKey:KEY_AMK_PAT_ID];
+    [patientDict setObject:patient.familyName    forKey:KEY_AMK_PAT_SURNAME];
+    [patientDict setObject:patient.givenName     forKey:KEY_AMK_PAT_NAME];
+    [patientDict setObject:patient.birthDate     forKey:KEY_AMK_PAT_BIRTHDATE];
+    [patientDict setObject:patient.gender        forKey:KEY_AMK_PAT_GENDER];
+    [patientDict setObject:[NSString stringWithFormat:@"%d", patient.weightKg] forKey:KEY_AMK_PAT_WEIGHT];
+    [patientDict setObject:[NSString stringWithFormat:@"%d", patient.heightCm] forKey:KEY_AMK_PAT_HEIGHT];
+    [patientDict setObject:patient.postalAddress forKey:KEY_AMK_PAT_ADDRESS];
+    [patientDict setObject:patient.zipCode       forKey:KEY_AMK_PAT_ZIP];
+    [patientDict setObject:patient.city          forKey:KEY_AMK_PAT_CITY];
+    [patientDict setObject:patient.country       forKey:KEY_AMK_PAT_COUNTRY];
+    [patientDict setObject:patient.phoneNumber   forKey:KEY_AMK_PAT_PHONE];
+    [patientDict setObject:patient.emailAddress  forKey:KEY_AMK_PAT_EMAIL];
     
     NSMutableDictionary *operatorDict = [[NSMutableDictionary alloc] init];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [operatorDict setObject:[defaults stringForKey:@"title"] forKey:@"title"];
-    [operatorDict setObject:[defaults stringForKey:@"familyname"] forKey:@"family_name"];
-    [operatorDict setObject:[defaults stringForKey:@"givenname"] forKey:@"given_name"];
-    [operatorDict setObject:[defaults stringForKey:@"postaladdress"] forKey:@"postal_address"];
-    [operatorDict setObject:[defaults stringForKey:@"zipcode"] forKey:@"zip_code"];
-    [operatorDict setObject:[defaults stringForKey:@"city"] forKey:@"city"];
-    [operatorDict setObject:[defaults stringForKey:@"phonenumber"] forKey:@"phone_number"];
-    [operatorDict setObject:[defaults stringForKey:@"emailaddress"] forKey:@"email_address"];
+    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_TITLE]   forKey:KEY_AMK_DOC_TITLE];
+    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_SURNAME] forKey:KEY_AMK_DOC_SURNAME];
+    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_NAME]    forKey:KEY_AMK_DOC_NAME];
+    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_ADDRESS] forKey:KEY_AMK_DOC_ADDRESS];
+    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_ZIP]     forKey:KEY_AMK_DOC_ZIP];
+    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_CITY]    forKey:KEY_AMK_DOC_CITY];
+    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_PHONE]   forKey:KEY_AMK_DOC_PHONE];
+    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_EMAIL]   forKey:KEY_AMK_DOC_EMAIL];
     
-    placeDate = [NSString stringWithFormat:@"%@, %@", [defaults stringForKey:@"city"], [MLUtilities prettyTime]];
+    placeDate = [NSString stringWithFormat:@"%@, %@",
+                 [defaults stringForKey:DEFAULTS_DOC_CITY],
+                 [MLUtilities prettyTime]];
     
     NSString *encodedImgStr = @"";
-    NSString *filePath = [[MLUtilities documentsDirectory] stringByAppendingPathComponent:@"op_signature.png"];
+    NSString *filePath = [[MLUtilities documentsDirectory] stringByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
     if (filePath!=nil) {
         NSImage *img = [[NSImage alloc] initWithContentsOfFile:filePath];
         NSData *imgData = [img TIFFRepresentation];
@@ -246,7 +248,7 @@
         NSData *data = [imageRep representationUsingType:NSPNGFileType properties:@{}];
         encodedImgStr = [data base64Encoding];
     }
-    [operatorDict setObject:encodedImgStr forKey:@"signature"];
+    [operatorDict setObject:encodedImgStr forKey:KEY_AMK_DOC_SIGNATURE];
     
     NSMutableArray *prescription = [[NSMutableArray alloc] init];
     for (MLPrescriptionItem *item in cart) {
@@ -301,53 +303,25 @@
     // Prescription
     NSMutableArray *prescription = [[NSMutableArray alloc] init];
     for (NSDictionary *p in [jsonDict objectForKey:@"medications"]) {
-        MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
-        item.title = [p objectForKey:@"product_name"];
-        item.fullPackageInfo = [p objectForKey:@"package"];
-        item.eanCode = [p objectForKey:@"eancode"];
-        item.comment = [p objectForKey:@"comment"];
-        
         MLMedication *med = [[MLMedication alloc] init];
-        med.title = [p objectForKey:@"title"];
-        med.auth = [p objectForKey:@"owner"];
-        med.regnrs = [p objectForKey:@"regnrs"];
-        med.atccode = [p objectForKey:@"atccode"];
+        [med importFromDict:p];
+        
+        MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
+        [item importFromDict:p];
         item.med = med;
         
         [prescription addObject:item];
     }
     cart = [prescription copy];
     
-    // Patient
-    patient = [[MLPatient alloc] init];
     NSDictionary *patientDict = [jsonDict objectForKey:@"patient"];
-    patient.uniqueId = [patientDict objectForKey:@"patient_id"];
-    patient.familyName = [patientDict objectForKey:@"family_name"];
-    patient.givenName = [patientDict objectForKey:@"given_name"];
-    patient.birthDate = [patientDict objectForKey:@"birth_date"];
-    patient.weightKg = [[patientDict objectForKey:@"weight_kg"] intValue];
-    patient.heightCm = [[patientDict objectForKey:@"height_cm"] intValue];
-    patient.gender = [patientDict objectForKey:@"gender"];
-    patient.postalAddress = [patientDict objectForKey:@"postal_address"];
-    patient.zipCode = [patientDict objectForKey:@"zip_code"];
-    patient.city = [patientDict objectForKey:@"city"];
-    patient.country = [patientDict objectForKey:@"country"];
-    patient.phoneNumber = [patientDict objectForKey:@"phone_number"];
-    patient.emailAddress = [patientDict objectForKey:@"email_address"];
+    patient = [[MLPatient alloc] init];
+    [patient importFromDict:patientDict];
     
-    // Operator/Doctor
-    doctor = [[MLOperator alloc] init];
     NSDictionary *operatorDict = [jsonDict objectForKey:@"operator"];
-    doctor.title = [operatorDict objectForKey:@"title"];
-    doctor.familyName = [operatorDict objectForKey:@"family_name"];
-    doctor.givenName = [operatorDict objectForKey:@"given_name"];
-    doctor.postalAddress = [operatorDict objectForKey:@"postal_address"];
-    doctor.zipCode = [operatorDict objectForKey:@"zip_code"];
-    doctor.city = [operatorDict objectForKey:@"city"];
-    doctor.country = @"";
-    doctor.phoneNumber = [operatorDict objectForKey:@"phone_number"];
-    doctor.emailAddress = [operatorDict objectForKey:@"email_address"];
-        
+    doctor = [[MLOperator alloc] init];
+    [doctor importFromDict:operatorDict];
+    
     placeDate = [jsonDict objectForKey:@"place_date"];
     if (placeDate == nil)
         placeDate = [jsonDict objectForKey:@"date"];

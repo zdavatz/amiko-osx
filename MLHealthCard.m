@@ -7,6 +7,7 @@
 //
 
 #import "MLHealthCard.h"
+#import "MLPatient.h"
 
 @implementation MLHealthCard
 
@@ -166,15 +167,15 @@
 //            NSLog(@"Serial:  %@", replyData);
               [self parseCardData:replyData];
               
-              NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        familyName, @"family_name",
-                                        givenName, @"given_name",
-                                        birthDate, @"birth_date",
-                                        gender, @"gender",
+              NSDictionary *patientDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        familyName, KEY_AMK_PAT_SURNAME,
+                                        givenName,  KEY_AMK_PAT_NAME,
+                                        birthDate,  KEY_AMK_PAT_BIRTHDATE,
+                                        gender,     KEY_AMK_PAT_GENDER,
                                         nil];
               
               [[NSNotificationCenter defaultCenter] postNotificationName:@"smartCardDataAcquired"
-                                                                  object:userInfo];
+                                                                  object:patientDict];
           }
      ];
 }
