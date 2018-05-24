@@ -51,13 +51,7 @@
         mFilteredArrayOfPatients = [[NSMutableArray alloc] init];
         mSearchFiltered = FALSE;
         mPatientUUID = nil;
-        
-        // Open patient DB
-        mPatientDb = [[MLPatientDBAdapter alloc] init];
-        if (![mPatientDb openDatabase:@"patient_db"]) {
-            NSLog(@"Could not open patient DB!");
-            mPatientDb = nil;
-        }
+        mPatientDb = [MLPatientDBAdapter sharedInstance];
         
         mABContactsVisible = FALSE;
         
@@ -282,11 +276,10 @@
 
 - (NSString *) retrievePatientAsString
 {
-    NSString *p = @"";
-    if (mSelectedPatient!=nil) {
+    if (mSelectedPatient)
         return [mSelectedPatient asString];
-    }
-    return p;
+
+    return @"";
 }
 
 - (NSString *) retrievePatientAsString:(NSString *)searchKey
@@ -526,6 +519,7 @@
     }
 }
 
+// Double clicked a patient in the table view
 - (IBAction) onSelectPatient:(id)sender
 {
     NSInteger row = [mTableView selectedRow];
@@ -573,12 +567,12 @@
  */
 - (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
 {
-    if (mSearchFiltered) {
+    if (mSearchFiltered)
         return [mFilteredArrayOfPatients count];
-    }
-    if (mArrayOfPatients!=nil) {
+
+    if (mArrayOfPatients!=nil)
         return [mArrayOfPatients count];
-    }
+
     return 0;
 }
 

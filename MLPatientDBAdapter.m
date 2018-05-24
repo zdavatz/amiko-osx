@@ -59,6 +59,24 @@ static NSString *DATABASE_COLUMNS = nil;
  */
 #pragma mark Class functions
 
++ (MLPatientDBAdapter *)sharedInstance
+{
+    NSLog(@"%s", __FUNCTION__);
+    __strong static id sharedObject = nil;
+    
+    static dispatch_once_t onceToken = 0;
+    dispatch_once(&onceToken, ^{
+        sharedObject = [[self alloc] init];
+        
+        if (![sharedObject openDatabase:@"patient_db"]) {
+            NSLog(@"Could not open patient DB!");
+            sharedObject = nil;
+        }
+        
+    });
+    return sharedObject;
+}
+
 + (void) initialize
 {
     if (self == [MLPatientDBAdapter class]) {

@@ -25,6 +25,8 @@
 
 @interface MLPatientDBAdapter : NSObject
 
++ (MLPatientDBAdapter *)sharedInstance;
+
 - (BOOL) openDatabase:(NSString *)dbName;
 - (void) closeDatabase;
 - (NSString *) addEntry:(MLPatient *)patient;

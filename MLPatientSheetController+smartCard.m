@@ -40,13 +40,22 @@
             //NSLog(@"Line %d, %i/%ld, %@", __LINE__, i+1, (long)n, p);
             if ([p.uniqueId isEqualToString:incompletePatient.uniqueId]) {
                 //NSLog(@"found at %d", i);
-                // Select it in the table view
+
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     // UI API must be called on the main thread
+
+                    // Select it in the table view
                     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:i];
                     [mTableView selectRowIndexes:indexSet byExtendingSelection:NO];
                     [mTableView scrollRowToVisible:[mTableView selectedRow]];
+#if 1
+                    // Simulate double-click in mTableView to close panel
+                    [self setSelectedPatient:existingPatient];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionPatientChanged" object:self];
+                    [self remove];
+#endif
                 });
+
                 break;
             }
         }

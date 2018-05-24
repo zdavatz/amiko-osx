@@ -608,31 +608,43 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [incompletePatient importFromDict:d];
     NSLog(@"patient %@", incompletePatient);
 
-#if 0
-    MLPatientDBAdapter *patientDb = [[MLPatientDBAdapter alloc] init];
-    if (![patientDb openDatabase:@"patient_db"]) {
-        NSLog(@"Could not open patient DB!");
-        return;
-    }
+    MLPatientDBAdapter *patientDb = [MLPatientDBAdapter sharedInstance];
     
-    MLPatient *existingPatient = [patientDb getPatientWithUniqueID:uuidStr];
+    MLPatient *existingPatient = [patientDb getPatientWithUniqueID:incompletePatient.uniqueId];
     NSLog(@"%s Existing patient from DB:%@", __FUNCTION__, existingPatient);
-
     if (![mPatientSheet.mPanel isVisible] && existingPatient) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [mPatientSheet setSelectedPatient:existingPatient];
+
+            if ([[[myTabView selectedTabViewItem] identifier] intValue] != 2) {
+                [myTabView selectTabViewItemAtIndex:2];
+                [myToolbar setSelectedItemIdentifier:@"Rezept"];
+            }
+
+            myPatientAddressTextField.stringValue = [existingPatient asString];
+            //myPatientAddressTextField.stringValue = [mPatientSheet retrievePatientAsString]; // FIXME: crash
+        });
+        
         NSLog(@"%s TODO: update patient text in main window", __FUNCTION__);
     }
+#if 1
     else {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            //[mPatientSheet show:[NSApp mainWindow] withUniqueID:uuidStr];
-            [mPatientSheet show:[NSApp mainWindow]];
-        });
+        if (![mPatientSheet.mPanel isVisible])
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self managePatients:nil];
+            });
+
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            //[mPatientSheet show:[NSApp mainWindow] withUniqueID:uuidStr];
+//            [mPatientSheet show:[NSApp mainWindow]];
+//        });
     }
 #endif
     
-    if (![mPatientSheet.mPanel isVisible])
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self managePatients:nil];
-        });
+//    if (![mPatientSheet.mPanel isVisible])
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            [self managePatients:nil];
+//        });
 }
 
 - (void) prescriptionDoctorChanged:(NSNotification *)notification
