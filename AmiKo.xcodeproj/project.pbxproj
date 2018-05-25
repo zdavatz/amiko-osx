@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93B279D620B857FD00E32881 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA54AAFD20AED1460034CD77 /* libz.tbd */; };
 		D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
 		D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
 		D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
@@ -820,6 +821,7 @@
 			files = (
 				D59426D91FA35A8B0052B32C /* Contacts.framework in Frameworks */,
 				D5E91BC417E5E8E800B66B27 /* QuartzCore.framework in Frameworks */,
+				93B279D620B857FD00E32881 /* libz.tbd in Frameworks */,
 				D5E91BC517E5E8E800B66B27 /* WebKit.framework in Frameworks */,
 				D5E91BC617E5E8E800B66B27 /* libsqlite3.0.dylib in Frameworks */,
 				FA54AAFC20AED0D00034CD77 /* CryptoTokenKit.framework in Frameworks */,
