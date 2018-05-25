@@ -51,6 +51,7 @@
 #if 1
                     // Simulate double-click in mTableView to close panel
                     [self setSelectedPatient:existingPatient];
+                    // Post a notification so that the Rezept view will be updated
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionPatientChanged" object:self];
                     [self remove];
 #endif

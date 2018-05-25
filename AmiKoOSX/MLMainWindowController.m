@@ -593,7 +593,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 #pragma mark - Notifications
 
-/* TODO:
+/*
  if not visible && exists in patient_db
  update patient text in main window
  else
@@ -602,16 +602,19 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) newHealthCardData:(NSNotification *)notification
 {
     NSDictionary *d = [notification object];
-    NSLog(@"%s NSNotification:%@", __FUNCTION__, d);
+    //NSLog(@"%s NSNotification:%@", __FUNCTION__, d);
 
     MLPatient *incompletePatient = [[MLPatient alloc] init];
     [incompletePatient importFromDict:d];
-    NSLog(@"patient %@", incompletePatient);
+    //NSLog(@"patient %@", incompletePatient);
 
     MLPatientDBAdapter *patientDb = [MLPatientDBAdapter sharedInstance];
     
     MLPatient *existingPatient = [patientDb getPatientWithUniqueID:incompletePatient.uniqueId];
-    NSLog(@"%s Existing patient from DB:%@", __FUNCTION__, existingPatient);
+    //NSLog(@"%s Existing patient from DB:%@", __FUNCTION__, existingPatient);
+    if (!mPatientSheet)
+        mPatientSheet = [[MLPatientSheetController alloc] init];
+
     if (![mPatientSheet.mPanel isVisible] && existingPatient) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             [mPatientSheet setSelectedPatient:existingPatient];
@@ -621,11 +624,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 [myToolbar setSelectedItemIdentifier:@"Rezept"];
             }
 
-            myPatientAddressTextField.stringValue = [existingPatient asString];
-            //myPatientAddressTextField.stringValue = [mPatientSheet retrievePatientAsString]; // FIXME: crash
+            myPatientAddressTextField.stringValue = [mPatientSheet retrievePatientAsString];
+            
+            // Update prescription history in right most pane
+            mPrescriptionMode = true;
+            [self updatePrescriptionHistory];
         });
-        
-        NSLog(@"%s TODO: update patient text in main window", __FUNCTION__);
     }
 #if 1
     else {
