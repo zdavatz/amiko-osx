@@ -8,6 +8,9 @@
 "AmiKo Prescription" = "AmiKo Prescription";
 
 /* No comment provided by engineer. */
+"Are you sure you want to delete this contact from the %@ Address Book?" = "Are you sure you want to delete this contact from the %@ Address Book?";
+
+/* No comment provided by engineer. */
 "ATC Code" = "ATC Code";
 
 /* No comment provided by engineer. */
@@ -15,6 +18,9 @@
 
 /* No comment provided by engineer. */
 "Cancel" = "Cancel";
+
+/* No comment provided by engineer. */
+"Delete contact?" = "Delete contact?";
 
 /* No comment provided by engineer. */
 "Delete prescription?" = "Delete prescription?";
@@ -50,6 +56,9 @@
 "Please contact" = "Please contact:\nzdavatz@ywesee.com\n+41 43 540 05 50";
 
 /* No comment provided by engineer. */
+"Please contact Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@" = "Please contact Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@";
+
+/* No comment provided by engineer. */
 "Preparation" = "Preparation";
 
 /* No comment provided by engineer. */
@@ -74,10 +83,16 @@
 "Therapy" = "Therapy";
 
 /* No comment provided by engineer. */
+"This card can not be read" = "This card can not be read";
+
+/* No comment provided by engineer. */
 "To update the database you must have an active internet connection" = "To update the database you must have an active internet connection.";
 
 /* No comment provided by engineer. */
 "Update is not possible" = "Update is not possible!";
+
+/* No comment provided by engineer. */
+"Your data bank is older than 30 days. We recommend an update" = "Your data bank is older than 30 days. We recommend an update.";
 
 /* html */
 "Your medicine basket is empty" = "Your medicine basket is empty.";

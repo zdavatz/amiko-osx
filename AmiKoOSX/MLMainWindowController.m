@@ -419,13 +419,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if ([MLUtilities timeIntervalSinceLastDBSync]>60*60*24*30) {
         // Show alert with OK button
         NSAlert *alert = [[NSAlert alloc] init];
+
+        [alert setMessageText:NSLocalizedString(@"Your data bank is older than 30 days. We recommend an update", nil)];
+
         if ([MLUtilities isGermanApp]) {
-            [alert setMessageText:@"Ihre Datenbank ist älter als 30 Tage. Wir empfehlen eine Aktualisierung auf die tagesaktuellen Daten."];
             [self updateUserDefaultsForKey:@"germanDBLastUpdate"];
-        } else if ([MLUtilities isFrenchApp]) {
-            [alert setMessageText:@"Votre banque des données est âgé de plus de 30 jours. Nous vous recommandons une mise à jour."];
+        }
+        else if ([MLUtilities isFrenchApp]) {
             [self updateUserDefaultsForKey:@"frenchDBLastUpdate"];
         }
+
         [alert setAlertStyle:NSInformationalAlertStyle];
         
         [alert beginSheetModalForWindow:[self window]

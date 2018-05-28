@@ -123,6 +123,37 @@
     }
 }
 
+- (BOOL) validAtr: (TKSmartCardATR *) atr
+{
+    uint8_t mutuelBytes[] = {
+        0x3b, 0x9f, 0x13, 0x81, 0xb1, 0x80, 0x37, 0x1f,
+        0x03, 0x80, 0x31, 0xf8, 0x69, 0x4d, 0x54, 0x43,
+        0x4f, 0x53, 0x70, 0x02, 0x01, 0x02, 0x81, 0x07, 0x86};
+
+    NSData *mutuelData = [NSData dataWithBytes:mutuelBytes
+                                  length:sizeof mutuelBytes];
+
+    if (![atr.bytes isEqual:mutuelData])
+    {
+        //NSLog(@"card %@", atr.bytes);
+        //NSLog(@"mutu %@", mutuelData);
+        NSString *part1 = NSLocalizedString(@"This card can not be read", nil);
+        NSString *part2 = [NSString stringWithFormat:NSLocalizedString(@"Please contact Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@", nil),
+                           atr.bytes];
+        
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:part1];
+        [alert setInformativeText:part2];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [alert runModal];
+        });
+        
+        return false;
+    }
+
+    return true;
+}
+
 - (void) processValidCard: (TKSmartCard *) sc
 {
     //NSLog(@"%s", __FUNCTION__);

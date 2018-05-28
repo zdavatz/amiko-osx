@@ -51,6 +51,12 @@
     NSLog(@"%s", __FUNCTION__);
 }
 
+- (BOOL) validAtr: (TKSmartCardATR *) atr
+{
+    NSLog(@"%s", __FUNCTION__);
+    return true;
+}
+
 #pragma mark - ISO 7816 commands
 
 - (void) scSelectMF:(TKSmartCard *)card
@@ -179,9 +185,13 @@
             TKSmartCardATRInterfaceGroup * iface = [slot.ATR interfaceGroupForProtocol:TKSmartCardProtocolT1];
 #ifdef DEBUG
             NSLog(@"  atr:   %@", slot.ATR);
-            NSLog(@"  atr bytes::   %@", slot.ATR.bytes);
+            NSLog(@"  atr bytes:   %@", slot.ATR.bytes);
             NSLog(@"Iface for T1: %@", iface);
 #endif
+            if (![self validAtr:slot.ATR]) {  // handled by subclass
+                // TODO: find a clean way of aborting processing for this card
+                return;
+            }
             
             TKSmartCard * sc = [slot makeSmartCard];
             [self.cards addObject:sc];

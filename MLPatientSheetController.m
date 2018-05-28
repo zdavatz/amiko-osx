@@ -455,14 +455,9 @@
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"Cancel"];
         [alert addButtonWithTitle:@"OK"];
-        if ([MLUtilities isGermanApp]) {
-            [alert setMessageText:@"Kontakt löschen?"];
-            [alert setInformativeText:@"Wollen Sie diesen Kontakt wirklich aus dem AmiKo Adressbuch löschen?"];
-        }
-        else if ([MLUtilities isFrenchApp]) {
-            [alert setMessageText:@"Supprimer le contact?"];
-            [alert setInformativeText:@"Êtes-vous sûr de vouloir supprimer ce contact du carnet d'adresses CoMed?"];
-        }
+        [alert setMessageText:NSLocalizedString(@"Delete contact?", nil)];
+        [alert setInformativeText:[NSString stringWithFormat:@"Are you sure you want to delete this contact from the %@ Address Book?", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"]]];
+
         [alert setAlertStyle:NSInformationalAlertStyle];
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self

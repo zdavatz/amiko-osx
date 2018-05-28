@@ -8,6 +8,9 @@
 "AmiKo Prescription" = "AmiKo Rezept";
 
 /* No comment provided by engineer. */
+"Are you sure you want to delete this contact from the %@ Address Book?" = "Wollen Sie diesen Kontakt wirklich aus dem %@ Adressbuch löschen?";
+
+/* No comment provided by engineer. */
 "ATC Code" = "Wirkstoff / ATC Code";
 
 /* No comment provided by engineer. */
@@ -15,6 +18,9 @@
 
 /* No comment provided by engineer. */
 "Cancel" = "Abbrechen";
+
+/* No comment provided by engineer. */
+"Delete contact?" = "Kontakt löschen?";
 
 /* No comment provided by engineer. */
 "Delete prescription?" = "Rezept löschen?";
@@ -50,6 +56,9 @@
 "Please contact" = "Bitte wenden Sie sich an:\nzdavatz@ywesee.com\n+41 43 540 05 50";
 
 /* No comment provided by engineer. */
+"Please contact Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@" = "Bitte kontaktieren Sie Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@";
+
+/* No comment provided by engineer. */
 "Preparation" = "Präparat";
 
 /* No comment provided by engineer. */
@@ -74,10 +83,16 @@
 "Therapy" = "Therapie";
 
 /* No comment provided by engineer. */
+"This card can not be read" = "Diese Karte kann nicht gelesen werden";
+
+/* No comment provided by engineer. */
 "To update the database you must have an active internet connection" = "Für die Aktualisierung der Datenbank benötigen Sie eine aktive Internetverbindung.";
 
 /* No comment provided by engineer. */
 "Update is not possible" = "Datenbank kann nicht aktualisiert werden!";
+
+/* No comment provided by engineer. */
+"Your data bank is older than 30 days. We recommend an update" = "Ihre Datenbank ist älter als 30 Tage. Wir empfehlen eine Aktualisierung auf die tagesaktuellen Daten.";
 
 /* html */
 "Your medicine basket is empty" = "Ihr Medikamentenkorb ist leer.";

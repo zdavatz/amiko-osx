@@ -37,6 +37,7 @@
 
 - (void) parseCardData:(NSData *)data;
 - (void) processValidCard: (TKSmartCard *) sc;
+- (BOOL) validAtr: (TKSmartCardATR *) atr;
 
 - (void) scSelectMF:(TKSmartCard *)card;
 - (void) scSelectFile:(TKSmartCard *)card byPath:(NSData *)filePath;
