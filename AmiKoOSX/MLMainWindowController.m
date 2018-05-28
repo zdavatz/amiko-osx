@@ -598,9 +598,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 /*
  if not visible && exists in patient_db
- update patient text in main window
+    update patient text in main window
  else
- launch patient panel
+    launch patient panel
  */
 - (void) newHealthCardData:(NSNotification *)notification
 {
@@ -634,24 +634,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [self updatePrescriptionHistory];
         });
     }
-#if 1
     else {
         if (![mPatientSheet.mPanel isVisible])
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [self managePatients:nil];
+                [mPatientSheet setSelectedPatient:incompletePatient];
+                [mPatientSheet show:[NSApp mainWindow]];
             });
-
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            //[mPatientSheet show:[NSApp mainWindow] withUniqueID:uuidStr];
-//            [mPatientSheet show:[NSApp mainWindow]];
-//        });
     }
-#endif
-    
-//    if (![mPatientSheet.mPanel isVisible])
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            [self managePatients:nil];
-//        });
 }
 
 - (void) prescriptionDoctorChanged:(NSNotification *)notification
