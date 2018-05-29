@@ -637,8 +637,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     else {
         if (![mPatientSheet.mPanel isVisible])
             dispatch_sync(dispatch_get_main_queue(), ^{
+                // UI API must be called on the main thread
                 [mPatientSheet setSelectedPatient:incompletePatient];
                 [mPatientSheet show:[NSApp mainWindow]];
+                [mPatientSheet setAllFields:incompletePatient];
             });
     }
 }
