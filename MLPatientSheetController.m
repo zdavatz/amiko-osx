@@ -456,7 +456,7 @@
         [alert addButtonWithTitle:@"Cancel"];
         [alert addButtonWithTitle:@"OK"];
         [alert setMessageText:NSLocalizedString(@"Delete contact?", nil)];
-        [alert setInformativeText:[NSString stringWithFormat:@"Are you sure you want to delete this contact from the %@ Address Book?", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"]]];
+        [alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete this contact from the %@ Address Book?", nil), [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"]]];
 
         [alert setAlertStyle:NSInformationalAlertStyle];
         [alert beginSheetModalForWindow:[self window]
