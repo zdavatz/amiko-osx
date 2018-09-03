@@ -512,10 +512,10 @@
 		D5F3034B1F21FE2200CAFED3 /* MLPrescriptionsCart.h in Sources */ = {isa = PBXBuildFile; fileRef = D5F303491F21F43F00CAFED3 /* MLPrescriptionsCart.h */; };
 		D5F6BB2617E8BAF600DCBD16 /* AmiKozRMainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */; };
 		FA22764020A98FD4003BA573 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA6371882089CFEE009361D7 /* Localizable.strings */; };
-		FA4BA42620B4015700552CEF /* MLSmartCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42520B4015700552CEF /* MLSmartCard.m */; };
-		FA4BA42720B4015700552CEF /* MLSmartCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42520B4015700552CEF /* MLSmartCard.m */; };
-		FA4BA42B20B401B700552CEF /* MLHealthCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42A20B401B700552CEF /* MLHealthCard.m */; };
-		FA4BA42C20B401B700552CEF /* MLHealthCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42A20B401B700552CEF /* MLHealthCard.m */; };
+		FA4BA42620B4015700552CEF /* SmartCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42520B4015700552CEF /* SmartCard.m */; };
+		FA4BA42720B4015700552CEF /* SmartCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42520B4015700552CEF /* SmartCard.m */; };
+		FA4BA42B20B401B700552CEF /* HealthCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42A20B401B700552CEF /* HealthCard.m */; };
+		FA4BA42C20B401B700552CEF /* HealthCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42A20B401B700552CEF /* HealthCard.m */; };
 		FA4BC4DC208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4E3208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib */; };
 		FA4BC4DD208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4E3208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib */; };
 		FA4BC4DE208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4BC4E3208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib */; };
@@ -734,10 +734,10 @@
 		D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoMed.entitlements; path = ../CoMed.entitlements; sourceTree = "<group>"; };
 		D5F6BB2917E8BC3900DCBD16 /* AmiKo-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "AmiKo-zR.entitlements"; sourceTree = SOURCE_ROOT; };
 		D5F6BB2A17E8BC3C00DCBD16 /* CoMed-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "CoMed-zR.entitlements"; path = "../CoMed-zR.entitlements"; sourceTree = "<group>"; };
-		FA4BA42420B4015700552CEF /* MLSmartCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLSmartCard.h; sourceTree = "<group>"; };
-		FA4BA42520B4015700552CEF /* MLSmartCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLSmartCard.m; sourceTree = "<group>"; };
-		FA4BA42920B401B700552CEF /* MLHealthCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHealthCard.h; sourceTree = "<group>"; };
-		FA4BA42A20B401B700552CEF /* MLHealthCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHealthCard.m; sourceTree = "<group>"; };
+		FA4BA42420B4015700552CEF /* SmartCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmartCard.h; sourceTree = "<group>"; };
+		FA4BA42520B4015700552CEF /* SmartCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartCard.m; sourceTree = "<group>"; };
+		FA4BA42920B401B700552CEF /* HealthCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthCard.h; sourceTree = "<group>"; };
+		FA4BA42A20B401B700552CEF /* HealthCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthCard.m; sourceTree = "<group>"; };
 		FA4BC4E2208F545000B7BDF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLAmiKoOperatorIDSheet.xib; sourceTree = "<group>"; };
 		FA4BC4E5208F545400B7BDF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLAmiKoOperatorIDSheet.strings; sourceTree = "<group>"; };
 		FA4BC4E7208F545600B7BDF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLAmiKoOperatorIDSheet.strings; sourceTree = "<group>"; };
@@ -1263,10 +1263,10 @@
 		FA4BA42820B4018C00552CEF /* card */ = {
 			isa = PBXGroup;
 			children = (
-				FA4BA42420B4015700552CEF /* MLSmartCard.h */,
-				FA4BA42520B4015700552CEF /* MLSmartCard.m */,
-				FA4BA42920B401B700552CEF /* MLHealthCard.h */,
-				FA4BA42A20B401B700552CEF /* MLHealthCard.m */,
+				FA4BA42420B4015700552CEF /* SmartCard.h */,
+				FA4BA42520B4015700552CEF /* SmartCard.m */,
+				FA4BA42920B401B700552CEF /* HealthCard.h */,
+				FA4BA42A20B401B700552CEF /* HealthCard.m */,
 			);
 			name = card;
 			sourceTree = "<group>";
@@ -1901,7 +1901,7 @@
 				D5E91B8D17E5E8E400B66B27 /* MLDBAdapter.m in Sources */,
 				D5BACC061EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
 				D545C8E51898527C00491511 /* mztools.c in Sources */,
-				FA4BA42B20B401B700552CEF /* MLHealthCard.m in Sources */,
+				FA4BA42B20B401B700552CEF /* HealthCard.m in Sources */,
 				D5ECDE0C1F2A2B4100970133 /* MLPrescriptionItem.m in Sources */,
 				D5E91B8E17E5E8E400B66B27 /* MLMedication.m in Sources */,
 				D5E91B8F17E5E8E400B66B27 /* MLDataStore.m in Sources */,
@@ -1912,7 +1912,7 @@
 				D545C8E41898527C00491511 /* ioapi.c in Sources */,
 				D5F303431F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */,
-				FA4BA42620B4015700552CEF /* MLSmartCard.m in Sources */,
+				FA4BA42620B4015700552CEF /* SmartCard.m in Sources */,
 				FA6A2BB020B2B0ED0080B4C9 /* MLPatientSheetController.m in Sources */,
 				D5ECDE131F2A7C1200970133 /* MLEditableTextField.m in Sources */,
 				D5E91B9017E5E8E400B66B27 /* MLItemCellView.m in Sources */,
@@ -1938,7 +1938,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA4BA42720B4015700552CEF /* MLSmartCard.m in Sources */,
+				FA4BA42720B4015700552CEF /* SmartCard.m in Sources */,
 				D5F3034B1F21FE2200CAFED3 /* MLPrescriptionsCart.h in Sources */,
 				D5AAB3EF1EB20F3F00002F47 /* MLFullTextDBAdapter.m in Sources */,
 				FA98A7AC20A09CE900B2665B /* MLPrescriptionTableView.m in Sources */,
@@ -1979,7 +1979,7 @@
 				D5ECDE141F2A7C1200970133 /* MLEditableTextField.m in Sources */,
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
 				D5C5C5321F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
-				FA4BA42C20B401B700552CEF /* MLHealthCard.m in Sources */,
+				FA4BA42C20B401B700552CEF /* HealthCard.m in Sources */,
 				D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				D53AB5AE1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,

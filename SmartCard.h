@@ -1,5 +1,5 @@
 //
-//  MLSmartCard.h
+//  SmartCard.h
 //  AmiKo
 //
 //  Created by Alex Bettarini on 22 May 2018
@@ -29,7 +29,7 @@
 /* for our transaction tracking, not defined in the specification */
 #define INS_INVALID        0x00
 
-@interface MLSmartCard : NSObject
+@interface SmartCard : NSObject
 
 @property (nonatomic, retain) TKSmartCardSlotManager * mngr;
 @property (nonatomic, retain) NSMutableArray *slots;

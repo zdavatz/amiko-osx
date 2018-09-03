@@ -1,15 +1,15 @@
 //
-//  MLHealthCard.m
+//  HealthCard.m
 //  AmiKo
 //
 //  Created by Alex Bettarini on 22 May 2018
 //  Copyright © 2018 Ywesee GmbH. All rights reserved.
 //
 
-#import "MLHealthCard.h"
+#import "HealthCard.h"
 #import "MLPatient.h"
 
-@implementation MLHealthCard
+@implementation HealthCard
 
 - (uint8_t) parseTLV:(NSData *)data
 {

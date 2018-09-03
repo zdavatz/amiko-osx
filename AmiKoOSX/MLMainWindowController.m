@@ -360,7 +360,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                  name:@"smartCardDataAcquired"
                                                object:nil];
 
-    healthCard = [[MLHealthCard alloc] init];
+    healthCard = [[HealthCard alloc] init];
 
     [[self window] makeFirstResponder:self];
     [[self window] setBackgroundColor:[NSColor whiteColor]];
@@ -1295,7 +1295,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     labelDoctor.stringValue = firstLine;
 
     
-    NSString *patient = myPatientAddressTextField.stringValue;  // TODO: it doesn't contain the  birthday
+    NSString *patient = myPatientAddressTextField.stringValue;  // TODO: it doesn't contain the birthday
     NSArray *patientArray = [patient componentsSeparatedByString:@"\r\n"];
 //    NSLog(@"patient: <%@>", patient);
 //    NSLog(@"patientArray: %lu <%@>", (unsigned long)patientArray.count, patientArray);

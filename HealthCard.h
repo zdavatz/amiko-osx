@@ -1,14 +1,14 @@
 //
-//  MLHealthCard.h
+//  HealthCard.h
 //  AmiKo
 //
 //  Created by Alex Bettarini on 22 May 2018
 //  Copyright © 2018 Ywesee GmbH. All rights reserved.
 //
 
-#import "MLSmartCard.h"
+#import "SmartCard.h"
 
-@interface MLHealthCard : MLSmartCard
+@interface HealthCard : SmartCard
 {
     NSString *familyName;
     NSString *givenName;

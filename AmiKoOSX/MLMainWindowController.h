@@ -53,7 +53,7 @@ extern NSString* const APP_ID;
 #endif
 
 #import "MLPrescriptionTableView.h"
-#import "MLHealthCard.h"
+#import "HealthCard.h"
 
 #pragma mark -
 
@@ -68,7 +68,7 @@ extern NSString* const APP_ID;
     IBOutlet NSTableView *myTableView;
     IBOutlet NSTableView *mySectionTitles;
     IBOutlet SHCWebView *myWebView;
-    MLHealthCard *healthCard;
+    HealthCard *healthCard;
 }
 
 @property (nonatomic, retain) IBOutlet NSView *myView;
