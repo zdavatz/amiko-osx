@@ -36,15 +36,15 @@
         case 0x82:  // NUMERIC STRING
         {
             s = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
-            NSLog(@"DOB yyyymmdd <%@>", s);
+            NSLog(@"DOB yyyyMMdd <%@>", s);
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 
-            [dateFormat setDateFormat:@"yyyymmdd"]; // convert from this
+            [dateFormat setDateFormat:@"yyyyMMdd"]; // convert from this
             NSDate *dob = [dateFormat dateFromString:s];
             
-            [dateFormat setDateFormat:@"dd.mm.yyyy"];   // to this
+            [dateFormat setDateFormat:@"dd.MM.yyyy"];   // to this
             birthDate = [dateFormat stringFromDate:dob];
-            //NSLog(@"DOB dd.mm.yyyy <%@>", birthDate);
+            //NSLog(@"DOB dd.MM.yyyy <%@>", birthDate);
         }
             break;
             
@@ -88,7 +88,7 @@
             
         case 0x94:  // NUMERIC STRING
             s = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
-            NSLog(@"ExpiryDate yyyymmdd <%@>", s);
+            NSLog(@"ExpiryDate yyyyMMdd <%@>", s);
             break;
             
         default:
