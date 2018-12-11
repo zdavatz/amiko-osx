@@ -52,6 +52,30 @@
 
 #define DYNAMIC_AMK_SELECTION
 
+NS_ENUM(NSInteger, ToolbarButtonTags) {
+    tagToolbarButton_Compendium = 0,
+    tagToolbarButton_Favorites = 1,
+    tagToolbarButton_Interactions = 2,
+    tagToolbarButton_Prescription = 3,
+    tagToolbarButton_Export = 4,
+    tagToolbarButton_Amiko = 5
+};
+
+NS_ENUM(NSInteger, MainButtonTags) {
+    tagButton_Preparation = 0,
+    tagButton_RegistrationOwner = 1,
+    tagButton_ActiveSubstance = 2,
+    tagButton_RegistrationNumber = 3,
+    tagButton_Therapy = 4,
+    tagButton_FullText = 5
+};
+
+NS_ENUM(NSInteger, AlertButtonTags) {
+    tagAlertButton_Overwrite = 100,
+    tagAlertButton_NewFile,
+    tagAlertButton_Cancel
+};
+
 /**
  Database types
  */
@@ -71,12 +95,6 @@ enum {
  */
 enum {
     kExpertInfoView=0, kFullTextSearchView=1, kInteractionsCartView=2
-};
-
-typedef NS_ENUM(NSInteger, ButtonTags) {
-    tagButtonOverwrite = 100,
-    tagButtonNewFile,
-    tagButtonCancel
 };
 
 static NSInteger mUsedDatabase = kAips;
@@ -962,22 +980,27 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSInteger prevState = mCurrentSearchState;
     
     switch (btn.tag) {
-        case 0:
+        case tagButton_Preparation:
             [self setSearchState:kTitle];
             break;
-        case 1:
+
+        case tagButton_RegistrationOwner:
             [self setSearchState:kAuthor];
             break;
-        case 2:
+
+        case tagButton_ActiveSubstance:
             [self setSearchState:kAtcCode];
             break;
-        case 3:
+
+        case tagButton_RegistrationNumber:
             [self setSearchState:kRegNr];
             break;
-        case 4:
+
+        case tagButton_Therapy:
             [self setSearchState:kTherapy];
             break;
-        case 5:
+
+        case tagButton_FullText:
             [self setSearchState:kFullText];
             mCurrentWebView = kFullTextSearchView;
             break;
@@ -1150,8 +1173,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // Create a file open dialog class
     NSOpenPanel* openDlgPanel = [NSOpenPanel openPanel];
     // Set array of file types
-    NSArray *fileTypesArray;
-    fileTypesArray = [NSArray arrayWithObjects:@"db",@"html",@"csv",nil];
+    NSArray *fileTypesArray = [NSArray arrayWithObjects:@"db",@"html",@"csv",nil];
     // Enable options in the dialog
     [openDlgPanel setCanChooseFiles:YES];
     [openDlgPanel setAllowedFileTypes:fileTypesArray];
@@ -1619,16 +1641,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSAlert *alert = [[NSAlert alloc] init]; // Buttons are added from right to left
 
     [alert addButtonWithTitle:NSLocalizedString(@"Overwrite", nil)];
-    [[alert.buttons lastObject] setTag:tagButtonOverwrite];
+    [[alert.buttons lastObject] setTag:tagAlertButton_Overwrite];
     
     [alert setMessageText:NSLocalizedString(@"Overwrite prescription?", nil)];
     [alert setInformativeText:NSLocalizedString(@"Do you really want to overwrite the existing prescription or generate a new one?", nil)];
 
     [alert addButtonWithTitle:NSLocalizedString(@"New prescription", nil)];
-    [[alert.buttons lastObject] setTag:tagButtonNewFile];
+    [[alert.buttons lastObject] setTag:tagAlertButton_NewFile];
 
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
-    [[alert.buttons lastObject] setTag:tagButtonCancel];
+    [[alert.buttons lastObject] setTag:tagAlertButton_Cancel];
 
     //NSLog(@"Alert buttons: %ld", [alert.buttons count]);
 
@@ -1638,19 +1660,19 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         //NSLog(@"returnCode: %ld", returnCode);
 
         // Create a new hash for both "overwrite" and "new file"
-        if (returnCode != tagButtonCancel)
+        if (returnCode != tagAlertButton_Cancel)
             [mPrescriptionsCart[0] makeNewUniqueHash];  // Issue #9
 
         NSURL *url = nil;
 
-        if (returnCode == tagButtonOverwrite) {
+        if (returnCode == tagAlertButton_Overwrite) {
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
                                                     withUniqueHash:mPrescriptionsCart[0].uniqueHash
                                                       andOverwrite:YES];
             modifiedPrescription = false;
             [self updateButtons];
         }
-        else if (returnCode == tagButtonNewFile) {
+        else if (returnCode == tagAlertButton_NewFile) {
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
                                                     withUniqueHash:mPrescriptionsCart[0].uniqueHash
                                                       andOverwrite:NO];
@@ -1714,7 +1736,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) switchTabs:(NSToolbarItem *)item
 {
     switch (item.tag) {
-        case 0:  // Compendium
+        case tagToolbarButton_Compendium:
         {
             // NSLog(@"AIPS Database");
             mUsedDatabase = kAips;
@@ -1758,7 +1780,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [myTabView selectTabViewItemAtIndex:0];
             break;
         }
-        case 1:
+        case tagToolbarButton_Favorites:
         {
             // NSLog(@"Favorites");
             mUsedDatabase = kFavorites;
@@ -1798,7 +1820,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             break;
         }
 
-        case 2:
+        case tagToolbarButton_Interactions:
         {
             // NSLog(@"Interactions");
             mUsedDatabase = kAips;
@@ -1813,7 +1835,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             break;
         }
 
-        case 3:
+        case tagToolbarButton_Prescription:
             // NSLog(@"Rezept");
             mUsedDatabase = kAips;
             mSearchInteractions = false;
@@ -1825,11 +1847,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [myTabView selectTabViewItemAtIndex:2];
             break;
 
-        case 4:
-            NSLog(@"Export");
+        case tagToolbarButton_Export:
+            [self setSearchState:kFullText];
+            [self exportWordListSearchResults];
             break;
 
         default:
+        case tagToolbarButton_Amiko:
             break;
     }
 }
@@ -2968,5 +2992,64 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     }
 
     return NO;
+}
+
+- (void) exportWordListSearchResults
+{
+    NSLog(@"%s", __FUNCTION__);
+    // TODO:
+    // - open input file with list of keywords
+    
+    NSOpenPanel* oPanel = [NSOpenPanel openPanel];
+    [oPanel setCanChooseFiles:YES];
+    [oPanel setAllowedFileTypes:@[@"csv", @"txt"]];
+    [oPanel setAllowsMultipleSelection:false];
+    [oPanel setPrompt:@"Open"]; // TODO: localize
+    [oPanel setTitle:@"Select the file containing the list of keywords"];
+    [oPanel beginWithCompletionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            NSURL *fileURL = [[oPanel  URLs] firstObject];
+            NSString *fileContents = [NSString stringWithContentsOfURL:fileURL
+                                                               encoding:NSUTF8StringEncoding
+                                                                  error:nil];
+            NSArray *keywords = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+            //NSLog(@"%@", keywords);
+            for (NSString *kw in keywords) {
+                if (kw.length < 3) // this also takes care of the empty line at the end of file
+                    continue;
+                
+                NSArray *result = [self searchAnyDatabasesWith:kw];  // amiko_frequency_de.db
+                //NSLog(@"%d result:%@", __LINE__, result);
+                for (MLFullTextEntry *entry in result) {
+                    //NSLog(@"%d entry:%@", __LINE__, entry);
+                    //NSLog(@"%d getRegChaptersDict: %@", __LINE__, [entry getRegChaptersDict]);
+                    //NSLog(@"getRegnrs: %@", [entry getRegnrs]);  // as string
+                    NSArray *rnArray = [entry getRegnrsAsArray];
+                    //NSLog(@"%d getRegnrsAsArray: %@", __LINE__, rnArray);
+                    for (NSString *rn in rnArray) {
+                        NSSet *set = [entry getChaptersForKey:rn];
+                        NSLog(@"%d kw:%@, rn:%@, set: %@", __LINE__, kw, rn, set);
+                        
+                        // TODO: look into amiko_db_full_idx_de.db, column content, filter by rn and get the HTML
+
+                        //NSString *query = [NSString stringWithFormat:@"select * from amikodb where content LIKE '%@'", rn];
+                        //NSString *query = [NSString stringWithFormat:@"select * from 'amikodb' where 'content' LIKE '%%65161%%'"];
+                        NSString *query = [NSString stringWithFormat:@"select content from amikodb where content LIKE '%%65161%%'"];
+
+                        //SELECT `_rowid_`,* FROM `amikodb` WHERE `content` LIKE '%65161%'
+                        
+                        NSArray *htmlArray = [mDb searchWithQuery:query];
+                        // Always one element in the array TODO: get the first (and only) element as a string
+                        //NSLog(@"%d htmlArray: %@", __LINE__, htmlArray);
+                        // TODO: in the html find each chapter of thet set, in each chapter the string could appear multiple times
+                        // add it to the output
+                        // TODO: show result
+                        // TODO: optionally save to file
+                    }
+                }
+            }
+
+        }
+    }];
 }
 @end
