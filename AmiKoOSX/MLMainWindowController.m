@@ -363,7 +363,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     healthCard = [[HealthCard alloc] init];
 
     [[self window] makeFirstResponder:self];
-    [[self window] setBackgroundColor:[NSColor whiteColor]];
+    [[self window] setBackgroundColor:[NSColor windowBackgroundColor]];
     return self;
 }
 

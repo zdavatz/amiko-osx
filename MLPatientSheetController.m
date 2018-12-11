@@ -584,7 +584,7 @@
         if (p.databaseType==eAddressBook) {
             cellView.textField.textColor = [NSColor grayColor];
         } else {
-            cellView.textField.textColor = [NSColor blackColor];
+            cellView.textField.textColor = [NSColor textColor];
         }
         return cellView;
     }

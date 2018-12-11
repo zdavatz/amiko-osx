@@ -26,7 +26,7 @@
 + (NSColor *) typicalGray { return [NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:1.0]; }
 + (NSColor *) typicalGreen { return [NSColor colorWithCalibratedRed:0.0 green:0.8 blue:0.2 alpha:1.0]; }
 + (NSColor *) typicalRed { return [NSColor colorWithCalibratedRed:1.0 green:0.0 blue:0.0 alpha:1.0]; }
-+ (NSColor *) mainTextFieldGray { return [NSColor colorWithCalibratedRed:(20/255.0) green:(20/255.0) blue:(20/255.0) alpha:1.0]; }
++ (NSColor *) mainTextFieldGray { return [NSColor textColor]; }
 + (NSColor *) mainTextFieldBlue { return [NSColor colorWithCalibratedRed:0.4 green:0.4 blue:0.8 alpha:1.0]; }
 + (NSColor *) selectBlue { return [NSColor colorWithCalibratedRed:0.8 green:0.8 blue:1.0 alpha:1.0]; }
 + (NSColor *) lightYellow { return [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:0.0 alpha:1.0]; }

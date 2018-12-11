@@ -61,7 +61,7 @@
     // mark the top margin
     NSRect r3 = NSMakeRect(0, pageSize.height-[printInfo topMargin],
                            pageSize.width, 2);
-    [[NSColor blackColor] set];
+    [[NSColor textColor] set];
     NSRectFill( r3 );
     
 #if 0
