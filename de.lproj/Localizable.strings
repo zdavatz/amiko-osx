@@ -5,6 +5,9 @@
 "Address Book Mac (%ld)" = "Addressbuch Mac (%ld)";
 
 /* No comment provided by engineer. */
+"AmiKo Database Updated!" = "AmiKo Datenbank aktualisiert!";
+
+/* No comment provided by engineer. */
 "AmiKo Prescription" = "AmiKo Rezept";
 
 /* No comment provided by engineer. */
@@ -78,6 +81,9 @@
 
 /* No comment provided by engineer. */
 "The contact was saved in the %@ address book" = "Kontakt wurde im %@ Addressbuch gespeichert.";
+
+/* No comment provided by engineer. */
+"The database contains:\n- %ld Products\n- %ld Specialist information\n- %ld Keywords\n- %d Interactions" = "Die Datenbank enthält:\n- %ld Produkte\n- %ld Fachinfos\n- %ld Suchbegriffe\n- %d Interaktionen";
 
 /* No comment provided by engineer. */
 "Therapy" = "Therapie";

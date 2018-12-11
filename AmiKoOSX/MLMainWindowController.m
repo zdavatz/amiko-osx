@@ -768,13 +768,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             NSAlert *alert = [[NSAlert alloc] init];
             
             [alert addButtonWithTitle:@"OK"];
-            if ([MLUtilities isGermanApp]) {
-                [alert setMessageText:@"AmiKo Datenbank aktualisiert!"];
-                [alert setInformativeText:[NSString stringWithFormat:@"Die Datenbank enthält:\n- %ld Produkte\n- %ld Fachinfos\n- %ld Suchbegriffe\n- %d Interaktionen", numProducts, numFachinfos, numSearchTerms, numInteractions]];
-            } else if ([MLUtilities isFrenchApp]) {
-                [alert setMessageText:@"Banque des donnees CoMed mises à jour!"];
-                [alert setInformativeText:[NSString stringWithFormat:@"La banque des données contien:\n- %ld produits\n- %ld notices infopro\n- %ld mot-clés\n- %d interactions", numProducts, numFachinfos, numSearchTerms, numInteractions]];
-            }
+            [alert setMessageText:NSLocalizedString(@"AmiKo Database Updated!", nil)];
+            [alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"The database contains:\n- %ld Products\n- %ld Specialist information\n- %ld Keywords\n- %d Interactions", nil), numProducts, numFachinfos, numSearchTerms, numInteractions]];
             [alert setAlertStyle:NSInformationalAlertStyle];
             
             [alert beginSheetModalForWindow:[self window]
