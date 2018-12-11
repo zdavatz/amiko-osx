@@ -881,6 +881,11 @@
                             <action selector="toolbarAction:" target="-2" id="Aeq-3z-6u5"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="67D0FBC3-5F83-4E3B-94FA-E8994B280031" explicitItemIdentifier="Export" label="Export" paletteLabel="Export" toolTip="Prescription" tag="4" image="export" selectable="YES" id="m1h-SA-01k" userLabel="Export">
+                        <connections>
+                            <action selector="toolbarAction:" target="-2" id="rrH-m1-ivj"/>
+                        </connections>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="6"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="8">
                         <connections>
@@ -900,6 +905,7 @@
                     <toolbarItem reference="11"/>
                     <toolbarItem reference="zHs-vk-i8q"/>
                     <toolbarItem reference="Kkv-pT-r1G"/>
+                    <toolbarItem reference="m1h-SA-01k"/>
                     <toolbarItem reference="7"/>
                     <toolbarItem reference="8"/>
                     <toolbarItem reference="9"/>
@@ -1120,6 +1126,7 @@
         <image name="NSStopProgressTemplate" width="11" height="11"/>
         <image name="deleteIcon" width="12.800000190734863" height="12.800000190734863"/>
         <image name="desitin" width="512" height="512"/>
+        <image name="export" width="48" height="48"/>
         <image name="favorites" width="418.90908813476562" height="418.90908813476562"/>
         <image name="interactions" width="17.130111694335938" height="17.130111694335938"/>
         <image name="maindb" width="121.26316070556641" height="121.26316070556641"/>

@@ -307,10 +307,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     mUsedDatabase = kAips;
     [myToolbar setSelectedItemIdentifier:@"AIPS"];
     
+#if 0
+    // FIXME: hardcoding the 5 is not good
+    // besides, it's a "system" icon and it's localized automatically
     if ([MLUtilities isGermanApp])
-        [[myToolbar items][4] setLabel:@"Drucken"];
+        [[myToolbar items][5] setLabel:@"Drucken"];
     else if ([MLUtilities isFrenchApp])
-        [[myToolbar items][4] setLabel:@"Imprimer"];
+        [[myToolbar items][5] setLabel:@"Imprimer"];
+#endif
     
     // Set search state
     [self setSearchState:kTitle];
@@ -1710,7 +1714,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) switchTabs:(NSToolbarItem *)item
 {
     switch (item.tag) {
-        case 0:
+        case 0:  // Compendium
         {
             // NSLog(@"AIPS Database");
             mUsedDatabase = kAips;
@@ -1793,6 +1797,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [myTabView selectTabViewItemAtIndex:0];
             break;
         }
+
         case 2:
         {
             // NSLog(@"Interactions");
@@ -1807,8 +1812,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [myTabView selectTabViewItemAtIndex:0];
             break;
         }
+
         case 3:
-        {
             // NSLog(@"Rezept");
             mUsedDatabase = kAips;
             mSearchInteractions = false;
@@ -1819,7 +1824,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             // Switch tab view
             [myTabView selectTabViewItemAtIndex:2];
             break;
-        }
+
+        case 4:
+            NSLog(@"Export");
+            break;
+
         default:
             break;
     }

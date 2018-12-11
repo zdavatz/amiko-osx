@@ -128,6 +128,15 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "j7B-kK-Vag"; */
 "j7B-kK-Vag.title" = "Text Cell";
 
+/* Class = "NSToolbarItem"; label = "Export"; ObjectID = "m1h-SA-01k"; */
+"m1h-SA-01k.label" = "Exportation";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Export"; ObjectID = "m1h-SA-01k"; */
+"m1h-SA-01k.paletteLabel" = "Exportation";
+
+/* Class = "NSToolbarItem"; toolTip = "Export"; ObjectID = "m1h-SA-01k"; */
+"m1h-SA-01k.toolTip" = "Exportation";
+
 /* Class = "NSButtonCell"; title = "Button"; ObjectID = "nbD-an-Hev"; */
 "nbD-an-Hev.title" = "Button";
 
