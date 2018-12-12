@@ -2994,18 +2994,19 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     return NO;
 }
 
+#pragma mark -
+
 - (void) exportWordListSearchResults
 {
     NSLog(@"%s", __FUNCTION__);
-    // TODO:
     // - open input file with list of keywords
     
     NSOpenPanel* oPanel = [NSOpenPanel openPanel];
     [oPanel setCanChooseFiles:YES];
     [oPanel setAllowedFileTypes:@[@"csv", @"txt"]];
     [oPanel setAllowsMultipleSelection:false];
-    [oPanel setPrompt:@"Open"]; // TODO: localize
-    [oPanel setTitle:@"Select the file containing the list of keywords"];
+    [oPanel setPrompt:NSLocalizedString(@"Open", nil)]; // TODO: localize
+    [oPanel setMessage:NSLocalizedString(@"Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8.", nil)];
     [oPanel beginWithCompletionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSURL *fileURL = [[oPanel  URLs] firstObject];
@@ -3014,27 +3015,46 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                                   error:nil];
             NSArray *keywords = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
             //NSLog(@"%@", keywords);
+            int totalHitsDb1 = 0;
+            int totalHitsDb2 = 0;
+            // TODO: run the following in a separate work thread
+
             for (NSString *kw in keywords) {
                 if (kw.length < 3) // this also takes care of the empty line at the end of file
                     continue;
                 
-                NSArray *result = [self searchAnyDatabasesWith:kw];  // amiko_frequency_de.db
-                //NSLog(@"%d result:%@", __LINE__, result);
-                for (MLFullTextEntry *entry in result) {
-                    //NSLog(@"%d entry:%@", __LINE__, entry);
+#if 0
+                NSArray *resultDb1 = [self searchAnyDatabasesWith:kw];  // amiko_frequency_de.db
+#else
+                NSArray *resultDb1 = [mFullTextDb searchKeyword:kw];
+#endif
+                NSLog(@"Line %d ========= search keyword: <%@> in DB1, %lu hits", __LINE__, kw, (unsigned long)[resultDb1 count]);
+                //NSLog(@"Line %d, resultDb1:%@", __LINE__, resultDb1);
+                for (MLFullTextEntry *entry in resultDb1) {
+                    if (![[entry keyword] isEqualToString:kw]) {
+                        // Make the search case sensitive. Easier to do it this way than through SQL
+                        NSLog(@"Line %d --------- skip: %@", __LINE__, [entry keyword]);
+                        continue;
+                    }
+                    
+                    NSLog(@"Line %d --------- %@", __LINE__, entry);
                     //NSLog(@"%d getRegChaptersDict: %@", __LINE__, [entry getRegChaptersDict]);
                     //NSLog(@"getRegnrs: %@", [entry getRegnrs]);  // as string
                     NSArray *rnArray = [entry getRegnrsAsArray];
                     //NSLog(@"%d getRegnrsAsArray: %@", __LINE__, rnArray);
                     for (NSString *rn in rnArray) {
+
+                        //NSDictionary *dic2 = [entry getRegChaptersDict];    // One or more lines like:
+                        //NSLog(@"Line %d, chapter dic: %@", __LINE__, dic2); // 65161 = "{(\n    14\n)}"
+
                         NSSet *set = [entry getChaptersForKey:rn];
-                        NSLog(@"%d kw:%@, rn:%@, set: %@", __LINE__, kw, rn, set);
+                        NSLog(@"Line %d, rn: %@ has chapter set: %@", __LINE__, rn, set);
                         
-                        // TODO: look into amiko_db_full_idx_de.db, column content, filter by rn and get the HTML
+                        // Look into amiko_db_full_idx_de.db, column content, filter by rn and get the HTML
 
                         //NSString *query = [NSString stringWithFormat:@"select * from amikodb where content LIKE '%@'", rn];
                         //NSString *query = [NSString stringWithFormat:@"select * from 'amikodb' where 'content' LIKE '%%65161%%'"];
-                        NSString *query = [NSString stringWithFormat:@"select content from amikodb where content LIKE '%%65161%%'"];
+                        NSString *query = [NSString stringWithFormat:@"select content from amikodb where content LIKE '%%%@%%'", rn];
 
                         //SELECT `_rowid_`,* FROM `amikodb` WHERE `content` LIKE '%65161%'
                         
@@ -3045,11 +3065,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                         // add it to the output
                         // TODO: show result
                         // TODO: optionally save to file
+                        totalHitsDb2++;
                     }
-                }
-            }
-
-        }
+                    totalHitsDb1++;
+                }  // for
+            } // for keywords
+            NSLog(@"Line %d, total chapter searches in DB2:%u", __LINE__, totalHitsDb2);
+            NSLog(@"Line %d, total keywords used from DB1:%u", __LINE__, totalHitsDb1);
+        } // if ok button
     }];
 }
 @end

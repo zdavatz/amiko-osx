@@ -79,6 +79,12 @@
     return[regChaptersDict count];
 }
 
+- (NSString *)description
+{    
+    return [NSString stringWithFormat:@"%@ keyword:<%@>, regnrs:<%@>, hash:<%@>",
+            NSStringFromClass([self class]), keyword, regnrs, hash];
+}
+
 @end
 
 
