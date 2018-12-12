@@ -51,6 +51,7 @@
 #import "MLPrescriptionTableView.h"
 
 #define DYNAMIC_AMK_SELECTION
+#define CSV_SEPARATOR       @";"
 
 NS_ENUM(NSInteger, ToolbarButtonTags) {
     tagToolbarButton_Compendium = 0,
@@ -128,6 +129,9 @@ static BOOL mPrescriptionMode = false;
 #pragma mark -
 
 @interface MLMainWindowController ()
+{
+    NSMutableString *csv;
+}
 
 - (void) updateButtons;
 
@@ -2864,6 +2868,28 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 mFullTextContentStr = [mFullTextSearch tableWithArticles:listOfArticles
                                                       andRegChaptersDict:dict
                                                                andFilter:@""];
+#ifdef DEBUG
+/*
+2869 listOfRegnrs: (
+ 65161
+ )
+ 
+2870 listOfArticles: (
+ "<MLMedication: 0x6000033d8d20>"
+ )
+ 
+2871 dict: {
+ 65161 = "{(\n    14\n)}";
+ }
+
+2872 mFullTextContentStr: <ul><li style="background-color:whitesmoke;" id="{firstLetter}"><a onclick="displayFachinfo('65161','{anchor}')"><span style="font-size:0.8em"><b>Isoniazid Labatec®</b></span></a> <span style="font-size:0.7em"> | Labatec Pharma SA</span><br><span style="font-size:0.75em; color:#0088BB"> <a onclick="displayFachinfo('65161','section14')">Kinetik</a></span><br></li></ul>
+*/
+                NSLog(@"%d hashId: %@", __LINE__, hashId);
+                NSLog(@"%d listOfRegnrs: %@", __LINE__, listOfRegnrs);
+                NSLog(@"%d listOfArticles: %@", __LINE__, listOfArticles);
+                NSLog(@"%d dict: %@", __LINE__, dict);
+                NSLog(@"%d mFullTextContentStr: %@", __LINE__, mFullTextContentStr);
+#endif
                 mCurrentWebView = kFullTextSearchView;
                 [self updateFullTextSearchView:mFullTextContentStr];
             }
@@ -2996,83 +3022,280 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 #pragma mark -
 
-- (void) exportWordListSearchResults
+- (NSArray *) getKeywordsFromFile
 {
-    NSLog(@"%s", __FUNCTION__);
-    // - open input file with list of keywords
-    
     NSOpenPanel* oPanel = [NSOpenPanel openPanel];
     [oPanel setCanChooseFiles:YES];
     [oPanel setAllowedFileTypes:@[@"csv", @"txt"]];
     [oPanel setAllowsMultipleSelection:false];
-    [oPanel setPrompt:NSLocalizedString(@"Open", nil)]; // TODO: localize
+    [oPanel setPrompt:NSLocalizedString(@"Open", nil)];
     [oPanel setMessage:NSLocalizedString(@"Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8.", nil)];
-    [oPanel beginWithCompletionHandler:^(NSInteger result) {
-        if (result == NSFileHandlingPanelOKButton) {
-            NSURL *fileURL = [[oPanel  URLs] firstObject];
-            NSString *fileContents = [NSString stringWithContentsOfURL:fileURL
-                                                               encoding:NSUTF8StringEncoding
-                                                                  error:nil];
-            NSArray *keywords = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-            //NSLog(@"%@", keywords);
-            int totalHitsDb1 = 0;
-            int totalHitsDb2 = 0;
-            // TODO: run the following in a separate work thread
 
-            for (NSString *kw in keywords) {
-                if (kw.length < 3) // this also takes care of the empty line at the end of file
-                    continue;
-                
-#if 0
-                NSArray *resultDb1 = [self searchAnyDatabasesWith:kw];  // amiko_frequency_de.db
-#else
-                NSArray *resultDb1 = [mFullTextDb searchKeyword:kw];
+    if ([oPanel runModal] != NSFileHandlingPanelOKButton) {
+        NSLog(@"%s canceled", __FUNCTION__);
+        return nil;
+    }
+
+    NSURL *fileURL = [[oPanel  URLs] firstObject];
+    NSString *fileContents = [NSString stringWithContentsOfURL:fileURL
+                                                      encoding:NSUTF8StringEncoding
+                                                         error:nil];
+
+    return [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+}
+
+// TODO: in the html find each chapter of the set, in each chapter the string could appear multiple times
+// add it to the output
+// TODO: show result
+- (void) searchParagraphInHTML:(NSString *)html
+                      chapters:(NSSet *)chSet
+                       keyword:(NSString *)aKeyword
+{
+#ifdef DEBUG
+    //NSLog(@"%s %d, html %p lenght:%lu", __FUNCTION__, __LINE__, html, (unsigned long)[html length]);
+    //NSLog(@"%s %d, html %@", __FUNCTION__, __LINE__, html);
+    NSLog(@"%s %d, chapters %@", __FUNCTION__, __LINE__, chSet);
 #endif
-                NSLog(@"Line %d ========= search keyword: <%@> in DB1, %lu hits", __LINE__, kw, (unsigned long)[resultDb1 count]);
-                //NSLog(@"Line %d, resultDb1:%@", __LINE__, resultDb1);
-                for (MLFullTextEntry *entry in resultDb1) {
-                    if (![[entry keyword] isEqualToString:kw]) {
-                        // Make the search case sensitive. Easier to do it this way than through SQL
-                        NSLog(@"Line %d --------- skip: %@", __LINE__, [entry keyword]);
-                        continue;
-                    }
-                    
-                    NSLog(@"Line %d --------- %@", __LINE__, entry);
-                    //NSLog(@"%d getRegChaptersDict: %@", __LINE__, [entry getRegChaptersDict]);
-                    //NSLog(@"getRegnrs: %@", [entry getRegnrs]);  // as string
-                    NSArray *rnArray = [entry getRegnrsAsArray];
-                    //NSLog(@"%d getRegnrsAsArray: %@", __LINE__, rnArray);
-                    for (NSString *rn in rnArray) {
 
-                        //NSDictionary *dic2 = [entry getRegChaptersDict];    // One or more lines like:
-                        //NSLog(@"Line %d, chapter dic: %@", __LINE__, dic2); // 65161 = "{(\n    14\n)}"
+#if 0
+    NSString *xmlHeader = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+    html = [xmlHeader stringByAppendingString:html];
+#endif
+#if 0
+    html = [html stringByReplacingOccurrencesOfString:@"<html>" withString:@"<html xmlns=\"http://www.w3.org/1999/xhtml\">"];
+#endif
+#if 0
+    html = [html stringByReplacingOccurrencesOfString:@"\\\"" withString:@"\""];
+#endif
+#if 0
+    html = [[html componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@"\n"];
+#endif
 
-                        NSSet *set = [entry getChaptersForKey:rn];
-                        NSLog(@"Line %d, rn: %@ has chapter set: %@", __LINE__, rn, set);
-                        
-                        // Look into amiko_db_full_idx_de.db, column content, filter by rn and get the HTML
+    NSError *err = nil;
+    NSXMLDocument *xmlDoc = [[NSXMLDocument alloc] initWithXMLString:html
+                                                             options:(NSXMLNodePreserveWhitespace|NSXMLNodePreserveCDATA)
+                                                               error:&err];
+    if (!xmlDoc) {
+        NSLog(@"%s %d %@", __FUNCTION__, __LINE__, [err localizedDescription]);
+        xmlDoc = [[NSXMLDocument alloc] initWithXMLString:html
+                                                  options:NSXMLDocumentTidyHTML
+                                                    error:&err];
+    }
 
-                        //NSString *query = [NSString stringWithFormat:@"select * from amikodb where content LIKE '%@'", rn];
-                        //NSString *query = [NSString stringWithFormat:@"select * from 'amikodb' where 'content' LIKE '%%65161%%'"];
-                        NSString *query = [NSString stringWithFormat:@"select content from amikodb where content LIKE '%%%@%%'", rn];
+    if (!xmlDoc) {
+        NSLog(@"%s %d %@", __FUNCTION__, __LINE__, [err localizedDescription]);
+        return;
+    }
 
-                        //SELECT `_rowid_`,* FROM `amikodb` WHERE `content` LIKE '%65161%'
-                        
-                        NSArray *htmlArray = [mDb searchWithQuery:query];
-                        // Always one element in the array TODO: get the first (and only) element as a string
-                        //NSLog(@"%d htmlArray: %@", __LINE__, htmlArray);
-                        // TODO: in the html find each chapter of thet set, in each chapter the string could appear multiple times
-                        // add it to the output
-                        // TODO: show result
-                        // TODO: optionally save to file
-                        totalHitsDb2++;
-                    }
-                    totalHitsDb1++;
-                }  // for
-            } // for keywords
-            NSLog(@"Line %d, total chapter searches in DB2:%u", __LINE__, totalHitsDb2);
-            NSLog(@"Line %d, total keywords used from DB1:%u", __LINE__, totalHitsDb1);
-        } // if ok button
-    }];
+    if (![xmlDoc validateAndReturnError:&err])
+        NSLog(@"%s %d %@", __FUNCTION__, __LINE__, [err localizedDescription]);
+
+    NSXMLElement *rootElement = [xmlDoc rootElement];
+    //NSLog(@"rootElement %@", rootElement);
+    //NSLog(@"Line %d HTML root children count %lu", __LINE__, (unsigned long)[rootElement childCount]);
+
+#if 0
+    NSArray *children = [rootElement children];
+    //NSLog(@"children %@", children);  // "head" and "body" (body trunctaed in the printout)
+    for (id child in children)
+        NSLog(@"child %@ %@", [child class], [child name]); // NSXMLFidelityElement "head" and "body"
+#endif
+    
+#if 0
+    NSXMLNode *nodeBody = children[1];
+    NSLog(@"Line %d, class:%@, name:%@, %lu children", __LINE__,
+          [nodeBody class],
+          [nodeBody name],
+          (unsigned long)[nodeBody childCount]);
+
+    NSXMLNode *nodeBodyDiv = [nodeBody childAtIndex:0];
+    NSLog(@"Line %d, class:%@, name:%@, %lu children", __LINE__,
+          [nodeBodyDiv class],
+          [nodeBodyDiv name],
+          (unsigned long)[nodeBodyDiv childCount]);
+#endif
+
+#if 0  // NG
+    //NSArray *pArray = [rootElement elementsForName:@"body"];
+    //NSArray *pBodyElem = [rootElement elementsForName:@"body:div"];
+    //NSArray *pBodyElem = [rootElement elementsForName:@"<body>"];
+    //NSArray *pBodyElem = [rootElement elementsForName:@"body/div"];
+    //NSArray *pBodyElem = [rootElement elementsForName:@"./body/div"];
+    NSArray *pBodyElem = [rootElement elementsForName:@"/html/body/div/div"];
+    NSLog(@"pBodyElem %@", pBodyElem);
+#endif
+
+    NSArray *pBodyElem2 = [rootElement nodesForXPath:@"/html/body/div/div" error:nil];
+    //NSLog(@"pBodyElem2 %lu elements", (unsigned long)[pBodyElem2 count]);
+    for (NSXMLElement *el in pBodyElem2) {
+        NSString *divClass = [[el attributeForName:@"class"] stringValue];
+        NSString *divId = [[el attributeForName:@"id"] stringValue];
+        if (![divClass isEqualToString:@"paragraph"]) {
+#ifdef DEBUG
+            NSLog(@"Line %d skip class:%@ id:%@", __LINE__, divClass, divId);  // [el name] is "div2
+#endif
+            continue;
+        }
+
+        // TODO: extract section number and skip if not in NSSet
+        NSString* numberString;
+        
+        NSScanner *scanner = [NSScanner scannerWithString:divId];
+        NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        
+        // Throw away characters before the first number.
+        [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+        
+        // Collect numbers.
+        [scanner scanCharactersFromSet:numbers intoString:&numberString];
+        NSInteger number = numberString.integerValue;
+        if (![chSet member:numberString])
+            continue;   // skip this section
+
+        NSArray *paragraphs = [el children];
+#ifdef DEBUG
+        NSLog(@"Line %d, use section (%ld) with %lu paragraphs", __LINE__,
+              (long)number,
+              (unsigned long)[paragraphs count]);
+#endif
+        for (NSXMLElement *p in paragraphs) {
+            // [p name]          is "div"
+            // [p stringValue]   content of tag
+            //NSLog(@"Line %d, %lu children", __LINE__, (unsigned long)[p childCount]);
+            if ([[p stringValue] containsString:aKeyword]) {
+                //NSLog(@"TODO: for %@ output this:\n\n%@\n", aKeyword, [p stringValue]);
+                [csv appendFormat:@"\n%@%@%@%@%@%@",
+                 aKeyword,CSV_SEPARATOR,
+                 CSV_SEPARATOR,CSV_SEPARATOR,
+                 [p stringValue],CSV_SEPARATOR];
+            }
+        }
+    }
+    
+#if 0
+    NSXMLNode *pNode = [rootElement attributeForName:@"body:div"];
+    NSLog(@"pNode %@", [pNode name]);
+#endif
+}
+
+- (void) exportWordListSearchResults
+{
+    //NSLog(@"%s", __FUNCTION__);
+
+    NSArray *keywords = [self getKeywordsFromFile];
+    if (!keywords)
+        return;
+
+    //NSLog(@"%@", keywords);
+    int totalHitsDb1 = 0;
+    int totalHitsDb2 = 0;
+
+    // TODO: localize
+    NSArray *csvHeader = @[@"Search Term from Uploaded file",
+                           @"Brand-Name of the drug",
+                           @"Chapter name",
+                           @"Sentence that contains the word",
+                           @"Link to the online reference"];
+    csv = [[csvHeader componentsJoinedByString:CSV_SEPARATOR] mutableCopy];
+    
+    // TODO: run the following in a separate work thread
+    for (NSString *kw in keywords) {
+        if (kw.length < 3) // this also takes care of the empty line at the end of file
+            continue;
+        
+#if 0
+        NSArray *resultDb1 = [self searchAnyDatabasesWith:kw];  // amiko_frequency_de.db
+#else
+        NSArray *resultDb1 = [mFullTextDb searchKeyword:kw];
+#endif
+
+#ifdef DEBUG
+        NSLog(@"Line %d ========= search keyword: <%@> in DB1 frequency table, %lu hit(s)", __LINE__, kw, (unsigned long)[resultDb1 count]);
+        //NSLog(@"Line %d, resultDb1:%@", __LINE__, resultDb1);
+#endif
+        for (MLFullTextEntry *entry in resultDb1) {
+            if (![[entry keyword] isEqualToString:kw]) {
+                // Make the search case sensitive. Easier to do it this way than through SQL
+#ifdef DEBUG
+                NSLog(@"Line %d --------- skip: %@", __LINE__, [entry keyword]);
+#endif
+                continue;
+            }
+            
+#ifdef DEBUG
+            NSLog(@"Line %d --------- use: %@", __LINE__, entry);
+#endif
+            //NSLog(@"%d getRegChaptersDict: %@", __LINE__, [entry getRegChaptersDict]);
+            //NSLog(@"getRegnrs: %@", [entry getRegnrs]);  // as string
+            NSArray *rnArray = [entry getRegnrsAsArray];
+            //NSLog(@"Line %d, getRegnrsAsArray: %@", __LINE__, rnArray);
+            for (NSString *rn in rnArray) {
+
+                //NSDictionary *dic2 = [entry getRegChaptersDict];    // One or more lines like:
+                //NSLog(@"Line %d, chapter dic: %@", __LINE__, dic2); // 65161 = "{(\n    14\n)}"
+
+                NSSet *chapterSet = [entry getChaptersForKey:rn];
+#ifdef DEBUG
+                NSLog(@"Line %d, rn: %@ has chapter set: %@", __LINE__, rn, chapterSet);
+#endif
+                
+                // Look into amiko_db_full_idx_de.db, column content, filter by rn and get the HTML
+
+#if 0  // A
+                // See line 2845
+                NSString *hashId = [entry hash];
+                MLFullTextEntry *mFullTextEntry2 = [mFullTextDb searchHash:hashId];
+                NSArray *listOfRegnrs = [mFullTextEntry2 getRegnrsAsArray];
+                NSArray *listOfArticles = [mDb searchRegnrsFromList:listOfRegnrs];
+                NSDictionary *dict = [mFullTextEntry getRegChaptersDict];
+                NSLog(@"%d listOfRegnrs: %@", __LINE__, listOfRegnrs);
+                NSLog(@"%d listOfArticles: %@", __LINE__, listOfArticles);
+                NSLog(@"%d dict: %@", __LINE__, dict);
+                
+                NSString *mFullTextContentStr2 = [mFullTextSearch tableWithArticles:listOfArticles
+                                                                 andRegChaptersDict:dict
+                                                                          andFilter:@""];
+                NSLog(@"%d mFullTextContentStr2: %@", __LINE__, mFullTextContentStr2);
+#endif
+#if 1   // B
+                MLMedication *mMed = [mDb getMediWithRegnr:rn];
+                NSString *html = mMed.contentStr;
+                //NSLog(@"%d mMed.contentStr: %@", __LINE__, html);
+#endif
+#if 0 // C
+                NSString *query = [NSString stringWithFormat:@"select content from amikodb where content LIKE '%%%@%%'", rn];
+
+                NSArray *htmlArray = [mDb searchWithQuery:query];
+                NSLog(@"%d htmlArray: %@", __LINE__, htmlArray);
+                if ([htmlArray count] != 1) {
+                    NSLog(@"Cannot handle HTML array with %lu entries", (unsigned long)[htmlArray count]);
+                    continue;
+                }
+
+                NSString *html = htmlArray[0];
+#endif
+
+                [self searchParagraphInHTML:html chapters:chapterSet keyword:kw];
+
+                totalHitsDb2++;
+            }
+            totalHitsDb1++;
+        }  // for
+    } // for keywords
+
+
+    NSLog(@"Line %d, total chapter searches in DB2:%u", __LINE__, totalHitsDb2);
+    NSLog(@"Line %d, total keywords used from DB1:%u", __LINE__, totalHitsDb1);
+    //NSLog(@"Line %d, csv:%@", __LINE__, csv);
+    
+    // TODO: optionally save to file
+    // ~/Library/Containers/amikoosx/Data/Issue44.csv
+    NSString *fileName = @"Issue44.csv";
+    NSError *error;
+    BOOL res = [csv writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    
+    if (!res) {
+        NSLog(@"Error %@ while writing to file %@", [error localizedDescription], fileName );
+    }
 }
 @end

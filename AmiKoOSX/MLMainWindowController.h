@@ -135,6 +135,10 @@ extern NSString* const APP_ID;
 - (void) loadPrescription:(NSString *)filename andRefreshHistory:(bool)refresh;
 - (MLMedication *) getShortMediWithId:(long)mid;
 - (void) newHealthCardData:(NSNotification *)notification;
+
+- (void) searchParagraphInHTML:(NSString *)html
+                      chapters:(NSSet *)ch
+                       keyword:(NSString *)aKeyword;
 - (void) exportWordListSearchResults;
 
 @end
