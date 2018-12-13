@@ -62,10 +62,10 @@
 "Not specified" = "k.A.";
 
 /* No comment provided by engineer. */
-"Open" = "Open";
+"Open" = "Öffnen";
 
 /* No comment provided by engineer. */
-"Open with" = "Open with";
+"Open with" = "Öffnen mit";
 
 /* No comment provided by engineer. */
 "Overwrite" = "Überschreiben";
@@ -104,7 +104,7 @@
 "Search Term from Uploaded file" = "Suchbegriff aus hochgeladener Datei";
 
 /* CSV header */
-"Sentence that contains the word" = "Satz, der das Wort enthält.";
+"Sentence that contains the word" = "Satz, der das Wort enthält";
 
 /* No comment provided by engineer. */
 "The contact has been removed from the %@ Address Book" = "Kontakt wurde vom %@ Addressbuch gelöscht.";
