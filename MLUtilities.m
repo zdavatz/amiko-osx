@@ -26,24 +26,11 @@
 #if defined (AMIKO)
 NSString* const APP_NAME = @"AmiKo";
 NSString* const APP_ID = @"708142753";
-#elif defined (AMIKO_ZR)
-NSString* const APP_NAME = @"AmiKo-zR";
-NSString* const APP_ID = @"708142753";
-#elif defined (AMIKO_DESITIN)
-NSString* const APP_NAME = @"AmiKo-Desitin";
-NSString* const APP_ID = @"708142753";
 #elif defined (COMED)
 NSString* const APP_NAME = @"CoMed";
 NSString* const APP_ID = @"710472327";
-#elif defined (COMED_ZR)
-NSString* const APP_NAME = @"CoMed-zR";
-NSString* const APP_ID = @"710472327";
-#elif defined (COMED_DESITIN)
-NSString* const APP_NAME = @"CoMed-Desitin";
-NSString* const APP_ID = @"710472327";
 #else
-NSString* const APP_NAME = @"AmiKo";
-NSString* const APP_ID = @"708142753";
+#error "TARGET not selected"
 #endif
 
 @implementation MLUtilities

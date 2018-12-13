@@ -29,28 +29,16 @@
 #import "MLSignatureView.h"
 #import "MLPrescriptionsCart.h"
 
-#if defined (AMIKO)
+//#if defined (AMIKO)
 extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
-#elif defined (AMIKO_ZR)
-extern NSString* const APP_NAME;
-extern NSString* const APP_ID;
-#elif defined (AMIKO_DESITIN)
-extern NSString* const APP_NAME;
-extern NSString* const APP_ID;
-#elif defined (COMED)
-extern NSString* const APP_NAME;
-extern NSString* const APP_ID;
-#elif defined (COMED_ZR)
-extern NSString* const APP_NAME;
-extern NSString* const APP_ID;
-#elif defined (COMED_DESITIN)
-extern NSString* const APP_NAME;
-extern NSString* const APP_ID;
-#else
-extern NSString* const APP_NAME;
-extern NSString* const APP_ID;
-#endif
+//#elif defined (COMED)
+//extern NSString* const APP_NAME;
+//extern NSString* const APP_ID;
+//#else
+//extern NSString* const APP_NAME;
+//extern NSString* const APP_ID;
+//#endif
 
 #import "MLPrescriptionTableView.h"
 #import "HealthCard.h"
