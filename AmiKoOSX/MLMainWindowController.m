@@ -3103,7 +3103,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
           (unsigned long)[nodeBodyDiv childCount]);
 #endif
 
-    NSArray *shortTitles = [csvMedication listOfSectionTitles];  // they are hardcoded into the app
+//    NSArray *shortTitles = [csvMedication listOfSectionTitles];  // they are hardcoded into the app
+    
     NSString *brandName;
     NSArray *pBodyElem2 = [rootElement nodesForXPath:@"/html/body/div/div" error:nil];
     //NSLog(@"pBodyElem2 %lu elements", (unsigned long)[pBodyElem2 count]);
@@ -3138,7 +3139,20 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         if (![chSet member:numberString])
             continue;   // skip this section
 
+        NSString *chapterName;
+#if 0
+        // It's not as simple as this:
         NSInteger chNumber = numberString.integerValue;
+        chapterName = shortTitles[chNumber - 1];  // subtract 1 because chpater 1 has index 0
+#else
+        // See how it's done in file 'MLFullTextSeaerch.m' function 'tableWithArticles'
+
+        //NSLog(@"Line %d, kw:%@ index:%ld of %lu", __LINE__, aKeyword, (long)chNumber, (unsigned long)[shortTitles count]);
+        NSDictionary *indexToTitlesDict = [csvMedication indexToTitlesDict];
+        //NSLog(@"Line %d, indexToTitlesDict:%@", __LINE__, indexToTitlesDict);
+        chapterName = indexToTitlesDict[numberString];
+        //NSLog(@"Line %d, cStr:%@", __LINE__, chapterName);
+#endif
 
         NSArray *paragraphs = [el children];
 #ifdef DEBUG
@@ -3158,7 +3172,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                  brandName, CSV_SEPARATOR,
                  CSV_SEPARATOR, // TODO: ATC-Code
                  CSV_SEPARATOR, // TODO: Substance name
-                 shortTitles[chNumber - 1], CSV_SEPARATOR, // subtract 1 because chpater 1 has index 0
+                 chapterName, CSV_SEPARATOR,
                  [p stringValue],CSV_SEPARATOR,
                  link];
 
@@ -3194,6 +3208,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                            NSLocalizedString(@"Link to the online reference", "CSV header")];
     csv = [[csvHeader componentsJoinedByString:CSV_SEPARATOR] mutableCopy];
     
+    //[self launchProgressIndicator];
+
     // TODO: run the following in a separate work thread
     for (NSString *kw in keywords) {
         if (kw.length < 3) // this also takes care of the empty line at the end of file
@@ -3283,6 +3299,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSLog(@"Line %d, total keywords used from DB1:%u", __LINE__, totalHitsDb1);
     //NSLog(@"Line %d, csv:%@", __LINE__, csv);
     
+    //[self stopProgressIndicator];
+
     // TODO: optionally save to file
     // ~/Library/Containers/amikoosx/Data/Issue44.csv
     NSString *fileName = @"Issue44.csv";
