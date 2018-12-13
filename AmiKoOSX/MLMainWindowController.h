@@ -54,6 +54,7 @@ extern NSString* const APP_ID;
 
 #import "MLPrescriptionTableView.h"
 #import "HealthCard.h"
+#import "MLFullTextEntry.h"
 
 #pragma mark -
 
@@ -138,7 +139,8 @@ extern NSString* const APP_ID;
 
 - (void) searchParagraphInHTML:(NSString *)html
                       chapters:(NSSet *)ch
-                       keyword:(NSString *)aKeyword;
+                       keyword:(NSString *)aKeyword
+                         regnr:(NSString *)rn;
 - (void) exportWordListSearchResults;
 
 @end

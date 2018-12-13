@@ -3050,25 +3050,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) searchParagraphInHTML:(NSString *)html
                       chapters:(NSSet *)chSet
                        keyword:(NSString *)aKeyword
+                         regnr:(NSString *)rn
 {
 #ifdef DEBUG
     //NSLog(@"%s %d, html %p lenght:%lu", __FUNCTION__, __LINE__, html, (unsigned long)[html length]);
     //NSLog(@"%s %d, html %@", __FUNCTION__, __LINE__, html);
     NSLog(@"%s %d, chapters %@", __FUNCTION__, __LINE__, chSet);
-#endif
-
-#if 0
-    NSString *xmlHeader = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
-    html = [xmlHeader stringByAppendingString:html];
-#endif
-#if 0
-    html = [html stringByReplacingOccurrencesOfString:@"<html>" withString:@"<html xmlns=\"http://www.w3.org/1999/xhtml\">"];
-#endif
-#if 0
-    html = [html stringByReplacingOccurrencesOfString:@"\\\"" withString:@"\""];
-#endif
-#if 0
-    html = [[html componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@"\n"];
 #endif
 
     NSError *err = nil;
@@ -3115,21 +3102,19 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
           (unsigned long)[nodeBodyDiv childCount]);
 #endif
 
-#if 0  // NG
-    //NSArray *pArray = [rootElement elementsForName:@"body"];
-    //NSArray *pBodyElem = [rootElement elementsForName:@"body:div"];
-    //NSArray *pBodyElem = [rootElement elementsForName:@"<body>"];
-    //NSArray *pBodyElem = [rootElement elementsForName:@"body/div"];
-    //NSArray *pBodyElem = [rootElement elementsForName:@"./body/div"];
-    NSArray *pBodyElem = [rootElement elementsForName:@"/html/body/div/div"];
-    NSLog(@"pBodyElem %@", pBodyElem);
-#endif
-
+    NSString *brandName;
     NSArray *pBodyElem2 = [rootElement nodesForXPath:@"/html/body/div/div" error:nil];
     //NSLog(@"pBodyElem2 %lu elements", (unsigned long)[pBodyElem2 count]);
     for (NSXMLElement *el in pBodyElem2) {
         NSString *divClass = [[el attributeForName:@"class"] stringValue];
         NSString *divId = [[el attributeForName:@"id"] stringValue];
+        if ([divClass isEqualToString:@"MonTitle"]) {
+            brandName = [el stringValue];
+            // sanitize:
+            brandName = [brandName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            continue;
+        }
+
         if (![divClass isEqualToString:@"paragraph"]) {
 #ifdef DEBUG
             NSLog(@"Line %d skip class:%@ id:%@", __LINE__, divClass, divId);  // [el name] is "div2
@@ -3137,8 +3122,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             continue;
         }
 
-        // TODO: extract section number and skip if not in NSSet
-        NSString* numberString;
+        // Extract section number and skip if not in NSSet
         
         NSScanner *scanner = [NSScanner scannerWithString:divId];
         NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
@@ -3147,15 +3131,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
         
         // Collect numbers.
+        NSString* numberString;
         [scanner scanCharactersFromSet:numbers intoString:&numberString];
-        NSInteger number = numberString.integerValue;
+        //NSInteger number = numberString.integerValue;
         if (![chSet member:numberString])
             continue;   // skip this section
 
         NSArray *paragraphs = [el children];
 #ifdef DEBUG
-        NSLog(@"Line %d, use section (%ld) with %lu paragraphs", __LINE__,
-              (long)number,
+        NSLog(@"Line %d, use section (%d) with %lu paragraphs", __LINE__,
+              numberString.intValue,
               (unsigned long)[paragraphs count]);
 #endif
         for (NSXMLElement *p in paragraphs) {
@@ -3164,10 +3149,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             //NSLog(@"Line %d, %lu children", __LINE__, (unsigned long)[p childCount]);
             if ([[p stringValue] containsString:aKeyword]) {
                 //NSLog(@"TODO: for %@ output this:\n\n%@\n", aKeyword, [p stringValue]);
-                [csv appendFormat:@"\n%@%@%@%@%@%@",
-                 aKeyword,CSV_SEPARATOR,
-                 CSV_SEPARATOR,CSV_SEPARATOR,
-                 [p stringValue],CSV_SEPARATOR];
+                NSString *link = [NSString stringWithFormat:@"https://amiko.oddb.org/de/fi?gtin=%@&highlight=%@&anchor=%@", rn, aKeyword, divId];
+                [csv appendFormat:@"\n%@%@%@%@%@%@%@%@",
+                 aKeyword, CSV_SEPARATOR,
+                 brandName, CSV_SEPARATOR,
+                 CSV_SEPARATOR,
+                 [p stringValue],CSV_SEPARATOR,
+                 link];
+
+                //NSLog(@"Line %d, csv:%@", __LINE__, csv);
             }
         }
     }
@@ -3191,11 +3181,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     int totalHitsDb2 = 0;
 
     // TODO: localize
-    NSArray *csvHeader = @[@"Search Term from Uploaded file",
-                           @"Brand-Name of the drug",
-                           @"Chapter name",
-                           @"Sentence that contains the word",
-                           @"Link to the online reference"];
+    NSArray *csvHeader = @[NSLocalizedString(@"Search Term from Uploaded file", "CSV header"),
+                           NSLocalizedString(@"Brand-Name of the drug", "CSV header"),
+                           NSLocalizedString(@"Chapter name", "CSV header"),
+                           NSLocalizedString(@"Sentence that contains the word", "CSV header"),
+                           NSLocalizedString(@"Link to the online reference", "CSV header")];
     csv = [[csvHeader componentsJoinedByString:CSV_SEPARATOR] mutableCopy];
     
     // TODO: run the following in a separate work thread
@@ -3275,14 +3265,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 NSString *html = htmlArray[0];
 #endif
 
-                [self searchParagraphInHTML:html chapters:chapterSet keyword:kw];
+                [self searchParagraphInHTML:html chapters:chapterSet keyword:kw regnr:rn];
 
                 totalHitsDb2++;
             }
             totalHitsDb1++;
         }  // for
     } // for keywords
-
 
     NSLog(@"Line %d, total chapter searches in DB2:%u", __LINE__, totalHitsDb2);
     NSLog(@"Line %d, total keywords used from DB1:%u", __LINE__, totalHitsDb1);
@@ -3291,11 +3280,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // TODO: optionally save to file
     // ~/Library/Containers/amikoosx/Data/Issue44.csv
     NSString *fileName = @"Issue44.csv";
+    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    
+    documentsURL = [documentsURL URLByAppendingPathComponent:fileName];
+    
     NSError *error;
-    BOOL res = [csv writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    BOOL res = [csv writeToFile:[documentsURL path] atomically:YES encoding:NSUTF8StringEncoding error:&error];
     
     if (!res) {
         NSLog(@"Error %@ while writing to file %@", [error localizedDescription], fileName );
+    }
+    else {
+        [[NSWorkspace sharedWorkspace] openFile:[documentsURL path]];
     }
 }
 @end
