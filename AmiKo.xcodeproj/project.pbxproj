@@ -314,10 +314,6 @@
 		D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drug_interactions_csv_fr.csv; sourceTree = "<group>"; };
 		D5E731531B33480A007771D7 /* AmiKo-desitin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AmiKo-desitin-Info.plist"; path = "/Users/maxl/Projects/Pharmax/MacOS/AmiKoOSX/AmiKo-desitin-Info.plist"; sourceTree = "<absolute>"; };
 		D5E731971B334829007771D7 /* CoMed-desitin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CoMed-desitin-Info.plist"; path = "/Users/maxl/Projects/Pharmax/MacOS/AmiKoOSX/CoMed-desitin-Info.plist"; sourceTree = "<absolute>"; };
-		D5E731A11B335229007771D7 /* AmiKoDesitinMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKoDesitinMainMenu.xib; sourceTree = "<group>"; };
-		D5E731A31B335234007771D7 /* CoMedDesitinMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoMedDesitinMainMenu.xib; sourceTree = "<group>"; };
-		D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoMedzRMainMenu.xib; sourceTree = "<group>"; };
-		D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoMedMainMenu.xib; sourceTree = "<group>"; };
 		D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-zR-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D5E91BB317E5E8E400B66B27 /* AmiKo Desitin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AmiKo Desitin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -368,7 +364,6 @@
 		D5ECDE1B1F2B24CB00970133 /* MLPrescriptionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionCellView.m; sourceTree = "<group>"; };
 		D5F303421F21F42A00CAFED3 /* MLPrescriptionsCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionsCart.m; sourceTree = "<group>"; };
 		D5F303491F21F43F00CAFED3 /* MLPrescriptionsCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionsCart.h; sourceTree = "<group>"; };
-		D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmiKozRMainMenu.xib; sourceTree = "<group>"; };
 		D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AmiKo.entitlements; path = ../AmiKo.entitlements; sourceTree = "<group>"; };
 		D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoMed.entitlements; path = ../CoMed.entitlements; sourceTree = "<group>"; };
 		D5F6BB2917E8BC3900DCBD16 /* AmiKo-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "AmiKo-zR.entitlements"; sourceTree = SOURCE_ROOT; };
@@ -659,11 +654,6 @@
 			isa = PBXGroup;
 			children = (
 				FA5562D42091ADD500B85266 /* AmiKoMainMenu.xib */,
-				D5E91AD717E3956000B66B27 /* CoMedMainMenu.xib */,
-				D5F6BB2517E8BAF600DCBD16 /* AmiKozRMainMenu.xib */,
-				D5E91AD517E3955300B66B27 /* CoMedzRMainMenu.xib */,
-				D5E731A11B335229007771D7 /* AmiKoDesitinMainMenu.xib */,
-				D5E731A31B335234007771D7 /* CoMedDesitinMainMenu.xib */,
 			);
 			name = MainNibs;
 			sourceTree = "<group>";
