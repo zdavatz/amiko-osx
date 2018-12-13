@@ -131,6 +131,7 @@ static BOOL mPrescriptionMode = false;
 @interface MLMainWindowController ()
 {
     NSMutableString *csv;
+    MLMedication *csvMedication;
 }
 
 - (void) updateButtons;
@@ -3102,6 +3103,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
           (unsigned long)[nodeBodyDiv childCount]);
 #endif
 
+    NSArray *shortTitles = [csvMedication listOfSectionTitles];  // they are hardcoded into the app
     NSString *brandName;
     NSArray *pBodyElem2 = [rootElement nodesForXPath:@"/html/body/div/div" error:nil];
     //NSLog(@"pBodyElem2 %lu elements", (unsigned long)[pBodyElem2 count]);
@@ -3133,9 +3135,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         // Collect numbers.
         NSString* numberString;
         [scanner scanCharactersFromSet:numbers intoString:&numberString];
-        //NSInteger number = numberString.integerValue;
         if (![chSet member:numberString])
             continue;   // skip this section
+
+        NSInteger chNumber = numberString.integerValue;
 
         NSArray *paragraphs = [el children];
 #ifdef DEBUG
@@ -3150,10 +3153,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             if ([[p stringValue] containsString:aKeyword]) {
                 //NSLog(@"TODO: for %@ output this:\n\n%@\n", aKeyword, [p stringValue]);
                 NSString *link = [NSString stringWithFormat:@"https://amiko.oddb.org/de/fi?gtin=%@&highlight=%@&anchor=%@", rn, aKeyword, divId];
-                [csv appendFormat:@"\n%@%@%@%@%@%@%@%@",
+                [csv appendFormat:@"\n%@%@%@%@%@%@%@%@%@%@%@",
                  aKeyword, CSV_SEPARATOR,
                  brandName, CSV_SEPARATOR,
-                 CSV_SEPARATOR,
+                 CSV_SEPARATOR, // TODO: ATC-Code
+                 CSV_SEPARATOR, // TODO: Substance name
+                 shortTitles[chNumber - 1], CSV_SEPARATOR, // subtract 1 because chpater 1 has index 0
                  [p stringValue],CSV_SEPARATOR,
                  link];
 
@@ -3180,9 +3185,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     int totalHitsDb1 = 0;
     int totalHitsDb2 = 0;
 
-    // TODO: localize
     NSArray *csvHeader = @[NSLocalizedString(@"Search Term from Uploaded file", "CSV header"),
                            NSLocalizedString(@"Brand-Name of the drug", "CSV header"),
+                           NSLocalizedString(@"ATC-Code", "CSV header"),
+                           NSLocalizedString(@"Active Substance", "CSV header"),
                            NSLocalizedString(@"Chapter name", "CSV header"),
                            NSLocalizedString(@"Sentence that contains the word", "CSV header"),
                            NSLocalizedString(@"Link to the online reference", "CSV header")];
@@ -3248,8 +3254,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 NSLog(@"%d mFullTextContentStr2: %@", __LINE__, mFullTextContentStr2);
 #endif
 #if 1   // B
-                MLMedication *mMed = [mDb getMediWithRegnr:rn];
-                NSString *html = mMed.contentStr;
+                csvMedication = [mDb getMediWithRegnr:rn];
+                NSString *html = csvMedication.contentStr;
                 //NSLog(@"%d mMed.contentStr: %@", __LINE__, html);
 #endif
 #if 0 // C

@@ -1,3 +1,6 @@
+/* CSV header */
+"Active Substance" = "Active Substance";
+
 /* No comment provided by engineer. */
 "Address Book App" = "Address Book\n%@ (%ld)";
 
@@ -16,11 +19,20 @@
 /* No comment provided by engineer. */
 "ATC Code" = "ATC Code";
 
+/* CSV header */
+"ATC-Code" = "ATC-Code";
+
 /* No comment provided by engineer. */
 "born" = "born";
 
+/* CSV header */
+"Brand-Name of the drug" = "Brand-Name of the drug";
+
 /* No comment provided by engineer. */
 "Cancel" = "Cancel";
+
+/* CSV header */
+"Chapter name" = "Chapter name";
 
 /* No comment provided by engineer. */
 "Delete contact?" = "Delete contact?";
@@ -40,11 +52,20 @@
 /* No comment provided by engineer. */
 "Full Text" = "Full Text";
 
+/* CSV header */
+"Link to the online reference" = "Link to the online reference";
+
 /* No comment provided by engineer. */
 "New prescription" = "New prescription";
 
 /* No comment provided by engineer. */
 "Not specified" = "n.s.";
+
+/* No comment provided by engineer. */
+"Open" = "Open";
+
+/* No comment provided by engineer. */
+"Open with" = "Open with";
 
 /* No comment provided by engineer. */
 "Overwrite" = "Overwrite";
@@ -78,6 +99,12 @@
 
 /* No comment provided by engineer. */
 "Search" = "Search";
+
+/* CSV header */
+"Search Term from Uploaded file" = "Search Term from Uploaded file";
+
+/* CSV header */
+"Sentence that contains the word" = "Sentence that contains the word";
 
 /* No comment provided by engineer. */
 "The contact has been removed from the %@ Address Book" = "The contact has been removed from the %@ Address Book.";
