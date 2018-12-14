@@ -1855,10 +1855,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
         case tagToolbarButton_Export:
         {
+            mUsedDatabase = kAips;
+            [self stopProgressIndicator];
+
             NSInteger savedState = mCurrentSearchState;
+            NSInteger savedTabIndex = [myTabView indexOfTabViewItem:[myTabView selectedTabViewItem]];
+
             [self setSearchState:kFullText];
-            [self exportWordListSearchResults];
+            [self exportWordListSearchResults:item];
+            
+            // Restore previous state
             [self setSearchState:savedState];
+            [myTabView selectTabViewItemAtIndex:savedTabIndex];
         }
             break;
 
@@ -3288,7 +3296,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     });
 }
 
-- (void) exportWordListSearchResults
+- (IBAction) exportWordListSearchResults:(id)sender
 {
     //NSLog(@"%s", __FUNCTION__);
 

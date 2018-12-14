@@ -129,6 +129,6 @@ extern NSString* const APP_ID;
                       chapters:(NSSet *)ch
                        keyword:(NSString *)aKeyword
                          regnr:(NSString *)rn;
-- (void) exportWordListSearchResults;
+- (IBAction) exportWordListSearchResults:(id)sender;
 
 @end
