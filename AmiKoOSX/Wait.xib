@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="progress" destination="xPZ-Gm-VIu" id="KQk-WT-bj0"/>
                 <outlet property="secondaryText" destination="bvO-IK-P5I" id="2Hk-tG-jpu"/>
+                <outlet property="tertiaryText" destination="XIb-5S-jOg" id="Pi1-2R-edn"/>
                 <outlet property="text" destination="K16-Df-hP9" id="iua-CV-pDw"/>
                 <outlet property="window" destination="5ej-fZ-qZ4" id="H20-Mu-7O5"/>
             </connections>

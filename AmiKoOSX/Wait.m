@@ -26,7 +26,9 @@
         [self.text setStringValue:str];
 
     [self.secondaryText setHidden:YES];
+    [self.tertiaryText setHidden:YES];
 
+    session = nil;
     self.cancel = NO;
 
     return self;
@@ -34,14 +36,30 @@
 
 - (void) setSubtitle:(NSString*) str
 {
-    if (str)
-        [self.secondaryText setStringValue:str];
-    
+    if (!str)
+        return;
+
+    [self.secondaryText setStringValue:str];
     [self.secondaryText setHidden:NO];
+}
+
+- (void) setSponsorTitle:(NSString*) str
+{
+    if (!str)
+        return;
+    
+    [self.tertiaryText setStringValue:str];
+    [self.tertiaryText setHidden:NO];
 }
 
 - (void)incrementBy:(double)delta
 {
+#ifdef WITH_MODAL_SESSION
+    if ([self.progress doubleValue] == [self.progress minValue]) {
+        session = [NSApp beginModalSessionForWindow:[self window]];
+        [NSApp runModalSession: session];
+    }
+#endif
     [self.progress incrementBy:delta];
 }
 
@@ -58,9 +76,15 @@
     [[self window] makeKeyAndOrderFront: sender];
 }
 
-//- (void)close
-//{
-//
-//}
+- (void)close
+{
+    [[self window] orderOut:self];
+#ifdef WITH_MODAL_SESSION
+    if (session != nil)
+        [NSApp endModalSession:session];
+
+    session = nil;
+#endif
+}
 
 @end

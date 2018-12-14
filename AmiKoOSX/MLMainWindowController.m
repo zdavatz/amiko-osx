@@ -1854,8 +1854,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             break;
 
         case tagToolbarButton_Export:
+        {
+            NSInteger savedState = mCurrentSearchState;
             [self setSearchState:kFullText];
             [self exportWordListSearchResults];
+            [self setSearchState:savedState];
+        }
             break;
 
         default:
@@ -3022,9 +3026,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     return NO;
 }
 
-#pragma mark -
+#pragma mark - Export CSV
 
-- (NSArray *) getKeywordsFromFile
+// Read the file containing the list of keywords
+- (NSArray *) csvGetInputListFromFile
 {
     NSOpenPanel* oPanel = [NSOpenPanel openPanel];
     [oPanel setCanChooseFiles:YES];
@@ -3215,9 +3220,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     __block Wait *wait;
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        wait = [[Wait alloc] initWithString:NSLocalizedString(@"Looking up keywords ...", nil)];
+        wait = [[Wait alloc] initWithString:NSLocalizedString(@"Looking up keywords. Please wait...", nil)];
         [wait setCancel:YES];
         [[wait progress] setMaxValue:[keywords count]];
+        [wait setSponsorTitle:NSLocalizedString(@"This feature is provided by:", nil)];
         [wait showWindow:self];
     });
     
@@ -3286,9 +3292,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 {
     //NSLog(@"%s", __FUNCTION__);
 
-    NSArray *keywords = [self getKeywordsFromFile];
+    NSArray *keywords = [self csvGetInputListFromFile];
     if (!keywords)
-        return;
+        return;  // canceled
 
     //NSLog(@"%@", keywords);
 
