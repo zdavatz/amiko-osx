@@ -54,6 +54,9 @@
 #define DYNAMIC_AMK_SELECTION
 #define CSV_SEPARATOR       @";"
 
+// Alternatively implement its own tabview to show the results
+#define CSV_EXPORT_RESTORES_PREVIOUS_STATE
+
 NS_ENUM(NSInteger, ToolbarButtonTags) {
     tagToolbarButton_Compendium = 0,
     tagToolbarButton_Favorites = 1,
@@ -1857,16 +1860,19 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         {
             mUsedDatabase = kAips;
             [self stopProgressIndicator];
+            [self setSearchState:kFullText];
 
+#ifdef CSV_EXPORT_RESTORES_PREVIOUS_STATE
             NSInteger savedState = mCurrentSearchState;
             NSInteger savedTabIndex = [myTabView indexOfTabViewItem:[myTabView selectedTabViewItem]];
+#endif
 
-            [self setSearchState:kFullText];
             [self exportWordListSearchResults:item];
             
-            // Restore previous state
+#ifdef CSV_EXPORT_RESTORES_PREVIOUS_STATE
             [self setSearchState:savedState];
             [myTabView selectTabViewItemAtIndex:savedTabIndex];
+#endif
         }
             break;
 
@@ -3063,7 +3069,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 // add it to the output
 // TODO: show result
 - (void) searchParagraphInHTML:(NSString *)html
-                      chapters:(NSSet *)chSet
+                      chapters:(NSSet    *)chSet
                        keyword:(NSString *)aKeyword
                          regnr:(NSString *)rn
 {
@@ -3073,6 +3079,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSLog(@"%s %d, chapters %@", __FUNCTION__, __LINE__, chSet);
 #endif
 
+#if 1
     NSError *err = nil;
     NSXMLDocument *xmlDoc = [[NSXMLDocument alloc] initWithXMLString:html
                                                              options:(NSXMLNodePreserveWhitespace|NSXMLNodePreserveCDATA)
@@ -3091,6 +3098,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     if (![xmlDoc validateAndReturnError:&err])
         NSLog(@"%s %d %@", __FUNCTION__, __LINE__, [err localizedDescription]);
+#endif
 
     NSXMLElement *rootElement = [xmlDoc rootElement];
     //NSLog(@"rootElement %@", rootElement);
@@ -3120,9 +3128,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 //    NSArray *shortTitles = [csvMedication listOfSectionTitles];  // they are hardcoded into the app
     
     NSString *brandName;
-    NSArray *pBodyElem2 = [rootElement nodesForXPath:@"/html/body/div/div" error:nil];
-    //NSLog(@"pBodyElem2 %lu elements", (unsigned long)[pBodyElem2 count]);
-    for (NSXMLElement *el in pBodyElem2) {
+    NSArray *pBodyElem = [rootElement nodesForXPath:@"/html/body/div/div" error:nil];
+    //NSLog(@"pBodyElem %lu elements", (unsigned long)[pBodyElem count]);
+    for (NSXMLElement *el in pBodyElem) {
         NSString *divClass = [[el attributeForName:@"class"] stringValue];
         NSString *divId = [[el attributeForName:@"id"] stringValue];
         if ([divClass isEqualToString:@"MonTitle"]) {
@@ -3183,9 +3191,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 NSString *link = [NSString stringWithFormat:@"https://amiko.oddb.org/de/fi?gtin=%@&highlight=%@&anchor=%@", rn, aKeyword, divId];
                 [csv appendFormat:@"\n%@%@%@%@%@%@%@%@%@%@%@",
                  aKeyword, CSV_SEPARATOR,
+                 CSV_SEPARATOR, // TODO: Substance name
                  brandName, CSV_SEPARATOR,
                  CSV_SEPARATOR, // TODO: ATC-Code
-                 CSV_SEPARATOR, // TODO: Substance name
                  chapterName, CSV_SEPARATOR,
                  [p stringValue],CSV_SEPARATOR,
                  link];
@@ -3307,9 +3315,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     //NSLog(@"%@", keywords);
 
     NSArray *csvHeader = @[NSLocalizedString(@"Search Term from Uploaded file", "CSV header"),
+                           NSLocalizedString(@"Active Substance", "CSV header"),
                            NSLocalizedString(@"Brand-Name of the drug", "CSV header"),
                            NSLocalizedString(@"ATC-Code", "CSV header"),
-                           NSLocalizedString(@"Active Substance", "CSV header"),
                            NSLocalizedString(@"Chapter name", "CSV header"),
                            NSLocalizedString(@"Sentence that contains the word", "CSV header"),
                            NSLocalizedString(@"Link to the online reference", "CSV header")];
