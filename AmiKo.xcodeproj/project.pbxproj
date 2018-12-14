@@ -179,6 +179,7 @@
 		D5F3034B1F21FE2200CAFED3 /* MLPrescriptionsCart.h in Sources */ = {isa = PBXBuildFile; fileRef = D5F303491F21F43F00CAFED3 /* MLPrescriptionsCart.h */; };
 		FA15FE2521BFC8B00049F1C5 /* export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA15FE2421BFC8B00049F1C5 /* export@2x.png */; };
 		FA15FE2621BFC8B00049F1C5 /* export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA15FE2421BFC8B00049F1C5 /* export@2x.png */; };
+		FA1DA17021C3B3B200EF5974 /* Wait.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9F26E621C2CD1A005DA919 /* Wait.xib */; };
 		FA22764020A98FD4003BA573 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA6371882089CFEE009361D7 /* Localizable.strings */; };
 		FA4BA42620B4015700552CEF /* SmartCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42520B4015700552CEF /* SmartCard.m */; };
 		FA4BA42720B4015700552CEF /* SmartCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BA42520B4015700552CEF /* SmartCard.m */; };
@@ -208,6 +209,9 @@
 		FA6A2BB220B2B10A0080B4C9 /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
 		FA6A2BB320B2B10A0080B4C9 /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
 		FA98A7AC20A09CE900B2665B /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
+		FA9F26E721C2CD1A005DA919 /* Wait.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9F26E521C2CD1A005DA919 /* Wait.m */; };
+		FA9F26E821C2CD1A005DA919 /* Wait.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9F26E621C2CD1A005DA919 /* Wait.xib */; };
+		FA9F26E921C2CEED005DA919 /* Wait.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9F26E521C2CD1A005DA919 /* Wait.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -400,6 +404,9 @@
 		FA66364820A5E4B1007BA83B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLAmiKoMainWindow.strings; sourceTree = "<group>"; };
 		FA6A2BA920B2AECD0080B4C9 /* MLPatientSheetController+smartCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MLPatientSheetController+smartCard.h"; path = "../MLPatientSheetController+smartCard.h"; sourceTree = "<group>"; };
 		FA6A2BAA20B2AECD0080B4C9 /* MLPatientSheetController+smartCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "MLPatientSheetController+smartCard.m"; path = "../MLPatientSheetController+smartCard.m"; sourceTree = "<group>"; };
+		FA9F26E421C2CD1A005DA919 /* Wait.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Wait.h; path = AmiKoOSX/Wait.h; sourceTree = "<group>"; };
+		FA9F26E521C2CD1A005DA919 /* Wait.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Wait.m; path = AmiKoOSX/Wait.m; sourceTree = "<group>"; };
+		FA9F26E621C2CD1A005DA919 /* Wait.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Wait.xib; path = AmiKoOSX/Wait.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -671,6 +678,9 @@
 		D5EBC67417C912FF00EBEF39 = {
 			isa = PBXGroup;
 			children = (
+				FA9F26E421C2CD1A005DA919 /* Wait.h */,
+				FA9F26E521C2CD1A005DA919 /* Wait.m */,
+				FA9F26E621C2CD1A005DA919 /* Wait.xib */,
 				93CC52D320A1D403002C3D2B /* CoMed Desitin.entitlements */,
 				FA6371882089CFEE009361D7 /* Localizable.strings */,
 				D541211817DFA96800ACDB81 /* QuartzCore.framework */,
@@ -946,6 +956,7 @@
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B9C17E5E8E400B66B27 /* Credits.rtf in Resources */,
 				D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */,
+				FA9F26E821C2CD1A005DA919 /* Wait.xib in Resources */,
 				FA15FE2521BFC8B00049F1C5 /* export@2x.png in Resources */,
 				D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
 				D5AE31821B37203D006BC60E /* desitin.iconset in Resources */,
@@ -992,6 +1003,7 @@
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
 				D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */,
+				FA1DA17021C3B3B200EF5974 /* Wait.xib in Resources */,
 				FA15FE2621BFC8B00049F1C5 /* export@2x.png in Resources */,
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5C6442D1EB345A300438E6F /* fulltext_style.css in Resources */,
@@ -1080,6 +1092,7 @@
 				FA6A2BAE20B2B09C0080B4C9 /* MLPatientSheetController+smartCard.m in Sources */,
 				D53AB5AD1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
+				FA9F26E721C2CD1A005DA919 /* Wait.m in Sources */,
 				D53973CD1FA37B9200D7E444 /* MLOperator.m in Sources */,
 				D517E4C21EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				D545C8D91898527300491511 /* SSZipArchive.m in Sources */,
@@ -1150,6 +1163,7 @@
 				D5E91BC117E5E8E800B66B27 /* MLCustomTableRowView.m in Sources */,
 				D5C6441E1EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E91BC217E5E8E800B66B27 /* MLSplashScreen.m in Sources */,
+				FA9F26E921C2CEED005DA919 /* Wait.m in Sources */,
 				D5962EA21EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

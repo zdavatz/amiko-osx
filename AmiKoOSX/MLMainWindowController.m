@@ -49,6 +49,7 @@
 #import <unistd.h>
 
 #import "MLPrescriptionTableView.h"
+#import "Wait.h"
 
 #define DYNAMIC_AMK_SELECTION
 #define CSV_SEPARATOR       @";"
@@ -3187,30 +3188,39 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 #endif
 }
 
-- (void) exportWordListSearchResults
+// It runs in a separate thread
+- (void) csvOutputResult
 {
-    //NSLog(@"%s", __FUNCTION__);
-
-    NSArray *keywords = [self getKeywordsFromFile];
-    if (!keywords)
-        return;
-
-    //NSLog(@"%@", keywords);
-    int totalHitsDb1 = 0;
-    int totalHitsDb2 = 0;
-
-    NSArray *csvHeader = @[NSLocalizedString(@"Search Term from Uploaded file", "CSV header"),
-                           NSLocalizedString(@"Brand-Name of the drug", "CSV header"),
-                           NSLocalizedString(@"ATC-Code", "CSV header"),
-                           NSLocalizedString(@"Active Substance", "CSV header"),
-                           NSLocalizedString(@"Chapter name", "CSV header"),
-                           NSLocalizedString(@"Sentence that contains the word", "CSV header"),
-                           NSLocalizedString(@"Link to the online reference", "CSV header")];
-    csv = [[csvHeader componentsJoinedByString:CSV_SEPARATOR] mutableCopy];
+    // TODO: optionally save to file
+    // ~/Library/Containers/amikoosx/Data/Issue44.csv
+    NSString *fileName = @"Issue44.csv";
+    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     
-    //[self launchProgressIndicator];
+    documentsURL = [documentsURL URLByAppendingPathComponent:fileName];
+    
+    NSError *error;
+    BOOL res = [csv writeToFile:[documentsURL path] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    
+    if (!res) {
+        NSLog(@"Error %@ while writing to file %@", [error localizedDescription], fileName );
+    }
+    else {
+        [[NSWorkspace sharedWorkspace] openFile:[documentsURL path]];
+    }
+}
 
-    // TODO: run the following in a separate work thread
+// It runs in a separate thread
+- (void) csvProcessKeywords:(NSArray *)keywords
+{
+    __block Wait *wait;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        wait = [[Wait alloc] initWithString:NSLocalizedString(@"Looking up keywords ...", nil)];
+        [wait setCancel:YES];
+        [[wait progress] setMaxValue:[keywords count]];
+        [wait showWindow:self];
+    });
+    
     for (NSString *kw in keywords) {
         if (kw.length < 3) // this also takes care of the empty line at the end of file
             continue;
@@ -3220,7 +3230,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 #else
         NSArray *resultDb1 = [mFullTextDb searchKeyword:kw];
 #endif
-
+        
 #ifdef DEBUG
         NSLog(@"Line %d ========= search keyword: <%@> in DB1 frequency table, %lu hit(s)", __LINE__, kw, (unsigned long)[resultDb1 count]);
         //NSLog(@"Line %d, resultDb1:%@", __LINE__, resultDb1);
@@ -3242,80 +3252,60 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             NSArray *rnArray = [entry getRegnrsAsArray];
             //NSLog(@"Line %d, getRegnrsAsArray: %@", __LINE__, rnArray);
             for (NSString *rn in rnArray) {
-
+                
                 //NSDictionary *dic2 = [entry getRegChaptersDict];    // One or more lines like:
                 //NSLog(@"Line %d, chapter dic: %@", __LINE__, dic2); // 65161 = "{(\n    14\n)}"
-
+                
                 NSSet *chapterSet = [entry getChaptersForKey:rn];
 #ifdef DEBUG
                 NSLog(@"Line %d, rn: %@ has chapter set: %@", __LINE__, rn, chapterSet);
 #endif
                 
                 // Look into amiko_db_full_idx_de.db, column content, filter by rn and get the HTML
-
-#if 0  // A
-                // See line 2845
-                NSString *hashId = [entry hash];
-                MLFullTextEntry *mFullTextEntry2 = [mFullTextDb searchHash:hashId];
-                NSArray *listOfRegnrs = [mFullTextEntry2 getRegnrsAsArray];
-                NSArray *listOfArticles = [mDb searchRegnrsFromList:listOfRegnrs];
-                NSDictionary *dict = [mFullTextEntry getRegChaptersDict];
-                NSLog(@"%d listOfRegnrs: %@", __LINE__, listOfRegnrs);
-                NSLog(@"%d listOfArticles: %@", __LINE__, listOfArticles);
-                NSLog(@"%d dict: %@", __LINE__, dict);
                 
-                NSString *mFullTextContentStr2 = [mFullTextSearch tableWithArticles:listOfArticles
-                                                                 andRegChaptersDict:dict
-                                                                          andFilter:@""];
-                NSLog(@"%d mFullTextContentStr2: %@", __LINE__, mFullTextContentStr2);
-#endif
-#if 1   // B
                 csvMedication = [mDb getMediWithRegnr:rn];
                 NSString *html = csvMedication.contentStr;
                 //NSLog(@"%d mMed.contentStr: %@", __LINE__, html);
-#endif
-#if 0 // C
-                NSString *query = [NSString stringWithFormat:@"select content from amikodb where content LIKE '%%%@%%'", rn];
-
-                NSArray *htmlArray = [mDb searchWithQuery:query];
-                NSLog(@"%d htmlArray: %@", __LINE__, htmlArray);
-                if ([htmlArray count] != 1) {
-                    NSLog(@"Cannot handle HTML array with %lu entries", (unsigned long)[htmlArray count]);
-                    continue;
-                }
-
-                NSString *html = htmlArray[0];
-#endif
-
+                
                 [self searchParagraphInHTML:html chapters:chapterSet keyword:kw regnr:rn];
-
-                totalHitsDb2++;
             }
-            totalHitsDb1++;
         }  // for
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [wait incrementBy: 1];
+            [wait setSubtitle:kw];
+        });
     } // for keywords
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [wait close];
+    });
+}
 
-    NSLog(@"Line %d, total chapter searches in DB2:%u", __LINE__, totalHitsDb2);
-    NSLog(@"Line %d, total keywords used from DB1:%u", __LINE__, totalHitsDb1);
-    //NSLog(@"Line %d, csv:%@", __LINE__, csv);
-    
-    //[self stopProgressIndicator];
+- (void) exportWordListSearchResults
+{
+    //NSLog(@"%s", __FUNCTION__);
 
-    // TODO: optionally save to file
-    // ~/Library/Containers/amikoosx/Data/Issue44.csv
-    NSString *fileName = @"Issue44.csv";
-    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSArray *keywords = [self getKeywordsFromFile];
+    if (!keywords)
+        return;
+
+    //NSLog(@"%@", keywords);
+
+    NSArray *csvHeader = @[NSLocalizedString(@"Search Term from Uploaded file", "CSV header"),
+                           NSLocalizedString(@"Brand-Name of the drug", "CSV header"),
+                           NSLocalizedString(@"ATC-Code", "CSV header"),
+                           NSLocalizedString(@"Active Substance", "CSV header"),
+                           NSLocalizedString(@"Chapter name", "CSV header"),
+                           NSLocalizedString(@"Sentence that contains the word", "CSV header"),
+                           NSLocalizedString(@"Link to the online reference", "CSV header")];
+    csv = [[csvHeader componentsJoinedByString:CSV_SEPARATOR] mutableCopy];
     
-    documentsURL = [documentsURL URLByAppendingPathComponent:fileName];
-    
-    NSError *error;
-    BOOL res = [csv writeToFile:[documentsURL path] atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    
-    if (!res) {
-        NSLog(@"Error %@ while writing to file %@", [error localizedDescription], fileName );
-    }
-    else {
-        [[NSWorkspace sharedWorkspace] openFile:[documentsURL path]];
-    }
+    // Run in a separate thread
+    dispatch_async(dispatch_get_global_queue(0, 0),
+                   ^ {
+                       [self csvProcessKeywords:keywords];
+                       [self csvOutputResult];
+                   });
 }
 @end
