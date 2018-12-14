@@ -334,15 +334,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     mUsedDatabase = kAips;
     [myToolbar setSelectedItemIdentifier:@"AIPS"];
     
-#if 0
-    // FIXME: hardcoding the 5 is not good
-    // besides, it's a "system" icon and it's localized automatically
-    if ([MLUtilities isGermanApp])
-        [[myToolbar items][5] setLabel:@"Drucken"];
-    else if ([MLUtilities isFrenchApp])
-        [[myToolbar items][5] setLabel:@"Imprimer"];
-#endif
-    
     // Set search state
     [self setSearchState:kTitle];
     
@@ -2888,28 +2879,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 mFullTextContentStr = [mFullTextSearch tableWithArticles:listOfArticles
                                                       andRegChaptersDict:dict
                                                                andFilter:@""];
-#ifdef DEBUG
-/*
-2869 listOfRegnrs: (
- 65161
- )
- 
-2870 listOfArticles: (
- "<MLMedication: 0x6000033d8d20>"
- )
- 
-2871 dict: {
- 65161 = "{(\n    14\n)}";
- }
-
-2872 mFullTextContentStr: <ul><li style="background-color:whitesmoke;" id="{firstLetter}"><a onclick="displayFachinfo('65161','{anchor}')"><span style="font-size:0.8em"><b>Isoniazid Labatec®</b></span></a> <span style="font-size:0.7em"> | Labatec Pharma SA</span><br><span style="font-size:0.75em; color:#0088BB"> <a onclick="displayFachinfo('65161','section14')">Kinetik</a></span><br></li></ul>
-*/
-                NSLog(@"%d hashId: %@", __LINE__, hashId);
-                NSLog(@"%d listOfRegnrs: %@", __LINE__, listOfRegnrs);
-                NSLog(@"%d listOfArticles: %@", __LINE__, listOfArticles);
-                NSLog(@"%d dict: %@", __LINE__, dict);
-                NSLog(@"%d mFullTextContentStr: %@", __LINE__, mFullTextContentStr);
-#endif
                 mCurrentWebView = kFullTextSearchView;
                 [self updateFullTextSearchView:mFullTextContentStr];
             }
@@ -3065,19 +3034,30 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     return [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 }
 
-// TODO: in the html find each chapter of the set, in each chapter the string could appear multiple times
-// add it to the output
-// TODO: show result
-- (void) searchParagraphInHTML:(NSString *)html
-                      chapters:(NSSet    *)chSet
-                       keyword:(NSString *)aKeyword
-                         regnr:(NSString *)rn
+- (void) searchKeyword:(NSString *)aKeyword
+          inMedication:(MLMedication *)med
+              chapters:(NSSet *)chSet
+                 regnr:(NSString *)rn
 {
+    NSString *html = med.contentStr;
+    NSString *atc = med.atccode;
+    
 #ifdef DEBUG
     //NSLog(@"%s %d, html %p lenght:%lu", __FUNCTION__, __LINE__, html, (unsigned long)[html length]);
     //NSLog(@"%s %d, html %@", __FUNCTION__, __LINE__, html);
     NSLog(@"%s %d, chapters %@", __FUNCTION__, __LINE__, chSet);
 #endif
+
+    if ([chSet count] == 0) {
+        NSLog(@"WARNING: Keyword <%@> has no chapters", aKeyword);
+    }
+    else {
+        for (NSString *el in chSet) {
+            if (el.length == 0) {
+                NSLog(@"WARNING: keyword <%@> has empty chapter set", aKeyword);
+            }
+        }
+    }
 
 #if 1
     NSError *err = nil;
@@ -3127,6 +3107,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 //    NSArray *shortTitles = [csvMedication listOfSectionTitles];  // they are hardcoded into the app
     
+    NSArray *atcArray = [atc componentsSeparatedByString:@";"];
+    NSString *activeSubstance;
+    NSString *atcCode;
+    if ([atcArray count] > 0) atcCode = atcArray[0];
+    if ([atcArray count] > 1) activeSubstance = atcArray[1];
+
     NSString *brandName;
     NSArray *pBodyElem = [rootElement nodesForXPath:@"/html/body/div/div" error:nil];
     //NSLog(@"pBodyElem %lu elements", (unsigned long)[pBodyElem count]);
@@ -3186,16 +3172,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             // [p name]          is "div"
             // [p stringValue]   content of tag
             //NSLog(@"Line %d, %lu children", __LINE__, (unsigned long)[p childCount]);
+            
             if ([[p stringValue] containsString:aKeyword]) {
                 //NSLog(@"TODO: for %@ output this:\n\n%@\n", aKeyword, [p stringValue]);
                 NSString *link = [NSString stringWithFormat:@"https://amiko.oddb.org/de/fi?gtin=%@&highlight=%@&anchor=%@", rn, aKeyword, divId];
-                [csv appendFormat:@"\n%@%@%@%@%@%@%@%@%@%@%@",
+                [csv appendFormat:@"\n%@%@%@%@%@%@%@%@%@%@%@%@%@",
                  aKeyword, CSV_SEPARATOR,
-                 CSV_SEPARATOR, // TODO: Substance name
+                 activeSubstance, CSV_SEPARATOR,
                  brandName, CSV_SEPARATOR,
-                 CSV_SEPARATOR, // TODO: ATC-Code
+                 atcCode, CSV_SEPARATOR,
                  chapterName, CSV_SEPARATOR,
-                 [p stringValue],CSV_SEPARATOR,
+                 [p stringValue], CSV_SEPARATOR,
                  link];
 
                 //NSLog(@"Line %d, csv:%@", __LINE__, csv);
@@ -3283,13 +3270,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 NSLog(@"Line %d, rn: %@ has chapter set: %@", __LINE__, rn, chapterSet);
 #endif
                 
-                // Look into amiko_db_full_idx_de.db, column content, filter by rn and get the HTML
-                
                 csvMedication = [mDb getMediWithRegnr:rn];
-                NSString *html = csvMedication.contentStr;
-                //NSLog(@"%d mMed.contentStr: %@", __LINE__, html);
-                
-                [self searchParagraphInHTML:html chapters:chapterSet keyword:kw regnr:rn];
+                [self searchKeyword:kw inMedication:csvMedication chapters:chapterSet regnr:rn];
             }
         }  // for
 

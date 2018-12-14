@@ -125,10 +125,13 @@ extern NSString* const APP_ID;
 - (MLMedication *) getShortMediWithId:(long)mid;
 - (void) newHealthCardData:(NSNotification *)notification;
 
-- (void) searchParagraphInHTML:(NSString *)html
-                      chapters:(NSSet *)ch
-                       keyword:(NSString *)aKeyword
-                         regnr:(NSString *)rn;
+#pragma mark - Export CSV
+
+- (void) searchKeyword:(NSString *)kw
+          inMedication:(MLMedication *)med
+              chapters:(NSSet *)ch
+                 regnr:(NSString *)rn;
+
 - (IBAction) exportWordListSearchResults:(id)sender;
 
 @end
