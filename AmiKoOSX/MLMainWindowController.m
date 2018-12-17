@@ -3201,25 +3201,45 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) csvOutputResult
 {
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"mm:HH_dd.MM.yy"];
+    [dateFormatter setDateFormat:@"yyyy.MM.dd_HHmm"];
     NSString * dateSuffix = [dateFormatter stringFromDate:[NSDate date]];
     
     NSString *fileName = [NSString stringWithFormat:@"%@_%@.csv", NSLocalizedString(@"word_analysis", "CSV filename prefix"), dateSuffix];
-    // TODO: use NSDesktopDirectory
-    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
-                            inDomains:NSUserDomainMask] lastObject];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
     
-    documentsURL = [documentsURL URLByAppendingPathComponent:fileName];
-    
-    NSError *error;
-    BOOL res = [csv writeToFile:[documentsURL path] atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    
-    if (!res) {
-        NSLog(@"Error %@ while writing to file %@", [error localizedDescription], fileName );
-    }
-    else {
-        [[NSWorkspace sharedWorkspace] openFile:[documentsURL path]];
-    }
+        // Select the directory
+        NSOpenPanel* oPanel = [NSOpenPanel openPanel];
+        [oPanel setCanChooseFiles:NO];
+        [oPanel setCanChooseDirectories:YES];
+        [oPanel setMessage:NSLocalizedString(@"Please select a directory where to save the file", nil)];
+        NSURL *desktopURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDesktopDirectory
+                                                                      inDomains:NSUserDomainMask] lastObject];
+        [oPanel setDirectoryURL:desktopURL];
+        [oPanel setPrompt:NSLocalizedString(@"Choose directory and save file", nil)];
+        [oPanel setCanCreateDirectories:YES];
+
+        [oPanel beginWithCompletionHandler:^(NSInteger result) {
+            if (result != NSModalResponseOK) {
+                //NSLog(@"%s %d", __FUNCTION__, __LINE__);
+                return;
+            }
+
+            NSURL *dirUrl = [oPanel URL];
+            NSString *fullPathCSV = [[dirUrl path] stringByAppendingPathComponent:fileName];
+            //NSLog(@"%s %d fullPathCSV:<%@>", __FUNCTION__, __LINE__, fullPathCSV);
+
+            NSError *error;
+            BOOL res = [csv writeToFile:fullPathCSV atomically:YES encoding:NSUTF8StringEncoding error:&error];
+            
+            if (!res) {
+                NSLog(@"Error %@ while writing to file %@", [error localizedDescription], fileName );
+                return;
+            }
+
+            [[NSWorkspace sharedWorkspace] openFile:fullPathCSV];
+        }];
+    });
 }
 
 // It runs in a separate thread

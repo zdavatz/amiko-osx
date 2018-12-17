@@ -35,6 +35,9 @@
 "Chapter name" = "Chapter name";
 
 /* No comment provided by engineer. */
+"Choose directory and save file" = "Choose directory and save file";
+
+/* No comment provided by engineer. */
 "Delete contact?" = "Delete contact?";
 
 /* No comment provided by engineer. */
@@ -84,6 +87,9 @@
 
 /* No comment provided by engineer. */
 "Please contact Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@" = "Please contact Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@";
+
+/* No comment provided by engineer. */
+"Please select a directory where to save the file" = "Please select a directory where to save the file";
 
 /* No comment provided by engineer. */
 "Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8" = "Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8.";

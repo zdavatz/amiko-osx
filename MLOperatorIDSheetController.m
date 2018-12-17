@@ -70,7 +70,7 @@
     [openDlgPanel setAllowedFileTypes:fileTypesArray];
     [openDlgPanel setAllowsMultipleSelection:false];
     [openDlgPanel beginWithCompletionHandler:^(NSInteger result) {
-        if (result == NSFileHandlingPanelOKButton) {
+        if (result == NSModalResponseOK) {
             // Grab reference to what has been selected
             NSURL *fileURL = [[openDlgPanel  URLs] firstObject];
             NSImage *image = [[NSImage alloc] initWithContentsOfURL:fileURL];
