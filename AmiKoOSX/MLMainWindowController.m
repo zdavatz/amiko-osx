@@ -3177,7 +3177,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             if ([[p stringValue] containsString:aKeyword]) {
                 //NSLog(@"TODO: for %@ output this:\n\n%@\n", aKeyword, [p stringValue]);
                 NSString *link = [NSString stringWithFormat:@"https://amiko.oddb.org/de/fi?gtin=%@&highlight=%@&anchor=%@", rn, aKeyword, divId];
-                [csv appendFormat:@"\n%@%@%@%@%@%@%@%@%@%@%@%@%@",
+                [csv appendFormat:@"\n%@%@%@%@\"%@\"%@\"%@\"%@%@%@\"%@\"%@%@",
                  aKeyword, CSV_SEPARATOR,
                  activeSubstance, CSV_SEPARATOR,
                  brandName, CSV_SEPARATOR,
