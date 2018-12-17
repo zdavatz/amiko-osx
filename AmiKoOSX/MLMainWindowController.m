@@ -386,6 +386,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     [[self window] makeFirstResponder:self];
     [[self window] setBackgroundColor:[NSColor windowBackgroundColor]];
+
     return self;
 }
 
