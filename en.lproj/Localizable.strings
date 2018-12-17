@@ -92,7 +92,7 @@
 "Please select a directory where to save the file" = "Please select a directory where to save the file";
 
 /* No comment provided by engineer. */
-"Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8" = "Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8.";
+"Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8" = "Please select text file with one word or two words per line. The file can be created a text editor. Encoding is UTF-8.";
 
 /* No comment provided by engineer. */
 "Preparation" = "Preparation";
