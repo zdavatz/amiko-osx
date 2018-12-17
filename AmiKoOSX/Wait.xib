@@ -49,9 +49,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </progressIndicator>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XIb-5S-jOg">
-                        <rect key="frame" x="76" y="70" width="169" height="14"/>
+                        <rect key="frame" x="18" y="70" width="299" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="This feature is provided by:" id="zsV-XX-FYK">
+                        <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="center" title="This feature is provided by:" id="zsV-XX-FYK">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
