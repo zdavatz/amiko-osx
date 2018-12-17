@@ -56,6 +56,9 @@
 "Link to the online reference" = "Link to the online reference";
 
 /* No comment provided by engineer. */
+"Looking up keywords. Please wait..." = "Looking up keywords. Please wait...";
+
+/* No comment provided by engineer. */
 "New prescription" = "New prescription";
 
 /* No comment provided by engineer. */
@@ -120,6 +123,9 @@
 
 /* No comment provided by engineer. */
 "This card can not be read" = "This card can not be read";
+
+/* No comment provided by engineer. */
+"This feature is provided by" = "This feature is provided by:";
 
 /* No comment provided by engineer. */
 "To update the database you must have an active internet connection" = "To update the database you must have an active internet connection.";

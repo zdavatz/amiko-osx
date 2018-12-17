@@ -670,7 +670,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) prescriptionDoctorChanged:(NSNotification *)notification
 {
-    NSLog(@"%s NSNotification:%@", __FUNCTION__, [notification name]);
+    //NSLog(@"%s NSNotification:%@", __FUNCTION__, [notification name]);
     [self setOperatorID];   // issue #5
 }
 
@@ -1017,6 +1017,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) toolbarAction:(id)sender
 {
+    //NSLog(@"%s %@", __FUNCTION__, [sender class]);
     [self launchProgressIndicator];
     
     NSToolbarItem *item = (NSToolbarItem *)sender;
@@ -3226,7 +3227,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         wait = [[Wait alloc] initWithString:NSLocalizedString(@"Looking up keywords. Please wait...", nil)];
         [wait setCancel:YES];
         [[wait progress] setMaxValue:[keywords count]];
-        [wait setSponsorTitle:NSLocalizedString(@"This feature is provided by:", nil)];
+        [wait setSponsorTitle:NSLocalizedString(@"This feature is provided by", nil)];
         [wait showWindow:self];
     });
     
@@ -3288,7 +3289,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) exportWordListSearchResults:(id)sender
 {
-    //NSLog(@"%s", __FUNCTION__);
+    //NSLog(@"%s %@ %ld", __FUNCTION__, [sender class], (long)[sender tag]);
 
     NSArray *keywords = [self csvGetInputListFromFile];
     if (!keywords)

@@ -124,6 +124,14 @@
                                     <action selector="loadAipsDatabase:" target="-1" id="GZK-m6-37r"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="mX3-Qh-4BL">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Word Analysis" tag="4" keyEquivalent="i" id="RnU-V6-Sup" userLabel="Word Analysis">
+                                <connections>
+                                    <action selector="exportWordListSearchResults:" target="-1" id="5Mn-5Q-qFS"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

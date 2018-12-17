@@ -104,6 +104,9 @@
 /* Class = "NSMenuItem"; title = "Print prescription..."; ObjectID = "Rdb-Ti-b5z"; */
 "Rdb-Ti-b5z.title" = "Rezept drucken...";
 
+/* Class = "NSMenuItem"; title = "Word Analysis"; ObjectID = "RnU-V6-Sup"; */
+"RnU-V6-Sup.title" = "Wortanaylse";
+
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "SBf-jg-8kW"; */
 "SBf-jg-8kW.title" = "Edit";
 
