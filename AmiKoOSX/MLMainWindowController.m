@@ -3200,10 +3200,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 // It runs in a separate thread
 - (void) csvOutputResult
 {
-    // TODO: optionally save to file
-    // ~/Library/Containers/amikoosx/Data/Issue44.csv
-    NSString *fileName = @"Issue44.csv";
-    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"mm:HH_dd.MM.yy"];
+    NSString * dateSuffix = [dateFormatter stringFromDate:[NSDate date]];
+    
+    NSString *fileName = [NSString stringWithFormat:@"Wortanaylse_%@.csv", dateSuffix];
+    // TODO: use NSDesktopDirectory
+    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                            inDomains:NSUserDomainMask] lastObject];
     
     documentsURL = [documentsURL URLByAppendingPathComponent:fileName];
     
