@@ -133,6 +133,9 @@
 /* No comment provided by engineer. */
 "Update is not possible" = "Update is not possible!";
 
+/* CSV filename prefix */
+"word_analysis" = "word_analysis";
+
 /* No comment provided by engineer. */
 "Your data bank is older than 30 days. We recommend an update" = "Your data bank is older than 30 days. We recommend an update.";
 

@@ -3020,7 +3020,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [oPanel setAllowedFileTypes:@[@"csv", @"txt"]];
     [oPanel setAllowsMultipleSelection:false];
     [oPanel setPrompt:NSLocalizedString(@"Open", nil)];
-    [oPanel setMessage:NSLocalizedString(@"Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8.", nil)];
+    [oPanel setMessage:NSLocalizedString(@"Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8", nil)];
 
     if ([oPanel runModal] != NSFileHandlingPanelOKButton) {
         NSLog(@"%s canceled", __FUNCTION__);
@@ -3204,7 +3204,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [dateFormatter setDateFormat:@"mm:HH_dd.MM.yy"];
     NSString * dateSuffix = [dateFormatter stringFromDate:[NSDate date]];
     
-    NSString *fileName = [NSString stringWithFormat:@"Wortanaylse_%@.csv", dateSuffix];
+    NSString *fileName = [NSString stringWithFormat:@"%@_%@.csv", NSLocalizedString(@"word_analysis", "CSV filename prefix"), dateSuffix];
     // TODO: use NSDesktopDirectory
     NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                             inDomains:NSUserDomainMask] lastObject];
