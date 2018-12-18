@@ -1,0 +1,9 @@
+:root {
+    --background-color-normal: transparent;
+    --text-color-normal: white;
+    --lines-color: orange;
+}
+body {
+    color: #dddddd;
+    background-color: #222222;
+}

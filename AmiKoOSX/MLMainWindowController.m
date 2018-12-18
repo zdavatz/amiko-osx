@@ -386,11 +386,25 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     return self;
 }
 
--(void)darkModeChanged:(NSNotification *)notif
+- (void) darkModeChanged:(NSNotification *)notif
 {
-    NSLog(@"Dark mode changed");
+#ifdef DEBUG
     NSString *osxMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"AppleInterfaceStyle"];
     NSLog(@"%s %d AppleInterfaceStyle:%@", __FUNCTION__, __LINE__, osxMode);  // null, Dark
+#endif
+
+    // reload the web view, not just refresh it
+
+    //[myWebView reload:self]; // presumably reloads, but using existing CSS
+    NSArray *toolbarItems = [myToolbar items];
+    NSToolbarItemIdentifier identifier = [myToolbar selectedItemIdentifier];
+    for (NSToolbarItem *tbi in toolbarItems) {
+        if ([tbi.itemIdentifier isEqualToString:identifier]) {
+            //NSLog(@"%s %d %@ %@", __FUNCTION__, __LINE__, [tbi class], tbi);
+            [self toolbarAction:tbi];
+            break;
+        }
+    }
 }
 
 - (void) windowDidLoad
@@ -402,7 +416,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     myTextFinder.findBarContainer = myWebView.enclosingScrollView;
     // Set client to work with the NSTextFinder object
     myTextFinder.client  = myWebView;
-    // And vice versa: inform our SHCVebView about which of the NSTextFinder instance to work with
+    // And vice versa: inform our SHCWebView about which of the NSTextFinder instance to work with
     myWebView.textFinder = myTextFinder;
     // Configure NSTextFinder
     myTextFinder.incrementalSearchingEnabled = YES;
@@ -1021,7 +1035,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) toolbarAction:(id)sender
 {
-    //NSLog(@"%s %@", __FUNCTION__, [sender class]);
+    //NSLog(@"%s %d %@ %@", __FUNCTION__, __LINE__, [sender class], sender);
     [self launchProgressIndicator];
     
     NSToolbarItem *item = (NSToolbarItem *)sender;
@@ -2387,7 +2401,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 /**
- The following function intercepts messages sent from javascript to objective C and acts
+ The following function intercepts messages sent from javascript to objective C and
  acts as a bridge between JS and ObjC
  */
 - (void) createJSBridge
@@ -2439,6 +2453,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) updateExpertInfoView:(NSString *)anchor
 {
+    NSString *osxMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"AppleInterfaceStyle"];
+    NSLog(@"%s %d AppleInterfaceStyle:%@", __FUNCTION__, __LINE__, osxMode);  // null, Dark
+    
+    NSString *colorSchemeFilename = @"color-scheme-light";
+    if ([osxMode isEqualToString:@"Dark"])
+        colorSchemeFilename = @"color-scheme-dark";
+
+    NSString *colorCssPath = [[NSBundle mainBundle] pathForResource:colorSchemeFilename ofType:@"css"];
+    NSString *colorCss = [NSString stringWithContentsOfFile:colorCssPath encoding:NSUTF8StringEncoding error:nil];
+
     // Load style sheet from file
     NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
     NSString *amikoCss = @"";
@@ -2454,9 +2478,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // Generate html string
     NSString *htmlStr = mMed.contentStr;
     htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<html>"
-                                                 withString:@"<!DOCTYPE html><html><head><meta charset=\"utf-8\" />"];
+                                                 withString:@"<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><meta name=\"supported-color-schemes\" content=\"light dark\" />"];
     htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<head></head>"
-                                                 withString:[NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head>", jscriptStr, amikoCss]];
+                                                 withString:[NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style><style type=\"text/css\">%@</style></head>", jscriptStr, colorCss, amikoCss]];
+#ifdef DEBUG
+    htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<body>"
+                                                 withString:@"<body><p id=\"demo\"></p>"];
+#endif
 
     if (mCurrentSearchState == kFullText) {
         NSString *keyword = [mFullTextEntry keyword];
@@ -2532,7 +2560,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSString *jscriptPath = [[NSBundle mainBundle] pathForResource:@"main_callbacks" ofType:@"js"];
     NSString *jscriptStr = [NSString stringWithContentsOfFile:jscriptPath encoding:NSUTF8StringEncoding error:nil];
     
-    NSString *htmlStr = [NSString stringWithFormat:@"<html><head><meta charset=\"utf-8\" />"];
+    NSString *htmlStr = [NSString stringWithFormat:@"<html><head><meta charset=\"utf-8\" /><meta name=\"supported-color-schemes\" content=\"light dark\" />"];
     htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head><body><div id=\"fulltext\">%@</body></div></html>",
                jscriptStr,
                fullTextCss,
