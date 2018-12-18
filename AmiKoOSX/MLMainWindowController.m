@@ -2481,11 +2481,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                  withString:@"<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><meta name=\"supported-color-schemes\" content=\"light dark\" />"];
     htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<head></head>"
                                                  withString:[NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style><style type=\"text/css\">%@</style></head>", jscriptStr, colorCss, amikoCss]];
-#ifdef DEBUG
-    htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<body>"
-                                                 withString:@"<body><p id=\"demo\"></p>"];
-#endif
 
+    // Some tables have the color set in the HTML string (not set with CSS)
+    if ([osxMode isEqualToString:@"Dark"])
+        htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"background-color: #EEEEEE"
+                                                     withString:@"background-color: #444444"];
+    
     if (mCurrentSearchState == kFullText) {
         NSString *keyword = [mFullTextEntry keyword];
         if ([keyword isNotEqualTo:[NSNull null]]) {
