@@ -35,7 +35,7 @@
 "Chapter name" = "Nom du chapitre";
 
 /* No comment provided by engineer. */
-"Choose directory and save file" = "Choose directory and save file";
+"Choose directory and save file" = "Sauvegarder";
 
 /* No comment provided by engineer. */
 "Delete contact?" = "Supprimer le contact?";
@@ -89,7 +89,7 @@
 "Please contact Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@" = "S.v.p. contactez Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@";
 
 /* No comment provided by engineer. */
-"Please select a directory where to save the file" = "Please select a directory where to save the file";
+"Please select a directory where to save the file" = "Veuillez sélectionner le répertoire dans lequel vous souhaitez enregistrer le fichier.";
 
 /* No comment provided by engineer. */
 "Please select text file with one word or two words per line. The file can be created into a text editor. Encoding is UTF-8" = "Veuillez sélectionner un fichier texte avec un mot ou deux mots par ligne. Le fichier peut être créé dans un éditeur de texte. L'encodage est UTF-8.";
