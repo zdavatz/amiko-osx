@@ -230,17 +230,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // self = [super initWithNibName:@"MLMasterViewController" bundle:nil];
     if ([APP_NAME isEqualToString:@"AmiKo"])
         self = [super initWithWindowNibName:@"MLAmiKoMainWindow"];
-    else if ([APP_NAME isEqualToString:@"AmiKo-zR"])
-        self = [super initWithWindowNibName:@"MLAmiKozRMainWindow"];
-    else if ([APP_NAME isEqualToString:@"AmiKo-Desitin"])
-        self = [super initWithWindowNibName:@"MLAmiKoDesitinMainWindow"];
     else if ([APP_NAME isEqualToString:@"CoMed"])
-        self = [super initWithWindowNibName:@"MLAmiKoMainWindow"];//@"MLCoMedMainWindow"];
-    else if ([APP_NAME isEqualToString:@"CoMed-zR"])
-        self = [super initWithWindowNibName:@"MLCoMedzRMainWindow"];
-    else if ([APP_NAME isEqualToString:@"CoMed-Desitin"])
-        self = [super initWithWindowNibName:@"MLCoMedDesitinMainWindow"];
-    else return nil;
+        self = [super initWithWindowNibName:@"MLAmiKoMainWindow"];
+    else
+        return nil;
     
     if (!self)
         return nil;
@@ -382,12 +375,22 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                  name:@"smartCardDataAcquired"
                                                object:nil];
 
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                        selector:@selector(darkModeChanged:) name:@"AppleInterfaceThemeChangedNotification" object:nil];
+    
     healthCard = [[HealthCard alloc] init];
 
     [[self window] makeFirstResponder:self];
     [[self window] setBackgroundColor:[NSColor windowBackgroundColor]];
 
     return self;
+}
+
+-(void)darkModeChanged:(NSNotification *)notif
+{
+    NSLog(@"Dark mode changed");
+    NSString *osxMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"AppleInterfaceStyle"];
+    NSLog(@"%s %d AppleInterfaceStyle:%@", __FUNCTION__, __LINE__, osxMode);  // null, Dark
 }
 
 - (void) windowDidLoad

@@ -53,19 +53,9 @@
         // Load xib file
         [NSBundle loadNibNamed:@"MLProgressSheet" owner:self];
  
-        if ([APP_NAME isEqualToString:@"AmiKo"])
-            splashPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"amikoosx_splash_1000x670.png"];
-        else if ([APP_NAME isEqualToString:@"AmiKo-zR"])
-            splashPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Zur_Rose_1000x670px.png"];
-        else if ([APP_NAME isEqualToString:@"AmiKo-Desitin"])
-            splashPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"amikodesitin_splash_1000x670.png"];
-        else if ([APP_NAME isEqualToString:@"CoMed"])
+        if ([APP_NAME isEqualToString:@"CoMed"])
             splashPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"comedosx_splash_1000x670.png"];
-        else if ([APP_NAME isEqualToString:@"CoMed-zR"])
-            splashPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Zur_Rose_1000x670px.png"];
-        else if ([APP_NAME isEqualToString:@"CoMed-Desitin"])
-            splashPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"comeddesitin_splash_1000x670.png"];
-        else
+        else // if ([APP_NAME isEqualToString:@"AmiKo"])
             splashPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"amikoosx_splash_1000x670.png"];
    
         NSImage *splash = [[NSImage alloc] initWithContentsOfFile:splashPath];

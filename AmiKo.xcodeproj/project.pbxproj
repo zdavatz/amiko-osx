@@ -141,7 +141,6 @@
 		D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6CF17D256EC00EBEF39 /* 28-star-gy.png */; };
 		D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */; };
 		D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
-		D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
 		D5E91BB717E5E8E800B66B27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC68C17C912FF00EBEF39 /* main.m */; };
 		D5E91BB817E5E8E800B66B27 /* MLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC69317C912FF00EBEF39 /* MLAppDelegate.m */; };
 		D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6A217C913B100EBEF39 /* MLMainWindowController.m */; };
@@ -164,7 +163,6 @@
 		D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6CF17D256EC00EBEF39 /* 28-star-gy.png */; };
 		D5E91BD117E5E8E800B66B27 /* app_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6D817D3ADCA00EBEF39 /* app_icon_512x512.png */; };
 		D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC6E217D521A500EBEF39 /* 28-star@2x.png */; };
-		D5E91BD717E5E8E800B66B27 /* Zur_Rose_1000x670px.png in Resources */ = {isa = PBXBuildFile; fileRef = D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */; };
 		D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BEE17E6060F00B66B27 /* amiko_db_full_idx_de.db */; };
 		D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BF417E6065C00B66B27 /* amiko_report_de.html */; };
 		D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */ = {isa = PBXBuildFile; fileRef = D5E91BFA17E6074D00B66B27 /* amiko_report_fr.html */; };
@@ -242,7 +240,6 @@
 		D53973CC1FA37B9200D7E444 /* MLOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLOperator.m; sourceTree = "<group>"; };
 		D539C10417DCED1D00759260 /* MLSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSplashScreen.h; sourceTree = "<group>"; };
 		D539C10517DCED1D00759260 /* MLSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSplashScreen.m; sourceTree = "<group>"; };
-		D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zur_Rose_1000x670px.png; sourceTree = "<group>"; };
 		D53AB5AB1F3DAA1F00B9C059 /* MLInteractionsCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInteractionsCart.h; sourceTree = "<group>"; };
 		D53AB5AC1F3DAA3600B9C059 /* MLInteractionsCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInteractionsCart.m; sourceTree = "<group>"; };
 		D53ABBF3189521FD00C4525C /* MLProgressSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLProgressSheet.xib; sourceTree = "<group>"; };
@@ -498,7 +495,6 @@
 				D5C5C5171F0C276E00DF851F /* checked_icon.png */,
 				D5DD5765193B4EB40094244E /* 218-trash2.png */,
 				D5DD5760193B49260094244E /* 217-trash.png */,
-				D539C10717DE3DAE00759260 /* Zur_Rose_1000x670px.png */,
 				D5AB1772180886810050DC12 /* 28-star-ye.png */,
 				D5EBC6CF17D256EC00EBEF39 /* 28-star-gy.png */,
 				D53877791A9E5AE700AEFDB4 /* maindb@2x.png */,
@@ -976,7 +972,6 @@
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
 				D5C6442C1EB345A300438E6F /* fulltext_style.css in Resources */,
 				D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */,
-				D5E91BA817E5E8E400B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				FA66364120A5E4A9007BA83B /* MLAmiKoMainWindow.xib in Resources */,
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
 				D53877821A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
@@ -1026,7 +1021,6 @@
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
 				D52795F91EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
-				D5E91BD717E5E8E800B66B27 /* Zur_Rose_1000x670px.png in Resources */,
 				D53877831A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538777B1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,

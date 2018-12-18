@@ -53,25 +53,28 @@ NSString* const APP_ID = @"710472327";
 {
     if ([APP_NAME isEqualToString:@"AmiKo"] || [APP_NAME isEqualToString:@"CoMed"])
         return @"ywesee";
-    else if ([APP_NAME isEqualToString:@"AmiKo-zR"] || [APP_NAME isEqualToString:@"CoMed-zR"])
-        return @"zurrose";
-    else if ([APP_NAME isEqualToString:@"AmiKo-Desitin"] || [APP_NAME isEqualToString:@"CoMed-Desitin"])
-        return @"desitin";
+//    else if ([APP_NAME isEqualToString:@"AmiKo-zR"] || [APP_NAME isEqualToString:@"CoMed-zR"])
+//        return @"zurrose";
+//    else if ([APP_NAME isEqualToString:@"AmiKo-Desitin"] || [APP_NAME isEqualToString:@"CoMed-Desitin"])
+//        return @"desitin";
+
     return nil;
 }
 
 + (NSString *) appLanguage
 {
-    if ([APP_NAME isEqualToString:@"AmiKo"] ||
-        [APP_NAME isEqualToString:@"AmiKo-zR"] ||
-        [APP_NAME isEqualToString:@"AmiKo-Desitin"])
+    if ([APP_NAME isEqualToString:@"AmiKo"]
+//        || [APP_NAME isEqualToString:@"AmiKo-zR"]
+//        || [APP_NAME isEqualToString:@"AmiKo-Desitin"]
+        )
     {
         return @"de";
     }
 
-    else if ([APP_NAME isEqualToString:@"CoMed"] ||
-             [APP_NAME isEqualToString:@"CoMed-zR"] ||
-             [APP_NAME isEqualToString:@"CoMed-Desitin"])
+    else if ([APP_NAME isEqualToString:@"CoMed"]
+//             || [APP_NAME isEqualToString:@"CoMed-zR"]
+//             || [APP_NAME isEqualToString:@"CoMed-Desitin"]
+             )
     {
         return @"fr";
     }
