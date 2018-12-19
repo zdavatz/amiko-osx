@@ -30,7 +30,7 @@ AmiKo/CoMed für macOS
   * Apfel + I > Input-File wählen
   * Export von allen Sätzen in der Fachinfo, welche die gewünschten Wörter enthalten.
   * Wortanalyse.csv enthält folgende Felder: 
-    * Suchbegriff, Wirkstoff, Markenname, ATC-Code, Kapitelname, Satz mit Wort, Link zur [https://amiko.oddb.org](Online Referenz)
+    * Suchbegriff, Wirkstoff, Markenname, ATC-Code, Kapitelname, Satz mit Wort, Link zur [Online Referenz](https://amiko.oddb.org)
     
 ## .amk File lesen
 *  `cat RZ_2017-09-22T211907.amk | base64 --decode` wird das JSON File auslesen.
