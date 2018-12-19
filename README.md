@@ -2,7 +2,7 @@ AmiKo/CoMed für macOS
 =====================
 
 ## Funktionen
-* Dark Light/Mode support  ;)
+* Dark/Light Mode support  ;)
 * Rezept 
   * erstellen
   * importieren
