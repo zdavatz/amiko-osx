@@ -217,6 +217,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		930F635F21CA5D4F00576223 /* AmiKo Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AmiKo Desitin.entitlements"; sourceTree = SOURCE_ROOT; };
+		930F636021CA5D8400576223 /* CoMed Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoMed Desitin.entitlements"; sourceTree = "<group>"; };
 		D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_de.db; sourceTree = "<group>"; };
 		D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_fr.db; sourceTree = "<group>"; };
 		D517E4AE1EA8B8C400187AC8 /* MLInteractionsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLInteractionsAdapter.h; sourceTree = "<group>"; };
@@ -674,6 +676,7 @@
 		D5EBC67417C912FF00EBEF39 = {
 			isa = PBXGroup;
 			children = (
+				930F636021CA5D8400576223 /* CoMed Desitin.entitlements */,
 				FA6371882089CFEE009361D7 /* Localizable.strings */,
 				D541211817DFA96800ACDB81 /* QuartzCore.framework */,
 				D5EBC6C617CD21C200EBEF39 /* WebKit.framework */,
@@ -717,6 +720,7 @@
 		D5EBC68617C912FF00EBEF39 /* AmiKo */ = {
 			isa = PBXGroup;
 			children = (
+				930F635F21CA5D4F00576223 /* AmiKo Desitin.entitlements */,
 				D5EBC6C817CFDD3800EBEF39 /* Resources */,
 				D5EBC6BF17C9248300EBEF39 /* Libs */,
 				D5EBC6A717C91FAC00EBEF39 /* Database */,
@@ -1237,6 +1241,7 @@
 		D5E91BB117E5E8E400B66B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "AmiKo Desitin.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1257,6 +1262,7 @@
 		D5E91BB217E5E8E400B66B27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "AmiKo Desitin.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1277,6 +1283,7 @@
 		D5E91BE017E5E8E800B66B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "CoMed Desitin.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1294,6 +1301,7 @@
 		D5E91BE117E5E8E800B66B27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "CoMed Desitin.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
