@@ -217,8 +217,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		931A5A3D20A1D33400353AFE /* AmiKo Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AmiKo Desitin.entitlements"; sourceTree = SOURCE_ROOT; };
-		93CC52D320A1D403002C3D2B /* CoMed Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoMed Desitin.entitlements"; sourceTree = "<group>"; };
 		D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_de.db; sourceTree = "<group>"; };
 		D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_fr.db; sourceTree = "<group>"; };
 		D517E4AE1EA8B8C400187AC8 /* MLInteractionsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLInteractionsAdapter.h; sourceTree = "<group>"; };
@@ -682,7 +680,6 @@
 		D5EBC67417C912FF00EBEF39 = {
 			isa = PBXGroup;
 			children = (
-				93CC52D320A1D403002C3D2B /* CoMed Desitin.entitlements */,
 				FA6371882089CFEE009361D7 /* Localizable.strings */,
 				D541211817DFA96800ACDB81 /* QuartzCore.framework */,
 				D5EBC6C617CD21C200EBEF39 /* WebKit.framework */,
@@ -726,7 +723,6 @@
 		D5EBC68617C912FF00EBEF39 /* AmiKo */ = {
 			isa = PBXGroup;
 			children = (
-				931A5A3D20A1D33400353AFE /* AmiKo Desitin.entitlements */,
 				D5EBC6C817CFDD3800EBEF39 /* Resources */,
 				D5EBC6BF17C9248300EBEF39 /* Libs */,
 				D5EBC6A717C91FAC00EBEF39 /* Database */,
