@@ -442,6 +442,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     possibleToOverwrite = false;
     modifiedPrescription = false;
     [self updateButtons];
+    [self updateExpertInfoView:nil];  // to have an initial dark background in dark mode
 }
 
 - (void) updateUserDefaultsForKey:(NSString *)key
@@ -2470,6 +2471,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     // Generate html string
     NSString *htmlStr = mMed.contentStr;
+    if (!htmlStr) {
+        htmlStr = @"<html><head></head><body></body></html>";
+    }
     htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<html>"
                                                  withString:@"<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><meta name=\"supported-color-schemes\" content=\"light dark\" />"];
     htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"<head></head>"

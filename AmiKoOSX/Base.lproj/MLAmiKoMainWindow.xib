@@ -517,7 +517,7 @@
                                                                                                                                                 <constraint firstAttribute="height" constant="16" id="IUw-iM-PF2"/>
                                                                                                                                                 <constraint firstAttribute="width" constant="24" id="Njm-G0-4gp"/>
                                                                                                                                             </constraints>
-                                                                                                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="printerIcon" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="0pf-ky-7wR">
+                                                                                                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="printerIcon" imagePosition="only" alignment="center" alternateImage="printerIcon_darkmode" imageScaling="proportionallyDown" inset="2" id="0pf-ky-7wR">
                                                                                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                                                                 <font key="font" metaFont="system"/>
                                                                                                                                             </buttonCell>
@@ -556,7 +556,7 @@
                                                                                                                                                 <constraint firstAttribute="height" constant="16" id="2BS-ft-DFh"/>
                                                                                                                                                 <constraint firstAttribute="width" constant="24" id="ClM-7a-E3L"/>
                                                                                                                                             </constraints>
-                                                                                                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="deleteIcon" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="QGY-1d-UdJ">
+                                                                                                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="deleteIcon" imagePosition="only" alignment="center" alternateImage="deleteIcon_darkmode" imageScaling="proportionallyDown" inset="2" id="QGY-1d-UdJ">
                                                                                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                                                                 <font key="font" metaFont="system"/>
                                                                                                                                             </buttonCell>
@@ -1124,6 +1124,7 @@
         <image name="28-star-ye" width="26" height="26"/>
         <image name="NSStopProgressTemplate" width="11" height="11"/>
         <image name="deleteIcon" width="12.800000190734863" height="12.800000190734863"/>
+        <image name="deleteIcon_darkmode" width="12.800000190734863" height="12.800000190734863"/>
         <image name="desitin" width="512" height="512"/>
         <image name="export" width="48" height="48"/>
         <image name="favorites" width="418.90908813476562" height="418.90908813476562"/>
@@ -1131,6 +1132,7 @@
         <image name="maindb" width="121.26316070556641" height="121.26316070556641"/>
         <image name="prescription" width="51.200000762939453" height="51.200000762939453"/>
         <image name="printerIcon" width="12.800000190734863" height="12.800000190734863"/>
+        <image name="printerIcon_darkmode" width="12.800000190734863" height="12.800000190734863"/>
         <sound name="Ping"/>
     </resources>
 </document>

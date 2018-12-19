@@ -208,6 +208,10 @@
 		FA6A2BB120B2B0EE0080B4C9 /* MLPatientSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5962E991EFBC2720034B964 /* MLPatientSheetController.m */; };
 		FA6A2BB220B2B10A0080B4C9 /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
 		FA6A2BB320B2B10A0080B4C9 /* MLOperatorIDSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5C5281F0E36BC00DF851F /* MLOperatorIDSheetController.m */; };
+		FA91FD5E21CA64F400714FB1 /* printerIcon_darkmode.png in Resources */ = {isa = PBXBuildFile; fileRef = FA91FD5D21CA64F400714FB1 /* printerIcon_darkmode.png */; };
+		FA91FD5F21CA64F400714FB1 /* printerIcon_darkmode.png in Resources */ = {isa = PBXBuildFile; fileRef = FA91FD5D21CA64F400714FB1 /* printerIcon_darkmode.png */; };
+		FA91FD6121CA65C600714FB1 /* deleteIcon_darkmode.png in Resources */ = {isa = PBXBuildFile; fileRef = FA91FD6021CA65C500714FB1 /* deleteIcon_darkmode.png */; };
+		FA91FD6221CA65C600714FB1 /* deleteIcon_darkmode.png in Resources */ = {isa = PBXBuildFile; fileRef = FA91FD6021CA65C500714FB1 /* deleteIcon_darkmode.png */; };
 		FA98A7AC20A09CE900B2665B /* MLPrescriptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */; };
 		FA9F26E721C2CD1A005DA919 /* Wait.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9F26E521C2CD1A005DA919 /* Wait.m */; };
 		FA9F26E821C2CD1A005DA919 /* Wait.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9F26E621C2CD1A005DA919 /* Wait.xib */; };
@@ -397,6 +401,8 @@
 		FA66364820A5E4B1007BA83B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLAmiKoMainWindow.strings; sourceTree = "<group>"; };
 		FA6A2BA920B2AECD0080B4C9 /* MLPatientSheetController+smartCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MLPatientSheetController+smartCard.h"; path = "../MLPatientSheetController+smartCard.h"; sourceTree = "<group>"; };
 		FA6A2BAA20B2AECD0080B4C9 /* MLPatientSheetController+smartCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "MLPatientSheetController+smartCard.m"; path = "../MLPatientSheetController+smartCard.m"; sourceTree = "<group>"; };
+		FA91FD5D21CA64F400714FB1 /* printerIcon_darkmode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printerIcon_darkmode.png; sourceTree = "<group>"; };
+		FA91FD6021CA65C500714FB1 /* deleteIcon_darkmode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteIcon_darkmode.png; sourceTree = "<group>"; };
 		FA9F26E421C2CD1A005DA919 /* Wait.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wait.h; sourceTree = "<group>"; };
 		FA9F26E521C2CD1A005DA919 /* Wait.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Wait.m; sourceTree = "<group>"; };
 		FA9F26E621C2CD1A005DA919 /* Wait.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Wait.xib; sourceTree = "<group>"; };
@@ -478,10 +484,12 @@
 		D5BACC121EBB2CAB001812FB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FA91FD6021CA65C500714FB1 /* deleteIcon_darkmode.png */,
 				FA518CDF20AB1BAD00F8DE42 /* deleteIcon.png */,
 				FA15FE2421BFC8B00049F1C5 /* export@2x.png */,
 				D53877771A9E5AE700AEFDB4 /* favorites@2x.png */,
 				D53877781A9E5AE700AEFDB4 /* interactions@2x.png */,
+				FA91FD5D21CA64F400714FB1 /* printerIcon_darkmode.png */,
 				FA518CD820AAED3600F8DE42 /* printerIcon.png */,
 				D5C5C5371F16515900DF851F /* prescription@2x.png */,
 				D5AE31841B372085006BC60E /* desitin_icon_512x512.png */,
@@ -962,9 +970,11 @@
 				D5AE31871B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
 				D5C6442C1EB345A300438E6F /* fulltext_style.css in Resources */,
+				FA91FD5E21CA64F400714FB1 /* printerIcon_darkmode.png in Resources */,
 				D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */,
 				FA66364120A5E4A9007BA83B /* MLAmiKoMainWindow.xib in Resources */,
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
+				FA91FD6121CA65C600714FB1 /* deleteIcon_darkmode.png in Resources */,
 				D53877821A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				D538777A1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				FA12C62721C9488E002E190E /* color-scheme-dark.css in Resources */,
@@ -1009,9 +1019,11 @@
 				FA5562D92091B33300B85266 /* AmiKoMainMenu.xib in Resources */,
 				D5C5C5191F0C276E00DF851F /* checked_icon.png in Resources */,
 				D5BACC141EBE051D001812FB /* amiko_frequency_fr.db in Resources */,
+				FA91FD5F21CA64F400714FB1 /* printerIcon_darkmode.png in Resources */,
 				D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
+				FA91FD6221CA65C600714FB1 /* deleteIcon_darkmode.png in Resources */,
 				D52795F91EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				D53877831A9E5AE700AEFDB4 /* maindb@2x.png in Resources */,
 				FA12C62821C9488E002E190E /* color-scheme-dark.css in Resources */,
