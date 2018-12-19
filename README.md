@@ -31,6 +31,7 @@ AmiKo/CoMed für macOS
   * Export von allen Sätzen in der Fachinfo, welche die gewünschten Wörter enthalten.
   * Wortanalyse.csv enthält folgende Felder: 
     * Suchbegriff, Wirkstoff, Markenname, ATC-Code, Kapitelname, Satz mit Wort, Link zur [Online Referenz](https://amiko.oddb.org)
+  * 5. Das CSV-File mit mehreren tausend Zeilen, lässt sich am besten mit [LibreOffice](https://www.libreoffice.org/download/download/) öffnen.
     
 ## .amk File lesen
 *  `cat RZ_2017-09-22T211907.amk | base64 --decode` wird das JSON File auslesen.
