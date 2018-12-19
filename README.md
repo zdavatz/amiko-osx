@@ -45,3 +45,6 @@ AmiKo/CoMed für macOS
 
 ## Build Target
 * 10.12
+
+## License
+* [GPLv3.0](https://github.com/zdavatz/amiko-osx/blob/master/LICENSE.txt)
