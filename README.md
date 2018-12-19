@@ -31,7 +31,7 @@ AmiKo/CoMed für macOS
   * Export von allen Sätzen in der Fachinfo, welche die gewünschten Wörter enthalten.
   * Wortanalyse.csv enthält folgende Felder: 
     * Suchbegriff, Wirkstoff, Markenname, ATC-Code, Kapitelname, Satz mit Wort, Link zur [Online Referenz](https://amiko.oddb.org)
-  * Das CSV-File mit mehreren tausend Zeilen, lässt sich am besten mit [LibreOffice](https://www.libreoffice.org/download/download/) öffnen.
+  * Das CSV-File mit mehreren tausend Zeilen, lässt sich am besten mit [LibreOffice](https://www.libreoffice.org/download/download/) öffnen. Delimiter ist ein _;_
   * Beispiel [Input-File](http://www.ywesee.com/uploads/AmiKo/Wortliste.csv.txt)
   * Beispiel [Output-File](http://www.ywesee.com/uploads/AmiKo/Wortanalyse.csv.txt)
     
