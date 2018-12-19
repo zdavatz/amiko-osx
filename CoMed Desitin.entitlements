@@ -14,5 +14,7 @@
 	<true/>
 	<key>com.apple.security.print</key>
 	<true/>
+	<key>com.apple.security.smartcard</key>
+	<true/>
 </dict>
 </plist>
