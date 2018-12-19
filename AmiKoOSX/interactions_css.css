@@ -1,8 +1,8 @@
-#interactions{margin-left:5px;margin-right:5px;margin-top:20px;margin-bottom:20px;font-family:"Lucida Grande","Arial","Tahoma","Helvetica","Geneva","sans-serif";color:black;}
+#interactions{margin-left:5px;margin-right:5px;margin-top:20px;margin-bottom:20px;font-family:"Lucida Grande","Arial","Tahoma","Helvetica","Geneva","sans-serif";color:var(--text-color-normal);}
 
 #interactions input{font-family:"Lucida Grande","sans-serif";font-size:0.9em;}
 #interactions div p{font-size:0.9em;}
-#interactions table{background-color:#eeeeee;font-family:"Lucida Grande","sans-serif";font-size:0.9em;padding:0.5em;margin-top:0.9em;margin-bottom:0.9em;border-radius:0.3em;}
+#interactions table{background-color:var(--background-color-gray);font-family:"Lucida Grande","sans-serif";font-size:0.9em;padding:0.5em;margin-top:0.9em;margin-bottom:0.9em;border-radius:0.3em;}
 #interactions td{font-family:"Lucida Grande","sans-serif";font-size:0.9em;}
 #interactions td p{font-family:"Lucida Grande","sans-serif";font-size:0.9em;}
 #interactions fieldset {border-bottom: none; border-left: none; border-right: none;}

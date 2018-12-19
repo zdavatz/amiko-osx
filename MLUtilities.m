@@ -183,4 +183,17 @@ NSString* const APP_ID = @"710472327";
     return [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
 }
 
++ (NSString *) getColorCss
+{
+    NSString *osxMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"AppleInterfaceStyle"];
+    //NSLog(@"%s %d AppleInterfaceStyle:%@", __FUNCTION__, __LINE__, osxMode);  // null, Dark
+    
+    NSString *colorSchemeFilename = @"color-scheme-light";
+    if ([osxMode isEqualToString:@"Dark"])
+        colorSchemeFilename = @"color-scheme-dark";
+    
+    NSString *colorCssPath = [[NSBundle mainBundle] pathForResource:colorSchemeFilename ofType:@"css"];
+    NSString *colorCss = [NSString stringWithContentsOfFile:colorCssPath encoding:NSUTF8StringEncoding error:nil];
+    return colorCss;
+}
 @end

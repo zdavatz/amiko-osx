@@ -5,7 +5,8 @@
     --text-color-highlight: blue;
     --lines-color: orange;
 }
+/* Used in interactions */
 body {
-    color: #dddddd;
+    color: grey;
     background-color: #222222;
 }

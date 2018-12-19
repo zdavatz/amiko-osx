@@ -21,16 +21,8 @@
  
  ------------------------------------------------------------------------ */
 
-//#if defined (AMIKO)
 extern NSString* const APP_NAME;
 extern NSString* const APP_ID;
-//#elif defined (COMED)
-//extern NSString* const APP_NAME;
-//extern NSString* const APP_ID;
-//#else
-//extern NSString* const APP_NAME;
-//extern NSString* const APP_ID;
-//#endif
 
 @interface MLUtilities : NSObject
 
@@ -48,5 +40,7 @@ extern NSString* const APP_ID;
 + (NSString *) prettyTime;
 + (NSString *) encodeStringToBase64:(NSString *)string;
 + (NSString *) decodeBase64ToString:(NSString *)base64String;
+
++ (NSString *) getColorCss;
 
 @end

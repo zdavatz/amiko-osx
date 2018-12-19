@@ -110,20 +110,6 @@ static NSString *mCurrentSearchKey = @"";
 static BOOL mSearchInteractions = false;
 static BOOL mPrescriptionMode = false;
 
-NSString *getColorCss(void)
-{
-    NSString *osxMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"AppleInterfaceStyle"];
-    //NSLog(@"%s %d AppleInterfaceStyle:%@", __FUNCTION__, __LINE__, osxMode);  // null, Dark
-    
-    NSString *colorSchemeFilename = @"color-scheme-light";
-    if ([osxMode isEqualToString:@"Dark"])
-        colorSchemeFilename = @"color-scheme-dark";
-    
-        NSString *colorCssPath = [[NSBundle mainBundle] pathForResource:colorSchemeFilename ofType:@"css"];
-        NSString *colorCss = [NSString stringWithContentsOfFile:colorCssPath encoding:NSUTF8StringEncoding error:nil];
-        return colorCss;
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 
@@ -2468,7 +2454,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) updateExpertInfoView:(NSString *)anchor
 {
-    NSString *colorCss = getColorCss();
+    NSString *colorCss = [MLUtilities getColorCss];
     
     // Load style sheet from file
     NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
@@ -2559,7 +2545,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) updateFullTextSearchView:(NSString *)contentStr
 {
-    NSString *colorCss = getColorCss();
+    NSString *colorCss = [MLUtilities getColorCss];
 
     // Load style sheet from file
     NSString *fullTextCssPath = [[NSBundle mainBundle] pathForResource:@"fulltext_style" ofType:@"css"];
