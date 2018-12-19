@@ -369,8 +369,6 @@
 		D5F303491F21F43F00CAFED3 /* MLPrescriptionsCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionsCart.h; sourceTree = "<group>"; };
 		D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AmiKo.entitlements; path = ../AmiKo.entitlements; sourceTree = "<group>"; };
 		D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoMed.entitlements; path = ../CoMed.entitlements; sourceTree = "<group>"; };
-		D5F6BB2917E8BC3900DCBD16 /* AmiKo-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "AmiKo-zR.entitlements"; sourceTree = SOURCE_ROOT; };
-		D5F6BB2A17E8BC3C00DCBD16 /* CoMed-zR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "CoMed-zR.entitlements"; path = "../CoMed-zR.entitlements"; sourceTree = "<group>"; };
 		FA12C62321C9484E002E190E /* color-scheme-light.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "color-scheme-light.css"; sourceTree = "<group>"; };
 		FA12C62621C9488D002E190E /* color-scheme-dark.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "color-scheme-dark.css"; sourceTree = "<group>"; };
 		FA15FE2421BFC8B00049F1C5 /* export@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "export@2x.png"; sourceTree = "<group>"; };
@@ -741,8 +739,6 @@
 			children = (
 				D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */,
 				D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */,
-				D5F6BB2917E8BC3900DCBD16 /* AmiKo-zR.entitlements */,
-				D5F6BB2A17E8BC3C00DCBD16 /* CoMed-zR.entitlements */,
 				D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */,
 				D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */,
 				D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */,
