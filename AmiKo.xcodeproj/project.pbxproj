@@ -315,9 +315,6 @@
 		D5DD5760193B49260094244E /* 217-trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "217-trash.png"; sourceTree = "<group>"; };
 		D5DD5765193B4EB40094244E /* 218-trash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2.png"; sourceTree = "<group>"; };
 		D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drug_interactions_csv_fr.csv; sourceTree = "<group>"; };
-		D5E731531B33480A007771D7 /* AmiKo-desitin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AmiKo-desitin-Info.plist"; path = "/Users/maxl/Projects/Pharmax/MacOS/AmiKoOSX/AmiKo-desitin-Info.plist"; sourceTree = "<absolute>"; };
-		D5E731971B334829007771D7 /* CoMed-desitin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CoMed-desitin-Info.plist"; path = "/Users/maxl/Projects/Pharmax/MacOS/AmiKoOSX/CoMed-desitin-Info.plist"; sourceTree = "<absolute>"; };
-		D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-zR-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D5E91BB317E5E8E400B66B27 /* AmiKo Desitin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AmiKo Desitin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmiKo-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D5E91BE217E5E8E800B66B27 /* CoMed Desitin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoMed Desitin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -329,7 +326,6 @@
 		D5EBC68317C912FF00EBEF39 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D5EBC68417C912FF00EBEF39 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D5EBC68517C912FF00EBEF39 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D5EBC68817C912FF00EBEF39 /* CoMed-zR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoMed-zR-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D5EBC68A17C912FF00EBEF39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D5EBC68C17C912FF00EBEF39 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D5EBC68E17C912FF00EBEF39 /* AmiKo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AmiKo-Prefix.pch"; sourceTree = "<group>"; };
@@ -741,10 +737,6 @@
 				D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */,
 				D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */,
 				D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */,
-				D5E91B8517E5E24000B66B27 /* AmiKo-zR-Info.plist */,
-				D5EBC68817C912FF00EBEF39 /* CoMed-zR-Info.plist */,
-				D5E731531B33480A007771D7 /* AmiKo-desitin-Info.plist */,
-				D5E731971B334829007771D7 /* CoMed-desitin-Info.plist */,
 				D5EBC68F17C912FF00EBEF39 /* Credits.rtf */,
 				D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */,
 				D5EBC68C17C912FF00EBEF39 /* main.m */,
