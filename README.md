@@ -2,6 +2,7 @@ AmiKo/CoMed für macOS
 =====================
 
 ## Funktionen
+* Dark Light/Mode support  ;)
 * Rezept 
   * erstellen
   * importieren
@@ -23,7 +24,14 @@ AmiKo/CoMed für macOS
   * Hersteller
   * Swissmedic-Nummer
   * BAG/Swissmedic Kategorie
-
+* Wortanaylse, erstellt für [Pharmaceutical Care Research Group](https://pharma.unibas.ch/de/research-groups/pharmaceutical-care/) Klingelbergstrasse 61, 4056 Basel, Switzerland
+  * Apfel+A zum DB aktualisieren
+  * File mit einem oder zwei Wörtern pro Zeile erstellen (UTF-8 codiert). Voll-Text-Suche verwenden um Wörter zu finden.
+  * Apfel + I > Input-File wählen
+  * Export von allen Sätzen in der Fachinfo, welche die gewünschten Wörter enthalten.
+  * Wortanalyse.csv enthält folgende Felder: 
+    * Suchbegriff, Wirkstoff, Markenname, ATC-Code, Kapitelname, Satz mit Wort, Link zur [Online Referenz](https://amiko.oddb.org)
+    
 ## .amk File lesen
 *  `cat RZ_2017-09-22T211907.amk | base64 --decode` wird das JSON File auslesen.
 
