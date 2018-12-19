@@ -143,7 +143,7 @@
 "word_analysis" = "word_analysis";
 
 /* No comment provided by engineer. */
-"Your data bank is older than 30 days. We recommend an update" = "Votre banque des données est âgé de plus de 30 jours. Nous vous recommandons une mise à jour.";
+"Your data bank is older than 30 days. We recommend an update" = "Votre banque des données est âgé de plus de 30 jours. Nous vous recommandons une mise à jour. Touche pomme+A";
 
 /* html */
 "Your medicine basket is empty" = "Votre panier des médicaments est vide.";
