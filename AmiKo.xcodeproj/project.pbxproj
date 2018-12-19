@@ -16,8 +16,6 @@
 		D52795F91EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */; };
 		D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7517EDC40B003BF272 /* amikoosx_splash_1000x670.png */; };
 		D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */ = {isa = PBXBuildFile; fileRef = D52A0D7717EDC414003BF272 /* comedosx_splash_1000x670.png */; };
-		D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */; };
-		D52A0D7A17EDC60E003BF272 /* AmiKo.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */; };
 		D52EA4A51EF4377C001ADFEC /* MLCellPackagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */; };
 		D52EA4A61EF4377C001ADFEC /* MLCellPackagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4A41EF4377C001ADFEC /* MLCellPackagesView.m */; };
 		D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EA4AB1EF43B96001ADFEC /* MLColors.m */; };
@@ -365,8 +363,6 @@
 		D5ECDE1B1F2B24CB00970133 /* MLPrescriptionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionCellView.m; sourceTree = "<group>"; };
 		D5F303421F21F42A00CAFED3 /* MLPrescriptionsCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionsCart.m; sourceTree = "<group>"; };
 		D5F303491F21F43F00CAFED3 /* MLPrescriptionsCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionsCart.h; sourceTree = "<group>"; };
-		D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AmiKo.entitlements; path = ../AmiKo.entitlements; sourceTree = "<group>"; };
-		D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoMed.entitlements; path = ../CoMed.entitlements; sourceTree = "<group>"; };
 		FA12C62321C9484E002E190E /* color-scheme-light.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "color-scheme-light.css"; sourceTree = "<group>"; };
 		FA12C62621C9488D002E190E /* color-scheme-dark.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "color-scheme-dark.css"; sourceTree = "<group>"; };
 		FA15FE2421BFC8B00049F1C5 /* export@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "export@2x.png"; sourceTree = "<group>"; };
@@ -737,8 +733,6 @@
 		D5EBC68717C912FF00EBEF39 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D5F6BB2717E8BC2800DCBD16 /* AmiKo.entitlements */,
-				D5F6BB2817E8BC3200DCBD16 /* CoMed.entitlements */,
 				D5E91BB417E5E8E500B66B27 /* AmiKo-Info.plist */,
 				D5E91BE317E5E8E900B66B27 /* CoMed-Info.plist */,
 				D5EBC68F17C912FF00EBEF39 /* Credits.rtf */,
@@ -980,7 +974,6 @@
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				FA4BC4DC208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */,
 				D52A0D7617EDC40B003BF272 /* amikoosx_splash_1000x670.png in Resources */,
-				D52A0D7A17EDC60E003BF272 /* AmiKo.entitlements in Resources */,
 				D5A22508193FB19F0078FEFF /* 216-compose.png in Resources */,
 				D5C5C5181F0C276E00DF851F /* checked_icon.png in Resources */,
 			);
@@ -1029,7 +1022,6 @@
 				D5DD576B193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */,
 				D5DD5762193B49260094244E /* 217-trash.png in Resources */,
-				D52A0D7917EDC60B003BF272 /* CoMed.entitlements in Resources */,
 				D5A22509193FB19F0078FEFF /* 216-compose.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
