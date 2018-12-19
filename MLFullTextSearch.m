@@ -65,10 +65,11 @@
     for (MLMedication *m in mListOfArticles) {
         BOOL filtered = true;
         NSString *contentStyle;
+
         if (rows % 2 == 0)
-            contentStyle = [NSString stringWithFormat:@"<li style=\"background-color:whitesmoke;\" id=\"{firstLetter}\">"];
+            contentStyle = [NSString stringWithFormat:@"<li style=\"background-color:var(--background-color-gray);\" id=\"{firstLetter}\">"];
         else
-            contentStyle = [NSString stringWithFormat:@"<li style=\"background-color:white;\" id=\"{firstLetter}\">"];
+            contentStyle = [NSString stringWithFormat:@"<li style=\"background-color:transparent;\" id=\"{firstLetter}\">"];
         
         NSString *contentTitle = [NSString stringWithFormat:@"<a onclick=\"displayFachinfo('%@','{anchor}')\"><span style=\"font-size:0.8em\"><b>%@</b></span></a> <span style=\"font-size:0.7em\"> | %@</span><br>", m.regnrs, m.title, m.auth];
 

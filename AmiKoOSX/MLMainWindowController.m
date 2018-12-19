@@ -110,6 +110,21 @@ static NSString *mCurrentSearchKey = @"";
 static BOOL mSearchInteractions = false;
 static BOOL mPrescriptionMode = false;
 
+NSString *getColorCss(void)
+{
+    NSString *osxMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"AppleInterfaceStyle"];
+    //NSLog(@"%s %d AppleInterfaceStyle:%@", __FUNCTION__, __LINE__, osxMode);  // null, Dark
+    
+    NSString *colorSchemeFilename = @"color-scheme-light";
+    if ([osxMode isEqualToString:@"Dark"])
+        colorSchemeFilename = @"color-scheme-dark";
+    
+        NSString *colorCssPath = [[NSBundle mainBundle] pathForResource:colorSchemeFilename ofType:@"css"];
+        NSString *colorCss = [NSString stringWithContentsOfFile:colorCssPath encoding:NSUTF8StringEncoding error:nil];
+        return colorCss;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 
 @interface DataObject : NSObject
@@ -2453,16 +2468,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) updateExpertInfoView:(NSString *)anchor
 {
-    NSString *osxMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"AppleInterfaceStyle"];
-    NSLog(@"%s %d AppleInterfaceStyle:%@", __FUNCTION__, __LINE__, osxMode);  // null, Dark
+    NSString *colorCss = getColorCss();
     
-    NSString *colorSchemeFilename = @"color-scheme-light";
-    if ([osxMode isEqualToString:@"Dark"])
-        colorSchemeFilename = @"color-scheme-dark";
-
-    NSString *colorCssPath = [[NSBundle mainBundle] pathForResource:colorSchemeFilename ofType:@"css"];
-    NSString *colorCss = [NSString stringWithContentsOfFile:colorCssPath encoding:NSUTF8StringEncoding error:nil];
-
     // Load style sheet from file
     NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
     NSString *amikoCss = @"";
@@ -2483,15 +2490,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                  withString:[NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style><style type=\"text/css\">%@</style></head>", jscriptStr, colorCss, amikoCss]];
 
     // Some tables have the color set in the HTML string (not set with CSS)
-    if ([osxMode isEqualToString:@"Dark"])
-        htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"background-color: #EEEEEE"
-                                                     withString:@"background-color: #444444"];
+    htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"background-color: #EEEEEE"
+                                                 withString:@"background-color: var(--background-color-gray)"];
     
     if (mCurrentSearchState == kFullText) {
         NSString *keyword = [mFullTextEntry keyword];
         if ([keyword isNotEqualTo:[NSNull null]]) {
             htmlStr = [htmlStr stringByReplacingOccurrencesOfString:keyword
-                                                         withString:[NSString stringWithFormat:@"<span class=\"mark\" style=\"background-color: yellow\">%@</span>", keyword]];
+                                                         withString:[NSString stringWithFormat:@"<span class=\"mark\" style=\"background-color: var(--text-color-highlight)\">%@</span>", keyword]];
         }
         mAnchor = anchor;
     }
@@ -2553,6 +2559,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) updateFullTextSearchView:(NSString *)contentStr
 {
+    NSString *colorCss = getColorCss();
+
     // Load style sheet from file
     NSString *fullTextCssPath = [[NSBundle mainBundle] pathForResource:@"fulltext_style" ofType:@"css"];
     NSString *fullTextCss = [NSString stringWithContentsOfFile:fullTextCssPath encoding:NSUTF8StringEncoding error:nil];
@@ -2562,8 +2570,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSString *jscriptStr = [NSString stringWithContentsOfFile:jscriptPath encoding:NSUTF8StringEncoding error:nil];
     
     NSString *htmlStr = [NSString stringWithFormat:@"<html><head><meta charset=\"utf-8\" /><meta name=\"supported-color-schemes\" content=\"light dark\" />"];
-    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style></head><body><div id=\"fulltext\">%@</body></div></html>",
+    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style><style type=\"text/css\">%@</style></head><body><div id=\"fulltext\">%@</body></div></html>",
                jscriptStr,
+               colorCss,
                fullTextCss,
                contentStr];
   

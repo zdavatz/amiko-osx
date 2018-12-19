@@ -1,6 +1,8 @@
 :root {
     --background-color-normal: transparent;
+    --background-color-gray: #444444;
     --text-color-normal: white;
+    --text-color-highlight: blue;
     --lines-color: orange;
 }
 body {
