@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		938147CE21CB9A790029D189 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68F17C912FF00EBEF39 /* Credits.rtf */; };
 		93B279D620B857FD00E32881 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA54AAFD20AED1460034CD77 /* libz.tbd */; };
 		D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
 		D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
@@ -1013,6 +1014,7 @@
 				D538777B1A9E5AE700AEFDB4 /* favorites@2x.png in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
 				D5C5C5391F16515900DF851F /* prescription@2x.png in Resources */,
+				938147CE21CB9A790029D189 /* Credits.rtf in Resources */,
 				D5DD576B193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */,
 				D5DD5762193B49260094244E /* 217-trash.png in Resources */,
