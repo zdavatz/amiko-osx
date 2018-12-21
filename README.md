@@ -24,7 +24,7 @@ AmiKo/CoMed für macOS
   * Hersteller
   * Swissmedic-Nummer
   * BAG/Swissmedic Kategorie
-* Wortanaylse, erstellt für [Pharmaceutical Care Research Group](https://pharma.unibas.ch/de/research-groups/pharmaceutical-care/) Klingelbergstrasse 61, 4056 Basel, Switzerland
+* Wortanaylse, erstellt für [Pharmaceutical Care Research Group](https://pharma.unibas.ch/de/research-groups/pharmaceutical-care/) Klingelbergstrasse 50, 4056 Basel, Switzerland
   * Apfel+A zum DB aktualisieren
   * File mit einem oder zwei Wörtern pro Zeile erstellen (UTF-8 codiert). Voll-Text-Suche verwenden um Wörter zu finden.
   * Apfel + I > Input-File wählen
