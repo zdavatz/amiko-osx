@@ -46,7 +46,7 @@ extern NSString* const APP_ID;
 
 #pragma mark -
 
-@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSDraggingDestination, NSSharingServicePickerDelegate>
+@interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSDraggingDestination, NSSharingServicePickerDelegate, NSToolbarDelegate>
 {
     IBOutlet NSButton *saveButton;
     IBOutlet NSButton *sendButton;
