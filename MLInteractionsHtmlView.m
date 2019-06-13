@@ -103,7 +103,7 @@
     // basket_html_str + delete_all_button_str + "<br><br>" + top_note_html_str
     int medCnt = 0;
     NSString *medBasketStr = @"";
-    if ([MLUtilities isGermanApp])
+    if ([MLUtilities isGermanApp])  // TODO: localize
         medBasketStr = [medBasketStr stringByAppendingString:@"<div id=\"Medikamentenkorb\"><fieldset><legend>Medikamentenkorb</legend></fieldset></div><table id=\"InterTable\" width=\"100%25\">"];
     else if ([MLUtilities isFrenchApp])
         medBasketStr = [medBasketStr stringByAppendingString:@"<div id=\"Medikamentenkorb\"><fieldset><legend>Panier des Médicaments</legend></fieldset></div><table id=\"InterTable\" width=\"100%25\">"];
@@ -134,6 +134,7 @@
                             @"</tr>", medCnt, name, atc_code, active_ingredient];
         }
         // Add delete all button
+        // TODO: localize
         if ([MLUtilities isGermanApp])
             medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Korb leeren\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
         else if ([MLUtilities isFrenchApp])
@@ -197,7 +198,7 @@
     
     if ([medCart size]>1) {
         // Add note to indicate that there are no interactions
-        if ([MLUtilities isGermanApp]) {
+        if ([MLUtilities isGermanApp]) {  // TODO: localize
             topNote = @"<fieldset><legend>Bekannte Interaktionen</legend></fieldset><p class=\"paragraph0\">Zur Zeit sind keine Interaktionen zwischen diesen Medikamenten in der EPha.ch-Datenbank vorhanden. Weitere Informationen finden Sie in der Fachinformation.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Interaktion melden\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>";
         } else if ([MLUtilities isFrenchApp]) {
             topNote = @"<fieldset><legend>Interactions Connues</legend></fieldset><p class=\"paragraph0\">Il n’y a aucune information dans la banque de données EPha.ch à propos d’une interaction entre les médicaments sélectionnés. Veuillez consulter les informations professionelles.</p><div id=\"Delete_all\"><input type=\"button\" value=\"Signaler une interaction\" onclick=\"deleteRow('Notify_interaction',this)\" /></div><br>";
@@ -207,6 +208,7 @@
     return topNote;
 }
 
+// TODO: localize
 - (NSString *) footNoteHtml
 {
     /*
@@ -235,7 +237,9 @@
                 @"<p class=\"footnote\">3. Unterstützt durch:  IBSA Institut Biochimique SA.</p>"
             };
             return legend;
-        } else if ([MLUtilities isFrenchApp]) {
+        }
+        
+        if ([MLUtilities isFrenchApp]) {
             NSString *legend = {
                 @"<fieldset><legend>Notes</legend></fieldset>"
                 @"<p class=\"footnote\">1. Légende des couleurs: </p>"

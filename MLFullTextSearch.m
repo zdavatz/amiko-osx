@@ -84,9 +84,14 @@
                 for (NSString *c in chapters) {
                     if ([indexToTitlesDict objectForKey:c]) {
                         NSString *cStr = indexToTitlesDict[c];
-                        NSString *anchor = [NSString stringWithFormat:@"section%@", c];
-                        if ([c intValue]>100)
-                            anchor = [NSString stringWithFormat:@"Section%@", c];
+                        NSString *sectionNamePrefix;
+                        if ([c intValue] > 100)
+                            sectionNamePrefix = @"Section";
+                        else
+                            sectionNamePrefix = @"section";
+
+                        NSString *anchor = [NSString stringWithFormat:@"%@%@", sectionNamePrefix, c];
+
                         int count = 0;
                         if ([chaptersCountDict objectForKey:cStr])
                             count = [chaptersCountDict[cStr] intValue];
