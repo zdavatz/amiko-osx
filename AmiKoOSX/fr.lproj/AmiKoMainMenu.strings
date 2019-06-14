@@ -33,10 +33,10 @@
 "83.title" = "Fichier";
 
 /* Class = "NSMenuItem"; title = "AmiKo Desitin verstecken"; ObjectID = "134"; */
-"134.title" = "Cacher AmiKo Desitin";
+"134.title" = "Cacher CoMed Desitin";
 
 /* Class = "NSMenuItem"; title = "AmiKo Desitin Beenden"; ObjectID = "136"; */
-"136.title" = "Terminer";
+"136.title" = "Terminer CoMed Desitin";
 
 /* Class = "NSMenuItem"; title = "Übrige Fenster verstecken"; ObjectID = "145"; */
 "145.title" = "Cacher autres fenêtres";
