@@ -2271,7 +2271,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     else
         m.title = NSLocalizedString(@"Not specified", nil);
 
-    m.subTitle = [NSString stringWithFormat:@"%ld Treffer", numHits];
+    m.subTitle = [NSString stringWithFormat:@"%ld Treffer", numHits];  // TODO: localize
     m.hashId = hash;
     
     [medi addObject:m];
@@ -2486,8 +2486,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if (mCurrentSearchState == kFullText) {
         NSString *keyword = [mFullTextEntry keyword];
         if ([keyword isNotEqualTo:[NSNull null]]) {
-            htmlStr = [htmlStr stringByReplacingOccurrencesOfString:keyword
-                                                         withString:[NSString stringWithFormat:@"<span class=\"mark\" style=\"background-color: var(--text-color-highlight)\">%@</span>", keyword]];
+            // Instead of appending like in the Windows version,
+            // insert before "</body>"
+            NSString *jsCode = [NSString stringWithFormat:@"highlightText(document.body,'%@')", keyword];
+            NSString *extraHtmlCode = [NSString stringWithFormat:@"<script>%@</script>\n </body>", jsCode];
+            htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"</body>"
+                                                         withString:extraHtmlCode];
+
         }
         mAnchor = anchor;
     }
