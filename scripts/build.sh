@@ -18,9 +18,11 @@ PILLBOX_ODDB_ORG="http://pillbox.oddb.org"
 # default is ~/Library/Developer/Xcode/Archives
 # see Xcode->Preferences->Locations->Archives
 ARCHIVE_PATH="$WD/../build/Archives/$TIMESTAMP1"
+
 IPA_PATH="$WD/../build/ipa"
 
-touch itc.conf
+ITC_FILE=itc.conf
+touch $ITC_FILE
 
 #-------------------------------------------------------------------------------
 if [ $STEP_REMOVE_SUPPORT_FILES ] ; then
@@ -61,8 +63,6 @@ fi
 #-------------------------------------------------------------------------------
 if [ $STEP_BUILD ] ; then
 pushd ../
-#xcodebuild -showBuildSettings > ../build-settings.txt
-#xcodebuild -list
 for TARGET in AmiKo CoMed ; do
     echo "Build $TARGET"
     xcodebuild build -target $TARGET -configuration Release
@@ -99,7 +99,7 @@ fi
 
 #-------------------------------------------------------------------------------
 if [ $STEP_UPLOAD_APP ] ; then
-source itc.conf
+#source $ITC_FILE
 for f in $IPA_PATH/*.ipa ; do
     echo "Validating $f"
     xcrun altool --validate-app --type osx --file "$f" \
