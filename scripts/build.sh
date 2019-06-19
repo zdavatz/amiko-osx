@@ -91,6 +91,7 @@ pushd ../
 for f in $ARCHIVE_PATH/*.xcarchive ; do
     echo "Export the .ipa from $f"
     xcodebuild -exportArchive \
+        -verbose \
         -archivePath "$f" \
         -exportOptionsPlist $WD/store.plist \
         -exportPath "$IPA_PATH"
