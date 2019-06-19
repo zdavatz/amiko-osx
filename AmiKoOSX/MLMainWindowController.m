@@ -2492,7 +2492,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             NSString *extraHtmlCode = [NSString stringWithFormat:@"<script>%@</script>\n </body>", jsCode];
             htmlStr = [htmlStr stringByReplacingOccurrencesOfString:@"</body>"
                                                          withString:extraHtmlCode];
-
         }
         mAnchor = anchor;
     }
