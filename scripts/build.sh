@@ -15,11 +15,13 @@ TIMESTAMP2=$(date +%Y%m%d_%H%M)
 WD=$PWD
 PILLBOX_ODDB_ORG="http://pillbox.oddb.org"
 
+BUILD_PATH="$WD/../build"
+
 # default is ~/Library/Developer/Xcode/Archives
 # see Xcode->Preferences->Locations->Archives
-ARCHIVE_PATH="$WD/../build/Archives/$TIMESTAMP1"
+ARCHIVE_PATH="$BUILD_PATH/Archives/$TIMESTAMP1"
 
-IPA_PATH="$WD/../build/ipa"
+IPA_PATH="$BUILD_PATH/ipa"
 
 #ITC_FILE=itc.conf
 #touch $ITC_FILE
@@ -35,6 +37,7 @@ for EXT in db html csv ; do
         rm *.$EXT
     fi
 done
+rm -r "$BUILD_PATH"
 popd > /dev/null
 fi
 
