@@ -79,6 +79,7 @@ for SCHEME in AmiKo CoMed ; do
     xcodebuild archive \
     -scheme $SCHEME \
     -configuration Release \
+    -derivedDataPath "build/DerivedData" \
     -archivePath "$ARCHIVE_PATH/$SCHEME $TIMESTAMP2.xcarchive"
 done
 popd > /dev/null
@@ -87,6 +88,8 @@ fi
 #-------------------------------------------------------------------------------
 if [ $STEP_CREATE_IPA ] ; then
 security unlock-keychain
+#PRODUCT_BUNDLE_IDENTIFIER=amikoosx
+#PROVISIONING_PROFILE_SPECIFIER="Zeno Davatz"
 pushd ../
 for f in $ARCHIVE_PATH/*.xcarchive ; do
     echo "Export the .ipa from $f"
