@@ -2,12 +2,14 @@
 # Alex Bettarini -  19 Jun 2019
 # Copyright © 2019 Ywesee GmbH. All rights reserved.
 
-#STEP_REMOVE_SUPPORT_FILES=true
-#STEP_DOWNLOAD_SUPPORT_FILES=true
-#STEP_BUILD=true
-#STEP_ARCHIVE=true
+security unlock-keychain
+
+STEP_REMOVE_SUPPORT_FILES=true
+STEP_DOWNLOAD_SUPPORT_FILES=true
+STEP_BUILD=true
+STEP_ARCHIVE=true
 STEP_CREATE_IPA=true
-#STEP_UPLOAD_APP=true
+STEP_UPLOAD_APP=true
 
 #-------------------------------------------------------------------------------
 TIMESTAMP1=$(date +%Y%m%d)
@@ -86,7 +88,6 @@ fi
 
 #-------------------------------------------------------------------------------
 if [ $STEP_CREATE_IPA ] ; then
-security unlock-keychain
 pushd ../
 for f in $ARCHIVE_PATH/*.xcarchive ; do
     echo "Export the .ipa from $f"
