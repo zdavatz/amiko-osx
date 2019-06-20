@@ -97,7 +97,7 @@ for f in $ARCHIVE_PATH/*.xcarchive ; do
     xcodebuild -exportArchive \
         -verbose \
         -archivePath "$f" \
-        -exportOptionsPlist $WD/ExportOptionsDevelop.plist \
+        -exportOptionsPlist $WD/store.plist \
         -exportPath "$PKG_PATH"
 done
 popd > /dev/null
