@@ -100,7 +100,7 @@ for f in $ARCHIVE_PATH/*.xcarchive ; do
     xcodebuild -exportArchive \
         -verbose \
         -archivePath "$f" \
-        -exportOptionsPlist $WD/store.plist \
+        -exportOptionsPlist $WD/ExportOptionsMacAppStore.plist \
         -exportPath "$IPA_PATH"
 done
 popd > /dev/null
