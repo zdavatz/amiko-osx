@@ -89,7 +89,6 @@ fi
 
 #-------------------------------------------------------------------------------
 if [ $STEP_CREATE_IPA ] ; then
-security unlock-keychain
 #PRODUCT_BUNDLE_IDENTIFIER=amikoosx
 #PROVISIONING_PROFILE_SPECIFIER="Zeno Davatz"
 pushd ../
