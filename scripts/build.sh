@@ -6,7 +6,7 @@ STEP_REMOVE_SUPPORT_FILES=true
 STEP_DOWNLOAD_SUPPORT_FILES=true
 #STEP_BUILD=true
 STEP_ARCHIVE=true
-STEP_CREATE_IPA=true
+STEP_CREATE_PKG=true
 STEP_UPLOAD_APP=true
 
 #-------------------------------------------------------------------------------
@@ -21,10 +21,7 @@ BUILD_PATH="$WD/../build"
 # see Xcode->Preferences->Locations->Archives
 ARCHIVE_PATH="$BUILD_PATH/Archives/$TIMESTAMP1"
 
-IPA_PATH="$BUILD_PATH/ipa"
-
-#ITC_FILE=itc.conf
-#touch $ITC_FILE
+PKG_PATH="$BUILD_PATH/pkg"
 
 security unlock-keychain
 
@@ -91,7 +88,7 @@ popd > /dev/null
 fi
 
 #-------------------------------------------------------------------------------
-if [ $STEP_CREATE_IPA ] ; then
+if [ $STEP_CREATE_PKG ] ; then
 #PRODUCT_BUNDLE_IDENTIFIER=amikoosx
 #PROVISIONING_PROFILE_SPECIFIER="Zeno Davatz"
 pushd ../
@@ -100,8 +97,8 @@ for f in $ARCHIVE_PATH/*.xcarchive ; do
     xcodebuild -exportArchive \
         -verbose \
         -archivePath "$f" \
-        -exportOptionsPlist $WD/ExportOptionsMacAppStore.plist \
-        -exportPath "$IPA_PATH"
+        -exportOptionsPlist $WD/ExportOptionsDevelop.plist \
+        -exportPath "$PKG_PATH"
 done
 popd > /dev/null
 fi
@@ -109,7 +106,7 @@ fi
 #-------------------------------------------------------------------------------
 if [ $STEP_UPLOAD_APP ] ; then
 #source $ITC_FILE
-for f in $IPA_PATH/*.ipa ; do
+for f in $PKG_PATH/*.pkg ; do
     echo "Validating $f"
     xcrun altool --validate-app --type osx --file "$f" \
         --username "$ITC_USER" --password "$ITC_PASSWORD"
