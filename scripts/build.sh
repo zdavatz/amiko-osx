@@ -2,12 +2,12 @@
 # Alex Bettarini -  19 Jun 2019
 # Copyright © 2019 Ywesee GmbH. All rights reserved.
 
-#STEP_REMOVE_SUPPORT_FILES=true
-#STEP_DOWNLOAD_SUPPORT_FILES=true
-#STEP_BUILD=true
-#STEP_ARCHIVE=true
+STEP_REMOVE_SUPPORT_FILES=true
+STEP_DOWNLOAD_SUPPORT_FILES=true
+STEP_BUILD=true
+STEP_ARCHIVE=true
 STEP_CREATE_IPA=true
-#STEP_UPLOAD_APP=true
+STEP_UPLOAD_APP=true
 
 #-------------------------------------------------------------------------------
 TIMESTAMP1=$(date +%Y%m%d)
@@ -21,8 +21,10 @@ ARCHIVE_PATH="$WD/../build/Archives/$TIMESTAMP1"
 
 IPA_PATH="$WD/../build/ipa"
 
-ITC_FILE=itc.conf
-touch $ITC_FILE
+#ITC_FILE=itc.conf
+#touch $ITC_FILE
+
+security unlock-keychain
 
 #-------------------------------------------------------------------------------
 if [ $STEP_REMOVE_SUPPORT_FILES ] ; then
