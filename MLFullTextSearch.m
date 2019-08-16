@@ -65,17 +65,16 @@
     for (MLMedication *m in mListOfArticles) {
         BOOL filtered = true;
         NSString *contentStyle;
-
+        NSString *firstLetter = [[m.title substringToIndex: 1] uppercaseString];
         if (rows % 2 == 0)
-            contentStyle = [NSString stringWithFormat:@"<li style=\"background-color:var(--background-color-gray);\" id=\"{firstLetter}\">"];
+            contentStyle = [NSString stringWithFormat:@"<li style=\"background-color:var(--background-color-gray);\" id=\"%@\">", firstLetter];
         else
-            contentStyle = [NSString stringWithFormat:@"<li style=\"background-color:transparent;\" id=\"{firstLetter}\">"];
-        
-        NSString *contentTitle = [NSString stringWithFormat:@"<a onclick=\"displayFachinfo('%@','{anchor}')\"><span style=\"font-size:0.8em\"><b>%@</b></span></a> <span style=\"font-size:0.7em\"> | %@</span><br>", m.regnrs, m.title, m.auth];
+            contentStyle = [NSString stringWithFormat:@"<li style=\"background-color:transparent;\" id=\"%@\">", firstLetter];
 
         NSString *contentChapters = @"";
         NSArray *regnrs = [m.regnrs componentsSeparatedByString:@","];
         NSDictionary *indexToTitlesDict = [m indexToTitlesDict];    // id -> chapter title
+        NSString *anchor;
         // List of chapters
         if ([regnrs count]>0) {
             NSString *r = [regnrs objectAtIndex:0];
@@ -90,7 +89,7 @@
                         else
                             sectionNamePrefix = @"section";
 
-                        NSString *anchor = [NSString stringWithFormat:@"%@%@", sectionNamePrefix, c];
+                        anchor = [NSString stringWithFormat:@"%@%@", sectionNamePrefix, c];
 
                         int count = 0;
                         if ([chaptersCountDict objectForKey:cStr])
@@ -104,6 +103,7 @@
                 }
             }
         }
+        NSString *contentTitle = [NSString stringWithFormat:@"<a onclick=\"displayFachinfo('%@','%@')\"><span style=\"font-size:0.8em\"><b>%@</b></span></a> <span style=\"font-size:0.7em\"> | %@</span><br>", m.regnrs, anchor, m.title, m.auth];
         if (!filtered) {
             htmlStr = [htmlStr stringByAppendingFormat:@"%@%@%@</li>", contentStyle, contentTitle, contentChapters];
             rows++;
