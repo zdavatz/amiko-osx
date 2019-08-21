@@ -144,10 +144,12 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_de" ofType:@"db"];
         if ([mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_db_full_idx_fr" ofType:@"db"];
+
         if ([mFileName isEqualToString:@"drug_interactions_csv_de.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"drug_interactions_csv_de" ofType:@"csv"];
         if ([mFileName isEqualToString:@"drug_interactions_csv_fr.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"drug_interactions_csv_fr" ofType:@"csv"];
+        
         if ([mFileName isEqualToString:@"amiko_frequency_de.db.zip"])
             filePath = [[NSBundle mainBundle] pathForResource:@"amiko_frequency_de" ofType:@"db"];
         if ([mFileName isEqualToString:@"amiko_frequency_fr.db.zip"])
@@ -161,7 +163,8 @@ static NSString *PILLBOX_ODDB_ORG = @"http://pillbox.oddb.org/";
             [mProgressSheet remove];
         
         // Unzip data success, post notification when larger files is unzipped!
-        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] || [mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"]) {
+        if ([mFileName isEqualToString:@"amiko_db_full_idx_de.zip"] ||
+            [mFileName isEqualToString:@"amiko_db_full_idx_fr.zip"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MLDidFinishLoading" object:self];
         }
     } else {

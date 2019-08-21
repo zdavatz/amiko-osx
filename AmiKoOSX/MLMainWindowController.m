@@ -586,7 +586,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [dbConn downloadFileWithName:@"amiko_db_full_idx_fr.zip" andModal:YES];
         }
     }
-    
 }
 
 - (void) openInteractionsCsvFile
@@ -928,7 +927,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 {
     NSInteger row = [self.myTableView rowForView:sender];
 #ifdef DEBUG
-    NSLog(@"Tapped on star: %ld", row);
+    NSLog(@"%s row: %ld", __FUNCTION__, row);
 #endif
     if (mCurrentSearchState!=kFullText) {
         NSString *medRegnrs = [NSString stringWithString:[favoriteKeyData objectAtIndex:row]];
@@ -936,7 +935,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [favoriteMedsSet removeObject:medRegnrs];
         else
             [favoriteMedsSet addObject:medRegnrs];
-    } else {
+    }
+    else {
         NSString *hashId = [NSString stringWithString:[favoriteKeyData objectAtIndex:row]];
         if ([favoriteFTEntrySet containsObject:hashId])
             [favoriteFTEntrySet removeObject:hashId];
@@ -963,6 +963,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             while (mSearchInProgress) {
                 [NSThread sleepForTimeInterval:0.005];  // Wait for 5ms
             }
+
             if (!mSearchInProgress) {
                 @synchronized(self) {
                     mSearchInProgress = true;
@@ -994,7 +995,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 - (IBAction) onButtonPressed: (id)sender
-{  
+{
     NSButton *btn = (NSButton *)sender;
     
     NSInteger prevState = mCurrentSearchState;
@@ -1782,10 +1783,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     if (mCurrentSearchState!=kFullText) {
                         mCurrentSearchState = kTitle;
                         mCurrentSearchKey = @"";
-                        searchResults = [scopeSelf searchAnyDatabasesWith:mCurrentSearchKey];
-                    } else {
-                        searchResults = [scopeSelf searchAnyDatabasesWith:mCurrentSearchKey];
                     }
+                    searchResults = [scopeSelf searchAnyDatabasesWith:mCurrentSearchKey];
                     // Update tableview
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [scopeSelf updateTableView];
@@ -1801,6 +1800,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [myTabView selectTabViewItemAtIndex:0];
             break;
         }
+
         case tagToolbarButton_Favorites:
         {
             // NSLog(@"Favorites");
@@ -1910,7 +1910,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     [medList addObject:med[0]];
             }
         }
-    } else {
+    }
+    else {
         if (mFullTextDb!=nil) {
             for (NSString *hashId in favoriteFTEntrySet) {
                 MLFullTextEntry *entry = [mFullTextDb searchHash:hashId];
@@ -1923,7 +1924,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 #ifdef DEBUG
         NSDate *endTime = [NSDate date];
         NSTimeInterval execTime = [endTime timeIntervalSinceDate:startTime];
-        NSLog(@"%ld Favoriten in %dms", [medList count], (int)(1000*execTime+0.5));
+        NSLog(@"%ld favorites in %dms", [medList count], (int)(1000*execTime+0.5));
 #endif
     
     return medList;
@@ -1957,6 +1958,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if ([rootObject valueForKey:@"kFavMedsSet"]) {
         favorites.favMedsSet = (NSSet *)[rootObject valueForKey:@"kFavMedsSet"];
     }
+    
     if ([rootObject valueForKey:@"kFavFTEntrySet"]) {
         favorites.favFTEntrySet = (NSSet *)[rootObject valueForKey:@"kFavFTEntrySet"];
     }
@@ -2230,7 +2232,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [medi addObject:m];
 }
 
-- (void) addTitle: (NSString *)title andApplications: (NSString *)applications andMedId: (long)medId
+- (void) addTitle: (NSString *)title
+  andApplications: (NSString *)applications
+         andMedId: (long)medId
 {
     DataObject *m = [[DataObject alloc] init];
     
@@ -2262,7 +2266,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [medi addObject:m];
 }
 
-- (void) addKeyword: (NSString *)keyword andNumHits: (unsigned long)numHits andHash: (NSString *)hash
+- (void) addKeyword: (NSString *)keyword
+         andNumHits: (unsigned long)numHits
+            andHash: (NSString *)hash
 {
     DataObject *m = [[DataObject alloc] init];
     
@@ -2297,7 +2303,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                             [self addTitle:m.title andPackInfo:m.atccode andMedId:m.medId];
                     }
                 }
-            } else if (mUsedDatabase == kFavorites) {
+            }
+            else if (mUsedDatabase == kFavorites) {
                 for (MLMedication *m in searchResults) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         if ([favoriteMedsSet containsObject:m.regnrs]) {
@@ -2307,7 +2314,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     }
                 }
             }
-        } else if (mCurrentSearchState == kAuthor) {
+        }
+        else if (mCurrentSearchState == kAuthor) {
             for (MLMedication *m in searchResults) {
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
@@ -2323,7 +2331,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     }
                 }
             }
-        } else if (mCurrentSearchState == kAtcCode) {
+        }
+        else if (mCurrentSearchState == kAtcCode) {
             for (MLMedication *m in searchResults) {
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
@@ -2339,7 +2348,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     }
                 }
             }
-        } else if (mCurrentSearchState == kRegNr) {
+        }
+        else if (mCurrentSearchState == kRegNr) {
             for (MLMedication *m in searchResults) {
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
@@ -2356,7 +2366,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     }
                 }
             }
-        } else if (mCurrentSearchState == kTherapy) {
+        }
+        else if (mCurrentSearchState == kTherapy) {
             for (MLMedication *m in searchResults) {
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
@@ -2373,11 +2384,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     }
                 }
             }
-        } else if (mCurrentSearchState == kFullText) {
+        }
+        else if (mCurrentSearchState == kFullText) {
             for (MLFullTextEntry *e in searchResults) {
                 if (mUsedDatabase == kAips || mUsedDatabase == kFavorites) {
                     if (![e.hash isEqual:[NSNull null]]) {
-                         [favoriteKeyData addObject:e.hash];
+                        [favoriteKeyData addObject:e.hash];
                         [self addKeyword:e.keyword andNumHits:e.numHits andHash:e.hash];
                     }
                 }
@@ -2410,7 +2422,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 {
     mJSBridge = [WebViewJavascriptBridge bridgeForWebView:myWebView];
     
-    [mJSBridge registerHandler:@"JSToObjC_" handler:^(id msg, WVJBResponseCallback responseCallback) {        
+    [mJSBridge registerHandler:@"JSToObjC_"
+                       handler:^(id msg, WVJBResponseCallback responseCallback) {
         if ([msg count]==3) {
             // --- Interactions ---
             if ([msg[0] isEqualToString:@"interactions_cb"]) {
@@ -2425,7 +2438,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 mCurrentWebView = kInteractionsCartView;
                 [self updateInteractionsView];
             }
-        } else if ([msg count]==4) {
+        }
+        else if ([msg count]==4) {
             // --- Full text search ---
             if ([msg[0] isEqualToString:@"main_cb"]) {
                 if ([msg[1] isEqualToString:@"display_fachinfo"]) {
@@ -2497,7 +2511,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     }
     
     NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-    [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+    [[myWebView mainFrame] loadHTMLString:htmlStr
+                                  baseURL:mainBundleURL];
     
     // [[myWebView preferences] setDefaultFontSize:14];
     // [self setSearchState:kWebView];
@@ -2523,7 +2538,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     // [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
     
-    [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:[[NSBundle mainBundle] resourceURL]];
+    [[myWebView mainFrame] loadHTMLString:htmlStr
+                                  baseURL:[[NSBundle mainBundle] resourceURL]];
     
     if (mPrescriptionMode == false) {
         // Update section title anchors
@@ -2564,13 +2580,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSString *jscriptStr = [NSString stringWithContentsOfFile:jscriptPath encoding:NSUTF8StringEncoding error:nil];
     
     NSString *htmlStr = [NSString stringWithFormat:@"<html><head><meta charset=\"utf-8\" /><meta name=\"supported-color-schemes\" content=\"light dark\" />"];
-    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style><style type=\"text/css\">%@</style></head><body><div id=\"fulltext\">%@</body></div></html>",
+    htmlStr = [htmlStr stringByAppendingFormat:@"<script type=\"text/javascript\">%@</script><style type=\"text/css\">%@</style><style type=\"text/css\">%@</style></head><body><div id=\"fulltext\">%@</div></body></html>",
                jscriptStr,
                colorCss,
                fullTextCss,
                contentStr];
   
-    [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:[[NSBundle mainBundle] resourceURL]];
+    [[myWebView mainFrame] loadHTMLString:htmlStr
+                                  baseURL:[[NSBundle mainBundle] resourceURL]];
     
     // Update right pane (section titles)
     if (![mFullTextSearch.listOfSectionIds isEqual:[NSNull null]])
@@ -2811,7 +2828,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (BOOL) tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard
 {
-    if (mPrescriptionMode == true) {
+    if (mPrescriptionMode) {
         if (tableView == self.mySectionTitles) {
             NSMutableArray *dragFiles = [[NSMutableArray alloc] init];
             NSString *path = mListOfSectionIds[[rowIndexes lastIndex]];

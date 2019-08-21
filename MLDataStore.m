@@ -28,7 +28,7 @@
 @synthesize favMedsSet;
 @synthesize favFTEntrySet;  // Full Text Entry
 
-#pragma mark Class methods
+#pragma mark - Class methods
 
 + (MLDataStore *) initWithFavMedsSet:(NSMutableSet *)favMedsSet
 {
@@ -48,7 +48,7 @@
     return favFTEntry;
 }
 
-#pragma mark Delegate methods
+#pragma mark - Delegate methods
 
 /** Returns a coder used as a dictionary
  */

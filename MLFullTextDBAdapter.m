@@ -44,7 +44,7 @@ static NSString *DATABASE_TABLE = @"frequency";
 
 /** Instance functions
  */
-#pragma mark public methods
+#pragma mark - public methods
 
 - (BOOL) openDatabase:(NSString *)dbName
 {

@@ -86,7 +86,7 @@
 
 - (void) update:(long)value max:(long long)maxValue
 {
-    NSString *msg = [NSString stringWithFormat:@"Downloading update... %ld MiB out of %lld MiB", (long)(value/1e6), (long long)(maxValue/1e6)];
+    NSString *msg = [NSString stringWithFormat:@"Downloading update... %ld MiB out of %lld MiB", (long)(value/(1024*1024)), (long long)(maxValue/(1024*1024))];
     CGFloat fontSize = [NSFont systemFontSize];
     [mDownloadMsg setFont:[NSFont userFixedPitchFontOfSize:fontSize]];
     [mDownloadMsg setStringValue:msg];

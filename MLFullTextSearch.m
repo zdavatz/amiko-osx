@@ -24,7 +24,6 @@
 #import "MLFullTextSearch.h"
 #import "MLMedication.h"
 
-
 @implementation MLFullTextSearch
 {
     // Instance variable declarations go here
@@ -76,6 +75,7 @@
         NSString *contentChapters = @"";
         NSArray *regnrs = [m.regnrs componentsSeparatedByString:@","];
         NSDictionary *indexToTitlesDict = [m indexToTitlesDict];    // id -> chapter title
+        
         // List of chapters
         if ([regnrs count]>0) {
             NSString *r = [regnrs objectAtIndex:0];

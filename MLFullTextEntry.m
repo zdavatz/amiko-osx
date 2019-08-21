@@ -76,7 +76,7 @@
 
 - (unsigned long) numHits
 {
-    return[regChaptersDict count];
+    return [regChaptersDict count];
 }
 
 - (NSString *)description
