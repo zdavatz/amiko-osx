@@ -4,7 +4,7 @@
 
 STEP_REMOVE_SUPPORT_FILES=true
 STEP_DOWNLOAD_SUPPORT_FILES=true
-#STEP_BUILD=true
+STEP_BUILD=true
 STEP_ARCHIVE=true
 STEP_CREATE_PKG=true
 STEP_UPLOAD_APP=true
@@ -93,7 +93,7 @@ if [ $STEP_CREATE_PKG ] ; then
 #PROVISIONING_PROFILE_SPECIFIER="Zeno Davatz"
 pushd ../
 for f in $ARCHIVE_PATH/*.xcarchive ; do
-    echo "Export the .ipa from $f"
+    echo "Export the .pkg from $f"
     xcodebuild -exportArchive \
         -verbose \
         -archivePath "$f" \
