@@ -927,7 +927,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 {
     NSInteger row = [self.myTableView rowForView:sender];
 #ifdef DEBUG
-    NSLog(@"%s row: %ld", __FUNCTION__, row);
+    //NSLog(@"%s row: %ld", __FUNCTION__, row);
 #endif
     if (mCurrentSearchState!=kFullText) {
         NSString *medRegnrs = [NSString stringWithString:[favoriteKeyData objectAtIndex:row]];
