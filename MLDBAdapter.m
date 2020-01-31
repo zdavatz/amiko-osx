@@ -168,7 +168,16 @@ static NSString *FULL_TABLE = nil;
  */
 - (NSArray *) searchTitle:(NSString *)title
 {
-    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@ like '%@%%' or %@ like '%%%@%%'", SHORT_TABLE, DATABASE_TABLE, KEY_TITLE, title, KEY_TITLE, title];
+    NSString *replaced = [[[[[[title lowercaseString]
+                          stringByReplacingOccurrencesOfString:@"a" withString:@"[aáàäâã]"]
+                         stringByReplacingOccurrencesOfString:@"e" withString:@"[eéèëê]"]
+                        stringByReplacingOccurrencesOfString:@"i" withString:@"[iíìî]"]
+                       stringByReplacingOccurrencesOfString:@"o" withString:@"[oóòöôõ]"]
+                      stringByReplacingOccurrencesOfString:@"u" withString:@"[uúùüû]"];
+
+    NSString *query = [NSString stringWithFormat:@"select %@ from %@ where lower(%@) GLOB '*%@*'",
+                       SHORT_TABLE, DATABASE_TABLE, KEY_TITLE, replaced];
+
     NSArray *results = [mySqliteDb performQuery:query];
     
     return [self extractShortMedInfoFrom:results];
