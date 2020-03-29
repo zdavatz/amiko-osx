@@ -23,6 +23,7 @@
 
 #import "MLPrescriptionsAdapter.h"
 
+#import "MLPersistenceManager.h"
 #import "MLUtilities.h"
 #import "MLPrescriptionItem.h"
 
@@ -224,26 +225,16 @@
     [patientDict setObject:patient.phoneNumber   forKey:KEY_AMK_PAT_PHONE];
     [patientDict setObject:patient.emailAddress  forKey:KEY_AMK_PAT_EMAIL];
     
-    NSMutableDictionary *operatorDict = [[NSMutableDictionary alloc] init];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_TITLE]   forKey:KEY_AMK_DOC_TITLE];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_SURNAME] forKey:KEY_AMK_DOC_SURNAME];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_NAME]    forKey:KEY_AMK_DOC_NAME];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_ADDRESS] forKey:KEY_AMK_DOC_ADDRESS];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_ZIP]     forKey:KEY_AMK_DOC_ZIP];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_CITY]    forKey:KEY_AMK_DOC_CITY];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_PHONE]   forKey:KEY_AMK_DOC_PHONE];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_EMAIL]   forKey:KEY_AMK_DOC_EMAIL];
-    
+    MLOperator *doctor = [[MLPersistenceManager shared] doctor];
+    NSMutableDictionary *operatorDict = [[doctor dictionaryRepresentation] mutableCopy];
     placeDate = [NSString stringWithFormat:@"%@, %@",
-                 [defaults stringForKey:DEFAULTS_DOC_CITY],
+                 doctor.city,
                  [MLUtilities prettyTime]];
     
     NSString *encodedImgStr = @"";
-    NSString *filePath = [[MLUtilities documentsDirectory] stringByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
-    if (filePath!=nil) {
-        NSImage *img = [[NSImage alloc] initWithContentsOfFile:filePath];
-        NSData *imgData = [img TIFFRepresentation];
+    NSImage *doctorImage = [[MLPersistenceManager shared] doctorSignature];
+    if (doctorImage!=nil) {
+        NSData *imgData = [doctorImage TIFFRepresentation];
         NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imgData];
         NSData *data = [imageRep representationUsingType:NSPNGFileType properties:@{}];
         encodedImgStr = [data base64Encoding];

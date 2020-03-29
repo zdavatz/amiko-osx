@@ -40,6 +40,7 @@
 #import "MLOperatorIDSheetController.h"
 #import "MLPrescriptionCellView.h"
 
+#import "MLPersistenceManager.h"
 #import "MLAbout.h"
 #import "MLUtilities.h"
 
@@ -1258,13 +1259,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSString *operatorPlace = [mOperatorIDSheet retrieveCity];
     myOperatorIDTextField.stringValue = operatorIDStr;
     myPlaceDateField.stringValue = [NSString stringWithFormat:@"%@, %@", operatorPlace, [MLUtilities prettyTime]];
-    
-    NSString *documentsDirectory = [MLUtilities documentsDirectory];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
-    if (filePath!=nil) {
-        NSImage *signatureImg = [[NSImage alloc] initWithContentsOfFile:filePath];
-        [mySignView setSignature:signatureImg];
-    }
+
+    [mySignView setSignature:[[MLPersistenceManager shared] doctorSignature]];
 }
 
 #pragma mark - Actions
