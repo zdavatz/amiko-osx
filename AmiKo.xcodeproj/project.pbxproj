@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		938147CE21CB9A790029D189 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68F17C912FF00EBEF39 /* Credits.rtf */; };
 		93B279D620B857FD00E32881 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA54AAFD20AED1460034CD77 /* libz.tbd */; };
+		CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
+		CFE80FCD242F9332003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
+		CFE80FE124309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */; };
+		CFE80FE224309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */; };
+		CFE80FE324309D10003DB2FA /* MLPersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */; };
+		CFE80FE424309D10003DB2FA /* MLPersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */; };
 		D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
 		D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
 		D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
@@ -216,6 +222,11 @@
 /* Begin PBXFileReference section */
 		930F635F21CA5D4F00576223 /* AmiKo Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AmiKo Desitin.entitlements"; sourceTree = SOURCE_ROOT; };
 		930F636021CA5D8400576223 /* CoMed Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoMed Desitin.entitlements"; sourceTree = "<group>"; };
+		CFE80FCB242F9306003DB2FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		CFE80FDD24309D10003DB2FA /* MLiCloudToLocalMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLiCloudToLocalMigration.h; sourceTree = "<group>"; };
+		CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLiCloudToLocalMigration.m; sourceTree = "<group>"; };
+		CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPersistenceManager.m; sourceTree = "<group>"; };
+		CFE80FE024309D10003DB2FA /* MLPersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPersistenceManager.h; sourceTree = "<group>"; };
 		D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_de.db; sourceTree = "<group>"; };
 		D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_fr.db; sourceTree = "<group>"; };
 		D517E4AE1EA8B8C400187AC8 /* MLInteractionsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLInteractionsAdapter.h; sourceTree = "<group>"; };
@@ -410,6 +421,7 @@
 				D5C5C50E1F0640E100DF851F /* Contacts.framework in Frameworks */,
 				D5E91B9517E5E8E400B66B27 /* QuartzCore.framework in Frameworks */,
 				D5E91B9617E5E8E400B66B27 /* WebKit.framework in Frameworks */,
+				CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */,
 				D5E91B9717E5E8E400B66B27 /* libsqlite3.0.dylib in Frameworks */,
 				D5E91B9817E5E8E400B66B27 /* Cocoa.framework in Frameworks */,
 			);
@@ -424,6 +436,7 @@
 				93B279D620B857FD00E32881 /* libz.tbd in Frameworks */,
 				D5E91BC517E5E8E800B66B27 /* WebKit.framework in Frameworks */,
 				D5E91BC617E5E8E800B66B27 /* libsqlite3.0.dylib in Frameworks */,
+				CFE80FCD242F9332003DB2FA /* CloudKit.framework in Frameworks */,
 				FA54AAFC20AED0D00034CD77 /* CryptoTokenKit.framework in Frameworks */,
 				D5E91BC717E5E8E800B66B27 /* Cocoa.framework in Frameworks */,
 			);
@@ -432,6 +445,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CFE80FDB24309D10003DB2FA /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				CFE80FDC24309D10003DB2FA /* iCloud to local migration */,
+				CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */,
+				CFE80FE024309D10003DB2FA /* MLPersistenceManager.h */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		CFE80FDC24309D10003DB2FA /* iCloud to local migration */ = {
+			isa = PBXGroup;
+			children = (
+				CFE80FDD24309D10003DB2FA /* MLiCloudToLocalMigration.h */,
+				CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */,
+			);
+			path = "iCloud to local migration";
+			sourceTree = "<group>";
+		};
 		D53ABBF2189521D400C4525C /* SubWindows */ = {
 			isa = PBXGroup;
 			children = (
@@ -690,6 +722,7 @@
 		D5EBC67F17C912FF00EBEF39 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CFE80FCB242F9306003DB2FA /* CloudKit.framework */,
 				FA54AAFD20AED1460034CD77 /* libz.tbd */,
 				FA54AAFA20AED0CA0034CD77 /* CryptoTokenKit.framework */,
 				D5C5C50D1F0640E100DF851F /* Contacts.framework */,
@@ -751,6 +784,7 @@
 				D5C644241EB3367300438E6F /* Interactions */,
 				D5F303411F21F3F600CAFED3 /* Prescriptions */,
 				D5C644231EB3366200438E6F /* FullTextSearch */,
+				CFE80FDB24309D10003DB2FA /* Persistence */,
 			);
 			name = Classes;
 			path = ..;
@@ -1036,6 +1070,7 @@
 				FA6A2BB220B2B10A0080B4C9 /* MLOperatorIDSheetController.m in Sources */,
 				D5E91B8917E5E8E400B66B27 /* MLAppDelegate.m in Sources */,
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
+				CFE80FE124309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
 				D52EA4A51EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D5C5C5101F06416800DF851F /* MLContacts.m in Sources */,
@@ -1066,6 +1101,7 @@
 				D5F303431F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */,
 				FA4BA42620B4015700552CEF /* SmartCard.m in Sources */,
+				CFE80FE324309D10003DB2FA /* MLPersistenceManager.m in Sources */,
 				FA6A2BB020B2B0ED0080B4C9 /* MLPatientSheetController.m in Sources */,
 				D5ECDE131F2A7C1200970133 /* MLEditableTextField.m in Sources */,
 				D5E91B9017E5E8E400B66B27 /* MLItemCellView.m in Sources */,
@@ -1138,7 +1174,9 @@
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				D53AB5AE1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
+				CFE80FE424309D10003DB2FA /* MLPersistenceManager.m in Sources */,
 				D517E4C31EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
+				CFE80FE224309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */,
 				D545C8F018A2CDE900491511 /* SSZipArchive.m in Sources */,
 				D5ECDE1D1F2B24CB00970133 /* MLPrescriptionCellView.m in Sources */,
 				FA6A2BAF20B2B09D0080B4C9 /* MLPatientSheetController+smartCard.m in Sources */,
@@ -1275,6 +1313,7 @@
 				CODE_SIGN_ENTITLEMENTS = "CoMed Desitin.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 4B37356EGR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
 				INFOPLIST_FILE = "CoMed-Info.plist";
@@ -1293,6 +1332,7 @@
 				CODE_SIGN_ENTITLEMENTS = "CoMed Desitin.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 4B37356EGR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
 				INFOPLIST_FILE = "CoMed-Info.plist";
