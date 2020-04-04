@@ -168,8 +168,8 @@ static BOOL mPrescriptionMode = false;
     
     NSArray *searchResults;
     
-    NSArray *mListOfSectionIds;  // full paths
-    NSArray *mListOfSectionTitles;
+    NSArray<NSString *> *mListOfSectionIds;  // full paths
+    NSArray<NSString *> *mListOfSectionTitles;
     
     NSProgressIndicator *progressIndicator;
     
@@ -750,14 +750,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     // Extract section ids
     if (![mMed.sectionIds isEqual:[NSNull null]]) {
-        NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionURLsForPatient:[mPatientSheet retrievePatient]];
+        NSArray<NSString *> *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
         mListOfSectionIds = listOfPrescriptions;  // array of full paths
     }
 
     // Extract section titles
     if (![mMed.sectionTitles isEqual:[NSNull null]]) {
-        NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
-        mListOfSectionTitles = listOfPrescriptions; // array of just the basenames
+        NSArray<NSString *> *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
+        mListOfSectionTitles = [listOfPrescriptions valueForKeyPath:@"lastPathComponent.stringByDeletingPathExtension"];
     }
 
     [mySectionTitles reloadData];
@@ -1425,7 +1425,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         if (result == NSFileHandlingPanelOKButton) {
             // Grab reference to what has been selected
             NSURL *fileURL = [[openDlgPanel  URLs] firstObject];
-            [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
+            [mPrescriptionAdapter loadPrescriptionFromURL:fileURL];
             mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
             [self updatePrescriptionsView];
         }
@@ -1567,10 +1567,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 // 'filename' contains the full path
-- (void) loadPrescription:(NSString *)filename
+- (void) loadPrescription:(NSURL *)url
         andRefreshHistory:(bool)refresh
 {
-    NSString *hash = [mPrescriptionAdapter loadPrescriptionFromFile:filename];
+    NSString *hash = [mPrescriptionAdapter loadPrescriptionFromURL:url];
 #ifdef DEBUG
     NSLog(@"%s hash: %@", __FUNCTION__, hash);
 #endif
@@ -2860,7 +2860,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         NSURL *fileURL = [fileURLs objectAtIndex:0];
         if ([[fileURL pathExtension] isEqualToString:@"amk"]) {
             // Load prescription
-            [self loadPrescription:[fileURL path] andRefreshHistory:YES];
+            [self loadPrescription:fileURL andRefreshHistory:YES];
         }
     }
     
@@ -2943,7 +2943,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             
             if (mPrescriptionMode) {
                 //NSLog(@"%s row:%ld, %@", __FUNCTION__, row, mListOfSectionIds[row]);
-                [self loadPrescription:mListOfSectionIds[row] andRefreshHistory:NO];
+                [self loadPrescription:[NSURL fileURLWithPath:mListOfSectionIds[row]] andRefreshHistory:NO];
             }
             else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
                 // NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];

@@ -25,7 +25,6 @@ typedef NS_ENUM(NSInteger, MLPersistenceSource) {
 + (instancetype) shared;
 + (BOOL)supportICloud;
 - (NSURL *)iCloudDocumentDirectory;
-- (NSManagedObjectContext *)managedViewContext;
 
 - (void)setCurrentSourceToICloud;
 - (void)setCurrentSourceToLocalWithDeleteICloud:(BOOL)deleteFilesOnICloud;

@@ -112,7 +112,7 @@
         [mainWindowController showWindow:nil];
     }
     
-    [mainWindowController loadPrescription:filename andRefreshHistory:YES];
+    [mainWindowController loadPrescription:[NSURL fileURLWithPath:filename] andRefreshHistory:YES];
         
     return YES;
 }

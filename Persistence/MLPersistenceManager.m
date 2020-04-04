@@ -35,6 +35,9 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        [self doctor]; // Migrate to file based doctor storage
+        [self migrateToAMKDirectory];
+        
     }
     return self;
 }
@@ -97,7 +100,6 @@
     }
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
 
-        [self doctor]; // Migrate to file based doctor storage
         NSFileManager *manager = [NSFileManager defaultManager];
         NSURL *localDocument = [NSURL fileURLWithPath:[MLUtilities documentsDirectory]];
         NSURL *remoteDocument = [self iCloudDocumentDirectory];
@@ -112,6 +114,11 @@
         [MLUtilities moveFile:[localDocument URLByAppendingPathComponent:DOC_SIGNATURE_FILENAME]
                       toURL:signatureURL
         overwriteIfExisting:YES];
+        [manager startDownloadingUbiquitousItemAtURL:signatureURL error:nil];
+        NSURL *amkDirectoryURL = [remoteDocument URLByAppendingPathComponent:@"amk" isDirectory:YES];
+        [MLUtilities mergeFolderRecursively:[localDocument URLByAppendingPathComponent:@"amk" isDirectory:YES]
+                                         to:amkDirectoryURL
+                             deleteOriginal:YES];
     });
 }
 
@@ -186,6 +193,91 @@
     return [[NSImage alloc] initWithContentsOfFile:filePath];
 }
 
+# pragma mark - Prescription
 
+// At 3.4.11, the amk files are put under path like this:
+// "Documents/<patient unique id>/xxxx.amk"
+// However on iOS it's "Documents/amk/<patient unique id>/xxxx.amk"
+// It wasn't a problem until we have to sync with iCloud.
+// Lets migrate to "amk" directory.
+- (void)migrateToAMKDirectory {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *doc = [MLUtilities documentsDirectory];
+    NSError *error = nil;
+    NSArray<NSString *> *docFiles = [manager contentsOfDirectoryAtPath:doc error:&error];
+    if (error) {
+        NSLog(@"migrate amk error: %@ ", error);
+        return;
+    }
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    for (NSString *docFile in docFiles) {
+        NSNumber *num = [formatter numberFromString:docFile];
+        if (!num) {
+            continue;
+        }
+        NSUInteger uniquePatientId = [num unsignedIntegerValue];
+        if (![docFile isEqualToString:[NSString stringWithFormat:@"%lu", uniquePatientId]]){
+            // Make sure we do not parse the number wrongly
+            continue;
+        }
+        [manager moveItemAtPath:[doc stringByAppendingPathComponent:docFile]
+                         toPath:[[self localAmkBaseDirectory] stringByAppendingPathComponent:docFile]
+                          error:&error];
+        if (error) {
+            NSLog(@"Error when moving amk files %@", error);
+        }
+    }
+}
 
+- (NSURL *)amkBaseDirectory {
+    if (self.currentSource == MLPersistenceSourceICloud) {
+        NSURL *url = [[self documentDirectory] URLByAppendingPathComponent:@"amk"];
+        [[NSFileManager defaultManager] createDirectoryAtURL:url
+                                 withIntermediateDirectories:YES
+                                                  attributes:nil
+                                                       error:nil];
+        return url;
+    }
+    return [NSURL fileURLWithPath:[self localAmkBaseDirectory]];
+}
+
+- (NSURL *)amkDirectoryForPatient:(NSString*)uid {
+    NSURL *amk = [self amkBaseDirectory];
+    NSURL *patientAmk = [amk URLByAppendingPathComponent:uid];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[patientAmk path]])
+    {
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:[patientAmk path]
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:&error];
+        if (error) {
+            NSLog(@"error creating directory: %@", error.localizedDescription);
+            patientAmk = nil;
+        } else {
+            NSLog(@"Created patient directory: %@", patientAmk);
+        }
+    }
+
+    return patientAmk;
+}
+
+// Create the directory if it doesn't exist
+- (NSString *) localAmkBaseDirectory
+{
+    NSString *amk = [[MLUtilities documentsDirectory] stringByAppendingPathComponent:@"amk"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:amk])
+    {
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:amk
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:&error];
+        if (error) {
+            NSLog(@"error creating directory: %@", error.localizedDescription);
+            amk = nil;
+        }
+    }
+    return amk;
+}
 @end
