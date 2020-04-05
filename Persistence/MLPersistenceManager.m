@@ -36,6 +36,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         [self doctor]; // Migrate to file based doctor storage
+        [self migrateFromOldFavourites];
         [self migrateToAMKDirectory];
         
     }
@@ -106,8 +107,8 @@
 
         NSURL *remoteDoctorURL = [remoteDocument URLByAppendingPathComponent:@"doctor.plist"];
         [MLUtilities moveFile:[localDocument URLByAppendingPathComponent:@"doctor.plist"]
-                      toURL:remoteDoctorURL
-   overwriteIfExisting:NO];
+                        toURL:remoteDoctorURL
+          overwriteIfExisting:NO];
         [manager startDownloadingUbiquitousItemAtURL:remoteDoctorURL error:nil];
         
         NSURL *signatureURL = [remoteDocument URLByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
@@ -115,6 +116,13 @@
                       toURL:signatureURL
         overwriteIfExisting:YES];
         [manager startDownloadingUbiquitousItemAtURL:signatureURL error:nil];
+
+        NSURL *favouriteURL = [remoteDocument URLByAppendingPathComponent:@"favourites"];
+        [MLUtilities moveFile:[localDocument URLByAppendingPathComponent:@"favourites"]
+                        toURL:favouriteURL
+          overwriteIfExisting:YES];
+        [manager startDownloadingUbiquitousItemAtURL:favouriteURL error:nil];
+
         NSURL *amkDirectoryURL = [remoteDocument URLByAppendingPathComponent:@"amk" isDirectory:YES];
         [MLUtilities mergeFolderRecursively:[localDocument URLByAppendingPathComponent:@"amk" isDirectory:YES]
                                          to:amkDirectoryURL
@@ -279,5 +287,20 @@
         }
     }
     return amk;
+}
+
+# pragma mark - Favourites
+
+- (NSURL *)favouritesFile {
+    return [[self documentDirectory] URLByAppendingPathComponent:@"favourites"];
+}
+
+- (void)migrateFromOldFavourites {
+    NSString *oldFile = [@"~/Library/Preferences/data" stringByExpandingTildeInPath];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:oldFile]) {
+        [[NSFileManager defaultManager] moveItemAtPath:oldFile
+                                                toPath:[[self favouritesFile] path]
+                                                 error:nil];
+    }
 }
 @end

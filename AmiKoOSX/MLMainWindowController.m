@@ -1928,9 +1928,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) saveFavorites
 {
-    NSString *path = @"~/Library/Preferences/data";
-    path = [path stringByExpandingTildeInPath];
-    
     NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
     
     if (favoriteMedsSet!=nil)
@@ -1938,15 +1935,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     if (favoriteFTEntrySet!=nil)
         [rootObject setValue:favoriteFTEntrySet forKey:@"kFavFTEntrySet"];
-    
+
     // Save contents of rootObject by key, value must conform to NSCoding protocolw
-    [NSKeyedArchiver archiveRootObject:rootObject toFile:path];
+    [NSKeyedArchiver archiveRootObject:rootObject toFile:[[MLPersistenceManager shared] favouritesFile].path];
 }
 
 - (void) loadFavorites:(MLDataStore *)favorites
 {
-    NSString *path = @"~/Library/Preferences/data";
-    path = [path stringByExpandingTildeInPath];
+    NSString *path = [[MLPersistenceManager shared] favouritesFile].path;
     
     // Retrieves unarchived dictionary into rootObject
     NSMutableDictionary *rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
@@ -2509,9 +2505,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     [[myWebView mainFrame] loadHTMLString:htmlStr
                                   baseURL:mainBundleURL];
-    
-    // [[myWebView preferences] setDefaultFontSize:14];
-    // [self setSearchState:kWebView];
     
     if (mPrescriptionMode == false) {
         // Extract section ids

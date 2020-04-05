@@ -37,6 +37,9 @@ typedef NS_ENUM(NSInteger, MLPersistenceSource) {
 - (void)setDoctorSignature:(NSData *)image;
 - (NSImage *)doctorSignature;
 
+#pragma mark - Favourites
+
+- (NSURL *)favouritesFile;
 
 @end
 
