@@ -25,7 +25,6 @@
 
 @implementation MLPatient
 
-@synthesize rowId;
 @synthesize uniqueId;
 @synthesize familyName;
 @synthesize givenName;

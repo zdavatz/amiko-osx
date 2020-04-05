@@ -22,12 +22,10 @@
  ------------------------------------------------------------------------ */
 
 #import "MLPatient.h"
-#import "MLPatientDBAdapter.h"
 
 @interface MLPatientSheetController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate>
 {
 @public
-    MLPatientDBAdapter *mPatientDb; // public for access by category
     IBOutlet NSTableView *mTableView;
 
 @private
