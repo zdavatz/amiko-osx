@@ -652,10 +652,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     MLPatient *incompletePatient = [[MLPatient alloc] init];
     [incompletePatient importFromDict:d];
     //NSLog(@"patient %@", incompletePatient);
-
-    MLPatientDBAdapter *patientDb = [MLPatientDBAdapter sharedInstance];
     
-    MLPatient *existingPatient = [patientDb getPatientWithUniqueID:incompletePatient.uniqueId];
+    MLPatient *existingPatient = [[MLPersistenceManager shared] getPatientWithUniqueID:incompletePatient.uniqueId];
     //NSLog(@"%s Existing patient from DB:%@", __FUNCTION__, existingPatient);
     if (!mPatientSheet)
         mPatientSheet = [[MLPatientSheetController alloc] init];

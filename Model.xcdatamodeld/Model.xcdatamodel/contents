@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Patient" representedClassName="PatientModel" syncable="YES">
+        <attribute name="birthDate" optional="YES" attributeType="String"/>
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="emailAddress" optional="YES" attributeType="String"/>
+        <attribute name="familyName" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="givenName" optional="YES" attributeType="String"/>
+        <attribute name="heightCm" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String"/>
+        <attribute name="postalAddress" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String"/>
+        <attribute name="weightKg" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="zipCode" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Patient" positionX="-63" positionY="-18" width="128" height="253"/>
+    </elements>
+</model>

@@ -8,6 +8,8 @@
 
 #import "MLPersistenceManager.h"
 #import "MLUtilities.h"
+#import "PatientModel+CoreDataClass.h"
+#import "LegacyPatientDBAdapter.h"
 #import "MLiCloudToLocalMigration.h"
 
 #define KEY_PERSISTENCE_SOURCE @"KEY_PERSISTENCE_SOURCE"
@@ -18,6 +20,9 @@
 
 - (void)migrateToICloud;
 - (void)migrateToLocal:(BOOL)deleteFilesOnICloud;
+
+@property NSPersistentContainer *coreDataContainer;
+
 @end
 
 @implementation MLPersistenceManager
@@ -35,6 +40,17 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+            self.coreDataContainer = [[NSPersistentContainer alloc] initWithName:@"Model"];
+
+
+        [self.coreDataContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * _Nonnull desc, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Coredata error %@", error);
+                return;
+            }
+            [self.coreDataContainer viewContext].automaticallyMergesChangesFromParent = YES;
+        }];
+        
         [self doctor]; // Migrate to file based doctor storage
         [self migrateFromOldFavourites];
         [self migrateToAMKDirectory];
@@ -92,6 +108,9 @@
     return [NSURL fileURLWithPath:[MLUtilities documentsDirectory]];
 }
 
+- (NSManagedObjectContext *)managedViewContext {
+    return self.coreDataContainer.viewContext;
+}
 
 # pragma mark - Migration Local -> iCloud
 
@@ -287,6 +306,117 @@
         }
     }
     return amk;
+}
+
+# pragma mark - Patient
+
+- (NSString *)addPatient:(MLPatient *)patient {
+    NSString *uuidStr = [patient generateUniqueID];
+    patient.uniqueId = uuidStr;
+
+    NSManagedObjectContext *context = [[self coreDataContainer] viewContext];
+    PatientModel *pm = [NSEntityDescription insertNewObjectForEntityForName:@"Patient"
+                                                     inManagedObjectContext:context];
+
+    [pm importFromPatient:patient timestamp: [NSDate new]];
+
+    NSError *error = nil;
+    [context save:&error];
+    if (error != nil) {
+        NSLog(@"Cannot create patient %@", error);
+    }
+    return uuidStr;
+}
+
+- (NSString *)upsertPatient:(MLPatient *)patient {
+    NSError *error = nil;
+    if (patient.uniqueId.length) {
+        PatientModel *p = [self getPatientModelWithUniqueID:patient.uniqueId];
+        p.weightKg = patient.weightKg;
+        p.heightCm = patient.heightCm;
+        p.zipCode = patient.zipCode;
+        p.city = patient.city;
+        p.country = patient.country;
+        p.postalAddress = patient.postalAddress;
+        p.phoneNumber = patient.phoneNumber;
+        p.emailAddress = patient.emailAddress;
+        p.gender = patient.gender;
+        [[self.coreDataContainer viewContext] save:&error];
+        if (error != nil) {
+            NSLog(@"Cannot update patient %@", error);
+        }
+        return patient.uniqueId;
+    } else {
+        return [self addPatient:patient];
+    }
+}
+
+- (BOOL)deletePatient:(MLPatient *)patient {
+    if (!patient.uniqueId.length) {
+        return NO;
+    }
+    PatientModel *pm = [self getPatientModelWithUniqueID:patient.uniqueId];
+    if (!pm) {
+        return NO;
+    }
+    NSManagedObjectContext *context = [self.coreDataContainer viewContext];
+    [context deleteObject:pm];
+    return YES;
+}
+
+- (NSArray<MLPatient *> *)getAllPatients {
+    NSError *error = nil;
+    NSManagedObjectContext *context = [[self coreDataContainer] viewContext];
+
+    NSFetchRequest *req = [PatientModel fetchRequest];
+    req.sortDescriptors = @[
+        [NSSortDescriptor sortDescriptorWithKey:@"familyName" ascending:YES]
+    ];
+
+    NSArray<PatientModel*> *pm = [context executeFetchRequest:req error:&error];
+    if (error != nil) {
+        NSLog(@"Cannot get all patients %@", error);
+    }
+    return [pm valueForKey:@"toPatient"];
+}
+
+- (NSArray *)searchPatientsWithKeyword:(NSString *)key
+{
+    NSArray *searchKeys = [key componentsSeparatedByString:@" "];
+    if (![searchKeys count]) {
+        return @[];
+    }
+    
+    NSFetchRequest *req = [PatientModel fetchRequest];
+    NSMutableArray<NSPredicate *> *predicates = [NSMutableArray array];
+    for (NSString *searchKey in searchKeys) {
+        if (searchKey.length == 0) {
+            continue;
+        }
+        NSPredicate *p = [NSPredicate predicateWithFormat:@"familyName BEGINSWITH[cd] %@ OR givenName BEGINSWITH[cd] %@ OR city BEGINSWITH[cd] %@ OR zipCode BEGINSWITH[cd] %@", searchKey, searchKey, searchKey, searchKey];
+        [predicates addObject:p];
+    }
+    req.predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
+    NSError *error = nil;
+    NSArray<PatientModel *> *patientModels = [[[self coreDataContainer] viewContext] executeFetchRequest:req error:&error];
+    if (error != nil) {
+        NSLog(@"Cannot search patients %@", error);
+    }
+    return [patientModels valueForKey:@"toPatient"];
+}
+
+- (PatientModel *)getPatientModelWithUniqueID:(NSString *)uniqueID {
+    NSError *error = nil;
+    NSManagedObjectContext *context = [[self coreDataContainer] viewContext];
+    NSFetchRequest *req = [PatientModel fetchRequest];
+    req.predicate = [NSPredicate predicateWithFormat:@"uniqueId == %@", uniqueID];
+    req.fetchLimit = 1;
+    NSArray<PatientModel *> *patientModels = [context executeFetchRequest:req error:&error];
+    return [patientModels firstObject];
+}
+
+- (MLPatient *) getPatientWithUniqueID:(NSString *)uniqueID {
+    return [[self getPatientModelWithUniqueID:uniqueID] toPatient];
 }
 
 # pragma mark - Favourites

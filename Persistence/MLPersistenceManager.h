@@ -9,7 +9,7 @@
 #import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
 #import "MLOperator.h"
-//#import "Prescription.h"
+#import "MLPatient.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,6 +37,19 @@ typedef NS_ENUM(NSInteger, MLPersistenceSource) {
 - (void)setDoctorSignature:(NSData *)image;
 - (NSImage *)doctorSignature;
 
+# pragma mark - Prescription
+
+- (NSURL *)amkBaseDirectory;
+- (NSURL *)amkDirectoryForPatient:(NSString*)uid;
+#pragma mark - Patient
+
+- (NSString *)addPatient:(MLPatient *)patient;
+- (NSString *)upsertPatient:(MLPatient *)patient;
+- (BOOL)deletePatient:(MLPatient *)patient;
+
+- (NSArray<MLPatient *> *) getAllPatients;
+- (NSArray *)searchPatientsWithKeyword:(NSString *)key;
+- (MLPatient *) getPatientWithUniqueID:(NSString *)uniqueID;
 #pragma mark - Favourites
 
 - (NSURL *)favouritesFile;

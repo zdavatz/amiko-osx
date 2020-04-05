@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		938147CE21CB9A790029D189 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68F17C912FF00EBEF39 /* Credits.rtf */; };
 		93B279D620B857FD00E32881 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA54AAFD20AED1460034CD77 /* libz.tbd */; };
+		CF34E549243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF34E547243A1A5A00E3AF61 /* Model.xcdatamodeld */; };
+		CF34E54A243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF34E547243A1A5A00E3AF61 /* Model.xcdatamodeld */; };
+		CF34E54F243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */; };
+		CF34E550243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */; };
+		CF34E551243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
+		CF34E552243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
 		CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
 		CFE80FCD242F9332003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
 		CFE80FE124309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */; };
@@ -222,6 +228,11 @@
 /* Begin PBXFileReference section */
 		930F635F21CA5D4F00576223 /* AmiKo Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AmiKo Desitin.entitlements"; sourceTree = SOURCE_ROOT; };
 		930F636021CA5D8400576223 /* CoMed Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoMed Desitin.entitlements"; sourceTree = "<group>"; };
+		CF34E548243A1A5A00E3AF61 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		CF34E54B243A1A8300E3AF61 /* PatientModel+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PatientModel+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CF34E54C243A1A8300E3AF61 /* PatientModel+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PatientModel+CoreDataClass.h"; sourceTree = "<group>"; };
+		CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataClass.m"; sourceTree = "<group>"; };
+		CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CFE80FCB242F9306003DB2FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CFE80FDD24309D10003DB2FA /* MLiCloudToLocalMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLiCloudToLocalMigration.h; sourceTree = "<group>"; };
 		CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLiCloudToLocalMigration.m; sourceTree = "<group>"; };
@@ -445,6 +456,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF34E546243A1A1E00E3AF61 /* Patient */ = {
+			isa = PBXGroup;
+			children = (
+				D5962EA71EFC26BF0034B964 /* LegacyPatientDBAdapter.h */,
+				D5962EA01EFC26AD0034B964 /* LegacyPatientDBAdapter.m */,
+				CF34E547243A1A5A00E3AF61 /* Model.xcdatamodeld */,
+				CF34E54C243A1A8300E3AF61 /* PatientModel+CoreDataClass.h */,
+				CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */,
+				CF34E54B243A1A8300E3AF61 /* PatientModel+CoreDataProperties.h */,
+				CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */,
+			);
+			name = Patient;
+			sourceTree = "<group>";
+		};
 		CFE80FDB24309D10003DB2FA /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -639,6 +664,7 @@
 		D5C6442A1EB337D800438E6F /* Databases */ = {
 			isa = PBXGroup;
 			children = (
+				CF34E546243A1A1E00E3AF61 /* Patient */,
 				D5EBC6AE17C9203F00EBEF39 /* MLSQLiteDatabase.h */,
 				D5EBC6AC17C9202600EBEF39 /* MLSQLiteDatabase.m */,
 				D5EBC6B617C9206800EBEF39 /* MLMedication.h */,
@@ -1075,6 +1101,7 @@
 				D52EA4A51EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D5C5C5101F06416800DF851F /* MLContacts.m in Sources */,
 				D53877941AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
+				CF34E551243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */,
 				D5BACC001EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90B18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D58685551F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,
@@ -1099,6 +1126,7 @@
 				D545C91118A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8E41898527C00491511 /* ioapi.c in Sources */,
 				D5F303431F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
+				CF34E54F243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
 				D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */,
 				FA4BA42620B4015700552CEF /* SmartCard.m in Sources */,
 				CFE80FE324309D10003DB2FA /* MLPersistenceManager.m in Sources */,
@@ -1121,6 +1149,7 @@
 				D5C6441D1EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E91B9317E5E8E400B66B27 /* MLSplashScreen.m in Sources */,
 				D5962EA11EFC26AD0034B964 /* MLPatientDBAdapter.m in Sources */,
+				CF34E549243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1129,12 +1158,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4BA42720B4015700552CEF /* SmartCard.m in Sources */,
+				CF34E54A243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */,
 				D5F3034B1F21FE2200CAFED3 /* MLPrescriptionsCart.h in Sources */,
 				D5AAB3EF1EB20F3F00002F47 /* MLFullTextDBAdapter.m in Sources */,
 				FA98A7AC20A09CE900B2665B /* MLPrescriptionTableView.m in Sources */,
 				D545C8F918A2CE0800491511 /* unzip.c in Sources */,
 				D5E91BB717E5E8E800B66B27 /* main.m in Sources */,
 				D5E91BB817E5E8E800B66B27 /* MLAppDelegate.m in Sources */,
+				CF34E552243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */,
 				D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */,
 				D545C8EE18A2CDD100491511 /* MLProgressSheetController.m in Sources */,
 				D52EA4A61EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
@@ -1172,6 +1203,7 @@
 				FA4BA42C20B401B700552CEF /* HealthCard.m in Sources */,
 				D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				CF34E550243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
 				D53AB5AE1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				CFE80FE424309D10003DB2FA /* MLPersistenceManager.m in Sources */,
@@ -1454,6 +1486,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CF34E547243A1A5A00E3AF61 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CF34E548243A1A5A00E3AF61 /* Model.xcdatamodel */,
+			);
+			currentVersion = CF34E548243A1A5A00E3AF61 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D5EBC67517C912FF00EBEF39 /* Project object */;
 }
