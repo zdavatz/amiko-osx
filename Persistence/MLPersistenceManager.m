@@ -40,8 +40,19 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        if (@available(macOS 10.15, *)) {
+            self.coreDataContainer = [[NSPersistentCloudKitContainer alloc] initWithName:@"Model"];
+        } else {
             self.coreDataContainer = [[NSPersistentContainer alloc] initWithName:@"Model"];
+        }
 
+        if (self.currentSource == MLPersistenceSourceICloud) {
+            NSPersistentStoreDescription *description = [[self.coreDataContainer persistentStoreDescriptions] firstObject];
+            if (@available(macOS 10.15, *)) {
+                NSPersistentCloudKitContainerOptions *options = [[NSPersistentCloudKitContainerOptions alloc] initWithContainerIdentifier:[MLUtilities iCloudContainerIdentifier]];
+                description.cloudKitContainerOptions = options;
+            }
+        }
 
         [self.coreDataContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * _Nonnull desc, NSError * _Nullable error) {
             if (error != nil) {
@@ -120,6 +131,12 @@
         return;
     }
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        NSPersistentStoreDescription *description = [[self.coreDataContainer persistentStoreDescriptions] firstObject];
+        if (@available(macOS 10.15, *)) {
+            NSPersistentCloudKitContainerOptions *options = [[NSPersistentCloudKitContainerOptions alloc] initWithContainerIdentifier:[MLUtilities iCloudContainerIdentifier]];
+            description.cloudKitContainerOptions = options;
+        } else {
+        }
 
         NSFileManager *manager = [NSFileManager defaultManager];
         NSURL *localDocument = [NSURL fileURLWithPath:[MLUtilities documentsDirectory]];
@@ -155,6 +172,10 @@
 - (void)migrateToLocal:(BOOL)deleteFilesOnICloud {
     if (self.currentSource == MLPersistenceSourceLocal) {
         return;
+    }
+    if (@available(macOS 10.15, *)) {
+        NSPersistentStoreDescription *description = [[self.coreDataContainer persistentStoreDescriptions] firstObject];
+        description.cloudKitContainerOptions = nil;
     }
 
     MLiCloudToLocalMigration *migration = [[MLiCloudToLocalMigration alloc] init];
