@@ -66,6 +66,7 @@
         [self doctor]; // Migrate to file based doctor storage
         [self migrateFromOldFavourites];
         [self migrateToAMKDirectory];
+        [self initialICloudDownload];
         
     }
     return self;
@@ -122,6 +123,33 @@
 
 - (NSManagedObjectContext *)managedViewContext {
     return self.coreDataContainer.viewContext;
+}
+
+- (void)initialICloudDownload {
+    // Trigger download when the app starts
+    if (self.currentSource != MLPersistenceSourceICloud) {
+        return;
+    }
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSError *error = nil;
+
+    NSURL *remoteDoctorURL = [self doctorDictionaryURL];
+    [manager startDownloadingUbiquitousItemAtURL:remoteDoctorURL error:&error];
+    if (error != nil) {
+        NSLog(@"Cannot start downloading doctor %@", error);
+    }
+    
+    NSURL *signatureURL = [[self documentDirectory] URLByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
+    [manager startDownloadingUbiquitousItemAtURL:signatureURL error:&error];
+    if (error != nil) {
+        NSLog(@"Cannot start downloading doctor signature %@", error);
+    }
+    
+    NSURL *favouriteURL = [[self documentDirectory] URLByAppendingPathComponent:@"favourites"];
+    [manager startDownloadingUbiquitousItemAtURL:favouriteURL error:&error];
+    if (error != nil) {
+        NSLog(@"Cannot start downloading favourite %@", error);
+    }
 }
 
 # pragma mark - Migration Local -> iCloud
