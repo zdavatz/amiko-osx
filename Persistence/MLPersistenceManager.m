@@ -49,6 +49,7 @@
                 return;
             }
             [self.coreDataContainer viewContext].automaticallyMergesChangesFromParent = YES;
+            [self migratePatientSqliteToCoreData];
         }];
         
         [self doctor]; // Migrate to file based doctor storage
@@ -433,4 +434,51 @@
                                                  error:nil];
     }
 }
+
+# pragma mark - Patient Migration
+
+- (void)migratePatientSqliteToCoreData {
+    NSManagedObjectContext *context = [self.coreDataContainer newBackgroundContext];
+    [context performBlock:^{
+        LegacyPatientDBAdapter *adapter = [[LegacyPatientDBAdapter alloc] init];
+        if (![adapter openDatabase]) return;
+        NSArray<MLPatient *> *patients = [adapter getAllPatients];
+        if (@available(macOS 10.15, *)) {
+            NSMutableArray *dicts = [NSMutableArray arrayWithCapacity:patients.count];
+            for (MLPatient *patient in patients) {
+                NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+                if (patient.birthDate != nil)     dict[@"birthDate"] = patient.birthDate;
+                if (patient.city != nil)          dict[@"city"] = patient.city;
+                if (patient.country != nil)       dict[@"country"] = patient.country;
+                if (patient.emailAddress != nil)  dict[@"emailAddress"] = patient.emailAddress;
+                if (patient.familyName != nil)    dict[@"familyName"] = patient.familyName;
+                if (patient.gender != nil)        dict[@"gender"] = patient.gender;
+                if (patient.givenName != nil)     dict[@"givenName"] = patient.givenName;
+                if (patient.heightCm != 0)        dict[@"heightCm"] = @(patient.heightCm);
+                if (patient.phoneNumber != nil)   dict[@"phoneNumber"] = patient.phoneNumber;
+                if (patient.postalAddress != nil) dict[@"postalAddress"] = patient.postalAddress;
+                if (patient.uniqueId != nil)      dict[@"uniqueId"] = patient.uniqueId;
+                if (patient.weightKg != 0)        dict[@"weightKg"] = @(patient.weightKg);
+                if (patient.zipCode != nil)       dict[@"zipCode"] = patient.zipCode;
+                dict[@"timestamp"] = [NSDate date];
+                [dicts addObject:dict];
+            }
+            NSBatchInsertRequest *req = [[NSBatchInsertRequest alloc] initWithEntity:[PatientModel entity]
+                                                                             objects:dicts];
+            NSError *error = nil;
+            [context executeRequest:req error:&error];
+            if (error != nil) {
+                NSLog(@"Cannot migrate %@", error);
+                return;
+            }
+        } else {
+            for (MLPatient *patient in patients) {
+                [self addPatient:patient];
+            }
+        }
+        NSString *dbPath = [adapter dbPath];
+        [[NSFileManager defaultManager] removeItemAtPath:dbPath error:nil];
+    }];
+}
+
 @end
