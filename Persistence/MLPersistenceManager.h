@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, MLPersistenceSource) {
 - (MLOperator *)doctor;
 - (void)setDoctorSignature:(NSData *)image;
 - (NSImage *)doctorSignature;
+- (NSURL *)doctorSignatureURL;
 
 # pragma mark - Prescription
 

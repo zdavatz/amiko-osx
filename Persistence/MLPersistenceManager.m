@@ -260,13 +260,17 @@
     }
 }
 
+- (NSURL *)doctorSignatureURL {
+    return [[self documentDirectory] URLByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
+}
+
 - (void)setDoctorSignature:(NSData *)image {
-    NSString *filePath = [[[self documentDirectory] URLByAppendingPathComponent:DOC_SIGNATURE_FILENAME] path];
+    NSString *filePath = [[self doctorSignatureURL] path];
     [image writeToFile:filePath atomically:YES];
 }
 
 - (NSImage*)doctorSignature {
-    NSString *filePath = [[[self documentDirectory] URLByAppendingPathComponent:DOC_SIGNATURE_FILENAME] path];
+    NSString *filePath = [[self doctorSignatureURL] path];
     return [[NSImage alloc] initWithContentsOfFile:filePath];
 }
 
