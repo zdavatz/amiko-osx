@@ -30,6 +30,12 @@
 #import "MLColors.h"
 #import "MLUtilities.h"
 
+@interface MLPatientSheetController () <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSFetchedResultsController *resultsController;
+
+@end
+
 @implementation MLPatientSheetController
 {
     @private
@@ -59,9 +65,12 @@
                                                  selector:@selector(controlTextDidChange:)
                                                      name:NSControlTextDidChangeNotification
                                                    object:nil];
-        return self;
+
+        self.resultsController = [[MLPersistenceManager shared] resultsControllerForAllPatients];
+        self.resultsController.delegate = self;
+        [self.resultsController performFetch:nil];
     }    
-    return nil;
+    return self;
 }
 
 - (void) show:(NSWindow *)window
@@ -343,6 +352,15 @@
      NSLog(@"%@", [textField stringValue]);
      */
     [self checkFields];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateAmiKoAddressBookTableView];
+        MLPatient *p = [[MLPersistenceManager shared] getPatientWithUniqueID:mPatientUUID];
+        [self resetAllFields];
+        [self setAllFields:p];
+    });
 }
 
 #pragma mark - Actions

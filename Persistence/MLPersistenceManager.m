@@ -434,6 +434,20 @@
     return [pm valueForKey:@"toPatient"];
 }
 
+- (NSFetchedResultsController *)resultsControllerForAllPatients {
+    NSManagedObjectContext *context = [self.coreDataContainer viewContext];
+    NSFetchRequest *fetchRequest = [PatientModel fetchRequest];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"familyName" ascending:YES];
+    fetchRequest.sortDescriptors = @[sortDescriptor];
+
+    NSFetchedResultsController *controller = [[NSFetchedResultsController alloc]
+            initWithFetchRequest:fetchRequest
+            managedObjectContext:context
+            sectionNameKeyPath:nil
+            cacheName:nil];
+    return controller;
+}
+
 - (NSArray *)searchPatientsWithKeyword:(NSString *)key
 {
     NSArray *searchKeys = [key componentsSeparatedByString:@" "];

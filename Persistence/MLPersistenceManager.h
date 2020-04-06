@@ -51,6 +51,8 @@ typedef NS_ENUM(NSInteger, MLPersistenceSource) {
 - (NSArray<MLPatient *> *) getAllPatients;
 - (NSArray *)searchPatientsWithKeyword:(NSString *)key;
 - (MLPatient *) getPatientWithUniqueID:(NSString *)uniqueID;
+- (NSFetchedResultsController *)resultsControllerForAllPatients;
+
 #pragma mark - Favourites
 
 - (NSURL *)favouritesFile;
