@@ -140,6 +140,8 @@ static BOOL mPrescriptionMode = false;
     MLMedication *csvMedication;
 }
 
+@property (nonatomic, strong) NSMetadataQuery *query;
+
 - (void) updateButtons;
 
 @end
@@ -250,6 +252,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [self fadeInAndShow];
     [[self window] center];
     
+    self.query = [[NSMetadataQuery alloc] init];
+    self.query.searchScopes = @[NSMetadataQueryUbiquitousDocumentsScope];
+    self.query.predicate = [NSPredicate predicateWithValue:YES];
+    [self.query startQuery];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(documentFilesUpdated:) name:NSMetadataQueryDidUpdateNotification object:self.query];
+
     // Allocate some variables
     medi = [NSMutableArray array];
     favoriteKeyData = [NSMutableArray array];
@@ -725,6 +733,44 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         [mPrescriptionsCart[0] clearCart];
         [myPrescriptionsTableView reloadData];
         [self resetPrescriptionHistory];
+    }
+}
+
+- (void)documentFilesUpdated:(NSNotification *)notification {
+    NSString *tabId = [[myTabView selectedTabViewItem] identifier];
+    if (![tabId isEqualToString:@"TabPrescription1"]) return;
+
+    NSDictionary *dict = [notification userInfo];
+    NSArray<NSMetadataItem *> *addedItems = dict[NSMetadataQueryUpdateAddedItemsKey];
+    if ([addedItems count]) {
+        for (NSMetadataItem *addedItem in addedItems) {
+            NSURL *url = [addedItem valueForAttribute:NSMetadataItemURLKey];
+            if ([[url path] hasPrefix:[[[MLPersistenceManager shared] amkBaseDirectory] path]]) {
+                [self updatePrescriptionHistory];
+                break;
+            }
+        }
+    }
+    NSArray<NSMetadataItem *> *changedItems = dict[NSMetadataQueryUpdateChangedItemsKey];
+    if (changedItems) {
+        for (NSMetadataItem *changedItem in changedItems) {
+            NSURL *url = [changedItem valueForAttribute:NSMetadataItemURLKey];
+            if ([[url path] hasPrefix:[[[MLPersistenceManager shared] amkBaseDirectory] path]]) {
+                [self loadPrescription:url andRefreshHistory:NO];
+                [self updatePrescriptionsView];
+                break;
+            }
+        }
+    }
+    NSArray<NSMetadataItem *> *removedItems = dict[NSMetadataQueryUpdateRemovedItemsKey];
+    if (removedItems) {
+        for (NSMetadataItem *removedItem in removedItems) {
+            NSURL *url = [removedItem valueForAttribute:NSMetadataItemURLKey];
+            if ([[url path] hasPrefix:[[[MLPersistenceManager shared] amkBaseDirectory] path]]) {
+                [self updatePrescriptionHistory];
+                break;
+            }
+        }
     }
 }
 
