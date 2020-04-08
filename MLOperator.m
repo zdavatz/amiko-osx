@@ -35,6 +35,13 @@
 @synthesize phoneNumber;
 @synthesize emailAddress;
 
+- (instancetype)initWithDictionary:(NSDictionary *)dict {
+    if (self = [super init]) {
+        [self importFromDict:dict];
+    }
+    return self;
+}
+
 - (NSString *) retrieveOperatorAsString
 {
     if (title==nil)
@@ -68,7 +75,7 @@
     postalAddress = [dict objectForKey:KEY_AMK_DOC_ADDRESS];
     zipCode =       [dict objectForKey:KEY_AMK_DOC_ZIP];
     city =          [dict objectForKey:KEY_AMK_DOC_CITY];
-    country = @"";
+    country =       [dict objectForKey:KEY_AMK_DOC_COUNTRY] ?: @"";
     phoneNumber =   [dict objectForKey:KEY_AMK_DOC_PHONE];
     emailAddress =  [dict objectForKey:KEY_AMK_DOC_EMAIL];
 }
@@ -77,6 +84,20 @@
 {
     return [NSString stringWithFormat:@"%@ title:%@, givenName:%@, familyName:%@",
             NSStringFromClass([self class]), title, givenName, familyName];
+}
+
+- (NSDictionary *)dictionaryRepresentation {
+    NSMutableDictionary *doctorDict = [NSMutableDictionary new];
+    doctorDict[KEY_AMK_DOC_TITLE] = self.title;
+    doctorDict[KEY_AMK_DOC_NAME] = self.givenName;
+    doctorDict[KEY_AMK_DOC_SURNAME] = self.familyName;
+    doctorDict[KEY_AMK_DOC_ADDRESS] = self.postalAddress;
+    doctorDict[KEY_AMK_DOC_CITY] = self.city;
+    doctorDict[KEY_AMK_DOC_COUNTRY] = self.country;
+    doctorDict[KEY_AMK_DOC_ZIP] = self.zipCode;
+    doctorDict[KEY_AMK_DOC_PHONE] = self.phoneNumber;
+    doctorDict[KEY_AMK_DOC_EMAIL] = self.emailAddress;
+    return doctorDict;
 }
 
 @end

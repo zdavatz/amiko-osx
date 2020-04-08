@@ -23,11 +23,18 @@
 
 #import "MLPatientSheetController.h"
 #import "MLPatientSheetController+smartCard.h"
+#import "MLPersistenceManager.h"
 
-#import "MLPatientDBAdapter.h"
+#import "LegacyPatientDBAdapter.h"
 #import "MLContacts.h"
 #import "MLColors.h"
 #import "MLUtilities.h"
+
+@interface MLPatientSheetController () <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSFetchedResultsController *resultsController;
+
+@end
 
 @implementation MLPatientSheetController
 {
@@ -51,7 +58,6 @@
         mFilteredArrayOfPatients = [[NSMutableArray alloc] init];
         mSearchFiltered = FALSE;
         mPatientUUID = nil;
-        mPatientDb = [MLPatientDBAdapter sharedInstance];
         
         mABContactsVisible = FALSE;
         
@@ -59,9 +65,12 @@
                                                  selector:@selector(controlTextDidChange:)
                                                      name:NSControlTextDidChangeNotification
                                                    object:nil];
-        return self;
+
+        self.resultsController = [[MLPersistenceManager shared] resultsControllerForAllPatients];
+        self.resultsController.delegate = self;
+        [self.resultsController performFetch:nil];
     }    
-    return nil;
+    return self;
 }
 
 - (void) show:(NSWindow *)window
@@ -218,10 +227,7 @@
 
 - (MLPatient *) getAllFields
 {
-    long largetRowId = [mPatientDb getLargestRowId];
-    
     MLPatient *patient = [[MLPatient alloc] init];
-    patient.rowId = largetRowId + 1;
     patient.familyName = [mFamilyName stringValue];
     patient.givenName = [mGivenName stringValue];
     patient.birthDate = [mBirthDate stringValue];
@@ -246,7 +252,7 @@
 - (void) addPatient:(MLPatient *)patient
 {
     mSelectedPatient = patient;
-    mPatientUUID = [mPatientDb addEntry:patient];
+    mPatientUUID = [[MLPersistenceManager shared] addPatient:patient];
     mSearchFiltered = FALSE;
     [mSearchKey setStringValue:@""];
     [self updateAmiKoAddressBookTableView];
@@ -265,7 +271,7 @@
 
 - (MLPatient *) retrievePatientWithUniqueID:(NSString *)uniqueID
 {
-    return [mPatientDb getPatientWithUniqueID:uniqueID];
+    return [[MLPersistenceManager shared] getPatientWithUniqueID:uniqueID];
 }
 
 - (BOOL) patientExistsWithID:(NSString *)uniqueID
@@ -286,7 +292,7 @@
 {
     NSString *p = @"";
     // Retrieves first best match from patient sqlite database
-    mArrayOfPatients = [mPatientDb getPatientsWithKey:searchKey];
+    mArrayOfPatients = [[MLPersistenceManager shared] searchPatientsWithKeyword:searchKey];
     if ([mArrayOfPatients count]>0) {
         MLPatient *r = [mArrayOfPatients objectAtIndex:0];
         return [r asString];
@@ -330,7 +336,7 @@
 
 - (void) updateAmiKoAddressBookTableView
 {
-    mArrayOfPatients = [mPatientDb getAllPatients];
+    mArrayOfPatients = [[MLPersistenceManager shared] getAllPatients];
     mABContactsVisible=NO;
     [mTableView reloadData];
     [self setNumPatients:[mArrayOfPatients count]];
@@ -346,6 +352,15 @@
      NSLog(@"%@", [textField stringValue]);
      */
     [self checkFields];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateAmiKoAddressBookTableView];
+        MLPatient *p = [[MLPersistenceManager shared] getPatientWithUniqueID:mPatientUUID];
+        [self resetAllFields];
+        [self setAllFields:p];
+    });
 }
 
 #pragma mark - Actions
@@ -408,10 +423,6 @@
 
 - (IBAction) onSavePatient:(id)sender
 {
-    if (!mPatientDb) {
-        return;
-    }
-    
     MLPatient *patient = [self getAllFields];
     if (![self validateFields:patient]) {
         return;
@@ -421,11 +432,11 @@
         patient.uniqueId = mPatientUUID;
     }
 
-    if ([mPatientDb getPatientWithUniqueID:mPatientUUID]==nil) {
-        mPatientUUID = [mPatientDb addEntry:patient];
+    if ([[MLPersistenceManager shared] getPatientWithUniqueID:mPatientUUID]==nil) {
+        mPatientUUID = [[MLPersistenceManager shared] addPatient:patient];
     }
     else {
-        mPatientUUID = [mPatientDb insertEntry:patient]; // Update row
+        mPatientUUID = [[MLPersistenceManager shared] upsertPatient:patient];
     }
 
     mSearchFiltered = FALSE;
@@ -470,7 +481,7 @@
 {
     if (returnCode==NSAlertSecondButtonReturn) {
         MLPatient *p = (__bridge MLPatient *)contextInfo;
-        if ([mPatientDb deleteEntry:p]) {
+        if ([[MLPersistenceManager shared] deletePatient:p]) {
             [self deletePatientFolder:p withBackup:YES];
             [self resetAllFields];
             [self updateAmiKoAddressBookTableView];

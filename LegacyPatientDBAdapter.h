@@ -23,20 +23,13 @@
 
 #import "MLPatient.h"
 
-@interface MLPatientDBAdapter : NSObject
+@interface LegacyPatientDBAdapter : NSObject
 
-+ (MLPatientDBAdapter *)sharedInstance;
++ (LegacyPatientDBAdapter *)sharedInstance;
 
-- (BOOL) openDatabase:(NSString *)dbName;
+- (BOOL) openDatabase;
+- (NSString *)dbPath;
 - (void) closeDatabase;
-- (NSString *) addEntry:(MLPatient *)patient;
-- (NSString *) insertEntry:(MLPatient *)patient;
-- (BOOL) modifyEntry:(MLPatient *)patient;
-- (BOOL) deleteEntry:(MLPatient *)patient;
-- (NSInteger) getNumPatients;
-- (long) getLargestRowId;
 - (NSArray *) getAllPatients;
-- (NSArray *) getPatientsWithKey:(NSString *)key;
-- (MLPatient *) getPatientWithUniqueID:(NSString *)uniqueID;
 
 @end

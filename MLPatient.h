@@ -43,7 +43,6 @@ enum database_t {
 
 @interface MLPatient : NSObject
 
-@property (atomic, assign) long rowId;
 @property (atomic, copy) NSString *uniqueId;
 @property (atomic, copy) NSString *familyName;
 @property (atomic, copy) NSString *givenName;

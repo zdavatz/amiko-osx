@@ -32,16 +32,13 @@
 @property (atomic) MLOperator *doctor;
 @property (atomic) NSString *placeDate;
 
-- (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p;
-- (NSArray *) listOfPrescriptionURLsForPatient:(MLPatient *)p;
+- (NSArray<NSString *> *) listOfPrescriptionsForPatient:(MLPatient *)p;
 
 - (void) deletePrescriptionWithName:(NSString *)name forPatient:(MLPatient *)p;
-- (void) deleteAllPrescriptionsForPatient:(MLPatient *)p withBackup:(BOOL)backup;
 
 - (NSURL *) savePrescriptionForPatient:(MLPatient *)p withUniqueHash:(NSString *)hash andOverwrite:(BOOL)overwrite;
 
-- (NSString *) loadPrescriptionWithName:(NSString *)fileName forPatient:(MLPatient *)p;
-- (NSString *) loadPrescriptionFromFile:(NSString *)filePath;
+- (NSString *) loadPrescriptionFromURL:(NSURL *)fileURL;
 
 - (NSURL *) getPrescriptionUrl;
 @end

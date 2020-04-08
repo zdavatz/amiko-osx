@@ -39,7 +39,9 @@
 #import "MLPatientSheetController.h"
 #import "MLOperatorIDSheetController.h"
 #import "MLPrescriptionCellView.h"
+#import "MLPreferencesWindowController.h"
 
+#import "MLPersistenceManager.h"
 #import "MLAbout.h"
 #import "MLUtilities.h"
 
@@ -139,6 +141,8 @@ static BOOL mPrescriptionMode = false;
     MLMedication *csvMedication;
 }
 
+@property (nonatomic, strong) NSMetadataQuery *query;
+
 - (void) updateButtons;
 
 @end
@@ -167,8 +171,8 @@ static BOOL mPrescriptionMode = false;
     
     NSArray *searchResults;
     
-    NSArray *mListOfSectionIds;  // full paths
-    NSArray *mListOfSectionTitles;
+    NSArray<NSString *> *mListOfSectionIds;  // full paths
+    NSArray<NSString *> *mListOfSectionTitles;
     
     NSProgressIndicator *progressIndicator;
     
@@ -249,6 +253,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [self fadeInAndShow];
     [[self window] center];
     
+    self.query = [[NSMetadataQuery alloc] init];
+    self.query.searchScopes = @[NSMetadataQueryUbiquitousDocumentsScope];
+    self.query.predicate = [NSPredicate predicateWithValue:YES];
+    [self.query startQuery];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(documentFilesUpdated:) name:NSMetadataQueryDidUpdateNotification object:self.query];
+
     // Allocate some variables
     medi = [NSMutableArray array];
     favoriteKeyData = [NSMutableArray array];
@@ -651,10 +661,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     MLPatient *incompletePatient = [[MLPatient alloc] init];
     [incompletePatient importFromDict:d];
     //NSLog(@"patient %@", incompletePatient);
-
-    MLPatientDBAdapter *patientDb = [MLPatientDBAdapter sharedInstance];
     
-    MLPatient *existingPatient = [patientDb getPatientWithUniqueID:incompletePatient.uniqueId];
+    MLPatient *existingPatient = [[MLPersistenceManager shared] getPatientWithUniqueID:incompletePatient.uniqueId];
     //NSLog(@"%s Existing patient from DB:%@", __FUNCTION__, existingPatient);
     if (!mPatientSheet)
         mPatientSheet = [[MLPatientSheetController alloc] init];
@@ -729,6 +737,44 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     }
 }
 
+- (void)documentFilesUpdated:(NSNotification *)notification {
+    NSString *tabId = [[myTabView selectedTabViewItem] identifier];
+    if (![tabId isEqualToString:@"TabPrescription1"]) return;
+
+    NSDictionary *dict = [notification userInfo];
+    NSArray<NSMetadataItem *> *addedItems = dict[NSMetadataQueryUpdateAddedItemsKey];
+    if ([addedItems count]) {
+        for (NSMetadataItem *addedItem in addedItems) {
+            NSURL *url = [addedItem valueForAttribute:NSMetadataItemURLKey];
+            if ([[url path] hasPrefix:[[[MLPersistenceManager shared] amkBaseDirectory] path]]) {
+                [self updatePrescriptionHistory];
+                break;
+            }
+        }
+    }
+    NSArray<NSMetadataItem *> *changedItems = dict[NSMetadataQueryUpdateChangedItemsKey];
+    if (changedItems) {
+        for (NSMetadataItem *changedItem in changedItems) {
+            NSURL *url = [changedItem valueForAttribute:NSMetadataItemURLKey];
+            if ([[url path] hasPrefix:[[[MLPersistenceManager shared] amkBaseDirectory] path]]) {
+                [self loadPrescription:url andRefreshHistory:NO];
+                [self updatePrescriptionsView];
+                break;
+            }
+        }
+    }
+    NSArray<NSMetadataItem *> *removedItems = dict[NSMetadataQueryUpdateRemovedItemsKey];
+    if (removedItems) {
+        for (NSMetadataItem *removedItem in removedItems) {
+            NSURL *url = [removedItem valueForAttribute:NSMetadataItemURLKey];
+            if ([[url path] hasPrefix:[[[MLPersistenceManager shared] amkBaseDirectory] path]]) {
+                [self updatePrescriptionHistory];
+                break;
+            }
+        }
+    }
+}
+
 #pragma mark -
 
 - (void) resetPrescriptionHistory
@@ -749,14 +795,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     // Extract section ids
     if (![mMed.sectionIds isEqual:[NSNull null]]) {
-        NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionURLsForPatient:[mPatientSheet retrievePatient]];
+        NSArray<NSString *> *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
         mListOfSectionIds = listOfPrescriptions;  // array of full paths
     }
 
     // Extract section titles
     if (![mMed.sectionTitles isEqual:[NSNull null]]) {
-        NSArray *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
-        mListOfSectionTitles = listOfPrescriptions; // array of just the basenames
+        NSArray<NSString *> *listOfPrescriptions = [mPrescriptionAdapter listOfPrescriptionsForPatient:[mPatientSheet retrievePatient]];
+        mListOfSectionTitles = [listOfPrescriptions valueForKeyPath:@"lastPathComponent.stringByDeletingPathExtension"];
     }
 
     [mySectionTitles reloadData];
@@ -1258,13 +1304,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSString *operatorPlace = [mOperatorIDSheet retrieveCity];
     myOperatorIDTextField.stringValue = operatorIDStr;
     myPlaceDateField.stringValue = [NSString stringWithFormat:@"%@, %@", operatorPlace, [MLUtilities prettyTime]];
-    
-    NSString *documentsDirectory = [MLUtilities documentsDirectory];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
-    if (filePath!=nil) {
-        NSImage *signatureImg = [[NSImage alloc] initWithContentsOfFile:filePath];
-        [mySignView setSignature:signatureImg];
-    }
+
+    [mySignView setSignature:[[MLPersistenceManager shared] doctorSignature]];
 }
 
 #pragma mark - Actions
@@ -1429,7 +1470,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         if (result == NSFileHandlingPanelOKButton) {
             // Grab reference to what has been selected
             NSURL *fileURL = [[openDlgPanel  URLs] firstObject];
-            [mPrescriptionAdapter loadPrescriptionFromFile:[fileURL path]];
+            [mPrescriptionAdapter loadPrescriptionFromURL:fileURL];
             mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
             [self updatePrescriptionsView];
         }
@@ -1540,6 +1581,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [MLAbout showAboutPanel];
 }
 
+- (IBAction) showPreferences:(id)sender
+{
+    MLPreferencesWindowController *preferenceController = [[MLPreferencesWindowController alloc] initWithWindowNibName:@"MLPreferencesWindowController"];
+    [preferenceController showWindow:sender];
+}
+
 - (IBAction) sendFeedback:(id)sender
 {
     [MLAbout sendFeedback];
@@ -1571,10 +1618,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 // 'filename' contains the full path
-- (void) loadPrescription:(NSString *)filename
+- (void) loadPrescription:(NSURL *)url
         andRefreshHistory:(bool)refresh
 {
-    NSString *hash = [mPrescriptionAdapter loadPrescriptionFromFile:filename];
+    NSString *hash = [mPrescriptionAdapter loadPrescriptionFromURL:url];
 #ifdef DEBUG
     NSLog(@"%s hash: %@", __FUNCTION__, hash);
 #endif
@@ -1932,9 +1979,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) saveFavorites
 {
-    NSString *path = @"~/Library/Preferences/data";
-    path = [path stringByExpandingTildeInPath];
-    
     NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
     
     if (favoriteMedsSet!=nil)
@@ -1942,15 +1986,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     if (favoriteFTEntrySet!=nil)
         [rootObject setValue:favoriteFTEntrySet forKey:@"kFavFTEntrySet"];
-    
+
     // Save contents of rootObject by key, value must conform to NSCoding protocolw
-    [NSKeyedArchiver archiveRootObject:rootObject toFile:path];
+    [NSKeyedArchiver archiveRootObject:rootObject toFile:[[MLPersistenceManager shared] favouritesFile].path];
 }
 
 - (void) loadFavorites:(MLDataStore *)favorites
 {
-    NSString *path = @"~/Library/Preferences/data";
-    path = [path stringByExpandingTildeInPath];
+    NSString *path = [[MLPersistenceManager shared] favouritesFile].path;
     
     // Retrieves unarchived dictionary into rootObject
     NSMutableDictionary *rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
@@ -2514,9 +2557,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [[myWebView mainFrame] loadHTMLString:htmlStr
                                   baseURL:mainBundleURL];
     
-    // [[myWebView preferences] setDefaultFontSize:14];
-    // [self setSearchState:kWebView];
-    
     if (mPrescriptionMode == false) {
         // Extract section ids
         if (![mMed.sectionIds isEqual:[NSNull null]])
@@ -2864,7 +2904,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         NSURL *fileURL = [fileURLs objectAtIndex:0];
         if ([[fileURL pathExtension] isEqualToString:@"amk"]) {
             // Load prescription
-            [self loadPrescription:[fileURL path] andRefreshHistory:YES];
+            [self loadPrescription:fileURL andRefreshHistory:YES];
         }
     }
     
@@ -2947,7 +2987,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             
             if (mPrescriptionMode) {
                 //NSLog(@"%s row:%ld, %@", __FUNCTION__, row, mListOfSectionIds[row]);
-                [self loadPrescription:mListOfSectionIds[row] andRefreshHistory:NO];
+                [self loadPrescription:[NSURL fileURLWithPath:mListOfSectionIds[row]] andRefreshHistory:NO];
             }
             else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
                 // NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];

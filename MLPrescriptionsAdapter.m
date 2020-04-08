@@ -23,12 +23,13 @@
 
 #import "MLPrescriptionsAdapter.h"
 
+#import "MLPersistenceManager.h"
 #import "MLUtilities.h"
 #import "MLPrescriptionItem.h"
 
 @implementation MLPrescriptionsAdapter
 {
-    NSString *currentFileName;
+    NSURL *currentFileURL;
 }
 
 @synthesize cart;
@@ -38,7 +39,7 @@
 
 // Returns an array of filenames (NSString),
 // just the basename with the extension ".amk" stripped off
-- (NSArray *) listOfPrescriptionsForPatient:(MLPatient *)p
+- (NSArray<NSString *> *) listOfPrescriptionsForPatient:(MLPatient *)p
 {
     if (!p) {
 #ifdef DEBUG
@@ -47,71 +48,38 @@
         return nil;
     }
 
-    NSMutableArray *amkFiles = [[NSMutableArray alloc] init];
-
-    NSString *documentsDir = [MLUtilities documentsDirectory];
+    NSMutableArray<NSString *> *amkFiles = [[NSMutableArray alloc] init];
     // Check if patient has already a directory, if not create one
-    NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", p.uniqueId]];
+    NSURL *patientDir = [[MLPersistenceManager shared] amkDirectoryForPatient:p.uniqueId];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL isDir = false;
-    [fileManager fileExistsAtPath:patientDir isDirectory:&isDir];
-    if (isDir) {
+    BOOL isDir = NO;
+    if ([fileManager fileExistsAtPath:patientDir.path isDirectory:&isDir] && isDir) {
         // List content of directory
-        NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:patientDir error:NULL];
-        [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSString *filename = (NSString *)obj;
-            NSString *extension = [[filename pathExtension] lowercaseString];
-            if ([extension isEqualToString:@"amk"]) {
-                filename = [filename stringByReplacingOccurrencesOfString:@".amk" withString:@""];
-                [amkFiles addObject:filename];
+        NSArray<NSURL *> *files = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:patientDir
+                                                                includingPropertiesForKeys:nil
+                                                                                   options:0
+                                                                                     error:nil];
+        for (NSURL *file in files) {
+            if ([fileManager isUbiquitousItemAtURL:file]) {
+                NSString *downloadStatus = nil;
+                NSError *error = nil;
+                if ([file getResourceValue:&downloadStatus forKey:NSURLUbiquitousItemDownloadingStatusKey error:&error] &&
+                    error != nil &&
+                    [downloadStatus isEqualToString:NSURLUbiquitousItemDownloadingStatusNotDownloaded]) {
+                    [fileManager startDownloadingUbiquitousItemAtURL:file error:&error];
+                    continue;
+                }
             }
-        }];
-        
+            NSString *extension = [[file pathExtension] lowercaseString];
+            if ([extension isEqualToString:@"amk"]) {
+                [amkFiles addObject:[file path]];
+            }
+        }
         // Sort
-        NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:nil ascending:NO];
-        NSArray *sortedArray = [[NSArray arrayWithArray:amkFiles] sortedArrayUsingDescriptors:@[sd]];
-        amkFiles = [sortedArray mutableCopy];
+        [amkFiles sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
 
     return amkFiles;
-}
-
-// Returns an array of filenames (NSString), the full path
-- (NSArray *) listOfPrescriptionURLsForPatient:(MLPatient *)p
-{
-    if (!p) {
-#ifdef DEBUG
-        NSLog(@"%s MLPatient not defined", __FUNCTION__);
-#endif
-        return nil;
-    }
-
-    NSMutableArray *amkURLs = [[NSMutableArray alloc] init];
-    
-    NSString *documentsDir = [MLUtilities documentsDirectory];
-    // Check if patient has already a directory, if not create one
-    NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", p.uniqueId]];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL isDir = false;
-    [fileManager fileExistsAtPath:patientDir isDirectory:&isDir];
-    if (isDir) {
-        // List content of directory
-        NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:patientDir error:NULL];
-        [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSString *filename = (NSString *)obj;
-            NSString *extension = [[filename pathExtension] lowercaseString];
-            if ([extension isEqualToString:@"amk"]) {
-                [amkURLs addObject:[NSString stringWithFormat:@"%@/%@", patientDir, filename]];
-            }
-        }];
-
-        // Sort
-        NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:nil ascending:NO];
-        NSArray *sortedArray = [[NSArray arrayWithArray:amkURLs] sortedArrayUsingDescriptors:@[sd]];
-        amkURLs = [sortedArray mutableCopy];
-    }
-    
-    return amkURLs;
 }
 
 - (void) deletePrescriptionWithName:(NSString *)name forPatient:(MLPatient *)p
@@ -119,42 +87,18 @@
     if (p!=nil) {
         // Assign patient
         patient = p;
-        
-        NSString *documentsDir = [MLUtilities documentsDirectory];
-        // Check if patient has already a directory, if not create one
-        NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", patient.uniqueId]];
+
+        NSURL *patientDir = [[MLPersistenceManager shared] amkDirectoryForPatient:patient.uniqueId];
         
         // Delete file
-        NSError *error = nil;
-        NSString *path = [NSString stringWithFormat:@"%@/%@.amk", patientDir, name];
-        BOOL success = [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
-        if (!success) {
-            NSLog(@"Error: %@", [error userInfo]);
-        }
-    }
-}
-
-- (void) deleteAllPrescriptionsForPatient:(MLPatient *)p withBackup:(BOOL)backup
-{
-    if (p!=nil) {
-        // Assign patient
-        patient = p;
-        
-        NSString *documentsDir = [MLUtilities documentsDirectory];
-        NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", patient.uniqueId]];
-        
-        if (backup==YES) {
-            NSString *backupDir = [NSString stringWithFormat:@".%@", patientDir];
-            [[NSFileManager defaultManager] moveItemAtPath:patientDir toPath:backupDir error:nil];
-        } else {
-            [[NSFileManager defaultManager] removeItemAtPath:patientDir error:nil];
-        }
+        NSURL *fileURL = [[patientDir URLByAppendingPathComponent:name] URLByAppendingPathExtension:@"amk"];
+        [[NSFileManager defaultManager] removeItemAtURL:fileURL error:nil];
     }
 }
 
 - (NSURL *) getPrescriptionUrl
 {
-    return [[NSURL alloc] initWithString:currentFileName];
+    return currentFileURL;
 }
 
 // It will in any case create a new file
@@ -168,7 +112,7 @@
         return nil;
     }
 
-    if (overwrite && !currentFileName) {
+    if (overwrite && !currentFileURL) {
         NSLog(@"%s %d, cannot overwrite an empty filename", __FUNCTION__, __LINE__);
         return nil;
     }
@@ -180,18 +124,13 @@
 
     // Assign patient
     patient = p;
-    
-    NSString *documentsDir = [MLUtilities documentsDirectory];
-    // Check if patient has already a directory, if not create one
-    NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", patient.uniqueId]];
+
+    NSURL *patientDir = [[MLPersistenceManager shared] amkDirectoryForPatient:patient.uniqueId];
     
     if (overwrite) {
         // Delete old file
         NSError *error = nil;
-        NSString *path = currentFileName; // full path. Okay when coming from "Send" button
-        //NSLog(@"%s %d, will delete:<%@>", __FUNCTION__, __LINE__, path);
-        BOOL success = [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
-        if (!success) {
+        if (![[NSFileManager defaultManager] removeItemAtURL:currentFileURL error:&error]) {
             NSLog(@"Error: %@", [error userInfo]);
         }
     }
@@ -201,11 +140,10 @@
     currentTime = [currentTime stringByReplacingOccurrencesOfString:@"." withString:@""];
     NSString *fileName = [NSString stringWithFormat:@"RZ_%@.amk", currentTime];
     
-    [[NSFileManager defaultManager] createDirectoryAtPath:patientDir withIntermediateDirectories:YES attributes:nil error:nil];
-    NSString *path = [NSString stringWithFormat:@"%@/%@", patientDir, fileName];
+    NSURL *file = [patientDir URLByAppendingPathComponent:fileName];
 
-    currentFileName = path;  // full path
-    NSLog(@"%s new currentFileName:%@", __FUNCTION__, currentFileName);
+    currentFileURL = file;  // full path
+    NSLog(@"%s new currentFileName:%@", __FUNCTION__, currentFileURL);
 
     NSMutableDictionary *prescriptionDict = [[NSMutableDictionary alloc] init];
     
@@ -224,26 +162,16 @@
     [patientDict setObject:patient.phoneNumber   forKey:KEY_AMK_PAT_PHONE];
     [patientDict setObject:patient.emailAddress  forKey:KEY_AMK_PAT_EMAIL];
     
-    NSMutableDictionary *operatorDict = [[NSMutableDictionary alloc] init];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_TITLE]   forKey:KEY_AMK_DOC_TITLE];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_SURNAME] forKey:KEY_AMK_DOC_SURNAME];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_NAME]    forKey:KEY_AMK_DOC_NAME];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_ADDRESS] forKey:KEY_AMK_DOC_ADDRESS];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_ZIP]     forKey:KEY_AMK_DOC_ZIP];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_CITY]    forKey:KEY_AMK_DOC_CITY];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_PHONE]   forKey:KEY_AMK_DOC_PHONE];
-    [operatorDict setObject:[defaults stringForKey:DEFAULTS_DOC_EMAIL]   forKey:KEY_AMK_DOC_EMAIL];
-    
+    MLOperator *doctor = [[MLPersistenceManager shared] doctor];
+    NSMutableDictionary *operatorDict = [[doctor dictionaryRepresentation] mutableCopy];
     placeDate = [NSString stringWithFormat:@"%@, %@",
-                 [defaults stringForKey:DEFAULTS_DOC_CITY],
+                 doctor.city,
                  [MLUtilities prettyTime]];
     
     NSString *encodedImgStr = @"";
-    NSString *filePath = [[MLUtilities documentsDirectory] stringByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
-    if (filePath!=nil) {
-        NSImage *img = [[NSImage alloc] initWithContentsOfFile:filePath];
-        NSData *imgData = [img TIFFRepresentation];
+    NSImage *doctorImage = [[MLPersistenceManager shared] doctorSignature];
+    if (doctorImage!=nil) {
+        NSData *imgData = [doctorImage TIFFRepresentation];
         NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imgData];
         NSData *data = [imageRep representationUsingType:NSPNGFileType properties:@{}];
         encodedImgStr = [data base64Encoding];
@@ -276,29 +204,28 @@
     NSData *jsonObject = [NSJSONSerialization dataWithJSONObject:prescriptionDict
                                                          options:NSJSONWritingPrettyPrinted
                                                            error:&error];
-    // BOOL success = [jsonObject writeToFile:path options:NSUTF8StringEncoding error:&error];
-    
+
     NSString *jsonStr = [[NSString alloc] initWithData:jsonObject encoding:NSUTF8StringEncoding];
     NSString *base64Str = [MLUtilities encodeStringToBase64:jsonStr];
-    
-    BOOL success = [base64Str writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    if (!success) {
+
+    if (![base64Str writeToURL:file atomically:YES encoding:NSUTF8StringEncoding error:&error]) {
         NSLog(@"Error: %@", [error userInfo]);
     }
 
-    return [[NSURL alloc] initWithString:path];
+    return file;
 }
 
-- (NSString *) loadPrescriptionFromFile:(NSString *)filePath
+- (NSString *) loadPrescriptionFromURL:(NSURL *)fileURL
 {
     NSError *error = nil;
-    NSString *base64Str = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+    NSString *base64Str = [NSString stringWithContentsOfURL:fileURL
+                                                   encoding:NSUTF8StringEncoding
+                                                      error:&error];
     NSString *jsonStr = [MLUtilities decodeBase64ToString:base64Str];
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]
                                                              options: NSJSONReadingMutableContainers
                                                                error:&error];
-    currentFileName = filePath;
-    //NSLog(@"%s currentFileName:%@", __FUNCTION__, currentFileName);
+    currentFileURL = fileURL;
     
     // Prescription
     NSMutableArray *prescription = [[NSMutableArray alloc] init];
@@ -328,21 +255,6 @@
 
     NSString *hash = [jsonDict objectForKey:@"prescription_hash"];
     return hash;
-}
-
-- (NSString *) loadPrescriptionWithName:(NSString *)fileName forPatient:(MLPatient *)p
-{
-    NSString *prescription_hash = @"";
-    NSString *documentsDir = [MLUtilities documentsDirectory];
-    // Check if patient has already a directory, if not create one
-    NSString *filePath = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@/%@.amk", p.uniqueId, fileName]];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:filePath]) {
-        prescription_hash = [self loadPrescriptionFromFile:filePath];
-        currentFileName = [NSString stringWithFormat:@"%@.amk", fileName];
-    }
-    
-    return prescription_hash;
 }
 
 @end

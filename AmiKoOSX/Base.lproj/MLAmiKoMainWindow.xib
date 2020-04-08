@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -52,7 +52,7 @@
         <window title="AmiKo Desitin" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" frameAutosaveName="AmiKoWindow" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="400" width="1035" height="820"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" identifier="MasterView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="1035" height="820"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -170,7 +170,7 @@
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="182" userLabel="Title Text Field">
-                                                                                    <rect key="frame" x="26" y="29" width="480" height="17"/>
+                                                                                    <rect key="frame" x="26" y="30" width="480" height="16"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="476" id="1638"/>
                                                                                     </constraints>
@@ -458,7 +458,7 @@
                                                                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                                                     <subviews>
                                                                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="HgM-Gc-2vZ">
-                                                                                                                                            <rect key="frame" x="0.0" y="28" width="461" height="16"/>
+                                                                                                                                            <rect key="frame" x="0.0" y="29" width="461" height="15"/>
                                                                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="cc4-Hi-QKi">
                                                                                                                                                 <font key="font" metaFont="cellTitle"/>
                                                                                                                                                 <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
@@ -466,7 +466,7 @@
                                                                                                                                             </textFieldCell>
                                                                                                                                         </textField>
                                                                                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KeN-pC-Fg2">
-                                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="457" height="28"/>
+                                                                                                                                            <rect key="frame" x="0.0" y="1" width="457" height="28"/>
                                                                                                                                             <constraints>
                                                                                                                                                 <constraint firstAttribute="height" constant="28" id="UNg-hR-Xlj"/>
                                                                                                                                             </constraints>
@@ -630,7 +630,7 @@
                                                                                                         </connections>
                                                                                                     </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8B8-Yr-IGK">
-                                                                                                        <rect key="frame" x="2" y="774" width="127" height="32"/>
+                                                                                                        <rect key="frame" x="2" y="775" width="127" height="32"/>
                                                                                                         <buttonCell key="cell" type="push" title="Patient search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="agi-3L-00C">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
@@ -802,7 +802,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="16" id="p4V-g3-5Nq"/>
                                                                 </constraints>
-                                                                <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="EG9-tB-cVG">
+                                                                <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="EG9-tB-cVG">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
                                                                     <string key="keyEquivalent"></string>
@@ -919,6 +919,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1006" height="676"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="desitin" id="1536"/>
+            <point key="canvasLocation" x="-1753" y="-1150"/>
         </imageView>
         <button verticalHuggingPriority="750" id="aTX-gV-G5U">
             <rect key="frame" x="0.0" y="0.0" width="82" height="32"/>
@@ -927,6 +928,7 @@
                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                 <font key="font" metaFont="system"/>
             </buttonCell>
+            <point key="canvasLocation" x="-1753" y="-727"/>
         </button>
         <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="46" horizontalPageScroll="10" verticalLineScroll="46" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="Ccd-dh-pYm">
             <rect key="frame" x="0.0" y="0.0" width="497" height="300"/>
@@ -1125,6 +1127,7 @@
     <resources>
         <image name="28-star-gy" width="26" height="26"/>
         <image name="28-star-ye" width="26" height="26"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSStopProgressTemplate" width="11" height="11"/>
         <image name="deleteImage" width="16" height="16"/>
         <image name="desitin" width="512" height="512"/>

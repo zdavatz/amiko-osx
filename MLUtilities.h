@@ -32,6 +32,7 @@ extern NSString* const APP_ID;
 + (BOOL) isGermanApp;
 + (BOOL) isFrenchApp;
 + (BOOL) isConnected;
++ (NSString *)iCloudContainerIdentifier;
 + (NSString *) documentsDirectory;
 + (BOOL) checkFileIsAllowed:(NSString *)name;
 + (NSNumber*) timeIntervalInSecondsSince1970:(NSDate *)date;
@@ -42,5 +43,9 @@ extern NSString* const APP_ID;
 + (NSString *) decodeBase64ToString:(NSString *)base64String;
 
 + (NSString *) getColorCss;
+
++ (void)moveFile:(NSURL *)url toURL:(NSURL *)targetUrl overwriteIfExisting:(BOOL)overwrite;
++ (void)copyFile:(NSURL *)url toURL:(NSURL *)targetUrl overwriteIfExisting:(BOOL)overwrite;
++ (void)mergeFolderRecursively:(NSURL *)fromURL to:(NSURL *)toURL deleteOriginal:(BOOL)deleteOriginal;
 
 @end

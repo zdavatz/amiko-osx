@@ -101,6 +101,16 @@ NSString* const APP_ID = @"710472327";
     return data!=nil;
 }
 
++ (NSString *)iCloudContainerIdentifier {
+    if ([APP_NAME isEqualToString:@"AmiKo"])
+        return @"iCloud.com.ywesee.AmikoDesitin";
+    
+    if ([APP_NAME isEqualToString:@"CoMed"])
+        return @"iCloud.com.ywesee.ComedDesitin";
+    
+    return nil;
+}
+
 + (NSString *) documentsDirectory
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -197,4 +207,90 @@ NSString* const APP_ID = @"710472327";
     NSString *colorCss = [NSString stringWithContentsOfFile:colorCssPath encoding:NSUTF8StringEncoding error:nil];
     return colorCss;
 }
+
++ (void)moveFile:(NSURL *)url toURL:(NSURL *)targetUrl overwriteIfExisting:(BOOL)overwrite {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:[url path]]) {
+        return;
+    }
+    BOOL exist = [manager fileExistsAtPath:[targetUrl path]];
+    if (exist && overwrite) {
+        [manager replaceItemAtURL:targetUrl
+                    withItemAtURL:url
+                   backupItemName:[NSString stringWithFormat:@"%@.bak", [url lastPathComponent]]
+                          options:NSFileManagerItemReplacementUsingNewMetadataOnly
+                 resultingItemURL:nil
+                            error:nil];
+        [manager removeItemAtURL:url error:nil];
+    } else if (!exist) {
+        [manager moveItemAtURL:url
+                         toURL:targetUrl
+                         error:nil];
+    }
+}
+
++ (void)copyFile:(NSURL *)url toURL:(NSURL *)targetUrl overwriteIfExisting:(BOOL)overwrite {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:[url path]]) {
+        return;
+    }
+    BOOL exist = [manager fileExistsAtPath:[targetUrl path]];
+    if (exist && overwrite) {
+        [manager replaceItemAtURL:targetUrl
+                    withItemAtURL:url
+                   backupItemName:[NSString stringWithFormat:@"%@.bak", [url lastPathComponent]]
+                          options:NSFileManagerItemReplacementUsingNewMetadataOnly
+                 resultingItemURL:nil
+                            error:nil];
+    } else if (!exist) {
+        [manager copyItemAtURL:url
+                         toURL:targetUrl
+                         error:nil];
+    }
+
+}
+
++ (void)mergeFolderRecursively:(NSURL *)fromURL to:(NSURL *)toURL deleteOriginal:(BOOL)deleteOriginal {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    BOOL isDirectory = NO;
+    BOOL sourceExist = [manager fileExistsAtPath:[fromURL path] isDirectory:&isDirectory];
+    if (!sourceExist || !isDirectory) {
+        return;
+    }
+    isDirectory = NO;
+    BOOL destExist = [manager fileExistsAtPath:[toURL path] isDirectory:&isDirectory];
+    if (destExist && !isDirectory) {
+        // Remote is a file but we need a directory, abort
+        return;
+    }
+    if (!destExist) {
+        [manager createDirectoryAtURL:toURL
+          withIntermediateDirectories:YES
+                           attributes:nil
+                                error:nil];
+    }
+    NSArray<NSURL *> *sourceFiles = [manager contentsOfDirectoryAtURL:fromURL
+                                           includingPropertiesForKeys:@[NSURLIsDirectoryKey]
+                                                              options:0
+                                                                error:nil];
+    for (NSURL *sourceFile in sourceFiles) {
+        NSURL *destFile = [toURL URLByAppendingPathComponent:[sourceFile lastPathComponent]];
+        NSNumber *sourceIsDir = @0;
+        [sourceFile getResourceValue:&sourceIsDir
+                              forKey:NSURLIsDirectoryKey
+                               error:nil];
+        if ([sourceIsDir boolValue]) {
+            [self mergeFolderRecursively:sourceFile
+                                      to:destFile
+                          deleteOriginal:deleteOriginal];
+        } else {
+            if (deleteOriginal) {
+                [MLUtilities moveFile:sourceFile toURL:destFile overwriteIfExisting:YES];
+            } else {
+                [MLUtilities copyFile:sourceFile toURL:destFile overwriteIfExisting:YES];
+            }
+        }
+    }
+}
+
 @end

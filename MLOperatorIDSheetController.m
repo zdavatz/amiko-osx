@@ -25,6 +25,13 @@
 
 #import "MLUtilities.h"
 #import "MLColors.h"
+#import "MLPersistenceManager.h"
+
+@interface MLOperatorIDSheetController ()
+
+@property (nonatomic, strong) NSMetadataQuery *query;
+
+@end
 
 @implementation MLOperatorIDSheetController
 {
@@ -35,9 +42,18 @@
 - (id) init
 {
     if (self = [super init]) {
-        return self;
+        self.query = [[NSMetadataQuery alloc] init];
+        self.query.searchScopes = @[NSMetadataQueryUbiquitousDocumentsScope];
+        self.query.predicate = [NSPredicate predicateWithFormat:@"%K == %@ OR %K == %@",
+                                NSMetadataItemURLKey,
+                                [[MLPersistenceManager shared] doctorDictionaryURL],
+                                NSMetadataItemURLKey,
+                                [[MLPersistenceManager shared] doctorSignatureURL]];
+        self.query.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"lastPathComponent" ascending:NO]];
+        [self.query startQuery];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadSettings) name:NSMetadataQueryDidUpdateNotification object:self.query];
     }
-    return nil;
+    return self;
 }
 
 - (BOOL) stringIsNilOrEmpty:(NSString*)str
@@ -157,53 +173,31 @@
 - (void) saveSettings
 {
     // Signature is saved as a PNG to Documents Directory within the app
-    NSString *documentsDirectory = [MLUtilities documentsDirectory];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
     NSData *png = [mSignView getSignaturePNG];
-    [png writeToFile:filePath atomically:YES];
-    
-    // All other settings are saved using NSUserDefaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[mTitle stringValue]        forKey:DEFAULTS_DOC_TITLE];
-    [defaults setObject:[mFamilyName stringValue]   forKey:DEFAULTS_DOC_SURNAME];
-    [defaults setObject:[mGivenName stringValue]    forKey:DEFAULTS_DOC_NAME];
-    [defaults setObject:[mPostalAddress stringValue] forKey:DEFAULTS_DOC_ADDRESS];
-    [defaults setObject:[mZipCode stringValue]      forKey:DEFAULTS_DOC_ZIP];
-    [defaults setObject:[mCity stringValue]         forKey:DEFAULTS_DOC_CITY];
-    [defaults setObject:[mCountry stringValue]      forKey:DEFAULTS_DOC_COUNTRY];
-    [defaults setObject:[mPhoneNumber stringValue]  forKey:DEFAULTS_DOC_PHONE];
-    [defaults setObject:[mEmailAddress stringValue] forKey:DEFAULTS_DOC_EMAIL];
-    // Writes mods to persistent storage
-    [defaults synchronize];
+    [[MLPersistenceManager shared] setDoctorSignature:png];
+
+    MLOperator *operator = [[MLOperator alloc] init];
+    operator.title = [mTitle stringValue];
+    operator.familyName = [mFamilyName stringValue];
+    operator.givenName = [mGivenName stringValue];
+    operator.postalAddress = [mPostalAddress stringValue];
+    operator.zipCode = [mZipCode stringValue];
+    operator.city = [mCity stringValue];
+    operator.country = [mCountry stringValue];
+    operator.phoneNumber = [mPhoneNumber stringValue];
+    operator.emailAddress = [mEmailAddress stringValue];
+    [[MLPersistenceManager shared] setDoctor:operator];
 }
 
 - (MLOperator *) loadOperator
 {
-    // Load from user defaults
-    MLOperator *operator = [[MLOperator alloc] init];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    operator.title = [defaults stringForKey:DEFAULTS_DOC_TITLE];
-    operator.familyName = [defaults stringForKey:DEFAULTS_DOC_SURNAME];
-    operator.givenName = [defaults stringForKey:DEFAULTS_DOC_NAME];
-    operator.postalAddress = [defaults stringForKey:DEFAULTS_DOC_ADDRESS];
-    operator.zipCode = [defaults stringForKey:DEFAULTS_DOC_ZIP];
-    operator.city = [defaults stringForKey:DEFAULTS_DOC_CITY];
-    operator.country = [defaults stringForKey:DEFAULTS_DOC_COUNTRY];
-    operator.phoneNumber = [defaults stringForKey:DEFAULTS_DOC_PHONE];
-    operator.emailAddress = [defaults stringForKey:DEFAULTS_DOC_EMAIL];
-    
-    return operator;
+    return [[MLPersistenceManager shared] doctor];
 }
 
 - (void) loadSettings
 {
-    NSString *documentsDirectory = [MLUtilities documentsDirectory];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:DOC_SIGNATURE_FILENAME];
-    if (filePath!=nil) {
-        NSImage *signatureImg = [[NSImage alloc] initWithContentsOfFile:filePath];
-        [mSignView setSignature:signatureImg];
-    }
+    NSImage *signatureImg = [[MLPersistenceManager shared] doctorSignature];
+    [mSignView setSignature:signatureImg];
     
     MLOperator *operator = [self loadOperator];
     

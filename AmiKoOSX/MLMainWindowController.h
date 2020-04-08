@@ -116,12 +116,13 @@ extern NSString* const APP_ID;
 // Help
 - (IBAction) showReportFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;
+- (IBAction) showPreferences:(id)sender;
 - (IBAction) sendFeedback:(id)sender;
 - (IBAction) shareApp:(id)sender;
 - (IBAction) rateApp:(id)sender;
 
 - (void) addItem:(MLPrescriptionItem *)med toPrescriptionCartWithId:(NSInteger)n;
-- (void) loadPrescription:(NSString *)filename andRefreshHistory:(bool)refresh;
+- (void) loadPrescription:(NSURL *)url andRefreshHistory:(bool)refresh;
 - (MLMedication *) getShortMediWithId:(long)mid;
 - (void) newHealthCardData:(NSNotification *)notification;
 
