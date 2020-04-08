@@ -67,13 +67,16 @@
         [self migrateFromOldFavourites];
         [self migrateToAMKDirectory];
         [self initialICloudDownload];
-        
     }
     return self;
 }
 
 + (BOOL)supportICloud {
-    return [[NSFileManager defaultManager] ubiquityIdentityToken] != nil;
+    if (@available(macOS 10.15, *)) {
+        return [[NSFileManager defaultManager] ubiquityIdentityToken] != nil;
+    } else {
+        return NO;
+    }
 }
 
 - (void)setCurrentSourceToLocalWithDeleteICloud:(BOOL)deleteFilesOnICloud {
