@@ -39,6 +39,7 @@
 #import "MLPatientSheetController.h"
 #import "MLOperatorIDSheetController.h"
 #import "MLPrescriptionCellView.h"
+#import "MLPreferencesWindowController.h"
 
 #import "MLPersistenceManager.h"
 #import "MLAbout.h"
@@ -1578,6 +1579,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (IBAction) showAboutPanel:(id)sender
 {
     [MLAbout showAboutPanel];
+}
+
+- (IBAction) showPreferences:(id)sender
+{
+    MLPreferencesWindowController *preferenceController = [[MLPreferencesWindowController alloc] initWithWindowNibName:@"MLPreferencesWindowController"];
+    [preferenceController showWindow:sender];
 }
 
 - (IBAction) sendFeedback:(id)sender

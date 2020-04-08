@@ -116,6 +116,7 @@ extern NSString* const APP_ID;
 // Help
 - (IBAction) showReportFile:(id)sender;
 - (IBAction) showAboutPanel:(id)sender;
+- (IBAction) showPreferences:(id)sender;
 - (IBAction) sendFeedback:(id)sender;
 - (IBAction) shareApp:(id)sender;
 - (IBAction) rateApp:(id)sender;

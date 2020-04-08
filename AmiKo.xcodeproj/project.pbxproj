@@ -15,6 +15,10 @@
 		CF34E550243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */; };
 		CF34E551243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
 		CF34E552243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
+		CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
+		CF5B30FE243DFCB3000312F1 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */; };
+		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
+		CF5B3100243DFCCD000312F1 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */; };
 		CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
 		CFE80FCD242F9332003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
 		CFE80FE124309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */; };
@@ -233,6 +237,9 @@
 		CF34E54C243A1A8300E3AF61 /* PatientModel+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PatientModel+CoreDataClass.h"; sourceTree = "<group>"; };
 		CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataClass.m"; sourceTree = "<group>"; };
 		CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPreferencesWindowController.h; sourceTree = "<group>"; };
+		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
+		CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLPreferencesWindowController.xib; sourceTree = "<group>"; };
 		CFE80FCB242F9306003DB2FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CFE80FDD24309D10003DB2FA /* MLiCloudToLocalMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLiCloudToLocalMigration.h; sourceTree = "<group>"; };
 		CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLiCloudToLocalMigration.m; sourceTree = "<group>"; };
@@ -468,6 +475,16 @@
 				CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */,
 			);
 			name = Patient;
+			sourceTree = "<group>";
+		};
+		CF5B30F9243DFC7E000312F1 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */,
+				CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */,
+				CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */,
+			);
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 		CFE80FDB24309D10003DB2FA /* Persistence */ = {
@@ -825,6 +842,7 @@
 				D53ABBF2189521D400C4525C /* SubWindows */,
 				D5E91B3717E39C1100B66B27 /* MainNibs */,
 				D5E91B3817E39C3700B66B27 /* MainWindows */,
+				CF5B30F9243DFC7E000312F1 /* Preferences */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -1011,6 +1029,7 @@
 				D5DD5766193B4EB40094244E /* 218-trash2.png in Resources */,
 				D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */,
 				FA12C62421C9484E002E190E /* color-scheme-light.css in Resources */,
+				CF5B30FE243DFCB3000312F1 /* MLPreferencesWindowController.xib in Resources */,
 				D5B0105C1927C451007BE838 /* interactions_css.css in Resources */,
 				FA91FD6421CA724700714FB1 /* Media.xcassets in Resources */,
 				D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */,
@@ -1051,6 +1070,7 @@
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5C6443B1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				FA4BC4DD208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */,
+				CF5B3100243DFCCD000312F1 /* MLPreferencesWindowController.xib in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
 				FA4BC4E9208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */,
 				FA22764020A98FD4003BA573 /* Localizable.strings in Resources */,
@@ -1125,6 +1145,7 @@
 				D545C8E41898527C00491511 /* ioapi.c in Sources */,
 				D5F303431F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				CF34E54F243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
+				CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */,
 				D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */,
 				FA4BA42620B4015700552CEF /* SmartCard.m in Sources */,
 				CFE80FE324309D10003DB2FA /* MLPersistenceManager.m in Sources */,
@@ -1214,6 +1235,7 @@
 				D5E91BC117E5E8E800B66B27 /* MLCustomTableRowView.m in Sources */,
 				D5C6441E1EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E91BC217E5E8E800B66B27 /* MLSplashScreen.m in Sources */,
+				CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */,
 				FA9F26E921C2CEED005DA919 /* Wait.m in Sources */,
 				D5962EA21EFC26AD0034B964 /* LegacyPatientDBAdapter.m in Sources */,
 			);
