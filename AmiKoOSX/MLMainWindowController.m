@@ -2338,6 +2338,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         if (mCurrentSearchState == kTitle) {
             if (mUsedDatabase == kAips) {
                 for (MLMedication *m in searchResults) {
+                    if (![m isKindOfClass:[MLMedication class]]) {
+                        continue;
+                    }
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:m.regnrs];
                         if (mSearchInteractions == false)
@@ -2349,6 +2352,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             }
             else if (mUsedDatabase == kFavorites) {
                 for (MLMedication *m in searchResults) {
+                    if (![m isKindOfClass:[MLMedication class]]) {
+                        continue;
+                    }
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         if ([favoriteMedsSet containsObject:m.regnrs]) {
                             [favoriteKeyData addObject:m.regnrs];
@@ -2360,6 +2366,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         }
         else if (mCurrentSearchState == kAuthor) {
             for (MLMedication *m in searchResults) {
+                if (![m isKindOfClass:[MLMedication class]]) {
+                    continue;
+                }
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:m.regnrs];
@@ -2377,6 +2386,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         }
         else if (mCurrentSearchState == kAtcCode) {
             for (MLMedication *m in searchResults) {
+                if (![m isKindOfClass:[MLMedication class]]) {
+                    continue;
+                }
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:m.regnrs];
@@ -2394,6 +2406,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         }
         else if (mCurrentSearchState == kRegNr) {
             for (MLMedication *m in searchResults) {
+                if (![m isKindOfClass:[MLMedication class]]) {
+                    continue;
+                }
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:m.regnrs];
@@ -2412,6 +2427,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         }
         else if (mCurrentSearchState == kTherapy) {
             for (MLMedication *m in searchResults) {
+                if (![m isKindOfClass:[MLMedication class]]) {
+                    continue;
+                }
                 if (mUsedDatabase == kAips) {
                     if (![m.regnrs isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:m.regnrs];
@@ -2430,6 +2448,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         }
         else if (mCurrentSearchState == kFullText) {
             for (MLFullTextEntry *e in searchResults) {
+                if (![e isKindOfClass:[MLFullTextEntry class]]) {
+                    continue;
+                }
                 if (mUsedDatabase == kAips || mUsedDatabase == kFavorites) {
                     if (![e.hash isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:e.hash];
