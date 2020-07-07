@@ -2452,7 +2452,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     continue;
                 }
                 if (mUsedDatabase == kAips || mUsedDatabase == kFavorites) {
-                    if (![e.hash isEqual:[NSNull null]]) {
+                    if (e.hash != nil && ![e.hash isEqual:[NSNull null]]) {
                         [favoriteKeyData addObject:e.hash];
                         [self addKeyword:e.keyword andNumHits:e.numHits andHash:e.hash];
                     }
