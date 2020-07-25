@@ -969,6 +969,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         return nil;
 }
 
+- (MLMedication *) getMediWithId:(long)mid
+{
+    if (mDb != nil)
+        return [mDb getMediWithId:mid];
+    else
+        return nil;
+}
+
+
 - (IBAction) tappedOnStar: (id)sender
 {
     NSInteger row = [self.myTableView rowForView:sender];

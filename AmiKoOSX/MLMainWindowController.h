@@ -124,7 +124,9 @@ extern NSString* const APP_ID;
 - (void) addItem:(MLPrescriptionItem *)med toPrescriptionCartWithId:(NSInteger)n;
 - (void) loadPrescription:(NSURL *)url andRefreshHistory:(bool)refresh;
 - (MLMedication *) getShortMediWithId:(long)mid;
+- (MLMedication *) getMediWithId:(long)mid;
 - (void) newHealthCardData:(NSNotification *)notification;
+- (void) pushToMedBasket:(MLMedication *)med;
 
 #pragma mark - Export CSV
 
