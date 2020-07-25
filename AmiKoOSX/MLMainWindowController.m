@@ -2523,7 +2523,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     if ([ean isNotEqualTo:[NSNull null]]) {
                         mCurrentWebView = kExpertInfoView;
                         mMed = [mDb getMediWithRegnr:ean];
-                        [self updateExpertInfoView:anchor];
+                        if (mSearchInteractions) {
+                            [self pushToMedBasket:mMed];
+                            [self updateInteractionsView];
+                        } else {
+                            [self updateExpertInfoView:anchor];
+                        }
                     }
                 }
             }
