@@ -194,7 +194,7 @@
         item.mid = selectedMedi.medId;
 
         // Extract EAN/GTIN
-        MLMedication *m = [vc getShortMediWithId:[selectedMedi medId]];
+        MLMedication *m = [vc getMediWithId:[selectedMedi medId]];
         if (m != nil) {
             NSArray *listOfPackInfos = [[m packInfo] componentsSeparatedByString:@"\n"];
             NSArray *listOfPacks = [[m packages] componentsSeparatedByString:@"\n"];
@@ -225,6 +225,8 @@
             }
             [vc addItem:item toPrescriptionCartWithId:n];
         }
+        
+        [vc pushToMedBasket: m];
     }
 }
 

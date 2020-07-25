@@ -969,6 +969,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         return nil;
 }
 
+- (MLMedication *) getMediWithId:(long)mid
+{
+    if (mDb != nil)
+        return [mDb getMediWithId:mid];
+    else
+        return nil;
+}
+
+
 - (IBAction) tappedOnStar: (id)sender
 {
     NSInteger row = [self.myTableView rowForView:sender];
@@ -2065,6 +2074,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                         NSLocalizedString(@"Full Text", nil)]];
             break;
     }
+    [medi removeAllObjects];
+    [self.myTableView reloadData];
     mCurrentSearchKey = @"";
     mCurrentSearchState = searchState;
 }
@@ -2512,7 +2523,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     if ([ean isNotEqualTo:[NSNull null]]) {
                         mCurrentWebView = kExpertInfoView;
                         mMed = [mDb getMediWithRegnr:ean];
-                        [self updateExpertInfoView:anchor];
+                        if (mSearchInteractions) {
+                            [self pushToMedBasket:mMed];
+                            [self updateInteractionsView];
+                        } else {
+                            [self updateExpertInfoView:anchor];
+                        }
                     }
                 }
             }
