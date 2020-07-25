@@ -881,7 +881,7 @@
                             <action selector="toolbarAction:" target="-2" id="Aeq-3z-6u5"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="67D0FBC3-5F83-4E3B-94FA-E8994B280031" explicitItemIdentifier="Export" label="Export" paletteLabel="Export" toolTip="Prescription" tag="4" image="export" selectable="YES" id="m1h-SA-01k" userLabel="Export">
+                    <toolbarItem implicitItemIdentifier="67D0FBC3-5F83-4E3B-94FA-E8994B280031" explicitItemIdentifier="Export" label="Export" paletteLabel="Export" toolTip="Prescription" tag="4" image="export" id="m1h-SA-01k" userLabel="Export">
                         <connections>
                             <action selector="toolbarAction:" target="-2" id="DIT-Kl-vbC"/>
                         </connections>
