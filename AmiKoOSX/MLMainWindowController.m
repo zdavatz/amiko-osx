@@ -1905,7 +1905,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             mPrescriptionMode = false;
             [self stopProgressIndicator];
             [self setSearchState:kTitle];            
-            [self pushToMedBasket:mMed];
             [self updateInteractionsView];
             // Switch tab view
             [myTabView selectTabViewItemAtIndex:0];
