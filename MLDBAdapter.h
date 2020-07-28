@@ -41,7 +41,7 @@
 - (NSArray *) searchRegNr:(NSString *)regnr;
 - (NSArray *) searchTherapy:(NSString *)therapy;
 - (NSArray *) searchApplication:(NSString *)application;
-- (NSArray *) searchRegnrsFromList:(NSArray *)listOfRegnrs;
+- (NSArray<MLMedication*> *) searchRegnrsFromList:(NSArray *)listOfRegnrs;
 - (MLMedication *) cursorToVeryShortMedInfo:(NSArray *)cursor;
 - (MLMedication *) cursorToShortMedInfo:(NSArray *)cursor;
 - (MLMedication *) cursorToFullMedInfo:(NSArray *)cursor;

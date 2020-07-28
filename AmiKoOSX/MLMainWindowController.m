@@ -1613,7 +1613,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) clickedTableView:(id)sender
 {
-    if (mCurrentSearchState == kFullText) {
+    if (mCurrentSearchState == kFullText && !mSearchInteractions) {
         mCurrentWebView = kFullTextSearchView;
         [self updateFullTextSearchView:mFullTextContentStr];
     }
@@ -1904,7 +1904,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             mSearchInteractions = true;
             mPrescriptionMode = false;
             [self stopProgressIndicator];
-            [self setSearchState:kTitle];            
             [self updateInteractionsView];
             // Switch tab view
             [myTabView selectTabViewItemAtIndex:0];
@@ -2522,12 +2521,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     if ([ean isNotEqualTo:[NSNull null]]) {
                         mCurrentWebView = kExpertInfoView;
                         mMed = [mDb getMediWithRegnr:ean];
-                        if (mSearchInteractions) {
-                            [self pushToMedBasket:mMed];
-                            [self updateInteractionsView];
-                        } else {
-                            [self updateExpertInfoView:anchor];
-                        }
+                        [self updateExpertInfoView:anchor];
                     }
                 }
             }
@@ -3003,14 +2997,27 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 [self hideTextFinder];
                 
                 NSArray *listOfRegnrs = [mFullTextEntry getRegnrsAsArray];
-                NSArray *listOfArticles = [mDb searchRegnrsFromList:listOfRegnrs];
+                NSArray<MLMedication*> *listOfArticles = [mDb searchRegnrsFromList:listOfRegnrs];
                 NSDictionary *dict = [mFullTextEntry getRegChaptersDict];
                 
-                mFullTextContentStr = [mFullTextSearch tableWithArticles:listOfArticles
-                                                      andRegChaptersDict:dict
-                                                               andFilter:@""];
-                mCurrentWebView = kFullTextSearchView;
-                [self updateFullTextSearchView:mFullTextContentStr];
+                if (mSearchInteractions) {
+                    // https://github.com/zdavatz/amiko-osx/issues/81
+                    // > Actually here we could just always add the first product of each ATC-Code,
+                    // > as the interactions are based on ATC-Codes.
+                    NSMutableSet<NSString*> *uniqueATCs = [[NSMutableSet alloc] init];
+                    for (MLMedication *m in listOfArticles) {
+                        if ([uniqueATCs containsObject:m.atccode]) continue;
+                        [uniqueATCs addObject:m.atccode];
+                        [self pushToMedBasket:m];
+                    }
+                    [self updateInteractionsView];
+                } else {
+                    mFullTextContentStr = [mFullTextSearch tableWithArticles:listOfArticles
+                                                          andRegChaptersDict:dict
+                                                                   andFilter:@""];
+                    mCurrentWebView = kFullTextSearchView;
+                    [self updateFullTextSearchView:mFullTextContentStr];
+                }
             }
         }
         else if (notifier == self.mySectionTitles) {
