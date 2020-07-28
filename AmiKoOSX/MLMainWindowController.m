@@ -2073,8 +2073,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                         NSLocalizedString(@"Full Text", nil)]];
             break;
     }
-    [medi removeAllObjects];
-    [self.myTableView reloadData];
     mCurrentSearchKey = @"";
     mCurrentSearchState = searchState;
 }
