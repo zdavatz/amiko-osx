@@ -248,7 +248,7 @@ static NSString *FULL_TABLE = nil;
 
 /** Search Reg. Nrs. given a list of reg. nr.
  */
-- (NSArray *) searchRegnrsFromList:(NSArray *)listOfRegnrs
+- (NSArray<MLMedication*> *) searchRegnrsFromList:(NSArray *)listOfRegnrs
 {
     const unsigned int N = 40;
     NSMutableArray *listOfMedis = [[NSMutableArray alloc] init];
@@ -274,7 +274,7 @@ static NSString *FULL_TABLE = nil;
             NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@", FULL_TABLE, DATABASE_TABLE, subQuery];
             NSArray *results = [mySqliteDb performQuery:query];
             for (NSArray *cursor in results) {
-                MLMedication *m = [self cursorToVeryShortMedInfo:cursor];
+                MLMedication *m = [self cursorToFullMedInfo:cursor];
                 [listOfMedis addObject:m];
             }
             subQuery = @"";
@@ -291,7 +291,7 @@ static NSString *FULL_TABLE = nil;
         NSString *query = [NSString stringWithFormat:@"select %@ from %@ where %@", FULL_TABLE, DATABASE_TABLE, subQuery];
         NSArray *results = [mySqliteDb performQuery:query];
         for (NSArray *cursor in results) {
-            MLMedication *m = [self cursorToVeryShortMedInfo:cursor];
+            MLMedication *m = [self cursorToFullMedInfo:cursor];
             [listOfMedis addObject:m];
         }
     }
