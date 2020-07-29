@@ -928,6 +928,7 @@
 				D5E91B8717E5E8E400B66B27 /* Sources */,
 				D5E91B9417E5E8E400B66B27 /* Frameworks */,
 				D5E91B9917E5E8E400B66B27 /* Resources */,
+				CFECF67424D1D8CD00CD6E09 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1102,6 +1103,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CFECF67424D1D8CD00CD6E09 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n# Xcode Auto Increment Buildnumber Script\n\necho \"Buildnumber and Date script\"\nbuildPlist=${PROJECT_DIR}/${INFOPLIST_FILE}\n\nCFBuildDate=$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\n\n# update the properties for your <project>-Info.plist\n/usr/libexec/PlistBuddy -c \"Set :CFBuildDate $CFBuildDate\" $buildPlist\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D5E91B8717E5E8E400B66B27 /* Sources */ = {

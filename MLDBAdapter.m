@@ -78,6 +78,46 @@ static NSString *FULL_TABLE = nil;
     }
 }
 
++ (void)copyDBFilesFromBundleIfNeeded {
+    NSArray<NSString *> *filesToCopy =
+        [MLUtilities isGermanApp] ? @[@"amiko_db_full_idx_de.db", @"amiko_frequency_de.db", @"amiko_report_de.html", @"drug_interactions_csv_de.csv"] :
+        [MLUtilities isFrenchApp] ? @[@"amiko_db_full_idx_fr.db", @"amiko_frequency_fr.db", @"amiko_report_fr.html", @"drug_interactions_csv_fr.csv"] :
+        @[];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // Get documents directory
+    NSString *documentsDir = [MLUtilities documentsDirectory];
+    NSString *buildDateString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBuildDate"];
+    NSLog(@"doc %@", documentsDir);
+    
+    NSISO8601DateFormatter *formatter = [[NSISO8601DateFormatter alloc] init];
+    NSDate *buildDate = [formatter dateFromString:buildDateString];
+    
+    for (NSString *filename in filesToCopy) {
+        BOOL shouldCopy = NO;
+        NSString *targetPath = [documentsDir stringByAppendingPathComponent:filename];
+        NSString *sourcePath = [[NSBundle mainBundle] pathForResource:[filename stringByDeletingPathExtension] ofType:[filename pathExtension]];
+        NSError *error = nil;
+        if (![fileManager fileExistsAtPath:targetPath]) {
+            shouldCopy = YES;
+        } else {
+            NSDictionary *attrs = [fileManager attributesOfItemAtPath:targetPath error:&error];
+            if (!error && attrs[NSFileModificationDate]) {
+                NSDate *lastModified = attrs[NSFileModificationDate];
+                if ([lastModified timeIntervalSince1970] < [buildDate timeIntervalSince1970]) {
+                    shouldCopy = YES;
+                }
+            }
+        }
+        if (shouldCopy) {
+            [fileManager copyItemAtPath:sourcePath
+                                 toPath:targetPath
+                                  error:&error];
+        }
+        
+    }
+}
+
 /** Instance functions
  */
 #pragma mark Instance functions

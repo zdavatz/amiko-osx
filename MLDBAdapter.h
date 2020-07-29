@@ -25,6 +25,8 @@
 
 @interface MLDBAdapter : NSObject
 
++ (void)copyDBFilesFromBundleIfNeeded;
+
 - (BOOL) openDatabase:(NSString *)name;
 - (void) closeDatabase;
 - (NSInteger) getNumRecords;
