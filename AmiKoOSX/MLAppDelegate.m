@@ -23,6 +23,7 @@
 
 #import "MLAppDelegate.h"
 #import "MLMainWindowController.h"
+#import "MLDBAdapter.h"
 
 @interface MLAppDelegate()
 // @property (nonatomic, strong) IBOutlet MLMasterViewController *masterViewController;
@@ -63,6 +64,8 @@
     [window makeKeyAndOrderFront:self];
     [window setOrderedIndex:0];
     [window makeKeyAndOrderFront:self];
+    
+    [MLDBAdapter copyDBFilesFromBundleIfNeeded];
     
     [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
