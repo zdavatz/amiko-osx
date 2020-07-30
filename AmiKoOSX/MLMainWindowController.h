@@ -44,6 +44,15 @@ extern NSString* const APP_ID;
 #import "HealthCard.h"
 #import "MLFullTextEntry.h"
 
+@interface DataObject : NSObject
+
+@property NSString *title;
+@property NSString *subTitle;
+@property long medId;
+@property NSString *hashId;
+
+@end
+
 #pragma mark -
 
 @interface MLMainWindowController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate, NSTabViewDelegate, NSDraggingDestination, NSSharingServicePickerDelegate, NSToolbarDelegate>

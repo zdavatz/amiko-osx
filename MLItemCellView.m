@@ -148,8 +148,8 @@
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
     if ([notification object] == self.packagesView) {
+        NSInteger row = [[notification object] selectedRow];
         if (showContextualMenu) {
-            NSInteger row = [[notification object] selectedRow];
             if (row < [listOfPackages count]) {
                 // Generates contextual menu
                 NSMenu *ctxtMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
@@ -171,6 +171,8 @@
                 // Place menu on the screen
                 [ctxtMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
             }
+        } else if (self.onSubtitlePressed) {
+            self.onSubtitlePressed(row);
         }
         [self.packagesView reloadData];
     }

@@ -115,15 +115,6 @@ static BOOL mPrescriptionMode = false;
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 
-@interface DataObject : NSObject
-
-@property NSString *title;
-@property NSString *subTitle;
-@property long medId;
-@property NSString *hashId;
-
-@end
-
 @implementation DataObject
 
 @synthesize title;
@@ -2822,14 +2813,24 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if (tableView == self.myTableView) { // search results
         if ([tableColumn.identifier isEqualToString:@"MLSimpleCell"]) {
             MLItemCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+            DataObject *dataObject = medi[row];
 
-            cellView.textField.stringValue = [medi[row] title];
-            cellView.selectedMedi = medi[row];
-            cellView.packagesStr = [medi[row] subTitle];
-            if (mCurrentSearchState == kTitle)
+            cellView.textField.stringValue = [dataObject title];
+            cellView.selectedMedi = dataObject;
+            cellView.packagesStr = [dataObject subTitle];
+            if (mCurrentSearchState == kTitle) {
                 cellView.showContextualMenu = true;
-            else
+                cellView.onSubtitlePressed = nil;
+            } else if (mCurrentSearchState == kAuthor) {
                 cellView.showContextualMenu = false;
+                cellView.onSubtitlePressed = ^(NSInteger _row) {
+                    [[mySearchField cell] setStringValue:dataObject.subTitle];
+                    [self searchNow:nil];
+                };
+            } else {
+                cellView.showContextualMenu = false;
+                cellView.onSubtitlePressed = nil;
+            }
 
             [cellView.packagesView reloadData];
             

@@ -23,16 +23,18 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MLMedication.h"
+#import "MLMainWindowController.h"
 
 @interface MLItemCellView : NSTableCellView <NSTableViewDelegate, NSTableViewDataSource>
 
 @property (nonatomic, weak) IBOutlet NSButtonCell *favoritesCheckBox;
 @property (nonatomic, weak) IBOutlet NSTableView *packagesView;
 
-@property (atomic) MLMedication *selectedMedi;
+@property (atomic) DataObject *selectedMedi;
 @property (atomic) NSString *packagesStr;
 @property (atomic) NSInteger numPackages;
 @property (atomic) BOOL showContextualMenu;
+@property (nonatomic, copy, nullable) void (^onSubtitlePressed)(NSInteger row);
 
 @end
 
