@@ -2827,6 +2827,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     [[mySearchField cell] setStringValue:dataObject.subTitle];
                     [self searchNow:nil];
                 };
+            } else if (mCurrentSearchState == kAtcCode) {
+                cellView.showContextualMenu = false;
+                cellView.onSubtitlePressed = ^(NSInteger _row) {
+                    long mId = [dataObject medId];
+                    MLMedication *med = [mDb getMediWithId:mId];
+                    NSString *atcString = med.atccode;
+                    NSArray<NSString *> *atc = [atcString componentsSeparatedByString:@";"];
+                    if (atc.count >= 1) {
+                        [[mySearchField cell] setStringValue:atc[0]];
+                        [self searchNow:nil];
+                    }
+                };
             } else {
                 cellView.showContextualMenu = false;
                 cellView.onSubtitlePressed = nil;
