@@ -1069,7 +1069,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
         case tagButton_FullText:
             [self setSearchState:kFullText];
-            mCurrentWebView = kFullTextSearchView;
             break;
     }
     
@@ -3043,7 +3042,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 //NSLog(@"%s row:%ld, %@", __FUNCTION__, row, mListOfSectionIds[row]);
                 [self loadPrescription:[NSURL fileURLWithPath:mListOfSectionIds[row]] andRefreshHistory:NO];
             }
-            else if (mCurrentSearchState!=kFullText || mCurrentWebView!=kFullTextSearchView) {
+            else if (mCurrentWebView!=kFullTextSearchView) {
                 // NSString *javaScript = [NSString stringWithFormat:@"window.location.hash='#%@'", mListOfSectionIds[row]];
                 NSString *javaScript = [NSString stringWithFormat:@"var hashElement=document.getElementById('%@');if(hashElement) {hashElement.scrollIntoView();}", mListOfSectionIds[row]];
                 [myWebView stringByEvaluatingJavaScriptFromString:javaScript];
