@@ -20,8 +20,8 @@
 /* Class = "NSMenu"; title = "AmiKo"; ObjectID = "57"; */
 "57.title" = "CoMed Desitin";
 
-/* Class = "NSMenuItem"; title = "AmiKo Desitin"; ObjectID = "58"; */
-"58.title" = "CoMed Desitin";
+/* Class = "NSMenuItem"; title = "About"; ObjectID = "58"; */
+"58.title" = "À propos";
 
 /* Class = "NSMenuItem"; title = "Suchresultat drucken..."; ObjectID = "78"; */
 "78.title" = "Imprimer la Recherche...";
@@ -32,11 +32,11 @@
 /* Class = "NSMenuItem"; title = "Datei"; ObjectID = "83"; */
 "83.title" = "Fichier";
 
-/* Class = "NSMenuItem"; title = "AmiKo Desitin verstecken"; ObjectID = "134"; */
-"134.title" = "Cacher CoMed Desitin";
+/* Class = "NSMenuItem"; title = "Hide"; ObjectID = "134"; */
+"134.title" = "Cacher";
 
-/* Class = "NSMenuItem"; title = "AmiKo Desitin Beenden"; ObjectID = "136"; */
-"136.title" = "Terminer CoMed Desitin";
+/* Class = "NSMenuItem"; title = "Quit"; ObjectID = "136"; */
+"136.title" = "Terminer";
 
 /* Class = "NSMenuItem"; title = "Übrige Fenster verstecken"; ObjectID = "145"; */
 "145.title" = "Cacher autres fenêtres";

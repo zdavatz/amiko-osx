@@ -72,6 +72,17 @@
                                    selector:@selector(closeSplashScreen)    // fadeOutAndRemove
                                    userInfo:nil
                                     repeats:NO];
+    
+
+    NSString *bundleName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    NSMenu *mainMenu = [NSApp mainMenu];
+    NSMenu *firstSubMenu = [[mainMenu itemAtIndex:0] submenu];
+    NSMenuItem *aboutItem = [firstSubMenu itemAtIndex:0];
+    NSMenuItem *hideItem = [firstSubMenu itemAtIndex:4];
+    NSMenuItem *quitItem = [firstSubMenu itemAtIndex:8];
+    [aboutItem setTitle:[NSString stringWithFormat:@"%@ %@", aboutItem.title, bundleName]];
+    [hideItem setTitle:[NSString stringWithFormat:@"%@ %@", hideItem.title, bundleName]];
+    [quitItem setTitle:[NSString stringWithFormat:@"%@ %@", quitItem.title, bundleName]];
 }
 
 - (void) closeSplashScreen
