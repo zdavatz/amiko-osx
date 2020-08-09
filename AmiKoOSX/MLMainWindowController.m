@@ -942,6 +942,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     // Problem with this function is that it is called multiple times...
     // because we pass 'owner:self' when we create 'MLPrescriptionCellView *cellView'
+
+    // Issue #108
+    NSString *bundleName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    [[self window] setTitle:bundleName];
 }
 
 - (void) windowResized: (NSNotification *)notification;

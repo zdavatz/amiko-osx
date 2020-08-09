@@ -74,6 +74,7 @@
                                     repeats:NO];
     
 
+    // Issue #108
     NSString *bundleName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     NSMenu *mainMenu = [NSApp mainMenu];
     NSMenu *firstSubMenu = [[mainMenu itemAtIndex:0] submenu];
