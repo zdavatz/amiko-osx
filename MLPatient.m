@@ -68,8 +68,23 @@
 
 - (NSString *) generateUniqueID
 {
+    NSString *birthDateString = birthDate;
+    
+    // Transform birthday string from 05.05.2000 to 5.5.2000
+    NSArray<NSString*> *parts = [birthDate componentsSeparatedByString:@"."];
+    if ([parts count] == 3) {
+        NSString *dayString = parts[0];
+        NSString *monthString = parts[1];
+        NSString *yearString = parts[2];
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        NSNumber *dayNum = [formatter numberFromString:dayString];
+        NSNumber *monthNum = [formatter numberFromString:monthString];
+        NSNumber *yearNum = [formatter numberFromString:yearString];
+        birthDateString = [NSString stringWithFormat:@"%d.%d.%d", dayNum.intValue, monthNum.intValue, yearNum.intValue];
+    }
+
     // The UUID should be unique and should be based on familyname, givenname, and birthday
-    NSUInteger uniqueHash = [[NSString stringWithFormat:@"%@.%@.%@", familyName , givenName, birthDate] hash];
+    NSUInteger uniqueHash = [[NSString stringWithFormat:@"%@.%@.%@", familyName , givenName, birthDateString] hash];
     return [NSString stringWithFormat:@"%lu", uniqueHash];    // e.g. 3466684318797166812
 }
 
