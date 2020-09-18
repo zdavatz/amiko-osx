@@ -143,7 +143,7 @@
     if ([self stringIsNilOrEmpty:[mGivenName stringValue]]) {
         mGivenName.backgroundColor = [NSColor lightRed];
     }
-    if ([self stringIsNilOrEmpty:[mBirthDate stringValue]]) {
+    if ([self stringIsNilOrEmpty:[mBirthDate stringValue]] || ![self validateBirthdayString:[mBirthDate stringValue]]) {
         mBirthDate.backgroundColor = [NSColor lightRed];
     }
     if ([self stringIsNilOrEmpty:[mPostalAddress stringValue]]) {
@@ -314,7 +314,7 @@
         mGivenName.backgroundColor = [NSColor lightRed];
         valid = FALSE;
     }
-    if ([self stringIsNilOrEmpty:patient.birthDate]) {
+    if ([self stringIsNilOrEmpty:patient.birthDate] || ![self validateBirthdayString:patient.birthDate]) {
         mBirthDate.backgroundColor = [NSColor lightRed];
         valid = FALSE;
     }
@@ -332,6 +332,35 @@
     }
     
     return valid;
+}
+
+- (BOOL)validateBirthdayString:(NSString*)string {
+    if ([string containsString:@" "]) {
+        return NO;
+    }
+    NSArray<NSString*> *parts = [string componentsSeparatedByString:@"."];
+    if ([parts count] != 3) {
+        return NO;
+    }
+
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    NSString *dayString = parts[0];
+    NSString *monthString = parts[1];
+    NSString *yearString = parts[2];
+    
+    NSNumber *dayNum = [formatter numberFromString:dayString];
+    if (dayNum == nil || [dayNum intValue] <= 0 || [dayNum intValue] > 31) {
+        return NO;
+    }
+    NSNumber *monthNum = [formatter numberFromString:monthString];
+    if (monthNum == nil || [monthNum intValue] <= 0 || [monthNum intValue] > 12) {
+        return NO;
+    }
+    NSNumber *yearNum = [formatter numberFromString:yearString];
+    if (yearNum == nil || [yearString length] != 4) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void) updateAmiKoAddressBookTableView
