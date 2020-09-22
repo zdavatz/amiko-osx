@@ -84,7 +84,7 @@
     }
 
     // The UUID should be unique and should be based on familyname, givenname, and birthday
-    NSUInteger uniqueHash = [[NSString stringWithFormat:@"%@.%@.%@", familyName , givenName, birthDateString] hash];
+    NSUInteger uniqueHash = [[NSString stringWithFormat:@"%@.%@.%@", [familyName lowercaseString] , [givenName lowercaseString], birthDateString] hash];
     return [NSString stringWithFormat:@"%lu", uniqueHash];    // e.g. 3466684318797166812
 }
 
