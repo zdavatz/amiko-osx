@@ -43,6 +43,7 @@
     p.postalAddress = self.postalAddress;
     p.phoneNumber = self.phoneNumber;
     p.emailAddress = self.emailAddress;
+    p.timestamp = self.timestamp;
     return p;
 }
 

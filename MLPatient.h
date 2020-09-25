@@ -58,7 +58,11 @@ enum database_t {
 @property (atomic, copy) NSString *emailAddress;
 @property (atomic, assign) enum database_t databaseType;
 
+// Only available when patient is read from database
+@property (nonatomic, strong, nullable) NSDate *timestamp;
+
 - (void)importFromDict:(NSDictionary *)dict;
+- (NSDictionary <NSString *, NSString *> *)dictionaryRepresentation;
 - (NSString *) generateUniqueID;
 - (NSString *) asString;
 
