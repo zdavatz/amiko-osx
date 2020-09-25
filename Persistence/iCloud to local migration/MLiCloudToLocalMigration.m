@@ -81,6 +81,8 @@
         [self mergeFolderRecursively:[remoteDocument URLByAppendingPathComponent:@"amk" isDirectory:YES]
                                   to:[localDocument URLByAppendingPathComponent:@"amk" isDirectory:YES]
                       deleteOriginal:YES];
+        [[NSFileManager defaultManager] removeItemAtURL:[remoteDocument URLByAppendingPathComponent:@"patients"]
+                                                  error:nil];
     } else {
         [self copyFile:[remoteDocument URLByAppendingPathComponent:@"doctor.plist"]
                  toURL:[localDocument URLByAppendingPathComponent:@"doctor.plist"]
