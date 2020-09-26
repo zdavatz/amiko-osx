@@ -22,6 +22,7 @@
  ------------------------------------------------------------------------ */
 
 #import "MLPatient.h"
+#import "MLUtilities.h"
 
 @implementation MLPatient
 
@@ -102,8 +103,9 @@
     }
 
     // The UUID should be unique and should be based on familyname, givenname, and birthday
-    NSUInteger uniqueHash = [[NSString stringWithFormat:@"%@.%@.%@", [familyName lowercaseString] , [givenName lowercaseString], birthDateString] hash];
-    return [NSString stringWithFormat:@"%lu", uniqueHash];    // e.g. 3466684318797166812
+    NSString *str = [NSString stringWithFormat:@"%@.%@.%@", [familyName lowercaseString] , [givenName lowercaseString], birthDateString];
+    NSString *hashed = [MLUtilities sha256:str];
+    return hashed;
 }
 
 - (NSString *) asString
