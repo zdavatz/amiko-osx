@@ -19,6 +19,8 @@
 		CF5B30FE243DFCB3000312F1 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */; };
 		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF5B3100243DFCCD000312F1 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */; };
+		CF8F50F625164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
+		CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
 		CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
 		CFE80FCD242F9332003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
 		CFE80FE124309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */; };
@@ -240,6 +242,8 @@
 		CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPreferencesWindowController.h; sourceTree = "<group>"; };
 		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
 		CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLPreferencesWindowController.xib; sourceTree = "<group>"; };
+		CF8F50F425164113007D62B5 /* MLPatientSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPatientSync.h; sourceTree = "<group>"; };
+		CF8F50F525164113007D62B5 /* MLPatientSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPatientSync.m; sourceTree = "<group>"; };
 		CFE80FCB242F9306003DB2FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CFE80FDD24309D10003DB2FA /* MLiCloudToLocalMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLiCloudToLocalMigration.h; sourceTree = "<group>"; };
 		CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLiCloudToLocalMigration.m; sourceTree = "<group>"; };
@@ -487,9 +491,19 @@
 			name = Preferences;
 			sourceTree = "<group>";
 		};
+		CF8F50F3251640E7007D62B5 /* iCloud patient sync */ = {
+			isa = PBXGroup;
+			children = (
+				CF8F50F425164113007D62B5 /* MLPatientSync.h */,
+				CF8F50F525164113007D62B5 /* MLPatientSync.m */,
+			);
+			path = "iCloud patient sync";
+			sourceTree = "<group>";
+		};
 		CFE80FDB24309D10003DB2FA /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				CF8F50F3251640E7007D62B5 /* iCloud patient sync */,
 				CFE80FDC24309D10003DB2FA /* iCloud to local migration */,
 				CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */,
 				CFE80FE024309D10003DB2FA /* MLPersistenceManager.h */,
@@ -1135,6 +1149,7 @@
 				D5E91B8817E5E8E400B66B27 /* main.m in Sources */,
 				FA6A2BB220B2B10A0080B4C9 /* MLOperatorIDSheetController.m in Sources */,
 				D5E91B8917E5E8E400B66B27 /* MLAppDelegate.m in Sources */,
+				CF8F50F625164113007D62B5 /* MLPatientSync.m in Sources */,
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
 				CFE80FE124309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
@@ -1246,6 +1261,7 @@
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				CF34E550243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
 				D53AB5AE1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
+				CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */,
 				D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				CFE80FE424309D10003DB2FA /* MLPersistenceManager.m in Sources */,
 				D517E4C31EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,

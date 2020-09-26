@@ -64,8 +64,8 @@
                 NSString *downloadStatus = nil;
                 NSError *error = nil;
                 if ([file getResourceValue:&downloadStatus forKey:NSURLUbiquitousItemDownloadingStatusKey error:&error] &&
-                    error != nil &&
-                    [downloadStatus isEqualToString:NSURLUbiquitousItemDownloadingStatusNotDownloaded]) {
+                    error == nil &&
+                    ![downloadStatus isEqualToString:NSURLUbiquitousItemDownloadingStatusCurrent]) {
                     [fileManager startDownloadingUbiquitousItemAtURL:file error:&error];
                     continue;
                 }

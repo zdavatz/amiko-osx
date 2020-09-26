@@ -42,19 +42,19 @@
 
 - (void)importFromDict:(NSDictionary *)dict
 {
-    uniqueId =      [dict objectForKey: KEY_AMK_PAT_ID];
-    familyName =    [dict objectForKey: KEY_AMK_PAT_SURNAME];
-    givenName =     [dict objectForKey: KEY_AMK_PAT_NAME];
-    birthDate =     [dict objectForKey: KEY_AMK_PAT_BIRTHDATE];
-    weightKg =      [[dict objectForKey:KEY_AMK_PAT_WEIGHT] intValue];
-    heightCm =      [[dict objectForKey:KEY_AMK_PAT_HEIGHT] intValue];
-    gender =        [dict objectForKey: KEY_AMK_PAT_GENDER];
-    postalAddress = [dict objectForKey: KEY_AMK_PAT_ADDRESS];
-    zipCode =       [dict objectForKey: KEY_AMK_PAT_ZIP];
-    city =          [dict objectForKey: KEY_AMK_PAT_CITY];
-    country =       [dict objectForKey: KEY_AMK_PAT_COUNTRY];
-    phoneNumber =   [dict objectForKey: KEY_AMK_PAT_PHONE];
-    emailAddress =  [dict objectForKey: KEY_AMK_PAT_EMAIL];
+    uniqueId =      [self getString:KEY_AMK_PAT_ID orNilFromDict:dict];
+    familyName =    [self getString:KEY_AMK_PAT_SURNAME orNilFromDict:dict];
+    givenName =     [self getString:KEY_AMK_PAT_NAME orNilFromDict:dict];
+    birthDate =     [self getString:KEY_AMK_PAT_BIRTHDATE orNilFromDict:dict];
+    weightKg =      [[self getString:KEY_AMK_PAT_WEIGHT orNilFromDict:dict] intValue];
+    heightCm =      [[self getString:KEY_AMK_PAT_HEIGHT orNilFromDict:dict] intValue];
+    gender =        [self getString:KEY_AMK_PAT_GENDER orNilFromDict:dict];
+    postalAddress = [self getString:KEY_AMK_PAT_ADDRESS orNilFromDict:dict];
+    zipCode =       [self getString:KEY_AMK_PAT_ZIP orNilFromDict:dict];
+    city =          [self getString:KEY_AMK_PAT_CITY orNilFromDict:dict];
+    country =       [self getString:KEY_AMK_PAT_COUNTRY orNilFromDict:dict];
+    phoneNumber =   [self getString:KEY_AMK_PAT_PHONE orNilFromDict:dict];
+    emailAddress =  [self getString:KEY_AMK_PAT_EMAIL orNilFromDict:dict];
     
     NSString *newUniqueID = [self generateUniqueID];
     
@@ -64,6 +64,24 @@
     else if (![uniqueId isEqualToString:newUniqueID]) {
         NSLog(@"WARNING: imported ID:%@, expected ID %@", uniqueId, newUniqueID);
     }
+}
+
+- (NSDictionary <NSString *, NSString *> *)dictionaryRepresentation {
+    NSMutableDictionary *patientDict = [[NSMutableDictionary alloc] init];
+    [patientDict setObject:self.uniqueId             forKey:KEY_AMK_PAT_ID];
+    [patientDict setObject:self.familyName           forKey:KEY_AMK_PAT_SURNAME];
+    [patientDict setObject:self.givenName            forKey:KEY_AMK_PAT_NAME];
+    [patientDict setObject:self.birthDate            forKey:KEY_AMK_PAT_BIRTHDATE];
+    [patientDict setObject:self.gender        ?: @"" forKey:KEY_AMK_PAT_GENDER];
+    [patientDict setObject:[NSString stringWithFormat:@"%d", self.weightKg] forKey:KEY_AMK_PAT_WEIGHT];
+    [patientDict setObject:[NSString stringWithFormat:@"%d", self.heightCm] forKey:KEY_AMK_PAT_HEIGHT];
+    [patientDict setObject:self.postalAddress ?: @"" forKey:KEY_AMK_PAT_ADDRESS];
+    [patientDict setObject:self.zipCode       ?: @"" forKey:KEY_AMK_PAT_ZIP];
+    [patientDict setObject:self.city          ?: @"" forKey:KEY_AMK_PAT_CITY];
+    [patientDict setObject:self.country       ?: @"" forKey:KEY_AMK_PAT_COUNTRY];
+    [patientDict setObject:self.phoneNumber   ?: @"" forKey:KEY_AMK_PAT_PHONE];
+    [patientDict setObject:self.emailAddress  ?: @"" forKey:KEY_AMK_PAT_EMAIL];
+    return patientDict;
 }
 
 - (NSString *) generateUniqueID
@@ -97,6 +115,14 @@
 {
     return [NSString stringWithFormat:@"%@ givenName:%@, familyName:%@, birthDate:%@, uniqueId:%@",
             NSStringFromClass([self class]), givenName, familyName, birthDate, uniqueId];
+}
+
+- (NSString*)getString:(NSString *)key orNilFromDict:(NSDictionary *)dict {
+    id obj = [dict objectForKey:key];
+    if ([obj isKindOfClass:[NSString class]]) {
+        return obj;
+    }
+    return nil;
 }
 
 @end

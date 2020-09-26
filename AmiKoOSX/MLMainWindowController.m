@@ -747,7 +747,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if (changedItems) {
         for (NSMetadataItem *changedItem in changedItems) {
             NSURL *url = [changedItem valueForAttribute:NSMetadataItemURLKey];
-            if ([[url path] hasPrefix:[[[MLPersistenceManager shared] amkBaseDirectory] path]]) {
+            if ([[url path] hasPrefix:[[[MLPersistenceManager shared] amkBaseDirectory] path]] &&
+                [[url pathExtension] isEqualToString:@"amk"]) {
                 [self loadPrescription:url andRefreshHistory:NO];
                 [self updatePrescriptionsView];
                 break;
