@@ -442,6 +442,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [sendButton sendActionOn:NSEventMaskLeftMouseDown];
     possibleToOverwrite = false;
     modifiedPrescription = false;
+    
+    NSClickGestureRecognizer *click = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(setOperatorIdentity:)];
+    [self.myOperatorIDTextField addGestureRecognizer:click];
+    
     [self updateButtons];
     [self updateExpertInfoView:nil];  // to have an initial dark background in dark mode
 }
