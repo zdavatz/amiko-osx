@@ -425,6 +425,7 @@
     }
     NSManagedObjectContext *context = [self.coreDataContainer viewContext];
     [context deleteObject:pm];
+    [context save:nil];
     if (updateICloud) {
         [self.patientSync deletePatientFileForICloud:patient];
     }

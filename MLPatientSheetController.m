@@ -483,6 +483,7 @@
 - (IBAction) onDeletePatient:(id)sender
 {
     NSInteger row = [mTableView selectedRow];
+    if (row == -1) return;
     if (mABContactsVisible==NO) {
         MLPatient *p = nil;
         if (mSearchFiltered) {
