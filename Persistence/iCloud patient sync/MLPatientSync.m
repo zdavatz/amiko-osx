@@ -160,7 +160,7 @@
                                                                                         error:&error];
             NSDate *lastUpdated = [attributes fileModificationDate];
             
-            dispatch_sync(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [self.persistenceManager upsertPatient:p withTimestamp:lastUpdated updateICloud:NO];
             });
         }
@@ -200,7 +200,7 @@
                                                                                     error:&error];
         NSDate *lastUpdated = [attributes fileModificationDate];
         
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self.persistenceManager upsertPatient:p withTimestamp:lastUpdated updateICloud:NO];
         });
         if (callback != nil) {
@@ -267,6 +267,9 @@
 }
 
 - (void)deletePatientFileForICloud: (MLPatient*)patient {
+    if (self.persistenceManager.currentSource != MLPersistenceSourceICloud) {
+        return;
+    }
     NSURL *url = [self urlForPatientRepresentation:patient];
     [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
 }
@@ -307,7 +310,7 @@
             continue;
         }
         NSString *patientUniqueId = [[url pathComponents] lastObject];
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             MLPatient *p = [self.persistenceManager getPatientWithUniqueID:patientUniqueId];
             [self.persistenceManager deletePatient:p updateICloud:NO];
         });
