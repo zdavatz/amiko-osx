@@ -2,9 +2,9 @@
 # Alex Bettarini -  19 Jun 2019
 # Copyright © 2019 Ywesee GmbH. All rights reserved.
 
-#STEP_REMOVE_SUPPORT_FILES=true
-#STEP_DOWNLOAD_SUPPORT_FILES=true
-#STEP_BUILD=true
+STEP_REMOVE_SUPPORT_FILES=true
+STEP_DOWNLOAD_SUPPORT_FILES=true
+STEP_BUILD=true
 STEP_ARCHIVE=true
 STEP_CREATE_PKG=true
 STEP_UPLOAD_APP=true
