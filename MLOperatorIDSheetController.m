@@ -233,7 +233,7 @@
 {
     MLOperator *operator = [self loadOperator];
     
-    if (operator.familyName && operator.givenName)
+    if ([operator.familyName length] && [operator.givenName length])
         return [operator retrieveOperatorAsString];
 
     return NSLocalizedString(@"Enter the doctor's address", nil);
