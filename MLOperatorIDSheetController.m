@@ -52,6 +52,11 @@
         self.query.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"lastPathComponent" ascending:NO]];
         [self.query startQuery];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadSettings) name:NSMetadataQueryDidUpdateNotification object:self.query];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(controlTextDidChange:)
+                                                     name:NSControlTextDidChangeNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -68,10 +73,16 @@
 
 - (IBAction) onSaveOperator:(id)sender
 {
-    //NSLog(@"%s", __FUNCTION__);
-    [self saveSettings];
-    [self remove];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionDoctorChanged" object:nil];
+    if ([self validateFields]) {
+        //NSLog(@"%s", __FUNCTION__);
+        [self saveSettings];
+        [self remove];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionDoctorChanged" object:nil];
+    }
+}
+
+- (void) controlTextDidChange:(NSNotification *)notification {
+    [self validateFields];
 }
 
 - (IBAction) onLoadSignature:(id)sender
@@ -130,42 +141,20 @@
 {
     BOOL valid = TRUE;
     
-    if ([self stringIsNilOrEmpty:[mTitle stringValue]]) {
-        mTitle.backgroundColor = [NSColor lightRed];
-        valid = FALSE;
-    }
     if ([self stringIsNilOrEmpty:[mFamilyName stringValue]]) {
         mFamilyName.backgroundColor = [NSColor lightRed];
         valid = FALSE;
+    } else {
+        mFamilyName.backgroundColor = [NSColor clearColor];
     }
     if ([self stringIsNilOrEmpty:[mGivenName stringValue]]) {
         mGivenName.backgroundColor = [NSColor lightRed];
         valid = FALSE;
+    } else {
+        mGivenName.backgroundColor = [NSColor clearColor];
     }
-    if ([self stringIsNilOrEmpty:[mPostalAddress stringValue]]) {
-        mPostalAddress.backgroundColor = [NSColor lightRed];
-        valid = FALSE;
-    }
-    if ([self stringIsNilOrEmpty:[mZipCode stringValue]]) {
-        mZipCode.backgroundColor = [NSColor lightRed];
-        valid = FALSE;
-    }
-    if ([self stringIsNilOrEmpty:[mCity stringValue]]) {
-        mCity.backgroundColor = [NSColor lightRed];
-        valid = FALSE;
-    }
-    if ([self stringIsNilOrEmpty:[mCountry stringValue]]) {
-        mCountry.backgroundColor = [NSColor lightRed];
-        valid = FALSE;
-    }
-    if ([self stringIsNilOrEmpty:[mPhoneNumber stringValue]]) {
-        mPhoneNumber.backgroundColor = [NSColor lightRed];
-        valid = FALSE;
-    }
-    if ([self stringIsNilOrEmpty:[mEmailAddress stringValue]]) {
-        mEmailAddress.backgroundColor = [NSColor lightRed];
-        valid = FALSE;
-    }
+    
+    [mSaveButton setEnabled:valid];
     
     return valid;
 }
@@ -227,6 +216,8 @@
 
     if ([self stringIsNilOrEmpty:operator.emailAddress]==NO)
         mEmailAddress.stringValue = operator.emailAddress;
+    
+    [self validateFields];
 }
 
 - (NSString *) retrieveIDAsString

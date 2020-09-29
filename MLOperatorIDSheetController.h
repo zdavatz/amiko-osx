@@ -40,6 +40,7 @@
     IBOutlet NSTextField *mCountry;
     IBOutlet NSTextField *mPhoneNumber;
     IBOutlet NSTextField *mEmailAddress;
+    __weak IBOutlet NSButton *mSaveButton;
 }
 
 - (IBAction) onCancel:(id)sender;
