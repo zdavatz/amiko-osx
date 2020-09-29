@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		938147CE21CB9A790029D189 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68F17C912FF00EBEF39 /* Credits.rtf */; };
 		93B279D620B857FD00E32881 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA54AAFD20AED1460034CD77 /* libz.tbd */; };
+		CF16C25F25236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
+		CF16C26025236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
 		CF34E549243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF34E547243A1A5A00E3AF61 /* Model.xcdatamodeld */; };
 		CF34E54A243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF34E547243A1A5A00E3AF61 /* Model.xcdatamodeld */; };
 		CF34E54F243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */; };
@@ -16,9 +18,7 @@
 		CF34E551243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
 		CF34E552243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
 		CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
-		CF5B30FE243DFCB3000312F1 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */; };
 		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
-		CF5B3100243DFCCD000312F1 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */; };
 		CF8F50F625164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
 		CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
 		CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
@@ -234,6 +234,9 @@
 /* Begin PBXFileReference section */
 		930F635F21CA5D4F00576223 /* AmiKo Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AmiKo Desitin.entitlements"; sourceTree = SOURCE_ROOT; };
 		930F636021CA5D8400576223 /* CoMed Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoMed Desitin.entitlements"; sourceTree = "<group>"; };
+		CF16C26125236F7F00A05542 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLPreferencesWindowController.xib; sourceTree = "<group>"; };
+		CF16C26425236F8300A05542 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
+		CF16C26625236F8400A05542 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
 		CF34E548243A1A5A00E3AF61 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CF34E54B243A1A8300E3AF61 /* PatientModel+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PatientModel+CoreDataProperties.h"; sourceTree = "<group>"; };
 		CF34E54C243A1A8300E3AF61 /* PatientModel+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PatientModel+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -241,7 +244,6 @@
 		CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPreferencesWindowController.h; sourceTree = "<group>"; };
 		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
-		CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLPreferencesWindowController.xib; sourceTree = "<group>"; };
 		CF8F50F425164113007D62B5 /* MLPatientSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPatientSync.h; sourceTree = "<group>"; };
 		CF8F50F525164113007D62B5 /* MLPatientSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPatientSync.m; sourceTree = "<group>"; };
 		CFE80FCB242F9306003DB2FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -486,7 +488,7 @@
 			children = (
 				CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */,
 				CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */,
-				CF5B30FC243DFCB3000312F1 /* MLPreferencesWindowController.xib */,
+				CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -1045,7 +1047,7 @@
 				D5DD5766193B4EB40094244E /* 218-trash2.png in Resources */,
 				D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */,
 				FA12C62421C9484E002E190E /* color-scheme-light.css in Resources */,
-				CF5B30FE243DFCB3000312F1 /* MLPreferencesWindowController.xib in Resources */,
+				CF16C25F25236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */,
 				D5B0105C1927C451007BE838 /* interactions_css.css in Resources */,
 				FA91FD6421CA724700714FB1 /* Media.xcassets in Resources */,
 				D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */,
@@ -1086,7 +1088,7 @@
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5C6443B1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				FA4BC4DD208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */,
-				CF5B3100243DFCCD000312F1 /* MLPreferencesWindowController.xib in Resources */,
+				CF16C26025236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */,
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
 				FA4BC4E9208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */,
 				FA22764020A98FD4003BA573 /* Localizable.strings in Resources */,
@@ -1282,6 +1284,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF16C26125236F7F00A05542 /* Base */,
+				CF16C26425236F8300A05542 /* fr */,
+				CF16C26625236F8400A05542 /* de */,
+			);
+			name = MLPreferencesWindowController.xib;
+			sourceTree = "<group>";
+		};
 		D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
