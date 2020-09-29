@@ -98,6 +98,9 @@
 /* Class = "NSMenuItem"; title = "Rezept"; ObjectID = "NcS-1e-ymc"; */
 "NcS-1e-ymc.title" = "Ordonnance";
 
+/* Class = "NSMenuItem"; title = "Preferences..."; ObjectID = "L0n-K8-EIA"; */
+"L0n-K8-EIA.title" = "Configuration...";
+
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "P52-Re-Wjz"; */
 "P52-Re-Wjz.title" = "Select All";
 

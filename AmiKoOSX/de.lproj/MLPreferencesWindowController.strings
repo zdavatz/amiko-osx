@@ -1,0 +1,9 @@
+
+/* Class = "NSButtonCell"; title = "Enable iCloud"; ObjectID = "58g-Mv-66Y"; */
+"58g-Mv-66Y.title" = "Enable iCloud Sync.";
+
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "F0z-JX-Cv5"; */
+"F0z-JX-Cv5.title" = "Einstellungen";
+
+/* Class = "NSTextFieldCell"; title = "iCloud Syncing is only available on Mac OS 10.15+"; ObjectID = "OCW-p1-45S"; */
+"OCW-p1-45S.title" = "iCloud-Synchronisierung ist nur unter MacOS 10.15+ verfügbar.";
