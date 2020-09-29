@@ -18,10 +18,10 @@
 "QvC-M9-y7g.title" = "Signature du médecin";
 
 /* Class = "NSTextFieldCell"; title = "Vorname"; ObjectID = "Rwk-rY-x9h"; */
-"Rwk-rY-x9h.title" = "Prénom";
+"Rwk-rY-x9h.title" = "Prénom*";
 
 /* Class = "NSTextFieldCell"; title = "Name"; ObjectID = "Tyt-q1-Omh"; */
-"Tyt-q1-Omh.title" = "Nom";
+"Tyt-q1-Omh.title" = "Nom*";
 
 /* Class = "NSButtonCell"; title = "Speichern"; ObjectID = "V8Z-rM-HDQ"; */
 "V8Z-rM-HDQ.title" = "Sauver";

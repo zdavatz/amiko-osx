@@ -18,10 +18,10 @@
 "QvC-M9-y7g.title" = "Arztstempel";
 
 /* Class = "NSTextFieldCell"; title = "Vorname"; ObjectID = "Rwk-rY-x9h"; */
-"Rwk-rY-x9h.title" = "Vorname";
+"Rwk-rY-x9h.title" = "Vorname*";
 
 /* Class = "NSTextFieldCell"; title = "Name"; ObjectID = "Tyt-q1-Omh"; */
-"Tyt-q1-Omh.title" = "Name";
+"Tyt-q1-Omh.title" = "Name*";
 
 /* Class = "NSButtonCell"; title = "Speichern"; ObjectID = "V8Z-rM-HDQ"; */
 "V8Z-rM-HDQ.title" = "Speichern";
