@@ -404,7 +404,7 @@
 		FA4BA42520B4015700552CEF /* SmartCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartCard.m; sourceTree = "<group>"; };
 		FA4BA42920B401B700552CEF /* HealthCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthCard.h; sourceTree = "<group>"; };
 		FA4BA42A20B401B700552CEF /* HealthCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthCard.m; sourceTree = "<group>"; };
-		FA4BC4E2208F545000B7BDF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLAmiKoOperatorIDSheet.xib; sourceTree = "<group>"; };
+		FA4BC4.2408F545000B7BDF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLAmiKoOperatorIDSheet.xib; sourceTree = "<group>"; };
 		FA4BC4E5208F545400B7BDF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLAmiKoOperatorIDSheet.strings; sourceTree = "<group>"; };
 		FA4BC4E7208F545600B7BDF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLAmiKoOperatorIDSheet.strings; sourceTree = "<group>"; };
 		FA4BC4EE208F592000B7BDF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLAmiKoPatientSheet.xib; sourceTree = "<group>"; };
@@ -1317,7 +1317,7 @@
 		FA4BC4E3208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FA4BC4E2208F545000B7BDF3 /* Base */,
+				FA4BC4.2408F545000B7BDF3 /* Base */,
 				FA4BC4E5208F545400B7BDF3 /* fr */,
 				FA4BC4E7208F545600B7BDF3 /* de */,
 			);
@@ -1374,13 +1374,13 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3.4.22;
+				CURRENT_PROJECT_VERSION = 3.4.24;
 				DEVELOPMENT_TEAM = 4B37356EGR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
 				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 3.4.22;
+				MARKETING_VERSION = 3.4.24;
 				OTHER_CFLAGS = "-DAMIKO";
 				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
 				PRODUCT_NAME = "AmiKo Desitin";
@@ -1397,13 +1397,13 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3.4.22;
+				CURRENT_PROJECT_VERSION = 3.4.24;
 				DEVELOPMENT_TEAM = 4B37356EGR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
 				INFOPLIST_FILE = "AmiKo-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 3.4.22;
+				MARKETING_VERSION = 3.4.24;
 				OTHER_CFLAGS = "-DAMIKO";
 				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
 				PRODUCT_NAME = "AmiKo Desitin";
@@ -1420,13 +1420,13 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3.4.22;
+				CURRENT_PROJECT_VERSION = 3.4.24;
 				DEVELOPMENT_TEAM = 4B37356EGR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
 				INFOPLIST_FILE = "CoMed-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 3.4.22;
+				MARKETING_VERSION = 3.4.24;
 				OTHER_CFLAGS = "-DCOMED";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.comedosx;
 				PRODUCT_NAME = "CoMed Desitin";
@@ -1443,13 +1443,13 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3.4.22;
+				CURRENT_PROJECT_VERSION = 3.4.24;
 				DEVELOPMENT_TEAM = 4B37356EGR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AmiKoOSX/AmiKo-Prefix.pch";
 				INFOPLIST_FILE = "CoMed-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 3.4.22;
+				MARKETING_VERSION = 3.4.24;
 				OTHER_CFLAGS = "-DCOMED";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ywesee.comedosx;
 				PRODUCT_NAME = "CoMed Desitin";
