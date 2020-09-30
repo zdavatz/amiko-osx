@@ -86,7 +86,7 @@
                                             </searchField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="139">
                                                 <rect key="frame" x="11" y="734" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Preparation" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="190">
+                                                <buttonCell key="cell" type="roundRect" title="Preparation" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="190" customClass="MLButtonCell">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -96,7 +96,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="138">
                                                 <rect key="frame" x="11" y="708" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Registration Owner" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="191">
+                                                <buttonCell key="cell" type="roundRect" title="Registration Owner" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="191" customClass="MLButtonCell">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -106,7 +106,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="137">
                                                 <rect key="frame" x="11" y="682" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Active substance / ATC Code" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="192">
+                                                <buttonCell key="cell" type="roundRect" title="Active substance / ATC Code" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="192" customClass="MLButtonCell">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -116,7 +116,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="136">
                                                 <rect key="frame" x="11" y="656" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Registration Number" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="193">
+                                                <buttonCell key="cell" type="roundRect" title="Registration Number" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="193" customClass="MLButtonCell">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -126,7 +126,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="135">
                                                 <rect key="frame" x="11" y="630" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Therapy" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="194">
+                                                <buttonCell key="cell" type="roundRect" title="Therapy" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="194" customClass="MLButtonCell">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -136,7 +136,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="wP6-rw-gDp">
                                                 <rect key="frame" x="11" y="604" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Full text" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OVj-Pv-FBc">
+                                                <buttonCell key="cell" type="roundRect" title="Full text" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OVj-Pv-FBc" customClass="MLButtonCell">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -231,7 +231,7 @@
                                                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="t4d-Cn-FJr" userLabel="Packages Text Field">
                                                                                                                         <rect key="frame" x="-2" y="1" width="481" height="14"/>
                                                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" usesSingleLineMode="YES" id="NWx-wp-Pr5">
-                                                                                                                            <font key="font" metaFont="controlContent" size="11"/>
+                                                                                                                            <font key="font" metaFont="label" size="11"/>
                                                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                                         </textFieldCell>
@@ -474,7 +474,7 @@
                                                                                                                                                 <constraint firstAttribute="height" constant="28" id="UNg-hR-Xlj"/>
                                                                                                                                             </constraints>
                                                                                                                                             <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Bemerkungen" drawsBackground="YES" allowsEditingTextAttributes="YES" id="rA5-Xw-TBP">
-                                                                                                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                                                                                                <font key="font" metaFont="label" size="11"/>
                                                                                                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                                                                             </textFieldCell>
@@ -963,7 +963,7 @@
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="YsW-Cb-Mhb">
                                                 <rect key="frame" x="0.0" y="30" width="496" height="14"/>
                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="dlN-Jf-7hA">
-                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                    <font key="font" metaFont="label" size="11"/>
                                                     <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -974,7 +974,7 @@
                                                     <constraint firstAttribute="height" constant="28" id="rkB-j6-bBa"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Bemerkungen" drawsBackground="YES" allowsEditingTextAttributes="YES" id="gZU-sf-2lN">
-                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                    <font key="font" metaFont="label" size="11"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>

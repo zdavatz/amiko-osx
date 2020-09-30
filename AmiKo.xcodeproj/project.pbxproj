@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		938147CE21CB9A790029D189 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D5EBC68F17C912FF00EBEF39 /* Credits.rtf */; };
 		93B279D620B857FD00E32881 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA54AAFD20AED1460034CD77 /* libz.tbd */; };
+		CF01CCAD2524E92F0014B224 /* MLButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF01CCAC2524E92F0014B224 /* MLButtonCell.m */; };
+		CF01CCAE2524E92F0014B224 /* MLButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF01CCAC2524E92F0014B224 /* MLButtonCell.m */; };
 		CF16C25F25236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
 		CF16C26025236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
 		CF34E549243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF34E547243A1A5A00E3AF61 /* Model.xcdatamodeld */; };
@@ -234,6 +236,8 @@
 /* Begin PBXFileReference section */
 		930F635F21CA5D4F00576223 /* AmiKo Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AmiKo Desitin.entitlements"; sourceTree = SOURCE_ROOT; };
 		930F636021CA5D8400576223 /* CoMed Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoMed Desitin.entitlements"; sourceTree = "<group>"; };
+		CF01CCAB2524E92F0014B224 /* MLButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLButtonCell.h; sourceTree = "<group>"; };
+		CF01CCAC2524E92F0014B224 /* MLButtonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLButtonCell.m; sourceTree = "<group>"; };
 		CF16C26125236F7F00A05542 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLPreferencesWindowController.xib; sourceTree = "<group>"; };
 		CF16C26425236F8300A05542 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
 		CF16C26625236F8400A05542 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
@@ -659,6 +663,8 @@
 				D5C5C5301F0E5A1D00DF851F /* MLSignatureView.m */,
 				D5ECDE191F2A7C2600970133 /* MLEditableTextField.h */,
 				D5ECDE121F2A7C1200970133 /* MLEditableTextField.m */,
+				CF01CCAB2524E92F0014B224 /* MLButtonCell.h */,
+				CF01CCAC2524E92F0014B224 /* MLButtonCell.m */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1154,6 +1160,7 @@
 				CF8F50F625164113007D62B5 /* MLPatientSync.m in Sources */,
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
 				CFE80FE124309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */,
+				CF01CCAD2524E92F0014B224 /* MLButtonCell.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
 				D52EA4A51EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D5C5C5101F06416800DF851F /* MLContacts.m in Sources */,
@@ -1277,6 +1284,7 @@
 				D5E91BC217E5E8E800B66B27 /* MLSplashScreen.m in Sources */,
 				CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */,
 				FA9F26E921C2CEED005DA919 /* Wait.m in Sources */,
+				CF01CCAE2524E92F0014B224 /* MLButtonCell.m in Sources */,
 				D5962EA21EFC26AD0034B964 /* LegacyPatientDBAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
