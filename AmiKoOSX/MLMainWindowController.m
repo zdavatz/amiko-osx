@@ -2015,6 +2015,20 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) setSearchState: (NSInteger)searchState
 {
+    NSArray<NSButton*> *buttons = @[
+        self.preparationButton,
+        self.registrationOwnerButton,
+        self.atcButton,
+        self.registrationNumberButton,
+        self.therapyButton,
+        self.fullTextButton
+    ];
+    
+    for (NSButton *button in buttons) {
+        NSCell *cell = [button cell];
+        [cell setImage:nil];
+    }
+    
     switch (searchState) {
         case kTitle:
             [[mySearchField cell] setStringValue:@""];
@@ -2022,13 +2036,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
                                                         NSLocalizedString(@"Search", nil),
                                                         NSLocalizedString(@"Preparation", nil)]];
-             break;
+            self.preparationButton.cell.image = [NSImage imageNamed:NSImageNameStatusAvailable];
+            break;
         case kAuthor:
             [[mySearchField cell] setStringValue:@""];
             mCurrentSearchState = kAuthor;
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
                                                         NSLocalizedString(@"Search", nil),
                                                         NSLocalizedString(@"Owner", nil)]];
+            self.registrationOwnerButton.cell.image = [NSImage imageNamed:NSImageNameStatusAvailable];
             break;
         case kAtcCode:
             [[mySearchField cell] setStringValue:@""];
@@ -2036,6 +2052,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
                                                         NSLocalizedString(@"Search", nil),
                                                         NSLocalizedString(@"ATC Code", nil)]];
+            self.atcButton.cell.image = [NSImage imageNamed:NSImageNameStatusAvailable];
             break;
         case kRegNr:
             [[mySearchField cell] setStringValue:@""];
@@ -2043,6 +2060,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
                                                         NSLocalizedString(@"Search", nil),
                                                         NSLocalizedString(@"Reg. No", nil)]];
+            self.registrationNumberButton.cell.image = [NSImage imageNamed:NSImageNameStatusAvailable];
             break;
         case kTherapy:
             [[mySearchField cell] setStringValue:@""];
@@ -2050,6 +2068,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
                                                         NSLocalizedString(@"Search", nil),
                                                         NSLocalizedString(@"Therapy", nil)]];
+            self.therapyButton.cell.image = [NSImage imageNamed:NSImageNameStatusAvailable];
             break;
         case kWebView:
             // Hide textfinder
@@ -2069,6 +2088,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [[mySearchField cell] setPlaceholderString:[NSString stringWithFormat:@"%@ %@",
                                                         NSLocalizedString(@"Search", nil),
                                                         NSLocalizedString(@"Full Text", nil)]];
+            self.fullTextButton.cell.image = [NSImage imageNamed:NSImageNameStatusAvailable];
             break;
     }
     mCurrentSearchKey = @"";
