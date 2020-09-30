@@ -16,7 +16,7 @@
         [[NSColor colorWithRed:90/255.0 green:164/255.0 blue:194/255.0 alpha:1] set];
         
         NSBezierPath* line = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect(cellFrame, 2, 2) xRadius:2 yRadius:2];
-        [line setLineWidth: 3.0f];
+        [line setLineWidth: 2.0f];
         [line stroke];
     }
 }
