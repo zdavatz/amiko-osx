@@ -93,6 +93,14 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSTextField *labelPrice;
 @property (nonatomic, retain) IBOutlet NSTextField *labelSwissmed;
 
+@property (weak) IBOutlet NSButton *preparationButton;
+@property (weak) IBOutlet NSButton *registrationOwnerButton;
+@property (weak) IBOutlet NSButton *atcButton;
+@property (weak) IBOutlet NSButton *registrationNumberButton;
+@property (weak) IBOutlet NSButton *therapyButton;
+@property (weak) IBOutlet NSButton *fullTextButton;
+
+
 - (IBAction) performFindAction:(id)sender;
 - (IBAction) clickedTableView:(id)sender;
 - (IBAction) tappedOnStar:(id)sender;

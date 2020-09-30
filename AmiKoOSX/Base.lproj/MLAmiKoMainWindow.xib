@@ -9,6 +9,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MLMainWindowController">
             <connections>
+                <outlet property="atcButton" destination="137" id="aoE-eg-F3l"/>
+                <outlet property="fullTextButton" destination="wP6-rw-gDp" id="0YV-qD-QTd"/>
                 <outlet property="labelComment" destination="Zig-6E-0dQ" id="saZ-Kp-w9F"/>
                 <outlet property="labelDoctor" destination="qis-dS-vbv" id="ijN-kW-rEa"/>
                 <outlet property="labelMedicine" destination="auZ-jX-LIg" id="y61-pQ-lcp"/>
@@ -31,8 +33,12 @@
                 <outlet property="myToolbar" destination="3" id="1635"/>
                 <outlet property="myView" destination="2" id="257"/>
                 <outlet property="myWebView" destination="227" id="cwQ-J6-eXc"/>
+                <outlet property="preparationButton" destination="139" id="IvS-cL-Qwe"/>
+                <outlet property="registrationNumberButton" destination="136" id="OCa-lQ-dXn"/>
+                <outlet property="registrationOwnerButton" destination="138" id="JZh-h4-FhJ"/>
                 <outlet property="saveButton" destination="dYR-Rj-qjN" id="4W9-Xx-7b8"/>
                 <outlet property="sendButton" destination="h3A-OZ-Ito" id="QL9-nJ-ogL"/>
+                <outlet property="therapyButton" destination="135" id="mlS-lk-ER1"/>
                 <outlet property="window" destination="1" id="256"/>
             </connections>
         </customObject>
@@ -52,7 +58,7 @@
         <window title="AmiKo Desitin" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" frameAutosaveName="AmiKoWindow" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="400" width="1035" height="820"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" identifier="MasterView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="1035" height="820"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,7 +86,7 @@
                                             </searchField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="139">
                                                 <rect key="frame" x="11" y="734" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Preparation" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="190">
+                                                <buttonCell key="cell" type="roundRect" title="Preparation" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="190">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -90,7 +96,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="138">
                                                 <rect key="frame" x="11" y="708" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Registration Owner" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="191">
+                                                <buttonCell key="cell" type="roundRect" title="Registration Owner" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="191">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -100,7 +106,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="137">
                                                 <rect key="frame" x="11" y="682" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Active substance / ATC Code" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="192">
+                                                <buttonCell key="cell" type="roundRect" title="Active substance / ATC Code" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="192">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -110,7 +116,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="136">
                                                 <rect key="frame" x="11" y="656" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Registration Number" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="193">
+                                                <buttonCell key="cell" type="roundRect" title="Registration Number" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="193">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -120,7 +126,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="135">
                                                 <rect key="frame" x="11" y="630" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Therapy" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="194">
+                                                <buttonCell key="cell" type="roundRect" title="Therapy" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="194">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -130,7 +136,7 @@
                                             </button>
                                             <button verticalHuggingPriority="750" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="wP6-rw-gDp">
                                                 <rect key="frame" x="11" y="604" width="342" height="19"/>
-                                                <buttonCell key="cell" type="roundRect" title="Full text" bezelStyle="roundedRect" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OVj-Pv-FBc">
+                                                <buttonCell key="cell" type="roundRect" title="Full text" bezelStyle="roundedRect" imagePosition="right" alignment="left" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OVj-Pv-FBc">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="label" size="12"/>
                                                 </buttonCell>
@@ -225,7 +231,7 @@
                                                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="t4d-Cn-FJr" userLabel="Packages Text Field">
                                                                                                                         <rect key="frame" x="-2" y="1" width="481" height="14"/>
                                                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" usesSingleLineMode="YES" id="NWx-wp-Pr5">
-                                                                                                                            <font key="font" metaFont="message" size="11"/>
+                                                                                                                            <font key="font" metaFont="controlContent" size="11"/>
                                                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                                         </textFieldCell>
@@ -468,7 +474,7 @@
                                                                                                                                                 <constraint firstAttribute="height" constant="28" id="UNg-hR-Xlj"/>
                                                                                                                                             </constraints>
                                                                                                                                             <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Bemerkungen" drawsBackground="YES" allowsEditingTextAttributes="YES" id="rA5-Xw-TBP">
-                                                                                                                                                <font key="font" metaFont="message" size="11"/>
+                                                                                                                                                <font key="font" metaFont="controlContent" size="11"/>
                                                                                                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                                                                             </textFieldCell>
@@ -929,7 +935,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <clipView key="contentView" id="iPa-2v-CIT">
                 <rect key="frame" x="1" y="1" width="495" height="298"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tableView verticalHuggingPriority="750" tag="3" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="44" rowSizeStyle="automatic" viewBased="YES" id="Sa6-ry-Prj" customClass="MLPrescriptionTableView">
                         <rect key="frame" x="0.0" y="0.0" width="495" height="298"/>
@@ -957,7 +963,7 @@
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="YsW-Cb-Mhb">
                                                 <rect key="frame" x="0.0" y="30" width="496" height="14"/>
                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="dlN-Jf-7hA">
-                                                    <font key="font" metaFont="message" size="11"/>
+                                                    <font key="font" metaFont="controlContent" size="11"/>
                                                     <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -968,7 +974,7 @@
                                                     <constraint firstAttribute="height" constant="28" id="rkB-j6-bBa"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Bemerkungen" drawsBackground="YES" allowsEditingTextAttributes="YES" id="gZU-sf-2lN">
-                                                    <font key="font" metaFont="message" size="11"/>
+                                                    <font key="font" metaFont="controlContent" size="11"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -1004,7 +1010,7 @@
                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                 <prototypeCellViews>
                                     <tableCellView id="uge-3A-4W0">
-                                        <rect key="frame" x="1" y="1" width="-3" height="17"/>
+                                        <rect key="frame" x="1" y="1" width="0.0" height="17"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <button translatesAutoresizingMaskIntoConstraints="NO" id="Vre-TA-HrC">
@@ -1045,6 +1051,7 @@
                 <rect key="frame" x="224" y="17" width="15" height="102"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
+            <point key="canvasLocation" x="140" y="557"/>
         </scrollView>
         <customView id="2Cd-W1-7ot" userLabel="MedicineLabel">
             <rect key="frame" x="0.0" y="0.0" width="252" height="102"/>
@@ -1114,6 +1121,7 @@
                     <color key="borderColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </box>
             </subviews>
+            <point key="canvasLocation" x="140" y="154"/>
         </customView>
     </objects>
     <resources>
