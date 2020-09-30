@@ -11,13 +11,24 @@
 @implementation MLButtonCell
 
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-    [super drawWithFrame:cellFrame inView:controlView];
     if (self.selected) {
-        [[NSColor colorWithRed:90/255.0 green:164/255.0 blue:194/255.0 alpha:1] set];
+        [[NSColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:224/255.0 alpha:1] set];
+        NSBezierPath *background = [NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:3 yRadius:3];
+        [background fill];
         
-        NSBezierPath* line = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect(cellFrame, 2, 2) xRadius:2 yRadius:2];
+        self.attributedTitle = [[NSAttributedString alloc] initWithString:self.title attributes:@{
+            NSForegroundColorAttributeName: [NSColor darkGrayColor]
+        }];
+        
+        [super drawWithFrame:cellFrame inView:controlView];
+        
+        [[NSColor colorWithRed:90/255.0 green:164/255.0 blue:194/255.0 alpha:1] set];
+        NSBezierPath* line = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect(cellFrame, 1, 1) xRadius:2 yRadius:2];
         [line setLineWidth: 2.0f];
         [line stroke];
+    } else {
+        self.attributedTitle = [[NSAttributedString alloc] initWithString:self.title];
+        [super drawWithFrame:cellFrame inView:controlView];
     }
 }
 
