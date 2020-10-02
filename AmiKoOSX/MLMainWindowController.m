@@ -1345,6 +1345,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [mPrescriptionsCart[0] makeNewUniqueHash];
 
         [self.myPrescriptionsTableView reloadData];
+        modifiedPrescription = true;
         [self updateButtons];
     }
 }
@@ -1509,7 +1510,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if (modifiedPrescription)
     {
         [mPrescriptionsCart[0] makeNewUniqueHash];  // Issue #9
-
+        mPrescriptionAdapter.cart = mPrescriptionsCart[0].cart;
+        
         // Handle the decision automatically
         if (possibleToOverwrite) {
             url = [mPrescriptionAdapter savePrescriptionForPatient:patient
@@ -2717,6 +2719,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
         row++;
     }
+    [self updateButtons];
 }
 
 - (void) addItem:(MLPrescriptionItem *)item toPrescriptionCartWithId:(NSInteger)n
@@ -2746,6 +2749,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if (n < NUM_ACTIVE_PRESCRIPTIONS) {
         [mPrescriptionsCart[n] removeItemFromCart:item];
         [self.myPrescriptionsTableView reloadData];
+        modifiedPrescription = true;
+        [self updateButtons];
     }
 }
 
@@ -3162,9 +3167,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             // Unselect AMK
             [mySectionTitles deselectAll:nil];
 #endif
+        } else {
+            saveButton.enabled = NO;
         }
-
-        sendButton.enabled = YES;
+        
+        sendButton.enabled = [mPrescriptionAdapter getPrescriptionUrl] != nil;
     }
     else {
         saveButton.enabled = NO;
