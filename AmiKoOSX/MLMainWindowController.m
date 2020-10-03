@@ -1024,11 +1024,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                 @synchronized(self) {
                     mSearchInProgress = true;
                 }
-                if ([searchText length]>0)
+                if ([searchText length] == 0 && mUsedDatabase == kFavorites) {
+                    searchResults = [scopeSelf retrieveAllFavorites];
+                } else {
                     searchResults = [scopeSelf searchAnyDatabasesWith:searchText];
-                else {
-                    if (mUsedDatabase == kFavorites)
-                        searchResults = [scopeSelf retrieveAllFavorites];
                 }
                 // Update tableview
                 dispatch_async(dispatch_get_main_queue(), ^{
