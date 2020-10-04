@@ -1669,7 +1669,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     */
 
     possibleToOverwrite = true;
-    modifiedPrescription = false;
+    modifiedPrescription = true;
     [self updateButtons];
 }
 
