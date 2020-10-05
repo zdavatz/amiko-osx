@@ -139,6 +139,8 @@ extern NSString* const APP_ID;
 - (IBAction) rateApp:(id)sender;
 
 - (void) addItem:(MLPrescriptionItem *)med toPrescriptionCartWithId:(NSInteger)n;
+- (void) addPackageAtIndex:(NSInteger)index ofMedToPrescriptionCart:(MLMedication*)med;
+
 - (void) loadPrescription:(NSURL *)url andRefreshHistory:(bool)refresh;
 - (MLMedication *) getShortMediWithId:(long)mid;
 - (MLMedication *) getMediWithId:(long)mid;
