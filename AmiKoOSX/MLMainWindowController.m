@@ -2322,21 +2322,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         m.title = NSLocalizedString(@"Not specified", nil);
 
     NSArray *m_applications = [applications componentsSeparatedByString:@";"];
-    NSMutableString *m_swissmedic = nil;
-    NSMutableString *m_bag = nil;
-    if ([m_applications count]>0) {
-        if (![[m_applications objectAtIndex:0] isEqual:nil])
-            m_swissmedic = [NSMutableString stringWithString:[m_applications objectAtIndex:0]];
-        if ([m_applications count]>1) {
-            if (![[m_applications objectAtIndex:1] isEqual:nil])
-                m_bag = [NSMutableString stringWithString:[m_applications objectAtIndex:1]];
-        }
+    NSString *m_swissmedic = [m_applications firstObject];
+    NSString *m_bag = nil;
+    if ([m_applications count] > 1) {
+        m_bag = [m_applications objectAtIndex:1];
     }
-    if ([m_swissmedic isEqual:[NSNull null]])
-        [m_swissmedic setString:NSLocalizedString(@"Not specified", nil)];
-
-    if ([m_bag isEqual:[NSNull null]])
-        [m_bag setString:NSLocalizedString(@"Not specified", nil)]; // @"k.A.";
+    if (!m_swissmedic) {
+        m_swissmedic = NSLocalizedString(@"Not specified", nil);
+    }
+    if (!m_bag) {
+        m_bag = NSLocalizedString(@"Not specified", nil); // @"k.A.";
+    }
 
     m.subTitle = [NSString stringWithFormat:@"%@\n%@", m_swissmedic, m_bag];
     m.medId = medId;
@@ -2721,6 +2717,41 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [self updateButtons];
 }
 
+- (void) addAllPackagesOfMedToPrescriptionCart:(MLMedication*)med {
+    NSArray *listOfPackInfos = [[med packInfo] componentsSeparatedByString:@"\n"];
+    for (int i = 0; i < listOfPackInfos.count; i++) {
+        [self addPackageAtIndex:i ofMedToPrescriptionCart:med];
+    }
+}
+
+- (void) addPackageAtIndex:(NSInteger)index ofMedToPrescriptionCart:(MLMedication*)med {
+    NSArray *listOfPackInfos = [[med packInfo] componentsSeparatedByString:@"\n"];
+    NSArray *listOfPacks = [[med packages] componentsSeparatedByString:@"\n"];
+    NSString *s = listOfPackInfos[index];
+    NSString *package = listOfPacks[index];
+    NSArray *p = [package componentsSeparatedByString:@"|"];
+    NSString *eanCode = [p objectAtIndex:9];
+    
+    MLPrescriptionItem *item = [[MLPrescriptionItem alloc] init];
+    item.eanCode = eanCode;
+    item.fullPackageInfo = s;
+    item.mid = med.medId;
+    
+    NSArray *titleComponents = [s componentsSeparatedByString:@"["];
+    titleComponents = [[titleComponents firstObject] componentsSeparatedByString:@","];
+    if ([titleComponents count]) {
+        item.title = [titleComponents firstObject];
+        if ([titleComponents count] > 2) {
+            item.price = [NSString stringWithFormat:@"%@ CHF", titleComponents[2]];
+            item.price = [item.price stringByReplacingOccurrencesOfString:@"ev.nn.i.H. " withString:@""];
+            item.price = [item.price stringByReplacingOccurrencesOfString:@"PP " withString:@""];
+        } else {
+            item.price = @"";
+        }
+        [self addItem:item toPrescriptionCartWithId:0];
+    }
+}
+
 - (void) addItem:(MLPrescriptionItem *)item toPrescriptionCartWithId:(NSInteger)n
 {
     if (n < NUM_ACTIVE_PRESCRIPTIONS)
@@ -2876,6 +2907,33 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     NSArray<NSString *> *atc = [atcString componentsSeparatedByString:@";"];
                     if (atc.count >= 1) {
                         [[mySearchField cell] setStringValue:atc[0]];
+                        [self searchNow:nil];
+                    }
+                };
+            } else if (mCurrentSearchState == kTherapy) {
+                cellView.showContextualMenu = NO;
+                cellView.onSubtitlePressed = ^(NSInteger row) {
+                    long mId = [dataObject medId];
+                    MLMedication *med = [mDb getMediWithId:mId];
+                    NSArray *applications = [med.application componentsSeparatedByString:@";"];
+                    NSString *application = nil;
+                    
+                    if (row == 0) {
+                        NSString *swissmedic = [applications firstObject];
+                        application = [[[swissmedic componentsSeparatedByString:@"("] firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    } else if (row == 1) {
+                        NSString *bag = applications.count > 1 ? applications[1] : nil;
+                        application = [[[bag componentsSeparatedByString:@"("] firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    }
+                    
+                    if (mSearchInteractions) {
+                        [self pushToMedBasket:med];
+                        [self updateInteractionsView];
+                    } else if (mPrescriptionMode) {
+                        [self addAllPackagesOfMedToPrescriptionCart:med];
+                    }
+                    if (application) {
+                        [[mySearchField cell] setStringValue:application];
                         [self searchNow:nil];
                     }
                 };
