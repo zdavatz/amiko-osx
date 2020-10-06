@@ -231,7 +231,7 @@
                                                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="t4d-Cn-FJr" userLabel="Packages Text Field">
                                                                                                                         <rect key="frame" x="-2" y="1" width="481" height="14"/>
                                                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" usesSingleLineMode="YES" id="NWx-wp-Pr5">
-                                                                                                                            <font key="font" metaFont="label" size="11"/>
+                                                                                                                            <font key="font" metaFont="controlContent" size="11"/>
                                                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                                         </textFieldCell>
@@ -474,7 +474,7 @@
                                                                                                                                                 <constraint firstAttribute="height" constant="28" id="UNg-hR-Xlj"/>
                                                                                                                                             </constraints>
                                                                                                                                             <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Bemerkungen" drawsBackground="YES" allowsEditingTextAttributes="YES" id="rA5-Xw-TBP">
-                                                                                                                                                <font key="font" metaFont="label" size="11"/>
+                                                                                                                                                <font key="font" metaFont="controlContent" size="11"/>
                                                                                                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                                                                             </textFieldCell>
@@ -963,8 +963,8 @@
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="YsW-Cb-Mhb">
                                                 <rect key="frame" x="0.0" y="30" width="496" height="14"/>
                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="dlN-Jf-7hA">
-                                                    <font key="font" metaFont="label" size="11"/>
-                                                    <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                    <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
@@ -974,7 +974,7 @@
                                                     <constraint firstAttribute="height" constant="28" id="rkB-j6-bBa"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Bemerkungen" drawsBackground="YES" allowsEditingTextAttributes="YES" id="gZU-sf-2lN">
-                                                    <font key="font" metaFont="label" size="11"/>
+                                                    <font key="font" metaFont="controlContent" size="11"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -1131,11 +1131,11 @@
         <image name="NSStopProgressTemplate" width="11" height="11"/>
         <image name="deleteImage" width="16" height="16"/>
         <image name="desitin" width="512" height="512"/>
-        <image name="export" width="48" height="48"/>
-        <image name="favorites" width="418.90908813476562" height="418.90908813476562"/>
-        <image name="interactions" width="17.130111694335938" height="17.130111694335938"/>
-        <image name="maindb" width="121.26316070556641" height="121.26316070556641"/>
-        <image name="prescription" width="51.200000762939453" height="51.200000762939453"/>
+        <image name="export" width="32" height="32"/>
+        <image name="favorites" width="32" height="32"/>
+        <image name="interactions" width="32" height="32"/>
+        <image name="maindb" width="32" height="32"/>
+        <image name="prescription" width="32" height="32"/>
         <image name="printerImage" width="16" height="16"/>
         <sound name="Ping"/>
     </resources>

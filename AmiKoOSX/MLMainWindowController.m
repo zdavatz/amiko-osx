@@ -2765,12 +2765,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         [self storeAllPrescriptionComments];
         
         // Get medi
-        item.med = [mDb getShortMediWithId:item.mid];
-        [mPrescriptionsCart[n] addItemToCart:item];
-        [self.myPrescriptionsTableView reloadData];
-        
-        modifiedPrescription = true;
-        [self updateButtons];
+        dispatch_async(mSearchQueue, ^(void) {
+            item.med = [mDb getShortMediWithId:item.mid];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [mPrescriptionsCart[n] addItemToCart:item];
+                [self.myPrescriptionsTableView reloadData];
+                
+                modifiedPrescription = true;
+                [self updateButtons];
+            });
+        });
     }
 }
 
@@ -2895,6 +2899,24 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             } else if (mCurrentSearchState == kAuthor) {
                 cellView.showContextualMenu = false;
                 cellView.onSubtitlePressed = ^(NSInteger _row) {
+                    if (mSearchInteractions || mPrescriptionMode) {
+                        dispatch_async(mSearchQueue, ^(void) {
+                            NSArray<MLMedication *> *searchRes = [mDb searchAuthor:dataObject.subTitle];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                if (mSearchInteractions) {
+                                    for (MLMedication *med in searchRes) {
+                                        [self pushToMedBasket:med];
+                                    }
+                                    [self updateInteractionsView];
+                                } else if (mPrescriptionMode) {
+                                    for (MLMedication *med in searchRes) {
+                                        [self addAllPackagesOfMedToPrescriptionCart:med];
+                                    }
+                                }
+                            });
+                        });
+                    }
+                    
                     [[mySearchField cell] setStringValue:dataObject.subTitle];
                     [self searchNow:nil];
                 };
