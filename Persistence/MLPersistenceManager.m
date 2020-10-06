@@ -423,9 +423,14 @@
     if (!pm) {
         return NO;
     }
+    
+    NSURL *amkDir = [self amkDirectoryForPatient:patient.uniqueId];
+    [[NSFileManager defaultManager] removeItemAtURL:amkDir error:nil];
+
     NSManagedObjectContext *context = [self.coreDataContainer viewContext];
     [context deleteObject:pm];
     [context save:nil];
+    
     if (updateICloud) {
         [self.patientSync deletePatientFileForICloud:patient];
     }
