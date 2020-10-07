@@ -512,26 +512,12 @@
     if (returnCode==NSAlertSecondButtonReturn) {
         MLPatient *p = (__bridge MLPatient *)contextInfo;
         if ([[MLPersistenceManager shared] deletePatient:p]) {
-            [self deletePatientFolder:p withBackup:YES];
             [self resetAllFields];
             [self updateAmiKoAddressBookTableView];
             [mNotification setStringValue:[NSString stringWithFormat:NSLocalizedString(@"The contact has been removed from the %@ Address Book", nil), [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"]]];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MLPrescriptionPatientDeleted" object:self];
         }
-    }
-}
-
-- (void) deletePatientFolder:(MLPatient *)patient withBackup:(BOOL)backup
-{
-    NSString *documentsDir = [MLUtilities documentsDirectory];
-    NSString *patientDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/%@", patient.uniqueId]];
-    
-    if (backup==YES) {
-        NSString *backupDir = [documentsDir stringByAppendingString:[NSString stringWithFormat:@"/.%@", patient.uniqueId]];
-        [[NSFileManager defaultManager] moveItemAtPath:patientDir toPath:backupDir error:nil];
-    } else {
-        [[NSFileManager defaultManager] removeItemAtPath:patientDir error:nil];
     }
 }
 
