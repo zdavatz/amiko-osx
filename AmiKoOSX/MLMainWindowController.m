@@ -1479,9 +1479,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         if (result == NSFileHandlingPanelOKButton) {
             // Grab reference to what has been selected
             NSURL *fileURL = [[openDlgPanel  URLs] firstObject];
-            [mPrescriptionAdapter loadPrescriptionFromURL:fileURL];
-            mPrescriptionsCart[0].cart = [mPrescriptionAdapter.cart mutableCopy];
-            [self updatePrescriptionsView];
+            [self loadPrescription:fileURL andRefreshHistory:YES];
         }
     }];
 }
