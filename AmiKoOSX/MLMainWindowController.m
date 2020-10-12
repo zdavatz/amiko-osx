@@ -2926,8 +2926,21 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     NSString *atcString = med.atccode;
                     NSArray<NSString *> *atc = [atcString componentsSeparatedByString:@";"];
                     if (atc.count >= 1) {
-                        [[mySearchField cell] setStringValue:atc[0]];
-                        [self searchNow:nil];
+                        dispatch_async(mSearchQueue, ^(void) {
+                            if (mSearchInteractions) {
+                                NSArray *meds = [mDb searchATCCode:atc[0]];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    for (MLMedication *med in meds) {
+                                        [self pushToMedBasket:med];
+                                    }
+                                    [self updateInteractionsView];
+                                });
+                            }
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [[mySearchField cell] setStringValue:atc[0]];
+                                [self searchNow:nil];
+                            });
+                        });
                     }
                 };
             } else if (mCurrentSearchState == kTherapy) {
