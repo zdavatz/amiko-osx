@@ -39,7 +39,7 @@ extern NSString* const APP_ID;
 //extern NSString* const APP_NAME;
 //extern NSString* const APP_ID;
 //#endif
-
+#import "MLPrescriptionView.h"
 #import "MLPrescriptionTableView.h"
 #import "HealthCard.h"
 #import "MLFullTextEntry.h"
@@ -75,12 +75,16 @@ extern NSString* const APP_ID;
 @property (nonatomic, retain) IBOutlet NSSearchField *mySearchField;
 @property (nonatomic, retain) IBOutlet NSTableView *myTableView;
 @property (nonatomic, retain) IBOutlet NSTableView *mySectionTitles;
-@property (nonatomic, retain) IBOutlet NSTextFinder *myTextFinder;
+@property (nonatomic, retain) IBOutlet NSTextFinder *myTextFinder; // This is the text finder for the main Kompendium webview. Thanks for the naming.
 @property (nonatomic, retain) IBOutlet NSTabView *myTabView;
 @property (nonatomic, retain) IBOutlet NSSearchField *myPatientSearchField;
 @property (nonatomic, retain) IBOutlet NSTextField *myPatientAddressTextField;
 @property (nonatomic, retain) IBOutlet NSTextField *myPlaceDateField;
 @property (nonatomic, retain) IBOutlet NSTextField *myOperatorIDTextField;
+
+@property (weak) IBOutlet MLPrescriptionView *prescriptionView;
+@property (nonatomic, retain) NSTextFinder *prescriptionTextFinder;
+@property (nonatomic, retain) id <NSTextFinderClient> prescriptionTextFinderClient;
 @property (nonatomic, retain) IBOutlet MLSignatureView *mySignView;
 @property (nonatomic, retain) IBOutlet MLPrescriptionTableView *myPrescriptionsTableView;
 @property (nonatomic, retain) IBOutlet MLPrescriptionTableView *myPrescriptionsPrintTV;
@@ -146,6 +150,7 @@ extern NSString* const APP_ID;
 - (MLMedication *) getMediWithId:(long)mid;
 - (void) newHealthCardData:(NSNotification *)notification;
 - (void) pushToMedBasket:(MLMedication *)med;
++ (MLPrescriptionsCart *) prescriptionsCartWithId:(NSInteger)id;
 
 #pragma mark - Export CSV
 

@@ -51,6 +51,7 @@
 #import <mach/mach.h>
 #import <unistd.h>
 
+#import "MLPrescriptionTextFinderClient.h"
 #import "MLPrescriptionTableView.h"
 #import "Wait.h"
 
@@ -198,6 +199,7 @@ static BOOL mPrescriptionMode = false;
 @synthesize myPlaceDateField;
 @synthesize myOperatorIDTextField;
 @synthesize mySignView;
+@synthesize prescriptionTextFinder;
 @synthesize myPrescriptionsTableView;
 @synthesize myPrescriptionsPrintTV;
 @synthesize medicineLabelView, labelDoctor, labelPatient, labelMedicine, labelComment, labelPrice, labelSwissmed;
@@ -306,6 +308,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         [mPrescriptionsCart[i] setInteractionsAdapter:mInteractions];
     }
     mPrescriptionAdapter = [[MLPrescriptionsAdapter alloc] init];
+    
+    prescriptionTextFinder = [[NSTextFinder alloc] init];
+    prescriptionTextFinder.findBarContainer = self.prescriptionView;
+    prescriptionTextFinder.incrementalSearchingEnabled = YES;
+    prescriptionTextFinder.incrementalSearchingShouldDimContentView = YES;
+    self.prescriptionTextFinderClient = [[MLPrescriptionTextFinderClient alloc] initWithAdapter:mPrescriptionAdapter
+                                                                           mainWindowController:self];
+    prescriptionTextFinder.client = self.prescriptionTextFinderClient;
     
     // Register drag and drop on prescription table view
     [self.mySectionTitles setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
@@ -507,15 +517,23 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSTextFinderActionSetSearchString = 7,
     NSTextFinderActionHideFindInterface = 11,
     */
-    if ([[myWebView mainFrame] dataSource]!=nil) {
+    NSTextFinder *textFinder = nil;
+    if (mPrescriptionMode) {
+        textFinder = prescriptionTextFinder;
+        [(MLPrescriptionTextFinderClient*)self.prescriptionTextFinderClient reloadSearchString];
+        [self.prescriptionView setFindBarVisible:YES];
+    } else if ([[myWebView mainFrame] dataSource]!=nil) {
+        textFinder = myTextFinder;
+    }
+    if (textFinder != nil) {
         if ([sender isKindOfClass:[NSMenuItem class]] ) {
             NSMenuItem *menuItem = (NSMenuItem*)sender;
-            if ([myTextFinder validateAction:menuItem.tag]) {
+            if ([textFinder validateAction:menuItem.tag]) {
                 if (menuItem.tag == NSTextFinderActionShowFindInterface) {
                     // This is a special tag
-                    [myTextFinder performAction:NSTextFinderActionSetSearchString];
+                    [textFinder performAction:NSTextFinderActionSetSearchString];
                 }
-                [myTextFinder performAction:menuItem.tag];
+                [textFinder performAction:menuItem.tag];
             }
         }
     }
@@ -666,7 +684,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if (![mPatientSheet.mPanel isVisible] && existingPatient) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             [mPatientSheet setSelectedPatient:existingPatient];
-
+            [mPrescriptionAdapter setPatient:existingPatient];
+            
             if ([[[myTabView selectedTabViewItem] identifier] intValue] != 2) {
                 [myTabView selectTabViewItemAtIndex:2];
                 [myToolbar setSelectedItemIdentifier:@"Rezept"];
@@ -707,6 +726,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         // If prescription cart is not empty, generate new hash
         if (mPrescriptionsCart[0].cart)
             [mPrescriptionsCart[0] makeNewUniqueHash];
+        [mPrescriptionAdapter setPatient:mPatientSheet.retrievePatient];
         
         modifiedPrescription = true;
         [self updateButtons];
@@ -1314,6 +1334,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     myPlaceDateField.stringValue = [NSString stringWithFormat:@"%@, %@", operatorPlace, [MLUtilities prettyTime]];
 
     [mySignView setSignature:[[MLPersistenceManager shared] doctorSignature]];
+    [mPrescriptionAdapter setDoctor:[mOperatorIDSheet loadOperator]];
 }
 
 #pragma mark - Actions
