@@ -26,6 +26,7 @@
 		CF8BEB982538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
 		CF8BEB992538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
 		CF8BEB9C25388BAE00C2D367 /* MLFindHighlightField.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB9B25388BAE00C2D367 /* MLFindHighlightField.m */; };
+		CF8BEB9D25388BAE00C2D367 /* MLFindHighlightField.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB9B25388BAE00C2D367 /* MLFindHighlightField.m */; };
 		CF8F50F625164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
 		CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
 		CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
@@ -247,6 +248,8 @@
 		CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionView.m; sourceTree = "<group>"; };
 		CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionTextFinderClient.h; sourceTree = "<group>"; };
 		CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionTextFinderClient.m; sourceTree = "<group>"; };
+		CF8BEB9A25388BAE00C2D367 /* MLFindHighlightField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLFindHighlightField.h; sourceTree = "<group>"; };
+		CF8BEB9B25388BAE00C2D367 /* MLFindHighlightField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLFindHighlightField.m; sourceTree = "<group>"; };
 		CF8F50F425164113007D62B5 /* MLPatientSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPatientSync.h; sourceTree = "<group>"; };
 		CF8F50F525164113007D62B5 /* MLPatientSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPatientSync.m; sourceTree = "<group>"; };
 		CFE80FCB242F9306003DB2FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -918,6 +921,8 @@
 				CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */,
 				CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */,
 				CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */,
+				CF8BEB9A25388BAE00C2D367 /* MLFindHighlightField.h */,
+				CF8BEB9B25388BAE00C2D367 /* MLFindHighlightField.m */,
 			);
 			name = Prescriptions;
 			sourceTree = "<group>";
@@ -1185,6 +1190,7 @@
 				D5C5C5311F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0C1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				CF8BEB9C25388BAE00C2D367 /* MLFindHighlightField.m in Sources */,
 				FA6A2BAE20B2B09C0080B4C9 /* MLPatientSheetController+smartCard.m in Sources */,
 				D53AB5AD1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
@@ -1259,6 +1265,7 @@
 				D53AB5AE1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */,
 				D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
+				CF8BEB9D25388BAE00C2D367 /* MLFindHighlightField.m in Sources */,
 				CFE80FE424309D10003DB2FA /* MLPersistenceManager.m in Sources */,
 				D517E4C31EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
 				CFE80FE224309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */,
