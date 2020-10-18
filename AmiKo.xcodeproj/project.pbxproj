@@ -21,6 +21,9 @@
 		CF34E552243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
 		CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
+		CF8BEB982538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
+		CF8BEB992538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
+		CF8BEB9C25388BAE00C2D367 /* MLFindHighlightField.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB9B25388BAE00C2D367 /* MLFindHighlightField.m */; };
 		CF8F50F625164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
 		CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
 		CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
@@ -238,6 +241,8 @@
 		CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPreferencesWindowController.h; sourceTree = "<group>"; };
 		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
+		CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionTextFinderClient.h; sourceTree = "<group>"; };
+		CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionTextFinderClient.m; sourceTree = "<group>"; };
 		CF8F50F425164113007D62B5 /* MLPatientSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPatientSync.h; sourceTree = "<group>"; };
 		CF8F50F525164113007D62B5 /* MLPatientSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPatientSync.m; sourceTree = "<group>"; };
 		CFE80FCB242F9306003DB2FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -905,6 +910,8 @@
 				D58685541F47049D00A250A4 /* MLPrescriptionsAdapter.m */,
 				FA63296B20A088CC002DC9E2 /* MLPrescriptionTableView.h */,
 				FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */,
+				CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */,
+				CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */,
 			);
 			name = Prescriptions;
 			sourceTree = "<group>";
@@ -1181,6 +1188,7 @@
 				D5ECDE1C1F2B24CB00970133 /* MLPrescriptionCellView.m in Sources */,
 				D5E91B9117E5E8E400B66B27 /* MLSearchWebView.m in Sources */,
 				D5E91B9217E5E8E400B66B27 /* MLCustomTableRowView.m in Sources */,
+				CF8BEB982538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */,
 				D5C6441D1EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E91B9317E5E8E400B66B27 /* MLSplashScreen.m in Sources */,
 				D5962EA11EFC26AD0034B964 /* LegacyPatientDBAdapter.m in Sources */,
@@ -1223,6 +1231,7 @@
 				D545C8F618A2CE0500491511 /* mztools.c in Sources */,
 				D5ECDE0D1F2A2B4100970133 /* MLPrescriptionItem.m in Sources */,
 				D5E91BBD17E5E8E800B66B27 /* MLMedication.m in Sources */,
+				CF8BEB992538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */,
 				D5E91BBE17E5E8E800B66B27 /* MLDataStore.m in Sources */,
 				D5C1A77C1F29EB9600D299B5 /* MLAbout.m in Sources */,
 				D5CD48BE18944E11005CEC4C /* MLCustomURLConnection.m in Sources */,
