@@ -21,6 +21,8 @@
 		CF34E552243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
 		CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
+		CF8BEB94253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
+		CF8BEB95253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
 		CF8BEB982538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
 		CF8BEB992538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
 		CF8BEB9C25388BAE00C2D367 /* MLFindHighlightField.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB9B25388BAE00C2D367 /* MLFindHighlightField.m */; };
@@ -241,6 +243,8 @@
 		CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPreferencesWindowController.h; sourceTree = "<group>"; };
 		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
+		CF8BEB92253850AF00C2D367 /* MLPrescriptionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionView.h; sourceTree = "<group>"; };
+		CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionView.m; sourceTree = "<group>"; };
 		CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionTextFinderClient.h; sourceTree = "<group>"; };
 		CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionTextFinderClient.m; sourceTree = "<group>"; };
 		CF8F50F425164113007D62B5 /* MLPatientSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPatientSync.h; sourceTree = "<group>"; };
@@ -910,6 +914,8 @@
 				D58685541F47049D00A250A4 /* MLPrescriptionsAdapter.m */,
 				FA63296B20A088CC002DC9E2 /* MLPrescriptionTableView.h */,
 				FA63296C20A088CC002DC9E2 /* MLPrescriptionTableView.m */,
+				CF8BEB92253850AF00C2D367 /* MLPrescriptionView.h */,
+				CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */,
 				CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */,
 				CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */,
 			);
@@ -1166,6 +1172,7 @@
 				D5BACBFA1EBB1D2C001812FB /* WebViewJavascriptBridge.m in Sources */,
 				D545C91118A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8E41898527C00491511 /* ioapi.c in Sources */,
+				CF8BEB94253850AF00C2D367 /* MLPrescriptionView.m in Sources */,
 				D5F303431F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				CF34E54F243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
 				CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */,
@@ -1214,6 +1221,7 @@
 				D52EA4A61EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D5C5C5111F06416800DF851F /* MLContacts.m in Sources */,
 				D53877951AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
+				CF8BEB95253850AF00C2D367 /* MLPrescriptionView.m in Sources */,
 				D5BACC011EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				FA6A2BB120B2B0EE0080B4C9 /* MLPatientSheetController.m in Sources */,
 				D58685561F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,

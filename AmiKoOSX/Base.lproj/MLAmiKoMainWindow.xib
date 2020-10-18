@@ -387,7 +387,7 @@
                                                                                             </view>
                                                                                         </tabViewItem>
                                                                                         <tabViewItem label="Rezept" identifier="TabPrescription1" id="MYP-wQ-6gq" userLabel="Rezept">
-                                                                                            <view key="view" id="Oaf-El-vf2">
+                                                                                            <view key="view" id="Oaf-El-vf2" customClass="MLPrescriptionView">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="462" height="820"/>
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                 <subviews>
