@@ -1327,14 +1327,19 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         mOperatorIDSheet = [[MLOperatorIDSheetController alloc] init];
         //NSLog(@"%s %d, MLOperatorIDSheetController:%p", __FUNCTION__, __LINE__, mOperatorIDSheet);
     }
+    
+    [mPrescriptionAdapter setDoctor:[mOperatorIDSheet loadOperator]];
+    [self updateOperatorFields];
+}
 
-    NSString *operatorIDStr = [mOperatorIDSheet retrieveIDAsString];
-    NSString *operatorPlace = [mOperatorIDSheet retrieveCity];
+- (void) updateOperatorFields
+{
+    NSString *operatorIDStr = [[mPrescriptionAdapter doctor] retrieveOperatorAsString];
+    NSString *operatorPlace = [[mPrescriptionAdapter doctor] city];
     myOperatorIDTextField.stringValue = operatorIDStr;
     myPlaceDateField.stringValue = [NSString stringWithFormat:@"%@, %@", operatorPlace, [MLUtilities prettyTime]];
 
     [mySignView setSignature:[[MLPersistenceManager shared] doctorSignature]];
-    [mPrescriptionAdapter setDoctor:[mOperatorIDSheet loadOperator]];
 }
 
 #pragma mark - Actions
@@ -1650,6 +1655,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) loadPrescription:(NSURL *)url
         andRefreshHistory:(bool)refresh
 {
+    [myTabView selectTabViewItemAtIndex:2];
+    
     NSString *hash = [mPrescriptionAdapter loadPrescriptionFromURL:url];
 #ifdef DEBUG
     NSLog(@"%s hash: %@", __FUNCTION__, hash);
@@ -1676,6 +1683,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     // Update views
     [self updatePrescriptionsView];
+    [self updateOperatorFields];
     if (refresh)
         [self updatePrescriptionHistory];
     
