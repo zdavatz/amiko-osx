@@ -232,8 +232,8 @@
 
 - (NSString *) retrieveCity
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults stringForKey:@"city"];
+    MLOperator *operator = [self loadOperator];
+    return operator.city ?: @"";
 }
 
 @end
