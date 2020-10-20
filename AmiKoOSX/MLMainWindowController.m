@@ -1694,9 +1694,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         myOperatorIDTextField.stringValue = [o retrieveOperatorAsString];
     }
     */
-
-    possibleToOverwrite = true;
-    modifiedPrescription = true;
+    NSURL *baseURL = [[MLPersistenceManager shared] amkBaseDirectory];
+    if ([[url path] hasPrefix:baseURL.path]) {
+        possibleToOverwrite = false;
+        modifiedPrescription = false;
+    } else {
+        // If it's not in the base directory, we should allow user to save to prescription
+        possibleToOverwrite = true;
+        modifiedPrescription = true;
+    }
     [self updateButtons];
 }
 
