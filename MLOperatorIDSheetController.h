@@ -50,7 +50,6 @@
 
 - (void) show:(NSWindow *)window;
 - (void) remove;
-- (NSString *) retrieveIDAsString;
 - (NSString *) retrieveCity;
 - (MLOperator *) loadOperator;
 
