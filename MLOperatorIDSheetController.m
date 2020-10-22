@@ -220,16 +220,6 @@
     [self validateFields];
 }
 
-- (NSString *) retrieveIDAsString
-{
-    MLOperator *operator = [self loadOperator];
-    
-    if ([operator.familyName length] && [operator.givenName length])
-        return [operator retrieveOperatorAsString];
-
-    return NSLocalizedString(@"Enter the doctor's address", nil);
-}
-
 - (NSString *) retrieveCity
 {
     MLOperator *operator = [self loadOperator];

@@ -1334,7 +1334,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) updateOperatorFields
 {
-    NSString *operatorIDStr = [[mPrescriptionAdapter doctor] retrieveOperatorAsString];
+    NSString *operatorIDStr;
+    MLOperator *doctor = [mPrescriptionAdapter doctor];
+    
+    if ([doctor.familyName length] && [doctor.givenName length]) {
+        operatorIDStr = [doctor retrieveOperatorAsString];
+    } else {
+        operatorIDStr = NSLocalizedString(@"Enter the doctor's address", nil);
+    }
+    
     NSString *operatorPlace = [[mPrescriptionAdapter doctor] city];
     myOperatorIDTextField.stringValue = operatorIDStr;
     myPlaceDateField.stringValue = [NSString stringWithFormat:@"%@, %@", operatorPlace, [MLUtilities prettyTime]];
