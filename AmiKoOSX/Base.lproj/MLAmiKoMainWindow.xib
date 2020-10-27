@@ -56,7 +56,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <point key="canvasLocation" x="-131" y="651"/>
         </view>
-        <window title="AmiKo Desitin" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" frameAutosaveName="AmiKoWindow" animationBehavior="default" toolbarStyle="expanded" id="1">
+        <window title="AmiKo Desitin" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" frameAutosaveName="AmiKoWindow" animationBehavior="default" toolbarStyle="unified" titleVisibility="hidden" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="400" width="1035" height="820"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1767" height="967"/>
@@ -442,10 +442,10 @@
                                                                                                         <rect key="frame" x="6" y="47" width="390" height="601"/>
                                                                                                         <clipView key="contentView" id="UZ9-kw-amL">
                                                                                                             <rect key="frame" x="1" y="1" width="388" height="599"/>
-                                                                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                                            <autoresizingMask key="autoresizingMask"/>
                                                                                                             <subviews>
                                                                                                                 <tableView verticalHuggingPriority="750" tag="3" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="7gl-38-P2j" customClass="MLPrescriptionTableView">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="539" height="599"/>
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="559" height="599"/>
                                                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -464,7 +464,7 @@
                                                                                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                                                             <prototypeCellViews>
                                                                                                                                 <tableCellView id="nhl-NX-Mmg" customClass="MLPrescriptionCellView">
-                                                                                                                                    <rect key="frame" x="1" y="1" width="462" height="44"/>
+                                                                                                                                    <rect key="frame" x="11" y="1" width="462" height="44"/>
                                                                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                                                     <subviews>
                                                                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="HgM-Gc-2vZ">
@@ -517,7 +517,7 @@
                                                                                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                                                             <prototypeCellViews>
                                                                                                                                 <tableCellView id="A2S-fo-UhR">
-                                                                                                                                    <rect key="frame" x="466" y="1" width="32" height="17"/>
+                                                                                                                                    <rect key="frame" x="476" y="1" width="32" height="17"/>
                                                                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                                                     <subviews>
                                                                                                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="h5u-Em-mgD">
@@ -555,7 +555,7 @@
                                                                                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                                                             <prototypeCellViews>
                                                                                                                                 <tableCellView id="AuF-Wi-IBm">
-                                                                                                                                    <rect key="frame" x="501" y="1" width="36" height="17"/>
+                                                                                                                                    <rect key="frame" x="511" y="1" width="36" height="17"/>
                                                                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                                                     <subviews>
                                                                                                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="IUJ-Vi-QE0">
@@ -956,7 +956,7 @@
             </buttonCell>
             <point key="canvasLocation" x="-1753" y="-727"/>
         </button>
-        <scrollView wantsLayer="YES" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="46" horizontalPageScroll="10" verticalLineScroll="46" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="Ccd-dh-pYm">
+        <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="46" horizontalPageScroll="10" verticalLineScroll="46" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="Ccd-dh-pYm">
             <rect key="frame" x="0.0" y="0.0" width="17" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <clipView key="contentView" id="iPa-2v-CIT">
@@ -983,7 +983,7 @@
                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                 <prototypeCellViews>
                                     <tableCellView id="IwP-oT-RkF" customClass="MLPrescriptionCellView">
-                                        <rect key="frame" x="1" y="1" width="409" height="44"/>
+                                        <rect key="frame" x="11" y="1" width="409" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="YsW-Cb-Mhb">
@@ -1040,7 +1040,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <button translatesAutoresizingMaskIntoConstraints="NO" id="Vre-TA-HrC">
-                                                <rect key="frame" x="-32" y="1.5" width="64.5" height="14"/>
+                                                <rect key="frame" x="-32" y="1" width="64" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="64" id="mLa-d8-6LU"/>
                                                     <constraint firstAttribute="height" constant="10" id="y1r-Ar-EiE"/>
@@ -1153,8 +1153,8 @@
     <resources>
         <image name="28-star-gy" width="26" height="26"/>
         <image name="28-star-ye" width="26" height="26"/>
-        <image name="NSRemoveTemplate" width="14" height="4"/>
-        <image name="NSStopProgressTemplate" width="14" height="13"/>
+        <image name="NSRemoveTemplate" width="15" height="4"/>
+        <image name="NSStopProgressTemplate" width="15" height="13"/>
         <image name="deleteImage" width="16" height="16"/>
         <image name="desitin" width="512" height="512"/>
         <image name="export" width="32" height="32"/>
