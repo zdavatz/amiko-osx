@@ -450,6 +450,25 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [self checkLastDBSync];
     }
 
+    if (@available(macOS 11.0, *)) {
+        [self.window setTitleVisibility:NSWindowTitleHidden];
+#ifdef __MAC_11_0
+        [self.window setToolbarStyle:NSWindowToolbarStyleUnified];
+#endif
+        [self.myToolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
+    }
+    [self.myToolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
+    
+    for (NSToolbarItem *item in [self.myToolbar items]) {
+        if (item.tag == 5) { // Amiko / Comed button that opens the about dialog
+            NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
+            NSString* productName = infoDict[@"CFBundleName"] ?: infoDict[@"CFBundleExecutable"];
+            if (productName) {
+                [item setLabel:productName];
+            }
+        }
+    }    
+
     [sendButton sendActionOn:NSEventMaskLeftMouseDown];
     possibleToOverwrite = false;
     modifiedPrescription = false;
