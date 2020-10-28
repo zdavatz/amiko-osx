@@ -450,6 +450,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [self checkLastDBSync];
     }
 
+    if (@available(macOS 11.0, *)) {
+        [self.window setTitleVisibility:NSWindowTitleHidden];
+#ifdef __MAC_11_0
+        [self.window setToolbarStyle:NSWindowToolbarStyleUnified];
+#endif
+        [self.myToolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
+    }
+    [self.myToolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
     [sendButton sendActionOn:NSEventMaskLeftMouseDown];
     possibleToOverwrite = false;
     modifiedPrescription = false;
