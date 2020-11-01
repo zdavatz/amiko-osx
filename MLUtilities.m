@@ -196,13 +196,13 @@ NSString* const APP_ID = @"710472327";
 
 + (NSString *) getColorCss
 {
-    NSString *osxMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"AppleInterfaceStyle"];
-    //NSLog(@"%s %d AppleInterfaceStyle:%@", __FUNCTION__, __LINE__, osxMode);  // null, Dark
-    
     NSString *colorSchemeFilename = @"color-scheme-light";
-    if (@available(macOS 10.14, *))
-        if ([osxMode isEqualToString:@"Dark"])
+    if (@available(macOS 10.14, *)) {
+        NSAppearanceName name = [[[NSApp mainWindow] appearance] bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+        if ([name isEqualToString:NSAppearanceNameDarkAqua]) {
             colorSchemeFilename = @"color-scheme-dark";
+        }
+    }
     
     NSString *colorCssPath = [[NSBundle mainBundle] pathForResource:colorSchemeFilename ofType:@"css"];
     NSString *colorCss = [NSString stringWithContentsOfFile:colorCssPath encoding:NSUTF8StringEncoding error:nil];
