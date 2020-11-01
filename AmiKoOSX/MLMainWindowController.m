@@ -647,7 +647,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (void) openSQLiteDatabase
 {
-    mDb = [[MLDBAdapter alloc] init];
+    mDb = [[MLDBAdapter alloc] initWithQueue:mSearchQueue];
     if ([MLUtilities isGermanApp]) {
         if (![mDb openDatabase:@"amiko_db_full_idx_de"]) {
             NSLog(@"No German AIPS database!");
@@ -701,7 +701,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         mPatientSheet = [[MLPatientSheetController alloc] init];
 
     if (![mPatientSheet.mPanel isVisible] && existingPatient) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [mPatientSheet setSelectedPatient:existingPatient];
             [mPrescriptionAdapter setPatient:existingPatient];
             
@@ -719,7 +719,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     }
     else {
         if (![mPatientSheet.mPanel isVisible])
-            dispatch_sync(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 // UI API must be called on the main thread
                 [mPatientSheet show:[NSApp mainWindow]];
                 [mPatientSheet onNewPatient:nil];
@@ -2629,7 +2629,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     // Load style sheet from file
     NSString *amikoCssPath = [[NSBundle mainBundle] pathForResource:@"amiko_stylesheet" ofType:@"css"];
     NSString *amikoCss = @"";
-    if ([amikoCssPath isNotEqualTo:[NSNull null]])
+    if (amikoCssPath != nil)
         amikoCss = [NSString stringWithContentsOfFile:amikoCssPath encoding:NSUTF8StringEncoding error:nil];
     else
         amikoCss = [NSString stringWithString:mMed.styleStr];

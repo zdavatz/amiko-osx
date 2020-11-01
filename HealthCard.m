@@ -141,7 +141,7 @@
         NSString *part2 = [NSString stringWithFormat:NSLocalizedString(@"Please contact Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@", nil),
                            atr.bytes];
         
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             NSAlert *alert = [[NSAlert alloc] init];
             [alert setMessageText:part1];
             [alert setInformativeText:part2];

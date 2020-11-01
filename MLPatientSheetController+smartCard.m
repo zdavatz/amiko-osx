@@ -19,7 +19,7 @@
     //NSLog(@"%s %@", __FUNCTION__, d);
 
     // UI API must be called on the main thread
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self resetAllFields];
     });
 
@@ -41,7 +41,7 @@
             if ([p.uniqueId isEqualToString:incompletePatient.uniqueId]) {
                 //NSLog(@"found at %d", i);
 
-                dispatch_sync(dispatch_get_main_queue(), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
                     // UI API must be called on the main thread
 
                     // Select it in the table view
@@ -68,7 +68,7 @@
     }
 
     // Just pre-fill some fields with the dictionary
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         // UI API must be called on the main thread
         // TODO: maybe call onNewPatient
         [self setAllFields:incompletePatient];
