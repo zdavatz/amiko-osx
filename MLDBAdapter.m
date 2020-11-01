@@ -58,6 +58,7 @@ static NSString *FULL_TABLE = nil;
 @implementation MLDBAdapter
 {
     MLSQLiteDatabase *mySqliteDb;
+    dispatch_queue_t queue;
 }
 
 /** Class functions
@@ -122,6 +123,13 @@ static NSString *FULL_TABLE = nil;
  */
 #pragma mark Instance functions
 
+- (instancetype) initWithQueue:(dispatch_queue_t)dispatchQueue {
+    if (self = [super init]) {
+        queue = dispatchQueue;
+    }
+    return self;
+}
+
 - (BOOL) openDatabase:(NSString *)dbName
 {
     // A. Check first users documents folder
@@ -133,7 +141,7 @@ static NSString *FULL_TABLE = nil;
     if (filePath!=nil) {
         if ([fileManager fileExistsAtPath:filePath]) {
             NSLog(@"AIPS DB found in user's documents folder - %@", filePath);
-            mySqliteDb = [[MLSQLiteDatabase alloc] initReadOnlyWithPath:filePath];
+            mySqliteDb = [[MLSQLiteDatabase alloc] initReadOnlyWithPath:filePath andQueue:queue];
             return TRUE;
         }
     }
@@ -141,7 +149,7 @@ static NSString *FULL_TABLE = nil;
     // B. If no database is available, check if db is in app bundle
     filePath = [[NSBundle mainBundle] pathForResource:dbName ofType:@"db"];
     if (filePath!=nil ) {
-        mySqliteDb = [[MLSQLiteDatabase alloc] initReadOnlyWithPath:filePath];
+        mySqliteDb = [[MLSQLiteDatabase alloc] initReadOnlyWithPath:filePath andQueue:queue];
         NSLog(@"AIPS DB found in app bundle - %@", filePath);
         return TRUE;
     }

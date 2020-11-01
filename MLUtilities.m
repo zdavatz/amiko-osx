@@ -198,7 +198,7 @@ NSString* const APP_ID = @"710472327";
 {
     NSString *colorSchemeFilename = @"color-scheme-light";
     if (@available(macOS 10.14, *)) {
-        NSAppearanceName name = [[[NSApp mainWindow] appearance] bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+        NSAppearanceName name = [[[NSApp mainWindow] effectiveAppearance] bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
         if ([name isEqualToString:NSAppearanceNameDarkAqua]) {
             colorSchemeFilename = @"color-scheme-dark";
         }

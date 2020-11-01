@@ -28,6 +28,7 @@
 {
     // Instance variable declarations go here
     sqlite3 *database;
+    dispatch_queue_t dbQueue;
 }
 
 /** Class functions
@@ -67,6 +68,10 @@
 
 - (id) initReadOnlyWithPath:(NSString *)path
 {
+    return [self initReadOnlyWithPath:path andQueue:nil];
+}
+- (id) initReadOnlyWithPath:(NSString *)path andQueue:(dispatch_queue_t)queue
+{
     if (self = [super init]) {
         // Setup database object
         sqlite3 *dbConnection;
@@ -89,6 +94,8 @@
         rc = sqlite3_exec(database, "PRAGMA temp_store=1", nil, nil, nil);
         if (rc != SQLITE_OK)
             NSLog(@"%s:%i, rc %d", __FUNCTION__, __LINE__, rc);
+        
+        dbQueue = queue;
     }
 
     return self;
@@ -115,6 +122,8 @@
         database = dbConnection;
         // Force using disk for temp storage to reduce memory footprint
         sqlite3_exec(database, "PRAGMA temp_store=1", nil, nil, nil);
+        
+        dbQueue = nil;
     }
     return self;
 }
@@ -167,6 +176,17 @@
 }
 
 - (NSArray *) performQuery:(NSString *)query
+{
+    if (dbQueue != nil && [NSThread isMainThread]) {
+        __block NSArray *result = nil;
+        dispatch_sync(dbQueue, ^{
+            result = [self performQueryInQueue:query];
+        });
+        return result;
+    }
+    return [self performQueryInQueue:query];
+}
+- (NSArray *) performQueryInQueue:(NSString *)query
 {
     sqlite3_stmt *compiledStatement = nil;
     // Convert NSString to a C String

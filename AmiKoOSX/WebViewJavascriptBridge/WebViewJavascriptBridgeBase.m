@@ -192,7 +192,7 @@ static int logMaxLength = 500;
         [self _evaluateJavascript:javascriptCommand];
 
     } else {
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self _evaluateJavascript:javascriptCommand];
         });
     }

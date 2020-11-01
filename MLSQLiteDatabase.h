@@ -29,6 +29,8 @@
 + (void) createEditableCopyOfDatabaseIfNeeded: (NSString *)dbName;
 
 - (id) initReadOnlyWithPath:(NSString *)path;
+- (id) initReadOnlyWithPath:(NSString *)path andQueue:(dispatch_queue_t)queue;
+
 - (id) initReadWriteWithPath:(NSString *)path;
 - (BOOL) createWithPath:(NSString *)path andTable:(NSString *)table andColumns:(NSString *)columns;
 - (NSArray *) performQuery:(NSString *)query;

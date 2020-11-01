@@ -27,6 +27,7 @@
 
 + (void)copyDBFilesFromBundleIfNeeded;
 
+- (instancetype) initWithQueue:(dispatch_queue_t)dispatchQueue;
 - (BOOL) openDatabase:(NSString *)name;
 - (void) closeDatabase;
 - (NSInteger) getNumRecords;
