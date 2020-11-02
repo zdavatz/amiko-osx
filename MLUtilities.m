@@ -131,7 +131,7 @@ NSString* const APP_ID = @"710472327";
     }
     else if ([[self appLanguage] isEqualToString:@"fr"]) {
         if ([name isEqualToString:@"amiko_db_full_idx_fr.db"]
-            || [name isEqualToString:@"amiko_report_de.html"]
+            || [name isEqualToString:@"amiko_report_fr.html"]
             || [name isEqualToString:@"drug_interactions_csv_fr.csv"]
             || [name isEqualToString:@"amiko_frequency_fr.db"])  {            
             return true;
