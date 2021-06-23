@@ -34,6 +34,7 @@
 #define LEGACY_DEFAULTS_DOC_COUNTRY    @"country"
 
 #define KEY_AMK_DOC_TITLE       @"title"
+#define KEY_AMK_DOC_GLN         @"gln"
 #define KEY_AMK_DOC_NAME        @"given_name"
 #define KEY_AMK_DOC_SURNAME     @"family_name"
 #define KEY_AMK_DOC_ADDRESS     @"postal_address"
@@ -49,6 +50,7 @@
 @interface MLOperator : NSObject
 
 @property (atomic, copy) NSString *title;
+@property (atomic, copy) NSString *gln;
 @property (atomic, copy) NSString *familyName;
 @property (atomic, copy) NSString *givenName;
 @property (atomic, copy) NSString *postalAddress;
