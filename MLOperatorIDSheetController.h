@@ -32,6 +32,7 @@
     IBOutlet NSWindow *mPanel;
     IBOutlet MLSignatureView *mSignView;
     IBOutlet NSTextField *mTitle;
+    IBOutlet NSTextField *mGLN;
     IBOutlet NSTextField *mFamilyName;
     IBOutlet NSTextField *mGivenName;
     IBOutlet NSTextField *mPostalAddress;

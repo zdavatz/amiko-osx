@@ -26,6 +26,7 @@
 @implementation MLOperator
 
 @synthesize title;
+@synthesize gln;
 @synthesize familyName;
 @synthesize givenName;
 @synthesize postalAddress;
@@ -70,6 +71,7 @@
 - (void)importFromDict:(NSDictionary *)dict
 {
     title =         [dict objectForKey:KEY_AMK_DOC_TITLE];
+    gln =           [dict objectForKey:KEY_AMK_DOC_GLN];
     familyName =    [dict objectForKey:KEY_AMK_DOC_SURNAME];
     givenName =     [dict objectForKey:KEY_AMK_DOC_NAME];
     postalAddress = [dict objectForKey:KEY_AMK_DOC_ADDRESS];
@@ -89,6 +91,7 @@
 - (NSDictionary *)dictionaryRepresentation {
     NSMutableDictionary *doctorDict = [NSMutableDictionary new];
     doctorDict[KEY_AMK_DOC_TITLE] = self.title;
+    doctorDict[KEY_AMK_DOC_GLN] = self.gln;
     doctorDict[KEY_AMK_DOC_NAME] = self.givenName;
     doctorDict[KEY_AMK_DOC_SURNAME] = self.familyName;
     doctorDict[KEY_AMK_DOC_ADDRESS] = self.postalAddress;

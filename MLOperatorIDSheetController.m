@@ -141,6 +141,14 @@
 {
     BOOL valid = TRUE;
     
+    if ([self stringIsNilOrEmpty: [mGLN stringValue]] ||
+        [[mGLN stringValue] length] != 13 ||
+        ![[@([mGLN integerValue]) stringValue] isEqual:[mGLN stringValue]]) {
+        mGLN.backgroundColor = [NSColor lightRed];
+        valid = FALSE;
+    } else {
+        mGLN.backgroundColor = [NSColor clearColor];
+    }
     if ([self stringIsNilOrEmpty:[mFamilyName stringValue]]) {
         mFamilyName.backgroundColor = [NSColor lightRed];
         valid = FALSE;
@@ -167,6 +175,7 @@
 
     MLOperator *operator = [[MLOperator alloc] init];
     operator.title = [mTitle stringValue];
+    operator.gln = [mGLN stringValue];
     operator.familyName = [mFamilyName stringValue];
     operator.givenName = [mGivenName stringValue];
     operator.postalAddress = [mPostalAddress stringValue];
