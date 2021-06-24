@@ -19,7 +19,7 @@
     uint8_t tag = bytes[0];
     uint8_t length = bytes[1];
     NSData* value = [data subdataWithRange:NSMakeRange(2, length)];
-    //NSLog(@"T:0x%02x, L:%d, V: %@", tag, length, value);
+    NSLog(@"T:0x%02x, L:%d, V: %@", tag, length, value);
     switch (tag) {
         case 0x80:  // UTF8InternationalString
         {
@@ -79,11 +79,13 @@
         case 0x92:  // NUMERIC STRING
             s = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
             NSLog(@"identificationNumber Of The Institution <%@>", s);
+            bagNumber = s;
             break;
             
         case 0x93: // UTF8InternationalString
             s = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
             NSLog(@"Insured Person Number <%@>", s);
+            healthCardNumber = s;
             break;
             
         case 0x94:  // NUMERIC STRING
@@ -108,13 +110,13 @@
     uint8_t packetType = bytes[0];
     uint8_t packetSize = bytes[1];
     NSData* payload = [data subdataWithRange:NSMakeRange(2, packetSize)];
-    //NSLog(@"=== payload:%@", payload);
+    NSLog(@"=== payload:%@", payload);
     switch (packetType) {
         case 0x65:
             while (offset < packetSize) {
                 dataRange = NSMakeRange(offset, packetSize-offset);
                 offset += [self parseTLV:[payload subdataWithRange:dataRange]];
-                //NSLog(@"line %d, offset:0x%02x=%d", __LINE__, offset, offset);
+                NSLog(@"line %d, offset:0x%02x=%d", __LINE__, offset, offset);
             }
             break;
             
@@ -203,6 +205,8 @@
                                         givenName,  KEY_AMK_PAT_NAME,
                                         birthDate,  KEY_AMK_PAT_BIRTHDATE,
                                         gender,     KEY_AMK_PAT_GENDER,
+                                        bagNumber,  KEY_AMK_PAT_BAG_NUMBER,
+                                        healthCardNumber, KEY_AMK_PAT_HEALTH_CARD_NUMBER,
                                         nil];
               
               [[NSNotificationCenter defaultCenter] postNotificationName:@"smartCardDataAcquired"
