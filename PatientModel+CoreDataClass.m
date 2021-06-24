@@ -26,6 +26,8 @@
     self.postalAddress = p.postalAddress;
     self.phoneNumber = p.phoneNumber;
     self.emailAddress = p.emailAddress;
+    self.bagNumber = p.bagNumber;
+    self.healthCardNumber = p.healthCardNumber;
 }
 
 - (MLPatient *)toPatient {
@@ -44,6 +46,8 @@
     p.phoneNumber = self.phoneNumber;
     p.emailAddress = self.emailAddress;
     p.timestamp = self.timestamp;
+    p.bagNumber = self.bagNumber;
+    p.healthCardNumber = self.healthCardNumber;
     return p;
 }
 

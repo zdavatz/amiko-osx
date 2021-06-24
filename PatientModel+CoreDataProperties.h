@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<PatientModel *> *)fetchRequest;
 
+@property (nullable, nonatomic, copy) NSString *bagNumber;
 @property (nullable, nonatomic, copy) NSString *birthDate;
 @property (nullable, nonatomic, copy) NSString *city;
 @property (nullable, nonatomic, copy) NSString *country;
@@ -23,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *familyName;
 @property (nullable, nonatomic, copy) NSString *gender;
 @property (nullable, nonatomic, copy) NSString *givenName;
+@property (nullable, nonatomic, copy) NSString *healthCardNumber;
 @property (nonatomic) int64_t heightCm;
 @property (nullable, nonatomic, copy) NSString *phoneNumber;
 @property (nullable, nonatomic, copy) NSString *postalAddress;

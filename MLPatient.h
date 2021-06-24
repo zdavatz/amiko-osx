@@ -36,6 +36,8 @@
 #define KEY_AMK_PAT_COUNTRY     @"country"
 #define KEY_AMK_PAT_PHONE       @"phone_number"
 #define KEY_AMK_PAT_EMAIL       @"email_address"
+#define KEY_AMK_PAT_BAG_NUMBER  @"bag_number"
+#define KEY_AMK_PAT_HEALTH_CARD_NUMBER @"health_card_number"
 
 enum database_t {
     eLocal=0, eAddressBook=1
@@ -56,6 +58,8 @@ enum database_t {
 @property (atomic, copy) NSString *postalAddress;
 @property (atomic, copy) NSString *phoneNumber;
 @property (atomic, copy) NSString *emailAddress;
+@property (atomic, copy) NSString *bagNumber;
+@property (atomic, copy) NSString *healthCardNumber;
 @property (atomic, assign) enum database_t databaseType;
 
 // Only available when patient is read from database

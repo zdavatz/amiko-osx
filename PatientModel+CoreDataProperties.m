@@ -15,6 +15,7 @@
 	return [NSFetchRequest fetchRequestWithEntityName:@"Patient"];
 }
 
+@dynamic bagNumber;
 @dynamic birthDate;
 @dynamic city;
 @dynamic country;
@@ -22,6 +23,7 @@
 @dynamic familyName;
 @dynamic gender;
 @dynamic givenName;
+@dynamic healthCardNumber;
 @dynamic heightCm;
 @dynamic phoneNumber;
 @dynamic postalAddress;
