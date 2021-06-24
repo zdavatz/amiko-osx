@@ -201,6 +201,10 @@
     
     if ([self stringIsNilOrEmpty:operator.title]==NO)
         mTitle.stringValue = operator.title;
+    
+    if (![self stringIsNilOrEmpty:operator.gln]) {
+        mGLN.stringValue = operator.gln;
+    }
 
     if ([self stringIsNilOrEmpty:operator.familyName]==NO)
         mFamilyName.stringValue = operator.familyName;
