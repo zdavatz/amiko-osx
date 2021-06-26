@@ -176,6 +176,8 @@
     [mEmail setStringValue:@""];
     [mFemaleButton setState:NSOnState];
     [mMaleButton setState:NSOffState];
+    [mBagNumber setStringValue:@""];
+    [mCardNumber setStringValue:@""];
     
     mPatientUUID = nil;
     
@@ -223,6 +225,12 @@
             [mMaleButton setState:NSOnState];
         }
     }
+    if (p.bagNumber != nil) {
+        [mBagNumber setStringValue:p.bagNumber];
+    }
+    if (p.healthCardNumber != nil) {
+        [mCardNumber setStringValue:p.healthCardNumber];
+    }
 }
 
 - (MLPatient *) getAllFields
@@ -240,6 +248,8 @@
     patient.phoneNumber = [mPhone stringValue];
     patient.emailAddress = [mEmail stringValue];
     patient.gender = [mFemaleButton state]==NSOnState ? @"woman" : @"man";
+    patient.bagNumber = [mBagNumber stringValue];
+    patient.healthCardNumber = [mCardNumber stringValue];
     
     return patient;
 }

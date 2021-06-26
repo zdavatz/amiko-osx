@@ -45,6 +45,8 @@
     IBOutlet NSTextField *mEmail;
     IBOutlet NSButton *mFemaleButton;
     IBOutlet NSButton *mMaleButton;
+    __weak IBOutlet NSTextField *mBagNumber;
+    __weak IBOutlet NSTextField *mCardNumber;
 }
 
 @property (nonatomic, weak) IBOutlet NSWindow *mPanel;

@@ -40,6 +40,8 @@
 @synthesize phoneNumber;
 @synthesize emailAddress;
 @synthesize databaseType;
+@synthesize bagNumber;
+@synthesize healthCardNumber;
 
 - (void)importFromDict:(NSDictionary *)dict
 {
@@ -56,6 +58,8 @@
     country =       [self getString:KEY_AMK_PAT_COUNTRY orNilFromDict:dict];
     phoneNumber =   [self getString:KEY_AMK_PAT_PHONE orNilFromDict:dict];
     emailAddress =  [self getString:KEY_AMK_PAT_EMAIL orNilFromDict:dict];
+    bagNumber =     [self getString:KEY_AMK_PAT_BAG_NUMBER orNilFromDict:dict];
+    healthCardNumber = [self getString:KEY_AMK_PAT_HEALTH_CARD_NUMBER orNilFromDict:dict];
     
     NSString *newUniqueID = [self generateUniqueID];
     
@@ -82,6 +86,8 @@
     [patientDict setObject:self.country       ?: @"" forKey:KEY_AMK_PAT_COUNTRY];
     [patientDict setObject:self.phoneNumber   ?: @"" forKey:KEY_AMK_PAT_PHONE];
     [patientDict setObject:self.emailAddress  ?: @"" forKey:KEY_AMK_PAT_EMAIL];
+    [patientDict setObject:self.bagNumber     ?: @"" forKey:KEY_AMK_PAT_BAG_NUMBER];
+    [patientDict setObject:self.healthCardNumber ?: @"" forKey:KEY_AMK_PAT_HEALTH_CARD_NUMBER];
     return patientDict;
 }
 

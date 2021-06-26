@@ -306,7 +306,6 @@
 		D545C91018A5725900491511 /* MLCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomView.m; sourceTree = "<group>"; };
 		D58685541F47049D00A250A4 /* MLPrescriptionsAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionsAdapter.m; sourceTree = "<group>"; };
 		D586855B1F4704B400A250A4 /* MLPrescriptionsAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionsAdapter.h; sourceTree = "<group>"; };
-		D59426D51FA34F870052B32C /* MLCoMedPatientSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLCoMedPatientSheet.xib; sourceTree = "<group>"; };
 		D5962E891EF9C4160034B964 /* MLCustomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCustomScrollView.h; sourceTree = "<group>"; };
 		D5962E8A1EF9C42E0034B964 /* MLCustomScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCustomScrollView.m; sourceTree = "<group>"; };
 		D5962E981EFBC25C0034B964 /* MLPatientSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLPatientSheetController.h; path = ../MLPatientSheetController.h; sourceTree = "<group>"; };
@@ -593,7 +592,6 @@
 				D5962E981EFBC25C0034B964 /* MLPatientSheetController.h */,
 				D5962E991EFBC2720034B964 /* MLPatientSheetController.m */,
 				FA4BC4EF208F592000B7BDF3 /* MLAmiKoPatientSheet.xib */,
-				D59426D51FA34F870052B32C /* MLCoMedPatientSheet.xib */,
 			);
 			name = PatientSheets;
 			sourceTree = "<group>";
