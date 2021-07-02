@@ -21,6 +21,8 @@
 		CF34E552243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
 		CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
+		CF8A7339268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */; };
+		CF8A733A268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */; };
 		CF8BEB94253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
 		CF8BEB95253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
 		CF8BEB982538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
@@ -246,6 +248,8 @@
 		CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPreferencesWindowController.h; sourceTree = "<group>"; };
 		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
+		CF8A7337268F1A6D0092E214 /* MedidataXMLGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataXMLGenerator.h; sourceTree = "<group>"; };
+		CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataXMLGenerator.m; sourceTree = "<group>"; };
 		CF8BEB92253850AF00C2D367 /* MLPrescriptionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionView.h; sourceTree = "<group>"; };
 		CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionView.m; sourceTree = "<group>"; };
 		CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionTextFinderClient.h; sourceTree = "<group>"; };
@@ -494,6 +498,15 @@
 				CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		CF8A7336268F1A2D0092E214 /* Medidata */ = {
+			isa = PBXGroup;
+			children = (
+				CF8A7337268F1A6D0092E214 /* MedidataXMLGenerator.h */,
+				CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */,
+			);
+			path = Medidata;
 			sourceTree = "<group>";
 		};
 		CF8F50F3251640E7007D62B5 /* iCloud patient sync */ = {
@@ -840,6 +853,7 @@
 				D5F303411F21F3F600CAFED3 /* Prescriptions */,
 				D5C644231EB3366200438E6F /* FullTextSearch */,
 				CFE80FDB24309D10003DB2FA /* Persistence */,
+				CF8A7336268F1A2D0092E214 /* Medidata */,
 			);
 			name = Classes;
 			path = ..;
@@ -1191,6 +1205,7 @@
 				FA6A2BB020B2B0ED0080B4C9 /* MLPatientSheetController.m in Sources */,
 				D5ECDE131F2A7C1200970133 /* MLEditableTextField.m in Sources */,
 				D5E91B9017E5E8E400B66B27 /* MLItemCellView.m in Sources */,
+				CF8A7339268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */,
 				D5C5C5311F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0C1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
@@ -1267,6 +1282,7 @@
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				CF34E550243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
 				D53AB5AE1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
+				CF8A733A268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */,
 				CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */,
 				D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				CF8BEB9D25388BAE00C2D367 /* MLFindHighlightField.m in Sources */,
