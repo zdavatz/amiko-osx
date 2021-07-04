@@ -41,6 +41,7 @@
 #import "MLPrescriptionCellView.h"
 #import "MLPreferencesWindowController.h"
 #import "MLButtonCell.h"
+#import "MedidataXMLGenerator.h"
 
 #import "MLPersistenceManager.h"
 #import "MLAbout.h"
@@ -1597,6 +1598,18 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
     // TODO: maybe we should temporarily disable the send button,
     // unless we want to send the prescription again to another recipient
+}
+
+- (IBAction)onSendPrescriptionToMedidata:(id)sender {
+    NSXMLDocument *doc = [MedidataXMLGenerator xmlInvoiceRequestDocumentWithOperator:[mPrescriptionAdapter doctor]
+                                                                             patient:[mPrescriptionAdapter patient]
+                                                                   prescriptionItems:mPrescriptionsCart[0].cart];
+    NSData *data = [doc XMLData];
+    NSSavePanel *savePanel = [NSSavePanel savePanel];
+    NSModalResponse returnCode = [savePanel runModal];
+    if (returnCode == NSFileHandlingPanelOKButton) {
+        [data writeToURL:savePanel.URL atomically:YES];
+    }
 }
 
 - (IBAction) onDeletePrescription:(id)sender
