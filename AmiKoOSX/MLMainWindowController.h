@@ -130,6 +130,7 @@ extern NSString* const APP_ID;
 - (IBAction) onLoadPrescription:(id)sender;
 - (IBAction) onSavePrescription:(id)sender;
 - (IBAction) onSendPrescription:(id)sender;
+- (IBAction)onSendPrescriptionToMedidata:(id)sender;
 - (IBAction) onDeletePrescription:(id)sender;
 - (IBAction) printTechInfo:(id)sender;
 - (IBAction) printPrescription:(id)sender;

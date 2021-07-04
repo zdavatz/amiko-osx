@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MedidataXMLGenerator : NSObject
 
++ (NSXMLDocument *)xmlInvoiceRequestDocumentWithOperator:(MLOperator *)operator
+                                                 patient:(MLPatient *)patient
+                                       prescriptionItems:(NSArray<MLPrescriptionItem*> *)items;
+
 @end
 
 NS_ASSUME_NONNULL_END

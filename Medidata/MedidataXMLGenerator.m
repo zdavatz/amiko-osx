@@ -193,7 +193,7 @@
 //        @"validate": @"1",
 //        @"service_attributes": @"0",
 //        @"obligation": @"1",
-        @"name": item.productName,
+        @"name": item.title,
     }];
     return drug;
 }
@@ -243,6 +243,18 @@
     }
 
     return root;
+}
+
++ (NSXMLDocument *)xmlInvoiceRequestDocumentWithOperator:(MLOperator *)operator
+                                                 patient:(MLPatient *)patient
+                                       prescriptionItems:(NSArray<MLPrescriptionItem*> *)items {
+    NSXMLElement *root = [MedidataXMLGenerator xmlInvoiceRequestWithOperator:operator
+                                                                     patient:patient
+                                                           prescriptionItems:items];
+    NSXMLDocument *document = [NSXMLDocument documentWithRootElement:root];
+    [document setVersion:@"1.0"];
+    [document setStandalone:NO];
+    return document;
 }
 
 
