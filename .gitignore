@@ -13,3 +13,5 @@ AmiKoOSX/drug_interactions_csv_fr.csv
 build/
 scripts/itc.conf
 DerivedData/
+
+Medidata/MedidataCredential.h

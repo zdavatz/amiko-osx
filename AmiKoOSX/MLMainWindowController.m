@@ -42,6 +42,7 @@
 #import "MLPreferencesWindowController.h"
 #import "MLButtonCell.h"
 #import "MedidataXMLGenerator.h"
+#import "MedidataClient.h"
 
 #import "MLPersistenceManager.h"
 #import "MLAbout.h"
@@ -1604,12 +1605,15 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSXMLDocument *doc = [MedidataXMLGenerator xmlInvoiceRequestDocumentWithOperator:[mPrescriptionAdapter doctor]
                                                                              patient:[mPrescriptionAdapter patient]
                                                                    prescriptionItems:mPrescriptionsCart[0].cart];
+    [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc];
+
     NSData *data = [doc XMLData];
     NSSavePanel *savePanel = [NSSavePanel savePanel];
     NSModalResponse returnCode = [savePanel runModal];
     if (returnCode == NSFileHandlingPanelOKButton) {
         [data writeToURL:savePanel.URL atomically:YES];
     }
+    
 }
 
 - (IBAction) onDeletePrescription:(id)sender
