@@ -159,7 +159,7 @@
     NSXMLElement *patientElement = [NSXMLElement elementWithName:@"invoice:patient"];
     [patientElement setAttributesWithDictionary:@{
         @"gender": [patient.gender isEqualToString:@"man"] ? @"male" : @"female",
-        @"birthdate": [isoDateFormatter stringFromDate:birthdate],
+        @"birthdate": [isoDateFormatter stringFromDate:birthdate] ?: @"",
 //        @"ssn": @"TODO",
     }];
     
@@ -168,7 +168,7 @@
     NSXMLElement *card = [NSXMLElement elementWithName:@"invoice:card"];
     [patientElement addChild:card];
     [card setAttributesWithDictionary:@{
-        @"card_id": patient.healthCardNumber,
+        @"card_id": patient.healthCardNumber ?: @"",
 //        @"expiry_date": @"TODO",
     }];
     
@@ -193,7 +193,7 @@
 //        @"validate": @"1",
 //        @"service_attributes": @"0",
 //        @"obligation": @"1",
-        @"name": item.title,
+        @"name": item.title ?: @"",
     }];
     return drug;
 }
