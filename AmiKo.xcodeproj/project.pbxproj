@@ -13,6 +13,8 @@
 		CF01CCAE2524E92F0014B224 /* MLButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF01CCAC2524E92F0014B224 /* MLButtonCell.m */; };
 		CF16C25F25236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
 		CF16C26025236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
+		CF2EA5E9269328D300FA1EC8 /* MedidataClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2EA5E8269328D300FA1EC8 /* MedidataClient.m */; };
+		CF2EA5EA269328D300FA1EC8 /* MedidataClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2EA5E8269328D300FA1EC8 /* MedidataClient.m */; };
 		CF34E549243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF34E547243A1A5A00E3AF61 /* Model.xcdatamodeld */; };
 		CF34E54A243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF34E547243A1A5A00E3AF61 /* Model.xcdatamodeld */; };
 		CF34E54F243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */; };
@@ -241,6 +243,9 @@
 		CF16C26125236F7F00A05542 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLPreferencesWindowController.xib; sourceTree = "<group>"; };
 		CF16C26425236F8300A05542 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
 		CF16C26625236F8400A05542 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
+		CF2EA5E7269328D300FA1EC8 /* MedidataClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataClient.h; sourceTree = "<group>"; };
+		CF2EA5E8269328D300FA1EC8 /* MedidataClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataClient.m; sourceTree = "<group>"; };
+		CF2EA5EB26932BB900FA1EC8 /* MedidataCredential.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataCredential.h; sourceTree = "<group>"; };
 		CF34E548243A1A5A00E3AF61 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CF34E54B243A1A8300E3AF61 /* PatientModel+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PatientModel+CoreDataProperties.h"; sourceTree = "<group>"; };
 		CF34E54C243A1A8300E3AF61 /* PatientModel+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PatientModel+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -505,6 +510,9 @@
 			children = (
 				CF8A7337268F1A6D0092E214 /* MedidataXMLGenerator.h */,
 				CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */,
+				CF2EA5E7269328D300FA1EC8 /* MedidataClient.h */,
+				CF2EA5E8269328D300FA1EC8 /* MedidataClient.m */,
+				CF2EA5EB26932BB900FA1EC8 /* MedidataCredential.h */,
 			);
 			path = Medidata;
 			sourceTree = "<group>";
@@ -1209,6 +1217,7 @@
 				D5C5C5311F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0C1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
+				CF2EA5E9269328D300FA1EC8 /* MedidataClient.m in Sources */,
 				CF8BEB9C25388BAE00C2D367 /* MLFindHighlightField.m in Sources */,
 				FA6A2BAE20B2B09C0080B4C9 /* MLPatientSheetController+smartCard.m in Sources */,
 				D53AB5AD1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
@@ -1277,6 +1286,7 @@
 				D5ECDE141F2A7C1200970133 /* MLEditableTextField.m in Sources */,
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
 				D5C5C5321F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
+				CF2EA5EA269328D300FA1EC8 /* MedidataClient.m in Sources */,
 				FA4BA42C20B401B700552CEF /* HealthCard.m in Sources */,
 				D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
