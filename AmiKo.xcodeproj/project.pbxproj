@@ -1004,6 +1004,7 @@
 				TargetAttributes = {
 					D5E91B8617E5E8E400B66B27 = {
 						DevelopmentTeam = 4B37356EGR;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -1393,8 +1394,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AmiKo Desitin.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3.4.29;
 				DEVELOPMENT_TEAM = 4B37356EGR;
@@ -1408,6 +1410,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
 				PRODUCT_NAME = "AmiKo Desitin";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1417,8 +1420,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AmiKo Desitin.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3.4.29;
 				DEVELOPMENT_TEAM = 4B37356EGR;
@@ -1432,6 +1436,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = amikoosx;
 				PRODUCT_NAME = "AmiKo Desitin";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
