@@ -38,6 +38,7 @@
 #define KEY_AMK_PAT_EMAIL       @"email_address"
 #define KEY_AMK_PAT_BAG_NUMBER  @"bag_number"
 #define KEY_AMK_PAT_HEALTH_CARD_NUMBER @"health_card_number"
+#define KEY_AMK_PAT_HEALTH_CARD_EXPIRY @"health_card_expiry"
 
 enum database_t {
     eLocal=0, eAddressBook=1
@@ -60,6 +61,7 @@ enum database_t {
 @property (atomic, copy) NSString *emailAddress;
 @property (atomic, copy) NSString *bagNumber;
 @property (atomic, copy) NSString *healthCardNumber;
+@property (atomic, copy) NSString *healthCardExpiry;
 @property (atomic, assign) enum database_t databaseType;
 
 // Only available when patient is read from database
@@ -69,5 +71,6 @@ enum database_t {
 - (NSDictionary <NSString *, NSString *> *)dictionaryRepresentation;
 - (NSString *) generateUniqueID;
 - (NSString *) asString;
+- (NSDictionary *)findParticipantsKvg;
 
 @end

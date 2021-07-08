@@ -28,6 +28,7 @@
     self.emailAddress = p.emailAddress;
     self.bagNumber = p.bagNumber;
     self.healthCardNumber = p.healthCardNumber;
+    self.healthCardExpiry = p.healthCardExpiry;
 }
 
 - (MLPatient *)toPatient {
@@ -48,6 +49,7 @@
     p.timestamp = self.timestamp;
     p.bagNumber = self.bagNumber;
     p.healthCardNumber = self.healthCardNumber;
+    p.healthCardExpiry = self.healthCardExpiry;
     return p;
 }
 

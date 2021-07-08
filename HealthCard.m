@@ -88,10 +88,16 @@
             healthCardNumber = s;
             break;
             
-        case 0x94:  // NUMERIC STRING
+        case 0x94: {  // NUMERIC STRING
             s = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"yyyyMMdd"]; // convert from this
+            NSDate *expiry = [dateFormat dateFromString:s];
+            [dateFormat setDateFormat:@"dd.MM.yyyy"];   // to this
+            expiryDate = [dateFormat stringFromDate:expiry];
             NSLog(@"ExpiryDate yyyyMMdd <%@>", s);
             break;
+        }
             
         default:
             NSLog(@"T:0x%02x, L:%d, V: <%@>", tag, length, value);
@@ -207,6 +213,7 @@
                                         gender,     KEY_AMK_PAT_GENDER,
                                         bagNumber,  KEY_AMK_PAT_BAG_NUMBER,
                                         healthCardNumber, KEY_AMK_PAT_HEALTH_CARD_NUMBER,
+                                        expiryDate, KEY_AMK_PAT_HEALTH_CARD_EXPIRY,
                                         nil];
               
               [[NSNotificationCenter defaultCenter] postNotificationName:@"smartCardDataAcquired"

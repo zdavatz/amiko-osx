@@ -42,6 +42,7 @@
 @synthesize databaseType;
 @synthesize bagNumber;
 @synthesize healthCardNumber;
+@synthesize healthCardExpiry;
 
 - (void)importFromDict:(NSDictionary *)dict
 {
@@ -60,6 +61,7 @@
     emailAddress =  [self getString:KEY_AMK_PAT_EMAIL orNilFromDict:dict];
     bagNumber =     [self getString:KEY_AMK_PAT_BAG_NUMBER orNilFromDict:dict];
     healthCardNumber = [self getString:KEY_AMK_PAT_HEALTH_CARD_NUMBER orNilFromDict:dict];
+    healthCardExpiry = [self getString:KEY_AMK_PAT_HEALTH_CARD_EXPIRY orNilFromDict:dict];
     
     NSString *newUniqueID = [self generateUniqueID];
     
@@ -88,6 +90,7 @@
     [patientDict setObject:self.emailAddress  ?: @"" forKey:KEY_AMK_PAT_EMAIL];
     [patientDict setObject:self.bagNumber     ?: @"" forKey:KEY_AMK_PAT_BAG_NUMBER];
     [patientDict setObject:self.healthCardNumber ?: @"" forKey:KEY_AMK_PAT_HEALTH_CARD_NUMBER];
+    [patientDict setObject:self.healthCardExpiry ?: @"" forKey:KEY_AMK_PAT_HEALTH_CARD_EXPIRY];
     return patientDict;
 }
 
@@ -129,6 +132,23 @@
     id obj = [dict objectForKey:key];
     if ([obj isKindOfClass:[NSString class]]) {
         return obj;
+    }
+    return nil;
+}
+
+- (NSDictionary *)findParticipantsKvg {
+    NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"participants-kvg" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath
+                                          options:0
+                                            error:nil];
+    NSArray *dicts = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    for (NSDictionary *dict in dicts) {
+        NSNumber *bagNumber = dict[@"bagNumber"];
+        if ([bagNumber isKindOfClass:[NSNumber class]]) {
+            if (self.bagNumber.integerValue == bagNumber.integerValue) {
+                return dict;
+            }
+        }
     }
     return nil;
 }

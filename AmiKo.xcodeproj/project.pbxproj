@@ -35,6 +35,8 @@
 		CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
 		CF923BEE2549D13A00840F2E /* DesitinLogo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF923BED2549D13A00840F2E /* DesitinLogo.xcassets */; };
 		CF923BF02549D14E00840F2E /* ComedLogo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF923BEF2549D14E00840F2E /* ComedLogo.xcassets */; };
+		CF98CB89269719990005C79A /* participants-kvg.json in Resources */ = {isa = PBXBuildFile; fileRef = CF98CB88269719990005C79A /* participants-kvg.json */; };
+		CF98CB8A269719990005C79A /* participants-kvg.json in Resources */ = {isa = PBXBuildFile; fileRef = CF98CB88269719990005C79A /* participants-kvg.json */; };
 		CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
 		CFE80FCD242F9332003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
 		CFE80FE124309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */; };
@@ -265,6 +267,7 @@
 		CF8F50F525164113007D62B5 /* MLPatientSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPatientSync.m; sourceTree = "<group>"; };
 		CF923BED2549D13A00840F2E /* DesitinLogo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DesitinLogo.xcassets; sourceTree = "<group>"; };
 		CF923BEF2549D14E00840F2E /* ComedLogo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ComedLogo.xcassets; sourceTree = "<group>"; };
+		CF98CB88269719990005C79A /* participants-kvg.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "participants-kvg.json"; sourceTree = "<group>"; };
 		CFE80FCB242F9306003DB2FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CFE80FDD24309D10003DB2FA /* MLiCloudToLocalMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLiCloudToLocalMigration.h; sourceTree = "<group>"; };
 		CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLiCloudToLocalMigration.m; sourceTree = "<group>"; };
@@ -892,6 +895,7 @@
 				D5BACC131EBE051D001812FB /* amiko_frequency_fr.db */,
 				D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */,
 				D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */,
+				CF98CB88269719990005C79A /* participants-kvg.json */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -1083,6 +1087,7 @@
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
 				D5C6442C1EB345A300438E6F /* fulltext_style.css in Resources */,
 				D53ABBF4189521FD00C4525C /* MLProgressSheet.xib in Resources */,
+				CF98CB89269719990005C79A /* participants-kvg.json in Resources */,
 				FA66364120A5E4A9007BA83B /* MLAmiKoMainWindow.xib in Resources */,
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
 				FA12C62721C9488E002E190E /* color-scheme-dark.css in Resources */,
@@ -1132,6 +1137,7 @@
 				D52795F91EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				FA12C62821C9488E002E190E /* color-scheme-dark.css in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
+				CF98CB8A269719990005C79A /* participants-kvg.json in Resources */,
 				938147CE21CB9A790029D189 /* Credits.rtf in Resources */,
 				D5DD576B193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */,

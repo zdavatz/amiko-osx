@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *gender;
 @property (nullable, nonatomic, copy) NSString *givenName;
 @property (nullable, nonatomic, copy) NSString *healthCardNumber;
+@property (nullable, nonatomic, copy) NSString *healthCardExpiry;
 @property (nonatomic) int64_t heightCm;
 @property (nullable, nonatomic, copy) NSString *phoneNumber;
 @property (nullable, nonatomic, copy) NSString *postalAddress;

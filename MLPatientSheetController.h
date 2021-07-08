@@ -47,6 +47,7 @@
     IBOutlet NSButton *mMaleButton;
     __weak IBOutlet NSTextField *mBagNumber;
     __weak IBOutlet NSTextField *mCardNumber;
+    __weak IBOutlet NSTextField *mCardExpiry;
 }
 
 @property (nonatomic, weak) IBOutlet NSWindow *mPanel;
