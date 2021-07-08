@@ -24,6 +24,7 @@
 @dynamic gender;
 @dynamic givenName;
 @dynamic healthCardNumber;
+@dynamic healthCardExpiry;
 @dynamic heightCm;
 @dynamic phoneNumber;
 @dynamic postalAddress;

@@ -403,6 +403,7 @@ static NSString *FULL_TABLE = nil;
     [medi setSectionTitles:(NSString *)[cursor objectAtIndex:kSectionsStr]];
     [medi setContentStr:(NSString *)[cursor objectAtIndex:kContentStr]];
     [medi setStyleStr:(NSString *)[cursor objectAtIndex:kStyleStr]];
+    [medi setPackages:(NSString *)[cursor objectAtIndex:kPackages]];
     
     return medi;
 }
