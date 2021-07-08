@@ -16,6 +16,7 @@
     NSString *gender;
     NSString *bagNumber;
     NSString *healthCardNumber;
+    NSString *expiryDate;
 }
 
 - (uint8_t) parseTLV:(NSData *)data;
