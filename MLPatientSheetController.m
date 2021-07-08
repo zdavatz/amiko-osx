@@ -231,6 +231,9 @@
     if (p.healthCardNumber != nil) {
         [mCardNumber setStringValue:p.healthCardNumber];
     }
+    if (p.healthCardExpiry != nil) {
+        [mCardExpiry setStringValue:p.healthCardExpiry];
+    }
 }
 
 - (MLPatient *) getAllFields
@@ -250,6 +253,7 @@
     patient.gender = [mFemaleButton state]==NSOnState ? @"woman" : @"man";
     patient.bagNumber = [mBagNumber stringValue];
     patient.healthCardNumber = [mCardNumber stringValue];
+    patient.healthCardExpiry = [mCardExpiry stringValue];
     
     return patient;
 }

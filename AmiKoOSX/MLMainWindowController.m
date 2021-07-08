@@ -699,11 +699,11 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     MLPatient *existingPatient = [[MLPersistenceManager shared] getPatientWithUniqueID:incompletePatient.uniqueId];
     //NSLog(@"%s Existing patient from DB:%@", __FUNCTION__, existingPatient);
-    if (!mPatientSheet)
-        mPatientSheet = [[MLPatientSheetController alloc] init];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!mPatientSheet)
+            mPatientSheet = [[MLPatientSheetController alloc] init];
 
-    if (![mPatientSheet.mPanel isVisible] && existingPatient) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        if (![mPatientSheet.mPanel isVisible] && existingPatient) {
             [mPatientSheet setSelectedPatient:existingPatient];
             [mPrescriptionAdapter setPatient:existingPatient];
             
@@ -717,18 +717,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             // Update prescription history in right most pane
             mPrescriptionMode = true;
             [self updatePrescriptionHistory];
-        });
-    }
-    else {
-        if (![mPatientSheet.mPanel isVisible])
-            dispatch_async(dispatch_get_main_queue(), ^{
+        
+        } else {
+            if (![mPatientSheet.mPanel isVisible]) {
                 // UI API must be called on the main thread
                 [mPatientSheet show:[NSApp mainWindow]];
                 [mPatientSheet onNewPatient:nil];
                 [mPatientSheet setSelectedPatient:incompletePatient];
                 [mPatientSheet setAllFields:incompletePatient];
-            });
-    }
+            }
+        }
+    });
 }
 
 - (void) prescriptionDoctorChanged:(NSNotification *)notification

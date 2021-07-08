@@ -9,6 +9,7 @@
         <attribute name="familyName" optional="YES" attributeType="String"/>
         <attribute name="gender" optional="YES" attributeType="String"/>
         <attribute name="givenName" optional="YES" attributeType="String"/>
+        <attribute name="healthCardExpiry" optional="YES" attributeType="String"/>
         <attribute name="healthCardNumber" optional="YES" attributeType="String"/>
         <attribute name="heightCm" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
@@ -19,6 +20,6 @@
         <attribute name="zipCode" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Patient" positionX="-63" positionY="-18" width="128" height="269"/>
+        <element name="Patient" positionX="-63" positionY="-18" width="128" height="284"/>
     </elements>
 </model>
