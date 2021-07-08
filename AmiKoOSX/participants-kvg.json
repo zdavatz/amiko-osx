@@ -1,0 +1,855 @@
+[
+    {
+        "glnParticipant": "7601003001143",
+        "glnReceiver": "7601003001143",
+        "name": "Agilia Krankenkasse AG",
+        "street": "Mühlering 5",
+        "zipCode": "6102",
+        "town": "Malters",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000436",
+        "glnReceiver": "7601003000436",
+        "name": "Agrisano Krankenkasse",
+        "street": "Laurstrasse 10",
+        "zipCode": "5201",
+        "town": "Brugg",
+        "lawTypes": [
+            1,
+            2
+        ],
+        "bagNumber": 1560,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000504",
+        "glnReceiver": "7601003000504",
+        "name": "AMB Assurances",
+        "street": "Pl. de Curala 5",
+        "zipCode": "1934",
+        "town": "Le Châble",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1507,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001397750",
+        "glnReceiver": "7601001397750",
+        "name": "Amt für Gesundheit",
+        "street": "Aeulestrasse 51",
+        "zipCode": "9490",
+        "town": "Vaduz",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000184",
+        "glnReceiver": "7601003000184",
+        "name": "Aquilana Versicherungen",
+        "street": "Bruggerstrasse 46",
+        "zipCode": "5400",
+        "town": "Baden",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 32,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003010107",
+        "glnReceiver": "7601003010107",
+        "name": "Arcosana AG",
+        "street": "Tribschenstrasse 21",
+        "zipCode": "6005",
+        "town": "Luzern",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1569,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003001303",
+        "glnReceiver": "7601003001303",
+        "name": "Assura assurance maladie et accidents",
+        "street": "Avenue Charles-Ferdinand-Ramuz 70",
+        "zipCode": "1009",
+        "town": "Pully",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1542,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000290",
+        "glnReceiver": "7601003000290",
+        "name": "Atupri Krankenkasse",
+        "street": "Zieglerstrasse 29",
+        "zipCode": "3000",
+        "town": "Bern 65",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 312,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003004137",
+        "glnReceiver": "7601003004137",
+        "name": "Avenir Krankenversicherung AG",
+        "street": "Rue des Cèdres 5",
+        "zipCode": "1919",
+        "town": "Martigny Mutuel",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 343,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003898064",
+        "glnReceiver": "7601003898064",
+        "name": "AXA Health AG",
+        "street": "General Guisan-Strasse 40",
+        "zipCode": "8401",
+        "town": "Winterthur",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003001273",
+        "glnReceiver": "7601003001273",
+        "name": "Caisse-maladie Vallée d'Entremont",
+        "street": "Pl. Centrale",
+        "zipCode": "1937",
+        "town": "Orsières",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1113,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003001839",
+        "glnReceiver": "7601003001839",
+        "name": "Cassa da malsauns Lumneziana",
+        "street": "Postfach 41",
+        "zipCode": "7144",
+        "town": "Vella",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 820,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003156683",
+        "glnReceiver": "7601003156683",
+        "name": "Compact Grundversicherung AG",
+        "street": "Jägergasse 3",
+        "zipCode": "8021",
+        "town": "Zürich",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1575,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003001099",
+        "glnReceiver": "7601003001099",
+        "name": "CONCORDIA Versicherungen AG",
+        "street": "Bundesplatz 15",
+        "zipCode": "6002",
+        "town": "Luzern",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 290,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003001082",
+        "glnReceiver": "7601003001082",
+        "name": "CSS Kranken-Versicherung AG - KVG",
+        "street": "Tribschenstrasse 21",
+        "zipCode": "6005",
+        "town": "Luzern",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 8,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000498",
+        "glnReceiver": "7601003000498",
+        "name": "INTRAS Krankenversicherung AG",
+        "street": "Tribschenstrasse 21",
+        "zipCode": "6005",
+        "town": "Luzern",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1529,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001379022",
+        "glnReceiver": "7601001379022",
+        "name": "Dep. für Inneres und Volkswirtschaft Thurgau",
+        "street": "Im Roos 6",
+        "zipCode": "8570",
+        "town": "Weinfelden",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001394759",
+        "glnReceiver": "7601001394759",
+        "name": "Direction de la santé, affaires sociales canton FR",
+        "street": "Rte. des Cliniques 17",
+        "zipCode": "1700",
+        "town": "Fribourg",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003006995",
+        "glnReceiver": "7601003006995",
+        "name": "Easy Sana Krankenversicherung AG",
+        "street": "Rue des Cèdres 5",
+        "zipCode": "1919",
+        "town": "Martigny Mutuel",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 774,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000924",
+        "glnReceiver": "7601003000924",
+        "name": "EGK-Gesundheitskasse",
+        "street": "Brislachstrasse 2",
+        "zipCode": "4242",
+        "town": "Laufen",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 881,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003005295",
+        "glnReceiver": "7601003005295",
+        "name": "FKB Freiwillige Krankenkasse Balzers",
+        "street": "Gagoz 75",
+        "zipCode": "9496",
+        "town": "Balzers",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000054",
+        "glnReceiver": "7601003000054",
+        "name": "GALENOS",
+        "street": "Militärstrasse 36",
+        "zipCode": "8004",
+        "town": "Zürich",
+        "lawTypes": [
+            1,
+            2
+        ],
+        "bagNumber": 1386,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003005530",
+        "glnReceiver": "7601003005530",
+        "name": "Gemeinsame Einrichtung KVG",
+        "street": "Industriestrasse 78",
+        "zipCode": "4600",
+        "town": "Olten",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001396746",
+        "glnReceiver": "7601001396746",
+        "name": "Gesundheitsamt Kanton Solothurn",
+        "street": "Riedholzplatz 3",
+        "zipCode": "4509",
+        "town": "Solothurn",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 20000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001373419",
+        "glnReceiver": "7601001373419",
+        "name": "Gesundheitsdepartement des Kantons SG",
+        "street": "Oberer Graben 32",
+        "zipCode": "9001",
+        "town": "St. Gallen",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000610",
+        "glnReceiver": "7601003000610",
+        "name": "Glarner Krankenversicherung",
+        "street": "Herrenstrasse 44",
+        "zipCode": "8762",
+        "town": "Schwanden",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 780,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003002980",
+        "glnReceiver": "7601003002980",
+        "name": "Groupe Mutuel Holding",
+        "street": "Rue des Cèdres 5",
+        "zipCode": "1920",
+        "town": "Martigny",
+        "lawTypes": [
+            1,
+            5
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003005486",
+        "glnReceiver": "7601003005486",
+        "name": "Groupe Mutuel Versicherungen GMA AG - KVG",
+        "street": "Rue des Cèdres 5",
+        "zipCode": "1919",
+        "town": "Martigny Mutuel",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003002775",
+        "glnReceiver": "7601003002775",
+        "name": "Helsana Versicherungen AG - KVG",
+        "street": "Zürichstrasse 130",
+        "zipCode": "8081",
+        "town": "Zürich",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1562,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003001044",
+        "glnReceiver": "7601003001044",
+        "name": "Progrès Versicherungen AG",
+        "street": "Zürichstrasse 130",
+        "zipCode": "8081",
+        "town": "Zürich",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 994,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001396562",
+        "glnReceiver": "7601001396562",
+        "name": "Kanton Aargau",
+        "street": "Bachstrasse 15",
+        "zipCode": "5001",
+        "town": "Aarau",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 20000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001378988",
+        "glnReceiver": "7601001378988",
+        "name": "Kanton Glarus",
+        "street": "Rathaus",
+        "zipCode": "8750",
+        "town": "Glarus",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001379008",
+        "glnReceiver": "7601001379008",
+        "name": "Kanton Graubünden",
+        "street": "Planaterrastrasse 16",
+        "zipCode": "7000",
+        "town": "Chur",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001373402",
+        "glnReceiver": "7601001373402",
+        "name": "Kanton Luzern",
+        "street": "Meyerstrasse 20",
+        "zipCode": "6002",
+        "town": "Luzern",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 20000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001403536",
+        "glnReceiver": "7601001403536",
+        "name": "Kanton Nidwalden",
+        "street": "Engelbergstrasse 34",
+        "zipCode": "6371",
+        "town": "Stans",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001399167",
+        "glnReceiver": "7601001399167",
+        "name": "Kanton Schwyz",
+        "street": "Kollegiumstrasse 28",
+        "zipCode": "6431",
+        "town": "Schwyz",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001396487",
+        "glnReceiver": "7601001396487",
+        "name": "Kanton Zug",
+        "street": "Neugasse 2",
+        "zipCode": "6301",
+        "town": "Zug",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 20000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601001404328",
+        "glnReceiver": "7601001404328",
+        "name": "Kanton Zürich",
+        "street": "Stampfenbachstrasse 30",
+        "zipCode": "8090",
+        "town": "Zürich",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003002218",
+        "glnReceiver": "7601003002218",
+        "name": "KLuG Krankenversicherung",
+        "street": "Gubelstrasse 22",
+        "zipCode": "6300",
+        "town": "Zug",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 829,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003002034",
+        "glnReceiver": "7601003002034",
+        "name": "kmu-Krankenversicherung",
+        "street": "Bachtelstrasse 5",
+        "zipCode": "8400",
+        "town": "Winterthur",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": null,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003002256",
+        "glnReceiver": "7601003002256",
+        "name": "Kolping Krankenkasse AG",
+        "street": "Wallisellenstrasse 55",
+        "zipCode": "8600",
+        "town": "Dübendorf",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 762,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000382",
+        "glnReceiver": "7601003000382",
+        "name": "KPT / CPT Krankenkasse",
+        "street": "Wankdorfallee",
+        "zipCode": "3001",
+        "town": "Bern",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 376,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 20000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000566",
+        "glnReceiver": "7601003000566",
+        "name": "Einsiedler Krankenkasse",
+        "street": "Hauptstrasse 61",
+        "zipCode": "8840",
+        "town": "Einsiedeln",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 134,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000863",
+        "glnReceiver": "7601003000863",
+        "name": "Krankenkasse Birchmeier",
+        "street": "Hauptstrasse 22",
+        "zipCode": "5444",
+        "town": "Künten",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1322,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003000450",
+        "glnReceiver": "7601003000450",
+        "name": "Krankenkasse Institut Ingenbohl",
+        "street": "Postfach 57",
+        "zipCode": "8840",
+        "town": "Einsiedeln",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1142,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003002140",
+        "glnReceiver": "7601003002140",
+        "name": "Krankenkasse Luzerner Hinterland",
+        "street": "Luzernstrasse 19",
+        "zipCode": "6144",
+        "town": "Zell",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 360,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003001495",
+        "glnReceiver": "7601003001495",
+        "name": "Krankenkasse Simplon",
+        "street": "Blatt 1",
+        "zipCode": "3907",
+        "town": "Simplon Dorf",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1362,
+        "tgTpChange": false,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003002263",
+        "glnReceiver": "7601003002263",
+        "name": "Krankenkasse SLKK",
+        "street": "Hofwiesenstrasse 370",
+        "zipCode": "8050",
+        "town": "Zürich",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 923,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003001686",
+        "glnReceiver": "7601003001686",
+        "name": "Krankenkasse Steffisburg",
+        "street": "Unterdorfstrasse 37",
+        "zipCode": "3612",
+        "town": "Steffisburg",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 246,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 20000000,
+        "notSupported": [],
+        "tgAllowed": false
+    },
+    {
+        "glnParticipant": "7601003001174",
+        "glnReceiver": "7601003001174",
+        "name": "Krankenkasse Stoffel / Mels",
+        "street": "Bahnhofstrasse 63",
+        "zipCode": "8887",
+        "town": "Mels",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1331,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
+    }
+]
