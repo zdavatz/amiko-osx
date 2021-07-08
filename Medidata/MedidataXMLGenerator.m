@@ -171,34 +171,41 @@
     [patientElement addChild:card];
     [card setAttributesWithDictionary:@{
         @"card_id": patient.healthCardNumber ?: @"",
-        @"expiry_date": [isoDateFormatter stringFromDate:[NSDate date]],// TODO
+        @"expiry_date": patient.healthCardExpiry ? [isoDateFormatter stringFromDate:[dateFormat dateFromString:patient.healthCardExpiry]] : @"",
     }];
     
     return patientElement;
 }
 
-+ (NSXMLElement *)xmlInvoiceInsurance {
++ (NSXMLElement *)xmlInvoiceInsuranceWithPatient:(MLPatient *)patient {
+    NSDictionary *participantsKvg = [patient findParticipantsKvg];
     NSXMLElement *insurance = [NSXMLElement elementWithName:@"invoice:insurance"];
     [insurance setAttributesWithDictionary:@{
-        @"ean_party": @"7601003001082"
+        @"ean_party": participantsKvg[@"glnParticipant"],
     }];
     NSXMLElement *company = [NSXMLElement elementWithName:@"company"];
     [insurance addChild:company];
     
     NSXMLElement *companyName = [NSXMLElement elementWithName:@"invoice:companyname"];
     [company addChild:companyName];
-    [companyName setStringValue:@"CSS (KVG)"];
+    [companyName setStringValue:participantsKvg[@"name"]];
     
     NSXMLElement *postal = [NSXMLElement elementWithName:@"invoice:postal"];
     [company addChild:postal];
     
+    if (participantsKvg[@"street"]) {
+        NSXMLElement *street = [NSXMLElement elementWithName:@"invoice:street"];
+        [postal addChild:street];
+        [street setStringValue:participantsKvg[@"street"]];
+    }
+    
     NSXMLElement *zip = [NSXMLElement elementWithName:@"invoice:zip"];
     [postal addChild:zip];
-    [zip setStringValue:@"6002"];
+    [zip setStringValue:participantsKvg[@"zipCode"]];
     
     NSXMLElement *city = [NSXMLElement elementWithName:@"invoice:city"];
     [postal addChild:city];
-    [city setStringValue:@"city"];
+    [city setStringValue:participantsKvg[@"town"]];
 
     return insurance;
 //    <invoice:insurance ean_party="7601003001082">
@@ -222,17 +229,21 @@
 
 + (NSXMLElement *)xmlInvoiceRecordDrugWithOperator:(MLOperator *)operator index:(NSNumber *)number prescriptionItem:(MLPrescriptionItem *)item {
     NSXMLElement *drug = [NSXMLElement elementWithName:@"invoice:record_drug"];
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *price = [f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]];
 //    <invoice:record_drug record_id="1" tariff_type="402" code="7680300580117" session="1" quantity="1" date_begin="2021-06-22T00:00:00" provider_id="2099988876514" responsible_id="2099988876514" unit="8.2" unit_factor="1" amount="8.20" validate="1" service_attributes="0" obligation="1" name="MAXIDEX Gtt Opht 5 ml"/>
     [drug setAttributesWithDictionary:@{
         @"record_id": [@([number intValue] + 1) stringValue],
         @"tariff_type": @"402",
-        @"code": @"7680300580117", // TODO
-        @"quantity": @"1.0",
+        @"code": item.eanCode ?: @"",
+        @"quantity": @"1",
         @"date_begin": [[MedidataXMLGenerator isoDateFormatter] stringFromDate:[NSDate date]],
         @"provider_id": operator.gln,
         @"responsible_id": operator.gln,
-        @"unit": @"1.0",
-        @"amount": @"1",
+        @"unit": [f stringFromNumber:price] ?: @"0",
+        @"amount": [f stringFromNumber:price] ?: @"0",
         @"name": item.title ?: @"",
     }];
     return drug;
@@ -268,7 +279,7 @@
     [processing addChild:transport];
     [transport setAttributesWithDictionary:@{
         @"from": operator.gln,
-        @"to": @"1234567890123", // TODO
+        @"to": [patient findParticipantsKvg][@"glnParticipant"]
     }];
     NSXMLElement *via = [NSXMLElement elementWithName:@"invoice:via"];
     [transport addChild:via];
@@ -320,13 +331,19 @@
         @"place": @"practice",
     }];
     
-    // TODO: calculate balance
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *total = @0; // [f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]];
+    for (MLPrescriptionItem *item in items) {
+        total = [[NSDecimalNumber decimalNumberWithDecimal:[[f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]] decimalValue]] decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:total.decimalValue]];
+    }
+    
     NSXMLElement *balance = [NSXMLElement elementWithName:@"invoice:balance"];
     [body addChild:balance];
     [balance setAttributesWithDictionary:@{
         @"currency": @"CHF",
-        @"amount": @"0.0",
-        @"amount_due": @"0.0",
+        @"amount": [f stringFromNumber:total],
+        @"amount_due": [f stringFromNumber:total],
     }];
     
     NSXMLElement *vat = [NSXMLElement elementWithName:@"invoice:vat"];
@@ -355,7 +372,7 @@
     [body addChild:tiersPayment];
     [tiersPayment addChild:[MedidataXMLGenerator xmlInvoiceBillerWithOperator:operator]];
     [tiersPayment addChild:[MedidataXMLGenerator xmlInvoiceProviderWithOperator:operator]];
-    [tiersPayment addChild:[MedidataXMLGenerator xmlInvoiceInsurance]];
+    [tiersPayment addChild:[MedidataXMLGenerator xmlInvoiceInsuranceWithPatient:patient]];
     [tiersPayment addChild:[MedidataXMLGenerator xmlInvoicePatientWithPatient:patient]];
     [tiersPayment addChild:[MedidataXMLGenerator xmlInvoiceGuarantorWithPatient:patient]];
     
