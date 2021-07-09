@@ -398,6 +398,9 @@
             p.emailAddress = patient.emailAddress;
             p.gender = patient.gender;
             p.timestamp = date;
+            p.bagNumber = patient.bagNumber;
+            p.healthCardNumber = patient.healthCardNumber;
+            p.healthCardExpiry = patient.healthCardExpiry;
             [[self.coreDataContainer viewContext] save:&error];
             if (error != nil) {
                 NSLog(@"Cannot update patient %@", error);
