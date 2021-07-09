@@ -279,7 +279,7 @@
     [processing addChild:transport];
     [transport setAttributesWithDictionary:@{
         @"from": operator.gln,
-        @"to": [patient findParticipantsKvg][@"glnParticipant"]
+        @"to": [patient findParticipantsKvg][@"glnParticipant"] ?: @"",
     }];
     NSXMLElement *via = [NSXMLElement elementWithName:@"invoice:via"];
     [transport addChild:via];
@@ -342,8 +342,8 @@
     [body addChild:balance];
     [balance setAttributesWithDictionary:@{
         @"currency": @"CHF",
-        @"amount": [f stringFromNumber:total],
-        @"amount_due": [f stringFromNumber:total],
+        @"amount": [f stringFromNumber:total] ?: @"0",
+        @"amount_due": [f stringFromNumber:total] ?: @"0",
     }];
     
     NSXMLElement *vat = [NSXMLElement elementWithName:@"invoice:vat"];
@@ -376,6 +376,7 @@
     [tiersPayment addChild:[MedidataXMLGenerator xmlInvoicePatientWithPatient:patient]];
     [tiersPayment addChild:[MedidataXMLGenerator xmlInvoiceGuarantorWithPatient:patient]];
     
+    // TODO:
     NSXMLElement *kvg = [NSXMLElement elementWithName:@"invoice:kvg"];
     [kvg setAttributesWithDictionary:@{
         @"insured_id": @"209-17-965",
