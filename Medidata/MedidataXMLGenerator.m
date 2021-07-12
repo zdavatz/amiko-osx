@@ -410,7 +410,7 @@
     [treatment setAttributesWithDictionary:@{
         @"date_begin": [dateFormatter stringFromDate:now], // TODO
         @"date_end": [dateFormatter stringFromDate:now],
-        @"canton": @"AR",
+        @"canton": [MedidataXMLGenerator stringForCanton:operator.city],
         @"reason": @"disease",
     }];
     
@@ -436,5 +436,62 @@
     return document;
 }
 
+
++ (NSString *)stringForCanton:(NSString *)cantonString {
+    if ([cantonString.lowercaseString isEqualTo:@"zürich"]) {
+        return @"ZH";
+    } else if ([cantonString.lowercaseString isEqualTo:@"bern"] || [cantonString.lowercaseString isEqualTo:@"berne"]) {
+        return @"BE";
+    } else if ([cantonString.lowercaseString isEqualTo:@"luzer"]) {
+        return @"LU";
+    } else if ([cantonString.lowercaseString isEqualTo:@"ur"]) {
+        return @"UR";
+    } else if ([cantonString.lowercaseString isEqualTo:@"schwy"]) {
+        return @"SZ";
+    } else if ([cantonString.lowercaseString isEqualTo:@"obwalde"]) {
+        return @"OW";
+    } else if ([cantonString.lowercaseString isEqualTo:@"nidwalde"]) {
+        return @"NW";
+    } else if ([cantonString.lowercaseString isEqualTo:@"glaru"]) {
+        return @"GL";
+    } else if ([cantonString.lowercaseString isEqualTo:@"zu"]) {
+        return @"ZG";
+    } else if ([cantonString.lowercaseString isEqualTo:@"fribourg"] || [cantonString.lowercaseString isEqualTo:@"freibur"]) {
+        return @"FR";
+    } else if ([cantonString.lowercaseString isEqualTo:@"solothur"]) {
+        return @"SO";
+    } else if ([cantonString.lowercaseString isEqualTo:@"basel-stad"]) {
+        return @"BS";
+    } else if ([cantonString.lowercaseString isEqualTo:@"basel-landschaft"]) {
+        return @"BL";
+    } else if ([cantonString.lowercaseString isEqualTo:@"schaffhausen"]) {
+        return @"SH";
+    } else if ([cantonString.lowercaseString isEqualTo:@"appenzell ausserrhoden"]) {
+        return @"AR";
+    } else if ([cantonString.lowercaseString isEqualTo:@"appenzell innerrhoden"]) {
+        return @"AI";
+    } else if ([cantonString.lowercaseString isEqualTo:@"st. gallen"]) {
+        return @"SG";
+    } else if ([cantonString.lowercaseString isEqualTo:@"graubünden"] || [cantonString.lowercaseString isEqualTo:@"grischun"] || [cantonString.lowercaseString isEqualTo:@"grigioni"]) {
+        return @"GR";
+    } else if ([cantonString.lowercaseString isEqualTo:@"aargau"]) {
+        return @"AG";
+    } else if ([cantonString.lowercaseString isEqualTo:@"thurgau"]) {
+        return @"TG";
+    } else if ([cantonString.lowercaseString isEqualTo:@"ticino"]) {
+        return @"TI";
+    } else if ([cantonString.lowercaseString isEqualTo:@"vaud"]) {
+        return @"VD";
+    } else if ([cantonString.lowercaseString isEqualTo:@"valais"] || [cantonString.lowercaseString isEqualTo: @"wallis"]) {
+        return @"VS";
+    } else if ([cantonString.lowercaseString isEqualTo:@"neuchâtel"]) {
+        return @"NE";
+    } else if ([cantonString.lowercaseString isEqualTo:@"genève"]) {
+        return @"GE";
+    } else if ([cantonString.lowercaseString isEqualTo:@"jura"]) {
+        return @"JU";
+    }
+    return @"";
+}
 
 @end
