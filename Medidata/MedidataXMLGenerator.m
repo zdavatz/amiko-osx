@@ -374,17 +374,19 @@
         @"amount_due": [f stringFromNumber:total] ?: @"0",
     }];
     
+    NSDecimalNumber *totalVat = [[NSDecimalNumber decimalNumberWithDecimal:[total decimalValue]] decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithDecimal:[@(0.025) decimalValue]]];
+    
     NSXMLElement *vat = [NSXMLElement elementWithName:@"invoice:vat"];
     [balance addChild:vat];
     [vat setAttributesWithDictionary:@{
-        @"vat": @"0"
+        @"vat": [f stringFromNumber:totalVat] ?: @"0",
     }];
     NSXMLElement *vatRate = [NSXMLElement elementWithName:@"invoice:vat_rate"];
     [vat addChild:vatRate];
     [vatRate setAttributesWithDictionary:@{
-        @"vat": @"0.0",
-        @"vat_rate": @"0",
-        @"amount": @"0.0",
+        @"vat": [f stringFromNumber:totalVat] ?: @"0",
+        @"vat_rate": @"2.5",
+        @"amount": [f stringFromNumber:total] ?: @"0",
     }];
     
     NSXMLElement *esr9 = [NSXMLElement elementWithName:@"invoice:esr9"];
