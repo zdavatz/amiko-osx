@@ -251,6 +251,10 @@
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *price = [f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]];
 //    <invoice:record_drug record_id="1" tariff_type="402" code="7680300580117" session="1" quantity="1" date_begin="2021-06-22T00:00:00" provider_id="2099988876514" responsible_id="2099988876514" unit="8.2" unit_factor="1" amount="8.20" validate="1" service_attributes="0" obligation="1" name="MAXIDEX Gtt Opht 5 ml"/>
+    if (!price.intValue) {
+//        Drugs that have no price can be ignored and do not have to go onto the bill.
+        return nil;
+    }
     [drug setAttributesWithDictionary:@{
         @"record_id": [@([number intValue] + 1) stringValue],
         @"tariff_type": @"402",
@@ -421,7 +425,10 @@
     [body addChild:services];
     
     for (NSInteger i = 0; i < items.count; i++) {
-        [services addChild:[MedidataXMLGenerator xmlInvoiceServiceWithOperator:operator index:@(i) prescriptionItem:items[i]]];
+        NSXMLElement *drugElement = [MedidataXMLGenerator xmlInvoiceServiceWithOperator:operator index:@(i) prescriptionItem:items[i]];
+        if (drugElement) {
+            [services addChild:drugElement];
+        }
     }
 
     return root;
