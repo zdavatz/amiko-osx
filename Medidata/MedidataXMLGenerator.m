@@ -350,7 +350,7 @@
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *total = @0; // [f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]];
+    NSNumber *total = @0;
     for (MLPrescriptionItem *item in items) {
         total = [[NSDecimalNumber decimalNumberWithDecimal:[[f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]] decimalValue]] decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:total.decimalValue]];
     }
@@ -389,14 +389,17 @@
         @"amount": [f stringFromNumber:total] ?: @"0",
     }];
     
-    NSXMLElement *esr9 = [NSXMLElement elementWithName:@"invoice:esr9"];
-    [body addChild:esr9];
-    [esr9 setAttributesWithDictionary:@{
-        @"participant_number": @"01-123-6",
-        @"reference_number": @"12 34560 00000 00000 00015 85733",
-        @"coding_line": @"0100000056306>123456000000000000001585733+ 010001456>"
+    NSXMLElement *esrQR = [NSXMLElement elementWithName:@"invoice:esrQR"];
+    [body addChild:esrQR];
+    [esrQR setAttributesWithDictionary:@{
+        @"type": @"esrQR",
+        @"reference_number": @"123456000000000000000000610",
+        @"iban": operator.IBAN ?: @"",
     }];
-    [esr9 addChild:[MedidataXMLGenerator xmlInvoiceCreditorWithOperator:operator]];
+    NSXMLElement *bank = [NSXMLElement elementWithName:@"invoice:bank"];
+    [bank addChild:[MedidataXMLGenerator xmlInvoicePersonWithOperator:operator]];
+    [esrQR addChild:bank];
+    [esrQR addChild:[MedidataXMLGenerator xmlInvoiceCreditorWithOperator:operator]];
     
     // TODO:
     NSXMLElement *kvg = [NSXMLElement elementWithName:@"invoice:kvg"];
