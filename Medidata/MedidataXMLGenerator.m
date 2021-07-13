@@ -251,6 +251,10 @@
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *price = [f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]];
 //    <invoice:record_drug record_id="1" tariff_type="402" code="7680300580117" session="1" quantity="1" date_begin="2021-06-22T00:00:00" provider_id="2099988876514" responsible_id="2099988876514" unit="8.2" unit_factor="1" amount="8.20" validate="1" service_attributes="0" obligation="1" name="MAXIDEX Gtt Opht 5 ml"/>
+    if (!price.intValue) {
+//        Drugs that have no price can be ignored and do not have to go onto the bill.
+        return nil;
+    }
     [drug setAttributesWithDictionary:@{
         @"record_id": [@([number intValue] + 1) stringValue],
         @"tariff_type": @"402",
@@ -350,7 +354,7 @@
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *total = @0; // [f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]];
+    NSNumber *total = @0;
     for (MLPrescriptionItem *item in items) {
         total = [[NSDecimalNumber decimalNumberWithDecimal:[[f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]] decimalValue]] decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:total.decimalValue]];
     }
@@ -374,27 +378,35 @@
         @"amount_due": [f stringFromNumber:total] ?: @"0",
     }];
     
+    NSDecimalNumber *totalVat = [[NSDecimalNumber decimalNumberWithDecimal:[total decimalValue]] decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithDecimal:[@(0.025) decimalValue]]];
+    
     NSXMLElement *vat = [NSXMLElement elementWithName:@"invoice:vat"];
     [balance addChild:vat];
     [vat setAttributesWithDictionary:@{
-        @"vat": @"0"
+        @"vat": [f stringFromNumber:totalVat] ?: @"0",
     }];
     NSXMLElement *vatRate = [NSXMLElement elementWithName:@"invoice:vat_rate"];
     [vat addChild:vatRate];
     [vatRate setAttributesWithDictionary:@{
-        @"vat": @"0.0",
-        @"vat_rate": @"0",
-        @"amount": @"0.0",
+        @"vat": [f stringFromNumber:totalVat] ?: @"0",
+        @"vat_rate": @"2.5",
+        @"amount": [f stringFromNumber:total] ?: @"0",
     }];
     
-    NSXMLElement *esr9 = [NSXMLElement elementWithName:@"invoice:esr9"];
-    [body addChild:esr9];
-    [esr9 setAttributesWithDictionary:@{
-        @"participant_number": @"01-123-6",
-        @"reference_number": @"12 34560 00000 00000 00015 85733",
-        @"coding_line": @"0100000056306>123456000000000000001585733+ 010001456>"
+    NSXMLElement *esrQR = [NSXMLElement elementWithName:@"invoice:esrQR"];
+    [body addChild:esrQR];
+    NSUInteger uniqueHash = [MedidataXMLGenerator uniqueHashWithOperator:operator patient:patient prescriptionItems:items];
+    NSString *uniqueHashString = [[NSNumber numberWithUnsignedInteger:uniqueHash] stringValue];
+    uniqueHashString = [uniqueHashString substringToIndex:13];
+    [esrQR setAttributesWithDictionary:@{
+        @"type": @"esrQR",
+        @"reference_number": [NSString stringWithFormat:@"0000000000000%@%d", uniqueHashString, modulo10([uniqueHashString cStringUsingEncoding:NSUTF8StringEncoding])],
+        @"iban": operator.IBAN ?: @"",
     }];
-    [esr9 addChild:[MedidataXMLGenerator xmlInvoiceCreditorWithOperator:operator]];
+    NSXMLElement *bank = [NSXMLElement elementWithName:@"invoice:bank"];
+    [bank addChild:[MedidataXMLGenerator xmlInvoicePersonWithOperator:operator]];
+    [esrQR addChild:bank];
+    [esrQR addChild:[MedidataXMLGenerator xmlInvoiceCreditorWithOperator:operator]];
     
     // TODO:
     NSXMLElement *kvg = [NSXMLElement elementWithName:@"invoice:kvg"];
@@ -408,7 +420,7 @@
     [treatment setAttributesWithDictionary:@{
         @"date_begin": [dateFormatter stringFromDate:now], // TODO
         @"date_end": [dateFormatter stringFromDate:now],
-        @"canton": @"AR",
+        @"canton": [MedidataXMLGenerator stringForCanton:operator.city],
         @"reason": @"disease",
     }];
     
@@ -416,7 +428,10 @@
     [body addChild:services];
     
     for (NSInteger i = 0; i < items.count; i++) {
-        [services addChild:[MedidataXMLGenerator xmlInvoiceServiceWithOperator:operator index:@(i) prescriptionItem:items[i]]];
+        NSXMLElement *drugElement = [MedidataXMLGenerator xmlInvoiceServiceWithOperator:operator index:@(i) prescriptionItem:items[i]];
+        if (drugElement) {
+            [services addChild:drugElement];
+        }
     }
 
     return root;
@@ -434,5 +449,88 @@
     return document;
 }
 
+
++ (NSString *)stringForCanton:(NSString *)cantonString {
+    if ([cantonString.lowercaseString isEqualTo:@"zürich"]) {
+        return @"ZH";
+    } else if ([cantonString.lowercaseString isEqualTo:@"bern"] || [cantonString.lowercaseString isEqualTo:@"berne"]) {
+        return @"BE";
+    } else if ([cantonString.lowercaseString isEqualTo:@"luzer"]) {
+        return @"LU";
+    } else if ([cantonString.lowercaseString isEqualTo:@"ur"]) {
+        return @"UR";
+    } else if ([cantonString.lowercaseString isEqualTo:@"schwy"]) {
+        return @"SZ";
+    } else if ([cantonString.lowercaseString isEqualTo:@"obwalde"]) {
+        return @"OW";
+    } else if ([cantonString.lowercaseString isEqualTo:@"nidwalde"]) {
+        return @"NW";
+    } else if ([cantonString.lowercaseString isEqualTo:@"glaru"]) {
+        return @"GL";
+    } else if ([cantonString.lowercaseString isEqualTo:@"zu"]) {
+        return @"ZG";
+    } else if ([cantonString.lowercaseString isEqualTo:@"fribourg"] || [cantonString.lowercaseString isEqualTo:@"freibur"]) {
+        return @"FR";
+    } else if ([cantonString.lowercaseString isEqualTo:@"solothur"]) {
+        return @"SO";
+    } else if ([cantonString.lowercaseString isEqualTo:@"basel-stad"]) {
+        return @"BS";
+    } else if ([cantonString.lowercaseString isEqualTo:@"basel-landschaft"]) {
+        return @"BL";
+    } else if ([cantonString.lowercaseString isEqualTo:@"schaffhausen"]) {
+        return @"SH";
+    } else if ([cantonString.lowercaseString isEqualTo:@"appenzell ausserrhoden"]) {
+        return @"AR";
+    } else if ([cantonString.lowercaseString isEqualTo:@"appenzell innerrhoden"]) {
+        return @"AI";
+    } else if ([cantonString.lowercaseString isEqualTo:@"st. gallen"]) {
+        return @"SG";
+    } else if ([cantonString.lowercaseString isEqualTo:@"graubünden"] || [cantonString.lowercaseString isEqualTo:@"grischun"] || [cantonString.lowercaseString isEqualTo:@"grigioni"]) {
+        return @"GR";
+    } else if ([cantonString.lowercaseString isEqualTo:@"aargau"]) {
+        return @"AG";
+    } else if ([cantonString.lowercaseString isEqualTo:@"thurgau"]) {
+        return @"TG";
+    } else if ([cantonString.lowercaseString isEqualTo:@"ticino"]) {
+        return @"TI";
+    } else if ([cantonString.lowercaseString isEqualTo:@"vaud"]) {
+        return @"VD";
+    } else if ([cantonString.lowercaseString isEqualTo:@"valais"] || [cantonString.lowercaseString isEqualTo: @"wallis"]) {
+        return @"VS";
+    } else if ([cantonString.lowercaseString isEqualTo:@"neuchâtel"]) {
+        return @"NE";
+    } else if ([cantonString.lowercaseString isEqualTo:@"genève"]) {
+        return @"GE";
+    } else if ([cantonString.lowercaseString isEqualTo:@"jura"]) {
+        return @"JU";
+    }
+    return @"";
+}
+
++ (NSUInteger)uniqueHashWithOperator:(MLOperator *)operator
+                             patient:(MLPatient *)patient
+                   prescriptionItems:(NSArray<MLPrescriptionItem*> *)items {
+    NSUInteger hash = [operator hash] ^ [patient hash] ^ [[NSDate date] hash];
+    for (MLPrescriptionItem *item in items) {
+        hash ^= [item hash];
+    }
+    return hash;
+}
+
+int modulo10(const char* lpszNummer)
+{
+    // 'lpszNummer' darf nur Ziffern zwischen 0 und 9 enthalten!
+
+    static const int nTabelle[] = { 0, 9, 4, 6, 8, 2, 7, 1, 3, 5 };
+    int nUebertrag = 0;
+
+    while (*lpszNummer)
+    {
+        nUebertrag = nTabelle[(nUebertrag + *lpszNummer - '0') % 10];
+        ++lpszNummer;
+    }
+
+    return (10 - nUebertrag) % 10;
+}
 
 @end

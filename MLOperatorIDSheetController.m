@@ -184,6 +184,8 @@
     operator.country = [mCountry stringValue];
     operator.phoneNumber = [mPhoneNumber stringValue];
     operator.emailAddress = [mEmailAddress stringValue];
+    operator.IBAN = [mIBAN stringValue];
+    operator.vatNumber = [mVatNumber stringValue];
     [[MLPersistenceManager shared] setDoctor:operator];
 }
 
@@ -229,6 +231,14 @@
 
     if ([self stringIsNilOrEmpty:operator.emailAddress]==NO)
         mEmailAddress.stringValue = operator.emailAddress;
+    
+    if ([self stringIsNilOrEmpty:operator.IBAN]==NO) {
+        mIBAN.stringValue = operator.IBAN;
+    }
+    
+    if ([self stringIsNilOrEmpty:operator.vatNumber]==NO) {
+        mVatNumber.stringValue = operator.vatNumber;
+    }
     
     [self validateFields];
 }
