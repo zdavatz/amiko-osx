@@ -395,9 +395,12 @@
     
     NSXMLElement *esrQR = [NSXMLElement elementWithName:@"invoice:esrQR"];
     [body addChild:esrQR];
+    NSUInteger uniqueHash = [MedidataXMLGenerator uniqueHashWithOperator:operator patient:patient prescriptionItems:items];
+    NSString *uniqueHashString = [[NSNumber numberWithUnsignedInteger:uniqueHash] stringValue];
+    uniqueHashString = [uniqueHashString substringToIndex:13];
     [esrQR setAttributesWithDictionary:@{
         @"type": @"esrQR",
-        @"reference_number": @"123456000000000000000000610",
+        @"reference_number": [NSString stringWithFormat:@"0000000000000%@%d", uniqueHashString, modulo10([uniqueHashString cStringUsingEncoding:NSUTF8StringEncoding])],
         @"iban": operator.IBAN ?: @"",
     }];
     NSXMLElement *bank = [NSXMLElement elementWithName:@"invoice:bank"];
@@ -502,6 +505,32 @@
         return @"JU";
     }
     return @"";
+}
+
++ (NSUInteger)uniqueHashWithOperator:(MLOperator *)operator
+                             patient:(MLPatient *)patient
+                   prescriptionItems:(NSArray<MLPrescriptionItem*> *)items {
+    NSUInteger hash = [operator hash] ^ [patient hash] ^ [[NSDate date] hash];
+    for (MLPrescriptionItem *item in items) {
+        hash ^= [item hash];
+    }
+    return hash;
+}
+
+int modulo10(const char* lpszNummer)
+{
+    // 'lpszNummer' darf nur Ziffern zwischen 0 und 9 enthalten!
+
+    static const int nTabelle[] = { 0, 9, 4, 6, 8, 2, 7, 1, 3, 5 };
+    int nUebertrag = 0;
+
+    while (*lpszNummer)
+    {
+        nUebertrag = nTabelle[(nUebertrag + *lpszNummer - '0') % 10];
+        ++lpszNummer;
+    }
+
+    return (10 - nUebertrag) % 10;
 }
 
 @end
