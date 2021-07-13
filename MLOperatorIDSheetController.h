@@ -41,6 +41,8 @@
     IBOutlet NSTextField *mCountry;
     IBOutlet NSTextField *mPhoneNumber;
     IBOutlet NSTextField *mEmailAddress;
+    __weak IBOutlet NSTextField *mIBAN;
+    __weak IBOutlet NSTextField *mVatNumber;
     __weak IBOutlet NSButton *mSaveButton;
 }
 

@@ -73,3 +73,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Wohnort*"; ObjectID = "vsC-VR-c2J"; */
 "vsC-VR-c2J.title" = "Résidence*";
+
+"ApV-E5-6MO.title" = "No. OFSP";
+
+"pgD-PO-MRG.title" = "Nr. de la Carte";
+
+"Zrg-Tk-5zt.title" = "Date d'expiration";
