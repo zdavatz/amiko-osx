@@ -43,10 +43,19 @@
         NSLog(@"response data: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         NSLog(@"response: %@", response);
         NSLog(@"error: %@", error);
-        NSError *decodeError = nil;
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&decodeError];
-        NSString *ref = dict[@"transmissionReference"];
-        // TODO: past ref to amk
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAlert *alert = [NSAlert alertWithError:error];
+                [alert runModal];
+            });
+            return;
+        }
+        if (data) {
+            NSError *decodeError = nil;
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&decodeError];
+            NSString *ref = dict[@"transmissionReference"];
+            // TODO: past ref to amk
+        }
     }];
     [task resume];
 }
