@@ -147,3 +147,5 @@
 
 /* html */
 "Your medicine basket is empty" = "Votre panier des médicaments est vide.";
+
+"The Medidata VA seems to be offline." = "Le VA de Medidata ne semble pas être en ligne."

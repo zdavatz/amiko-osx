@@ -46,6 +46,9 @@
         if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [NSAlert alertWithError:error];
+                if ([error code] == NSURLErrorTimedOut) {
+                    [alert setInformativeText:NSLocalizedString(@"The Medidata VA seems to be offline.", nil)];
+                }
                 [alert runModal];
             });
             return;
