@@ -1739,7 +1739,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     */
     NSURL *baseURL = [[MLPersistenceManager shared] amkBaseDirectory];
     if ([[url path] hasPrefix:baseURL.path]) {
-        possibleToOverwrite = false;
+        possibleToOverwrite = true;
         modifiedPrescription = false;
     } else {
         // If it's not in the base directory, we should allow user to save to prescription
