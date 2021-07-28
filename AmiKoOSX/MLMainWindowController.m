@@ -2595,16 +2595,20 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     [mJSBridge registerHandler:@"JSToObjC_"
                        handler:^(id msg, WVJBResponseCallback responseCallback) {
-        if ([msg count]==3) {
+        if ([msg count] == 2) {
+            if ([msg[1] isEqualToString:@"call_epha"]) {
+                [mInteractionsView callEPha];
+            }
+        } else if ([msg count]==3) {
             // --- Interactions ---
             if ([msg[0] isEqualToString:@"interactions_cb"]) {
-                if ([msg[1] isEqualToString:@"notify_interaction"])
+                if ([msg[1] isEqualToString:@"notify_interaction"]) {
                     [mInteractionsView sendInteractionNotice];
-                else if ([msg[1] isEqualToString:@"delete_all"])
+                } else if ([msg[1] isEqualToString:@"delete_all"]) {
                     [mInteractionsView clearMedBasket];
-                else if ([msg[1] isEqualToString:@"delete_row"])
+                } else if ([msg[1] isEqualToString:@"delete_row"]) {
                     [mInteractionsView removeFromMedBasketForKey:msg[2]];
-                
+                }
                 // Update med basket
                 mCurrentWebView = kInteractionsCartView;
                 [self updateInteractionsView];

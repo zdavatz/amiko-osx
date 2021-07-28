@@ -95,6 +95,48 @@
     return htmlStr;
 }
 
+- (void)callEPha {
+    if ([medCart size] == 0) return;
+    NSString *lang = [MLUtilities isFrenchApp] ? @"fr" : @"de";
+    NSMutableArray<NSDictionary *> *dicts = [NSMutableArray array];
+    for (NSString *name in [medCart.cart allKeys]) {
+        MLMedication *med = [medCart.cart valueForKey:name];
+        NSArray *p = [med.packages componentsSeparatedByString:@"|"];
+        NSString *eanCode = [p objectAtIndex:9];
+        [dicts addObject:@{
+            @"type": @"drug",
+            @"gtin": [eanCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
+        }];
+    }
+    NSData *postBody = [NSJSONSerialization dataWithJSONObject:dicts options:0 error:0];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.epha.health/clinic/advice/%@/", lang]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:postBody];
+    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSAlert alertWithError:error] runModal];
+            });
+            return;
+        }
+        NSError *decodeError = nil;
+        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:0
+                                                                       error:&decodeError];
+        if (decodeError) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSAlert alertWithError:decodeError] runModal];
+            });
+            return;
+        }
+        NSURL *url = [NSURL URLWithString:responseDict[@"data"][@"link"]];
+        [[NSWorkspace sharedWorkspace] openURL:url];
+    }];
+    [task resume];
+}
+
 /**
  Create interaction basket html string
  */
@@ -135,10 +177,17 @@
         }
         // Add delete all button
         // TODO: localize
-        if ([MLUtilities isGermanApp])
-            medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Korb leeren\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
-        else if ([MLUtilities isFrenchApp])
-            medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\"><input type=\"button\" value=\"Tout supprimer\" onclick=\"deleteRow('Delete_all',this)\" /></div>"];
+        if ([MLUtilities isGermanApp]) {
+            medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\">"];
+            medBasketStr = [medBasketStr stringByAppendingString:@"<input type=\"button\" value=\"Korb leeren\" onclick=\"deleteRow('Delete_all',this)\" />"];
+            medBasketStr = [medBasketStr stringByAppendingString:@"<input type=\"button\" value=\"EPha API\" style=\"cursor: pointer; float:right;\" onclick=\"callEPhaAPI()\" />"];
+            medBasketStr = [medBasketStr stringByAppendingString:@"</div>"];
+        } else if ([MLUtilities isFrenchApp]) {
+            medBasketStr = [medBasketStr stringByAppendingString:@"</table><div id=\"Delete_all\">"];
+            medBasketStr = [medBasketStr stringByAppendingString:@"<input type=\"button\" value=\"Tout supprimer\" onclick=\"deleteRow('Delete_all',this)\" />"];
+            medBasketStr = [medBasketStr stringByAppendingString:@"<input type=\"button\" value=\"EPha API\" style=\"cursor: pointer; float:right;\" onclick=\"callEPhaAPI()\" />"];
+            medBasketStr = [medBasketStr stringByAppendingString:@"</div>"];
+        }
     }
     else {
         medBasketStr = [NSString stringWithFormat:@"<div>%@<br><br></div>",
