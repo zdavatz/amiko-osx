@@ -1606,7 +1606,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                                    prescriptionItems:mPrescriptionsCart[0].cart];
     [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc];
 
-    NSData *data = [doc XMLData];
+    NSData *data = [doc XMLDataWithOptions:NSXMLNodePrettyPrint];
     NSSavePanel *savePanel = [NSSavePanel savePanel];
     NSModalResponse returnCode = [savePanel runModal];
     if (returnCode == NSFileHandlingPanelOKButton) {

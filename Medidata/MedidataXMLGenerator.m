@@ -180,6 +180,7 @@
     
     NSXMLElement *card = [NSXMLElement elementWithName:@"invoice:card"];
     [patientElement addChild:card];
+    NSLog(@"xmlInvoicePatientWithPatient: Patient dict: %@", [patient dictionaryRepresentation]);
     [card setAttributesWithDictionary:@{
         @"card_id": patient.healthCardNumber ?: @"",
         @"expiry_date": patient.healthCardExpiry ? [isoDateFormatter stringFromDate:[dateFormat dateFromString:patient.healthCardExpiry]] : @"",
@@ -245,14 +246,18 @@
 }
 
 + (NSXMLElement *)xmlInvoiceServiceWithOperator:(MLOperator *)operator index:(NSNumber *)number prescriptionItem:(MLPrescriptionItem *)item {
+    NSLog(@"xmlInvoiceServiceWithOperator:index:prescriptionItem:");
+    NSLog(@"[item price]: %@", [item price]);
     NSXMLElement *drug = [NSXMLElement elementWithName:@"invoice:service"];
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *price = [f numberFromString:[[item price] stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]]];
+    NSLog(@"price number: %@", price);
 //    <invoice:record_drug record_id="1" tariff_type="402" code="7680300580117" session="1" quantity="1" date_begin="2021-06-22T00:00:00" provider_id="2099988876514" responsible_id="2099988876514" unit="8.2" unit_factor="1" amount="8.20" validate="1" service_attributes="0" obligation="1" name="MAXIDEX Gtt Opht 5 ml"/>
     if (!price.intValue) {
 //        Drugs that have no price can be ignored and do not have to go onto the bill.
+        NSLog(@"Cannot find price for: %@", item.fullPackageInfo);
         return nil;
     }
     [drug setAttributesWithDictionary:@{
@@ -430,7 +435,10 @@
     for (NSInteger i = 0; i < items.count; i++) {
         NSXMLElement *drugElement = [MedidataXMLGenerator xmlInvoiceServiceWithOperator:operator index:@(i) prescriptionItem:items[i]];
         if (drugElement) {
+            NSLog(@"Has drug element for %@", items[i].eanCode);
             [services addChild:drugElement];
+        } else {
+            NSLog(@"No drug element for %@", items[i].eanCode);
         }
     }
 
@@ -451,6 +459,7 @@
 
 
 + (NSString *)stringForCanton:(NSString *)cantonString {
+    NSLog(@"stringForCanton: %@", cantonString);
     if ([cantonString.lowercaseString isEqualTo:@"zürich"]) {
         return @"ZH";
     } else if ([cantonString.lowercaseString isEqualTo:@"bern"] || [cantonString.lowercaseString isEqualTo:@"berne"]) {

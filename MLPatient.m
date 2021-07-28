@@ -137,6 +137,7 @@
 }
 
 - (NSDictionary *)findParticipantsKvg {
+    NSLog(@"Patient findParticipantsKvg '%@'", self.bagNumber);
     NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"participants-kvg" ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:jsonPath
                                           options:0
@@ -148,11 +149,12 @@
         if (character >= '0' && character <= '9') {
             [myBagNumberStr appendString:[NSString stringWithCharacters:&character length:1]];
         }
-        NSLog(@"wow %@", myBagNumberStr);
     }
+    NSLog(@"BAG Number string %@", myBagNumberStr);
     
     for (NSDictionary *dict in dicts) {
         NSNumber *bagNumber = dict[@"bagNumber"];
+        NSLog(@"bagNumber %@, %@", [bagNumber class], bagNumber);
         if ([bagNumber isKindOfClass:[NSNumber class]]) {
             if (myBagNumberStr.integerValue == bagNumber.integerValue) {
                 return dict;
