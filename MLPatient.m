@@ -142,10 +142,19 @@
                                           options:0
                                             error:nil];
     NSArray *dicts = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    NSMutableString *myBagNumberStr = [NSMutableString string];
+    for (NSUInteger i = 0; i < self.bagNumber.length; i++) {
+        unichar character = [self.bagNumber characterAtIndex:i];
+        if (character >= '0' && character <= '9') {
+            [myBagNumberStr appendString:[NSString stringWithCharacters:&character length:1]];
+        }
+        NSLog(@"wow %@", myBagNumberStr);
+    }
+    
     for (NSDictionary *dict in dicts) {
         NSNumber *bagNumber = dict[@"bagNumber"];
         if ([bagNumber isKindOfClass:[NSNumber class]]) {
-            if (self.bagNumber.integerValue == bagNumber.integerValue) {
+            if (myBagNumberStr.integerValue == bagNumber.integerValue) {
                 return dict;
             }
         }
