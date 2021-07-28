@@ -31,9 +31,9 @@
 @property (atomic, copy) NSString *eanCode;
 @property (atomic, copy) NSString *productName;
 @property (atomic, copy) NSString *fullPackageInfo;
-@property (atomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *title;
 @property (atomic, copy) NSString *owner;
-@property (atomic, copy) NSString *price;
+@property (readonly) NSString *price;
 @property (atomic, copy) NSString *comment;
 @property (atomic) MLMedication *med;
 

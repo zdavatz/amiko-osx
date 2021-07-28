@@ -150,11 +150,9 @@
             [myBagNumberStr appendString:[NSString stringWithCharacters:&character length:1]];
         }
     }
-    NSLog(@"BAG Number string %@", myBagNumberStr);
     
     for (NSDictionary *dict in dicts) {
         NSNumber *bagNumber = dict[@"bagNumber"];
-        NSLog(@"bagNumber %@, %@", [bagNumber class], bagNumber);
         if ([bagNumber isKindOfClass:[NSNumber class]]) {
             if (myBagNumberStr.integerValue == bagNumber.integerValue) {
                 return dict;
