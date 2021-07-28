@@ -39,7 +39,7 @@
 
 - (NSArray *) getAllContacts
 {
-    groupOfContacts = [@[] mutableCopy];
+    groupOfContacts = [NSMutableArray array];
 
     [self addAllContactsToArray:groupOfContacts];
     

@@ -34,6 +34,7 @@
 - (void) pushToMedBasket:(MLMedication *)med;
 - (void) removeFromMedBasketForKey:(NSString *)key;
 - (void) clearMedBasket;
+- (void)callEPha;
 - (NSString *) fullInteractionsHtml:(MLInteractionsAdapter *)interactions;
 - (NSString *) medBasketHtml;
 - (NSString *) interactionsHtml:(MLInteractionsAdapter *)interactions;

@@ -66,3 +66,12 @@ function deleteRow(tableID,currentRow) {
         window.alert(e);
     }
 }
+
+function callEPhaAPI() {
+    var payload = ["interactions_cb", "call_epha"];
+    setupWebViewJavascriptBridge(function(bridge) {
+        bridge.callHandler('JSToObjC_', payload, function responseCallback(responseData) {
+            console.log("JS received response:", responseData);
+        })
+    })
+}
