@@ -2816,18 +2816,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     item.eanCode = eanCode;
     item.fullPackageInfo = s;
     item.mid = med.medId;
-    
-    NSArray *titleComponents = [s componentsSeparatedByString:@"["];
-    titleComponents = [[titleComponents firstObject] componentsSeparatedByString:@","];
-    if ([titleComponents count]) {
-        item.title = [titleComponents firstObject];
-        if ([titleComponents count] > 2) {
-            item.price = [NSString stringWithFormat:@"%@ CHF", titleComponents[2]];
-            item.price = [item.price stringByReplacingOccurrencesOfString:@"ev.nn.i.H. " withString:@""];
-            item.price = [item.price stringByReplacingOccurrencesOfString:@"PP " withString:@""];
-        } else {
-            item.price = @"";
-        }
+
+    if (item.title) {
         [self addItem:item toPrescriptionCartWithId:0];
     }
 }

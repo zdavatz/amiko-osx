@@ -48,4 +48,30 @@
             NSStringFromClass([self class]), title, productName, comment];
 }
 
+- (NSString *)title {
+    if (title) {
+        return title;
+    }
+    NSArray *titleComponents = [self.fullPackageInfo componentsSeparatedByString:@"["];
+    titleComponents = [[titleComponents firstObject] componentsSeparatedByString:@","];
+    if ([titleComponents count]) {
+        return [titleComponents firstObject];
+    }
+    return @"";
+}
+
+- (NSString *)price {
+    NSArray *titleComponents = [self.fullPackageInfo componentsSeparatedByString:@"["];
+    titleComponents = [[titleComponents firstObject] componentsSeparatedByString:@","];
+    NSString *result = @"";
+    if ([titleComponents count]) {
+        if ([titleComponents count] > 2) {
+            result = [NSString stringWithFormat:@"%@ CHF", titleComponents[2]];
+            result = [result stringByReplacingOccurrencesOfString:@"ev.nn.i.H. " withString:@""];
+            result = [result stringByReplacingOccurrencesOfString:@"PP " withString:@""];
+        }
+    }
+    return result;
+}
+
 @end
