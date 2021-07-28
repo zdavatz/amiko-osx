@@ -1601,8 +1601,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 - (IBAction)onSendPrescriptionToMedidata:(id)sender {
-    NSXMLDocument *doc = [MedidataXMLGenerator xmlInvoiceRequestDocumentWithOperator:[mPrescriptionAdapter doctor]
-                                                                             patient:[mPrescriptionAdapter patient]
+    MLPatient *amkPatient = [mPrescriptionAdapter patient];
+    MLPatient *dbPatient = [mPatientSheet retrievePatientWithUniqueID:amkPatient.uniqueId];
+    NSXMLDocument *doc = [MedidataXMLGenerator xmlInvoiceRequestDocumentWithOperator:[mOperatorIDSheet loadOperator]
+                                                                             patient:dbPatient
                                                                    prescriptionItems:mPrescriptionsCart[0].cart];
     [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc];
 
