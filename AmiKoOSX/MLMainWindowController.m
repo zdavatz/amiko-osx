@@ -1608,8 +1608,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                                                                    prescriptionItems:mPrescriptionsCart[0].cart];
     [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc];
 
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH.mm.dd.MM.yyyy"];
+    [dateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
+    
     NSData *data = [doc XMLDataWithOptions:NSXMLNodePrettyPrint];
     NSSavePanel *savePanel = [NSSavePanel savePanel];
+    [savePanel setNameFieldStringValue:[NSString stringWithFormat:@"%@_%@_%@_%@.xml", dbPatient.givenName, dbPatient.familyName, dbPatient.birthDate, [dateFormatter stringFromDate:[NSDate date]]]];
     NSModalResponse returnCode = [savePanel runModal];
     if (returnCode == NSFileHandlingPanelOKButton) {
         [data writeToURL:savePanel.URL atomically:YES];
