@@ -144,17 +144,21 @@
     [postal addChild:city];
     [city setStringValue:patient.city];
     
-    NSXMLElement *telecom = [NSXMLElement elementWithName:@"invoice:telecom"];
-    [person addChild:telecom];
-    NSXMLElement *phone = [NSXMLElement elementWithName:@"invoice:phone"];
-    [telecom addChild:phone];
-    [phone setStringValue:patient.phoneNumber];
+    if ([patient.phoneNumber length]) {
+        NSXMLElement *telecom = [NSXMLElement elementWithName:@"invoice:telecom"];
+        [person addChild:telecom];
+        NSXMLElement *phone = [NSXMLElement elementWithName:@"invoice:phone"];
+        [telecom addChild:phone];
+        [phone setStringValue:patient.phoneNumber];
+    }
     
-    NSXMLElement *online = [NSXMLElement elementWithName:@"invoice:online"];
-    [person addChild:online];
-    NSXMLElement *email = [NSXMLElement elementWithName:@"invoice:email"];
-    [online addChild:email];
-    [email setStringValue:patient.emailAddress];
+    if ([patient.emailAddress length]) {
+        NSXMLElement *online = [NSXMLElement elementWithName:@"invoice:online"];
+        [person addChild:online];
+        NSXMLElement *email = [NSXMLElement elementWithName:@"invoice:email"];
+        [online addChild:email];
+        [email setStringValue:patient.emailAddress];
+    }
     
     return person;
 }
