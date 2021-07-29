@@ -24,7 +24,7 @@
     [request setValue:[NSString stringWithFormat:@"Basic %@", MEDIDATA_CLIENT_AUTHORIZATION] forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:@"POST"];
     
-    NSData *xmlDocumentData = [document XMLData];
+    NSData *xmlDocumentData = [document XMLDataWithOptions:NSXMLNodePrettyPrint];
     
     NSMutableData *httpBody = [NSMutableData data];
 
