@@ -11,6 +11,8 @@
 		93B279D620B857FD00E32881 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA54AAFD20AED1460034CD77 /* libz.tbd */; };
 		CF01CCAD2524E92F0014B224 /* MLButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF01CCAC2524E92F0014B224 /* MLButtonCell.m */; };
 		CF01CCAE2524E92F0014B224 /* MLButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF01CCAC2524E92F0014B224 /* MLButtonCell.m */; };
+		CF02AC3226B2E10200844A28 /* Postleitzahlen-Schweiz.csv in Resources */ = {isa = PBXBuildFile; fileRef = CF02AC3126B2E10200844A28 /* Postleitzahlen-Schweiz.csv */; };
+		CF02AC3326B2E10200844A28 /* Postleitzahlen-Schweiz.csv in Resources */ = {isa = PBXBuildFile; fileRef = CF02AC3126B2E10200844A28 /* Postleitzahlen-Schweiz.csv */; };
 		CF16C25F25236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
 		CF16C26025236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
 		CF2EA5E9269328D300FA1EC8 /* MedidataClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2EA5E8269328D300FA1EC8 /* MedidataClient.m */; };
@@ -242,6 +244,7 @@
 		930F636021CA5D8400576223 /* CoMed Desitin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoMed Desitin.entitlements"; sourceTree = "<group>"; };
 		CF01CCAB2524E92F0014B224 /* MLButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLButtonCell.h; sourceTree = "<group>"; };
 		CF01CCAC2524E92F0014B224 /* MLButtonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLButtonCell.m; sourceTree = "<group>"; };
+		CF02AC3126B2E10200844A28 /* Postleitzahlen-Schweiz.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Postleitzahlen-Schweiz.csv"; sourceTree = "<group>"; };
 		CF16C26125236F7F00A05542 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLPreferencesWindowController.xib; sourceTree = "<group>"; };
 		CF16C26425236F8300A05542 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
 		CF16C26625236F8400A05542 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
@@ -896,6 +899,7 @@
 				D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */,
 				D5DD576A193E646D0094244E /* drug_interactions_csv_fr.csv */,
 				CF98CB88269719990005C79A /* participants-kvg.json */,
+				CF02AC3126B2E10200844A28 /* Postleitzahlen-Schweiz.csv */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -1065,6 +1069,7 @@
 				D5E91B9A17E5E8E400B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B9C17E5E8E400B66B27 /* Credits.rtf in Resources */,
+				CF02AC3226B2E10200844A28 /* Postleitzahlen-Schweiz.csv in Resources */,
 				D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */,
 				FA9F26E821C2CD1A005DA919 /* Wait.xib in Resources */,
 				D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
@@ -1115,6 +1120,7 @@
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5C6442D1EB345A300438E6F /* fulltext_style.css in Resources */,
 				D5AE31831B37203E006BC60E /* desitin.iconset in Resources */,
+				CF02AC3326B2E10200844A28 /* Postleitzahlen-Schweiz.csv in Resources */,
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5C6443B1EB37A6F00438E6F /* main_callbacks.js in Resources */,
 				FA4BC4DD208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */,
