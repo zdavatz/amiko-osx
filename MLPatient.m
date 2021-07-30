@@ -162,4 +162,32 @@
     return nil;
 }
 
+- (NSString *)findCantonShortCode {
+    NSString *csvPath = [[NSBundle mainBundle] pathForResource:@"Postleitzahlen-Schweiz" ofType:@"csv"];
+    NSData *data = [NSData dataWithContentsOfFile:csvPath
+                                          options:0
+                                            error:nil];
+    NSString *csvString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSArray<NSString *> *rows = [csvString componentsSeparatedByString:@"\n"];
+    for (NSInteger rowIndex = 1; rowIndex < [rows count]; rowIndex++) {
+        NSArray *cols = [rows[rowIndex] componentsSeparatedByString:@";"];
+        if ([cols count] < 6) continue;
+        NSString *zipCode = cols[0];
+        NSString *cityName = cols[1];
+        NSString *canton1 = cols[2];
+        NSString *canton2 = cols[3];
+        NSString *canton3 = cols[4];
+        NSString *shortCode = cols[5];
+        if ([self.zipCode integerValue] == [zipCode integerValue]
+            || [self.city.lowercaseString isEqualToString:cityName.lowercaseString]
+            || [self.city.lowercaseString isEqualToString:canton1.lowercaseString]
+            || [self.city.lowercaseString isEqualToString:canton2.lowercaseString]
+            || [self.city.lowercaseString isEqualToString:canton3.lowercaseString]
+            ) {
+            return shortCode;
+        }
+    }
+    return nil;
+}
+
 @end

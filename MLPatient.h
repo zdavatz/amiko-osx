@@ -72,5 +72,6 @@ enum database_t {
 - (NSString *) generateUniqueID;
 - (NSString *) asString;
 - (NSDictionary *)findParticipantsKvg;
+- (NSString *)findCantonShortCode;
 
 @end
