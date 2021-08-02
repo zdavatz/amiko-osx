@@ -12,6 +12,7 @@
         <attribute name="healthCardExpiry" optional="YES" attributeType="String"/>
         <attribute name="healthCardNumber" optional="YES" attributeType="String"/>
         <attribute name="heightCm" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="insuranceGLN" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="postalAddress" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -20,6 +21,6 @@
         <attribute name="zipCode" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Patient" positionX="-63" positionY="-18" width="128" height="284"/>
+        <element name="Patient" positionX="-63" positionY="-18" width="128" height="299"/>
     </elements>
 </model>

@@ -43,6 +43,7 @@
 @synthesize bagNumber;
 @synthesize healthCardNumber;
 @synthesize healthCardExpiry;
+@synthesize insuranceGLN;
 
 - (void)importFromDict:(NSDictionary *)dict
 {
@@ -62,6 +63,7 @@
     bagNumber =     [self getString:KEY_AMK_PAT_BAG_NUMBER orNilFromDict:dict];
     healthCardNumber = [self getString:KEY_AMK_PAT_HEALTH_CARD_NUMBER orNilFromDict:dict];
     healthCardExpiry = [self getString:KEY_AMK_PAT_HEALTH_CARD_EXPIRY orNilFromDict:dict];
+    insuranceGLN =  [self getString:KEY_AMK_PAT_INSURANCE_GLN orNilFromDict:dict];
     
     NSString *newUniqueID = [self generateUniqueID];
     
@@ -91,6 +93,7 @@
     [patientDict setObject:self.bagNumber     ?: @"" forKey:KEY_AMK_PAT_BAG_NUMBER];
     [patientDict setObject:self.healthCardNumber ?: @"" forKey:KEY_AMK_PAT_HEALTH_CARD_NUMBER];
     [patientDict setObject:self.healthCardExpiry ?: @"" forKey:KEY_AMK_PAT_HEALTH_CARD_EXPIRY];
+    [patientDict setObject:self.insuranceGLN  ?: @"" forKey:KEY_AMK_PAT_INSURANCE_GLN];
     return patientDict;
 }
 
@@ -160,6 +163,10 @@
         }
     }
     return nil;
+}
+
+- (NSString *)findParticipantGLN {
+    return [self.insuranceGLN length] ? self.insuranceGLN : [self findParticipantsKvg][@"glnParticipant"];
 }
 
 - (NSString *)findCantonShortCode {
