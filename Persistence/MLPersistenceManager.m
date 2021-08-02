@@ -401,6 +401,7 @@
             p.bagNumber = patient.bagNumber;
             p.healthCardNumber = patient.healthCardNumber;
             p.healthCardExpiry = patient.healthCardExpiry;
+            p.insuranceGLN = patient.insuranceGLN;
             [[self.coreDataContainer viewContext] save:&error];
             if (error != nil) {
                 NSLog(@"Cannot update patient %@", error);

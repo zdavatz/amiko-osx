@@ -131,6 +131,7 @@
     mPostalAddress.backgroundColor = [NSColor clearColor];
     mCity.backgroundColor = [NSColor clearColor];
     mZipCode.backgroundColor = [NSColor clearColor];
+    mInsuranceGLN.backgroundColor = [NSColor clearColor];
 }
 
 - (void) checkFields
@@ -155,6 +156,9 @@
     if ([self stringIsNilOrEmpty:[mZipCode stringValue]]) {
         mZipCode.backgroundColor = [NSColor lightRed];
     }
+    if (![self stringIsNilOrEmpty:[mInsuranceGLN stringValue]] && [[mInsuranceGLN stringValue] length] != 13) {
+        mInsuranceGLN.backgroundColor = [NSColor lightRed];
+    }
 }
 
 - (void) resetAllFields
@@ -178,6 +182,7 @@
     [mMaleButton setState:NSOffState];
     [mBagNumber setStringValue:@""];
     [mCardNumber setStringValue:@""];
+    [mInsuranceGLN setStringValue:@""];
     
     mPatientUUID = nil;
     
@@ -234,6 +239,10 @@
     if (p.healthCardExpiry != nil) {
         [mCardExpiry setStringValue:p.healthCardExpiry];
     }
+    NSString *gln = [p findParticipantGLN];
+    if ([gln length]) {
+        [mInsuranceGLN setStringValue:gln];
+    }
 }
 
 - (MLPatient *) getAllFields
@@ -254,6 +263,7 @@
     patient.bagNumber = [mBagNumber stringValue];
     patient.healthCardNumber = [mCardNumber stringValue];
     patient.healthCardExpiry = [mCardExpiry stringValue];
+    patient.insuranceGLN = [mInsuranceGLN stringValue];
     
     return patient;
 }

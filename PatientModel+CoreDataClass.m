@@ -29,6 +29,7 @@
     self.bagNumber = p.bagNumber;
     self.healthCardNumber = p.healthCardNumber;
     self.healthCardExpiry = p.healthCardExpiry;
+    self.insuranceGLN = p.insuranceGLN;
 }
 
 - (MLPatient *)toPatient {
@@ -50,6 +51,7 @@
     p.bagNumber = self.bagNumber;
     p.healthCardNumber = self.healthCardNumber;
     p.healthCardExpiry = self.healthCardExpiry;
+    p.insuranceGLN = self.insuranceGLN;
     return p;
 }
 

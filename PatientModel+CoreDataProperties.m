@@ -32,5 +32,6 @@
 @dynamic uniqueId;
 @dynamic weightKg;
 @dynamic zipCode;
+@dynamic insuranceGLN;
 
 @end
