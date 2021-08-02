@@ -851,5 +851,22 @@
         "maxReceive": 12000000,
         "notSupported": [],
         "tgAllowed": false
+    },
+    {
+        "glnParticipant": "2099988876514",
+        "glnReceiver": "2099988876514",
+        "name": "Medidata Test GmbH",
+        "street": "Teststrasse 1",
+        "zipCode": "6003",
+        "town": "Luzern",
+        "lawTypes": [
+            1
+        ],
+        "bagNumber": 1111,
+        "tgTpChange": true,
+        "additionalCosts": false,
+        "maxReceive": 12000000,
+        "notSupported": [],
+        "tgAllowed": false
     }
 ]
