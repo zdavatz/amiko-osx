@@ -81,7 +81,7 @@
 //</invoice:debitor>
     NSXMLElement *root = [NSXMLElement elementWithName:@"invoice:debitor"];
     [root setAttributesWithDictionary:@{
-        @"ean_party": [patient findParticipantsKvg][@"glnParticipant"] ?: @"",
+        @"ean_party": [patient findParticipantGLN] ?: @"",
     }];
     [root addChild:[MedidataXMLGenerator xmlInvoicePersonWithPatient:patient]];
     return root;
@@ -197,7 +197,7 @@
     NSDictionary *participantsKvg = [patient findParticipantsKvg];
     NSXMLElement *insurance = [NSXMLElement elementWithName:@"invoice:insurance"];
     [insurance setAttributesWithDictionary:@{
-        @"ean_party": participantsKvg[@"glnParticipant"] ?: @"",
+        @"ean_party": [patient findParticipantGLN] ?: @"",
     }];
     NSXMLElement *company = [NSXMLElement elementWithName:@"company"];
     [insurance addChild:company];
@@ -309,7 +309,7 @@
     [processing addChild:transport];
     [transport setAttributesWithDictionary:@{
         @"from": operator.gln,
-        @"to": [patient findParticipantsKvg][@"glnParticipant"] ?: @"",
+        @"to": [patient findParticipantGLN] ?: @"",
     }];
     NSXMLElement *via = [NSXMLElement elementWithName:@"invoice:via"];
     [transport addChild:via];
