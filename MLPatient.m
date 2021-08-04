@@ -154,6 +154,12 @@
         }
     }
     
+    if ([self.insuranceGLN isEqualToString:@"2099988876514"]) {
+        // This is the Test GLN, which we should use test data
+        // https://github.com/zdavatz/amiko-osx/issues/213
+        myBagNumberStr = [@"1111" mutableCopy];
+    }
+    
     for (NSDictionary *dict in dicts) {
         NSNumber *bagNumber = dict[@"bagNumber"];
         if ([bagNumber isKindOfClass:[NSNumber class]]) {
