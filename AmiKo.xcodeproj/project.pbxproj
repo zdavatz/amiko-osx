@@ -23,6 +23,12 @@
 		CF34E550243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */; };
 		CF34E551243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
 		CF34E552243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */; };
+		CF366B4426BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4326BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd */; };
+		CF366B4526BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4326BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd */; };
+		CF366B4826BAD2AE0060F8CF /* xenc-schema.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4626BAD2AE0060F8CF /* xenc-schema.xsd */; };
+		CF366B4926BAD2AE0060F8CF /* xenc-schema.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4626BAD2AE0060F8CF /* xenc-schema.xsd */; };
+		CF366B4A26BAD2AE0060F8CF /* xmldsig-core-schema.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4726BAD2AE0060F8CF /* xmldsig-core-schema.xsd */; };
+		CF366B4B26BAD2AE0060F8CF /* xmldsig-core-schema.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4726BAD2AE0060F8CF /* xmldsig-core-schema.xsd */; };
 		CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF8A7339268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */; };
@@ -256,6 +262,9 @@
 		CF34E54C243A1A8300E3AF61 /* PatientModel+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PatientModel+CoreDataClass.h"; sourceTree = "<group>"; };
 		CF34E54D243A1A8300E3AF61 /* PatientModel+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataClass.m"; sourceTree = "<group>"; };
 		CF34E54E243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatientModel+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CF366B4326BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = generalInvoiceRequest_450.xsd; sourceTree = "<group>"; };
+		CF366B4626BAD2AE0060F8CF /* xenc-schema.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "xenc-schema.xsd"; sourceTree = "<group>"; };
+		CF366B4726BAD2AE0060F8CF /* xmldsig-core-schema.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "xmldsig-core-schema.xsd"; sourceTree = "<group>"; };
 		CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPreferencesWindowController.h; sourceTree = "<group>"; };
 		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
 		CF8A7337268F1A6D0092E214 /* MedidataXMLGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataXMLGenerator.h; sourceTree = "<group>"; };
@@ -921,6 +930,9 @@
 		D5EBC6C817CFDD3800EBEF39 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CF366B4326BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd */,
+				CF366B4626BAD2AE0060F8CF /* xenc-schema.xsd */,
+				CF366B4726BAD2AE0060F8CF /* xmldsig-core-schema.xsd */,
 				D5BACC121EBB2CAB001812FB /* Images */,
 				D5C644411EB37A8F00438E6F /* Css */,
 				D5C644401EB37A7E00438E6F /* JScripts */,
@@ -1066,6 +1078,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5B6F970193136A400495873 /* interactions_callbacks.js in Resources */,
+				CF366B4426BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd in Resources */,
 				D5E91B9A17E5E8E400B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B9C17E5E8E400B66B27 /* Credits.rtf in Resources */,
@@ -1088,6 +1101,7 @@
 				FA91FD6421CA724700714FB1 /* Media.xcassets in Resources */,
 				D5E91BA217E5E8E400B66B27 /* app_icon_512x512.png in Resources */,
 				D5DD5761193B49260094244E /* 217-trash.png in Resources */,
+				CF366B4826BAD2AE0060F8CF /* xenc-schema.xsd in Resources */,
 				D5AE31871B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D5E91BA417E5E8E400B66B27 /* 28-star@2x.png in Resources */,
 				D5C6442C1EB345A300438E6F /* fulltext_style.css in Resources */,
@@ -1097,6 +1111,7 @@
 				D545C90218A3F89F00491511 /* comedosx_splash_1000x670.png in Resources */,
 				FA12C62721C9488E002E190E /* color-scheme-dark.css in Resources */,
 				D5E91BEF17E6060F00B66B27 /* amiko_db_full_idx_de.db in Resources */,
+				CF366B4A26BAD2AE0060F8CF /* xmldsig-core-schema.xsd in Resources */,
 				FA5562D22091ADD500B85266 /* AmiKoMainMenu.xib in Resources */,
 				D5E91BF517E6065C00B66B27 /* amiko_report_de.html in Resources */,
 				FA4BC4DC208F545000B7BDF3 /* MLAmiKoOperatorIDSheet.xib in Resources */,
@@ -1128,6 +1143,7 @@
 				D5B0105D1927C451007BE838 /* interactions_css.css in Resources */,
 				FA4BC4E9208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */,
 				FA22764020A98FD4003BA573 /* Localizable.strings in Resources */,
+				CF366B4B26BAD2AE0060F8CF /* xmldsig-core-schema.xsd in Resources */,
 				D5E91BCF17E5E8E800B66B27 /* 28-star-gy.png in Resources */,
 				FA12C62521C94856002E190E /* color-scheme-light.css in Resources */,
 				D5DD5767193B4EB40094244E /* 218-trash2.png in Resources */,
@@ -1140,6 +1156,7 @@
 				D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
+				CF366B4926BAD2AE0060F8CF /* xenc-schema.xsd in Resources */,
 				D52795F91EBF10A900B92794 /* amiko_db_full_idx_fr.db in Resources */,
 				FA12C62821C9488E002E190E /* color-scheme-dark.css in Resources */,
 				D5E91BFB17E6074D00B66B27 /* amiko_report_fr.html in Resources */,
@@ -1148,6 +1165,7 @@
 				D5DD576B193E646D0094244E /* drug_interactions_csv_fr.csv in Resources */,
 				D52A0D7817EDC414003BF272 /* comedosx_splash_1000x670.png in Resources */,
 				D5DD5762193B49260094244E /* 217-trash.png in Resources */,
+				CF366B4526BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd in Resources */,
 				D5A22509193FB19F0078FEFF /* 216-compose.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

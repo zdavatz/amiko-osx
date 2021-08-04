@@ -204,7 +204,7 @@
     
     NSXMLElement *companyName = [NSXMLElement elementWithName:@"invoice:companyname"];
     [company addChild:companyName];
-    [companyName setStringValue:[participantsKvg[@"name"] substringToIndex:35] ?: @""];
+    [companyName setStringValue: ([participantsKvg[@"name"] length] > 35 ? [participantsKvg[@"name"] substringToIndex:35] : participantsKvg[@"name"]) ?: @""];
     
     NSXMLElement *postal = [NSXMLElement elementWithName:@"invoice:postal"];
     [company addChild:postal];
@@ -406,7 +406,7 @@
     [body addChild:esrQR];
     NSUInteger uniqueHash = [MedidataXMLGenerator uniqueHashWithOperator:operator patient:patient prescriptionItems:items];
     NSString *uniqueHashString = [[NSNumber numberWithUnsignedInteger:uniqueHash] stringValue];
-    uniqueHashString = [uniqueHashString substringToIndex:13];
+    uniqueHashString = [uniqueHashString length] > 13 ? [uniqueHashString substringToIndex:13] : uniqueHashString;
     [esrQR setAttributesWithDictionary:@{
         @"type": @"esrQR",
         @"reference_number": [NSString stringWithFormat:@"0000000000000%@%d", uniqueHashString, modulo10([uniqueHashString cStringUsingEncoding:NSUTF8StringEncoding])],
