@@ -1606,13 +1606,43 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSXMLDocument *doc = [MedidataXMLGenerator xmlInvoiceRequestDocumentWithOperator:[mOperatorIDSheet loadOperator]
                                                                              patient:dbPatient
                                                                    prescriptionItems:mPrescriptionsCart[0].cart];
+    
+    NSString *tempPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"medi.xml"];
+    NSData *data = [doc XMLDataWithOptions:NSXMLNodePrettyPrint];
+    [data writeToFile:tempPath atomically:YES];
+    
+    NSString *xsdPath = [[NSBundle mainBundle] pathForResource:@"generalInvoiceRequest_450" ofType:@"xsd"];
+    
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/usr/bin/xmllint"];
+    [task setArguments:@[
+        @"--noout",
+        @"--schema",
+        xsdPath,
+        tempPath,
+    ]];
+    NSPipe *outputPipe = [NSPipe pipe];
+    [task setStandardError:outputPipe];
+    [task launch];
+    [task waitUntilExit];
+    int exitCode = [task terminationStatus];
+    NSData *lintData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
+    NSString *lintResult = [[NSString alloc] initWithData:lintData encoding:NSUTF8StringEncoding];
+    
+    if (exitCode != 0) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:NSLocalizedString(@"Error with XML Lint", nil)];
+        [alert setInformativeText:lintResult];
+        [alert runModal];
+        return;
+    }
+    
     [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH.mm.dd.MM.yyyy"];
     [dateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
     
-    NSData *data = [doc XMLDataWithOptions:NSXMLNodePrettyPrint];
     NSSavePanel *savePanel = [NSSavePanel savePanel];
     [savePanel setNameFieldStringValue:[NSString stringWithFormat:@"%@_%@_%@_%@.xml", dbPatient.givenName, dbPatient.familyName, dbPatient.birthDate, [dateFormatter stringFromDate:[NSDate date]]]];
     NSModalResponse returnCode = [savePanel runModal];
