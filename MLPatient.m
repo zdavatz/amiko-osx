@@ -166,6 +166,10 @@
             if (myBagNumberStr.integerValue == bagNumber.integerValue) {
                 return dict;
             }
+        } else if ([dict[@"glnParticipant"] isKindOfClass:[NSString class]]) {
+            if ([self.insuranceGLN isEqualToString:dict[@"glnParticipant"]]) {
+                return dict;
+            }
         }
     }
     return nil;
