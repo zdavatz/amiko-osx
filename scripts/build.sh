@@ -28,12 +28,20 @@ security unlock-keychain
 #-------------------------------------------------------------------------------
 if [ $STEP_REMOVE_SUPPORT_FILES ] ; then
 pushd ../AmiKoOSX
-for EXT in db html csv ; do
+for EXT in db html ; do
     if ls *.$EXT 1> /dev/null 2>&1; then
         echo Removing *.$EXT
         rm *.$EXT
     fi
 done
+if [[ -f "drug_interactions_csv_de.csv" ]]; then
+    rm "drug_interactions_csv_de.csv"
+    echo "Removing drug_interactions_csv_de.csv"
+fi
+if [[ -f "drug_interactions_csv_fr.csv" ]]; then
+    rm "drug_interactions_csv_fr.csv"
+    echo "Removing drug_interactions_csv_fr.csv"
+fi
 rm -r "$BUILD_PATH"
 popd > /dev/null
 fi
