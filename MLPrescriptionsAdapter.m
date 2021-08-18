@@ -36,6 +36,7 @@
 @synthesize patient;
 @synthesize doctor;
 @synthesize placeDate;
+@synthesize medidataRefs;
 
 // Returns an array of filenames (NSString),
 // just the basename with the extension ".amk" stripped off
@@ -181,15 +182,16 @@
     NSMutableArray *prescription = [[NSMutableArray alloc] init];
     for (MLPrescriptionItem *item in cart) {
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:item.title forKey:@"product_name"];
-        [dict setObject:item.fullPackageInfo forKey:@"package"];
-        if (item.eanCode!=nil)
-            [dict setObject:item.eanCode forKey:@"eancode"];
-        [dict setObject:item.comment forKey:@"comment"];
-        [dict setObject:item.med.title forKey:@"title"];
-        [dict setObject:item.med.auth forKey:@"owner"];
-        [dict setObject:item.med.regnrs forKey:@"regnrs"];
-        [dict setObject:item.med.atccode forKey:@"atccode"];
+        [dict setObject:item.title forKey:KEY_AMK_MED_PROD_NAME];
+        [dict setObject:item.fullPackageInfo forKey:KEY_AMK_MED_PACKAGE];
+        if (item.eanCode!=nil) {
+            [dict setObject:item.eanCode forKey:KEY_AMK_MED_EAN];
+        }
+        [dict setObject:item.comment forKey:KEY_AMK_MED_COMMENT];
+        [dict setObject:item.med.title forKey:KEY_AMK_MED_TITLE];
+        [dict setObject:item.med.auth forKey:KEY_AMK_MED_OWNER];
+        [dict setObject:item.med.regnrs forKey:KEY_AMK_MED_REG_N];
+        [dict setObject:item.med.atccode forKey:KEY_AMK_MED_ATC];
         [prescription addObject:dict];
     }
         
@@ -198,6 +200,9 @@
     [prescriptionDict setObject:patientDict forKey:@"patient"];
     [prescriptionDict setObject:operatorDict forKey:@"operator"];
     [prescriptionDict setObject:prescription forKey:@"medications"];
+    if (medidataRefs) {
+        [prescriptionDict setObject:[medidataRefs componentsJoinedByString:@","] forKey:@"medidata_refs"];
+    }
     
     // Map cart array to json
     NSError *error = nil;
@@ -252,6 +257,8 @@
     placeDate = [jsonDict objectForKey:@"place_date"];
     if (placeDate == nil)
         placeDate = [jsonDict objectForKey:@"date"];
+    
+    medidataRefs = [(NSString *)[jsonDict objectForKey:@"medidata_refs"] componentsSeparatedByString:@","];
 
     NSString *hash = [jsonDict objectForKey:@"prescription_hash"];
     return hash;

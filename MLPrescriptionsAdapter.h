@@ -31,6 +31,7 @@
 @property (atomic) MLPatient *patient;
 @property (atomic) MLOperator *doctor;
 @property (atomic) NSString *placeDate;
+@property (atomic) NSArray<NSString*> *medidataRefs;
 
 - (NSArray<NSString *> *) listOfPrescriptionsForPatient:(MLPatient *)p;
 
