@@ -44,6 +44,7 @@
     __weak IBOutlet NSTextField *mIBAN;
     __weak IBOutlet NSTextField *mVatNumber;
     __weak IBOutlet NSButton *mSaveButton;
+    __weak IBOutlet NSTextField *mZsrNumber;
 }
 
 - (IBAction) onCancel:(id)sender;

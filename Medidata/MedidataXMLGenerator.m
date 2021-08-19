@@ -69,7 +69,7 @@
     NSXMLElement *root = [NSXMLElement elementWithName:@"invoice:biller"];
     [root setAttributesWithDictionary:@{
         @"ean_party": operator.gln ?: @"",
-        @"zsr": @"U666666",
+        @"zsr": operator.zsrNumber.uppercaseString ?: @"",
     }];
     [root addChild:[MedidataXMLGenerator xmlInvoicePersonWithOperator:operator]];
     return root;
@@ -94,7 +94,7 @@
     NSXMLElement *root = [NSXMLElement elementWithName:@"invoice:provider"];
     [root setAttributesWithDictionary:@{
         @"ean_party": operator.gln ?: @"",
-        @"zsr": @"U666666",
+        @"zsr": operator.zsrNumber.uppercaseString ?: @"",
     }];
     [root addChild:[MedidataXMLGenerator xmlInvoicePersonWithOperator:operator]];
     return root;

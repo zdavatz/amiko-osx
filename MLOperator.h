@@ -45,6 +45,7 @@
 #define KEY_AMK_DOC_EMAIL       @"email_address"
 #define KEY_AMK_DOC_IBAN        @"iban"
 #define KEY_AMK_DOC_VAT         @"vat_number"
+#define KEY_AMK_DOC_ZSR_NUMBER  @"zsr_number"
 
 #define KEY_AMK_DOC_SIGNATURE   @"signature"
 #define DOC_SIGNATURE_FILENAME  @"op_signature.png"
@@ -63,6 +64,7 @@
 @property (atomic, copy) NSString *emailAddress;
 @property (atomic, copy) NSString *IBAN;
 @property (atomic, copy) NSString *vatNumber;
+@property (atomic, copy) NSString *zsrNumber;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (NSString *) retrieveOperatorAsString;

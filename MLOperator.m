@@ -37,6 +37,7 @@
 @synthesize emailAddress;
 @synthesize IBAN;
 @synthesize vatNumber;
+@synthesize zsrNumber;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     if (self = [super init]) {
@@ -84,6 +85,7 @@
     emailAddress =  [dict objectForKey:KEY_AMK_DOC_EMAIL];
     IBAN =          [dict objectForKey:KEY_AMK_DOC_IBAN];
     vatNumber =     [dict objectForKey:KEY_AMK_DOC_VAT];
+    zsrNumber =     [dict objectForKey:KEY_AMK_DOC_ZSR_NUMBER];
     
 }
 
@@ -107,6 +109,7 @@
     doctorDict[KEY_AMK_DOC_EMAIL] = self.emailAddress;
     doctorDict[KEY_AMK_DOC_IBAN] = self.IBAN;
     doctorDict[KEY_AMK_DOC_VAT] = self.vatNumber;
+    doctorDict[KEY_AMK_DOC_ZSR_NUMBER] = self.zsrNumber;
     return doctorDict;
 }
 

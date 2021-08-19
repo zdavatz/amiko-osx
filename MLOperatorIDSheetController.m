@@ -162,6 +162,20 @@
         mGivenName.backgroundColor = [NSColor clearColor];
     }
     
+    if (![self stringIsNilOrEmpty:[mZsrNumber stringValue]]) {
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[a-zA-Z][0-9]{6}$" options:0
+                                                                                 error:nil];
+        NSTextCheckingResult *result = [regex firstMatchInString:[mZsrNumber stringValue] options:0 range:NSMakeRange(0, [mZsrNumber stringValue].length)];
+        if (!result) {
+            mZsrNumber.backgroundColor = [NSColor lightRed];
+            valid = NO;
+        } else {
+            mZsrNumber.backgroundColor = [NSColor clearColor];
+        }
+    } else {
+        mZsrNumber.backgroundColor = [NSColor clearColor];
+    }
+    
     [mSaveButton setEnabled:valid];
     
     return valid;
@@ -186,6 +200,7 @@
     operator.emailAddress = [mEmailAddress stringValue];
     operator.IBAN = [mIBAN stringValue];
     operator.vatNumber = [mVatNumber stringValue];
+    operator.zsrNumber = [mZsrNumber stringValue];
     [[MLPersistenceManager shared] setDoctor:operator];
 }
 
@@ -238,6 +253,10 @@
     
     if ([self stringIsNilOrEmpty:operator.vatNumber]==NO) {
         mVatNumber.stringValue = operator.vatNumber;
+    }
+    
+    if ([self stringIsNilOrEmpty:operator.zsrNumber] == NO) {
+        mZsrNumber.stringValue = operator.zsrNumber;
     }
     
     [self validateFields];
