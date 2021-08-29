@@ -1659,7 +1659,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if (returnCode == NSFileHandlingPanelOKButton) {
         [data writeToURL:savePanel.URL atomically:YES];
     }
-    
+}
+- (IBAction)onOepnMedidataResponseWindow:(id)sender {
+    MLPatient *p = [mPrescriptionAdapter patient];
+    if (!p) return;
+    MLMedidataResponsesWindowController *controller = [[MLMedidataResponsesWindowController alloc] initWithPatient:p];
+    self.medidataResponseWindowController = controller;
+    [controller showWindow:self];
 }
 
 - (IBAction) onDeletePrescription:(id)sender

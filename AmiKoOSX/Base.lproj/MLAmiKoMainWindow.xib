@@ -70,9 +70,9 @@
                             <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="130">
                                 <rect key="frame" x="0.0" y="0.0" width="1066" height="820"/>
                                 <subviews>
-                                    <customView id="132">
-                                        <rect key="frame" x="0.0" y="0.0" width="364" height="820"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                    <customView misplaced="YES" id="132">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="820"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="133">
                                                 <rect key="frame" x="11" y="778" width="342" height="22"/>
@@ -172,7 +172,7 @@
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView id="172" userLabel="ML Item Cell View" customClass="MLItemCellView">
-                                                                            <rect key="frame" x="1" y="1" width="339" height="48"/>
+                                                                            <rect key="frame" x="1" y="1" width="460" height="48"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="182" userLabel="Title Text Field">
@@ -334,16 +334,16 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="709" id="ydz-Qf-H5L"/>
                                         </constraints>
                                     </customView>
-                                    <customView id="131">
-                                        <rect key="frame" x="365" y="0.0" width="701" height="820"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                    <customView misplaced="YES" id="131">
+                                        <rect key="frame" x="354" y="0.0" width="712" height="820"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="197">
                                                 <rect key="frame" x="0.0" y="0.0" width="701" height="820"/>
                                                 <subviews>
                                                     <customView misplaced="YES" id="203">
                                                         <rect key="frame" x="0.0" y="0.0" width="533" height="820"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <subviews>
                                                             <scrollView misplaced="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y32-6h-1qu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="537" height="820"/>
@@ -618,7 +618,7 @@
                                                                                                         </connections>
                                                                                                     </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TwZ-Xx-Fuz">
-                                                                                                        <rect key="frame" x="143" y="7" width="148" height="32"/>
+                                                                                                        <rect key="frame" x="135" y="7" width="148" height="32"/>
                                                                                                         <buttonCell key="cell" type="push" title="Check interactions" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aGv-We-Cfq">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
@@ -665,11 +665,22 @@
                                                                                                             </connections>
                                                                                                         </buttonCell>
                                                                                                     </button>
+                                                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X22-tY-pdI">
+                                                                                                        <rect key="frame" x="143" y="7" width="161" height="32"/>
+                                                                                                        <buttonCell key="cell" type="push" title="Medidata Responses" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5tE-Jv-ni5">
+                                                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                                            <font key="font" metaFont="system"/>
+                                                                                                        </buttonCell>
+                                                                                                        <connections>
+                                                                                                            <action selector="onOepnMedidataResponseWindow:" target="-2" id="uU0-uj-gq1"/>
+                                                                                                        </connections>
+                                                                                                    </button>
                                                                                                 </subviews>
                                                                                                 <constraints>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="leading" secondItem="tNE-hK-XN9" secondAttribute="trailing" constant="12" id="00Q-gc-ZbM"/>
                                                                                                     <constraint firstItem="UhN-cF-QcR" firstAttribute="leading" secondItem="hmt-dn-3hz" secondAttribute="leading" id="1Ss-wb-eyK"/>
                                                                                                     <constraint firstItem="71t-rm-v3N" firstAttribute="top" secondItem="tsd-Ou-uJr" secondAttribute="bottom" constant="10" id="3m8-HQ-jDi"/>
+                                                                                                    <constraint firstItem="X22-tY-pdI" firstAttribute="centerY" secondItem="tmX-P1-qbj" secondAttribute="centerY" id="5fE-fx-KXU"/>
                                                                                                     <constraint firstAttribute="bottom" secondItem="UhN-cF-QcR" secondAttribute="bottom" constant="14" id="6Db-QI-snv"/>
                                                                                                     <constraint firstItem="8B8-Yr-IGK" firstAttribute="firstBaseline" secondItem="71t-rm-v3N" secondAttribute="firstBaseline" id="8hl-n6-1wC"/>
                                                                                                     <constraint firstItem="h3A-OZ-Ito" firstAttribute="leading" secondItem="dYR-Rj-qjN" secondAttribute="trailing" constant="12" symbolic="YES" id="98e-cu-SVr"/>
@@ -686,10 +697,11 @@
                                                                                                     <constraint firstAttribute="trailing" secondItem="hmt-dn-3hz" secondAttribute="trailing" constant="6" id="V6T-59-drI"/>
                                                                                                     <constraint firstItem="dYR-Rj-qjN" firstAttribute="leading" secondItem="tmX-P1-qbj" secondAttribute="trailing" constant="11" id="Yxw-Ta-iEb"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="71t-rm-v3N" secondAttribute="trailing" constant="6" id="bnE-Se-xtR"/>
+                                                                                                    <constraint firstItem="tmX-P1-qbj" firstAttribute="leading" secondItem="X22-tY-pdI" secondAttribute="trailing" constant="12" symbolic="YES" id="eeb-fu-ogs"/>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="bottom" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="22" id="fBG-0z-AcA"/>
                                                                                                     <constraint firstItem="tsd-Ou-uJr" firstAttribute="top" secondItem="Oaf-El-vf2" secondAttribute="top" id="iwq-b8-w7K"/>
                                                                                                     <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="baseline" secondItem="dYR-Rj-qjN" secondAttribute="baseline" id="k0N-rz-FEc"/>
-                                                                                                    <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="leading" secondItem="UhN-cF-QcR" secondAttribute="trailing" constant="20" id="lIR-e6-yDz"/>
+                                                                                                    <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="leading" secondItem="UhN-cF-QcR" secondAttribute="trailing" constant="12" symbolic="YES" id="lIR-e6-yDz"/>
                                                                                                     <constraint firstItem="dYR-Rj-qjN" firstAttribute="baseline" secondItem="h3A-OZ-Ito" secondAttribute="baseline" id="mBx-Lc-Qe6"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="tsd-Ou-uJr" secondAttribute="trailing" id="nfu-TW-dPx"/>
                                                                                                     <constraint firstItem="8B8-Yr-IGK" firstAttribute="leading" secondItem="tNE-hK-XN9" secondAttribute="leading" id="oKr-6W-7Zw"/>
@@ -746,7 +758,7 @@
                                                     </customView>
                                                     <customView misplaced="YES" id="204">
                                                         <rect key="frame" x="534" y="0.0" width="167" height="820"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <subviews>
                                                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="205">
                                                                 <rect key="frame" x="0.0" y="0.0" width="185" height="800"/>
