@@ -70,9 +70,9 @@
                             <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="130">
                                 <rect key="frame" x="0.0" y="0.0" width="1066" height="820"/>
                                 <subviews>
-                                    <customView id="132">
-                                        <rect key="frame" x="0.0" y="0.0" width="364" height="820"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                    <customView misplaced="YES" id="132">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="820"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="133">
                                                 <rect key="frame" x="11" y="778" width="342" height="22"/>
@@ -334,16 +334,16 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="709" id="ydz-Qf-H5L"/>
                                         </constraints>
                                     </customView>
-                                    <customView id="131">
-                                        <rect key="frame" x="365" y="0.0" width="701" height="820"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                    <customView misplaced="YES" id="131">
+                                        <rect key="frame" x="344" y="0.0" width="722" height="820"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="197">
                                                 <rect key="frame" x="0.0" y="0.0" width="701" height="820"/>
                                                 <subviews>
                                                     <customView misplaced="YES" id="203">
                                                         <rect key="frame" x="0.0" y="0.0" width="533" height="820"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <subviews>
                                                             <scrollView misplaced="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y32-6h-1qu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="537" height="820"/>
@@ -383,7 +383,7 @@
                                                                                         </tabViewItem>
                                                                                         <tabViewItem label="Interaktionen" identifier="TabInteractions" id="g0F-TU-Qcd">
                                                                                             <view key="view" id="1W1-Fu-3zm">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="484" height="820"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="515" height="820"/>
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                             </view>
                                                                                         </tabViewItem>
@@ -618,7 +618,7 @@
                                                                                                         </connections>
                                                                                                     </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TwZ-Xx-Fuz">
-                                                                                                        <rect key="frame" x="143" y="7" width="148" height="32"/>
+                                                                                                        <rect key="frame" x="135" y="7" width="148" height="32"/>
                                                                                                         <buttonCell key="cell" type="push" title="Check interactions" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aGv-We-Cfq">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
@@ -645,16 +645,6 @@
                                                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                         </textFieldCell>
                                                                                                     </textField>
-                                                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tmX-P1-qbj">
-                                                                                                        <rect key="frame" x="302" y="7" width="91" height="32"/>
-                                                                                                        <buttonCell key="cell" type="push" title="Medidata" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xja-So-pAJ">
-                                                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                                            <font key="font" metaFont="system"/>
-                                                                                                        </buttonCell>
-                                                                                                        <connections>
-                                                                                                            <action selector="onSendPrescriptionToMedidata:" target="-2" id="klp-SJ-GP2"/>
-                                                                                                        </connections>
-                                                                                                    </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dYR-Rj-qjN">
                                                                                                         <rect key="frame" x="390" y="7" width="64" height="32"/>
                                                                                                         <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2Bd-3O-fif">
@@ -684,12 +674,11 @@
                                                                                                     <constraint firstItem="hmt-dn-3hz" firstAttribute="top" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="28" id="P7v-zA-bh4"/>
                                                                                                     <constraint firstItem="hmt-dn-3hz" firstAttribute="top" secondItem="tNE-hK-XN9" secondAttribute="bottom" constant="5" id="UK7-3h-zJz"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="hmt-dn-3hz" secondAttribute="trailing" constant="6" id="V6T-59-drI"/>
-                                                                                                    <constraint firstItem="dYR-Rj-qjN" firstAttribute="leading" secondItem="tmX-P1-qbj" secondAttribute="trailing" constant="11" id="Yxw-Ta-iEb"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="71t-rm-v3N" secondAttribute="trailing" constant="6" id="bnE-Se-xtR"/>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="bottom" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="22" id="fBG-0z-AcA"/>
                                                                                                     <constraint firstItem="tsd-Ou-uJr" firstAttribute="top" secondItem="Oaf-El-vf2" secondAttribute="top" id="iwq-b8-w7K"/>
                                                                                                     <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="baseline" secondItem="dYR-Rj-qjN" secondAttribute="baseline" id="k0N-rz-FEc"/>
-                                                                                                    <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="leading" secondItem="UhN-cF-QcR" secondAttribute="trailing" constant="20" id="lIR-e6-yDz"/>
+                                                                                                    <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="leading" secondItem="UhN-cF-QcR" secondAttribute="trailing" constant="12" symbolic="YES" id="lIR-e6-yDz"/>
                                                                                                     <constraint firstItem="dYR-Rj-qjN" firstAttribute="baseline" secondItem="h3A-OZ-Ito" secondAttribute="baseline" id="mBx-Lc-Qe6"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="tsd-Ou-uJr" secondAttribute="trailing" id="nfu-TW-dPx"/>
                                                                                                     <constraint firstItem="8B8-Yr-IGK" firstAttribute="leading" secondItem="tNE-hK-XN9" secondAttribute="leading" id="oKr-6W-7Zw"/>
@@ -697,7 +686,6 @@
                                                                                                     <constraint firstItem="UhN-cF-QcR" firstAttribute="top" secondItem="hmt-dn-3hz" secondAttribute="bottom" constant="13" id="vTK-6M-L5q"/>
                                                                                                     <constraint firstItem="tNE-hK-XN9" firstAttribute="top" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="6" id="vlb-oi-pHc"/>
                                                                                                     <constraint firstItem="fKp-CD-kdl" firstAttribute="leading" secondItem="Oaf-El-vf2" secondAttribute="leading" constant="6" id="xSU-g2-PwU"/>
-                                                                                                    <constraint firstItem="tmX-P1-qbj" firstAttribute="centerY" secondItem="dYR-Rj-qjN" secondAttribute="centerY" id="yZf-aS-2mY"/>
                                                                                                     <constraint firstItem="71t-rm-v3N" firstAttribute="leading" secondItem="fKp-CD-kdl" secondAttribute="trailing" constant="8" symbolic="YES" id="ylo-SH-JHg"/>
                                                                                                 </constraints>
                                                                                                 <connections>
@@ -746,7 +734,7 @@
                                                     </customView>
                                                     <customView misplaced="YES" id="204">
                                                         <rect key="frame" x="534" y="0.0" width="167" height="820"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <subviews>
                                                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="205">
                                                                 <rect key="frame" x="0.0" y="0.0" width="185" height="800"/>

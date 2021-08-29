@@ -55,6 +55,7 @@
 
 #import "MLPrescriptionTextFinderClient.h"
 #import "MLPrescriptionTableView.h"
+#import "MLMedidataResponsesWindowController.h"
 #import "Wait.h"
 
 #define DYNAMIC_AMK_SELECTION
@@ -137,6 +138,7 @@ static BOOL mPrescriptionMode = false;
 }
 
 @property (nonatomic, strong) NSMetadataQuery *query;
+@property (nonatomic, strong) MLMedidataResponsesWindowController *medidataResponseWindowController;
 
 - (void) updateButtons;
 
@@ -1486,6 +1488,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 {
     [self setOperatorID];
     [mPrescriptionsCart[0] clearCart];
+    [mPrescriptionAdapter setMedidataRefs:@[]];
     [self.myPrescriptionsTableView reloadData];
     possibleToOverwrite = false;
     modifiedPrescription = false;
@@ -1637,7 +1640,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         return;
     }
     
-    [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc];
+    __weak typeof(self) _self = self;
+    [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc completion:^(NSError * _Nonnull error, NSString * _Nonnull ref) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [mPrescriptionAdapter setMedidataRefs:[[mPrescriptionAdapter medidataRefs] arrayByAddingObject:ref]];
+            modifiedPrescription = true;
+            [_self updateButtons];
+        });
+    }];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH.mm.dd.MM.yyyy"];
@@ -1649,7 +1659,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     if (returnCode == NSFileHandlingPanelOKButton) {
         [data writeToURL:savePanel.URL atomically:YES];
     }
-    
+}
+- (IBAction)onOepnMedidataResponseWindow:(id)sender {
+    MLPatient *p = [mPrescriptionAdapter patient];
+    if (!p) return;
+    MLMedidataResponsesWindowController *controller = [[MLMedidataResponsesWindowController alloc] initWithPatient:p];
+    self.medidataResponseWindowController = controller;
+    [controller showWindow:self];
 }
 
 - (IBAction) onDeletePrescription:(id)sender
@@ -3381,22 +3397,34 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
     SEL action = [menuItem action];
-    if (action != @selector(printPrescription:))
-        return [menuItem isEnabled];  // All the other menu entries are unchanged
-
-    // Enabling logic for the "print prescription" menu item is the same as for the "Send" button
-    bool doctorDefined = (myOperatorIDTextField.stringValue.length > 0) &&
-    ![myOperatorIDTextField.stringValue isEqualToString:NSLocalizedString(@"Enter the doctor's address", nil)];
-    bool patientDefined = (myPatientAddressTextField.stringValue.length > 0);
-    
-    if (doctorDefined &&
-        patientDefined &&
-        [mPrescriptionsCart[0].cart count] > 0)
-    {
-        return YES;
+    if (action == @selector(printPrescription:)) {
+        // Enabling logic for the "print prescription" menu item is the same as for the "Send" button
+        bool doctorDefined = (myOperatorIDTextField.stringValue.length > 0) &&
+        ![myOperatorIDTextField.stringValue isEqualToString:NSLocalizedString(@"Enter the doctor's address", nil)];
+        bool patientDefined = (myPatientAddressTextField.stringValue.length > 0);
+        
+        if (doctorDefined &&
+            patientDefined &&
+            [mPrescriptionsCart[0].cart count] > 0)
+        {
+            return YES;
+        }
+        return NO;
+    } else if (action == @selector(onSendPrescriptionToMedidata:)) {
+        MLPatient *patient = [mPrescriptionAdapter patient];
+        if (mPrescriptionMode && patient && [mPrescriptionsCart[0].cart count]) {
+            return YES;
+        }
+        return NO;
+    } else if (action == @selector(onOepnMedidataResponseWindow:)) {
+        MLPatient *p = [mPrescriptionAdapter patient];
+        if ( p && [[mPrescriptionAdapter medidataRefs] count]) {
+            return YES;
+        }
+        return NO;
     }
 
-    return NO;
+    return [menuItem isEnabled];
 }
 
 #pragma mark - Export CSV
