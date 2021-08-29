@@ -71,7 +71,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1066" height="820"/>
                                 <subviews>
                                     <customView misplaced="YES" id="132">
-                                        <rect key="frame" x="0.0" y="0.0" width="353" height="820"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="820"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="133">
@@ -172,7 +172,7 @@
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView id="172" userLabel="ML Item Cell View" customClass="MLItemCellView">
-                                                                            <rect key="frame" x="1" y="1" width="460" height="48"/>
+                                                                            <rect key="frame" x="1" y="1" width="339" height="48"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="182" userLabel="Title Text Field">
@@ -335,7 +335,7 @@
                                         </constraints>
                                     </customView>
                                     <customView misplaced="YES" id="131">
-                                        <rect key="frame" x="354" y="0.0" width="712" height="820"/>
+                                        <rect key="frame" x="344" y="0.0" width="722" height="820"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="197">
@@ -383,7 +383,7 @@
                                                                                         </tabViewItem>
                                                                                         <tabViewItem label="Interaktionen" identifier="TabInteractions" id="g0F-TU-Qcd">
                                                                                             <view key="view" id="1W1-Fu-3zm">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="484" height="820"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="515" height="820"/>
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                             </view>
                                                                                         </tabViewItem>
@@ -645,16 +645,6 @@
                                                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                         </textFieldCell>
                                                                                                     </textField>
-                                                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tmX-P1-qbj">
-                                                                                                        <rect key="frame" x="302" y="7" width="91" height="32"/>
-                                                                                                        <buttonCell key="cell" type="push" title="Medidata" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xja-So-pAJ">
-                                                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                                            <font key="font" metaFont="system"/>
-                                                                                                        </buttonCell>
-                                                                                                        <connections>
-                                                                                                            <action selector="onSendPrescriptionToMedidata:" target="-2" id="klp-SJ-GP2"/>
-                                                                                                        </connections>
-                                                                                                    </button>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dYR-Rj-qjN">
                                                                                                         <rect key="frame" x="390" y="7" width="64" height="32"/>
                                                                                                         <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2Bd-3O-fif">
@@ -665,22 +655,11 @@
                                                                                                             </connections>
                                                                                                         </buttonCell>
                                                                                                     </button>
-                                                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X22-tY-pdI">
-                                                                                                        <rect key="frame" x="143" y="7" width="161" height="32"/>
-                                                                                                        <buttonCell key="cell" type="push" title="Medidata Responses" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5tE-Jv-ni5">
-                                                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                                            <font key="font" metaFont="system"/>
-                                                                                                        </buttonCell>
-                                                                                                        <connections>
-                                                                                                            <action selector="onOepnMedidataResponseWindow:" target="-2" id="uU0-uj-gq1"/>
-                                                                                                        </connections>
-                                                                                                    </button>
                                                                                                 </subviews>
                                                                                                 <constraints>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="leading" secondItem="tNE-hK-XN9" secondAttribute="trailing" constant="12" id="00Q-gc-ZbM"/>
                                                                                                     <constraint firstItem="UhN-cF-QcR" firstAttribute="leading" secondItem="hmt-dn-3hz" secondAttribute="leading" id="1Ss-wb-eyK"/>
                                                                                                     <constraint firstItem="71t-rm-v3N" firstAttribute="top" secondItem="tsd-Ou-uJr" secondAttribute="bottom" constant="10" id="3m8-HQ-jDi"/>
-                                                                                                    <constraint firstItem="X22-tY-pdI" firstAttribute="centerY" secondItem="tmX-P1-qbj" secondAttribute="centerY" id="5fE-fx-KXU"/>
                                                                                                     <constraint firstAttribute="bottom" secondItem="UhN-cF-QcR" secondAttribute="bottom" constant="14" id="6Db-QI-snv"/>
                                                                                                     <constraint firstItem="8B8-Yr-IGK" firstAttribute="firstBaseline" secondItem="71t-rm-v3N" secondAttribute="firstBaseline" id="8hl-n6-1wC"/>
                                                                                                     <constraint firstItem="h3A-OZ-Ito" firstAttribute="leading" secondItem="dYR-Rj-qjN" secondAttribute="trailing" constant="12" symbolic="YES" id="98e-cu-SVr"/>
@@ -695,9 +674,7 @@
                                                                                                     <constraint firstItem="hmt-dn-3hz" firstAttribute="top" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="28" id="P7v-zA-bh4"/>
                                                                                                     <constraint firstItem="hmt-dn-3hz" firstAttribute="top" secondItem="tNE-hK-XN9" secondAttribute="bottom" constant="5" id="UK7-3h-zJz"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="hmt-dn-3hz" secondAttribute="trailing" constant="6" id="V6T-59-drI"/>
-                                                                                                    <constraint firstItem="dYR-Rj-qjN" firstAttribute="leading" secondItem="tmX-P1-qbj" secondAttribute="trailing" constant="11" id="Yxw-Ta-iEb"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="71t-rm-v3N" secondAttribute="trailing" constant="6" id="bnE-Se-xtR"/>
-                                                                                                    <constraint firstItem="tmX-P1-qbj" firstAttribute="leading" secondItem="X22-tY-pdI" secondAttribute="trailing" constant="12" symbolic="YES" id="eeb-fu-ogs"/>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="bottom" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="22" id="fBG-0z-AcA"/>
                                                                                                     <constraint firstItem="tsd-Ou-uJr" firstAttribute="top" secondItem="Oaf-El-vf2" secondAttribute="top" id="iwq-b8-w7K"/>
                                                                                                     <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="baseline" secondItem="dYR-Rj-qjN" secondAttribute="baseline" id="k0N-rz-FEc"/>
@@ -709,7 +686,6 @@
                                                                                                     <constraint firstItem="UhN-cF-QcR" firstAttribute="top" secondItem="hmt-dn-3hz" secondAttribute="bottom" constant="13" id="vTK-6M-L5q"/>
                                                                                                     <constraint firstItem="tNE-hK-XN9" firstAttribute="top" secondItem="fKp-CD-kdl" secondAttribute="bottom" constant="6" id="vlb-oi-pHc"/>
                                                                                                     <constraint firstItem="fKp-CD-kdl" firstAttribute="leading" secondItem="Oaf-El-vf2" secondAttribute="leading" constant="6" id="xSU-g2-PwU"/>
-                                                                                                    <constraint firstItem="tmX-P1-qbj" firstAttribute="centerY" secondItem="dYR-Rj-qjN" secondAttribute="centerY" id="yZf-aS-2mY"/>
                                                                                                     <constraint firstItem="71t-rm-v3N" firstAttribute="leading" secondItem="fKp-CD-kdl" secondAttribute="trailing" constant="8" symbolic="YES" id="ylo-SH-JHg"/>
                                                                                                 </constraints>
                                                                                                 <connections>
