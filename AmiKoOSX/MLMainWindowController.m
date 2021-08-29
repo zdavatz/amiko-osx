@@ -55,6 +55,7 @@
 
 #import "MLPrescriptionTextFinderClient.h"
 #import "MLPrescriptionTableView.h"
+#import "MLMedidataResponsesWindowController.h"
 #import "Wait.h"
 
 #define DYNAMIC_AMK_SELECTION
@@ -137,6 +138,7 @@ static BOOL mPrescriptionMode = false;
 }
 
 @property (nonatomic, strong) NSMetadataQuery *query;
+@property (nonatomic, strong) MLMedidataResponsesWindowController *medidataResponseWindowController;
 
 - (void) updateButtons;
 
@@ -1486,6 +1488,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 {
     [self setOperatorID];
     [mPrescriptionsCart[0] clearCart];
+    [mPrescriptionAdapter setMedidataRefs:@[]];
     [self.myPrescriptionsTableView reloadData];
     possibleToOverwrite = false;
     modifiedPrescription = false;
@@ -1637,7 +1640,14 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         return;
     }
     
-    [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc];
+    __weak typeof(self) _self = self;
+    [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc completion:^(NSError * _Nonnull error, NSString * _Nonnull ref) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [mPrescriptionAdapter setMedidataRefs:[[mPrescriptionAdapter medidataRefs] arrayByAddingObject:ref]];
+            modifiedPrescription = true;
+            [_self updateButtons];
+        });
+    }];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH.mm.dd.MM.yyyy"];
