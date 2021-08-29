@@ -49,10 +49,10 @@
 		CF9625F326CD288100153457 /* MedidataInvoiceResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9625F126CD288100153457 /* MedidataInvoiceResponse.m */; };
 		CF98CB89269719990005C79A /* participants-kvg.json in Resources */ = {isa = PBXBuildFile; fileRef = CF98CB88269719990005C79A /* participants-kvg.json */; };
 		CF98CB8A269719990005C79A /* participants-kvg.json in Resources */ = {isa = PBXBuildFile; fileRef = CF98CB88269719990005C79A /* participants-kvg.json */; };
+		CFD7F7FF26DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F80226DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib */; };
+		CFD7F80026DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F80226DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib */; };
 		CFDFC48926CA905C00EDD182 /* MLMedidataResponsesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFC48726CA905C00EDD182 /* MLMedidataResponsesWindowController.m */; };
 		CFDFC48A26CA905C00EDD182 /* MLMedidataResponsesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFC48726CA905C00EDD182 /* MLMedidataResponsesWindowController.m */; };
-		CFDFC48B26CA905C00EDD182 /* MLMedidataResponsesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFDFC48826CA905C00EDD182 /* MLMedidataResponsesWindowController.xib */; };
-		CFDFC48C26CA905C00EDD182 /* MLMedidataResponsesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFDFC48826CA905C00EDD182 /* MLMedidataResponsesWindowController.xib */; };
 		CFE5FCC126CBAC9800FC8AAB /* MedidataDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE5FCC026CBAC9800FC8AAB /* MedidataDocument.m */; };
 		CFE5FCC226CBAC9800FC8AAB /* MedidataDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE5FCC026CBAC9800FC8AAB /* MedidataDocument.m */; };
 		CFE80FCC242F9306003DB2FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE80FCB242F9306003DB2FA /* CloudKit.framework */; };
@@ -294,9 +294,11 @@
 		CF9625F026CD288100153457 /* MedidataInvoiceResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataInvoiceResponse.h; sourceTree = "<group>"; };
 		CF9625F126CD288100153457 /* MedidataInvoiceResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceResponse.m; sourceTree = "<group>"; };
 		CF98CB88269719990005C79A /* participants-kvg.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "participants-kvg.json"; sourceTree = "<group>"; };
+		CFD7F80126DBB1CF00E41324 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLMedidataResponsesWindowController.xib; sourceTree = "<group>"; };
+		CFD7F80426DBB1D700E41324 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLMedidataResponsesWindowController.strings; sourceTree = "<group>"; };
+		CFD7F80626DBB1D800E41324 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLMedidataResponsesWindowController.strings; sourceTree = "<group>"; };
 		CFDFC48626CA905C00EDD182 /* MLMedidataResponsesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLMedidataResponsesWindowController.h; sourceTree = "<group>"; };
 		CFDFC48726CA905C00EDD182 /* MLMedidataResponsesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLMedidataResponsesWindowController.m; sourceTree = "<group>"; };
-		CFDFC48826CA905C00EDD182 /* MLMedidataResponsesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLMedidataResponsesWindowController.xib; sourceTree = "<group>"; };
 		CFE5FCBF26CBAC9800FC8AAB /* MedidataDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataDocument.h; sourceTree = "<group>"; };
 		CFE5FCC026CBAC9800FC8AAB /* MedidataDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataDocument.m; sourceTree = "<group>"; };
 		CFE80FCB242F9306003DB2FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -567,7 +569,7 @@
 			children = (
 				CFDFC48626CA905C00EDD182 /* MLMedidataResponsesWindowController.h */,
 				CFDFC48726CA905C00EDD182 /* MLMedidataResponsesWindowController.m */,
-				CFDFC48826CA905C00EDD182 /* MLMedidataResponsesWindowController.xib */,
+				CFD7F80226DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib */,
 				CF9625E826CD109700153457 /* MedidataGetStatusOperation.h */,
 				CF9625E926CD109700153457 /* MedidataGetStatusOperation.m */,
 				CF9625F026CD288100153457 /* MedidataInvoiceResponse.h */,
@@ -1119,7 +1121,7 @@
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B9C17E5E8E400B66B27 /* Credits.rtf in Resources */,
 				CF02AC3226B2E10200844A28 /* Postleitzahlen-Schweiz.csv in Resources */,
-				CFDFC48B26CA905C00EDD182 /* MLMedidataResponsesWindowController.xib in Resources */,
+				CFD7F7FF26DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib in Resources */,
 				D5AB1773180886810050DC12 /* 28-star-ye.png in Resources */,
 				FA9F26E821C2CD1A005DA919 /* Wait.xib in Resources */,
 				D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */,
@@ -1172,7 +1174,7 @@
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
 				D5C6442D1EB345A300438E6F /* fulltext_style.css in Resources */,
 				D5AE31831B37203E006BC60E /* desitin.iconset in Resources */,
-				CFDFC48C26CA905C00EDD182 /* MLMedidataResponsesWindowController.xib in Resources */,
+				CFD7F80026DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib in Resources */,
 				CF02AC3326B2E10200844A28 /* Postleitzahlen-Schweiz.csv in Resources */,
 				D5E91BCE17E5E8E800B66B27 /* amiko_stylesheet.css in Resources */,
 				D5C6443B1EB37A6F00438E6F /* main_callbacks.js in Resources */,
@@ -1401,6 +1403,16 @@
 				CF16C26625236F8400A05542 /* de */,
 			);
 			name = MLPreferencesWindowController.xib;
+			sourceTree = "<group>";
+		};
+		CFD7F80226DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CFD7F80126DBB1CF00E41324 /* Base */,
+				CFD7F80426DBB1D700E41324 /* de */,
+				CFD7F80626DBB1D800E41324 /* fr */,
+			);
+			name = MLMedidataResponsesWindowController.xib;
 			sourceTree = "<group>";
 		};
 		D5EBC68917C912FF00EBEF39 /* InfoPlist.strings */ = {
