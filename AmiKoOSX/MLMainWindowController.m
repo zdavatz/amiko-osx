@@ -1604,7 +1604,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 }
 
 - (IBAction)onSendPrescriptionToMedidata:(id)sender {
-    MLPatient *amkPatient = [mPrescriptionAdapter patient];
+    MLPatient *amkPatient = [mPatientSheet retrievePatient];
     MLPatient *dbPatient = [mPatientSheet retrievePatientWithUniqueID:amkPatient.uniqueId];
     NSXMLDocument *doc = [MedidataXMLGenerator xmlInvoiceRequestDocumentWithOperator:[mOperatorIDSheet loadOperator]
                                                                              patient:dbPatient
@@ -1644,8 +1644,19 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc completion:^(NSError * _Nonnull error, NSString * _Nonnull ref) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [mPrescriptionAdapter setMedidataRefs:[[mPrescriptionAdapter medidataRefs] arrayByAddingObject:ref]];
-            modifiedPrescription = true;
+            
+            [mPrescriptionsCart[0] makeNewUniqueHash];
+            mPrescriptionAdapter.cart = mPrescriptionsCart[0].cart;
+            
+            // Handle the decision automatically
+            [self storeAllPrescriptionComments];
+            [mPrescriptionAdapter savePrescriptionForPatient:[mPatientSheet retrievePatient]
+                                              withUniqueHash:mPrescriptionsCart[0].uniqueHash
+                                                andOverwrite:YES];
+            possibleToOverwrite = true;
+            modifiedPrescription = false;
             [_self updateButtons];
+            [_self updatePrescriptionHistory];
         });
     }];
 
@@ -1661,7 +1672,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     }
 }
 - (IBAction)onOepnMedidataResponseWindow:(id)sender {
-    MLPatient *p = [mPrescriptionAdapter patient];
+    MLPatient *p = [mPatientSheet retrievePatient];
     if (!p) return;
     MLMedidataResponsesWindowController *controller = [[MLMedidataResponsesWindowController alloc] initWithPatient:p];
     self.medidataResponseWindowController = controller;
@@ -3417,8 +3428,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         }
         return NO;
     } else if (action == @selector(onOepnMedidataResponseWindow:)) {
-        MLPatient *p = [mPrescriptionAdapter patient];
-        if ( p && [[mPrescriptionAdapter medidataRefs] count]) {
+        MLPatient *p = [mPatientSheet retrievePatient];
+        if (p
+//            && [[mPrescriptionAdapter medidataRefs] count]
+            ) {
             return YES;
         }
         return NO;
