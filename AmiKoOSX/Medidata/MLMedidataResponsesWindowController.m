@@ -68,6 +68,7 @@
             MedidataInvoiceResponse *s = [[MedidataInvoiceResponse alloc] init];
             s.name = [NSString stringWithFormat:@"%@ - %@", [path lastPathComponent], [self.mPrescriptionAdapter placeDate]];
             s.transmissionReference = ref;
+            s.amkFilePath = path;
             [statuses addObject:s];
         }
     }
@@ -110,6 +111,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     if (selected == -1) return;
     MedidataInvoiceResponse *response = self.invoiceResponses[selected];
     NSSavePanel *savePanel = [NSSavePanel savePanel];
+    [savePanel setNameFieldStringValue:[NSString stringWithFormat:@"%@.txt", response.amkFilePath.lastPathComponent.stringByDeletingPathExtension]];
     NSModalResponse returnCode = [savePanel runModal];
     if (returnCode == NSFileHandlingPanelOKButton) {
         [[[MedidataClient alloc] init] downloadInvoiceResponseWithTransmissionReference:response.transmissionReference
