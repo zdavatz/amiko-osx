@@ -258,7 +258,12 @@
     if (placeDate == nil)
         placeDate = [jsonDict objectForKey:@"date"];
     
-    medidataRefs = [(NSString *)[jsonDict objectForKey:@"medidata_refs"] componentsSeparatedByString:@","];
+    NSString *medidataRefsString = [jsonDict objectForKey:@"medidata_refs"];
+    if ([medidataRefsString length]) {
+        medidataRefs = [medidataRefsString componentsSeparatedByString:@","];
+    } else {
+        medidataRefs = @[];
+    }
 
     NSString *hash = [jsonDict objectForKey:@"prescription_hash"];
     return hash;
