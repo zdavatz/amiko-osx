@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *transmissionReference;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong, nullable) MedidataDocument *document;
+@property (nonatomic, strong) NSString *amkFilePath;
 
 @end
 
