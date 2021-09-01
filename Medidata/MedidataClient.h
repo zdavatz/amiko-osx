@@ -24,6 +24,8 @@ typedef enum : NSUInteger {
 - (void)getMedidataResponses:(void (^)(NSError *error, NSArray<MedidataDocument*> *doc))callback;
 - (void)getDocumentStatusWithTransmissionReference:(NSString *)ref completion:(void (^)(NSError *error, MedidataClientUploadStatus status))callback;
 - (void)downloadInvoiceResponseWithTransmissionReference:(NSString *)ref toFile:(NSURL*)dest completion:(void (^)(NSError *error))callback;
+- (void)confirmInvoiceResponseWithTransmissionReference:(NSString *)ref
+                                             completion:(void (^)(NSError *error, MedidataDocument *doc))callback;
 
 @end
 

@@ -194,6 +194,44 @@
     [task resume];
 }
 
+- (void)confirmInvoiceResponseWithTransmissionReference:(NSString *)ref
+                                             completion:(void (^)(NSError *error, MedidataDocument *doc))callback {
+    //curl -ks -X PUT --header "Content-Type: application/json" -d '{"status":"CONFIRMED"}' https://212.51.146.241:8100/md/ela/downloads/9c0e8433-f5e9f20/status --header "X-CLIENT-ID: 1000007582" --header "Content-Type: multipart/form-data" --header "Authorization: Basic XXXX"
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"https://212.51.146.241:8100/md/ela/downloads/%@/status", ref]]];
+    [request setValue:@"1000007582" forHTTPHeaderField:@"X-CLIENT-ID"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"Basic %@", MEDIDATA_CLIENT_AUTHORIZATION] forHTTPHeaderField:@"Authorization"];
+    [request setHTTPMethod:@"PUT"];
+    [request setHTTPBody:[@"{\"status\":\"CONFIRMED\"}" dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLSession * session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                                           delegate:self
+                                                      delegateQueue:nil];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"response data: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        NSLog(@"response: %@", response);
+        if (error) {
+            NSLog(@"error: %@", error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAlert *alert = [NSAlert alertWithError:error];
+                if ([error code] == NSURLErrorTimedOut) {
+                    [alert setInformativeText:NSLocalizedString(@"The Medidata VA seems to be offline.", nil)];
+                }
+                [alert runModal];
+            });
+            callback(error, nil);
+            return;
+        }
+        if (data) {
+            NSError *decodeError = nil;
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&decodeError];
+            MedidataDocument *doc = [[MedidataDocument alloc] initWithDictionary:dict];
+            NSLog(@"%@", doc);
+            callback(nil, doc);
+        }
+    }];
+    [task resume];
+}
+
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
 {
     completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]);
