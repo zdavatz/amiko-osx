@@ -20,13 +20,7 @@
         self.fileSize = dict[@"fileSize"];
         self.modus = dict[@"modus"];
         self.status = dict[@"status"];
-        
-        NSDateFormatter *isoDateFormatter = [[NSDateFormatter alloc] init];
-        NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-        [isoDateFormatter setLocale:enUSPOSIXLocale];
-        [isoDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
-        [isoDateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
-        self.created = [isoDateFormatter dateFromString:dict[@"created"]];
+        self.created = dict[@"created"];
     }
     return self;
 }

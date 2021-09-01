@@ -17,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *correlationReference;
 @property (nonatomic, strong) NSString *senderGln;
 @property (nonatomic, strong) NSString *docType;
-@property (nonatomic, strong) NSString *fileSize;
+@property (nonatomic, strong) NSNumber *fileSize;
 @property (nonatomic, strong) NSString *modus;
 @property (nonatomic, strong) NSString *status;
-@property (nonatomic, strong) NSDate *created;
+@property (nonatomic, strong) NSString *created;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 
