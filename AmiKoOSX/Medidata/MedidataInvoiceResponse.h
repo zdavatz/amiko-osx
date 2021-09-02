@@ -13,10 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MedidataInvoiceResponse : NSObject
 
-@property (nonatomic, strong) NSString *transmissionReference;
-@property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong, nullable) MedidataDocument *document;
 @property (nonatomic, strong) NSString *amkFilePath;
+@property (nonatomic, assign) bool canConfirm;
 
 @end
 

@@ -8,22 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #import "MedidataDocument.h"
+#import "MedidataClientUploadStatus.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum : NSUInteger {
-    MedidataClientUploadStatusUnknown,
-    MedidataClientUploadStatusDone,
-    MedidataClientUploadStatusProcessing,
-    MedidataClientUploadStatusError,
-} MedidataClientUploadStatus;
-
 @interface MedidataClient : NSObject
 
-- (void)sendXMLDocumentToMedidata:(NSXMLDocument *)document completion:(void (^)(NSError *error, NSString *ref))callback;
-- (void)getMedidataResponses:(void (^)(NSError *error, NSArray<MedidataDocument*> *doc))callback;
-- (void)getDocumentStatusWithTransmissionReference:(NSString *)ref completion:(void (^)(NSError *error, MedidataClientUploadStatus status))callback;
-- (void)downloadInvoiceResponseWithTransmissionReference:(NSString *)ref toFile:(NSURL*)dest completion:(void (^)(NSError *error))callback;
+- (void)sendXMLDocumentToMedidata:(NSXMLDocument *)document
+                       completion:(void (^)(NSError * _Nullable error, NSString * _Nullable ref))callback;
+- (void)getMedidataResponses:(void (^)(NSError * _Nullable error, NSArray<MedidataDocument*> * _Nullable doc))callback;
+- (void)getDocumentStatusWithTransmissionReference:(NSString *)ref
+                                        completion:(void (^)(NSError * _Nullable error, MedidataClientUploadStatus * _Nullable status))callback;
+- (void)downloadInvoiceResponseWithTransmissionReference:(NSString *)ref
+                                                  toFile:(NSURL *)dest
+                                              completion:(void (^)(NSError * _Nullable error))callback;
+- (void)confirmInvoiceResponseWithTransmissionReference:(NSString *)ref
+                                             completion:(void (^)(NSError * _Nullable error, MedidataDocument * _Nullable doc))callback;
 
 @end
 
