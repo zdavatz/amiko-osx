@@ -114,10 +114,11 @@
     [task resume];
 }
 
-- (void)getDocumentStatusWithTransmissionReference:(NSString *)ref completion:(void (^)(NSError *error, MedidataClientUploadStatus status))callback {
+- (void)getDocumentStatusWithTransmissionReference:(NSString *)ref
+                                        completion:(void (^)(NSError * _Nullable error, MedidataClientUploadStatus * _Nullable status))callback {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"https://212.51.146.241:8100/md/ela/uploads/%@/status", ref]]];
-//    [request setValue:@"1000007582" forHTTPHeaderField:@"X-CLIENT-ID"];
-//    [request setValue:[NSString stringWithFormat:@"Basic %@", MEDIDATA_CLIENT_AUTHORIZATION] forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"1000007582" forHTTPHeaderField:@"X-CLIENT-ID"];
+    [request setValue:[NSString stringWithFormat:@"Basic %@", MEDIDATA_CLIENT_AUTHORIZATION] forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:@"GET"];
     NSURLSession * session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                            delegate:self
@@ -134,26 +135,24 @@
                 }
                 [alert runModal];
             });
-            callback(error, MedidataClientUploadStatusUnknown);
+            callback(error, nil);
             return;
         }
-        if (data) {
+        if (data &&
+            [response isKindOfClass:[NSHTTPURLResponse class]] &&
+            [(NSHTTPURLResponse *)response statusCode] >= 200 &&
+            [(NSHTTPURLResponse *)response statusCode] <= 299) {
             NSError *decodeError = nil;
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&decodeError];
-            NSString *statusString = dict[@"status"];
-            MedidataClientUploadStatus status = [statusString isEqualToString:@"DONE"] ? MedidataClientUploadStatusDone :
-            [statusString isEqualToString:@"PROCESSING"] ? MedidataClientUploadStatusProcessing :
-            [statusString isEqualToString:@"ERROR"] ? MedidataClientUploadStatusError :
-            MedidataClientUploadStatusUnknown;
-            if (status != MedidataClientUploadStatusUnknown) {
-                callback(nil, status);
-            } else {
-                callback(
-                         [NSError errorWithDomain:@"AmikoMedidata" code:0 userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Status is %@", statusString]}],
-                         MedidataClientUploadStatusUnknown
-                         );
+            if (decodeError) {
+                callback(decodeError, nil);
+                return;
             }
+            MedidataClientUploadStatus *status = [[MedidataClientUploadStatus alloc] initWithDictionary:dict];
+            callback(nil, status);
+            return;
         }
+        callback(nil, nil);
     }];
     [task resume];
 }

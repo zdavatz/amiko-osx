@@ -61,6 +61,8 @@
 		CFE80FE224309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */; };
 		CFE80FE324309D10003DB2FA /* MLPersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */; };
 		CFE80FE424309D10003DB2FA /* MLPersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */; };
+		CFF3D9EC26E1259B003B74C2 /* MedidataClientUploadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF3D9EB26E1259B003B74C2 /* MedidataClientUploadStatus.m */; };
+		CFF3D9ED26E1259B003B74C2 /* MedidataClientUploadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF3D9EB26E1259B003B74C2 /* MedidataClientUploadStatus.m */; };
 		D517E4AB1EA8B5E100187AC8 /* amiko_frequency_de.db in Resources */ = {isa = PBXBuildFile; fileRef = D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */; };
 		D517E4B11EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
 		D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D517E4B01EA8B9A800187AC8 /* MLInteractionsAdapter.m */; };
@@ -306,6 +308,8 @@
 		CFE80FDE24309D10003DB2FA /* MLiCloudToLocalMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLiCloudToLocalMigration.m; sourceTree = "<group>"; };
 		CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPersistenceManager.m; sourceTree = "<group>"; };
 		CFE80FE024309D10003DB2FA /* MLPersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPersistenceManager.h; sourceTree = "<group>"; };
+		CFF3D9EA26E1259B003B74C2 /* MedidataClientUploadStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataClientUploadStatus.h; sourceTree = "<group>"; };
+		CFF3D9EB26E1259B003B74C2 /* MedidataClientUploadStatus.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataClientUploadStatus.m; sourceTree = "<group>"; };
 		D517E4AA1EA8B5E100187AC8 /* amiko_frequency_de.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_frequency_de.db; sourceTree = "<group>"; };
 		D517E4AC1EA8B67E00187AC8 /* amiko_db_full_idx_fr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = amiko_db_full_idx_fr.db; sourceTree = "<group>"; };
 		D517E4AE1EA8B8C400187AC8 /* MLInteractionsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLInteractionsAdapter.h; sourceTree = "<group>"; };
@@ -551,6 +555,8 @@
 				CF2EA5EB26932BB900FA1EC8 /* MedidataCredential.h */,
 				CFE5FCBF26CBAC9800FC8AAB /* MedidataDocument.h */,
 				CFE5FCC026CBAC9800FC8AAB /* MedidataDocument.m */,
+				CFF3D9EA26E1259B003B74C2 /* MedidataClientUploadStatus.h */,
+				CFF3D9EB26E1259B003B74C2 /* MedidataClientUploadStatus.m */,
 			);
 			path = Medidata;
 			sourceTree = "<group>";
@@ -1259,6 +1265,7 @@
 				FA63296D20A088CC002DC9E2 /* MLPrescriptionTableView.m in Sources */,
 				D5B010611927C472007BE838 /* interactions_callbacks.js in Sources */,
 				D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */,
+				CFF3D9EC26E1259B003B74C2 /* MedidataClientUploadStatus.m in Sources */,
 				D545C8E71898527C00491511 /* zip.c in Sources */,
 				D5E91B8C17E5E8E400B66B27 /* MLSearchWebView.js in Sources */,
 				D5C6440D1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
@@ -1340,6 +1347,7 @@
 				D5B010621927C472007BE838 /* interactions_callbacks.js in Sources */,
 				D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FC18A2CE0D00491511 /* zip.c in Sources */,
+				CFF3D9ED26E1259B003B74C2 /* MedidataClientUploadStatus.m in Sources */,
 				D53973CE1FA37B9200D7E444 /* MLOperator.m in Sources */,
 				D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */,
 				D5C6440E1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,

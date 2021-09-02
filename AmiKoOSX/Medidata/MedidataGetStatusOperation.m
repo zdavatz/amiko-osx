@@ -32,7 +32,7 @@
     self._isFinished = NO;
     __weak typeof(self) _self = self;
     [self.client getDocumentStatusWithTransmissionReference:self.transmissionReference
-                                                 completion:^(NSError * _Nonnull error, MedidataClientUploadStatus status) {
+                                                 completion:^(NSError * _Nullable error, MedidataClientUploadStatus * _Nullable status) {
         if (_self.callback) {
             _self.callback(error, status);
         }
