@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) MedidataDocument *document;
 @property (nonatomic, strong) NSString *amkFilePath;
-@property (nonatomic, assign) bool confirmed;
+@property (nonatomic, assign) bool canConfirm;
 
 @end
 

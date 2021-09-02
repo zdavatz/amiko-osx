@@ -14,13 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MedidataClient : NSObject
 
-- (void)sendXMLDocumentToMedidata:(NSXMLDocument *)document completion:(void (^)(NSError *error, NSString *ref))callback;
-- (void)getMedidataResponses:(void (^)(NSError *error, NSArray<MedidataDocument*> *doc))callback;
-- (void)downloadInvoiceResponseWithTransmissionReference:(NSString *)ref toFile:(NSURL*)dest completion:(void (^)(NSError *error))callback;
+- (void)sendXMLDocumentToMedidata:(NSXMLDocument *)document
+                       completion:(void (^)(NSError * _Nullable error, NSString * _Nullable ref))callback;
+- (void)getMedidataResponses:(void (^)(NSError * _Nullable error, NSArray<MedidataDocument*> * _Nullable doc))callback;
 - (void)getDocumentStatusWithTransmissionReference:(NSString *)ref
                                         completion:(void (^)(NSError * _Nullable error, MedidataClientUploadStatus * _Nullable status))callback;
+- (void)downloadInvoiceResponseWithTransmissionReference:(NSString *)ref
+                                                  toFile:(NSURL *)dest
+                                              completion:(void (^)(NSError * _Nullable error))callback;
 - (void)confirmInvoiceResponseWithTransmissionReference:(NSString *)ref
-                                             completion:(void (^)(NSError *error, MedidataDocument *doc))callback;
+                                             completion:(void (^)(NSError * _Nullable error, MedidataDocument * _Nullable doc))callback;
 
 @end
 
