@@ -1643,7 +1643,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     __weak typeof(self) _self = self;
     [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc completion:^(NSError * _Nonnull error, NSString * _Nonnull ref) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [mPrescriptionAdapter setMedidataRefs:[[mPrescriptionAdapter medidataRefs] arrayByAddingObject:ref]];
+            [mPrescriptionAdapter setMedidataRefs:@[ref]];
             
             [mPrescriptionsCart[0] makeNewUniqueHash];
             mPrescriptionAdapter.cart = mPrescriptionsCart[0].cart;
@@ -1652,7 +1652,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [self storeAllPrescriptionComments];
             [mPrescriptionAdapter savePrescriptionForPatient:[mPatientSheet retrievePatient]
                                               withUniqueHash:mPrescriptionsCart[0].uniqueHash
-                                                andOverwrite:YES];
+                                                andOverwrite:NO];
             possibleToOverwrite = true;
             modifiedPrescription = false;
             [_self updateButtons];

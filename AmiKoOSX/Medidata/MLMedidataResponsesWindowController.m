@@ -17,6 +17,7 @@
 
 @property (atomic, strong) NSMutableArray<MedidataInvoiceResponse*> *invoiceResponses;
 @property (atomic, strong) NSDictionary<NSString *, NSString *> *transmissionReferenceToAMKPath;
+@property (atomic, strong) NSMutableSet<NSString *> *latestTransmissionReferences; // The latest refs from each AMK file
 @property (atomic, strong) NSMutableSet *loadingResponses;
 @property (nonatomic, strong) MLPrescriptionsAdapter *mPrescriptionAdapter;
 @property (nonatomic, strong) MLPatient *patient;
@@ -35,6 +36,7 @@
     self.invoiceResponses = [NSMutableArray array];
     self.transmissionReferenceToAMKPath = @{};
     self.loadingResponses = [NSMutableSet set];
+    self.latestTransmissionReferences = [NSMutableSet set];
     return self;
 }
 
@@ -67,6 +69,10 @@
         for (NSString *ref in refs) {
             [dict setObject:path forKey:ref];
         }
+        NSString *last = [refs lastObject];
+        if (last) {
+            [self.latestTransmissionReferences addObject:last];
+        }
     }
     return dict;
 }
@@ -94,7 +100,7 @@
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue setMaxConcurrentOperationCount:10];
     NSSet *downloadedRefs = [NSSet setWithArray:[self.invoiceResponses valueForKeyPath:@"document.transmissionReference"]];
-    for (NSString *tranmissionReference in self.transmissionReferenceToAMKPath) {
+    for (NSString *tranmissionReference in self.latestTransmissionReferences) {
         NSString *amkFilePath = self.transmissionReferenceToAMKPath[tranmissionReference];
         if (![downloadedRefs containsObject:tranmissionReference]) {
             MedidataGetStatusOperation *op = [[MedidataGetStatusOperation alloc] initWithTransmissionReference:tranmissionReference];
