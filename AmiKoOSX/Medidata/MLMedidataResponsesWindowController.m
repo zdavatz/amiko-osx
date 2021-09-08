@@ -199,7 +199,7 @@
         NSURL *folderURL = [[MLPersistenceManager shared] medidataInvoiceResponseXMLDirectory];
         if ([folderURL startAccessingSecurityScopedResource]) {
             NSString *filename = response.amkFilePath.lastPathComponent ?: response.document.transmissionReference;
-            NSURL *fileURL = [folderURL URLByAppendingPathComponent:[filename stringByAppendingString:@".xml"]];
+            NSURL *fileURL = [folderURL URLByAppendingPathComponent:[filename stringByAppendingString:@"-response.xml"]];
             [[[MedidataClient alloc] init]
              downloadInvoiceResponseWithTransmissionReference:response.document.transmissionReference
              toFile:fileURL
