@@ -14,6 +14,8 @@
 #import "MLPatientSync.h"
 
 #define KEY_PERSISTENCE_SOURCE @"KEY_PERSISTENCE_SOURCE"
+#define KEY_MEDIDATA_INVOICE_XML_DIRECTORY @"KEY_MEDIDATA_INVOICE_XML_DIRECTORY"
+#define KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY @"KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY"
 
 @interface MLPersistenceManager () <MLiCloudToLocalMigrationDelegate>
 
@@ -147,6 +149,84 @@
     if (error != nil) {
         NSLog(@"Cannot start downloading favourite %@", error);
     }
+}
+
+- (BOOL)hadSetupMedidataInvoiceXMLDirectory {
+    NSData *bookmark = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_MEDIDATA_INVOICE_XML_DIRECTORY];
+    return bookmark != nil;
+}
+
+- (NSURL *)medidataInvoiceXMLDirectory {
+    NSData *bookmark = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_MEDIDATA_INVOICE_XML_DIRECTORY];
+    if (!bookmark) {
+        return nil;
+    }
+    NSError *error = nil;
+    BOOL isStale = NO;
+    NSURL *url = [NSURL URLByResolvingBookmarkData:bookmark
+                                           options:NSURLBookmarkResolutionWithSecurityScope
+                                     relativeToURL:nil
+                               bookmarkDataIsStale:&isStale
+                                             error:&error];
+    if (error) {
+        NSLog(@"%@", [error description]);
+        return nil;
+    }
+    if (isStale) {
+        [self setMedidataInvoiceXMLDirectory:url];
+    }
+    return url;
+}
+
+- (void)setMedidataInvoiceXMLDirectory:(NSURL *)url {
+    NSError *error = nil;
+    NSData *data = [url bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope
+                 includingResourceValuesForKeys:nil
+                                  relativeToURL:nil error:&error];
+    if (error) {
+        NSLog(@"%@", [error description]);
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:KEY_MEDIDATA_INVOICE_XML_DIRECTORY];
+    }
+}
+
+- (BOOL)hadSetupMedidataInvoiceResponseXMLDirectory {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY] != nil;
+}
+
+- (NSURL *)medidataInvoiceResponseXMLDirectory {
+    NSData *bookmark = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY];
+    if (!bookmark) {
+        return nil;
+    }
+    NSError *error = nil;
+    BOOL isStale = NO;
+    NSURL *url = [NSURL URLByResolvingBookmarkData:bookmark
+                                           options:NSURLBookmarkResolutionWithSecurityScope
+                                     relativeToURL:nil
+                               bookmarkDataIsStale:&isStale
+                                             error:&error];
+    if (error) {
+        NSLog(@"%@", [error description]);
+        return nil;
+    }
+    if (isStale) {
+        [self setMedidataInvoiceResponseXMLDirectory:url];
+    }
+    return url;
+}
+
+- (void)setMedidataInvoiceResponseXMLDirectory:(NSURL *)url {
+    NSError *error = nil;
+    NSData *bookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope
+                     includingResourceValuesForKeys:nil
+                                      relativeToURL:nil
+                                              error:&error];
+    if (error) {
+        NSLog(@"%@", [error description]);
+        return;
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:bookmark forKey:KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY];
 }
 
 # pragma mark - Migration Local -> iCloud

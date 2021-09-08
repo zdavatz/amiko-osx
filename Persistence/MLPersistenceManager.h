@@ -29,6 +29,13 @@ typedef NS_ENUM(NSInteger, MLPersistenceSource) {
 - (void)setCurrentSourceToICloud;
 - (void)setCurrentSourceToLocalWithDeleteICloud:(BOOL)deleteFilesOnICloud;
 
+- (BOOL)hadSetupMedidataInvoiceXMLDirectory;
+- (NSURL *)medidataInvoiceXMLDirectory;
+- (void)setMedidataInvoiceXMLDirectory:(NSURL *)url;
+- (BOOL)hadSetupMedidataInvoiceResponseXMLDirectory;
+- (NSURL *)medidataInvoiceResponseXMLDirectory;
+- (void)setMedidataInvoiceResponseXMLDirectory:(NSURL *)url;
+
 # pragma mark - Doctor
 
 - (NSURL *)doctorDictionaryURL;
