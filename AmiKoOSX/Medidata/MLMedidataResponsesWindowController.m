@@ -182,20 +182,43 @@
     if (!response.canConfirm) {
         return;
     }
-    NSSavePanel *savePanel = [NSSavePanel savePanel];
-    [savePanel setNameFieldStringValue:[NSString stringWithFormat:@"%@.txt", response.amkFilePath.lastPathComponent.stringByDeletingPathExtension]];
-    NSModalResponse returnCode = [savePanel runModal];
-    if (returnCode == NSFileHandlingPanelOKButton) {
-        [[[MedidataClient alloc] init]
-         downloadInvoiceResponseWithTransmissionReference:response.document.transmissionReference
-         toFile:savePanel.URL
-         completion:^(NSError * _Nonnull error) {
-            if (error) {
+    if (![[MLPersistenceManager shared] hadSetupMedidataInvoiceResponseXMLDirectory]) {
+        NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+        [openPanel setCanChooseFiles:NO];
+        [openPanel setCanChooseDirectories:YES];
+        [openPanel setCanCreateDirectories:YES];
+        [openPanel setAllowsMultipleSelection:NO];
+
+        NSModalResponse returnCode = [openPanel runModal];
+        if (returnCode == NSFileHandlingPanelOKButton) {
+            [[MLPersistenceManager shared] setMedidataInvoiceResponseXMLDirectory:openPanel.URL];
+        }
+    }
+    
+    if ([[MLPersistenceManager shared] hadSetupMedidataInvoiceResponseXMLDirectory]) {
+        NSURL *folderURL = [[MLPersistenceManager shared] medidataInvoiceResponseXMLDirectory];
+        if ([folderURL startAccessingSecurityScopedResource]) {
+            NSString *filename = response.amkFilePath.lastPathComponent ?: response.document.transmissionReference;
+            NSURL *fileURL = [folderURL URLByAppendingPathComponent:[filename stringByAppendingString:@"-response.xml"]];
+            [[[MedidataClient alloc] init]
+             downloadInvoiceResponseWithTransmissionReference:response.document.transmissionReference
+             toFile:fileURL
+             completion:^(NSError * _Nonnull error) {
+                [folderURL stopAccessingSecurityScopedResource];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSAlert alertWithError:error] runModal];
+                    if (error) {
+                        [[NSAlert alertWithError:error] runModal];
+                    } else {
+                        NSAlert *alert = [[NSAlert alloc] init];
+                        [alert setMessageText:NSLocalizedString(@"Downloaded", @"")];
+                        [alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Downloaded to %@", @""), fileURL.path]];
+                        [alert runModal];
+                    }
                 });
-            }
-        }];
+            }];
+        } else {
+            NSLog(@"Cannot access invoice response's secure URL");
+        }
     }
 }
 

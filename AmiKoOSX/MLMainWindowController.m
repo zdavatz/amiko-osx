@@ -1632,6 +1632,8 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     NSData *lintData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
     NSString *lintResult = [[NSString alloc] initWithData:lintData encoding:NSUTF8StringEncoding];
     
+    [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
+    
     if (exitCode != 0) {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText:NSLocalizedString(@"Error with XML Lint", nil)];
@@ -1640,36 +1642,57 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         return;
     }
     
+    if (![[MLPersistenceManager shared] hadSetupMedidataInvoiceXMLDirectory]) {
+        NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+        [openPanel setCanChooseFiles:NO];
+        [openPanel setCanChooseDirectories:YES];
+        [openPanel setCanCreateDirectories:YES];
+        [openPanel setAllowsMultipleSelection:NO];
+
+        NSModalResponse returnCode = [openPanel runModal];
+        if (returnCode == NSFileHandlingPanelOKButton) {
+            [[MLPersistenceManager shared] setMedidataInvoiceXMLDirectory:openPanel.URL];
+        }
+    }
+    
     __weak typeof(self) _self = self;
-    [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc completion:^(NSError * _Nonnull error, NSString * _Nonnull ref) {
+    [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc completion:^(NSError * _Nullable error, NSString * _Nullable ref) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [mPrescriptionAdapter setMedidataRefs:@[ref]];
+            if (ref) {
+                [mPrescriptionAdapter setMedidataRefs:@[ref]];
+            } else {
+                [mPrescriptionAdapter setMedidataRefs:@[]];
+            }
             
             [mPrescriptionsCart[0] makeNewUniqueHash];
             mPrescriptionAdapter.cart = mPrescriptionsCart[0].cart;
             
             // Handle the decision automatically
             [self storeAllPrescriptionComments];
-            [mPrescriptionAdapter savePrescriptionForPatient:[mPatientSheet retrievePatient]
-                                              withUniqueHash:mPrescriptionsCart[0].uniqueHash
-                                                andOverwrite:NO];
+            NSURL *savedFile = [mPrescriptionAdapter savePrescriptionForPatient:[mPatientSheet retrievePatient]
+                                                                 withUniqueHash:mPrescriptionsCart[0].uniqueHash
+                                                                   andOverwrite:NO];
             possibleToOverwrite = true;
             modifiedPrescription = false;
             [_self updateButtons];
             [_self updatePrescriptionHistory];
+            if ([[MLPersistenceManager shared] hadSetupMedidataInvoiceXMLDirectory]) {
+                NSURL *folderURL = [[MLPersistenceManager shared] medidataInvoiceXMLDirectory];
+                if ([folderURL startAccessingSecurityScopedResource]) {
+                    NSURL *fileURL = [folderURL URLByAppendingPathComponent: [savedFile.lastPathComponent stringByAppendingString:@".xml"]];
+                    NSError *writeError = nil;
+                    [data writeToURL:fileURL options:NSDataWritingAtomic error:&writeError];
+                    if (writeError) {
+                        [[NSAlert alertWithError:writeError] runModal];
+                    }
+                    [folderURL stopAccessingSecurityScopedResource];
+                } else {
+                    NSLog(@"Cannot access secure url");
+                }
+            }
         });
     }];
-
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH.mm.dd.MM.yyyy"];
-    [dateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
     
-    NSSavePanel *savePanel = [NSSavePanel savePanel];
-    [savePanel setNameFieldStringValue:[NSString stringWithFormat:@"%@_%@_%@_%@.xml", dbPatient.givenName, dbPatient.familyName, dbPatient.birthDate, [dateFormatter stringFromDate:[NSDate date]]]];
-    NSModalResponse returnCode = [savePanel runModal];
-    if (returnCode == NSFileHandlingPanelOKButton) {
-        [data writeToURL:savePanel.URL atomically:YES];
-    }
 }
 - (IBAction)onOepnMedidataResponseWindow:(id)sender {
     MLPatient *p = [mPatientSheet retrievePatient];
