@@ -6,9 +6,9 @@
 //  Copyright © 2021 Ywesee GmbH. All rights reserved.
 //
 
-#import "MedidataGetStatusOperation.h"
+#import "MedidataGetUploadStatusOperation.h"
 
-@interface MedidataGetStatusOperation ()
+@interface MedidataGetUploadStatusOperation ()
 
 @property (nonatomic, strong) MedidataClient *client;
 
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation MedidataGetStatusOperation
+@implementation MedidataGetUploadStatusOperation
 
 - (instancetype)initWithTransmissionReference:(NSString *)ref {
     if (self = [super init]) {
