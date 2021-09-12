@@ -10,25 +10,27 @@
 
 @interface MedidataInvoiceResponseLocalRow ()
 
-@property (nonatomic, strong, nullable) NSString *amkFilePath;
-@property (nonatomic, strong, nullable) NSString *ref;
+@property (nonatomic, strong, nullable) NSString *transmissionRef;
 
 @end
 
 @implementation MedidataInvoiceResponseLocalRow
 
-- (instancetype)initWithLocalFile:(NSURL *)url amkFilePath:(NSString * _Nullable)amkFilePath transmissionReference:(NSString * _Nullable)ref {
-    if (self = [super init]) {
+- (instancetype)initWithInvoiceFolder:(NSURL *)invoiceFolderURL
+                            localFile:(NSURL *)url
+                      amkFilePath:(NSString * _Nullable)amkFilePath
+                transmissionReference:(NSString * _Nullable)ref {
+    if (self = [super initWithInvoiceFolder:invoiceFolderURL]) {
         self.fileURL = url;
         self.amkFilePath = amkFilePath;
-        self.ref = ref;
+        self.transmissionRef = ref;
     }
     return self;
 }
 
 - (NSString *)amkFilename {
     if (self.amkFilePath) {
-        return self.amkFilename.lastPathComponent;
+        return self.amkFilePath.lastPathComponent;
     }
     NSString *xmlFilename = self.fileURL.lastPathComponent;
     if ([xmlFilename hasSuffix:@"-response.xml"]) {
@@ -38,21 +40,13 @@
 }
 
 - (NSString *)transmissionReference {
-    if (self.ref) {
-        return self.ref;
-    }
-    NSString *xmlFilename = self.fileURL.lastPathComponent;
-    if (![xmlFilename hasSuffix:@"-response.xml"]) {
-        return [xmlFilename stringByDeletingPathExtension];
+    if (self.transmissionRef) {
+        return self.transmissionRef;
     }
     return nil;
 }
 
 - (NSString *)documentReference {
-    return nil;
-}
-
-- (NSString *)correlationReference {
     return nil;
 }
 

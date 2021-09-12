@@ -13,9 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MedidataInvoiceResponseLocalRow : MedidataInvoiceResponseRow
 
+@property (nonatomic, strong, nullable) NSString *amkFilePath;
 @property (nonatomic, strong) NSURL *fileURL;
 
-- (instancetype)initWithLocalFile:(NSURL *)url
+- (instancetype)initWithInvoiceFolder:(NSURL *)invoiceFolderURL
+                            localFile:(NSURL *)url
                       amkFilePath:(NSString * _Nullable)amkFilePath
             transmissionReference:(NSString * _Nullable)ref;
 

@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MedidataInvoiceResponseRow : NSObject
 
+@property (nonatomic, strong) NSURL *invoiceFolderURL;
+
+- (instancetype)initWithInvoiceFolder:(NSURL *)invoiceFolderURL;
+
 - (NSString *)amkFilename;
 - (NSString *)transmissionReference;
 - (NSString *)documentReference;

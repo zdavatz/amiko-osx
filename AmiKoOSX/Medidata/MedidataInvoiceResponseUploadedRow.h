@@ -14,7 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MedidataInvoiceResponseUploadedRow : MedidataInvoiceResponseRow
 
-- (instancetype)initWithAMKFilePath:(NSString *)amkFilePath uploadStatus:(MedidataClientUploadStatus *)uploadStatus;
+@property (nonatomic, strong) NSString *amkFilePath;
+@property (nonatomic, strong, nullable) MedidataClientUploadStatus *uploadStatus;
+@property (nonatomic, strong, nullable) NSString *transmissionRef;
+
+- (instancetype)initWithInvoiceFolder:(NSURL *)invoiceFolderURL
+                          amkFilePath:(NSString *)amkFilePath
+                         uploadStatus:(MedidataClientUploadStatus * _Nullable)uploadStatus;
 
 @end
 

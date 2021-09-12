@@ -7,8 +7,16 @@
 //
 
 #import "MedidataInvoiceResponseDownloadsRow.h"
+#import "MedidataInvoiceResponseUploadedRow.h"
 
 @implementation MedidataInvoiceResponseDownloadsRow
+
+- (instancetype)initWithInvoiceFolder:(NSURL *)invoiceFolderURL amkFilePath:(NSString *)amkFilePath {
+    if (self = [super initWithInvoiceFolder:invoiceFolderURL]) {
+        self.amkFilePath = amkFilePath;
+    }
+    return self;
+}
 
 - (NSString *)amkFilename {
     return self.amkFilePath.lastPathComponent;
@@ -47,11 +55,11 @@
 }
 
 - (BOOL)isDownloading {
-    return self.localRow == nil;
+    return [self.existingRow isKindOfClass:[MedidataInvoiceResponseUploadedRow class]];
 }
 
 - (NSURL *)localFileToOpen {
-    return [self.localRow localFileToOpen];
+    return [self.existingRow localFileToOpen];
 }
 
 @end

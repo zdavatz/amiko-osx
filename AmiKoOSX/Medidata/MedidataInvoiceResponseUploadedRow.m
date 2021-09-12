@@ -10,15 +10,14 @@
 
 @interface MedidataInvoiceResponseUploadedRow ()
 
-@property (nonatomic, strong) NSString *amkFilePath;
-@property (nonatomic, strong) MedidataClientUploadStatus *uploadStatus;
-
 @end
 
 @implementation MedidataInvoiceResponseUploadedRow
 
-- (instancetype)initWithAMKFilePath:(NSString *)amkFilePath uploadStatus:(MedidataClientUploadStatus *)uploadStatus {
-    if (self = [super init]) {
+- (instancetype)initWithInvoiceFolder:(NSURL *)invoiceFolderURL
+                          amkFilePath:(NSString *)amkFilePath
+                         uploadStatus:(MedidataClientUploadStatus *)uploadStatus {
+    if (self = [super initWithInvoiceFolder:invoiceFolderURL]) {
         self.amkFilePath = amkFilePath;
         self.uploadStatus = uploadStatus;
     }
@@ -30,14 +29,10 @@
 }
 
 - (NSString *)transmissionReference {
-    return self.uploadStatus.transmissionReference;
+    return self.uploadStatus.transmissionReference ?: self.transmissionRef;
 }
 
 - (NSString *)documentReference {
-    return nil;
-}
-
-- (NSString *)correlationReference {
     return nil;
 }
 
@@ -54,6 +49,9 @@
 }
 
 - (NSString *)status {
+    if (!self.uploadStatus) {
+        return nil;
+    }
     return [NSString stringWithFormat:@"Uploaded: %@", self.uploadStatus.status];
 }
 

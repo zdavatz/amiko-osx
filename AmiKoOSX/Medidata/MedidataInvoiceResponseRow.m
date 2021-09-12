@@ -7,8 +7,22 @@
 //
 
 #import "MedidataInvoiceResponseRow.h"
+#import "MedidataInvoiceDocument.h"
+
+@interface MedidataInvoiceResponseRow ()
+
+@property (nonatomic, strong) MedidataInvoiceDocument *invoiceDocument;
+
+@end
 
 @implementation MedidataInvoiceResponseRow
+
+- (instancetype)initWithInvoiceFolder:(NSURL *)invoiceFolderURL {
+    if (self = [super init]) {
+        self.invoiceFolderURL = invoiceFolderURL;
+    }
+    return self;
+}
 
 - (NSString *)amkFilename {
     return nil;
@@ -23,7 +37,24 @@
 }
 
 - (NSString *)correlationReference {
-    return nil;
+    if (!self.invoiceDocument) {
+        NSString *amkFilename = [self.amkFilename stringByAppendingString:@".xml"];
+        if (!amkFilename) {
+            return nil;
+        }
+        NSURL *invoiceURL = [self.invoiceFolderURL URLByAppendingPathComponent:amkFilename];
+        NSError *error = nil;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:invoiceURL.path]) {
+            NSXMLDocument *xmlDoc = [[NSXMLDocument alloc] initWithContentsOfURL:invoiceURL options:0 error:&error];
+            if (error) {
+                NSLog(@"Cannot read invoice: %@", [error description]);
+                return nil;
+            }
+            MedidataInvoiceDocument *invoiceDoc = [[MedidataInvoiceDocument alloc] initWithXMLDocument:xmlDoc];
+            self.invoiceDocument = invoiceDoc;
+        }
+    }
+    return [self.invoiceDocument requestId];
 }
 
 - (NSString *)senderGln {
