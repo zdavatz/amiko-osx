@@ -175,7 +175,7 @@
         NSData *imgData = [doctorImage TIFFRepresentation];
         NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imgData];
         NSData *data = [imageRep representationUsingType:NSPNGFileType properties:@{}];
-        encodedImgStr = [data base64Encoding];
+        encodedImgStr = [data base64EncodedStringWithOptions:0];
     }
     [operatorDict setObject:encodedImgStr forKey:KEY_AMK_DOC_SIGNATURE];
     

@@ -47,34 +47,34 @@ enum database_t {
 
 @interface MLPatient : NSObject
 
-@property (atomic, copy) NSString *uniqueId;
-@property (atomic, copy) NSString *familyName;
-@property (atomic, copy) NSString *givenName;
-@property (atomic, copy) NSString *birthDate;
-@property (atomic, copy) NSString *gender;
+@property (atomic, copy, nullable) NSString *uniqueId;
+@property (atomic, copy, nullable) NSString *familyName;
+@property (atomic, copy, nullable) NSString *givenName;
+@property (atomic, copy, nullable) NSString *birthDate;
+@property (atomic, copy, nullable) NSString *gender;
 @property (atomic, assign) int weightKg;
 @property (atomic, assign) int heightCm;
-@property (atomic, copy) NSString *zipCode;
-@property (atomic, copy) NSString *city;
-@property (atomic, copy) NSString *country;
-@property (atomic, copy) NSString *postalAddress;
-@property (atomic, copy) NSString *phoneNumber;
-@property (atomic, copy) NSString *emailAddress;
-@property (atomic, copy) NSString *bagNumber;
-@property (atomic, copy) NSString *healthCardNumber;
-@property (atomic, copy) NSString *healthCardExpiry;
-@property (atomic, copy) NSString *insuranceGLN;
+@property (atomic, copy, nullable) NSString *zipCode;
+@property (atomic, copy, nullable) NSString *city;
+@property (atomic, copy, nullable) NSString *country;
+@property (atomic, copy, nullable) NSString *postalAddress;
+@property (atomic, copy, nullable) NSString *phoneNumber;
+@property (atomic, copy, nullable) NSString *emailAddress;
+@property (atomic, copy, nullable) NSString *bagNumber;
+@property (atomic, copy, nullable) NSString *healthCardNumber;
+@property (atomic, copy, nullable) NSString *healthCardExpiry;
+@property (atomic, copy, nullable) NSString *insuranceGLN;
 @property (atomic, assign) enum database_t databaseType;
 
 // Only available when patient is read from database
 @property (nonatomic, strong, nullable) NSDate *timestamp;
 
-- (void)importFromDict:(NSDictionary *)dict;
-- (NSDictionary <NSString *, NSString *> *)dictionaryRepresentation;
-- (NSString *) generateUniqueID;
-- (NSString *) asString;
-- (NSDictionary *)findParticipantsKvg;
-- (NSString *)findParticipantGLN;
-- (NSString *)findCantonShortCode;
+- (void)importFromDict:(NSDictionary * _Nonnull)dict;
+- (NSDictionary <NSString *, NSString *> * _Nonnull)dictionaryRepresentation;
+- (NSString * _Nonnull)generateUniqueID;
+- (NSString * _Nonnull)asString;
+- (NSDictionary * _Nullable)findParticipantsKvg;
+- (NSString * _Nullable)findParticipantGLN;
+- (NSString * _Nullable)findCantonShortCode;
 
 @end

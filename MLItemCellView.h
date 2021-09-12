@@ -27,11 +27,11 @@
 
 @interface MLItemCellView : NSTableCellView <NSTableViewDelegate, NSTableViewDataSource>
 
-@property (nonatomic, weak) IBOutlet NSButtonCell *favoritesCheckBox;
-@property (nonatomic, weak) IBOutlet NSTableView *packagesView;
+@property (nonatomic, weak) IBOutlet NSButtonCell * _Nullable favoritesCheckBox;
+@property (nonatomic, weak) IBOutlet NSTableView * _Nullable packagesView;
 
-@property (atomic) DataObject *selectedMedi;
-@property (atomic) NSString *packagesStr;
+@property (atomic, nullable) DataObject *selectedMedi;
+@property (atomic, nullable) NSString *packagesStr;
 @property (atomic) NSInteger numPackages;
 @property (atomic) BOOL showContextualMenu;
 @property (nonatomic, copy, nullable) void (^onSubtitlePressed)(NSInteger row);

@@ -322,10 +322,10 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     prescriptionTextFinder.client = self.prescriptionTextFinderClient;
     
     // Register drag and drop on prescription table view
-    [self.mySectionTitles setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
+    [self.mySectionTitles setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     [self.mySectionTitles registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, NSURLPboardType, nil]];
     
-    [self.myPrescriptionsTableView setDraggingSourceOperationMask:NSDragOperationAll forLocal:NO];
+    [self.myPrescriptionsTableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     [self.myPrescriptionsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, NSURLPboardType, nil]];
     
     // Initialize webview
@@ -510,12 +510,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [self updateUserDefaultsForKey:@"frenchDBLastUpdate"];
         }
 
-        [alert setAlertStyle:NSInformationalAlertStyle];
-        
+        [alert setAlertStyle:NSAlertStyleInformational];
+        __weak typeof(self) _self = self;
         [alert beginSheetModalForWindow:[self window]
-                          modalDelegate:self
-                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
-                            contextInfo:nil];
+                      completionHandler:^(NSModalResponse returnCode) {
+            [_self alertDidEnd:alert returnCode:returnCode];
+        }];
     }
 }
 
@@ -584,12 +584,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
  */
 - (void) webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message
 {
-    NSAlert* jsAlert = [NSAlert alertWithMessageText:@"JavaScript"
-                                       defaultButton:@"OK"
-                                     alternateButton:nil
-                                         otherButton:nil
-                           informativeTextWithFormat:@"%@", message];
-    [jsAlert beginSheetModalForWindow:sender.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
+    NSAlert *jsAlert = [[NSAlert alloc] init];
+    [jsAlert setMessageText:@"JavaScript"];
+    [jsAlert addButtonWithTitle:NSLocalizedString(@"OK", @"")];
+    [jsAlert setInformativeText:message];
+    [jsAlert beginSheetModalForWindow:sender.window completionHandler:^(NSModalResponse returnCode) {
+        
+    }];
 }
 
 - (void) fadeInAndShow
@@ -896,12 +897,13 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [alert addButtonWithTitle:@"OK"];
             [alert setMessageText:NSLocalizedString(@"AmiKo Database Updated!", nil)];
             [alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"The database contains:\n- %ld Products\n- %ld Specialist information\n- %ld Keywords\n- %d Interactions", nil), numProducts, numFachinfos, numSearchTerms, numInteractions]];
-            [alert setAlertStyle:NSInformationalAlertStyle];
-            
+
+            [alert setAlertStyle:NSAlertStyleInformational];
+            __weak typeof(self) _self = self;
             [alert beginSheetModalForWindow:[self window]
-                              modalDelegate:self
-                             didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
-                                contextInfo:nil];
+                          completionHandler:^(NSModalResponse returnCode) {
+                [_self alertDidEnd:alert returnCode:returnCode];
+            }];
         }
     }
     else if ([[notification name] isEqualToString:@"MLStatusCode404"]) {
@@ -910,15 +912,16 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         [alert addButtonWithTitle:@"OK"];
         [alert setMessageText:NSLocalizedString(@"Update is not possible", nil)];
         [alert setInformativeText:NSLocalizedString(@"Please contact", nil)];
-        [alert setAlertStyle:NSInformationalAlertStyle];
+        [alert setAlertStyle:NSAlertStyleInformational];
+        __weak typeof(self) _self = self;
         [alert beginSheetModalForWindow:[self window]
-                          modalDelegate:self
-                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
-                            contextInfo:nil];
+                      completionHandler:^(NSModalResponse returnCode) {
+            [_self alertDidEnd:alert returnCode:returnCode];
+        }];
     }
 }
 
-- (void) alertDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+- (void) alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode
 {
     if (returnCode==NSAlertFirstButtonReturn) {
         NSLog(@"Database successfully updated!");
@@ -1278,11 +1281,12 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
         [alert addButtonWithTitle:@"OK"];
         [alert setMessageText:NSLocalizedString(@"To update the database you must have an active internet connection", nil)];
 
-        [alert setAlertStyle:NSInformationalAlertStyle];
+        [alert setAlertStyle:NSAlertStyleInformational];
+        __weak typeof(self) _self = self;
         [alert beginSheetModalForWindow:[self window]
-                          modalDelegate:self
-                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
-                            contextInfo:nil];
+                      completionHandler:^(NSModalResponse returnCode) {
+            [_self alertDidEnd:alert returnCode:returnCode];
+        }];
     }
 }
 
@@ -1644,20 +1648,30 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     if (![[MLPersistenceManager shared] hadSetupMedidataInvoiceXMLDirectory]) {
         NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+        [openPanel setMessage:NSLocalizedString(@"Where to save Invoices?", @"")];
         [openPanel setCanChooseFiles:NO];
         [openPanel setCanChooseDirectories:YES];
         [openPanel setCanCreateDirectories:YES];
         [openPanel setAllowsMultipleSelection:NO];
 
         NSModalResponse returnCode = [openPanel runModal];
-        if (returnCode == NSFileHandlingPanelOKButton) {
-            [[MLPersistenceManager shared] setMedidataInvoiceXMLDirectory:openPanel.URL];
+        if (returnCode != NSFileHandlingPanelOKButton) {
+            return;
         }
+        [[MLPersistenceManager shared] setMedidataInvoiceXMLDirectory:openPanel.URL];
     }
     
     __weak typeof(self) _self = self;
     [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc completion:^(NSError * _Nullable error, NSString * _Nullable ref) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                [[NSAlert alertWithError:error] runModal];
+            }
+            if (ref) {
+                NSAlert *alert = [[NSAlert alloc] init];
+                [alert setMessageText:NSLocalizedString(@"Sent to Medidata", @"")];
+                [alert runModal];
+            }
             if (ref) {
                 [mPrescriptionAdapter setMedidataRefs:@[ref]];
             } else {
@@ -1676,19 +1690,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             modifiedPrescription = false;
             [_self updateButtons];
             [_self updatePrescriptionHistory];
-            if ([[MLPersistenceManager shared] hadSetupMedidataInvoiceXMLDirectory]) {
-                NSURL *folderURL = [[MLPersistenceManager shared] medidataInvoiceXMLDirectory];
-                if ([folderURL startAccessingSecurityScopedResource]) {
-                    NSURL *fileURL = [folderURL URLByAppendingPathComponent: [savedFile.lastPathComponent stringByAppendingString:@".xml"]];
-                    NSError *writeError = nil;
-                    [data writeToURL:fileURL options:NSDataWritingAtomic error:&writeError];
-                    if (writeError) {
-                        [[NSAlert alertWithError:writeError] runModal];
-                    }
-                    [folderURL stopAccessingSecurityScopedResource];
-                } else {
-                    NSLog(@"Cannot access secure url");
+            NSURL *folderURL = [[MLPersistenceManager shared] medidataInvoiceXMLDirectory];
+            if ([folderURL startAccessingSecurityScopedResource]) {
+                NSURL *fileURL = [folderURL URLByAppendingPathComponent: [savedFile.lastPathComponent stringByAppendingString:@".xml"]];
+                NSError *writeError = nil;
+                [data writeToURL:fileURL options:NSDataWritingAtomic error:&writeError];
+                if (writeError) {
+                    [[NSAlert alertWithError:writeError] runModal];
                 }
+                [folderURL stopAccessingSecurityScopedResource];
+            } else {
+                NSLog(@"Cannot access secure url");
             }
         });
     }];
@@ -1697,6 +1709,20 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (IBAction)onOepnMedidataResponseWindow:(id)sender {
     MLPatient *p = [mPatientSheet retrievePatient];
     if (!p) return;
+    if (![[MLPersistenceManager shared] hadSetupMedidataInvoiceResponseXMLDirectory]) {
+        NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+        [openPanel setMessage:NSLocalizedString(@"Where to save Invoice responses?", @"")];
+        [openPanel setCanChooseFiles:NO];
+        [openPanel setCanChooseDirectories:YES];
+        [openPanel setCanCreateDirectories:YES];
+        [openPanel setAllowsMultipleSelection:NO];
+
+        NSModalResponse returnCode = [openPanel runModal];
+        if (returnCode != NSFileHandlingPanelOKButton) {
+            return;
+        }
+        [[MLPersistenceManager shared] setMedidataInvoiceResponseXMLDirectory:openPanel.URL];
+    }
     MLMedidataResponsesWindowController *controller = [[MLMedidataResponsesWindowController alloc] initWithPatient:p];
     self.medidataResponseWindowController = controller;
     [controller showWindow:self];
@@ -1712,16 +1738,17 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
             [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
             [alert setMessageText:NSLocalizedString(@"Delete prescription?",nil)];
             [alert setInformativeText:NSLocalizedString(@"Do you really want to delete this prescription?",nil)];
-            [alert setAlertStyle:NSInformationalAlertStyle];
+            [alert setAlertStyle:NSAlertStyleInformational];
+            __weak typeof(self) _self = self;
             [alert beginSheetModalForWindow:[self window]
-                              modalDelegate:self
-                             didEndSelector:@selector(deletePrescription:returnCode:contextInfo:)
-                                contextInfo:nil];
+                          completionHandler:^(NSModalResponse returnCode) {
+                [_self deletePrescription:alert returnCode:returnCode];
+            }];
         }
     }
 }
 
-- (void) deletePrescription:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+- (void) deletePrescription:(NSAlert *)alert returnCode:(NSInteger)returnCode
 {
     if (returnCode==NSAlertFirstButtonReturn) {
         if (mPrescriptionMode) {

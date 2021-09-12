@@ -47,7 +47,11 @@
         self.coreDataContainer = [[NSPersistentContainer alloc] initWithName:@"Model"];
         
         NSPersistentStoreDescription *description = [[self.coreDataContainer persistentStoreDescriptions] firstObject];
-        [description setOption:@1 forKey:NSPersistentHistoryTrackingKey];
+        if (@available(macOS 10.13, *)) {
+            [description setOption:@1 forKey:NSPersistentHistoryTrackingKey];
+        } else {
+            // Fallback on earlier versions
+        }
 
         [self.coreDataContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * _Nonnull desc, NSError * _Nullable error) {
             if (error != nil) {
