@@ -523,18 +523,18 @@
         [alert setMessageText:NSLocalizedString(@"Delete contact?", nil)];
         [alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete this contact from the %@ Address Book?", nil), [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"]]];
 
-        [alert setAlertStyle:NSInformationalAlertStyle];
-        [alert beginSheetModalForWindow:[self window]
-                          modalDelegate:self
-                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
-                            contextInfo:(__bridge void * _Nullable)(p)];
+        [alert setAlertStyle:NSAlertStyleInformational];
+        __weak typeof(self) _self = self;
+        [alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
+            [_self alertDidEnd:alert returnCode:returnCode contextInfo:p];
+        }];
     }
 }
 
-- (void) alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+- (void) alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(MLPatient *)contextInfo
 {
     if (returnCode==NSAlertSecondButtonReturn) {
-        MLPatient *p = (__bridge MLPatient *)contextInfo;
+        MLPatient *p = contextInfo;
         if ([[MLPersistenceManager shared] deletePatient:p]) {
             [self resetAllFields];
             [self updateAmiKoAddressBookTableView];

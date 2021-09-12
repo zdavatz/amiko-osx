@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MedidataGetStatusOperation : NSOperation
+@interface MedidataGetUploadStatusOperation : NSOperation
 
 @property (nonatomic, strong) NSString *transmissionReference;
 @property (nonatomic, copy, nullable) void (^callback)(NSError *error, MedidataClientUploadStatus *status);

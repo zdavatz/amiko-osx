@@ -9,18 +9,27 @@
 #import "MLMedidataResponsesWindowController.h"
 #import "MedidataDocument.h"
 #import "MLPrescriptionsAdapter.h"
-#import "MedidataInvoiceResponse.h"
-#import "MedidataGetStatusOperation.h"
+#import "MedidataInvoiceResponseDownloadsRow.h"
+#import "MedidataGetUploadStatusOperation.h"
 #import "MLPersistenceManager.h"
+#import "MedidataResponseDocument.h"
+#import "MLMedidataDownloadAndCheckOperation.h"
+
+#import "MedidataInvoiceResponseDownloadsRow.h"
+#import "MedidataInvoiceResponseLocalRow.h"
+#import "MedidataInvoiceResponseUploadedRow.h"
 
 @interface MLMedidataResponsesWindowController () <NSTableViewDelegate, NSTableViewDataSource>
 
-@property (atomic, strong) NSMutableArray<MedidataInvoiceResponse*> *invoiceResponses;
-@property (atomic, strong) NSDictionary<NSString *, NSString *> *transmissionReferenceToAMKPath;
-@property (atomic, strong) NSMutableSet<NSString *> *latestTransmissionReferences; // The latest refs from each AMK file
-@property (atomic, strong) NSMutableSet *loadingResponses;
+@property (atomic, strong) NSMutableArray<MedidataInvoiceResponseRow*> *rows;
+@property (atomic, strong) NSMutableDictionary<NSString *, NSString *> *transmissionReferenceToAMKPath;
+@property (atomic, strong) NSMutableSet *confirmingTransmissionReferences;
 @property (nonatomic, strong) MLPrescriptionsAdapter *mPrescriptionAdapter;
 @property (nonatomic, strong) MLPatient *patient;
+
+@property (nonatomic, strong) NSOperationQueue *queue;
+@property (nonatomic, strong) NSURL *invoiceFolderURL;
+@property (nonatomic, strong) NSURL *invoiceResponseFolderURL;
 
 @property (weak) IBOutlet NSTableView *tableView;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
@@ -29,24 +38,59 @@
 
 @implementation MLMedidataResponsesWindowController
 
+// 1. List all local responses
+// 1.1. List all amks
+// 1.2. Get corresponding invoice response via amk filename or amk's transmission reference
+// 1.3. Create MedidataInvoiceResponseLocalRow for local responses
+// 1.4. If local response does not exist, it's "Uploaded but not yet receiving response", so create
+//      a MedidataInvoiceResponseUploadedRow
+//
+// 2. List all remote responses
+// 2.1 Create MedidataInvoiceResponseDownloadsRow for remote responses
+// 2.2 Merge with some MedidataInvoiceResponseLocalRow and MedidataInvoiceResponseUploadedRow,
+//     because it possible that the response is already downloaded,
+//     but not yet confirmed, which means it still available for download again.
+//
+// 3. List all remote upload status
+// 3.1. If there's any transmission reference from all amk, that we cannot find any response,
+//      we need to fetch its upload status.
+// 3.2 Create MedidataInvoiceResponseUploadedRow row those rows, or update existing MedidataInvoiceResponseUploadedRows.
+
 - (instancetype)initWithPatient:(MLPatient *)patient {
     self = [super initWithWindowNibName:@"MLMedidataResponsesWindowController"];
     self.patient = patient;
     self.mPrescriptionAdapter = [[MLPrescriptionsAdapter alloc] init];
-    self.invoiceResponses = [NSMutableArray array];
-    self.transmissionReferenceToAMKPath = @{};
-    self.loadingResponses = [NSMutableSet set];
-    self.latestTransmissionReferences = [NSMutableSet set];
+    self.rows = [NSMutableArray array];
+    self.queue = [[NSOperationQueue alloc] init];
+    [self.queue setMaxConcurrentOperationCount:10];
+    self.transmissionReferenceToAMKPath = [NSMutableDictionary dictionary];
+    self.confirmingTransmissionReferences = [NSMutableSet set];
     return self;
+}
+
+- (void)dealloc {
+    [self.invoiceFolderURL stopAccessingSecurityScopedResource];
+    [self.invoiceResponseFolderURL stopAccessingSecurityScopedResource];
 }
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+
+    self.invoiceFolderURL = [[MLPersistenceManager shared] medidataInvoiceXMLDirectory];
+    if (![self.invoiceFolderURL startAccessingSecurityScopedResource]) {
+        NSLog(@"Cannot access invoice's secure URL");
+    }
+    self.invoiceResponseFolderURL = [[MLPersistenceManager shared] medidataInvoiceResponseXMLDirectory];
+    if (![self.invoiceResponseFolderURL startAccessingSecurityScopedResource]) {
+        NSLog(@"Cannot access invoice response's secure URL");
+    }
     
     [self.progressIndicator startAnimation:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        self.transmissionReferenceToAMKPath = [self buildTranmissionReferenceToAMKPathDict];
-
+        [self setupWithAMKsAndLocalResponses];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
         [[[MedidataClient alloc] init] getMedidataResponses:^(NSError * _Nonnull error, NSArray<MedidataDocument *> * _Nonnull docs) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
@@ -54,42 +98,101 @@
                     return;
                 }
                 [self didReceivedMedidataDocs:docs];
-                [self.progressIndicator stopAnimation:self];
             });
         }];
     });
 }
 
-- (NSDictionary<NSString*, NSString*>*)buildTranmissionReferenceToAMKPathDict {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+- (void)setupWithAMKsAndLocalResponses {
     NSArray<NSString *> *paths = [self.mPrescriptionAdapter listOfPrescriptionsForPatient:self.patient];
     for (NSString *path in paths) {
         [self.mPrescriptionAdapter loadPrescriptionFromURL:[NSURL fileURLWithPath:path]];
         NSArray<NSString *> *refs = [self.mPrescriptionAdapter medidataRefs];
         for (NSString *ref in refs) {
-            [dict setObject:path forKey:ref];
-        }
-        NSString *last = [refs lastObject];
-        if (last) {
-            [self.latestTransmissionReferences addObject:last];
+            [self.transmissionReferenceToAMKPath setObject:path forKey:ref];
+            
+            NSString *responseFile = [self findInvoiceResponseFileWithAmkFilePath:path transmissionReference:ref];
+            if (responseFile) {
+                [self.rows addObject:[[MedidataInvoiceResponseLocalRow alloc] initWithInvoiceFolder:self.invoiceFolderURL
+                                                                                          localFile:[NSURL fileURLWithPath:responseFile]
+                                                                                        amkFilePath:path
+                                                                              transmissionReference:ref]];
+            } else {
+                MedidataInvoiceResponseUploadedRow *uploadedRow = [[MedidataInvoiceResponseUploadedRow alloc] initWithInvoiceFolder:self.invoiceFolderURL
+                                                                                                                        amkFilePath:path
+                                                                                                                       uploadStatus:nil];
+                uploadedRow.transmissionRef = ref;
+                [self.rows addObject:uploadedRow];
+            }
         }
     }
-    return dict;
+}
+
+- (NSString * _Nullable)findInvoiceResponseFileWithAmkFilePath:(NSString *)path transmissionReference:(NSString *)ref {
+    NSString *amkName = path.lastPathComponent.stringByDeletingPathExtension;
+    NSString *responseAmkFilename = [NSString stringWithFormat:@"%@-response.xml", amkName];
+    NSString *responseAmkPath = [self.invoiceResponseFolderURL.path stringByAppendingPathComponent:responseAmkFilename];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:responseAmkPath]) {
+        return responseAmkPath;
+    }
+    return nil;
+}
+
+- (NSInteger)indexOfRowForCorrelationReference:(NSString *)ref {
+    for (NSInteger i = 0; i < self.rows.count; i++) {
+        MedidataInvoiceResponseRow *row = self.rows[i];
+        if ([[row correlationReference] isEqualToString:ref]) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 - (void)didReceivedMedidataDocs:(NSArray<MedidataDocument*> *)docs {
-    NSMutableArray <MedidataInvoiceResponse*> *responses = [NSMutableArray array];
+    NSString *doctorGLN = [[[MLPersistenceManager shared] doctor] gln];
+    __typeof(self) __weak _self = self;
     for (MedidataDocument *doc in docs) {
-        if ([doc.senderGln isEqualToString:[[[MLPersistenceManager shared] doctor] gln]]) {
-            NSString *amkFilePath = self.transmissionReferenceToAMKPath[doc.transmissionReference];
-            MedidataInvoiceResponse *r = [[MedidataInvoiceResponse alloc] init];
-            r.amkFilePath = amkFilePath;
-            r.document = doc;
-            r.canConfirm = YES;
-            [responses addObject:r];
+        NSInteger indexOfExistingLocalRow = [self indexOfRowForCorrelationReference:doc.correlationReference];
+        if (indexOfExistingLocalRow == -1) {
+            continue;
+        }
+        // We already have an entry for that, either
+        // 1. Already downloaded as a LocalRow, or
+        // 2. Uploaded as a Uploaded row.
+        MedidataInvoiceResponseRow *existingRow = self.rows[indexOfExistingLocalRow];
+        NSString *amkFilePath = [existingRow isKindOfClass:[MedidataInvoiceResponseLocalRow class]]
+            ? [(MedidataInvoiceResponseLocalRow*)existingRow amkFilePath]
+            : [existingRow isKindOfClass:[MedidataInvoiceResponseUploadedRow class]]
+            ? [(MedidataInvoiceResponseUploadedRow*)existingRow amkFilePath]
+            : nil;
+        MedidataInvoiceResponseDownloadsRow *row = [[MedidataInvoiceResponseDownloadsRow alloc] initWithInvoiceFolder:self.invoiceFolderURL
+                                                                                                          amkFilePath:amkFilePath];
+        row.document = doc;
+        row.existingRow = existingRow;
+        [self.rows replaceObjectAtIndex:indexOfExistingLocalRow withObject:row];
+        if ([existingRow isKindOfClass:[MedidataInvoiceResponseUploadedRow class]]) {
+            NSString *outputFilename = [NSString stringWithFormat:@"%@-response.xml", amkFilePath.lastPathComponent.stringByDeletingPathExtension];
+            NSURL *destURL = [self.invoiceResponseFolderURL URLByAppendingPathComponent:outputFilename];
+            MLMedidataDownloadAndCheckOperation *operation = [[MLMedidataDownloadAndCheckOperation alloc] initWithTransmissionReference:doc.transmissionReference
+                                                                                                                           preferredGLN:doctorGLN
+                                                                                                                         andDestination:destURL];
+            operation.callback = ^(NSError * _Nullable error, NSURL * _Nullable downloadedURL) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (error) {
+                        [[NSAlert alertWithError:error] runModal];
+                        return;
+                    }
+                    MedidataInvoiceResponseLocalRow *localRow = [[MedidataInvoiceResponseLocalRow alloc] initWithInvoiceFolder:_self.invoiceFolderURL
+                                                                                                                     localFile:downloadedURL
+                                                                                                                   amkFilePath:row.amkFilePath
+                                                                                                         transmissionReference:row.transmissionReference];
+                    row.existingRow = localRow;
+                    [_self.tableView reloadData];
+                });
+            };
+            [self.queue addOperation:operation];
         }
     }
-    self.invoiceResponses = responses;
     [self.tableView reloadData];
     [self fetchUploadStatuses];
 }
@@ -97,42 +200,42 @@
 // Find upload statuses of documents that are in upload state (not yet in download state)
 - (void)fetchUploadStatuses {
     __typeof(self) __weak _self = self;
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [queue setMaxConcurrentOperationCount:10];
-    NSSet *downloadedRefs = [NSSet setWithArray:[self.invoiceResponses valueForKeyPath:@"document.transmissionReference"]];
-    for (NSString *tranmissionReference in self.latestTransmissionReferences) {
-        NSString *amkFilePath = self.transmissionReferenceToAMKPath[tranmissionReference];
-        if (![downloadedRefs containsObject:tranmissionReference]) {
-            MedidataGetStatusOperation *op = [[MedidataGetStatusOperation alloc] initWithTransmissionReference:tranmissionReference];
-            op.callback = ^(NSError * _Nonnull error, MedidataClientUploadStatus * _Nonnull status) {
-                if (status != nil) {
-                    MedidataDocument *uploadDoc = [[MedidataDocument alloc] init];
-                    uploadDoc.transmissionReference = tranmissionReference;
-                    uploadDoc.created = status.created;
-                    uploadDoc.status = status.status;
-                    MedidataInvoiceResponse *r = [[MedidataInvoiceResponse alloc] init];
-                    r.amkFilePath = amkFilePath;
-                    r.document = uploadDoc;
-                    r.canConfirm = NO;
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [_self.invoiceResponses addObject:r];
-                        [_self.tableView reloadData];
-                    });
-                }
-            };
-            [queue addOperation:op];
+    for (MedidataInvoiceResponseRow *row in self.rows) {
+        if (![row isKindOfClass:[MedidataInvoiceResponseUploadedRow class]]) {
+            continue;
         }
+        MedidataInvoiceResponseUploadedRow *uploadedRow = (MedidataInvoiceResponseUploadedRow*)row;
+        if (uploadedRow.uploadStatus) {
+            continue;
+        }
+        MedidataGetUploadStatusOperation *op = [[MedidataGetUploadStatusOperation alloc] initWithTransmissionReference:[uploadedRow transmissionReference]];
+        op.callback = ^(NSError * _Nonnull error, MedidataClientUploadStatus * _Nonnull status) {
+            if (status != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    uploadedRow.uploadStatus = status;
+                    [_self.tableView reloadData];
+                });
+            }
+        };
+        [self.queue addOperation:op];
     }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.queue waitUntilAllOperationsAreFinished];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_self.progressIndicator stopAnimation:_self];
+        });
+    });
 }
 
 # pragma mark - Table view
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return [self.invoiceResponses count];
+    return [self.rows count];
 }
 
-- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    MedidataInvoiceResponse *response = self.invoiceResponses[row];
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex {
+    MedidataInvoiceResponseRow *row = self.rows[rowIndex];
+
     NSTextField *textField = [[NSTextField alloc] init];
     textField.bezeled = NO;
     textField.drawsBackground = NO;
@@ -142,33 +245,33 @@
     [textField setRefusesFirstResponder: YES];
 
     if ([[tableColumn identifier] isEqualToString:@"name"]) {
-        textField.stringValue = [[response amkFilePath] lastPathComponent] ?: @"";
+        textField.stringValue = [row amkFilename] ?: @"";
     } else if ([[tableColumn identifier] isEqualToString:@"transmissionReference"]) {
-        textField.stringValue = [[response document] transmissionReference] ?: @"";
+        textField.stringValue = [row transmissionReference] ?: @"";
     } else if ([[tableColumn identifier] isEqualToString:@"documentReference"]) {
-        textField.stringValue = [[response document] documentReference] ?: @"";
+        textField.stringValue = [row documentReference] ?: @"";
     } else if ([[tableColumn identifier] isEqualToString:@"correlationReference"]) {
-        textField.stringValue = [[response document] correlationReference] ?: @"";
+        textField.stringValue = [row correlationReference] ?: @"";
     } else if ([[tableColumn identifier] isEqualToString:@"senderGln"]) {
-        textField.stringValue = [[response document] senderGln] ?: @"";
+        textField.stringValue = [row senderGln] ?: @"";
     } else if ([[tableColumn identifier] isEqualToString:@"fileSize"]) {
-        textField.stringValue = [[[response document] fileSize] stringValue] ?: @"";
+        textField.stringValue = [row fileSize] ?: @"";
     } else if ([[tableColumn identifier] isEqualToString:@"created"]) {
-        textField.stringValue = [[[response document] created] description] ?: @"";
+        textField.stringValue = [row created] ?: @"";
     } else if ([[tableColumn identifier] isEqualToString:@"status"]) {
-        textField.stringValue = [[response document] status] ?: @"";
+        textField.stringValue = [row status] ?: @"";
     } else if ([[tableColumn identifier] isEqualToString:@"confirm"]) {
-        if (!response.canConfirm) {
+        if (!row.canConfirm) {
             return nil;
         }
         NSButton *button = [NSButton buttonWithTitle:NSLocalizedString(@"Confirm",@"")
                                               target:self
                                               action:@selector(confirmButtonDidPress:)];
-        if ([self.loadingResponses containsObject:response.document.transmissionReference]) {
+        if ([self.confirmingTransmissionReferences containsObject:row.transmissionReference]) {
             [button setTitle:NSLocalizedString(@"Loading", @"")];
             [button setEnabled:NO];
         }
-        [button setTag:row];
+        [button setTag:rowIndex];
         return button;
     }
 
@@ -178,67 +281,28 @@
 - (IBAction)tableViewDoubleAction:(id)sender {
     NSInteger selected = [self.tableView selectedRow];
     if (selected == -1) return;
-    MedidataInvoiceResponse *response = self.invoiceResponses[selected];
-    if (!response.canConfirm) {
+    MedidataInvoiceResponseRow *row = self.rows[selected];
+    NSURL *fileURL = [row localFileToOpen];
+    if (!fileURL) {
         return;
     }
-    if (![[MLPersistenceManager shared] hadSetupMedidataInvoiceResponseXMLDirectory]) {
-        NSOpenPanel *openPanel = [NSOpenPanel openPanel];
-        [openPanel setCanChooseFiles:NO];
-        [openPanel setCanChooseDirectories:YES];
-        [openPanel setCanCreateDirectories:YES];
-        [openPanel setAllowsMultipleSelection:NO];
-
-        NSModalResponse returnCode = [openPanel runModal];
-        if (returnCode == NSFileHandlingPanelOKButton) {
-            [[MLPersistenceManager shared] setMedidataInvoiceResponseXMLDirectory:openPanel.URL];
-        }
-    }
-    
-    if ([[MLPersistenceManager shared] hadSetupMedidataInvoiceResponseXMLDirectory]) {
-        NSURL *folderURL = [[MLPersistenceManager shared] medidataInvoiceResponseXMLDirectory];
-        if ([folderURL startAccessingSecurityScopedResource]) {
-            NSString *filename = response.amkFilePath.lastPathComponent ?: response.document.transmissionReference;
-            NSURL *fileURL = [folderURL URLByAppendingPathComponent:[filename stringByAppendingString:@"-response.xml"]];
-            [[[MedidataClient alloc] init]
-             downloadInvoiceResponseWithTransmissionReference:response.document.transmissionReference
-             toFile:fileURL
-             completion:^(NSError * _Nonnull error) {
-                [folderURL stopAccessingSecurityScopedResource];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (error) {
-                        [[NSAlert alertWithError:error] runModal];
-                    } else {
-                        NSAlert *alert = [[NSAlert alloc] init];
-                        [alert setMessageText:NSLocalizedString(@"Downloaded", @"")];
-                        [alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Downloaded to %@", @""), fileURL.path]];
-                        [alert runModal];
-                    }
-                });
-            }];
-        } else {
-            NSLog(@"Cannot access invoice response's secure URL");
-        }
-    }
+    [[NSWorkspace sharedWorkspace] openURL:fileURL];
 }
 
 - (void)confirmButtonDidPress:(id)sender {
     __typeof(self) __weak _self = self;
-    MedidataInvoiceResponse *response = self.invoiceResponses[[sender tag]];
-    [self.loadingResponses addObject: response.document.transmissionReference];
-    [[[MedidataClient alloc] init] confirmInvoiceResponseWithTransmissionReference:response.document.transmissionReference
+    MedidataInvoiceResponseRow *row = self.rows[[sender tag]];
+    if (![row isKindOfClass:[MedidataInvoiceResponseDownloadsRow class]]) {
+        return;
+    }
+    MedidataInvoiceResponseDownloadsRow *downloadRow = (MedidataInvoiceResponseDownloadsRow*)row;
+    [self.confirmingTransmissionReferences addObject: downloadRow.transmissionReference];
+    [[[MedidataClient alloc] init] confirmInvoiceResponseWithTransmissionReference:downloadRow.transmissionReference
                                                                         completion:^(NSError * _Nonnull error, MedidataDocument * _Nonnull doc) {
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [_self.loadingResponses removeObject:doc.transmissionReference];
-                for (int i = 0; i < self.invoiceResponses.count; i++) {
-                    MedidataInvoiceResponse *r = _self.invoiceResponses[i];
-                    if ([r.document.transmissionReference isEqual:doc.transmissionReference]) {
-                        r.document = doc;
-                        r.canConfirm = NO;
-                        break;
-                    }
-                }
+                [_self.confirmingTransmissionReferences removeObject:doc.transmissionReference];
+                downloadRow.document = doc;
                 [_self.tableView reloadData];
             });
         }

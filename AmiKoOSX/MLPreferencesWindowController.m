@@ -11,6 +11,8 @@
 
 @interface MLPreferencesWindowController ()
 @property (weak) IBOutlet NSButton *iCloudCheckbox;
+@property (weak) IBOutlet NSPathControl *invoicePathControl;
+@property (weak) IBOutlet NSPathControl *invoiceResponsePathControl;
 
 @end
 
@@ -27,6 +29,16 @@
                                                   usingBlock:^(NSNotification * _Nonnull note) {
         [self reloadiCloudCheckbox];
     }];
+    if ([[MLPersistenceManager shared] hadSetupMedidataInvoiceXMLDirectory]) {
+        [self.invoicePathControl setURL:[[MLPersistenceManager shared] medidataInvoiceXMLDirectory]];
+    } else {
+        [self.invoicePathControl setURL: nil];
+    }
+    if ([[MLPersistenceManager shared] hadSetupMedidataInvoiceResponseXMLDirectory]) {
+        [self.invoiceResponsePathControl setURL:[[MLPersistenceManager shared] medidataInvoiceResponseXMLDirectory]];
+    } else {
+        [self.invoiceResponsePathControl setURL: nil];
+    }
 }
 
 - (void)dealloc {
@@ -57,6 +69,35 @@
             }
         }];
     }
+}
+- (IBAction)chooseInvoiceClicked:(id)sender {
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    [openPanel setCanChooseFiles:NO];
+    [openPanel setCanChooseDirectories:YES];
+    [openPanel setCanCreateDirectories:YES];
+    [openPanel setAllowsMultipleSelection:NO];
+
+    NSModalResponse returnCode = [openPanel runModal];
+    if (returnCode != NSFileHandlingPanelOKButton) {
+        return;
+    }
+    [[MLPersistenceManager shared] setMedidataInvoiceXMLDirectory:openPanel.URL];
+    [self.invoicePathControl setURL:openPanel.URL];
+}
+
+- (IBAction)chooseInvoiceResponseClicked:(id)sender {
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    [openPanel setCanChooseFiles:NO];
+    [openPanel setCanChooseDirectories:YES];
+    [openPanel setCanCreateDirectories:YES];
+    [openPanel setAllowsMultipleSelection:NO];
+
+    NSModalResponse returnCode = [openPanel runModal];
+    if (returnCode != NSFileHandlingPanelOKButton) {
+        return;
+    }
+    [[MLPersistenceManager shared] setMedidataInvoiceResponseXMLDirectory:openPanel.URL];
+    [self.invoiceResponsePathControl setURL:openPanel.URL];
 }
 
 @end

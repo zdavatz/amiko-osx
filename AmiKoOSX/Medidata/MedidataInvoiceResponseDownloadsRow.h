@@ -8,14 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import "MedidataClient.h"
+#import "MedidataInvoiceResponseRow.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MedidataInvoiceResponse : NSObject
+@interface MedidataInvoiceResponseDownloadsRow : MedidataInvoiceResponseRow
 
 @property (nonatomic, strong, nullable) MedidataDocument *document;
 @property (nonatomic, strong) NSString *amkFilePath;
-@property (nonatomic, assign) bool canConfirm;
+
+// If it's both local and downloadable at the same time
+@property (nonatomic, strong, nullable) MedidataInvoiceResponseRow *existingRow;
+
+- (instancetype)initWithInvoiceFolder:(NSURL *)invoiceFolderURL amkFilePath:(NSString *)amkFilePath;
+
+- (BOOL)isDownloading;
 
 @end
 

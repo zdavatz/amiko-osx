@@ -13,6 +13,16 @@
 		CF01CCAE2524E92F0014B224 /* MLButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF01CCAC2524E92F0014B224 /* MLButtonCell.m */; };
 		CF02AC3226B2E10200844A28 /* Postleitzahlen-Schweiz.csv in Resources */ = {isa = PBXBuildFile; fileRef = CF02AC3126B2E10200844A28 /* Postleitzahlen-Schweiz.csv */; };
 		CF02AC3326B2E10200844A28 /* Postleitzahlen-Schweiz.csv in Resources */ = {isa = PBXBuildFile; fileRef = CF02AC3126B2E10200844A28 /* Postleitzahlen-Schweiz.csv */; };
+		CF13F89026EB7D950060FB46 /* MedidataResponseDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F88F26EB7D950060FB46 /* MedidataResponseDocument.m */; };
+		CF13F89126EB7D950060FB46 /* MedidataResponseDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F88F26EB7D950060FB46 /* MedidataResponseDocument.m */; };
+		CF13F89426EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F89326EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.m */; };
+		CF13F89526EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F89326EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.m */; };
+		CF13F89826ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F89726ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.m */; };
+		CF13F89926ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F89726ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.m */; };
+		CF13F89C26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F89B26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m */; };
+		CF13F89D26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F89B26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m */; };
+		CF13F8A126ECB2D50060FB46 /* MedidataInvoiceResponseRow.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F8A026ECB2D50060FB46 /* MedidataInvoiceResponseRow.m */; };
+		CF13F8A226ECB2D50060FB46 /* MedidataInvoiceResponseRow.m in Sources */ = {isa = PBXBuildFile; fileRef = CF13F8A026ECB2D50060FB46 /* MedidataInvoiceResponseRow.m */; };
 		CF16C25F25236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
 		CF16C26025236F7F00A05542 /* MLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */; };
 		CF2EA5E9269328D300FA1EC8 /* MedidataClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2EA5E8269328D300FA1EC8 /* MedidataClient.m */; };
@@ -31,6 +41,8 @@
 		CF366B4B26BAD2AE0060F8CF /* xmldsig-core-schema.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4726BAD2AE0060F8CF /* xmldsig-core-schema.xsd */; };
 		CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
+		CF6BAE9726EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */; };
+		CF6BAE9826EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */; };
 		CF8A7339268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */; };
 		CF8A733A268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */; };
 		CF8BEB94253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
@@ -43,10 +55,10 @@
 		CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F50F525164113007D62B5 /* MLPatientSync.m */; };
 		CF923BEE2549D13A00840F2E /* DesitinLogo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF923BED2549D13A00840F2E /* DesitinLogo.xcassets */; };
 		CF923BF02549D14E00840F2E /* ComedLogo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF923BEF2549D14E00840F2E /* ComedLogo.xcassets */; };
-		CF9625EA26CD109700153457 /* MedidataGetStatusOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9625E926CD109700153457 /* MedidataGetStatusOperation.m */; };
-		CF9625EB26CD109700153457 /* MedidataGetStatusOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9625E926CD109700153457 /* MedidataGetStatusOperation.m */; };
-		CF9625F226CD288100153457 /* MedidataInvoiceResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9625F126CD288100153457 /* MedidataInvoiceResponse.m */; };
-		CF9625F326CD288100153457 /* MedidataInvoiceResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9625F126CD288100153457 /* MedidataInvoiceResponse.m */; };
+		CF9625EA26CD109700153457 /* MedidataGetUploadStatusOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9625E926CD109700153457 /* MedidataGetUploadStatusOperation.m */; };
+		CF9625EB26CD109700153457 /* MedidataGetUploadStatusOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9625E926CD109700153457 /* MedidataGetUploadStatusOperation.m */; };
+		CF9625F226CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9625F126CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m */; };
+		CF9625F326CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9625F126CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m */; };
 		CF98CB89269719990005C79A /* participants-kvg.json in Resources */ = {isa = PBXBuildFile; fileRef = CF98CB88269719990005C79A /* participants-kvg.json */; };
 		CF98CB8A269719990005C79A /* participants-kvg.json in Resources */ = {isa = PBXBuildFile; fileRef = CF98CB88269719990005C79A /* participants-kvg.json */; };
 		CFD7F7FF26DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F80226DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib */; };
@@ -263,6 +275,16 @@
 		CF01CCAB2524E92F0014B224 /* MLButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLButtonCell.h; sourceTree = "<group>"; };
 		CF01CCAC2524E92F0014B224 /* MLButtonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLButtonCell.m; sourceTree = "<group>"; };
 		CF02AC3126B2E10200844A28 /* Postleitzahlen-Schweiz.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Postleitzahlen-Schweiz.csv"; sourceTree = "<group>"; };
+		CF13F88E26EB7D950060FB46 /* MedidataResponseDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataResponseDocument.h; sourceTree = "<group>"; };
+		CF13F88F26EB7D950060FB46 /* MedidataResponseDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataResponseDocument.m; sourceTree = "<group>"; };
+		CF13F89226EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLMedidataDownloadAndCheckOperation.h; sourceTree = "<group>"; };
+		CF13F89326EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLMedidataDownloadAndCheckOperation.m; sourceTree = "<group>"; };
+		CF13F89626ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataInvoiceResponseLocalRow.h; sourceTree = "<group>"; };
+		CF13F89726ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceResponseLocalRow.m; sourceTree = "<group>"; };
+		CF13F89A26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataInvoiceResponseUploadedRow.h; sourceTree = "<group>"; };
+		CF13F89B26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceResponseUploadedRow.m; sourceTree = "<group>"; };
+		CF13F89F26ECB2D50060FB46 /* MedidataInvoiceResponseRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataInvoiceResponseRow.h; sourceTree = "<group>"; };
+		CF13F8A026ECB2D50060FB46 /* MedidataInvoiceResponseRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceResponseRow.m; sourceTree = "<group>"; };
 		CF16C26125236F7F00A05542 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLPreferencesWindowController.xib; sourceTree = "<group>"; };
 		CF16C26425236F8300A05542 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
 		CF16C26625236F8400A05542 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLPreferencesWindowController.strings; sourceTree = "<group>"; };
@@ -279,6 +301,8 @@
 		CF366B4726BAD2AE0060F8CF /* xmldsig-core-schema.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "xmldsig-core-schema.xsd"; sourceTree = "<group>"; };
 		CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPreferencesWindowController.h; sourceTree = "<group>"; };
 		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
+		CF6BAE9526EDE3BA0080DD00 /* MedidataInvoiceDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataInvoiceDocument.h; sourceTree = "<group>"; };
+		CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceDocument.m; sourceTree = "<group>"; };
 		CF8A7337268F1A6D0092E214 /* MedidataXMLGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataXMLGenerator.h; sourceTree = "<group>"; };
 		CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataXMLGenerator.m; sourceTree = "<group>"; };
 		CF8BEB92253850AF00C2D367 /* MLPrescriptionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionView.h; sourceTree = "<group>"; };
@@ -291,10 +315,10 @@
 		CF8F50F525164113007D62B5 /* MLPatientSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPatientSync.m; sourceTree = "<group>"; };
 		CF923BED2549D13A00840F2E /* DesitinLogo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DesitinLogo.xcassets; sourceTree = "<group>"; };
 		CF923BEF2549D14E00840F2E /* ComedLogo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ComedLogo.xcassets; sourceTree = "<group>"; };
-		CF9625E826CD109700153457 /* MedidataGetStatusOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataGetStatusOperation.h; sourceTree = "<group>"; };
-		CF9625E926CD109700153457 /* MedidataGetStatusOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataGetStatusOperation.m; sourceTree = "<group>"; };
-		CF9625F026CD288100153457 /* MedidataInvoiceResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataInvoiceResponse.h; sourceTree = "<group>"; };
-		CF9625F126CD288100153457 /* MedidataInvoiceResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceResponse.m; sourceTree = "<group>"; };
+		CF9625E826CD109700153457 /* MedidataGetUploadStatusOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataGetUploadStatusOperation.h; sourceTree = "<group>"; };
+		CF9625E926CD109700153457 /* MedidataGetUploadStatusOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataGetUploadStatusOperation.m; sourceTree = "<group>"; };
+		CF9625F026CD288100153457 /* MedidataInvoiceResponseDownloadsRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataInvoiceResponseDownloadsRow.h; sourceTree = "<group>"; };
+		CF9625F126CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceResponseDownloadsRow.m; sourceTree = "<group>"; };
 		CF98CB88269719990005C79A /* participants-kvg.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "participants-kvg.json"; sourceTree = "<group>"; };
 		CFD7F80126DBB1CF00E41324 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLMedidataResponsesWindowController.xib; sourceTree = "<group>"; };
 		CFD7F80426DBB1D700E41324 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLMedidataResponsesWindowController.strings; sourceTree = "<group>"; };
@@ -555,6 +579,10 @@
 				CF2EA5EB26932BB900FA1EC8 /* MedidataCredential.h */,
 				CFE5FCBF26CBAC9800FC8AAB /* MedidataDocument.h */,
 				CFE5FCC026CBAC9800FC8AAB /* MedidataDocument.m */,
+				CF6BAE9526EDE3BA0080DD00 /* MedidataInvoiceDocument.h */,
+				CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */,
+				CF13F88E26EB7D950060FB46 /* MedidataResponseDocument.h */,
+				CF13F88F26EB7D950060FB46 /* MedidataResponseDocument.m */,
 				CFF3D9EA26E1259B003B74C2 /* MedidataClientUploadStatus.h */,
 				CFF3D9EB26E1259B003B74C2 /* MedidataClientUploadStatus.m */,
 			);
@@ -576,10 +604,18 @@
 				CFDFC48626CA905C00EDD182 /* MLMedidataResponsesWindowController.h */,
 				CFDFC48726CA905C00EDD182 /* MLMedidataResponsesWindowController.m */,
 				CFD7F80226DBB1CF00E41324 /* MLMedidataResponsesWindowController.xib */,
-				CF9625E826CD109700153457 /* MedidataGetStatusOperation.h */,
-				CF9625E926CD109700153457 /* MedidataGetStatusOperation.m */,
-				CF9625F026CD288100153457 /* MedidataInvoiceResponse.h */,
-				CF9625F126CD288100153457 /* MedidataInvoiceResponse.m */,
+				CF9625E826CD109700153457 /* MedidataGetUploadStatusOperation.h */,
+				CF9625E926CD109700153457 /* MedidataGetUploadStatusOperation.m */,
+				CF13F89F26ECB2D50060FB46 /* MedidataInvoiceResponseRow.h */,
+				CF13F8A026ECB2D50060FB46 /* MedidataInvoiceResponseRow.m */,
+				CF9625F026CD288100153457 /* MedidataInvoiceResponseDownloadsRow.h */,
+				CF9625F126CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m */,
+				CF13F89626ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.h */,
+				CF13F89726ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.m */,
+				CF13F89A26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.h */,
+				CF13F89B26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m */,
+				CF13F89226EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.h */,
+				CF13F89326EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.m */,
 			);
 			path = Medidata;
 			sourceTree = "<group>";
@@ -589,8 +625,8 @@
 			children = (
 				CF8F50F3251640E7007D62B5 /* iCloud patient sync */,
 				CFE80FDC24309D10003DB2FA /* iCloud to local migration */,
-				CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */,
 				CFE80FE024309D10003DB2FA /* MLPersistenceManager.h */,
+				CFE80FDF24309D10003DB2FA /* MLPersistenceManager.m */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1271,6 +1307,7 @@
 				D5C6440D1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
 				D5C5C5071F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E91B8D17E5E8E400B66B27 /* MLDBAdapter.m in Sources */,
+				CF13F89826ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.m in Sources */,
 				CFE5FCC126CBAC9800FC8AAB /* MedidataDocument.m in Sources */,
 				D5BACC061EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
 				D545C8E51898527C00491511 /* mztools.c in Sources */,
@@ -1284,13 +1321,16 @@
 				D545C91118A5725900491511 /* MLCustomView.m in Sources */,
 				D545C8E41898527C00491511 /* ioapi.c in Sources */,
 				CF8BEB94253850AF00C2D367 /* MLPrescriptionView.m in Sources */,
+				CF13F8A126ECB2D50060FB46 /* MedidataInvoiceResponseRow.m in Sources */,
 				D5F303431F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				CF34E54F243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
+				CF13F89C26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m in Sources */,
 				CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */,
 				D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */,
 				FA4BA42620B4015700552CEF /* SmartCard.m in Sources */,
 				CFE80FE324309D10003DB2FA /* MLPersistenceManager.m in Sources */,
 				FA6A2BB020B2B0ED0080B4C9 /* MLPatientSheetController.m in Sources */,
+				CF13F89026EB7D950060FB46 /* MedidataResponseDocument.m in Sources */,
 				D5ECDE131F2A7C1200970133 /* MLEditableTextField.m in Sources */,
 				D5E91B9017E5E8E400B66B27 /* MLItemCellView.m in Sources */,
 				CF8A7339268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */,
@@ -1303,11 +1343,13 @@
 				D53AB5AD1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				FA9F26E721C2CD1A005DA919 /* Wait.m in Sources */,
+				CF6BAE9726EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */,
 				D53973CD1FA37B9200D7E444 /* MLOperator.m in Sources */,
-				CF9625EA26CD109700153457 /* MedidataGetStatusOperation.m in Sources */,
+				CF9625EA26CD109700153457 /* MedidataGetUploadStatusOperation.m in Sources */,
 				D517E4C21EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
+				CF13F89426EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.m in Sources */,
 				D545C8D91898527300491511 /* SSZipArchive.m in Sources */,
-				CF9625F226CD288100153457 /* MedidataInvoiceResponse.m in Sources */,
+				CF9625F226CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m in Sources */,
 				D5ECDE1C1F2B24CB00970133 /* MLPrescriptionCellView.m in Sources */,
 				D5E91B9117E5E8E400B66B27 /* MLSearchWebView.m in Sources */,
 				D5E91B9217E5E8E400B66B27 /* MLCustomTableRowView.m in Sources */,
@@ -1323,6 +1365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF13F89526EB857D0060FB46 /* MLMedidataDownloadAndCheckOperation.m in Sources */,
 				FA4BA42720B4015700552CEF /* SmartCard.m in Sources */,
 				CF34E54A243A1A5A00E3AF61 /* Model.xcdatamodeld in Sources */,
 				D5F3034B1F21FE2200CAFED3 /* MLPrescriptionsCart.h in Sources */,
@@ -1335,13 +1378,16 @@
 				D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */,
 				D545C8EE18A2CDD100491511 /* MLProgressSheetController.m in Sources */,
 				D52EA4A61EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
+				CF13F89126EB7D950060FB46 /* MedidataResponseDocument.m in Sources */,
 				CFE5FCC226CBAC9800FC8AAB /* MedidataDocument.m in Sources */,
 				D5C5C5111F06416800DF851F /* MLContacts.m in Sources */,
 				D53877951AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				CF8BEB95253850AF00C2D367 /* MLPrescriptionView.m in Sources */,
 				D5BACC011EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				FA6A2BB120B2B0EE0080B4C9 /* MLPatientSheetController.m in Sources */,
+				CF13F89D26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m in Sources */,
 				D58685561F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,
+				CF13F89926ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.m in Sources */,
 				D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D538779B1AA386AC00AEFDB4 /* SHCWebView.m in Sources */,
 				D5B010621927C472007BE838 /* interactions_callbacks.js in Sources */,
@@ -1353,7 +1399,7 @@
 				D5C6440E1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
 				CFDFC48A26CA905C00EDD182 /* MLMedidataResponsesWindowController.m in Sources */,
 				D5C5C5081F03AE2E00DF851F /* MLPatient.m in Sources */,
-				CF9625EB26CD109700153457 /* MedidataGetStatusOperation.m in Sources */,
+				CF9625EB26CD109700153457 /* MedidataGetUploadStatusOperation.m in Sources */,
 				D5E91BBC17E5E8E800B66B27 /* MLDBAdapter.m in Sources */,
 				D5BACC071EBB1D2C001812FB /* WebViewJavascriptBridgeBase.m in Sources */,
 				D545C8F618A2CE0500491511 /* mztools.c in Sources */,
@@ -1374,12 +1420,13 @@
 				D5C5C5321F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				CF2EA5EA269328D300FA1EC8 /* MedidataClient.m in Sources */,
 				FA4BA42C20B401B700552CEF /* HealthCard.m in Sources */,
+				CF13F8A226ECB2D50060FB46 /* MedidataInvoiceResponseRow.m in Sources */,
 				D517E4B21EA8B9A800187AC8 /* MLInteractionsAdapter.m in Sources */,
 				D5BACC0D1EBB1D2C001812FB /* WKWebViewJavascriptBridge.m in Sources */,
 				CF34E550243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
 				D53AB5AE1F3DAA3600B9C059 /* MLInteractionsCart.m in Sources */,
 				CF8A733A268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */,
-				CF9625F326CD288100153457 /* MedidataInvoiceResponse.m in Sources */,
+				CF9625F326CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m in Sources */,
 				CF8F50F725164113007D62B5 /* MLPatientSync.m in Sources */,
 				D5962E8C1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				CF8BEB9D25388BAE00C2D367 /* MLFindHighlightField.m in Sources */,
@@ -1391,6 +1438,7 @@
 				FA6A2BAF20B2B09D0080B4C9 /* MLPatientSheetController+smartCard.m in Sources */,
 				D5E91BC017E5E8E800B66B27 /* MLSearchWebView.m in Sources */,
 				D5E91BC117E5E8E800B66B27 /* MLCustomTableRowView.m in Sources */,
+				CF6BAE9826EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */,
 				D5C6441E1EB3360300438E6F /* MLFullTextSearch.m in Sources */,
 				D5E91BC217E5E8E800B66B27 /* MLSplashScreen.m in Sources */,
 				CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */,

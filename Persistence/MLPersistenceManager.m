@@ -47,7 +47,11 @@
         self.coreDataContainer = [[NSPersistentContainer alloc] initWithName:@"Model"];
         
         NSPersistentStoreDescription *description = [[self.coreDataContainer persistentStoreDescriptions] firstObject];
-        [description setOption:@1 forKey:NSPersistentHistoryTrackingKey];
+        if (@available(macOS 10.13, *)) {
+            [description setOption:@1 forKey:NSPersistentHistoryTrackingKey];
+        } else {
+            // Fallback on earlier versions
+        }
 
         [self.coreDataContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * _Nonnull desc, NSError * _Nullable error) {
             if (error != nil) {
@@ -188,6 +192,7 @@
     } else {
         [[NSUserDefaults standardUserDefaults] setObject:data forKey:KEY_MEDIDATA_INVOICE_XML_DIRECTORY];
     }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)hadSetupMedidataInvoiceResponseXMLDirectory {
@@ -227,6 +232,7 @@
         return;
     }
     [[NSUserDefaults standardUserDefaults] setObject:bookmark forKey:KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 # pragma mark - Migration Local -> iCloud
