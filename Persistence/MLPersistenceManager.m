@@ -188,6 +188,7 @@
     } else {
         [[NSUserDefaults standardUserDefaults] setObject:data forKey:KEY_MEDIDATA_INVOICE_XML_DIRECTORY];
     }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)hadSetupMedidataInvoiceResponseXMLDirectory {
@@ -227,6 +228,7 @@
         return;
     }
     [[NSUserDefaults standardUserDefaults] setObject:bookmark forKey:KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 # pragma mark - Migration Local -> iCloud
