@@ -176,6 +176,14 @@
         mZsrNumber.backgroundColor = [NSColor clearColor];
     }
     
+    if (![self stringIsNilOrEmpty:[mMedidataClientId stringValue]] &&
+        [[mMedidataClientId stringValue] length] != 10
+        ) {
+        mMedidataClientId.backgroundColor = [NSColor lightRed];
+    } else {
+        mMedidataClientId.backgroundColor = [NSColor clearColor];
+    }
+    
     [mSaveButton setEnabled:valid];
     
     return valid;
@@ -201,6 +209,7 @@
     operator.IBAN = [mIBAN stringValue];
     operator.vatNumber = [mVatNumber stringValue];
     operator.zsrNumber = [mZsrNumber stringValue];
+    operator.medidataClientId = [mMedidataClientId stringValue];
     [[MLPersistenceManager shared] setDoctor:operator];
 }
 
@@ -257,6 +266,10 @@
     
     if ([self stringIsNilOrEmpty:operator.zsrNumber] == NO) {
         mZsrNumber.stringValue = operator.zsrNumber;
+    }
+    
+    if ([self stringIsNilOrEmpty:operator.medidataClientId] == NO) {
+        mMedidataClientId.stringValue = operator.medidataClientId;
     }
     
     [self validateFields];

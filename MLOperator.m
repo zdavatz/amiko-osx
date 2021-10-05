@@ -38,6 +38,7 @@
 @synthesize IBAN;
 @synthesize vatNumber;
 @synthesize zsrNumber;
+@synthesize medidataClientId;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     if (self = [super init]) {
@@ -86,7 +87,7 @@
     IBAN =          [dict objectForKey:KEY_AMK_DOC_IBAN];
     vatNumber =     [dict objectForKey:KEY_AMK_DOC_VAT];
     zsrNumber =     [dict objectForKey:KEY_AMK_DOC_ZSR_NUMBER];
-    
+    medidataClientId = [dict objectForKey:KEY_AMK_DOC_MEDIDATA_CLIENT_ID];
 }
 
 - (NSString *)description
@@ -110,6 +111,7 @@
     doctorDict[KEY_AMK_DOC_IBAN] = self.IBAN;
     doctorDict[KEY_AMK_DOC_VAT] = self.vatNumber;
     doctorDict[KEY_AMK_DOC_ZSR_NUMBER] = self.zsrNumber;
+    doctorDict[KEY_AMK_DOC_MEDIDATA_CLIENT_ID] = self.medidataClientId;
     return doctorDict;
 }
 

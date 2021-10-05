@@ -7,6 +7,7 @@
 //
 
 #import "MedidataGetUploadStatusOperation.h"
+#import "MLPersistenceManager.h"
 
 @interface MedidataGetUploadStatusOperation ()
 
@@ -32,6 +33,7 @@
     self._isFinished = NO;
     __weak typeof(self) _self = self;
     [self.client getDocumentStatusWithTransmissionReference:self.transmissionReference
+                                             clientIdSuffix:[MLPersistenceManager shared].doctor.medidataClientId
                                                  completion:^(NSError * _Nullable error, MedidataClientUploadStatus * _Nullable status) {
         if (_self.callback) {
             _self.callback(error, status);
