@@ -45,6 +45,7 @@
     __weak IBOutlet NSTextField *mVatNumber;
     __weak IBOutlet NSButton *mSaveButton;
     __weak IBOutlet NSTextField *mZsrNumber;
+    __weak IBOutlet NSTextField *mMedidataClientId;
 }
 
 - (IBAction) onCancel:(id)sender;
