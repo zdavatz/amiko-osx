@@ -91,7 +91,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
-        [[[MedidataClient alloc] init] getMedidataResponses:^(NSError * _Nonnull error, NSArray<MedidataDocument *> * _Nonnull docs) {
+        [[[MedidataClient alloc] init] getMedidataResponsesWithClientIdSuffix:[MLPersistenceManager shared].doctor.medidataClientId
+                                                                   completion:^(NSError * _Nullable error, NSArray<MedidataDocument *> * _Nullable docs) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
                     [[NSAlert alertWithError:error] runModal];
@@ -298,6 +299,7 @@
     MedidataInvoiceResponseDownloadsRow *downloadRow = (MedidataInvoiceResponseDownloadsRow*)row;
     [self.confirmingTransmissionReferences addObject: downloadRow.transmissionReference];
     [[[MedidataClient alloc] init] confirmInvoiceResponseWithTransmissionReference:downloadRow.transmissionReference
+                                                                    clientIdSuffix:[MLPersistenceManager shared].doctor.medidataClientId
                                                                         completion:^(NSError * _Nonnull error, MedidataDocument * _Nonnull doc) {
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{

@@ -1662,7 +1662,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     }
     
     __weak typeof(self) _self = self;
-    [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc completion:^(NSError * _Nullable error, NSString * _Nullable ref) {
+    [[[MedidataClient alloc] init] sendXMLDocumentToMedidata:doc
+                                              clientIdSuffix:[MLPersistenceManager shared].doctor.medidataClientId
+                                                  completion:^(NSError * _Nullable error, NSString * _Nullable ref) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 [[NSAlert alertWithError:error] runModal];

@@ -9,6 +9,7 @@
 #import "MLMedidataDownloadAndCheckOperation.h"
 #import "MedidataClient.h"
 #import "MedidataResponseDocument.h"
+#import "MLPersistenceManager.h"
 
 @interface MLMedidataDownloadAndCheckOperation ()
 
@@ -44,6 +45,7 @@
     NSURL *tempFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:filename]];
     [self.client downloadInvoiceResponseWithTransmissionReference:self.ref
                                                            toFile:tempFile
+                                                   clientIdSuffix:[MLPersistenceManager shared].doctor.medidataClientId
                                                        completion:^(NSError * _Nullable error) {
         if (error) {
             [_self finishWithError:error andURL:nil];

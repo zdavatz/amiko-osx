@@ -16,9 +16,11 @@
 @implementation MedidataClient
 
 - (void)sendXMLDocumentToMedidata:(NSXMLDocument *)document
+                   clientIdSuffix:(NSString *)clientIdSuffix
                        completion:(void (^)(NSError * _Nullable error, NSString * _Nullable ref))callback {
+    NSString *clientId = [self clientIdWithSuffix:clientIdSuffix];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://212.51.146.241:8100/md/ela/uploads"]];
-    [request setValue:@"1000007582" forHTTPHeaderField:@"X-CLIENT-ID"];
+    [request setValue:clientId forHTTPHeaderField:@"X-CLIENT-ID"];
     NSString *boundary = [NSString stringWithFormat:@"Boundary-%@", [[NSUUID UUID] UUIDString]];
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
@@ -66,9 +68,11 @@
     [task resume];
 }
 
-- (void)getMedidataResponses:(void (^)(NSError * _Nullable error, NSArray<MedidataDocument*> * _Nullable doc))callback {
+- (void)getMedidataResponsesWithClientIdSuffix:(NSString *)clientIdSuffix
+                                    completion:(void (^)(NSError * _Nullable error, NSArray<MedidataDocument*> * _Nullable doc))callback {
+    NSString *clientId = [self clientIdWithSuffix:clientIdSuffix];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://212.51.146.241:8100/md/ela/downloads?limit=500"]];
-    [request setValue:@"1000007582" forHTTPHeaderField:@"X-CLIENT-ID"];
+    [request setValue:clientId forHTTPHeaderField:@"X-CLIENT-ID"];
     [request setValue:[NSString stringWithFormat:@"Basic %@", MEDIDATA_CLIENT_AUTHORIZATION] forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:@"GET"];
     NSURLSession * session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
@@ -105,9 +109,11 @@
 }
 
 - (void)getDocumentStatusWithTransmissionReference:(NSString *)ref
+                                    clientIdSuffix:(NSString *)clientIdSuffix
                                         completion:(void (^)(NSError * _Nullable error, MedidataClientUploadStatus * _Nullable status))callback {
+    NSString *clientId = [self clientIdWithSuffix:clientIdSuffix];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"https://212.51.146.241:8100/md/ela/uploads/%@/status", ref]]];
-    [request setValue:@"1000007582" forHTTPHeaderField:@"X-CLIENT-ID"];
+    [request setValue:clientId forHTTPHeaderField:@"X-CLIENT-ID"];
     [request setValue:[NSString stringWithFormat:@"Basic %@", MEDIDATA_CLIENT_AUTHORIZATION] forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:@"GET"];
     NSURLSession * session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
@@ -147,10 +153,14 @@
     [task resume];
 }
 
-- (void)downloadInvoiceResponseWithTransmissionReference:(NSString *)ref toFile:(NSURL*)dest completion:(void (^)(NSError * _Nullable error))callback {
+- (void)downloadInvoiceResponseWithTransmissionReference:(NSString *)ref
+                                                  toFile:(NSURL*)dest
+                                          clientIdSuffix:(NSString *)clientIdSuffix
+                                              completion:(void (^)(NSError * _Nullable error))callback {
 //    curl -kvL -O --resolve --location --request GET "https://212.51.146.241:8100/md/ela/downloads/f95ce87a-1856-4a10-a825-6c01e7c7346c" --header "X-CLIENT-ID: 1000007582" --header "Content-Type: multipart/form-data" --header "Authorization: Basic XXX"
+    NSString *clientId = [self clientIdWithSuffix:clientIdSuffix];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"https://212.51.146.241:8100/md/ela/downloads/%@", ref]]];
-    [request setValue:@"1000007582" forHTTPHeaderField:@"X-CLIENT-ID"];
+    [request setValue:clientId forHTTPHeaderField:@"X-CLIENT-ID"];
     [request setValue:[NSString stringWithFormat:@"Basic %@", MEDIDATA_CLIENT_AUTHORIZATION] forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:@"GET"];
     NSURLSession * session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
@@ -184,10 +194,12 @@
 }
 
 - (void)confirmInvoiceResponseWithTransmissionReference:(NSString *)ref
+                                         clientIdSuffix:(NSString *)clientIdSuffix
                                              completion:(void (^)(NSError * _Nullable error, MedidataDocument * _Nullable doc))callback {
     //curl -ks -X PUT --header "Content-Type: application/json" -d '{"status":"CONFIRMED"}' https://212.51.146.241:8100/md/ela/downloads/9c0e8433-f5e9f20/status --header "X-CLIENT-ID: 1000007582" --header "Content-Type: multipart/form-data" --header "Authorization: Basic XXXX"
+    NSString *clientId = [self clientIdWithSuffix:clientIdSuffix];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"https://212.51.146.241:8100/md/ela/downloads/%@/status", ref]]];
-    [request setValue:@"1000007582" forHTTPHeaderField:@"X-CLIENT-ID"];
+    [request setValue:clientId forHTTPHeaderField:@"X-CLIENT-ID"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"Basic %@", MEDIDATA_CLIENT_AUTHORIZATION] forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:@"PUT"];
@@ -225,6 +237,13 @@
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
 {
     completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]);
+}
+
+- (NSString *)clientIdWithSuffix:(NSString*)suffix {
+    if (![suffix length]) {
+        return MEDIDATA_CLIENT_CLIENT_ID_PREFIX;
+    }
+    return [NSString stringWithFormat:@"%@_%@", MEDIDATA_CLIENT_CLIENT_ID_PREFIX, suffix];
 }
 
 @end
