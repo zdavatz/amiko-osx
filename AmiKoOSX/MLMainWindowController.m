@@ -2820,25 +2820,27 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) updateInteractionsView
 {
     // Generate main interaction table
-    NSString *htmlStr = [mInteractionsView fullInteractionsHtml:mInteractions];
-    
-    // With the following implementation, the images are not loaded
-    // NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-    // [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
-    
-    [[myWebView mainFrame] loadHTMLString:htmlStr
-                                  baseURL:[[NSBundle mainBundle] resourceURL]];
-    
-    if (mPrescriptionMode == false) {
-        // Update section title anchors
-        if (![mInteractionsView.listofSectionIds isEqual:[NSNull null]])
-            mListOfSectionIds = mInteractionsView.listofSectionIds;
-        // Update section titles (here: identical to anchors)
-        if (![mInteractionsView.listofSectionTitles isEqual:[NSNull null]])
-            mListOfSectionTitles = mInteractionsView.listofSectionTitles;
-        
-        [mySectionTitles reloadData];
-    }
+    [mInteractionsView fullInteractionsHtml:mInteractions withCompletion:^(NSString *htmlStr) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // With the following implementation, the images are not loaded
+            // NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+            // [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+            
+            [[myWebView mainFrame] loadHTMLString:htmlStr
+                                          baseURL:[[NSBundle mainBundle] resourceURL]];
+            
+            if (mPrescriptionMode == false) {
+                // Update section title anchors
+                if (![mInteractionsView.listofSectionIds isEqual:[NSNull null]])
+                    mListOfSectionIds = mInteractionsView.listofSectionIds;
+                // Update section titles (here: identical to anchors)
+                if (![mInteractionsView.listofSectionTitles isEqual:[NSNull null]])
+                    mListOfSectionTitles = mInteractionsView.listofSectionTitles;
+                
+                [mySectionTitles reloadData];
+            }
+        });
+    }];
 }
 
 - (void) updatePrescriptionsView
