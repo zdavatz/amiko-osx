@@ -67,8 +67,8 @@ function deleteRow(tableID,currentRow) {
     }
 }
 
-function callEPhaAPI() {
-    var payload = ["interactions_cb", "call_epha"];
+function openLinkNative(url) {
+    var payload = ["interactions_cb", "open_link", url];
     setupWebViewJavascriptBridge(function(bridge) {
         bridge.callHandler('JSToObjC_', payload, function responseCallback(responseData) {
             console.log("JS received response:", responseData);
