@@ -2711,11 +2711,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     
     [mJSBridge registerHandler:@"JSToObjC_"
                        handler:^(id msg, WVJBResponseCallback responseCallback) {
-        if ([msg count] == 2) {
-            if ([msg[1] isEqualToString:@"call_epha"]) {
-                [mInteractionsView callEPha];
-            }
-        } else if ([msg count]==3) {
+        if ([msg count]==3) {
             // --- Interactions ---
             if ([msg[0] isEqualToString:@"interactions_cb"]) {
                 if ([msg[1] isEqualToString:@"notify_interaction"]) {
@@ -2724,6 +2720,9 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
                     [mInteractionsView clearMedBasket];
                 } else if ([msg[1] isEqualToString:@"delete_row"]) {
                     [mInteractionsView removeFromMedBasketForKey:msg[2]];
+                } else if ([msg[1] isEqualToString:@"open_link"]) {
+                    NSURL *url = [NSURL URLWithString:msg[2]];
+                    [[NSWorkspace sharedWorkspace] openURL:url];
                 }
                 // Update med basket
                 mCurrentWebView = kInteractionsCartView;
@@ -2820,25 +2819,27 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 - (void) updateInteractionsView
 {
     // Generate main interaction table
-    NSString *htmlStr = [mInteractionsView fullInteractionsHtml:mInteractions];
-    
-    // With the following implementation, the images are not loaded
-    // NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-    // [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
-    
-    [[myWebView mainFrame] loadHTMLString:htmlStr
-                                  baseURL:[[NSBundle mainBundle] resourceURL]];
-    
-    if (mPrescriptionMode == false) {
-        // Update section title anchors
-        if (![mInteractionsView.listofSectionIds isEqual:[NSNull null]])
-            mListOfSectionIds = mInteractionsView.listofSectionIds;
-        // Update section titles (here: identical to anchors)
-        if (![mInteractionsView.listofSectionTitles isEqual:[NSNull null]])
-            mListOfSectionTitles = mInteractionsView.listofSectionTitles;
-        
-        [mySectionTitles reloadData];
-    }
+    [mInteractionsView fullInteractionsHtml:mInteractions withCompletion:^(NSString *htmlStr) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // With the following implementation, the images are not loaded
+            // NSURL *mainBundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+            // [[myWebView mainFrame] loadHTMLString:htmlStr baseURL:mainBundleURL];
+            
+            [[myWebView mainFrame] loadHTMLString:htmlStr
+                                          baseURL:[[NSBundle mainBundle] resourceURL]];
+            
+            if (mPrescriptionMode == false) {
+                // Update section title anchors
+                if (![mInteractionsView.listofSectionIds isEqual:[NSNull null]])
+                    mListOfSectionIds = mInteractionsView.listofSectionIds;
+                // Update section titles (here: identical to anchors)
+                if (![mInteractionsView.listofSectionTitles isEqual:[NSNull null]])
+                    mListOfSectionTitles = mInteractionsView.listofSectionTitles;
+                
+                [mySectionTitles reloadData];
+            }
+        });
+    }];
 }
 
 - (void) updatePrescriptionsView
