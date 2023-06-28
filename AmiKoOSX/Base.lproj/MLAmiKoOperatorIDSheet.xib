@@ -304,9 +304,6 @@ DQ
                         <buttonCell key="cell" type="push" title="Signature from file" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yCN-97-a6m">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
                         </buttonCell>
                         <connections>
                             <action selector="onLoadSignature:" target="-2" id="Z3R-BP-aib"/>
@@ -329,6 +326,6 @@ Gw
         </window>
     </objects>
     <resources>
-        <image name="NSStopProgressTemplate" width="14" height="13"/>
+        <image name="NSStopProgressTemplate" width="17" height="15"/>
     </resources>
 </document>
