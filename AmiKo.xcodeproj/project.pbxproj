@@ -39,6 +39,16 @@
 		CF366B4926BAD2AE0060F8CF /* xenc-schema.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4626BAD2AE0060F8CF /* xenc-schema.xsd */; };
 		CF366B4A26BAD2AE0060F8CF /* xmldsig-core-schema.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4726BAD2AE0060F8CF /* xmldsig-core-schema.xsd */; };
 		CF366B4B26BAD2AE0060F8CF /* xmldsig-core-schema.xsd in Resources */ = {isa = PBXBuildFile; fileRef = CF366B4726BAD2AE0060F8CF /* xmldsig-core-schema.xsd */; };
+		CF3B87462A4AECA100D7D894 /* MLHINClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B87452A4AECA100D7D894 /* MLHINClient.m */; };
+		CF3B87472A4AECA100D7D894 /* MLHINClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B87452A4AECA100D7D894 /* MLHINClient.m */; };
+		CF3B874A2A4AEEC600D7D894 /* MLHINProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B87492A4AEEC600D7D894 /* MLHINProfile.m */; };
+		CF3B874B2A4AEEC600D7D894 /* MLHINProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B87492A4AEEC600D7D894 /* MLHINProfile.m */; };
+		CF3B874E2A4AEECF00D7D894 /* MLHINTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B874D2A4AEECF00D7D894 /* MLHINTokens.m */; };
+		CF3B874F2A4AEECF00D7D894 /* MLHINTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B874D2A4AEECF00D7D894 /* MLHINTokens.m */; };
+		CF3B87532A4AF92300D7D894 /* MLHINOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B87512A4AF92300D7D894 /* MLHINOAuthWindowController.m */; };
+		CF3B87542A4AF92300D7D894 /* MLHINOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B87512A4AF92300D7D894 /* MLHINOAuthWindowController.m */; };
+		CF3B87552A4AF92300D7D894 /* MLHINOAuthWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF3B87522A4AF92300D7D894 /* MLHINOAuthWindowController.xib */; };
+		CF3B87562A4AF92300D7D894 /* MLHINOAuthWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF3B87522A4AF92300D7D894 /* MLHINOAuthWindowController.xib */; };
 		CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF6BAE9726EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */; };
@@ -299,6 +309,16 @@
 		CF366B4326BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = generalInvoiceRequest_450.xsd; sourceTree = "<group>"; };
 		CF366B4626BAD2AE0060F8CF /* xenc-schema.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "xenc-schema.xsd"; sourceTree = "<group>"; };
 		CF366B4726BAD2AE0060F8CF /* xmldsig-core-schema.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "xmldsig-core-schema.xsd"; sourceTree = "<group>"; };
+		CF3B87442A4AECA100D7D894 /* MLHINClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINClient.h; sourceTree = "<group>"; };
+		CF3B87452A4AECA100D7D894 /* MLHINClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINClient.m; sourceTree = "<group>"; };
+		CF3B87482A4AEEC600D7D894 /* MLHINProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINProfile.h; sourceTree = "<group>"; };
+		CF3B87492A4AEEC600D7D894 /* MLHINProfile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINProfile.m; sourceTree = "<group>"; };
+		CF3B874C2A4AEECF00D7D894 /* MLHINTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINTokens.h; sourceTree = "<group>"; };
+		CF3B874D2A4AEECF00D7D894 /* MLHINTokens.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINTokens.m; sourceTree = "<group>"; };
+		CF3B87502A4AF92300D7D894 /* MLHINOAuthWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINOAuthWindowController.h; sourceTree = "<group>"; };
+		CF3B87512A4AF92300D7D894 /* MLHINOAuthWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINOAuthWindowController.m; sourceTree = "<group>"; };
+		CF3B87522A4AF92300D7D894 /* MLHINOAuthWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLHINOAuthWindowController.xib; sourceTree = "<group>"; };
+		CF3B87572A4C60AB00D7D894 /* MLHINClientCredential.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINClientCredential.h; sourceTree = "<group>"; };
 		CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPreferencesWindowController.h; sourceTree = "<group>"; };
 		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
 		CF6BAE9526EDE3BA0080DD00 /* MedidataInvoiceDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataInvoiceDocument.h; sourceTree = "<group>"; };
@@ -559,12 +579,29 @@
 			name = Patient;
 			sourceTree = "<group>";
 		};
+		CF3B87432A4AEC6E00D7D894 /* HINClient */ = {
+			isa = PBXGroup;
+			children = (
+				CF3B87442A4AECA100D7D894 /* MLHINClient.h */,
+				CF3B87452A4AECA100D7D894 /* MLHINClient.m */,
+				CF3B87482A4AEEC600D7D894 /* MLHINProfile.h */,
+				CF3B87492A4AEEC600D7D894 /* MLHINProfile.m */,
+				CF3B874C2A4AEECF00D7D894 /* MLHINTokens.h */,
+				CF3B874D2A4AEECF00D7D894 /* MLHINTokens.m */,
+				CF3B87572A4C60AB00D7D894 /* MLHINClientCredential.h */,
+			);
+			path = HINClient;
+			sourceTree = "<group>";
+		};
 		CF5B30F9243DFC7E000312F1 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
 				CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */,
 				CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */,
 				CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */,
+				CF3B87502A4AF92300D7D894 /* MLHINOAuthWindowController.h */,
+				CF3B87512A4AF92300D7D894 /* MLHINOAuthWindowController.m */,
+				CF3B87522A4AF92300D7D894 /* MLHINOAuthWindowController.xib */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -956,6 +993,7 @@
 				D5C644231EB3366200438E6F /* FullTextSearch */,
 				CFE80FDB24309D10003DB2FA /* Persistence */,
 				CF8A7336268F1A2D0092E214 /* Medidata */,
+				CF3B87432A4AEC6E00D7D894 /* HINClient */,
 			);
 			name = Classes;
 			path = ..;
@@ -1171,6 +1209,7 @@
 				D5E91B9F17E5E8E400B66B27 /* amiko_stylesheet.css in Resources */,
 				CF923BEE2549D13A00840F2E /* DesitinLogo.xcassets in Resources */,
 				D5C6443A1EB37A6F00438E6F /* main_callbacks.js in Resources */,
+				CF3B87552A4AF92300D7D894 /* MLHINOAuthWindowController.xib in Resources */,
 				D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */,
 				FA4BC4E8208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */,
 				FA6371862089CFEE009361D7 /* Localizable.strings in Resources */,
@@ -1235,6 +1274,7 @@
 				FA5562D92091B33300B85266 /* AmiKoMainMenu.xib in Resources */,
 				D5C5C5191F0C276E00DF851F /* checked_icon.png in Resources */,
 				D5BACC141EBE051D001812FB /* amiko_frequency_fr.db in Resources */,
+				CF3B87562A4AF92300D7D894 /* MLHINOAuthWindowController.xib in Resources */,
 				D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
@@ -1288,12 +1328,14 @@
 				D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */,
 				CFE80FE124309D10003DB2FA /* MLiCloudToLocalMigration.m in Sources */,
 				CFDFC48926CA905C00EDD182 /* MLMedidataResponsesWindowController.m in Sources */,
+				CF3B874E2A4AEECF00D7D894 /* MLHINTokens.m in Sources */,
 				CF01CCAD2524E92F0014B224 /* MLButtonCell.m in Sources */,
 				D53ABBF8189522AD00C4525C /* MLProgressSheetController.m in Sources */,
 				D52EA4A51EF4377C001ADFEC /* MLCellPackagesView.m in Sources */,
 				D5C5C5101F06416800DF851F /* MLContacts.m in Sources */,
 				D53877941AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				CF34E551243A1A8300E3AF61 /* PatientModel+CoreDataProperties.m in Sources */,
+				CF3B874A2A4AEEC600D7D894 /* MLHINProfile.m in Sources */,
 				D5BACC001EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				D545C90B18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D58685551F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,
@@ -1328,6 +1370,7 @@
 				CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */,
 				D52EA4AC1EF43B96001ADFEC /* MLColors.m in Sources */,
 				FA4BA42620B4015700552CEF /* SmartCard.m in Sources */,
+				CF3B87462A4AECA100D7D894 /* MLHINClient.m in Sources */,
 				CFE80FE324309D10003DB2FA /* MLPersistenceManager.m in Sources */,
 				FA6A2BB020B2B0ED0080B4C9 /* MLPatientSheetController.m in Sources */,
 				CF13F89026EB7D950060FB46 /* MedidataResponseDocument.m in Sources */,
@@ -1344,6 +1387,7 @@
 				D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				FA9F26E721C2CD1A005DA919 /* Wait.m in Sources */,
 				CF6BAE9726EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */,
+				CF3B87532A4AF92300D7D894 /* MLHINOAuthWindowController.m in Sources */,
 				D53973CD1FA37B9200D7E444 /* MLOperator.m in Sources */,
 				CF9625EA26CD109700153457 /* MedidataGetUploadStatusOperation.m in Sources */,
 				D517E4C21EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
@@ -1391,6 +1435,7 @@
 				D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D538779B1AA386AC00AEFDB4 /* SHCWebView.m in Sources */,
 				D5B010621927C472007BE838 /* interactions_callbacks.js in Sources */,
+				CF3B87472A4AECA100D7D894 /* MLHINClient.m in Sources */,
 				D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FC18A2CE0D00491511 /* zip.c in Sources */,
 				CFF3D9ED26E1259B003B74C2 /* MedidataClientUploadStatus.m in Sources */,
@@ -1398,6 +1443,7 @@
 				D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */,
 				D5C6440E1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
 				CFDFC48A26CA905C00EDD182 /* MLMedidataResponsesWindowController.m in Sources */,
+				CF3B87542A4AF92300D7D894 /* MLHINOAuthWindowController.m in Sources */,
 				D5C5C5081F03AE2E00DF851F /* MLPatient.m in Sources */,
 				CF9625EB26CD109700153457 /* MedidataGetUploadStatusOperation.m in Sources */,
 				D5E91BBC17E5E8E800B66B27 /* MLDBAdapter.m in Sources */,
@@ -1416,6 +1462,7 @@
 				D5F303441F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				D52EA4AD1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5ECDE141F2A7C1200970133 /* MLEditableTextField.m in Sources */,
+				CF3B874F2A4AEECF00D7D894 /* MLHINTokens.m in Sources */,
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
 				D5C5C5321F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
 				CF2EA5EA269328D300FA1EC8 /* MedidataClient.m in Sources */,
@@ -1444,6 +1491,7 @@
 				CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */,
 				FA9F26E921C2CEED005DA919 /* Wait.m in Sources */,
 				CF01CCAE2524E92F0014B224 /* MLButtonCell.m in Sources */,
+				CF3B874B2A4AEEC600D7D894 /* MLHINProfile.m in Sources */,
 				D5962EA21EFC26AD0034B964 /* LegacyPatientDBAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
