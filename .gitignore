@@ -15,3 +15,4 @@ scripts/itc.conf
 DerivedData/
 
 Medidata/MedidataCredential.h
+HINClient/MLHINClientCredential.h
