@@ -14,8 +14,11 @@
 #import "MLPatientSync.h"
 
 #define KEY_PERSISTENCE_SOURCE @"KEY_PERSISTENCE_SOURCE"
+
 #define KEY_MEDIDATA_INVOICE_XML_DIRECTORY @"KEY_MEDIDATA_INVOICE_XML_DIRECTORY"
 #define KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY @"KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY"
+
+#define KEY_PERSISTENCE_HIN_TOKENS @"KEY_PERSISTENCE_HIN_TOKENS"
 
 @interface MLPersistenceManager () <MLiCloudToLocalMigrationDelegate>
 
@@ -289,6 +292,26 @@
 - (void)didFinishedICloudToLocalMigration:(id)sender {
     self.iCloudToLocalMigration = nil;
     NSLog(@"Migration is done");
+}
+
+# pragma mark - HIN
+
+- (void)setHINTokens:(MLHINTokens *)tokens {
+    if (!tokens) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_TOKENS];
+    } else {
+        NSDictionary *dict = [tokens dictionaryRepresentation];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:KEY_PERSISTENCE_HIN_TOKENS];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (MLHINTokens *)HINTokens {
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_TOKENS];
+    if (![dict isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    return [[MLHINTokens alloc] initWithDictionary:dict];
 }
 
 # pragma mark - Doctor

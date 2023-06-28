@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "MLOperator.h"
 #import "MLPatient.h"
+#import "MLHINTokens.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,6 +36,9 @@ typedef NS_ENUM(NSInteger, MLPersistenceSource) {
 - (BOOL)hadSetupMedidataInvoiceResponseXMLDirectory;
 - (NSURL *)medidataInvoiceResponseXMLDirectory;
 - (void)setMedidataInvoiceResponseXMLDirectory:(NSURL *)url;
+
+- (void)setHINTokens:(MLHINTokens * _Nullable)tokens;
+- (MLHINTokens * _Nullable)HINTokens;
 
 # pragma mark - Doctor
 
