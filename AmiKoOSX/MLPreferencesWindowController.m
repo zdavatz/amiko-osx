@@ -8,11 +8,16 @@
 
 #import "MLPreferencesWindowController.h"
 #import "MLPersistenceManager.h"
+#import "MLHINClient.h"
+#import "MLHINOAuthWindowController.h"
 
 @interface MLPreferencesWindowController ()
 @property (weak) IBOutlet NSButton *iCloudCheckbox;
 @property (weak) IBOutlet NSPathControl *invoicePathControl;
 @property (weak) IBOutlet NSPathControl *invoiceResponsePathControl;
+@property (weak) IBOutlet NSTextField *hinUserIdTextField;
+@property (weak) IBOutlet NSButton *loginWithHINButton;
+@property (strong) MLHINOAuthWindowController *hinOauthController;
 
 @end
 
@@ -22,6 +27,7 @@
     [super windowDidLoad];
     
     [self reloadiCloudCheckbox];
+    [self reloadHINState];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NSUbiquityIdentityDidChangeNotification
                                                       object:nil
@@ -99,5 +105,36 @@
     [[MLPersistenceManager shared] setMedidataInvoiceResponseXMLDirectory:openPanel.URL];
     [self.invoiceResponsePathControl setURL:openPanel.URL];
 }
+
+- (void)reloadHINState {
+    MLHINTokens *tokens = [[MLPersistenceManager shared] HINTokens];
+    if (tokens) {
+        [self.hinUserIdTextField setStringValue:tokens.hinId];
+        [self.hinUserIdTextField setEnabled:YES];
+        [self.loginWithHINButton setTitle:NSLocalizedString(@"Logout from HIN", @"")];
+    } else {
+        [self.hinUserIdTextField setStringValue:@"[Not logged in]"];
+        [self.hinUserIdTextField setEnabled:NO];
+        [self.loginWithHINButton setTitle:NSLocalizedString(@"Login with HIN", @"")];
+    }
+}
+
+- (IBAction)loginWithHINClicked:(id)sender {
+    MLHINTokens *tokens = [[MLPersistenceManager shared] HINTokens];
+    if (tokens) {
+        [[MLPersistenceManager shared] setHINTokens:nil];
+        [self reloadHINState];
+    } else {
+        MLHINOAuthWindowController *controller = [[MLHINOAuthWindowController alloc] init];
+        self.hinOauthController = controller;
+        typeof(self) __weak _self = self;
+        [self.window beginSheet:controller.window
+              completionHandler:^(NSModalResponse returnCode) {
+            [_self reloadHINState];
+            _self.hinOauthController = nil;
+        }];
+    }
+}
+
 
 @end
