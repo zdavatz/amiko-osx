@@ -2,14 +2,12 @@ name: Build
 
 on:
   push:
-    branches: #[ "master" ]
-      - '*'
-  # pull_request:
-  #   branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
   build:
-    name: Build and analyse default scheme using xcodebuild command
+    name: Archive
     runs-on: macos-latest
 
     steps:
