@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -145,8 +145,6 @@
 		D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D5AE31841B372085006BC60E /* desitin_icon_512x512.png */; };
 		D5B0105C1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
 		D5B0105D1927C451007BE838 /* interactions_css.css in Resources */ = {isa = PBXBuildFile; fileRef = D5B0105B1927C451007BE838 /* interactions_css.css */; };
-		D5B010611927C472007BE838 /* interactions_callbacks.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* interactions_callbacks.js */; };
-		D5B010621927C472007BE838 /* interactions_callbacks.js in Sources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* interactions_callbacks.js */; };
 		D5B6F96C192BE2B100495873 /* drug_interactions_csv_de.csv in Resources */ = {isa = PBXBuildFile; fileRef = D5B6F96B192BE2B100495873 /* drug_interactions_csv_de.csv */; };
 		D5B6F970193136A400495873 /* interactions_callbacks.js in Resources */ = {isa = PBXBuildFile; fileRef = D5B010601927C472007BE838 /* interactions_callbacks.js */; };
 		D5BACBFA1EBB1D2C001812FB /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BACBF31EBB1D2C001812FB /* WebViewJavascriptBridge.m */; };
@@ -189,7 +187,6 @@
 		D5E91B8917E5E8E400B66B27 /* MLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC69317C912FF00EBEF39 /* MLAppDelegate.m */; };
 		D5E91B8A17E5E8E400B66B27 /* MLMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6A217C913B100EBEF39 /* MLMainWindowController.m */; };
 		D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6AC17C9202600EBEF39 /* MLSQLiteDatabase.m */; };
-		D5E91B8C17E5E8E400B66B27 /* MLSearchWebView.js in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B017C9205E00EBEF39 /* MLSearchWebView.js */; };
 		D5E91B8D17E5E8E400B66B27 /* MLDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B517C9206800EBEF39 /* MLDBAdapter.m */; };
 		D5E91B8E17E5E8E400B66B27 /* MLMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B717C9206800EBEF39 /* MLMedication.m */; };
 		D5E91B8F17E5E8E400B66B27 /* MLDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6BB17C9207200EBEF39 /* MLDataStore.m */; };
@@ -212,7 +209,6 @@
 		D5E91BB817E5E8E800B66B27 /* MLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC69317C912FF00EBEF39 /* MLAppDelegate.m */; };
 		D5E91BB917E5E8E800B66B27 /* MLMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6A217C913B100EBEF39 /* MLMainWindowController.m */; };
 		D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6AC17C9202600EBEF39 /* MLSQLiteDatabase.m */; };
-		D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B017C9205E00EBEF39 /* MLSearchWebView.js */; };
 		D5E91BBC17E5E8E800B66B27 /* MLDBAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B517C9206800EBEF39 /* MLDBAdapter.m */; };
 		D5E91BBD17E5E8E800B66B27 /* MLMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6B717C9206800EBEF39 /* MLMedication.m */; };
 		D5E91BBE17E5E8E800B66B27 /* MLDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EBC6BB17C9207200EBEF39 /* MLDataStore.m */; };
@@ -1297,6 +1293,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		CFECF67424D1D8CD00CD6E09 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);
@@ -1341,11 +1338,9 @@
 				D58685551F47049D00A250A4 /* MLPrescriptionsAdapter.m in Sources */,
 				D538779A1AA386AC00AEFDB4 /* SHCWebView.m in Sources */,
 				FA63296D20A088CC002DC9E2 /* MLPrescriptionTableView.m in Sources */,
-				D5B010611927C472007BE838 /* interactions_callbacks.js in Sources */,
 				D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */,
 				CFF3D9EC26E1259B003B74C2 /* MedidataClientUploadStatus.m in Sources */,
 				D545C8E71898527C00491511 /* zip.c in Sources */,
-				D5E91B8C17E5E8E400B66B27 /* MLSearchWebView.js in Sources */,
 				D5C6440D1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
 				D5C5C5071F03AE2E00DF851F /* MLPatient.m in Sources */,
 				D5E91B8D17E5E8E400B66B27 /* MLDBAdapter.m in Sources */,
@@ -1434,13 +1429,11 @@
 				CF13F89926ECB2510060FB46 /* MedidataInvoiceResponseLocalRow.m in Sources */,
 				D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D538779B1AA386AC00AEFDB4 /* SHCWebView.m in Sources */,
-				D5B010621927C472007BE838 /* interactions_callbacks.js in Sources */,
 				CF3B87472A4AECA100D7D894 /* MLHINClient.m in Sources */,
 				D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FC18A2CE0D00491511 /* zip.c in Sources */,
 				CFF3D9ED26E1259B003B74C2 /* MedidataClientUploadStatus.m in Sources */,
 				D53973CE1FA37B9200D7E444 /* MLOperator.m in Sources */,
-				D5E91BBB17E5E8E800B66B27 /* MLSearchWebView.js in Sources */,
 				D5C6440E1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
 				CFDFC48A26CA905C00EDD182 /* MLMedidataResponsesWindowController.m in Sources */,
 				CF3B87542A4AF92300D7D894 /* MLHINOAuthWindowController.m in Sources */,

@@ -9,7 +9,7 @@
 #ifndef MLHINClientCredential_h
 #define MLHINClientCredential_h
 
-#define HIN_CLIENT_ID @"xxxxxxxx"
-#define HIN_CLIENT_SECRET @"xxxxxxxxxx"
+#define HIN_CLIENT_ID @"YOUR_HIN_CLIENT_ID"
+#define HIN_CLIENT_SECRET @"YOUR_HIN_CLIENT_SECRET"
 
 #endif /* MLHINClientCredential_h */
