@@ -9,7 +9,7 @@
 #ifndef MedidataCredential_h
 #define MedidataCredential_h
 
-#define MEDIDATA_CLIENT_AUTHORIZATION @"XXXXXXXXXXXX"
+#define MEDIDATA_CLIENT_AUTHORIZATION @"YOUR_MEDIDATA_CLIENT_AUTHORIZATION"
 #define MEDIDATA_CLIENT_CLIENT_ID_PREFIX @"1000000000"
 
 #endif /* MedidataCredential_h */

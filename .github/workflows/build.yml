@@ -1,0 +1,58 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Archive
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup credentails
+        env: # Or as an environment variable
+          HIN_CLIENT_ID: ${{ secrets.HIN_CLIENT_ID }}
+          HIN_CLIENT_SECRET: ${{ secrets.HIN_CLIENT_SECRET }}
+          MEDIDATA_CLIENT_AUTHORIZATION: ${{ secrets.MEDIDATA_CLIENT_AUTHORIZATION }}
+          MEDIDATA_CLIENT_CLIENT_ID_PREFIX: ${{ secrets.MEDIDATA_CLIENT_CLIENT_ID_PREFIX }}
+        run: |
+          sed "s/YOUR_HIN_CLIENT_ID/$HIN_CLIENT_ID/;s/YOUR_HIN_CLIENT_SECRET/$HIN_CLIENT_SECRET/" ./HINClient/MLHINClientCredential.sample.h > ./HINClient/MLHINClientCredential.h
+          sed "s/YOUR_MEDIDATA_CLIENT_AUTHORIZATION/$MEDIDATA_CLIENT_AUTHORIZATION/;s/1000000000/$MEDIDATA_CLIENT_CLIENT_ID_PREFIX/" ./Medidata/MedidataCredential.sample.h > ./Medidata/MedidataCredential.h
+      - name: Download databases
+        run: |
+          cd AmiKoOSX
+          curl -o amiko_report_de.html http://pillbox.oddb.org/amiko_report_de.html
+          curl -o amiko_db_full_idx_de.zip http://pillbox.oddb.org/amiko_db_full_idx_de.zip
+          curl -o amiko_frequency_de.db.zip http://pillbox.oddb.org/amiko_frequency_de.db.zip
+          curl -o drug_interactions_csv_de.zip http://pillbox.oddb.org/drug_interactions_csv_de.zip
+          curl -o amiko_report_fr.html http://pillbox.oddb.org/amiko_report_fr.html
+          curl -o amiko_db_full_idx_fr.zip http://pillbox.oddb.org/amiko_db_full_idx_fr.zip
+          curl -o amiko_frequency_fr.db.zip http://pillbox.oddb.org/amiko_frequency_fr.db.zip
+          curl -o drug_interactions_csv_fr.zip http://pillbox.oddb.org/drug_interactions_csv_fr.zip
+          unzip amiko_db_full_idx_de.zip
+          unzip amiko_frequency_de.db.zip
+          unzip drug_interactions_csv_de.zip
+          unzip amiko_db_full_idx_fr.zip
+          unzip amiko_frequency_fr.db.zip
+          unzip drug_interactions_csv_fr.zip
+          rm amiko_db_full_idx_de.zip amiko_frequency_de.db.zip drug_interactions_csv_de.zip amiko_db_full_idx_fr.zip amiko_frequency_fr.db.zip drug_interactions_csv_fr.zip
+      - name: Build
+        run: |
+          mkdir archive
+          xcodebuild clean build archive -allowProvisioningUpdates -project AmiKo.xcodeproj -scheme AmiKo -archivePath ./archive/amiko-archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild clean build archive -allowProvisioningUpdates -project AmiKo.xcodeproj -scheme CoMed -archivePath ./archive/comed-archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          ls archive
+      - uses: actions/upload-artifact@v3
+        with:
+          name: amiko-artifact
+          path: ./archive/amiko-archive.xcarchive
+          retention-days: 30
+      - uses: actions/upload-artifact@v3
+        with:
+          name: comed-artifact
+          path: ./archive/comed-archive.xcarchive
+          retention-days: 30
