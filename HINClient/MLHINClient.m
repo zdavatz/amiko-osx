@@ -43,19 +43,23 @@
     ];
     [request setHTTPBody:[components.query dataUsingEncoding:NSUTF8StringEncoding]];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error != nil) {
-                callback(error, nil);
-                return;
-            }
-            NSError *jsonError = nil;
-            id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-            if (jsonError != nil) {
-                callback(jsonError, nil);
-                return;
-            }
-            MLHINTokens *tokens = [[MLHINTokens alloc] initWithResponseJSON:jsonObj];
-            callback(nil, tokens);
-        }] resume];
+        if (error != nil) {
+            callback(error, nil);
+            return;
+        }
+        NSError *jsonError = nil;
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        if (jsonError != nil) {
+            NSLog(@"response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            callback(jsonError, nil);
+            return;
+        }
+        MLHINTokens *tokens = [[MLHINTokens alloc] initWithResponseJSON:jsonObj];
+        if (!tokens) {
+            NSLog(@"response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        }
+        callback(nil, tokens);
+    }] resume];
     //curl -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept:application/json' --data 'grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fcallback&code=xxxxxx&client_id=xxxxx&client_secret=xxxxx' https://oauth2.hin.ch/REST/v1/OAuth/GetAccessToken
 }
 
@@ -81,19 +85,23 @@
     ];
     [request setHTTPBody:[components.query dataUsingEncoding:NSUTF8StringEncoding]];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error != nil) {
-                callback(error, nil);
-                return;
-            }
-            NSError *jsonError = nil;
-            id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-            if (jsonError != nil) {
-                callback(jsonError, nil);
-                return;
-            }
-            MLHINTokens *tokens = [[MLHINTokens alloc] initWithResponseJSON:jsonObj];
-            callback(nil, tokens);
-        }] resume];
+        if (error != nil) {
+            callback(error, nil);
+            return;
+        }
+        NSError *jsonError = nil;
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        if (jsonError != nil) {
+            NSLog(@"response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            callback(jsonError, nil);
+            return;
+        }
+        MLHINTokens *tokens = [[MLHINTokens alloc] initWithResponseJSON:jsonObj];
+        if (!tokens) {
+            NSLog(@"response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        }
+        callback(nil, tokens);
+    }] resume];
 //    curl -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept:application/json' --data 'grant_type=refresh_token&refresh_token=xxxxxx&client_id=xxxxx&client_secret=xxxxx' https://oauth2.hin.ch/REST/v1/OAuth/GetAccessToken
 }
 
@@ -111,19 +119,23 @@
         }];
         [request setHTTPMethod:@"GET"];
         [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                    if (error != nil) {
-                        callback(error, nil);
-                        return;
-                    }
-                    NSError *jsonError = nil;
-                    id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-                    if (jsonError != nil) {
-                        callback(jsonError, nil);
-                        return;
-                    }
-                    MLHINProfile *profile = [[MLHINProfile alloc] initWithResponseJSON:jsonObj];
-                    callback(nil, profile);
-                }] resume];
+            if (error != nil) {
+                callback(error, nil);
+                return;
+            }
+            NSError *jsonError = nil;
+            id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+            if (jsonError != nil) {
+                NSLog(@"response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                callback(jsonError, nil);
+                return;
+            }
+            MLHINProfile *profile = [[MLHINProfile alloc] initWithResponseJSON:jsonObj];
+            if (!profile) {
+                NSLog(@"response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            }
+            callback(nil, profile);
+        }] resume];
         //curl -H 'Authorization: Bearer xxxxx' https://oauth2.sds.hin.ch/api/public/v1/self/
     }];
 }
