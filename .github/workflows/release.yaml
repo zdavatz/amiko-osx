@@ -1,9 +1,8 @@
-name: Build
-
+name: Publish Release
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -42,5 +41,13 @@ jobs:
           rm amiko_db_full_idx_de.zip amiko_frequency_de.db.zip drug_interactions_csv_de.zip amiko_db_full_idx_fr.zip amiko_frequency_fr.db.zip drug_interactions_csv_fr.zip
       - name: Build
         run: |
-          xcodebuild clean build -allowProvisioningUpdates -project AmiKo.xcodeproj -scheme AmiKo CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-          xcodebuild clean build -allowProvisioningUpdates -project AmiKo.xcodeproj -scheme CoMed CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          mkdir archive
+          xcodebuild clean build archive -allowProvisioningUpdates -project AmiKo.xcodeproj -scheme AmiKo -archivePath ./archive/amiko-archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild clean build archive -allowProvisioningUpdates -project AmiKo.xcodeproj -scheme CoMed -archivePath ./archive/comed-archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          ls archive
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: |
+            ./archive/amiko-archive.xcarchive
+            ./archive/comed-archive.xcarchive
