@@ -10,9 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    MLHINTokensApplicationSDS,
+    MLHINTokensApplicationADSwiss,
+} MLHINTokensApplication;
+
 @interface MLHINTokens : NSObject
 
 - (instancetype)initWithResponseJSON:(NSDictionary *)dict;
+
+@property (nonatomic, assign) MLHINTokensApplication application;
 
 - (BOOL)expired;
 - (NSString *)refreshToken;

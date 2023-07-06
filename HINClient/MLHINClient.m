@@ -8,6 +8,7 @@
 
 #import "MLHINClient.h"
 #import "MLHINClientCredential.h"
+#import "MLPersistenceManager.h"
 
 @implementation MLHINClient
 
@@ -20,8 +21,22 @@
     return shared;
 }
 
-- (NSURL*)authURL {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.hin.ch/REST/v1/OAuth/GetAuthCode/hin_sds?response_type=code&client_id=%@&redirect_uri=http://localhost:8080/callback&state=teststate", HIN_CLIENT_ID]];
+- (NSURL*)authURLWithApplication:(NSString *)applicationName {
+    return [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.hin.ch/REST/v1/OAuth/GetAuthCode/%@?response_type=code&client_id=%@&redirect_uri=http://localhost:8080/callback&state=teststate", applicationName, HIN_CLIENT_ID]];
+}
+
+- (NSURL*)authURLForSDS {
+    return [self authURLWithApplication:@"hin_sds"];
+}
+
+- (NSURL *)authURLForADSwiss {
+    return [self authURLWithApplication:
+#ifdef DEBUG
+            @"ADSwiss_CI-Test"
+#else
+            @"ADSwiss_CI"
+#endif
+    ];
 }
 
 - (void)fetchAccessTokenWithAuthCode:(NSString *)authCode
@@ -96,16 +111,21 @@
             callback(jsonError, nil);
             return;
         }
-        MLHINTokens *tokens = [[MLHINTokens alloc] initWithResponseJSON:jsonObj];
-        if (!tokens) {
+        MLHINTokens *newTokens = [[MLHINTokens alloc] initWithResponseJSON:jsonObj];
+        if (!newTokens) {
             NSLog(@"response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         }
-        callback(nil, tokens);
+        if (token.application == MLHINTokensApplicationSDS) {
+            [[MLPersistenceManager shared] setHINSDSTokens:newTokens];
+        } else if (token.application == MLHINTokensApplicationADSwiss) {
+            [[MLPersistenceManager shared] setHINADSwissTokens:newTokens];
+        }
+        callback(nil, newTokens);
     }] resume];
 //    curl -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept:application/json' --data 'grant_type=refresh_token&refresh_token=xxxxxx&client_id=xxxxx&client_secret=xxxxx' https://oauth2.hin.ch/REST/v1/OAuth/GetAccessToken
 }
 
-- (void)fetchSelfWithToken:(MLHINTokens *)token completion:(void (^_Nonnull)(NSError *error, MLHINProfile *profile))callback {
+- (void)fetchSDSSelfWithToken:(MLHINTokens *)token completion:(void (^_Nonnull)(NSError *error, MLHINProfile *profile))callback {
     [self renewTokenIfNeededWithToken:token
                            completion:^(NSError * _Nullable error, MLHINTokens * _Nullable tokens) {
         if (error != nil) {

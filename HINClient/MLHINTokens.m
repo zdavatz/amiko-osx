@@ -44,6 +44,7 @@
         self.expiresAt = dict[@"expiresAt"];
         self.hinId = dict[@"hinId"];
         self.tokenType = dict[@"tokenType"];
+        self.application = dict[@"application"] ? [dict[@"application"] unsignedIntegerValue] : MLHINTokensApplicationSDS;
     }
     return self;
 }
@@ -55,6 +56,7 @@
         @"expiresAt": self.expiresAt,
         @"hinId": self.hinId,
         @"tokenType": self.tokenType,
+        @"application": [NSNumber numberWithUnsignedInteger:self.application],
     };
 }
 

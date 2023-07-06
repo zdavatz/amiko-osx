@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 
-- (NSURL *)authURL;
+- (NSURL *)authURLForSDS;
+- (NSURL *)authURLForADSwiss;
 
 - (void)fetchAccessTokenWithAuthCode:(NSString *)authCode
                           completion:(void (^_Nonnull)(NSError * _Nullable error, MLHINTokens * _Nullable tokens))callback;
@@ -24,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)renewTokenIfNeededWithToken:(MLHINTokens *)token
                          completion:(void (^_Nonnull)(NSError * _Nullable error, MLHINTokens * _Nullable tokens))callback;
 
-- (void)fetchSelfWithToken:(MLHINTokens *)token completion:(void (^_Nonnull)(NSError *error, MLHINProfile *profile))callback;
+- (void)fetchSDSSelfWithToken:(MLHINTokens *)token completion:(void (^_Nonnull)(NSError *error, MLHINProfile *profile))callback;
 
 @end
 

@@ -37,8 +37,10 @@ typedef NS_ENUM(NSInteger, MLPersistenceSource) {
 - (NSURL *)medidataInvoiceResponseXMLDirectory;
 - (void)setMedidataInvoiceResponseXMLDirectory:(NSURL *)url;
 
-- (void)setHINTokens:(MLHINTokens * _Nullable)tokens;
-- (MLHINTokens * _Nullable)HINTokens;
+- (void)setHINSDSTokens:(MLHINTokens * _Nullable)tokens;
+- (MLHINTokens * _Nullable)HINSDSTokens;
+- (void)setHINADSwissTokens:(MLHINTokens * _Nullable)tokens;
+- (MLHINTokens * _Nullable)HINADSwissTokens;
 
 # pragma mark - Doctor
 

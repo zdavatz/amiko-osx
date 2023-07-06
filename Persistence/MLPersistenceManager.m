@@ -18,7 +18,8 @@
 #define KEY_MEDIDATA_INVOICE_XML_DIRECTORY @"KEY_MEDIDATA_INVOICE_XML_DIRECTORY"
 #define KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY @"KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY"
 
-#define KEY_PERSISTENCE_HIN_TOKENS @"KEY_PERSISTENCE_HIN_TOKENS"
+#define KEY_PERSISTENCE_HIN_SDS_TOKENS @"KEY_PERSISTENCE_HIN_TOKENS"
+#define KEY_PERSISTENCE_HIN_ADSWISS_TOKENS @"KEY_PERSISTENCE_HIN_ADSWISS_TOKENS"
 
 @interface MLPersistenceManager () <MLiCloudToLocalMigrationDelegate>
 
@@ -296,18 +297,38 @@
 
 # pragma mark - HIN
 
-- (void)setHINTokens:(MLHINTokens *)tokens {
+- (void)setHINSDSTokens:(MLHINTokens *)tokens {
+    tokens.application = MLHINTokensApplicationSDS;
     if (!tokens) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_TOKENS];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_SDS_TOKENS];
     } else {
         NSDictionary *dict = [tokens dictionaryRepresentation];
-        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:KEY_PERSISTENCE_HIN_TOKENS];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:KEY_PERSISTENCE_HIN_SDS_TOKENS];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (MLHINTokens *)HINTokens {
-    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_TOKENS];
+- (MLHINTokens *)HINSDSTokens {
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_SDS_TOKENS];
+    if (![dict isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    return [[MLHINTokens alloc] initWithDictionary:dict];
+}
+
+- (void)setHINADSwissTokens:(MLHINTokens *)tokens {
+    tokens.application = MLHINTokensApplicationADSwiss;
+    if (!tokens) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_TOKENS];
+    } else {
+        NSDictionary *dict = [tokens dictionaryRepresentation];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:KEY_PERSISTENCE_HIN_ADSWISS_TOKENS];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (MLHINTokens *)HINADSwissTokens {
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_ADSWISS_TOKENS];
     if (![dict isKindOfClass:[NSDictionary class]]) {
         return nil;
     }

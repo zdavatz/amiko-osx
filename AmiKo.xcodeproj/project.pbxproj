@@ -55,6 +55,8 @@
 		CF6BAE9826EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */; };
 		CF8A7339268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */; };
 		CF8A733A268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */; };
+		CF8B3ED82A567FA40017CC28 /* MLSDSOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3ED72A567FA40017CC28 /* MLSDSOAuthWindowController.m */; };
+		CF8B3ED92A567FA40017CC28 /* MLSDSOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3ED72A567FA40017CC28 /* MLSDSOAuthWindowController.m */; };
 		CF8BEB94253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
 		CF8BEB95253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
 		CF8BEB982538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
@@ -321,6 +323,8 @@
 		CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceDocument.m; sourceTree = "<group>"; };
 		CF8A7337268F1A6D0092E214 /* MedidataXMLGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataXMLGenerator.h; sourceTree = "<group>"; };
 		CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataXMLGenerator.m; sourceTree = "<group>"; };
+		CF8B3ED62A567FA40017CC28 /* MLSDSOAuthWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLSDSOAuthWindowController.h; sourceTree = "<group>"; };
+		CF8B3ED72A567FA40017CC28 /* MLSDSOAuthWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLSDSOAuthWindowController.m; sourceTree = "<group>"; };
 		CF8BEB92253850AF00C2D367 /* MLPrescriptionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionView.h; sourceTree = "<group>"; };
 		CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionView.m; sourceTree = "<group>"; };
 		CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionTextFinderClient.h; sourceTree = "<group>"; };
@@ -598,6 +602,8 @@
 				CF3B87502A4AF92300D7D894 /* MLHINOAuthWindowController.h */,
 				CF3B87512A4AF92300D7D894 /* MLHINOAuthWindowController.m */,
 				CF3B87522A4AF92300D7D894 /* MLHINOAuthWindowController.xib */,
+				CF8B3ED62A567FA40017CC28 /* MLSDSOAuthWindowController.h */,
+				CF8B3ED72A567FA40017CC28 /* MLSDSOAuthWindowController.m */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -1391,6 +1397,7 @@
 				CF9625F226CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m in Sources */,
 				D5ECDE1C1F2B24CB00970133 /* MLPrescriptionCellView.m in Sources */,
 				D5E91B9117E5E8E400B66B27 /* MLSearchWebView.m in Sources */,
+				CF8B3ED82A567FA40017CC28 /* MLSDSOAuthWindowController.m in Sources */,
 				D5E91B9217E5E8E400B66B27 /* MLCustomTableRowView.m in Sources */,
 				CF8BEB982538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */,
 				D5C6441D1EB3360300438E6F /* MLFullTextSearch.m in Sources */,
@@ -1455,6 +1462,7 @@
 				D5F303441F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				D52EA4AD1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5ECDE141F2A7C1200970133 /* MLEditableTextField.m in Sources */,
+				CF8B3ED92A567FA40017CC28 /* MLSDSOAuthWindowController.m in Sources */,
 				CF3B874F2A4AEECF00D7D894 /* MLHINTokens.m in Sources */,
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
 				D5C5C5321F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
