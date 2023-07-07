@@ -3779,7 +3779,20 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 #endif
                 
                 csvMedication = [mDb getMediWithRegnr:rn];
-                [self searchKeyword:kw inMedication:csvMedication chapters:chapterSet regnr:rn];
+                if (csvMedication) {
+                    [self searchKeyword:kw inMedication:csvMedication chapters:chapterSet regnr:rn];
+                } else {
+                    // https://github.com/zdavatz/amiko-osx/issues/251
+                    // When the medicine isn't found in DB, we put the Regnr in link.
+                    [csv appendFormat:@"\n%@%@%@%@\"%@\"%@\"%@\"%@%@%@\"%@\"%@%@",
+                     @"", CSV_SEPARATOR,
+                     @"", CSV_SEPARATOR,
+                     @"", CSV_SEPARATOR,
+                     @"", CSV_SEPARATOR,
+                     @"", CSV_SEPARATOR,
+                     @"", CSV_SEPARATOR,
+                     rn];
+                }
             }
         }  // for
 
