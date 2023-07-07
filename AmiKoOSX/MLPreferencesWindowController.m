@@ -10,6 +10,7 @@
 #import "MLPersistenceManager.h"
 #import "MLHINClient.h"
 #import "MLSDSOAuthWindowController.h"
+#import "MLADSwissOAuthWindowController.h"
 
 @interface MLPreferencesWindowController ()
 @property (weak) IBOutlet NSButton *iCloudCheckbox;
@@ -20,6 +21,7 @@
 @property (strong) MLSDSOAuthWindowController *hinSDSOauthController;
 @property (weak) IBOutlet NSTextField *hinADSwissUserIdTextField;
 @property (weak) IBOutlet NSButton *loginWithHINADSwissButton;
+@property (strong) MLADSwissOAuthWindowController *hinADSwissOAuthController;
 
 @end
 
@@ -29,7 +31,7 @@
     [super windowDidLoad];
     
     [self reloadiCloudCheckbox];
-    [self reloadHINSDSState];
+    [self reloadHINState];
     
     [[MLHINClient shared] renewTokenIfNeededWithToken:[[MLPersistenceManager shared] HINSDSTokens]
                                            completion:^(NSError * _Nullable error, MLHINTokens * _Nullable tokens) {
@@ -113,7 +115,7 @@
     [self.invoiceResponsePathControl setURL:openPanel.URL];
 }
 
-- (void)reloadHINSDSState {
+- (void)reloadHINState {
     MLHINTokens *tokens = [[MLPersistenceManager shared] HINSDSTokens];
     if (tokens) {
         [self.hinSDSUserIdTextField setStringValue:tokens.hinId];
@@ -124,10 +126,7 @@
         [self.hinSDSUserIdTextField setEnabled:NO];
         [self.loginWithHINSDSButton setTitle:NSLocalizedString(@"Login with HIN (SDS)", @"")];
     }
-}
-
-- (void)reloadHINADSwissState {
-    MLHINTokens *tokens = [[MLPersistenceManager shared] HINSDSTokens];
+    tokens = [[MLPersistenceManager shared] HINADSwissTokens];
     if (tokens) {
         [self.hinADSwissUserIdTextField setStringValue:tokens.hinId];
         [self.hinADSwissUserIdTextField setEnabled:YES];
@@ -143,14 +142,14 @@
     MLHINTokens *tokens = [[MLPersistenceManager shared] HINSDSTokens];
     if (tokens) {
         [[MLPersistenceManager shared] setHINSDSTokens:nil];
-        [self reloadHINSDSState];
+        [self reloadHINState];
     } else {
         MLSDSOAuthWindowController *controller = [[MLSDSOAuthWindowController alloc] init];
         self.hinSDSOauthController = controller;
         typeof(self) __weak _self = self;
         [self.window beginSheet:controller.window
               completionHandler:^(NSModalResponse returnCode) {
-            [_self reloadHINSDSState];
+            [_self reloadHINState];
             _self.hinSDSOauthController = nil;
         }];
     }
@@ -160,16 +159,16 @@
     MLHINTokens *tokens = [[MLPersistenceManager shared] HINADSwissTokens];
     if (tokens) {
         [[MLPersistenceManager shared] setHINADSwissTokens:nil];
-        [self reloadHINSDSState];
+        [self reloadHINState];
     } else {
-//        MLSDSOAuthWindowController *controller = [[MLSDSOAuthWindowController alloc] init];
-//        self.hinSDSOauthController = controller;
-//        typeof(self) __weak _self = self;
-//        [self.window beginSheet:controller.window
-//              completionHandler:^(NSModalResponse returnCode) {
-//            [_self reloadHINSDSState];
-//            _self.hinSDSOauthController = nil;
-//        }];
+        MLADSwissOAuthWindowController *controller = [[MLADSwissOAuthWindowController alloc] init];
+        self.hinADSwissOAuthController = controller;
+        typeof(self) __weak _self = self;
+        [self.window beginSheet:controller.window
+              completionHandler:^(NSModalResponse returnCode) {
+            [_self reloadHINState];
+            _self.hinADSwissOAuthController = nil;
+        }];
     }
 }
 

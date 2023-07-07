@@ -21,8 +21,9 @@
 }
 
 - (void)receivedTokens:(id)tokens {
-    typeof(self) __weak _self = self;
     [[MLPersistenceManager shared] setHINSDSTokens:tokens];
+    [self displayStatus:NSLocalizedString(@"Loading: Received Access Token, fetching profile", @"")];
+    typeof(self) __weak _self = self;
     [[MLHINClient shared] fetchSDSSelfWithToken:tokens
                                      completion:^(NSError * _Nonnull error, MLHINProfile * _Nonnull profile) {
         if (error) {
@@ -37,6 +38,7 @@
             }]];
             return;
         }
+        [_self displayStatus:NSLocalizedString(@"Received profile", @"")];
         MLOperator *doctor = [[MLPersistenceManager shared] doctor];
         [_self mergeHINProfile:profile withDoctor:doctor];
         [[MLPersistenceManager shared] setDoctor:doctor];
@@ -79,8 +81,6 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
 @end
