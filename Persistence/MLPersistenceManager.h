@@ -42,6 +42,9 @@ typedef NS_ENUM(NSInteger, MLPersistenceSource) {
 - (void)setHINADSwissTokens:(MLHINTokens * _Nullable)tokens;
 - (MLHINTokens * _Nullable)HINADSwissTokens;
 
+- (void)setHINADSwissAuthHandle:(NSString *)authHandle;
+- (NSString *)HINADSwissAuthHandle;
+
 # pragma mark - Doctor
 
 - (NSURL *)doctorDictionaryURL;

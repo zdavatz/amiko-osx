@@ -21,6 +21,9 @@
 #define KEY_PERSISTENCE_HIN_SDS_TOKENS @"KEY_PERSISTENCE_HIN_TOKENS"
 #define KEY_PERSISTENCE_HIN_ADSWISS_TOKENS @"KEY_PERSISTENCE_HIN_ADSWISS_TOKENS"
 
+#define KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE @"KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE"
+#define KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE @"KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE"
+
 @interface MLPersistenceManager () <MLiCloudToLocalMigrationDelegate>
 
 @property (nonatomic, strong) MLiCloudToLocalMigration *iCloudToLocalMigration;
@@ -333,6 +336,25 @@
         return nil;
     }
     return [[MLHINTokens alloc] initWithDictionary:dict];
+}
+
+- (void)setHINADSwissAuthHandle:(NSString *)authHandle {
+    [[NSUserDefaults standardUserDefaults] setObject:authHandle forKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
+    NSDate *expire = [[NSDate date] dateByAddingTimeInterval:12*60*60]; // 12 hours of validity
+    [[NSUserDefaults standardUserDefaults] setObject:expire forKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (NSString *)HINADSwissAuthHandle {
+    NSString *authHandle = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
+    NSDate *expire = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+    if (![authHandle isKindOfClass:[NSString class]] || ![expire isKindOfClass:[NSDate class]]) return nil;
+    if ([expire timeIntervalSinceNow] <= 0) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return nil;
+    }
+    return authHandle;
 }
 
 # pragma mark - Doctor
