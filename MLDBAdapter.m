@@ -384,6 +384,7 @@ static NSString *FULL_TABLE = nil;
 
 - (MLMedication *) cursorToFullMedInfo:(NSArray *)cursor
 {
+    if (!cursor) return nil;
     MLMedication *medi = [[MLMedication alloc] init];
     
     [medi setMedId:[(NSString *)[cursor objectAtIndex:kMedId] longLongValue]];
