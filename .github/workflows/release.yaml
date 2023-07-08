@@ -45,9 +45,9 @@ jobs:
           xcodebuild clean build archive -allowProvisioningUpdates -project AmiKo.xcodeproj -scheme AmiKo -archivePath ./archive/amiko-archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
           xcodebuild clean build archive -allowProvisioningUpdates -project AmiKo.xcodeproj -scheme CoMed -archivePath ./archive/comed-archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
           ls archive
+          zip -r archive.zip ./archive
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifacts: |
-            ./archive/amiko-archive.xcarchive
-            ./archive/comed-archive.xcarchive
+            ./archive.zip
