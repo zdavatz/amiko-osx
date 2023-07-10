@@ -31,6 +31,7 @@ extern NSString* const APP_ID;
 + (NSString *) appLanguage;
 + (BOOL) isGermanApp;
 + (BOOL) isFrenchApp;
++ (BOOL) isAppleSilicon;
 + (BOOL) isConnected;
 + (NSString *)iCloudContainerIdentifier;
 + (NSString *) documentsDirectory;

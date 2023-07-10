@@ -11,6 +11,7 @@
 #import "MLADSwissSAMLWindowController.h"
 #import "MLPrescriptionItem.h"
 #import "LFCGzipUtility.h"
+#import "MLUtilities.h"
 
 @interface MLePrescriptionPrepareWindowController ()
 
@@ -201,7 +202,7 @@
                                          @"%@.png",
                                      [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]]
         ];
-        NSURL *exePath = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"certifaction-arm64"];
+        NSURL *exePath = [[NSBundle mainBundle] URLForAuxiliaryExecutable:[MLUtilities isAppleSilicon] ? @"certifaction-arm64" : @"certifaction-x86"];
         NSTask *task = [NSTask new];
         [task setEnvironment:@{
             @"ENABLE_EPRESCRIPTION": @"true",

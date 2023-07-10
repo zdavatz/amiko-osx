@@ -23,6 +23,7 @@
 
 #import "MLUtilities.h"
 #import <CommonCrypto/CommonHMAC.h>
+#include <sys/utsname.h>
 
 #if defined (AMIKO)
 NSString* const APP_NAME = @"AmiKo";
@@ -91,6 +92,14 @@ NSString* const APP_ID = @"710472327";
 + (BOOL) isFrenchApp
 {
     return [[self appLanguage] isEqualToString:@"fr"];
+}
+
++ (BOOL) isAppleSilicon {
+    struct utsname sysinfo;
+    int retVal = uname(&sysinfo);
+    if (EXIT_SUCCESS != retVal) return nil;
+    NSString *arch = [NSString stringWithUTF8String:sysinfo.machine];
+    return [arch isEqualTo:@"arm64"];
 }
 
 + (BOOL) isConnected
@@ -185,7 +194,7 @@ NSString* const APP_ID = @"710472327";
 + (NSString*) encodeStringToBase64:(NSString*)string
 {
     NSData *plainData = [string dataUsingEncoding:NSUTF8StringEncoding];
-    return [plainData base64Encoding];
+    return [plainData base64EncodedStringWithOptions:0];
 }
 
 + (NSString*) decodeBase64ToString:(NSString*)base64String
