@@ -339,9 +339,14 @@
 }
 
 - (void)setHINADSwissAuthHandle:(NSString *)authHandle {
-    [[NSUserDefaults standardUserDefaults] setObject:authHandle forKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
-    NSDate *expire = [[NSDate date] dateByAddingTimeInterval:12*60*60]; // 12 hours of validity
-    [[NSUserDefaults standardUserDefaults] setObject:expire forKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+    if (!authHandle) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:authHandle forKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
+        NSDate *expire = [[NSDate date] dateByAddingTimeInterval:12*60*60]; // 12 hours of validity
+        [[NSUserDefaults standardUserDefaults] setObject:expire forKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+    }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (NSString *)HINADSwissAuthHandle {

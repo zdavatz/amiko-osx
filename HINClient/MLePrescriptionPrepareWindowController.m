@@ -50,8 +50,14 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    [self startFlow];
+}
+
+- (void)startFlow {
     typeof(self) __weak _self = self;
-    [self.loadingIndicator startAnimation:self];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.loadingIndicator startAnimation:self];
+    });
     [self displayStatus:NSLocalizedString(@"Loading SAML", @"")];
     [self prepareSAMLIfNeeded:^(NSError * _Nullable error, NSString *authHandle) {
         if (error) {
@@ -71,12 +77,21 @@
             });
             return;
         }
-        [self displayStatus:NSLocalizedString(@"Loaded SAML", @"")];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) , ^{
-            [self displayStatus:NSLocalizedString(@"Preparing prescription file", @"")];
-            NSString *prescriptionFile = [self preparePrescriptionFile];
-            [self displayStatus:NSLocalizedString(@"Preparing QR Code", @"")];
-            NSString *qrCodeFile = [self executeCertifactionWithGZippedBase64File:prescriptionFile];
+        [self displayStatus:NSLocalizedString(@"Preparing prescription file", @"")];
+        NSString *prescriptionFile = [self preparePrescriptionFile];
+        [self displayStatus:NSLocalizedString(@"Preparing QR Code", @"")];
+        [self executeCertifactionWithGZippedBase64File:prescriptionFile
+                                            completion:^(NSError * _Nullable error, NSString * _Nullable qrCodeFile) {
+            if (error.code == 401) {
+                [[MLPersistenceManager shared] setHINADSwissAuthHandle:nil];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self startFlow];
+                });
+                return;
+            } else if (error) {
+                [_self displayError:error];
+                return;
+            }
             [self displayStatus:NSLocalizedString(@"QR Code is ready", @"")];
             NSLog(@"QRCode file %@", qrCodeFile);
             NSImage *qrCodeImage = [[NSImage alloc] initWithContentsOfFile:qrCodeFile];
@@ -86,7 +101,7 @@
                 [_self.window.sheetParent endSheet:_self.window
                                         returnCode:NSModalResponseOK];
             });
-        });
+        }];
     }];
 }
 
@@ -177,48 +192,70 @@
     return [NSString stringWithFormat:@"%@-%@-%@", parts[2], parts[1], parts[0]];
 }
 
-- (NSString *)executeCertifactionWithGZippedBase64File:(NSString *)filePath {
-    NSString *authHandle = [[MLPersistenceManager shared] HINADSwissAuthHandle];
-    NSString *tempOutFilePath = [NSString stringWithFormat:
-                                 @"%@.png",
-                                 [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]]
-                                 ];
-    NSURL *exePath = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"certifaction-arm64"];
-    NSTask *task = [NSTask new];
-    [task setEnvironment:@{
-        @"ENABLE_EPRESCRIPTION": @"true",
-    }];
-    [task setLaunchPath:[exePath path]];
-    [task setArguments:@[
-        @"eprescription",
-        @"create",
-        @"--api", @"https://api.testnet.certifaction.io",
-        @"--hin-api", @"https://oauth2.sign-test.hin.ch/api",
-        @"--token", authHandle,
-        @"-o", tempOutFilePath,
-        @"-f", @"qrcode",
-        filePath,
-    ]];
-
-    NSPipe *outputPipe = [NSPipe pipe];
-    NSPipe *errorPipe = [NSPipe pipe];
-    [task setStandardInput:[NSPipe pipe]];
-    [task setStandardError:errorPipe];
-    [task setStandardOutput:outputPipe];
-
-    [task launch];
-    [task waitUntilExit]; // Alternatively, make it asynchronous.
-
-    NSData *outputData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
-    NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"output str %@", outputString);
-    
-    NSData *errorData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
-    NSString *errorString = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"error str %@", errorString);
-    return tempOutFilePath;
+- (void )executeCertifactionWithGZippedBase64File:(NSString *)filePath
+                                        completion:(void (^_Nonnull)(NSError * _Nullable error, NSString * _Nullable result))callback
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) , ^{
+        NSString *authHandle = [[MLPersistenceManager shared] HINADSwissAuthHandle];
+        NSString *tempOutFilePath = [NSString stringWithFormat:
+                                         @"%@.png",
+                                     [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]]
+        ];
+        NSURL *exePath = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"certifaction-arm64"];
+        NSTask *task = [NSTask new];
+        [task setEnvironment:@{
+            @"ENABLE_EPRESCRIPTION": @"true",
+        }];
+        [task setLaunchPath:[exePath path]];
+        [task setArguments:@[
+            @"eprescription",
+            @"create",
+            @"--api", @"https://api.testnet.certifaction.io",
+            @"--hin-api", @"https://oauth2.sign-test.hin.ch/api",
+            @"--token", authHandle,
+            @"-o", tempOutFilePath,
+            @"-f", @"qrcode",
+            filePath,
+        ]];
+        
+        NSPipe *outputPipe = [NSPipe pipe];
+        NSPipe *errorPipe = [NSPipe pipe];
+        [task setStandardInput:[NSPipe pipe]];
+        [task setStandardError:errorPipe];
+        [task setStandardOutput:outputPipe];
+        
+        [task launch];
+        [task waitUntilExit]; // Alternatively, make it asynchronous.
+        
+        NSData *outputData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
+        NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"output str %@", outputString);
+        
+        NSData *errorData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
+        NSString *errorString = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"error str %@", errorString);
+        
+        int exitCode = [task terminationStatus];
+        NSLog(@"exit code %d", exitCode);
+        
+        if (exitCode == 1) {
+            NSError *jsonError = nil;
+            id errorResponse = [NSJSONSerialization JSONObjectWithData:outputData
+                                                               options:0
+                                                                 error:&jsonError];
+            if (!jsonError && [errorResponse isKindOfClass:[NSDictionary class]]) {
+                if ([errorResponse[@"error_code"] isEqualTo:@"unauthorized"]) {
+                    callback([NSError errorWithDomain:@"ch.ywesee"
+                                                 code:401
+                                             userInfo:nil], nil);
+                    return;
+                }
+            }
+        }
+        callback(nil, tempOutFilePath);
+    });
 }
 
 @end
