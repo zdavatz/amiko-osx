@@ -171,7 +171,7 @@
             callback(error, nil);
             return;
         }
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://oauth2.ci-prep.adswiss.hin.ch/authService/EPDAuth?targetUrl=http%3A%2F%2Flocalhost%2Fsuccess&style=redirect"]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://oauth2.ci-prep.adswiss.hin.ch/authService/EPDAuth?targetUrl=http%3A%2F%2Flocalhost%3A8080%2Fcallback&style=redirect"]];
         [request setAllHTTPHeaderFields:@{
             @"Accept": @"application/json",
             @"Authorization": [NSString stringWithFormat:@"Bearer %@", token.accessToken],
@@ -195,13 +195,13 @@
             }
             callback(nil, saml);
         }] resume];
-        // curl --request POST --url 'https://oauth2.ci-prep.adswiss.hin.ch/authService/EPDAuth?targetUrl=http%3A%2F%2Flocalhost%2Fsuccess&style=redirect' --header 'accept: application/json' --header 'Authorization: Bearer b#G7XRWMzXd...aMALnxAj#GpN7V'
+        // curl --request POST --url 'https://oauth2.ci-prep.adswiss.hin.ch/authService/EPDAuth?targetUrl=http%3A%2F%2Flocalhost:8080%2Fcallback&style=redirect' --header 'accept: application/json' --header 'Authorization: Bearer b#G7XRWMzXd...aMALnxAj#GpN7V'
     }];
 }
 
 - (void)fetchADSwissAuthHandleWithToken:(MLHINTokens *)token
                                authCode:(NSString *)authCode
-                             completion:(void (^_Nonnull)(NSError *_Nullable error, NSString *authHandle))callback {
+                             completion:(void (^_Nonnull)(NSError *_Nullable error, NSString * _Nullable authHandle))callback {
     [self renewTokenIfNeededWithToken:token
                            completion:^(NSError * _Nullable error, MLHINTokens * _Nullable newTokens) {
         if (error != nil) {
@@ -211,6 +211,7 @@
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://oauth2.ci-prep.adswiss.hin.ch/authService/EPDAuth/auth_handle"]];
         [request setAllHTTPHeaderFields:@{
             @"Accept": @"application/json",
+            @"Content-Type": @"application/json",
             @"Authorization": [NSString stringWithFormat:@"Bearer %@", token.accessToken],
         }];
         NSError *jsonError = nil;
@@ -236,7 +237,7 @@
             }
             NSString *authHandle = [jsonObj objectForKey:@"authHandle"];
             if (!authHandle) {
-                NSLog(@"response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                NSLog(@"auth handle response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             }
             callback(nil, authHandle);
         }] resume];

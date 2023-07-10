@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchADSwissAuthHandleWithToken:(MLHINTokens *)token
                                authCode:(NSString *)authCode
-                             completion:(void (^_Nonnull)(NSError *_Nullable error, NSString *authHandle))callback;
+                             completion:(void (^_Nonnull)(NSError *_Nullable error, NSString *_Nullable authHandle))callback;
 
 @end
 
