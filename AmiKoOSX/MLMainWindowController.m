@@ -1263,6 +1263,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [self.myPrescriptionsPrintTV setPatient:myPatientAddressTextField.stringValue];
     [self.myPrescriptionsPrintTV setDoctor:myOperatorIDTextField.stringValue];
     [self.myPrescriptionsPrintTV setPlaceDate:myPlaceDateField.stringValue];
+    [self.myPrescriptionsPrintTV setEPrescriptionQRCode:qrCode];
     
     NSImage *signature = [[NSImage alloc] initWithData:[mySignView getSignaturePNG]];
 #ifndef METHOD_2
