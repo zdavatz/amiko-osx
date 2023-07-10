@@ -156,13 +156,24 @@
     
     [strDoc drawAtPoint:NSMakePoint(rightPosition - signSize.width, //- strDoc.size.width,
                                     topPatDoc - strDoc.size.height)]; // BL corner
-
-    [self.signature drawInRect:NSMakeRect(signOrigin.x, signOrigin.y, signSize.width, signSize.height)
-                      fromRect:NSZeroRect
-                     operation:NSCompositingOperationSourceOver
-                      fraction:1.0
-                respectFlipped:YES
-                         hints:nil];
+    if (self.ePrescriptionQRCode) {
+        CGFloat ratio = MIN(signSize.width / self.ePrescriptionQRCode.size.width, signSize.height / self.ePrescriptionQRCode.size.height);
+        CGFloat qrWidth = self.ePrescriptionQRCode.size.width * ratio;
+        CGFloat qrHeight = self.ePrescriptionQRCode.size.height * ratio;
+        [self.ePrescriptionQRCode drawInRect:NSMakeRect(rightPosition - qrWidth, signOrigin.y, qrWidth, qrHeight)
+                          fromRect:NSZeroRect
+                         operation:NSCompositingOperationSourceOver
+                          fraction:1.0
+                    respectFlipped:YES
+                             hints:nil];
+    } else {
+        [self.signature drawInRect:NSMakeRect(signOrigin.x, signOrigin.y, signSize.width, signSize.height)
+                          fromRect:NSZeroRect
+                         operation:NSCompositingOperationSourceOver
+                          fraction:1.0
+                    respectFlipped:YES
+                             hints:nil];
+    }
     
     [strPlaceDate drawAtPoint:NSMakePoint(leftPosition, topPlaceDate-strPlaceDate.size.height)];
 
