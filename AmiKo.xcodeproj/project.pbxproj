@@ -61,6 +61,10 @@
 		CF8B3EDD2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EDB2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m */; };
 		CF8B3EE02A56FDC50017CC28 /* MLHINADSwissSaml.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EDF2A56FDC50017CC28 /* MLHINADSwissSaml.m */; };
 		CF8B3EE12A56FDC50017CC28 /* MLHINADSwissSaml.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EDF2A56FDC50017CC28 /* MLHINADSwissSaml.m */; };
+		CF8B3EE42A5AB0070017CC28 /* MLADSwissSAMLWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EE32A5AB0070017CC28 /* MLADSwissSAMLWindowController.m */; };
+		CF8B3EE52A5AB0070017CC28 /* MLADSwissSAMLWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EE32A5AB0070017CC28 /* MLADSwissSAMLWindowController.m */; };
+		CF8B3EE72A5AD84D0017CC28 /* MLADSwissSAMLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF8B3EE62A5AD84D0017CC28 /* MLADSwissSAMLWindowController.xib */; };
+		CF8B3EE82A5AD84D0017CC28 /* MLADSwissSAMLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF8B3EE62A5AD84D0017CC28 /* MLADSwissSAMLWindowController.xib */; };
 		CF8BEB94253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
 		CF8BEB95253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
 		CF8BEB982538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
@@ -333,6 +337,9 @@
 		CF8B3EDB2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLADSwissOAuthWindowController.m; sourceTree = "<group>"; };
 		CF8B3EDE2A56FDC50017CC28 /* MLHINADSwissSaml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINADSwissSaml.h; sourceTree = "<group>"; };
 		CF8B3EDF2A56FDC50017CC28 /* MLHINADSwissSaml.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINADSwissSaml.m; sourceTree = "<group>"; };
+		CF8B3EE22A5AB0070017CC28 /* MLADSwissSAMLWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLADSwissSAMLWindowController.h; sourceTree = "<group>"; };
+		CF8B3EE32A5AB0070017CC28 /* MLADSwissSAMLWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLADSwissSAMLWindowController.m; sourceTree = "<group>"; };
+		CF8B3EE62A5AD84D0017CC28 /* MLADSwissSAMLWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLADSwissSAMLWindowController.xib; sourceTree = "<group>"; };
 		CF8BEB92253850AF00C2D367 /* MLPrescriptionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionView.h; sourceTree = "<group>"; };
 		CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionView.m; sourceTree = "<group>"; };
 		CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionTextFinderClient.h; sourceTree = "<group>"; };
@@ -616,6 +623,9 @@
 				CF8B3ED72A567FA40017CC28 /* MLSDSOAuthWindowController.m */,
 				CF8B3EDA2A56F94A0017CC28 /* MLADSwissOAuthWindowController.h */,
 				CF8B3EDB2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m */,
+				CF8B3EE22A5AB0070017CC28 /* MLADSwissSAMLWindowController.h */,
+				CF8B3EE32A5AB0070017CC28 /* MLADSwissSAMLWindowController.m */,
+				CF8B3EE62A5AD84D0017CC28 /* MLADSwissSAMLWindowController.xib */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -1211,6 +1221,7 @@
 			files = (
 				D5B6F970193136A400495873 /* interactions_callbacks.js in Resources */,
 				CF366B4426BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd in Resources */,
+				CF8B3EE72A5AD84D0017CC28 /* MLADSwissSAMLWindowController.xib in Resources */,
 				D5E91B9A17E5E8E400B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B9C17E5E8E400B66B27 /* Credits.rtf in Resources */,
@@ -1264,6 +1275,7 @@
 				D5C5C5021EFF8D6B00DF851F /* comed.iconset in Resources */,
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
+				CF8B3EE82A5AD84D0017CC28 /* MLADSwissSAMLWindowController.xib in Resources */,
 				D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */,
 				FA1DA17021C3B3B200EF5974 /* Wait.xib in Resources */,
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
@@ -1379,6 +1391,7 @@
 				CF13F8A126ECB2D50060FB46 /* MedidataInvoiceResponseRow.m in Sources */,
 				D5F303431F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				CF8B3EE02A56FDC50017CC28 /* MLHINADSwissSaml.m in Sources */,
+				CF8B3EE42A5AB0070017CC28 /* MLADSwissSAMLWindowController.m in Sources */,
 				CF34E54F243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
 				CF13F89C26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m in Sources */,
 				CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */,
@@ -1445,6 +1458,7 @@
 				D5C5C5111F06416800DF851F /* MLContacts.m in Sources */,
 				D53877951AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				CF8BEB95253850AF00C2D367 /* MLPrescriptionView.m in Sources */,
+				CF8B3EE52A5AB0070017CC28 /* MLADSwissSAMLWindowController.m in Sources */,
 				D5BACC011EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				FA6A2BB120B2B0EE0080B4C9 /* MLPatientSheetController.m in Sources */,
 				CF13F89D26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m in Sources */,

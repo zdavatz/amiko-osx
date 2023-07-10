@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MLHINTokens.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MLHINADSwissSaml : NSObject
 
-- (instancetype)initWithResponseJSON:(NSDictionary *)dict;
+- (instancetype)initWithResponseJSON:(NSDictionary *)dict token:(MLHINTokens*)tokens;
 
+@property (nonatomic, strong) MLHINTokens *tokens;
 @property (nonatomic, strong) NSString *epdAuthUrl;
 @property (nonatomic, strong) NSString *url;
 

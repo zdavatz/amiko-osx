@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="21225"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MLADSwissSAMLWindowController">
+            <connections>
+                <outlet property="loadingIndicator" destination="M2H-Sh-Lbb" id="4d0-Gu-Qpu"/>
+                <outlet property="statusLabel" destination="1aH-MX-Qdw" id="uUh-J1-7NV"/>
+                <outlet property="webView" destination="363-5m-h8v" id="gOA-Q8-zCG"/>
+                <outlet property="window" destination="dx0-Gz-u72" id="ad4-Yh-Bo9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="dx0-Gz-u72">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <rect key="contentRect" x="196" y="240" width="800" height="600"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <view key="contentView" id="aYk-wJ-jtB">
+                <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="363-5m-h8v">
+                        <rect key="frame" x="0.0" y="60" width="800" height="540"/>
+                        <wkWebViewConfiguration key="configuration">
+                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                            <wkPreferences key="preferences"/>
+                        </wkWebViewConfiguration>
+                        <connections>
+                            <outlet property="navigationDelegate" destination="-2" id="eAQ-9G-YwP"/>
+                        </connections>
+                    </wkWebView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nFd-Rj-Wzg">
+                        <rect key="frame" x="717" y="13" width="70" height="32"/>
+                        <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kx8-fT-5L3">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="closeClicked:" target="-2" id="JA6-jL-fto"/>
+                        </connections>
+                    </button>
+                    <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="M2H-Sh-Lbb">
+                        <rect key="frame" x="384" y="14" width="32" height="32"/>
+                    </progressIndicator>
+                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1aH-MX-Qdw">
+                        <rect key="frame" x="18" y="20" width="360" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Status:" id="GcG-Wt-JUf">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="nFd-Rj-Wzg" secondAttribute="trailing" constant="20" symbolic="YES" id="32v-BA-0nw"/>
+                    <constraint firstItem="363-5m-h8v" firstAttribute="leading" secondItem="aYk-wJ-jtB" secondAttribute="leading" id="BO0-fC-f6Q"/>
+                    <constraint firstAttribute="trailing" secondItem="363-5m-h8v" secondAttribute="trailing" id="BdN-6G-oz9"/>
+                    <constraint firstItem="M2H-Sh-Lbb" firstAttribute="leading" secondItem="1aH-MX-Qdw" secondAttribute="trailing" constant="8" symbolic="YES" id="En9-LT-398"/>
+                    <constraint firstItem="M2H-Sh-Lbb" firstAttribute="centerY" secondItem="nFd-Rj-Wzg" secondAttribute="centerY" id="Fhb-IH-WmR"/>
+                    <constraint firstAttribute="bottom" secondItem="nFd-Rj-Wzg" secondAttribute="bottom" constant="20" symbolic="YES" id="JYH-Ps-Z6m"/>
+                    <constraint firstItem="M2H-Sh-Lbb" firstAttribute="centerX" secondItem="363-5m-h8v" secondAttribute="centerX" id="P5G-Ck-sWg"/>
+                    <constraint firstItem="363-5m-h8v" firstAttribute="top" secondItem="aYk-wJ-jtB" secondAttribute="top" id="QH3-zy-lbs"/>
+                    <constraint firstItem="1aH-MX-Qdw" firstAttribute="leading" secondItem="aYk-wJ-jtB" secondAttribute="leading" constant="20" symbolic="YES" id="Sd7-QN-1Pn"/>
+                    <constraint firstItem="nFd-Rj-Wzg" firstAttribute="top" secondItem="363-5m-h8v" secondAttribute="bottom" constant="20" symbolic="YES" id="aO7-ud-79L"/>
+                    <constraint firstAttribute="bottom" secondItem="1aH-MX-Qdw" secondAttribute="bottom" constant="20" symbolic="YES" id="voZ-yh-H2d"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="126" y="144"/>
+        </window>
+    </objects>
+</document>

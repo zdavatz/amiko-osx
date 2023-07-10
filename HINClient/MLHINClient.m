@@ -189,7 +189,7 @@
                 callback(jsonError, nil);
                 return;
             }
-            MLHINADSwissSaml *saml = [[MLHINADSwissSaml alloc] initWithResponseJSON:jsonObj];
+            MLHINADSwissSaml *saml = [[MLHINADSwissSaml alloc] initWithResponseJSON:jsonObj token:token];
             if (!saml) {
                 NSLog(@"response: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             }
