@@ -8,12 +8,12 @@
 
 #import <WebKit/WebKit.h>
 #import "MLHINOAuthWindowController.h"
-#import "MLHINClient.h"
 #import "MLPersistenceManager.h"
 
 @interface MLHINOAuthWindowController () <WKNavigationDelegate>
 @property (weak) IBOutlet WKWebView *webView;
 @property (weak) IBOutlet NSProgressIndicator *loadingIndicator;
+@property (weak) IBOutlet NSTextField *statusLabel;
 
 @end
 
@@ -23,11 +23,18 @@
     return [super initWithWindowNibName:@"MLHINOAuthWindowController"];
 }
 
+- (NSURL *)authURL {
+    @throw [NSException exceptionWithName:@"Subclass must override authURL" reason:nil userInfo:nil];
+}
+
+- (void)receivedTokens:(MLHINTokens *)tokens {
+    @throw [NSException exceptionWithName:@"Subclass must override receivedTokens:" reason:nil userInfo:nil];
+}
+
 - (void)windowDidLoad {
     [super windowDidLoad];
-    
-    NSURL *url = [MLHINClient shared].authURL;
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self displayStatus:@""];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[self authURL]];
     [self.webView loadRequest:request];
 }
 
@@ -45,6 +52,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
         decisionHandler(WKNavigationActionPolicyCancel);
         dispatch_async(dispatch_get_main_queue(), ^{
             [_self.loadingIndicator startAnimation:_self];
+            [_self displayStatus:NSLocalizedString(@"Loading: Received callback, fetching Access Token", @"")];
         });
         NSLog(@"url: %@", url);
 //    http://localhost:8080/callback?state=teststate&code=xxxxxx
@@ -65,29 +73,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
                             NSLocalizedDescriptionKey: @"Invalid token response"
                         }]];
                     }
-                    [[MLPersistenceManager shared] setHINTokens:tokens];
-                    [[MLHINClient shared] fetchSelfWithToken:tokens
-                                                  completion:^(NSError * _Nonnull error, MLHINProfile * _Nonnull profile) {
-                        if (error) {
-                            [_self displayError:error];
-                            return;
-                        }
-                        if (!profile) {
-                            [_self displayError:[NSError errorWithDomain:@"com.ywesee.AmikoDesitin"
-                                                                    code:0
-                                                                userInfo:@{
-                                NSLocalizedDescriptionKey: @"Invalid profile response"
-                            }]];
-                            return;
-                        }
-                        MLOperator *doctor = [[MLPersistenceManager shared] doctor];
-                        [_self mergeHINProfile:profile withDoctor:doctor];
-                        [[MLPersistenceManager shared] setDoctor:doctor];
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [_self.window.sheetParent endSheet:_self.window
-                                                   returnCode:NSModalResponseOK];
-                        });
-                    }];
+                    [_self displayStatus:NSLocalizedString(@"Received Access Token", @"")];
+                    [_self receivedTokens:tokens];
                 }];
                 break;
             }
@@ -97,40 +84,21 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     decisionHandler(WKNavigationActionPolicyAllow);
 }
 
-- (void)mergeHINProfile:(MLHINProfile *)profile withDoctor:(MLOperator *)doctor {
-    if (!doctor.emailAddress.length) {
-        doctor.emailAddress = profile.email;
-    }
-    if (!doctor.familyName.length) {
-        doctor.familyName = profile.lastName;
-    }
-    if (!doctor.givenName.length) {
-        doctor.givenName = profile.firstName;
-    }
-    if (!doctor.postalAddress.length) {
-        doctor.postalAddress = profile.address;
-    }
-    if (!doctor.zipCode.length) {
-        doctor.zipCode = profile.postalCode;
-    }
-    if (!doctor.city.length) {
-        doctor.city = profile.city;
-    }
-    if (!doctor.country.length) {
-        doctor.country = profile.countryCode;
-    }
-    if (!doctor.phoneNumber.length) {
-        doctor.phoneNumber = profile.phoneNr;
-    }
-    if (!doctor.gln.length) {
-        doctor.gln = profile.gln;
-    }
-}
-
 - (void)displayError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSAlert alertWithError:error] runModal];
     });
+}
+
+- (void)displayStatus:(NSString *)status {
+    if ([NSThread isMainThread]) {
+        self.statusLabel.stringValue = status;
+    } else {
+        typeof(self) __weak _self = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _self.statusLabel.stringValue = status;
+        });
+    }
 }
 
 @end

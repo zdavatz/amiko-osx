@@ -7,10 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MLHINClient.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MLHINOAuthWindowController : NSWindowController
+
+- (NSURL *)authURL;
+- (void)receivedTokens:(MLHINTokens *)tokens;
+- (void)displayError:(NSError *)error;
+- (void)displayStatus:(NSString *)status;
 
 @end
 

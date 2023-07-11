@@ -57,6 +57,7 @@
 #import "MLPrescriptionTableView.h"
 #import "MLMedidataResponsesWindowController.h"
 #import "Wait.h"
+#import "MLePrescriptionPrepareWindowController.h"
 
 #define DYNAMIC_AMK_SELECTION
 #define CSV_SEPARATOR       @";"
@@ -139,6 +140,7 @@ static BOOL mPrescriptionMode = false;
 
 @property (nonatomic, strong) NSMetadataQuery *query;
 @property (nonatomic, strong) MLMedidataResponsesWindowController *medidataResponseWindowController;
+@property (nonatomic, strong) MLePrescriptionPrepareWindowController *ePrescriptionPrepareWindowController;
 
 - (void) updateButtons;
 
@@ -1168,6 +1170,54 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 // and two pages appear in the preview even if there is a single medicine. This should be fixed with issue #15
 - (IBAction) printPrescription:(id)sender
 {
+    NSInteger row = [mySectionTitles selectedRow];
+    if (row == -1) {
+        NSLog(@"%s no AMK is selected, aborting print operation", __FUNCTION__);
+        return;
+    }
+    BOOL signPrescription = NO;
+    if ([MLePrescriptionPrepareWindowController applicable]) {
+        if ([MLePrescriptionPrepareWindowController canPrintWithoutAuth]) {
+            signPrescription = YES;
+        } else {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:NSLocalizedString(@"Do you want to sign your prescription?", @"")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"")];
+            [alert addButtonWithTitle:NSLocalizedString(@"No", @"")];
+            NSModalResponse response = [alert runModal];
+            if (response == NSAlertFirstButtonReturn) {
+                signPrescription = YES;
+            }
+        }
+    }
+    if (signPrescription) {
+        MLPatient *p = [mPrescriptionAdapter patient];
+        MLOperator *o = [mPrescriptionAdapter doctor];
+        self.ePrescriptionPrepareWindowController = [[MLePrescriptionPrepareWindowController alloc] initWithPatient:p
+                                                                                                             doctor:o
+                                                                                                              items:[mPrescriptionAdapter cart]];
+        typeof(self) __weak _self = self;
+        [self.window beginSheet:self.ePrescriptionPrepareWindowController.window
+              completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSModalResponseOK) {
+                NSImage *qrCode = _self.ePrescriptionPrepareWindowController.outQRCode;
+                _self.ePrescriptionPrepareWindowController = nil;
+                // Need to give time for modal to close
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_self printPrescription:sender withQRCode:qrCode];
+                });
+            }
+        }];
+    } else {
+        [self printPrescription:sender withQRCode:nil];
+    }
+}
+- (void) printPrescription:(id)sender withQRCode:(NSImage * _Nullable)qrCode {
+    NSInteger row = [mySectionTitles selectedRow];
+    if (row == -1) {
+        NSLog(@"%s no AMK is selected, aborting print operation", __FUNCTION__);
+        return;
+    }
     NSView *printView;
     
     NSPrintInfo *sharedInfo = [NSPrintInfo sharedPrintInfo];
@@ -1213,6 +1263,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     [self.myPrescriptionsPrintTV setPatient:myPatientAddressTextField.stringValue];
     [self.myPrescriptionsPrintTV setDoctor:myOperatorIDTextField.stringValue];
     [self.myPrescriptionsPrintTV setPlaceDate:myPlaceDateField.stringValue];
+    [self.myPrescriptionsPrintTV setEPrescriptionQRCode:qrCode];
     
     NSImage *signature = [[NSImage alloc] initWithData:[mySignView getSignaturePNG]];
 #ifndef METHOD_2
@@ -1225,11 +1276,6 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
     printView = self.myPrescriptionsPrintTV;
     
     NSPrintOperation *printJob = [NSPrintOperation printOperationWithView:printView printInfo:printInfo];
-    NSInteger row = [mySectionTitles selectedRow];
-    if (row == -1) {
-        NSLog(@"%s no AMK is selected, aborting print operation", __FUNCTION__);
-        return;
-    }
 
     [printJob setJobTitle:mListOfSectionTitles[row]];
 

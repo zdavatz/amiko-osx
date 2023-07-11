@@ -9,15 +9,19 @@
 #import "MLPreferencesWindowController.h"
 #import "MLPersistenceManager.h"
 #import "MLHINClient.h"
-#import "MLHINOAuthWindowController.h"
+#import "MLSDSOAuthWindowController.h"
+#import "MLADSwissOAuthWindowController.h"
 
 @interface MLPreferencesWindowController ()
 @property (weak) IBOutlet NSButton *iCloudCheckbox;
 @property (weak) IBOutlet NSPathControl *invoicePathControl;
 @property (weak) IBOutlet NSPathControl *invoiceResponsePathControl;
-@property (weak) IBOutlet NSTextField *hinUserIdTextField;
-@property (weak) IBOutlet NSButton *loginWithHINButton;
-@property (strong) MLHINOAuthWindowController *hinOauthController;
+@property (weak) IBOutlet NSTextField *hinSDSUserIdTextField;
+@property (weak) IBOutlet NSButton *loginWithHINSDSButton;
+@property (strong) MLSDSOAuthWindowController *hinSDSOauthController;
+@property (weak) IBOutlet NSTextField *hinADSwissUserIdTextField;
+@property (weak) IBOutlet NSButton *loginWithHINADSwissButton;
+@property (strong) MLADSwissOAuthWindowController *hinADSwissOAuthController;
 
 @end
 
@@ -28,6 +32,11 @@
     
     [self reloadiCloudCheckbox];
     [self reloadHINState];
+    
+    [[MLHINClient shared] renewTokenIfNeededWithToken:[[MLPersistenceManager shared] HINSDSTokens]
+                                           completion:^(NSError * _Nullable error, MLHINTokens * _Nullable tokens) {
+        NSLog(@"Token %@", tokens);
+    }];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NSUbiquityIdentityDidChangeNotification
                                                       object:nil
@@ -107,34 +116,60 @@
 }
 
 - (void)reloadHINState {
-    MLHINTokens *tokens = [[MLPersistenceManager shared] HINTokens];
+    MLHINTokens *tokens = [[MLPersistenceManager shared] HINSDSTokens];
     if (tokens) {
-        [self.hinUserIdTextField setStringValue:tokens.hinId];
-        [self.hinUserIdTextField setEnabled:YES];
-        [self.loginWithHINButton setTitle:NSLocalizedString(@"Logout from HIN", @"")];
+        [self.hinSDSUserIdTextField setStringValue:tokens.hinId];
+        [self.hinSDSUserIdTextField setEnabled:YES];
+        [self.loginWithHINSDSButton setTitle:NSLocalizedString(@"Logout from HIN (SDS)", @"")];
     } else {
-        [self.hinUserIdTextField setStringValue:@"[Not logged in]"];
-        [self.hinUserIdTextField setEnabled:NO];
-        [self.loginWithHINButton setTitle:NSLocalizedString(@"Login with HIN", @"")];
+        [self.hinSDSUserIdTextField setStringValue:@"[Not logged in]"];
+        [self.hinSDSUserIdTextField setEnabled:NO];
+        [self.loginWithHINSDSButton setTitle:NSLocalizedString(@"Login with HIN (SDS)", @"")];
+    }
+    tokens = [[MLPersistenceManager shared] HINADSwissTokens];
+    if (tokens) {
+        [self.hinADSwissUserIdTextField setStringValue:tokens.hinId];
+        [self.hinADSwissUserIdTextField setEnabled:YES];
+        [self.loginWithHINADSwissButton setTitle:NSLocalizedString(@"Logout from HIN (ADSwiss)", @"")];
+    } else {
+        [self.hinADSwissUserIdTextField setStringValue:@"[Not logged in]"];
+        [self.hinADSwissUserIdTextField setEnabled:NO];
+        [self.loginWithHINADSwissButton setTitle:NSLocalizedString(@"Login with HIN (ADSwiss)", @"")];
     }
 }
 
-- (IBAction)loginWithHINClicked:(id)sender {
-    MLHINTokens *tokens = [[MLPersistenceManager shared] HINTokens];
+- (IBAction)loginWithHINSDSClicked:(id)sender {
+    MLHINTokens *tokens = [[MLPersistenceManager shared] HINSDSTokens];
     if (tokens) {
-        [[MLPersistenceManager shared] setHINTokens:nil];
+        [[MLPersistenceManager shared] setHINSDSTokens:nil];
         [self reloadHINState];
     } else {
-        MLHINOAuthWindowController *controller = [[MLHINOAuthWindowController alloc] init];
-        self.hinOauthController = controller;
+        MLSDSOAuthWindowController *controller = [[MLSDSOAuthWindowController alloc] init];
+        self.hinSDSOauthController = controller;
         typeof(self) __weak _self = self;
         [self.window beginSheet:controller.window
               completionHandler:^(NSModalResponse returnCode) {
             [_self reloadHINState];
-            _self.hinOauthController = nil;
+            _self.hinSDSOauthController = nil;
         }];
     }
 }
 
+- (IBAction)loginWithHINADSwissClicked:(id)sender {
+    MLHINTokens *tokens = [[MLPersistenceManager shared] HINADSwissTokens];
+    if (tokens) {
+        [[MLPersistenceManager shared] setHINADSwissTokens:nil];
+        [self reloadHINState];
+    } else {
+        MLADSwissOAuthWindowController *controller = [[MLADSwissOAuthWindowController alloc] init];
+        self.hinADSwissOAuthController = controller;
+        typeof(self) __weak _self = self;
+        [self.window beginSheet:controller.window
+              completionHandler:^(NSModalResponse returnCode) {
+            [_self reloadHINState];
+            _self.hinADSwissOAuthController = nil;
+        }];
+    }
+}
 
 @end

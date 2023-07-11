@@ -18,7 +18,11 @@
 #define KEY_MEDIDATA_INVOICE_XML_DIRECTORY @"KEY_MEDIDATA_INVOICE_XML_DIRECTORY"
 #define KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY @"KEY_MEDIDATA_INVOICE_RESPONSE_XML_DIRECTORY"
 
-#define KEY_PERSISTENCE_HIN_TOKENS @"KEY_PERSISTENCE_HIN_TOKENS"
+#define KEY_PERSISTENCE_HIN_SDS_TOKENS @"KEY_PERSISTENCE_HIN_TOKENS"
+#define KEY_PERSISTENCE_HIN_ADSWISS_TOKENS @"KEY_PERSISTENCE_HIN_ADSWISS_TOKENS"
+
+#define KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE @"KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE"
+#define KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE @"KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE"
 
 @interface MLPersistenceManager () <MLiCloudToLocalMigrationDelegate>
 
@@ -296,22 +300,66 @@
 
 # pragma mark - HIN
 
-- (void)setHINTokens:(MLHINTokens *)tokens {
+- (void)setHINSDSTokens:(MLHINTokens *)tokens {
+    tokens.application = MLHINTokensApplicationSDS;
     if (!tokens) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_TOKENS];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_SDS_TOKENS];
     } else {
         NSDictionary *dict = [tokens dictionaryRepresentation];
-        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:KEY_PERSISTENCE_HIN_TOKENS];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:KEY_PERSISTENCE_HIN_SDS_TOKENS];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (MLHINTokens *)HINTokens {
-    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_TOKENS];
+- (MLHINTokens *)HINSDSTokens {
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_SDS_TOKENS];
     if (![dict isKindOfClass:[NSDictionary class]]) {
         return nil;
     }
     return [[MLHINTokens alloc] initWithDictionary:dict];
+}
+
+- (void)setHINADSwissTokens:(MLHINTokens *)tokens {
+    tokens.application = MLHINTokensApplicationADSwiss;
+    if (!tokens) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_TOKENS];
+    } else {
+        NSDictionary *dict = [tokens dictionaryRepresentation];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:KEY_PERSISTENCE_HIN_ADSWISS_TOKENS];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (MLHINTokens *)HINADSwissTokens {
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_ADSWISS_TOKENS];
+    if (![dict isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    return [[MLHINTokens alloc] initWithDictionary:dict];
+}
+
+- (void)setHINADSwissAuthHandle:(NSString *)authHandle {
+    if (!authHandle) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:authHandle forKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
+        NSDate *expire = [[NSDate date] dateByAddingTimeInterval:12*60*60]; // 12 hours of validity
+        [[NSUserDefaults standardUserDefaults] setObject:expire forKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (NSString *)HINADSwissAuthHandle {
+    NSString *authHandle = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
+    NSDate *expire = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+    if (![authHandle isKindOfClass:[NSString class]] || ![expire isKindOfClass:[NSDate class]]) return nil;
+    if ([expire timeIntervalSinceNow] <= 0) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_PERSISTENCE_HIN_ADSWISS_AUTH_HANDLE_EXPIRE];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return nil;
+    }
+    return authHandle;
 }
 
 # pragma mark - Doctor

@@ -22,5 +22,6 @@
 @property NSString *doctor;
 @property NSImage *signature;
 @property NSString *placeDate;
+@property NSImage *ePrescriptionQRCode;
 
 @end
