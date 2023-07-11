@@ -61,17 +61,17 @@
             <rect key="contentRect" x="120" y="400" width="1035" height="820"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
             <view key="contentView" identifier="MasterView" id="2">
-                <rect key="frame" x="0.0" y="0.0" width="1035" height="820"/>
+                <rect key="frame" x="0.0" y="0.0" width="1066" height="820"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="125">
-                        <rect key="frame" x="0.0" y="0.0" width="1035" height="820"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1066" height="820"/>
                         <subviews>
                             <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="130">
-                                <rect key="frame" x="0.0" y="0.0" width="1035" height="820"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1066" height="820"/>
                                 <subviews>
                                     <customView misplaced="YES" id="132">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="820"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="323" height="820"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="133">
@@ -149,7 +149,7 @@
                                                 <rect key="frame" x="11" y="0.0" width="342" height="590"/>
                                                 <clipView key="contentView" id="fga-sD-hNm" userLabel="Main Clip View">
                                                     <rect key="frame" x="0.0" y="0.0" width="342" height="590"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" tag="1" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="48" rowSizeStyle="automatic" viewBased="YES" id="170" userLabel="Main Table View">
                                                             <rect key="frame" x="0.0" y="0.0" width="342" height="590"/>
@@ -204,7 +204,7 @@
                                                                                     <rect key="frame" x="28" y="6" width="480" height="20"/>
                                                                                     <clipView key="contentView" id="n8p-jO-XR8" userLabel="Package Clip View">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="480" height="20"/>
-                                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
                                                                                             <tableView identifier="PackagesView" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="16" rowSizeStyle="automatic" viewBased="YES" id="fVP-Mn-Owg" userLabel="Packages Table View">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="480" height="20"/>
@@ -335,11 +335,11 @@
                                         </constraints>
                                     </customView>
                                     <customView misplaced="YES" id="131">
-                                        <rect key="frame" x="344" y="0.0" width="722" height="820"/>
+                                        <rect key="frame" x="324" y="0.0" width="742" height="820"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="197">
-                                                <rect key="frame" x="0.0" y="0.0" width="670" height="820"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="701" height="820"/>
                                                 <subviews>
                                                     <customView misplaced="YES" id="203">
                                                         <rect key="frame" x="0.0" y="0.0" width="533" height="820"/>
@@ -349,13 +349,13 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="537" height="820"/>
                                                                 <clipView key="contentView" autoresizesSubviews="NO" drawsBackground="NO" copiesOnScroll="NO" id="vtA-FV-vT4">
                                                                     <rect key="frame" x="0.0" y="0.0" width="537" height="820"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="kkj-7X-zH4">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="484" height="820"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="515" height="820"/>
                                                                             <subviews>
                                                                                 <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="dum-Yn-Ij1" translatesAutoresizingMaskIntoConstraints="NO" id="ebY-3x-Av5">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="484" height="820"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="515" height="820"/>
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <tabViewItems>
                                                                                         <tabViewItem label="Kompendium" identifier="TabWebView" id="dum-Yn-Ij1" userLabel="Kompendium">
@@ -442,7 +442,7 @@
                                                                                                         <rect key="frame" x="6" y="47" width="503" height="601"/>
                                                                                                         <clipView key="contentView" id="UZ9-kw-amL">
                                                                                                             <rect key="frame" x="1" y="1" width="501" height="599"/>
-                                                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                             <subviews>
                                                                                                                 <tableView verticalHuggingPriority="750" tag="3" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="fullWidth" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="7gl-38-P2j" customClass="MLPrescriptionTableView">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="539" height="599"/>
@@ -646,7 +646,7 @@
                                                                                                         </textFieldCell>
                                                                                                     </textField>
                                                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tmX-P1-qbj">
-                                                                                                        <rect key="frame" x="300" y="7" width="92" height="32"/>
+                                                                                                        <rect key="frame" x="299" y="7" width="92" height="32"/>
                                                                                                         <buttonCell key="cell" type="push" title="Medidata" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xja-So-pAJ">
                                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                             <font key="font" metaFont="system"/>
@@ -669,8 +669,10 @@
                                                                                                 <constraints>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="leading" secondItem="tNE-hK-XN9" secondAttribute="trailing" constant="12" id="00Q-gc-ZbM"/>
                                                                                                     <constraint firstItem="UhN-cF-QcR" firstAttribute="leading" secondItem="hmt-dn-3hz" secondAttribute="leading" id="1Ss-wb-eyK"/>
+                                                                                                    <constraint firstItem="tmX-P1-qbj" firstAttribute="centerY" secondItem="dYR-Rj-qjN" secondAttribute="centerY" id="3im-o5-ApO"/>
                                                                                                     <constraint firstItem="71t-rm-v3N" firstAttribute="top" secondItem="tsd-Ou-uJr" secondAttribute="bottom" constant="10" id="3m8-HQ-jDi"/>
                                                                                                     <constraint firstAttribute="bottom" secondItem="UhN-cF-QcR" secondAttribute="bottom" constant="14" id="6Db-QI-snv"/>
+                                                                                                    <constraint firstItem="tmX-P1-qbj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TwZ-Xx-Fuz" secondAttribute="trailing" constant="12" symbolic="YES" id="7hc-4b-gve"/>
                                                                                                     <constraint firstItem="8B8-Yr-IGK" firstAttribute="firstBaseline" secondItem="71t-rm-v3N" secondAttribute="firstBaseline" id="8hl-n6-1wC"/>
                                                                                                     <constraint firstItem="h3A-OZ-Ito" firstAttribute="leading" secondItem="dYR-Rj-qjN" secondAttribute="trailing" constant="12" symbolic="YES" id="98e-cu-SVr"/>
                                                                                                     <constraint firstItem="0c5-KW-ZdG" firstAttribute="centerX" secondItem="71t-rm-v3N" secondAttribute="centerX" constant="-52" id="Cfe-WO-ZG6"/>
@@ -689,6 +691,7 @@
                                                                                                     <constraint firstItem="tsd-Ou-uJr" firstAttribute="top" secondItem="Oaf-El-vf2" secondAttribute="top" id="iwq-b8-w7K"/>
                                                                                                     <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="baseline" secondItem="dYR-Rj-qjN" secondAttribute="baseline" id="k0N-rz-FEc"/>
                                                                                                     <constraint firstItem="TwZ-Xx-Fuz" firstAttribute="leading" secondItem="UhN-cF-QcR" secondAttribute="trailing" constant="12" symbolic="YES" id="lIR-e6-yDz"/>
+                                                                                                    <constraint firstItem="dYR-Rj-qjN" firstAttribute="leading" secondItem="tmX-P1-qbj" secondAttribute="trailing" constant="12" symbolic="YES" id="llf-xK-0Jf"/>
                                                                                                     <constraint firstItem="dYR-Rj-qjN" firstAttribute="baseline" secondItem="h3A-OZ-Ito" secondAttribute="baseline" id="mBx-Lc-Qe6"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="tsd-Ou-uJr" secondAttribute="trailing" id="nfu-TW-dPx"/>
                                                                                                     <constraint firstItem="8B8-Yr-IGK" firstAttribute="leading" secondItem="tNE-hK-XN9" secondAttribute="leading" id="oKr-6W-7Zw"/>
@@ -750,7 +753,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="185" height="800"/>
                                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="UhZ-Ed-eZv">
                                                                     <rect key="frame" x="0.0" y="0.0" width="185" height="800"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" tag="2" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="213">
                                                                             <rect key="frame" x="0.0" y="0.0" width="185" height="800"/>
@@ -759,7 +762,7 @@
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                             <tableColumns>
-                                                                                <tableColumn identifier="MLSimpleCell" width="114.79084967319884" minWidth="40" maxWidth="1000" id="214">
+                                                                                <tableColumn identifier="MLSimpleCell" width="115" minWidth="40" maxWidth="1000" id="214">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
@@ -970,7 +973,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <clipView key="contentView" id="iPa-2v-CIT">
                 <rect key="frame" x="1" y="1" width="12" height="298"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tableView verticalHuggingPriority="750" tag="3" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="44" rowSizeStyle="automatic" viewBased="YES" id="Sa6-ry-Prj" customClass="MLPrescriptionTableView">
                         <rect key="frame" x="0.0" y="0.0" width="412" height="298"/>
@@ -992,7 +995,7 @@
                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                 <prototypeCellViews>
                                     <tableCellView id="IwP-oT-RkF" customClass="MLPrescriptionCellView">
-                                        <rect key="frame" x="11" y="1" width="409" height="44"/>
+                                        <rect key="frame" x="1" y="1" width="409" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="YsW-Cb-Mhb">
@@ -1045,7 +1048,7 @@
                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                 <prototypeCellViews>
                                     <tableCellView id="uge-3A-4W0">
-                                        <rect key="frame" x="1" y="1" width="-3" height="17"/>
+                                        <rect key="frame" x="1" y="1" width="0.0" height="17"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <button translatesAutoresizingMaskIntoConstraints="NO" id="Vre-TA-HrC">
@@ -1162,8 +1165,8 @@
     <resources>
         <image name="28-star-gy" width="26" height="26"/>
         <image name="28-star-ye" width="26" height="26"/>
-        <image name="NSRemoveTemplate" width="15" height="4"/>
-        <image name="NSStopProgressTemplate" width="15" height="13"/>
+        <image name="NSRemoveTemplate" width="18" height="4"/>
+        <image name="NSStopProgressTemplate" width="17" height="15"/>
         <image name="applogo" width="512" height="512"/>
         <image name="deleteImage" width="16" height="16"/>
         <image name="desitin" width="512" height="512"/>
