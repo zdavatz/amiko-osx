@@ -646,6 +646,7 @@
 {
     if ([notification object] == mTableView) {       
         NSInteger row = [[notification object] selectedRow];
+        if (row < 0) return;
         NSTableRowView *rowView = [mTableView rowViewAtRow:row makeIfNecessary:NO];
         
         MLPatient *p = [self getContactAtRow:row];
