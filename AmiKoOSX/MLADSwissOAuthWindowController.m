@@ -22,8 +22,11 @@
 
 - (void)receivedTokens:(id)tokens {
     [[MLPersistenceManager shared] setHINADSwissTokens:tokens];
-    [self.window.sheetParent endSheet:self.window
-                           returnCode:NSModalResponseOK];
+    typeof(self) __weak _self = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.window.sheetParent endSheet:self.window
+                               returnCode:NSModalResponseOK];
+    });
 }
 
 - (void)windowDidLoad {
