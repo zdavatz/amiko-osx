@@ -551,13 +551,37 @@
     mSearchFiltered = FALSE;
     [mSearchKey setStringValue:@""];
     
+    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    if (![CNContactStore class]) {
+        return;
+    }
     if (mABContactsVisible==NO) {
-        MLContacts *contacts = [[MLContacts alloc] init];
-        // Retrieves contacts from address book
-        mArrayOfPatients = [contacts getAllContacts];
-        [mTableView reloadData];
-        mABContactsVisible = YES;
-        [self setNumPatients:[mArrayOfPatients count]];
+        CNContactStore *addressBook = [[CNContactStore alloc] init];
+        if (status != CNAuthorizationStatusAuthorized) {
+            [addressBook requestAccessForEntityType:CNEntityTypeContacts
+                                  completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (error) {
+                        [[NSAlert alertWithError:error] runModal];
+                    }
+                    if (granted) {
+                        [self onShowContacts:sender];
+                    }
+                });
+            }];
+        } else {
+            // Need to be in background queue because it may be slow to takes contacts
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) , ^{
+                MLContacts *contacts = [[MLContacts alloc] init];
+                // Retrieves contacts from address book
+                mArrayOfPatients = [contacts getAllContacts];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [mTableView reloadData];
+                    mABContactsVisible = YES;
+                    [self setNumPatients:[mArrayOfPatients count]];
+                });
+            });
+        }
     }
     else {
         // Retrieves contacts from local patient database
