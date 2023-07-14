@@ -50,6 +50,9 @@
 "Do you really want to overwrite the existing prescription or generate a new one?" = "Voulez-vous vraiment écraser l'ordonnance existante ou générer une nouvelle?";
 
 /* No comment provided by engineer. */
+"Do you want to sign your prescription?" = "Voulez-vous signer numériquement votre ordonnance ?";
+
+/* No comment provided by engineer. */
 "Enter the doctor's address" = "Saisir l'adresse du médecin";
 
 /* No comment provided by engineer. */
@@ -57,6 +60,18 @@
 
 /* CSV header */
 "Link to the online reference" = "Lien vers la référence en ligne";
+
+/* No comment provided by engineer. */
+"Login with HIN (ADSwiss)" = "Se connecter avec HIN (ADSwiss)";
+
+/* No comment provided by engineer. */
+"Login with HIN (SDS)" = "Se connecter avec HIN (SDS)";
+
+/* No comment provided by engineer. */
+"Logout from HIN (ADSwiss)" = "Déconnexion de HIN (ADSwiss)";
+
+/* No comment provided by engineer. */
+"Logout from HIN (SDS)" = "Déconnexion de HIN (SDS)";
 
 /* No comment provided by engineer. */
 "Looking up keywords. Please wait..." = "Recherche de mots-clés. Veuillez patienter...";
@@ -84,9 +99,6 @@
 
 /* No comment provided by engineer. */
 "Please contact" = "S'il vous plaît contacter:\nzdavatz@ywesee.com\n+41 43 540 05 50";
-
-/* No comment provided by engineer. */
-"Please contact Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@" = "S.v.p. contactez Zeno Davatz\nzdavatz@ywesee.com\n+41 43 540 05 50\nATR: %@";
 
 /* No comment provided by engineer. */
 "Please select a directory where to save the file" = "Veuillez sélectionner le répertoire dans lequel vous souhaitez enregistrer le fichier.";
@@ -122,7 +134,7 @@
 "The contact was saved in the %@ address book" = "Contact enregistré dans le carnet d'adresses %@.";
 
 /* No comment provided by engineer. */
-"The database contains:\n- %ld Products\n- %ld Specialist information\n- %ld Keywords\n- %d Interactions" = "La banque des données contien:\n- %ld produits\n- %ld notices infopro\n- %ld mot-clés\n- %d interactions";
+"The Medidata VA seems to be offline." = "Le VA de Medidata ne semble pas être en ligne.";
 
 /* No comment provided by engineer. */
 "Therapy" = "Thérapie";
@@ -148,4 +160,3 @@
 /* html */
 "Your medicine basket is empty" = "Votre panier des médicaments est vide.";
 
-"The Medidata VA seems to be offline." = "Le VA de Medidata ne semble pas être en ligne.";

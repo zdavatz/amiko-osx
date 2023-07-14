@@ -1,6 +1,8 @@
-
 /* Class = "NSWindow"; title = "AmiKo Desitin"; ObjectID = "1"; */
 "1.title" = "AmiKo Desitin";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "2Bd-3O-fif"; */
+"2Bd-3O-fif.title" = "Speichern";
 
 /* Class = "NSToolbarItem"; label = "AmiKo Desitin"; ObjectID = "9"; */
 "9.label" = "AmiKo Desitin";
@@ -11,23 +13,29 @@
 /* Class = "NSToolbarItem"; toolTip = "AmiKo"; ObjectID = "9"; */
 "9.toolTip" = "AmiKo";
 
-/* Class = "NSToolbarItem"; label = "Kompendium"; ObjectID = "10"; */
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "9No-ZE-RE0"; */
+"9No-ZE-RE0.title" = "Text Cell";
+
+/* Class = "NSToolbarItem"; label = "Compendium"; ObjectID = "10"; */
 "10.label" = "Kompendium";
 
-/* Class = "NSToolbarItem"; paletteLabel = "Kompendium"; ObjectID = "10"; */
+/* Class = "NSToolbarItem"; paletteLabel = "Compendium"; ObjectID = "10"; */
 "10.paletteLabel" = "Kompendium";
 
 /* Class = "NSToolbarItem"; toolTip = "AIPS Database"; ObjectID = "10"; */
 "10.toolTip" = "AIPS Database";
 
-/* Class = "NSToolbarItem"; label = "Favoriten"; ObjectID = "11"; */
+/* Class = "NSToolbarItem"; label = "Favorites"; ObjectID = "11"; */
 "11.label" = "Favoriten";
 
-/* Class = "NSToolbarItem"; paletteLabel = "Favoriten"; ObjectID = "11"; */
+/* Class = "NSToolbarItem"; paletteLabel = "Favorites"; ObjectID = "11"; */
 "11.paletteLabel" = "Favoriten";
 
-/* Class = "NSToolbarItem"; toolTip = "Favoriten"; ObjectID = "11"; */
+/* Class = "NSToolbarItem"; toolTip = "Favorites"; ObjectID = "11"; */
 "11.toolTip" = "Favoriten";
+
+/* Class = "NSButtonCell"; title = "New Prescription"; ObjectID = "73B-fa-Zhz"; */
+"73B-fa-Zhz.title" = "Neues Rezept";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "173"; */
 "173.title" = "Text Cell";
@@ -35,19 +43,19 @@
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "184"; */
 "184.title" = "Table View Cell";
 
-/* Class = "NSButtonCell"; title = "Präparat"; ObjectID = "190"; */
+/* Class = "NSButtonCell"; title = "Preparation"; ObjectID = "190"; */
 "190.title" = "Präparat";
 
-/* Class = "NSButtonCell"; title = "Inhaberin"; ObjectID = "191"; */
+/* Class = "NSButtonCell"; title = "Registration Owner"; ObjectID = "191"; */
 "191.title" = "Inhaberin";
 
-/* Class = "NSButtonCell"; title = "Wirkstoff / ATC Code"; ObjectID = "192"; */
+/* Class = "NSButtonCell"; title = "Active substance / ATC Code"; ObjectID = "192"; */
 "192.title" = "Wirkstoff / ATC Code";
 
-/* Class = "NSButtonCell"; title = "Zulassungsnummer"; ObjectID = "193"; */
+/* Class = "NSButtonCell"; title = "Registration Number"; ObjectID = "193"; */
 "193.title" = "Zulassungsnummer";
 
-/* Class = "NSButtonCell"; title = "Therapie"; ObjectID = "194"; */
+/* Class = "NSButtonCell"; title = "Therapy"; ObjectID = "194"; */
 "194.title" = "Therapie";
 
 /* Class = "NSTextFieldCell"; placeholderString = "section title"; ObjectID = "216"; */
@@ -59,50 +67,11 @@
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "222"; */
 "222.title" = "Table View Cell";
 
-/* Class = "NSButtonCell"; title = "Speichern"; ObjectID = "2Bd-3O-fif"; */
-"2Bd-3O-fif.title" = "Speichern";
-
-/* Class = "NSButtonCell"; title = "Neues Rezept"; ObjectID = "73B-fa-Zhz"; */
-"73B-fa-Zhz.title" = "Neues Rezept";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "9No-ZE-RE0"; */
-"9No-ZE-RE0.title" = "Text Cell";
-
-/* Class = "NSButtonCell"; title = "Button"; ObjectID = "EG9-tB-cVG"; */
-"EG9-tB-cVG.title" = "Button";
-
-/* Class = "NSToolbarItem"; label = "Rezept"; ObjectID = "Kkv-pT-r1G"; */
-"Kkv-pT-r1G.label" = "Rezept";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Rezept"; ObjectID = "Kkv-pT-r1G"; */
-"Kkv-pT-r1G.paletteLabel" = "Rezept";
-
-/* Class = "NSToolbarItem"; toolTip = "Rezept"; ObjectID = "Kkv-pT-r1G"; */
-"Kkv-pT-r1G.toolTip" = "Rezept";
-
-/* Class = "NSTabViewItem"; label = "Rezept"; ObjectID = "MYP-wQ-6gq"; */
-"MYP-wQ-6gq.label" = "Rezept";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "NWx-wp-Pr5"; */
-"NWx-wp-Pr5.title" = "Table View Cell";
-
-/* Class = "NSButtonCell"; title = "Volltext"; ObjectID = "OVj-Pv-FBc"; */
-"OVj-Pv-FBc.title" = "Volltext";
-
-/* Class = "NSButtonCell"; title = "Senden"; ObjectID = "Ref-Dv-DHp"; */
-"Ref-Dv-DHp.title" = "Senden";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "WY1-RV-war"; */
-"WY1-RV-war.title" = "Text Cell";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Wf5-IL-MuY"; */
-"Wf5-IL-MuY.title" = "Text Cell";
-
-/* Class = "NSButtonCell"; title = "Interaktionen überprüfen"; ObjectID = "aGv-We-Cfq"; */
-"aGv-We-Cfq.title" = "Interaktionen prüfen";
-
-/* Class = "NSButtonCell"; title = "Patient suchen"; ObjectID = "agi-3L-00C"; */
+/* Class = "NSButtonCell"; title = "Patient search"; ObjectID = "agi-3L-00C"; */
 "agi-3L-00C.title" = "Patient suchen";
+
+/* Class = "NSButtonCell"; title = "Check interactions"; ObjectID = "aGv-We-Cfq"; */
+"aGv-We-Cfq.title" = "Interaktionen prüfen";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cc4-Hi-QKi"; */
 "cc4-Hi-QKi.title" = "Table View Cell";
@@ -116,6 +85,9 @@
 /* Class = "NSTabViewItem"; label = "Kompendium"; ObjectID = "dum-Yn-Ij1"; */
 "dum-Yn-Ij1.label" = "Kompendium";
 
+/* Class = "NSButtonCell"; title = "Button"; ObjectID = "EG9-tB-cVG"; */
+"EG9-tB-cVG.title" = "Button";
+
 /* Class = "NSTabViewItem"; label = "Interaktionen"; ObjectID = "g0F-TU-Qcd"; */
 "g0F-TU-Qcd.label" = "Interaktionen";
 
@@ -128,26 +100,54 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "j7B-kK-Vag"; */
 "j7B-kK-Vag.title" = "Text Cell";
 
+/* Class = "NSToolbarItem"; label = "Prescription"; ObjectID = "Kkv-pT-r1G"; */
+"Kkv-pT-r1G.label" = "Rezept";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Rezept"; ObjectID = "Kkv-pT-r1G"; */
+"Kkv-pT-r1G.paletteLabel" = "Rezept";
+
+/* Class = "NSToolbarItem"; toolTip = "Prescription"; ObjectID = "Kkv-pT-r1G"; */
+"Kkv-pT-r1G.toolTip" = "Rezept";
+
 /* Class = "NSToolbarItem"; label = "Export"; ObjectID = "m1h-SA-01k"; */
 "m1h-SA-01k.label" = "Exportieren";
 
 /* Class = "NSToolbarItem"; paletteLabel = "Export"; ObjectID = "m1h-SA-01k"; */
 "m1h-SA-01k.paletteLabel" = "Exportieren";
 
-/* Class = "NSToolbarItem"; toolTip = "Export"; ObjectID = "m1h-SA-01k"; */
+/* Class = "NSToolbarItem"; toolTip = "Prescription"; ObjectID = "m1h-SA-01k"; */
 "m1h-SA-01k.toolTip" = "Exportieren";
+
+/* Class = "NSTabViewItem"; label = "Rezept"; ObjectID = "MYP-wQ-6gq"; */
+"MYP-wQ-6gq.label" = "Rezept";
 
 /* Class = "NSButtonCell"; title = "Button"; ObjectID = "nbD-an-Hev"; */
 "nbD-an-Hev.title" = "Button";
 
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "NWx-wp-Pr5"; */
+"NWx-wp-Pr5.title" = "Table View Cell";
+
+/* Class = "NSButtonCell"; title = "Full text"; ObjectID = "OVj-Pv-FBc"; */
+"OVj-Pv-FBc.title" = "Volltext";
+
 /* Class = "NSTextFieldCell"; placeholderString = "Bemerkungen"; ObjectID = "rA5-Xw-TBP"; */
 "rA5-Xw-TBP.placeholderString" = "Bemerkungen";
 
-/* Class = "NSToolbarItem"; label = "Interaktionen"; ObjectID = "zHs-vk-i8q"; */
+/* Class = "NSButtonCell"; title = "Send"; ObjectID = "Ref-Dv-DHp"; */
+"Ref-Dv-DHp.title" = "Senden";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Wf5-IL-MuY"; */
+"Wf5-IL-MuY.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "WY1-RV-war"; */
+"WY1-RV-war.title" = "Text Cell";
+
+/* Class = "NSToolbarItem"; label = "Interactions"; ObjectID = "zHs-vk-i8q"; */
 "zHs-vk-i8q.label" = "Interaktionen";
 
-/* Class = "NSToolbarItem"; paletteLabel = "Interaktionen"; ObjectID = "zHs-vk-i8q"; */
+/* Class = "NSToolbarItem"; paletteLabel = "Interactions"; ObjectID = "zHs-vk-i8q"; */
 "zHs-vk-i8q.paletteLabel" = "Interaktionen";
 
-/* Class = "NSToolbarItem"; toolTip = "Favoriten"; ObjectID = "zHs-vk-i8q"; */
+/* Class = "NSToolbarItem"; toolTip = "Interactions"; ObjectID = "zHs-vk-i8q"; */
 "zHs-vk-i8q.toolTip" = "Interaktionen";
+

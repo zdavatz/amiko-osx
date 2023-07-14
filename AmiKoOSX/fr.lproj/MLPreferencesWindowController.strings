@@ -1,13 +1,24 @@
-
-/* Class = "NSButtonCell"; title = "Enable iCloud"; ObjectID = "58g-Mv-66Y"; */
+/* Class = "NSButtonCell"; title = "Enable iCloud Sync"; ObjectID = "58g-Mv-66Y"; */
 "58g-Mv-66Y.title" = "Activez la synchronisation iCloud.";
 
 /* Class = "NSWindow"; title = "Preferences"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Configuration";
 
+/* Class = "NSButtonCell"; title = "Login with HIN (SDS)"; ObjectID = "fWZ-2O-dIK"; */
+"fWZ-2O-dIK.title" = "Se connecter avec HIN (SDS)";
+
+/* Class = "NSTextFieldCell"; title = "HIN (SDS) Login:"; ObjectID = "lxV-dO-bXM"; */
+"lxV-dO-bXM.title" = "";
+
+/* Class = "NSButtonCell"; title = "Login with HIN (ADSwiss)"; ObjectID = "nei-cC-Zh2"; */
+"nei-cC-Zh2.title" = "Se connecter avec HIN (ADSwiss)";
+
 /* Class = "NSTextFieldCell"; title = "iCloud Syncing is only available on Mac OS 10.15+"; ObjectID = "OCW-p1-45S"; */
 "OCW-p1-45S.title" = "La synchronisation iCloud n'est disponible que sur MacOS 10.15+";
 
+/* Class = "NSTextFieldCell"; title = "Invoice XML"; ObjectID = "s2b-n6-2v0"; */
 "s2b-n6-2v0.title" = "Factures XML";
 
+/* Class = "NSTextFieldCell"; title = "Invoice Respone XML"; ObjectID = "wch-Da-E48"; */
 "wch-Da-E48.title" = "Réponses aux factures XML";
+
