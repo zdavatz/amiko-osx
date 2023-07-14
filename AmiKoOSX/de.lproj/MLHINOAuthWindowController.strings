@@ -1,0 +1,9 @@
+/* Class = "NSWindow"; title = "Window"; ObjectID = "F0z-JX-Cv5"; */
+"F0z-JX-Cv5.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "Status:"; ObjectID = "QRc-rk-wYF"; */
+"QRc-rk-wYF.title" = "Status:";
+
+/* Class = "NSButtonCell"; title = "Close"; ObjectID = "Rkb-dm-cTn"; */
+"Rkb-dm-cTn.title" = "Close";
+

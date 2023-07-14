@@ -1,11 +1,10 @@
-
-/* Class = "NSTextFieldCell"; title = "Geburtstag*"; ObjectID = "1D1-mL-UNO"; */
+/* Class = "NSTextFieldCell"; title = "Birthday*"; ObjectID = "1D1-mL-UNO"; */
 "1D1-mL-UNO.title" = "Anniversaire*";
 
-/* Class = "NSButtonCell"; title = "Speichern"; ObjectID = "2pg-Jh-vuf"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "2pg-Jh-vuf"; */
 "2pg-Jh-vuf.title" = "Sauver";
 
-/* Class = "NSButtonCell"; title = "männlich"; ObjectID = "5WN-kS-cu2"; */
+/* Class = "NSButtonCell"; title = "male"; ObjectID = "5WN-kS-cu2"; */
 "5WN-kS-cu2.title" = "masculin";
 
 /* Class = "NSTextFieldCell"; placeholderString = "DD.MM.JJJJ"; ObjectID = "5Yo-kO-JCE"; */
@@ -14,47 +13,32 @@
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "7xC-A4-yUr"; */
 "7xC-A4-yUr.title" = "Label";
 
-/* Class = "NSTextFieldCell"; title = "Patientenverwaltung"; ObjectID = "Afu-3K-pKY"; */
+/* Class = "NSTextFieldCell"; title = "Sex*"; ObjectID = "a3n-X6-Cu4"; */
+"a3n-X6-Cu4.title" = "Gendre*";
+
+/* Class = "NSTextFieldCell"; title = "Patient Management"; ObjectID = "Afu-3K-pKY"; */
 "Afu-3K-pKY.title" = "Gestion des patients";
 
-/* Class = "NSTextFieldCell"; title = "Telefonnr."; ObjectID = "B81-Wd-rr3"; */
+/* Class = "NSTextFieldCell"; title = "BAG Number"; ObjectID = "ApV-E5-6MO"; */
+"ApV-E5-6MO.title" = "No. OFSP";
+
+/* Class = "NSTextFieldCell"; title = "Phone"; ObjectID = "B81-Wd-rr3"; */
 "B81-Wd-rr3.title" = "No. téléphone";
 
-/* Class = "NSTextFieldCell"; title = "Grösse in cm"; ObjectID = "BwX-JV-HhA"; */
+/* Class = "NSTextFieldCell"; title = "Height (cm)"; ObjectID = "BwX-JV-HhA"; */
 "BwX-JV-HhA.title" = "Taille en cm";
 
-/* Class = "NSTextFieldCell"; title = "* Pflichtfelder"; ObjectID = "Cmt-9g-BWI"; */
+/* Class = "NSTextFieldCell"; title = "* Required fields"; ObjectID = "Cmt-9g-BWI"; */
 "Cmt-9g-BWI.title" = "* Obligatoire";
 
-/* Class = "NSTextFieldCell"; title = "Land"; ObjectID = "F74-xw-l43"; */
+/* Class = "NSButtonCell"; title = "female"; ObjectID = "d7D-4K-qft"; */
+"d7D-4K-qft.title" = "féminin";
+
+/* Class = "NSTextFieldCell"; title = "Country"; ObjectID = "F74-xw-l43"; */
 "F74-xw-l43.title" = "Pays";
 
 /* Class = "NSTextFieldCell"; title = "Email"; ObjectID = "GBF-cp-UHt"; */
 "GBF-cp-UHt.title" = "Email";
-
-/* Class = "NSTextFieldCell"; title = "Name*"; ObjectID = "P4d-H7-gtg"; */
-"P4d-H7-gtg.title" = "Nom*";
-
-/* Class = "NSTextFieldCell"; title = "PLZ*"; ObjectID = "QmN-Eh-PaI"; */
-"QmN-Eh-PaI.title" = "NP*";
-
-/* Class = "NSWindow"; title = "Patientenverwaltung"; ObjectID = "QvC-M9-y7g"; */
-"QvC-M9-y7g.title" = "Gestion des patients";
-
-/* Class = "NSTextFieldCell"; title = "Adresse*"; ObjectID = "Rm4-cT-pmI"; */
-"Rm4-cT-pmI.title" = "Adresse*";
-
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "VkX-z1-G8I"; */
-"VkX-z1-G8I.title" = "Annuler";
-
-/* Class = "NSSearchFieldCell"; placeholderString = "Suche Patient..."; ObjectID = "XfM-Wt-ozu"; */
-"XfM-Wt-ozu.placeholderString" = "Recherche patient...";
-
-/* Class = "NSTextFieldCell"; title = "Geschlecht*"; ObjectID = "a3n-X6-Cu4"; */
-"a3n-X6-Cu4.title" = "Gendre*";
-
-/* Class = "NSButtonCell"; title = "weiblich"; ObjectID = "d7D-4K-qft"; */
-"d7D-4K-qft.title" = "féminin";
 
 /* Class = "NSTextFieldCell"; title = "Save..."; ObjectID = "k2s-uB-Bsu"; */
 "k2s-uB-Bsu.title" = "Save...";
@@ -62,20 +46,39 @@
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "mHM-8V-rme"; */
 "mHM-8V-rme.title" = "Table View Cell";
 
-/* Class = "NSTextFieldCell"; title = "Gewicht in kg"; ObjectID = "oiE-8O-I9B"; */
+/* Class = "NSTextFieldCell"; title = "Weight (kg)"; ObjectID = "oiE-8O-I9B"; */
 "oiE-8O-I9B.title" = "Poids en kg";
+
+/* Class = "NSTextFieldCell"; title = "Surname*"; ObjectID = "P4d-H7-gtg"; */
+"P4d-H7-gtg.title" = "Nom*";
+
+/* Class = "NSTextFieldCell"; title = "Card Number"; ObjectID = "pgD-PO-MRG"; */
+"pgD-PO-MRG.title" = "Nr. de la Carte";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "pjC-bJ-7po"; */
 "pjC-bJ-7po.title" = "Text Cell";
 
-/* Class = "NSTextFieldCell"; title = "Vorname*"; ObjectID = "qej-Ja-Ymi"; */
+/* Class = "NSTextFieldCell"; title = "Name*"; ObjectID = "qej-Ja-Ymi"; */
 "qej-Ja-Ymi.title" = "Prénom*";
 
-/* Class = "NSTextFieldCell"; title = "Wohnort*"; ObjectID = "vsC-VR-c2J"; */
+/* Class = "NSTextFieldCell"; title = "ZIP*"; ObjectID = "QmN-Eh-PaI"; */
+"QmN-Eh-PaI.title" = "NP*";
+
+/* Class = "NSWindow"; title = "Patient Management"; ObjectID = "QvC-M9-y7g"; */
+"QvC-M9-y7g.title" = "Gestion des patients";
+
+/* Class = "NSTextFieldCell"; title = "Street*"; ObjectID = "Rm4-cT-pmI"; */
+"Rm4-cT-pmI.title" = "Adresse*";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "VkX-z1-G8I"; */
+"VkX-z1-G8I.title" = "Annuler";
+
+/* Class = "NSTextFieldCell"; title = "City*"; ObjectID = "vsC-VR-c2J"; */
 "vsC-VR-c2J.title" = "Résidence*";
 
-"ApV-E5-6MO.title" = "No. OFSP";
+/* Class = "NSSearchFieldCell"; placeholderString = "Search Patient..."; ObjectID = "XfM-Wt-ozu"; */
+"XfM-Wt-ozu.placeholderString" = "Recherche patient...";
 
-"pgD-PO-MRG.title" = "Nr. de la Carte";
-
+/* Class = "NSTextFieldCell"; title = "Card Expiry"; ObjectID = "Zrg-Tk-5zt"; */
 "Zrg-Tk-5zt.title" = "Date d'expiration";
+

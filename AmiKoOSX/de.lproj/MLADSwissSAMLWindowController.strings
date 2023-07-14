@@ -1,0 +1,9 @@
+/* Class = "NSWindow"; title = "Window"; ObjectID = "dx0-Gz-u72"; */
+"dx0-Gz-u72.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "Status:"; ObjectID = "GcG-Wt-JUf"; */
+"GcG-Wt-JUf.title" = "Status:";
+
+/* Class = "NSButtonCell"; title = "Close"; ObjectID = "Kx8-fT-5L3"; */
+"Kx8-fT-5L3.title" = "Close";
+

@@ -1,40 +1,42 @@
-
-/* Class = "NSTextFieldCell"; title = "PLZ"; ObjectID = "98l-W6-iqN"; */
+/* Class = "NSTextFieldCell"; title = "ZIP"; ObjectID = "98l-W6-iqN"; */
 "98l-W6-iqN.title" = "NP";
 
-/* Class = "NSTextFieldCell"; title = "Arztstempel"; ObjectID = "Afo-H8-RBN"; */
+/* Class = "NSTextFieldCell"; title = "Doctor"; ObjectID = "Afo-H8-RBN"; */
 "Afo-H8-RBN.title" = "Signature du médicin";
+
+/* Class = "NSTextFieldCell"; title = "City"; ObjectID = "am9-gC-CZf"; */
+"am9-gC-CZf.title" = "Ville";
 
 /* Class = "NSTextFieldCell"; title = "Email"; ObjectID = "Eob-IQ-iXt"; */
 "Eob-IQ-iXt.title" = "Email";
 
-/* Class = "NSTextFieldCell"; title = "Adresse"; ObjectID = "Kz6-a3-QdB"; */
+/* Class = "NSTextFieldCell"; title = "Street"; ObjectID = "Kz6-a3-QdB"; */
 "Kz6-a3-QdB.title" = "Adresse";
 
-/* Class = "NSTextFieldCell"; title = "Telefonnr."; ObjectID = "Pzw-eX-UuP"; */
-"Pzw-eX-UuP.title" = "No. Téléphone";
-
-/* Class = "NSWindow"; title = "Arztstempel"; ObjectID = "QvC-M9-y7g"; */
-"QvC-M9-y7g.title" = "Signature du médecin";
-
-/* Class = "NSTextFieldCell"; title = "Vorname"; ObjectID = "Rwk-rY-x9h"; */
-"Rwk-rY-x9h.title" = "Prénom*";
-
-/* Class = "NSTextFieldCell"; title = "Name"; ObjectID = "Tyt-q1-Omh"; */
-"Tyt-q1-Omh.title" = "Nom*";
-
-/* Class = "NSButtonCell"; title = "Speichern"; ObjectID = "V8Z-rM-HDQ"; */
-"V8Z-rM-HDQ.title" = "Sauver";
-
-/* Class = "NSTextFieldCell"; title = "Stadt"; ObjectID = "am9-gC-CZf"; */
-"am9-gC-CZf.title" = "Ville";
-
-/* Class = "NSTextFieldCell"; title = "Titel"; ObjectID = "pqA-9Q-sez"; */
+/* Class = "NSTextFieldCell"; title = "Title"; ObjectID = "pqA-9Q-sez"; */
 "pqA-9Q-sez.title" = "Titre";
 
-/* Class = "NSButtonCell"; title = "Unterschrift aus Datei"; ObjectID = "yCN-97-a6m"; */
-"yCN-97-a6m.title" = "Signature du fichier";
+/* Class = "NSTextFieldCell"; title = "ZSR-Nr."; ObjectID = "PXm-WB-JyK"; */
+"PXm-WB-JyK.title" = "N° RCC";
 
+/* Class = "NSTextFieldCell"; title = "Phone"; ObjectID = "Pzw-eX-UuP"; */
+"Pzw-eX-UuP.title" = "No. Téléphone";
+
+/* Class = "NSTextFieldCell"; title = "Vat Number"; ObjectID = "qUh-rB-Ywd"; */
 "qUh-rB-Ywd.title" = "numéro de TVA";
 
-"PXm-WB-JyK.title" = "N° RCC";
+/* Class = "NSWindow"; title = "Doctor"; ObjectID = "QvC-M9-y7g"; */
+"QvC-M9-y7g.title" = "Signature du médecin";
+
+/* Class = "NSTextFieldCell"; title = "Name*"; ObjectID = "Rwk-rY-x9h"; */
+"Rwk-rY-x9h.title" = "Prénom*";
+
+/* Class = "NSTextFieldCell"; title = "Surname*"; ObjectID = "Tyt-q1-Omh"; */
+"Tyt-q1-Omh.title" = "Nom*";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "V8Z-rM-HDQ"; */
+"V8Z-rM-HDQ.title" = "Sauver";
+
+/* Class = "NSButtonCell"; title = "Signature from file"; ObjectID = "yCN-97-a6m"; */
+"yCN-97-a6m.title" = "Signature du fichier";
+
