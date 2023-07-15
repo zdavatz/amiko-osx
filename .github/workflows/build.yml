@@ -40,6 +40,13 @@ jobs:
           unzip amiko_frequency_fr.db.zip
           unzip drug_interactions_csv_fr.zip
           rm amiko_db_full_idx_de.zip amiko_frequency_de.db.zip drug_interactions_csv_de.zip amiko_db_full_idx_fr.zip amiko_frequency_fr.db.zip drug_interactions_csv_fr.zip
+      - name: Sign
+        run: |
+          cd HINClient/
+          IDENTITY="amikoosx.certifaction"
+          echo "Signing certifaction"
+          codesign -s - -i "$IDENTITY" --entitlements Certifaction.entitlements -f ./certifaction-arm64
+          codesign -s - -i "$IDENTITY" --entitlements Certifaction.entitlements -f ./certifaction-x86
       - name: Build
         run: |
           xcodebuild clean build -allowProvisioningUpdates -project AmiKo.xcodeproj -scheme AmiKo CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO

@@ -4,6 +4,7 @@
 
 STEP_REMOVE_SUPPORT_FILES=true
 STEP_DOWNLOAD_SUPPORT_FILES=true
+STEP_CODESIGN_CERTIFACTION=true
 STEP_BUILD=true
 STEP_ARCHIVE=true
 STEP_CREATE_PKG=true
@@ -68,6 +69,15 @@ for LANG in de fr ; do
     rm $FILENAME
 done
 popd > /dev/null
+fi
+
+if [ $STEP_CODESIGN_CERTIFACTION ] ; then
+pushd ../HINClient
+    IDENTITY="amikoosx.certifaction"
+    echo "Signing certifaction"
+    codesign -s - -i "$IDENTITY" --entitlements Certifaction.entitlements -f ./certifaction-arm64
+    codesign -s - -i "$IDENTITY" --entitlements Certifaction.entitlements -f ./certifaction-x86
+popd
 fi
 
 #-------------------------------------------------------------------------------
