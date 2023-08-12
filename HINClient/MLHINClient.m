@@ -39,6 +39,14 @@
     ];
 }
 
+- (NSString*)HINDomainForADSwiss {
+#ifdef DEBUG
+    return @"oauth2.ci-prep.adswiss.hin.ch";
+#else
+    return @"oauth2.ci.adswiss.hin.ch";
+#endif
+}
+
 - (void)fetchAccessTokenWithAuthCode:(NSString *)authCode
                           completion:(void (^_Nonnull)(NSError * _Nullable error, MLHINTokens * _Nullable tokens))callback
 {
@@ -171,7 +179,7 @@
             callback(error, nil);
             return;
         }
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://oauth2.ci-prep.adswiss.hin.ch/authService/EPDAuth?targetUrl=http%3A%2F%2Flocalhost%3A8080%2Fcallback&style=redirect"]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/authService/EPDAuth?targetUrl=http://localhost:8080/callback&style=redirect", [self HINDomainForADSwiss]]]];
         [request setAllHTTPHeaderFields:@{
             @"Accept": @"application/json",
             @"Authorization": [NSString stringWithFormat:@"Bearer %@", token.accessToken],
@@ -208,7 +216,7 @@
             callback(error, nil);
             return;
         }
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://oauth2.ci-prep.adswiss.hin.ch/authService/EPDAuth/auth_handle"]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/authService/EPDAuth/auth_handle", [self HINDomainForADSwiss]]]];
         [request setAllHTTPHeaderFields:@{
             @"Accept": @"application/json",
             @"Content-Type": @"application/json",
