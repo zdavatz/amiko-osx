@@ -10,6 +10,7 @@
 #import "MLPersistenceManager.h"
 #import "MLHINClient.h"
 #import <WebKit/WebKit.h>
+#import "MLHINADSwissAuthHandle.h"
 
 @interface MLADSwissSAMLWindowController () <WKNavigationDelegate>
 
@@ -62,7 +63,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
                         return;
                     }
                     [_self displayStatus:NSLocalizedString(@"Received Auth Handle", @"")];
-                    [[MLPersistenceManager shared] setHINADSwissAuthHandle:authHandle];
+                    MLHINADSwissAuthHandle *handle = [[MLHINADSwissAuthHandle alloc] initWithToken:authHandle];
+                    [[MLPersistenceManager shared] setHINADSwissAuthHandle:handle];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_self.window.sheetParent endSheet:_self.window returnCode:NSModalResponseOK];
                     });
