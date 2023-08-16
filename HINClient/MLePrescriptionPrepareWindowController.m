@@ -12,6 +12,7 @@
 #import "MLPrescriptionItem.h"
 #import "LFCGzipUtility.h"
 #import "MLUtilities.h"
+#import "MLHINADSwissAuthHandle.h"
 
 @interface MLePrescriptionPrepareWindowController ()
 
@@ -60,7 +61,7 @@
         [self.loadingIndicator startAnimation:self];
     });
     [self displayStatus:NSLocalizedString(@"Loading SAML", @"")];
-    [self prepareSAMLIfNeeded:^(NSError * _Nullable error, NSString *authHandle) {
+    [self prepareSAMLIfNeeded:^(NSError * _Nullable error, MLHINADSwissAuthHandle *authHandle) {
         if (error) {
             [_self displayError:error];
             self.outError = error;
@@ -81,7 +82,10 @@
         [self displayStatus:NSLocalizedString(@"Preparing prescription file", @"")];
         NSString *prescriptionFile = [self preparePrescriptionFile];
         [self displayStatus:NSLocalizedString(@"Preparing QR Code", @"")];
+        [authHandle updateLastUsedAt];
+        [[MLPersistenceManager shared] setHINADSwissAuthHandle:authHandle];
         [self executeCertifactionWithGZippedBase64File:prescriptionFile
+                                            authHandle:authHandle
                                             completion:^(NSError * _Nullable error, NSString * _Nullable qrCodeFile) {
             if (error.code == 401) {
                 [[MLPersistenceManager shared] setHINADSwissAuthHandle:nil];
@@ -123,8 +127,8 @@
     }
 }
 
-- (void)prepareSAMLIfNeeded:(void (^_Nonnull)(NSError * _Nullable error, NSString *authHandle))callback {
-    NSString *authHandle = [[MLPersistenceManager shared] HINADSwissAuthHandle];
+- (void)prepareSAMLIfNeeded:(void (^_Nonnull)(NSError * _Nullable error, MLHINADSwissAuthHandle *authHandle))callback {
+    MLHINADSwissAuthHandle *authHandle = [[MLPersistenceManager shared] HINADSwissAuthHandle];
     if (authHandle) {
         callback(nil, authHandle);
         return;
@@ -194,10 +198,10 @@
 }
 
 - (void )executeCertifactionWithGZippedBase64File:(NSString *)filePath
+                                       authHandle:(MLHINADSwissAuthHandle *)authHandle
                                         completion:(void (^_Nonnull)(NSError * _Nullable error, NSString * _Nullable result))callback
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) , ^{
-        NSString *authHandle = [[MLPersistenceManager shared] HINADSwissAuthHandle];
         NSString *tempOutFilePath = [NSString stringWithFormat:
                                          @"%@.png",
                                      [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]]
@@ -213,7 +217,7 @@
             @"create",
             @"--api", @"https://api.testnet.certifaction.io",
             @"--hin-api", @"https://oauth2.sign-test.hin.ch/api",
-            @"--token", authHandle,
+            @"--token", authHandle.token,
             @"-o", tempOutFilePath,
             @"-f", @"qrcode",
             filePath,

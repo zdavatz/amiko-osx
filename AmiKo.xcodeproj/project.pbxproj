@@ -59,6 +59,8 @@
 		CF5B30FF243DFCB9000312F1 /* MLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */; };
 		CF6BAE9726EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */; };
 		CF6BAE9826EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */; };
+		CF7E3F262A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7E3F252A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m */; };
+		CF7E3F272A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7E3F252A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m */; };
 		CF83D4BD2A6199BA008B6B53 /* MLHINOAuthWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF83D4C02A6199BA008B6B53 /* MLHINOAuthWindowController.xib */; };
 		CF83D4BE2A6199BA008B6B53 /* MLHINOAuthWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF83D4C02A6199BA008B6B53 /* MLHINOAuthWindowController.xib */; };
 		CF83D4C52A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF83D4C82A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib */; };
@@ -369,6 +371,8 @@
 		CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPreferencesWindowController.m; sourceTree = "<group>"; };
 		CF6BAE9526EDE3BA0080DD00 /* MedidataInvoiceDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataInvoiceDocument.h; sourceTree = "<group>"; };
 		CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceDocument.m; sourceTree = "<group>"; };
+		CF7E3F242A8C72F700E65BF1 /* MLHINADSwissAuthHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINADSwissAuthHandle.h; sourceTree = "<group>"; };
+		CF7E3F252A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINADSwissAuthHandle.m; sourceTree = "<group>"; };
 		CF83D4BF2A6199BA008B6B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLHINOAuthWindowController.xib; sourceTree = "<group>"; };
 		CF83D4C22A6199C8008B6B53 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLHINOAuthWindowController.strings; sourceTree = "<group>"; };
 		CF83D4C42A6199C9008B6B53 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLHINOAuthWindowController.strings; sourceTree = "<group>"; };
@@ -651,6 +655,8 @@
 				CF3B87492A4AEEC600D7D894 /* MLHINProfile.m */,
 				CF3B874C2A4AEECF00D7D894 /* MLHINTokens.h */,
 				CF3B874D2A4AEECF00D7D894 /* MLHINTokens.m */,
+				CF7E3F242A8C72F700E65BF1 /* MLHINADSwissAuthHandle.h */,
+				CF7E3F252A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m */,
 				CF8B3EDE2A56FDC50017CC28 /* MLHINADSwissSaml.h */,
 				CF8B3EDF2A56FDC50017CC28 /* MLHINADSwissSaml.m */,
 				CF3B87572A4C60AB00D7D894 /* MLHINClientCredential.h */,
@@ -1428,6 +1434,7 @@
 				D538779A1AA386AC00AEFDB4 /* SHCWebView.m in Sources */,
 				FA63296D20A088CC002DC9E2 /* MLPrescriptionTableView.m in Sources */,
 				D5E91B8B17E5E8E400B66B27 /* MLSQLiteDatabase.m in Sources */,
+				CF7E3F262A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m in Sources */,
 				CFF3D9EC26E1259B003B74C2 /* MedidataClientUploadStatus.m in Sources */,
 				D545C8E71898527C00491511 /* zip.c in Sources */,
 				D5C6440D1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
@@ -1528,6 +1535,7 @@
 				D545C90C18A4286B00491511 /* MLCustomWebView.m in Sources */,
 				D538779B1AA386AC00AEFDB4 /* SHCWebView.m in Sources */,
 				CF3B87472A4AECA100D7D894 /* MLHINClient.m in Sources */,
+				CF7E3F272A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m in Sources */,
 				D5E91BBA17E5E8E800B66B27 /* MLSQLiteDatabase.m in Sources */,
 				D545C8FC18A2CE0D00491511 /* zip.c in Sources */,
 				CFF3D9ED26E1259B003B74C2 /* MedidataClientUploadStatus.m in Sources */,
