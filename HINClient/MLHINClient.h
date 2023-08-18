@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSURL *)authURLForSDS;
 - (NSURL *)authURLForADSwiss;
+- (NSString *)sdsApplicationName;
+- (NSString *)ADSwissApplicationName;
 
 - (void)fetchAccessTokenWithAuthCode:(NSString *)authCode
                           completion:(void (^_Nonnull)(NSError * _Nullable error, MLHINTokens * _Nullable tokens))callback;

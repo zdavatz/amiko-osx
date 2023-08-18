@@ -24,6 +24,8 @@
 #import "MLAppDelegate.h"
 #import "MLMainWindowController.h"
 #import "MLDBAdapter.h"
+#import "MLPreferencesWindowController.h"
+#import "MLHINClient.h"
 
 @interface MLAppDelegate()
 // @property (nonatomic, strong) IBOutlet MLMasterViewController *masterViewController;
@@ -47,6 +49,34 @@
     [mainWindowController showWindow:nil];
 }
 */
+
+- (void)application:(NSApplication *)application openURLs:(NSArray<NSURL *> *)urls {
+    for (NSURL *url in urls) {
+        if (([[url scheme] isEqual:@"amiko"] || [[url scheme] isEqual:@"comed"]) && [[url host] isEqual:@"oauth"]) {
+            NSURLComponents *components = [NSURLComponents componentsWithURL:url
+                                                     resolvingAgainstBaseURL:NO];
+            NSString *code = nil;
+            NSString *state = nil;
+            NSString *authCode = nil;
+            for (NSURLQueryItem *query in [components queryItems]) {
+                if ([query.name isEqualTo:@"code"]) {
+                    code = query.value;
+                } else if ([query.name isEqual:@"state"]) {
+                    state = query.value;
+                } else if ([query.name isEqual:@"auth_code"]) {
+                    authCode = query.value;
+                }
+            }
+            if (code && ([state isEqual:[[MLHINClient shared] sdsApplicationName]] || [state isEqual:[[MLHINClient shared] ADSwissApplicationName]])) {
+                [[MLPreferencesWindowController shared] handleOAuthCallbackWithCode:code state:state];
+                [[MLPreferencesWindowController shared] showWindow:self];
+            }
+            if (authCode) {
+                [mainWindowController.ePrescriptionPrepareWindowController handleOAuthCallbackWithAuthCode:authCode];
+            }
+        }
+    }
+}
 
 - (void) applicationWillFinishLaunching:(NSNotification *)notification
 {

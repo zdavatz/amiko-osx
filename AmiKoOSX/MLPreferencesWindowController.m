@@ -9,8 +9,6 @@
 #import "MLPreferencesWindowController.h"
 #import "MLPersistenceManager.h"
 #import "MLHINClient.h"
-#import "MLSDSOAuthWindowController.h"
-#import "MLADSwissOAuthWindowController.h"
 
 @interface MLPreferencesWindowController ()
 @property (weak) IBOutlet NSButton *iCloudCheckbox;
@@ -18,14 +16,21 @@
 @property (weak) IBOutlet NSPathControl *invoiceResponsePathControl;
 @property (weak) IBOutlet NSTextField *hinSDSUserIdTextField;
 @property (weak) IBOutlet NSButton *loginWithHINSDSButton;
-@property (strong) MLSDSOAuthWindowController *hinSDSOauthController;
 @property (weak) IBOutlet NSTextField *hinADSwissUserIdTextField;
 @property (weak) IBOutlet NSButton *loginWithHINADSwissButton;
-@property (strong) MLADSwissOAuthWindowController *hinADSwissOAuthController;
 
 @end
 
 @implementation MLPreferencesWindowController
+
++ (instancetype)shared {
+    static MLPreferencesWindowController *controller = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        controller = [[MLPreferencesWindowController alloc] initWithWindowNibName:@"MLPreferencesWindowController"];
+    });
+    return controller;
+}
 
 - (void)windowDidLoad {
     [super windowDidLoad];
@@ -126,6 +131,7 @@
         [self.hinSDSUserIdTextField setEnabled:NO];
         [self.loginWithHINSDSButton setTitle:NSLocalizedString(@"Login with HIN (SDS)", @"")];
     }
+    [self.loginWithHINSDSButton setEnabled:YES];
     tokens = [[MLPersistenceManager shared] HINADSwissTokens];
     if (tokens) {
         [self.hinADSwissUserIdTextField setStringValue:tokens.hinId];
@@ -136,6 +142,7 @@
         [self.hinADSwissUserIdTextField setEnabled:NO];
         [self.loginWithHINADSwissButton setTitle:NSLocalizedString(@"Login with HIN (ADSwiss)", @"")];
     }
+    [self.loginWithHINADSwissButton setEnabled:YES];
 }
 
 - (IBAction)loginWithHINSDSClicked:(id)sender {
@@ -144,14 +151,7 @@
         [[MLPersistenceManager shared] setHINSDSTokens:nil];
         [self reloadHINState];
     } else {
-        MLSDSOAuthWindowController *controller = [[MLSDSOAuthWindowController alloc] init];
-        self.hinSDSOauthController = controller;
-        typeof(self) __weak _self = self;
-        [self.window beginSheet:controller.window
-              completionHandler:^(NSModalResponse returnCode) {
-            [_self reloadHINState];
-            _self.hinSDSOauthController = nil;
-        }];
+        [[NSWorkspace sharedWorkspace] openURL:[[MLHINClient shared] authURLForSDS]];
     }
 }
 
@@ -161,15 +161,79 @@
         [[MLPersistenceManager shared] setHINADSwissTokens:nil];
         [self reloadHINState];
     } else {
-        MLADSwissOAuthWindowController *controller = [[MLADSwissOAuthWindowController alloc] init];
-        self.hinADSwissOAuthController = controller;
-        typeof(self) __weak _self = self;
-        [self.window beginSheet:controller.window
-              completionHandler:^(NSModalResponse returnCode) {
-            [_self reloadHINState];
-            _self.hinADSwissOAuthController = nil;
-        }];
+        [[NSWorkspace sharedWorkspace] openURL:[[MLHINClient shared] authURLForADSwiss]];
     }
+}
+
+- (void)handleOAuthCallbackWithCode:(NSString *)code state:(NSString *)state {
+    __weak typeof(self) _self = self;
+    if ([state isEqual:[[MLHINClient shared] sdsApplicationName]]) {
+        [self.loginWithHINSDSButton setEnabled:NO];
+        _self.hinSDSUserIdTextField.stringValue = NSLocalizedString(@"Loading", @"");
+    } else if ([state isEqual:[[MLHINClient shared] ADSwissApplicationName]]) {
+        [self.loginWithHINADSwissButton setEnabled:NO];
+        _self.hinADSwissUserIdTextField.stringValue = NSLocalizedString(@"Loading", @"");
+    }
+    [[MLHINClient shared] fetchAccessTokenWithAuthCode:code
+                                            completion:^(NSError * _Nullable error, MLHINTokens * _Nullable tokens) {
+        if (error) {
+            [_self displayError:error];
+            return;
+        }
+        if (!tokens) {
+            [_self displayError:[NSError errorWithDomain:@"com.ywesee.AmikoDesitin"
+                                                    code:0
+                                                userInfo:@{
+                NSLocalizedDescriptionKey: @"Invalid token response"
+            }]];
+            return;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _self.hinSDSUserIdTextField.stringValue = NSLocalizedString(@"Received Access Token", @"");
+        });
+        if ([state isEqual:[[MLHINClient shared] sdsApplicationName]]) {
+            [[MLPersistenceManager shared] setHINSDSTokens:tokens];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _self.hinSDSUserIdTextField.stringValue = NSLocalizedString(@"Loading: Received Access Token, fetching profile", @"");
+            });
+            [[MLHINClient shared] fetchSDSSelfWithToken:tokens
+                                             completion:^(NSError * _Nonnull error, MLHINProfile * _Nonnull profile) {
+                if (error) {
+                    [_self displayError:error];
+                    return;
+                }
+                if (!profile) {
+                    [_self displayError:[NSError errorWithDomain:@"com.ywesee.AmikoDesitin"
+                                                            code:0
+                                                        userInfo:@{
+                        NSLocalizedDescriptionKey: @"Invalid profile response"
+                    }]];
+                    return;
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _self.hinSDSUserIdTextField.stringValue = NSLocalizedString(@"Received profile", @"");
+                });
+                MLOperator *doctor = [[MLPersistenceManager shared] doctor];
+                [profile mergeWithDoctor:doctor];
+                [[MLPersistenceManager shared] setDoctor:doctor];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_self reloadHINState];
+                });
+            }];
+        } else if ([state isEqual:[[MLHINClient shared] ADSwissApplicationName]]) {
+            [[MLPersistenceManager shared] setHINADSwissTokens:tokens];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_self reloadHINState];
+            });
+        }
+    }];
+}
+
+- (void)displayError:(NSError *)error {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSAlert alertWithError:error] runModal];
+        [self reloadHINState];
+    });
 }
 
 @end

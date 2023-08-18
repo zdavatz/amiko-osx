@@ -23,8 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
                           doctor:(MLOperator *)doctor
                            items:(NSArray<MLPrescriptionItem*> *)items;
 
+- (void)handleOAuthCallbackWithAuthCode:(NSString *)code;
+
 @property (nonatomic, strong, nullable) NSImage *outQRCode;
-@property (nonatomic, strong, nullable) NSError *outError;
 
 @end
 

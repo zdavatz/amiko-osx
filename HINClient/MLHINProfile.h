@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MLOperator.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) NSString *phoneNr;
 @property (nonatomic, strong, nullable) NSString *gln;
 @property (nonatomic, strong, nullable) NSString *verificationLevel;
+
+- (void)mergeWithDoctor:(MLOperator *)doctor;
 
 @end
 

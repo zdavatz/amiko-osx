@@ -57,7 +57,6 @@
 #import "MLPrescriptionTableView.h"
 #import "MLMedidataResponsesWindowController.h"
 #import "Wait.h"
-#import "MLePrescriptionPrepareWindowController.h"
 
 #define DYNAMIC_AMK_SELECTION
 #define CSV_SEPARATOR       @";"
@@ -1822,8 +1821,7 @@ static MLPrescriptionsCart *mPrescriptionsCart[NUM_ACTIVE_PRESCRIPTIONS];
 
 - (IBAction) showPreferences:(id)sender
 {
-    MLPreferencesWindowController *preferenceController = [[MLPreferencesWindowController alloc] initWithWindowNibName:@"MLPreferencesWindowController"];
-    [preferenceController showWindow:sender];
+    [[MLPreferencesWindowController shared] showWindow:sender];
 }
 
 - (IBAction) sendFeedback:(id)sender
