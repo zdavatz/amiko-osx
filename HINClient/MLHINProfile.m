@@ -39,4 +39,34 @@
     return self;
 }
 
+- (void)mergeWithDoctor:(MLOperator *)doctor {
+    if (!doctor.emailAddress.length) {
+        doctor.emailAddress = self.email;
+    }
+    if (!doctor.familyName.length) {
+        doctor.familyName = self.lastName;
+    }
+    if (!doctor.givenName.length) {
+        doctor.givenName = self.firstName;
+    }
+    if (!doctor.postalAddress.length) {
+        doctor.postalAddress = self.address;
+    }
+    if (!doctor.zipCode.length) {
+        doctor.zipCode = self.postalCode;
+    }
+    if (!doctor.city.length) {
+        doctor.city = self.city;
+    }
+    if (!doctor.country.length) {
+        doctor.country = self.countryCode;
+    }
+    if (!doctor.phoneNumber.length) {
+        doctor.phoneNumber = self.phoneNr;
+    }
+    if (!doctor.gln.length) {
+        doctor.gln = self.gln;
+    }
+}
+
 @end

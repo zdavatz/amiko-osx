@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MLPreferencesWindowController : NSWindowController
 
++ (instancetype)shared;
+
+- (void)handleOAuthCallbackWithCode:(NSString *)code state:(NSString *)state;
+
 @end
 
 NS_ASSUME_NONNULL_END

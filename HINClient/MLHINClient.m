@@ -9,6 +9,7 @@
 #import "MLHINClient.h"
 #import "MLHINClientCredential.h"
 #import "MLPersistenceManager.h"
+#import "MLUtilities.h"
 
 @implementation MLHINClient
 
@@ -22,21 +23,32 @@
 }
 
 - (NSURL*)authURLWithApplication:(NSString *)applicationName {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.hin.ch/REST/v1/OAuth/GetAuthCode/%@?response_type=code&client_id=%@&redirect_uri=http://localhost:8080/callback&state=teststate", applicationName, HIN_CLIENT_ID]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.hin.ch/REST/v1/OAuth/GetAuthCode/%@?response_type=code&client_id=%@&redirect_uri=%@://oauth&state=%@", applicationName, HIN_CLIENT_ID, [self oauthCallbackURL], applicationName]];
+}
+
+- (NSString *)oauthCallbackURL {
+    NSString *scheme = [[MLUtilities appLanguage] isEqual:@"de"] ? @"amiko" : @"comed";
+    return [NSString stringWithFormat:@"%@://oauth", scheme];
+}
+
+- (NSString *)sdsApplicationName {
+    return @"hin_sds";
+}
+
+- (NSString *)ADSwissApplicationName {
+#ifdef DEBUG
+    return @"ADSwiss_CI-Test";
+#else
+    return @"ADSwiss_CI";
+#endif
 }
 
 - (NSURL*)authURLForSDS {
-    return [self authURLWithApplication:@"hin_sds"];
+    return [self authURLWithApplication:[self sdsApplicationName]];
 }
 
 - (NSURL *)authURLForADSwiss {
-    return [self authURLWithApplication:
-#ifdef DEBUG
-            @"ADSwiss_CI-Test"
-#else
-            @"ADSwiss_CI"
-#endif
-    ];
+    return [self authURLWithApplication:[self ADSwissApplicationName]];
 }
 
 - (NSString*)HINDomainForADSwiss {
@@ -59,7 +71,7 @@
     NSURLComponents *components = [[NSURLComponents alloc] init];
     components.queryItems = @[
         [NSURLQueryItem queryItemWithName:@"grant_type" value:@"authorization_code"],
-        [NSURLQueryItem queryItemWithName:@"redirect_uri" value:@"http://localhost:8080/callback"],
+        [NSURLQueryItem queryItemWithName:@"redirect_uri" value:[self oauthCallbackURL]],
         [NSURLQueryItem queryItemWithName:@"code" value:authCode],
         [NSURLQueryItem queryItemWithName:@"client_id" value:HIN_CLIENT_ID],
         [NSURLQueryItem queryItemWithName:@"client_secret" value:HIN_CLIENT_SECRET],
@@ -101,7 +113,7 @@
     NSURLComponents *components = [[NSURLComponents alloc] init];
     components.queryItems = @[
         [NSURLQueryItem queryItemWithName:@"grant_type" value:@"refresh_token"],
-        [NSURLQueryItem queryItemWithName:@"redirect_uri" value:@"http://localhost:8080/callback"],
+        [NSURLQueryItem queryItemWithName:@"redirect_uri" value:[self oauthCallbackURL]],
         [NSURLQueryItem queryItemWithName:@"refresh_token" value:token.refreshToken],
         [NSURLQueryItem queryItemWithName:@"client_id" value:HIN_CLIENT_ID],
         [NSURLQueryItem queryItemWithName:@"client_secret" value:HIN_CLIENT_SECRET],
@@ -179,7 +191,8 @@
             callback(error, nil);
             return;
         }
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/authService/EPDAuth?targetUrl=http://localhost:8080/callback&style=redirect", [self HINDomainForADSwiss]]]];
+        NSString *scheme = [[MLUtilities appLanguage] isEqual:@"de"] ? @"amiko" : @"comed";
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/authService/EPDAuth?targetUrl=%@://oauth&style=redirect", [self HINDomainForADSwiss], scheme]]];
         [request setAllHTTPHeaderFields:@{
             @"Accept": @"application/json",
             @"Authorization": [NSString stringWithFormat:@"Bearer %@", token.accessToken],

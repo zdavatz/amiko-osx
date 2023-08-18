@@ -8,11 +8,11 @@
 
 #import "MLePrescriptionPrepareWindowController.h"
 #import "MLPersistenceManager.h"
-#import "MLADSwissSAMLWindowController.h"
 #import "MLPrescriptionItem.h"
 #import "LFCGzipUtility.h"
 #import "MLUtilities.h"
 #import "MLHINADSwissAuthHandle.h"
+#import "MLHINClient.h"
 
 @interface MLePrescriptionPrepareWindowController ()
 
@@ -22,8 +22,8 @@
 
 @property (weak) IBOutlet NSProgressIndicator *loadingIndicator;
 @property (weak) IBOutlet NSTextField *statusLabel;
+@property (weak) IBOutlet NSButton *cancelButton;
 
-@property (nonatomic, strong, nullable) MLADSwissSAMLWindowController *samlWindowController;
 
 @end
 
@@ -55,64 +55,84 @@
     [self startFlow];
 }
 
-- (void)startFlow {
+- (IBAction)cancelClicked:(id)sender {
+    [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseCancel];
+}
+
+- (void)handleOAuthCallbackWithAuthCode:(NSString *)code {
     typeof(self) __weak _self = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.loadingIndicator startAnimation:self];
-    });
-    [self displayStatus:NSLocalizedString(@"Loading SAML", @"")];
-    [self prepareSAMLIfNeeded:^(NSError * _Nullable error, MLHINADSwissAuthHandle *authHandle) {
+    [[MLHINClient shared] fetchADSwissAuthHandleWithToken:[[MLPersistenceManager shared] HINADSwissTokens]
+                                                 authCode:code
+                                               completion:^(NSError * _Nullable error, NSString * _Nullable authHandle) {
+        NSLog(@"received Auth Handle1 %@ %@", error, authHandle);
         if (error) {
             [_self displayError:error];
-            self.outError = error;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_self.window.sheetParent endSheet:_self.window
-                                        returnCode:NSModalResponseCancel];
-            });
             return;
         }
         if (!authHandle) {
-            // No error but no auth handle = user cancelled;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_self.window.sheetParent endSheet:_self.window
-                                        returnCode:NSModalResponseCancel];
-            });
+            [_self displayError:[NSError errorWithDomain:@"com.ywesee.AmikoDesitin"
+                                                    code:0
+                                                userInfo:@{
+                NSLocalizedDescriptionKey: @"Invalid authHandle"
+            }]];
             return;
         }
-        [self displayStatus:NSLocalizedString(@"Preparing prescription file", @"")];
-        NSString *prescriptionFile = [self preparePrescriptionFile];
-        [self displayStatus:NSLocalizedString(@"Preparing QR Code", @"")];
-        [authHandle updateLastUsedAt];
-        [[MLPersistenceManager shared] setHINADSwissAuthHandle:authHandle];
-        [self executeCertifactionWithGZippedBase64File:prescriptionFile
-                                            authHandle:authHandle
-                                            completion:^(NSError * _Nullable error, NSString * _Nullable qrCodeFile) {
-            if (error.code == 401) {
-                [[MLPersistenceManager shared] setHINADSwissAuthHandle:nil];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self startFlow];
-                });
-                return;
-            } else if (error) {
-                [_self displayError:error];
-                return;
-            }
-            [self displayStatus:NSLocalizedString(@"QR Code is ready", @"")];
-            NSLog(@"QRCode file %@", qrCodeFile);
-            NSImage *qrCodeImage = [[NSImage alloc] initWithContentsOfFile:qrCodeFile];
-            NSLog(@"qrCodeImage %@", NSStringFromSize(qrCodeImage.size));
-            self.outQRCode = qrCodeImage;
+        [_self displayStatus:NSLocalizedString(@"Received Auth Handle", @"")];
+        MLHINADSwissAuthHandle *handle = [[MLHINADSwissAuthHandle alloc] initWithToken:authHandle];
+        [[MLPersistenceManager shared] setHINADSwissAuthHandle:handle];
+        [_self afterGettingAuthHandle:handle];
+    }];
+}
+
+- (void)startFlow {
+    typeof(self) __weak _self = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_self.loadingIndicator startAnimation:_self];
+    });
+    [self displayStatus:NSLocalizedString(@"Loading SAML", @"")];
+    MLHINADSwissAuthHandle *authHandle = [self getAuthHandleOrAuth];
+    if (!authHandle) return; // User should have browser opened by now
+    [self afterGettingAuthHandle:authHandle];
+}
+
+- (void)afterGettingAuthHandle:(MLHINADSwissAuthHandle *)authHandle {
+    typeof(self) __weak _self = self;
+    [self displayStatus:NSLocalizedString(@"Preparing prescription file", @"")];
+    NSString *prescriptionFile = [self preparePrescriptionFile];
+    [self displayStatus:NSLocalizedString(@"Preparing QR Code", @"")];
+    [authHandle updateLastUsedAt];
+    [[MLPersistenceManager shared] setHINADSwissAuthHandle:authHandle];
+    [self executeCertifactionWithGZippedBase64File:prescriptionFile
+                                        authHandle:authHandle
+                                        completion:^(NSError * _Nullable error, NSString * _Nullable qrCodeFile) {
+        if (error.code == 401) {
+            [[MLPersistenceManager shared] setHINADSwissAuthHandle:nil];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [_self.window.sheetParent endSheet:_self.window
-                                        returnCode:NSModalResponseOK];
+                [self startFlow];
             });
-        }];
+            return;
+        } else if (error) {
+            [_self displayError:error];
+            return;
+        }
+        [self displayStatus:NSLocalizedString(@"QR Code is ready", @"")];
+        NSLog(@"QRCode file %@", qrCodeFile);
+        NSImage *qrCodeImage = [[NSImage alloc] initWithContentsOfFile:qrCodeFile];
+        NSLog(@"qrCodeImage %@", NSStringFromSize(qrCodeImage.size));
+        self.outQRCode = qrCodeImage;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_self.window.sheetParent endSheet:_self.window
+                                    returnCode:NSModalResponseOK];
+        });
     }];
 }
 
 - (void)displayError:(NSError *)error {
+    typeof(self) __weak _self = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSAlert alertWithError:error] runModal];
+        [_self.window.sheetParent endSheet:_self.window
+                                returnCode:NSModalResponseCancel];
     });
 }
 
@@ -127,24 +147,21 @@
     }
 }
 
-- (void)prepareSAMLIfNeeded:(void (^_Nonnull)(NSError * _Nullable error, MLHINADSwissAuthHandle *authHandle))callback {
+- (MLHINADSwissAuthHandle *)getAuthHandleOrAuth {
     MLHINADSwissAuthHandle *authHandle = [[MLPersistenceManager shared] HINADSwissAuthHandle];
     if (authHandle) {
-        callback(nil, authHandle);
-        return;
+        return authHandle;
     }
     typeof(self) __weak _self = self;
-    MLADSwissSAMLWindowController *samlWindowController = [[MLADSwissSAMLWindowController alloc] init];
-    self.samlWindowController = samlWindowController;
-    [self.window beginSheet:samlWindowController.window
-           completionHandler:^(NSModalResponse returnCode) {
-        _self.samlWindowController = nil;
-        if (returnCode == NSModalResponseOK) {
-            callback(nil, [[MLPersistenceManager shared] HINADSwissAuthHandle]);
-        } else {
-            callback(nil, nil);
+    [[MLHINClient shared] fetchADSwissSAMLWithToken:[[MLPersistenceManager shared] HINADSwissTokens]
+                                         completion:^(NSError * _Nullable error, MLHINADSwissSaml * _Nonnull result) {
+        if (error) {
+            [_self displayError:error];
+            return;
         }
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:result.epdAuthUrl]];
     }];
+    return nil;
 }
 
 - (NSString *)preparePrescriptionFile {
@@ -215,8 +232,13 @@
         [task setArguments:@[
             @"eprescription",
             @"create",
+#if DEBUG
             @"--api", @"https://api.testnet.certifaction.io",
             @"--hin-api", @"https://oauth2.sign-test.hin.ch/api",
+#else
+            @"--api", @"https://api.certifaction.io",
+            @"--hin-api", @"https://oauth2.sign.hin.ch/api",
+#endif
             @"--token", authHandle.token,
             @"-o", tempOutFilePath,
             @"-f", @"qrcode",

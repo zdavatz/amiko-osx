@@ -43,6 +43,7 @@ extern NSString* const APP_ID;
 #import "MLPrescriptionTableView.h"
 #import "HealthCard.h"
 #import "MLFullTextEntry.h"
+#import "MLePrescriptionPrepareWindowController.h"
 
 @interface DataObject : NSObject
 
@@ -103,6 +104,8 @@ extern NSString* const APP_ID;
 @property (weak) IBOutlet NSButton *registrationNumberButton;
 @property (weak) IBOutlet NSButton *therapyButton;
 @property (weak) IBOutlet NSButton *fullTextButton;
+
+- (MLePrescriptionPrepareWindowController *)ePrescriptionPrepareWindowController;
 
 
 - (IBAction) performFindAction:(id)sender;

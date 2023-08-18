@@ -45,8 +45,6 @@
 		CF3B874B2A4AEEC600D7D894 /* MLHINProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B87492A4AEEC600D7D894 /* MLHINProfile.m */; };
 		CF3B874E2A4AEECF00D7D894 /* MLHINTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B874D2A4AEECF00D7D894 /* MLHINTokens.m */; };
 		CF3B874F2A4AEECF00D7D894 /* MLHINTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B874D2A4AEECF00D7D894 /* MLHINTokens.m */; };
-		CF3B87532A4AF92300D7D894 /* MLHINOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B87512A4AF92300D7D894 /* MLHINOAuthWindowController.m */; };
-		CF3B87542A4AF92300D7D894 /* MLHINOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3B87512A4AF92300D7D894 /* MLHINOAuthWindowController.m */; };
 		CF4023302A5BC2D100B04FA4 /* certifaction-arm64 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CF4023292A5BBCF900B04FA4 /* certifaction-arm64 */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CF4023312A5BC2D100B04FA4 /* certifaction-x86 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CF40232A2A5BBCF900B04FA4 /* certifaction-x86 */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CF4023332A5BC34A00B04FA4 /* certifaction-arm64 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CF4023292A5BBCF900B04FA4 /* certifaction-arm64 */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -61,22 +59,12 @@
 		CF6BAE9826EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */; };
 		CF7E3F262A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7E3F252A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m */; };
 		CF7E3F272A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7E3F252A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m */; };
-		CF83D4BD2A6199BA008B6B53 /* MLHINOAuthWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF83D4C02A6199BA008B6B53 /* MLHINOAuthWindowController.xib */; };
-		CF83D4BE2A6199BA008B6B53 /* MLHINOAuthWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF83D4C02A6199BA008B6B53 /* MLHINOAuthWindowController.xib */; };
-		CF83D4C52A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF83D4C82A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib */; };
-		CF83D4C62A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF83D4C82A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib */; };
 		CF83D4CD2A6199DF008B6B53 /* MLePrescriptionPrepareWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF83D4D02A6199DF008B6B53 /* MLePrescriptionPrepareWindowController.xib */; };
 		CF83D4CE2A6199DF008B6B53 /* MLePrescriptionPrepareWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF83D4D02A6199DF008B6B53 /* MLePrescriptionPrepareWindowController.xib */; };
 		CF8A7339268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */; };
 		CF8A733A268F1A6D0092E214 /* MedidataXMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */; };
-		CF8B3ED82A567FA40017CC28 /* MLSDSOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3ED72A567FA40017CC28 /* MLSDSOAuthWindowController.m */; };
-		CF8B3ED92A567FA40017CC28 /* MLSDSOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3ED72A567FA40017CC28 /* MLSDSOAuthWindowController.m */; };
-		CF8B3EDC2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EDB2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m */; };
-		CF8B3EDD2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EDB2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m */; };
 		CF8B3EE02A56FDC50017CC28 /* MLHINADSwissSaml.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EDF2A56FDC50017CC28 /* MLHINADSwissSaml.m */; };
 		CF8B3EE12A56FDC50017CC28 /* MLHINADSwissSaml.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EDF2A56FDC50017CC28 /* MLHINADSwissSaml.m */; };
-		CF8B3EE42A5AB0070017CC28 /* MLADSwissSAMLWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EE32A5AB0070017CC28 /* MLADSwissSAMLWindowController.m */; };
-		CF8B3EE52A5AB0070017CC28 /* MLADSwissSAMLWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8B3EE32A5AB0070017CC28 /* MLADSwissSAMLWindowController.m */; };
 		CF8BEB94253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
 		CF8BEB95253850AF00C2D367 /* MLPrescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */; };
 		CF8BEB982538633000C2D367 /* MLPrescriptionTextFinderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8BEB972538633000C2D367 /* MLPrescriptionTextFinderClient.m */; };
@@ -358,8 +346,6 @@
 		CF3B87492A4AEEC600D7D894 /* MLHINProfile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINProfile.m; sourceTree = "<group>"; };
 		CF3B874C2A4AEECF00D7D894 /* MLHINTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINTokens.h; sourceTree = "<group>"; };
 		CF3B874D2A4AEECF00D7D894 /* MLHINTokens.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINTokens.m; sourceTree = "<group>"; };
-		CF3B87502A4AF92300D7D894 /* MLHINOAuthWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINOAuthWindowController.h; sourceTree = "<group>"; };
-		CF3B87512A4AF92300D7D894 /* MLHINOAuthWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINOAuthWindowController.m; sourceTree = "<group>"; };
 		CF3B87572A4C60AB00D7D894 /* MLHINClientCredential.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINClientCredential.h; sourceTree = "<group>"; };
 		CF4023292A5BBCF900B04FA4 /* certifaction-arm64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "certifaction-arm64"; sourceTree = "<group>"; };
 		CF40232A2A5BBCF900B04FA4 /* certifaction-x86 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "certifaction-x86"; sourceTree = "<group>"; };
@@ -373,25 +359,13 @@
 		CF6BAE9626EDE3BA0080DD00 /* MedidataInvoiceDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataInvoiceDocument.m; sourceTree = "<group>"; };
 		CF7E3F242A8C72F700E65BF1 /* MLHINADSwissAuthHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINADSwissAuthHandle.h; sourceTree = "<group>"; };
 		CF7E3F252A8C72F700E65BF1 /* MLHINADSwissAuthHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINADSwissAuthHandle.m; sourceTree = "<group>"; };
-		CF83D4BF2A6199BA008B6B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLHINOAuthWindowController.xib; sourceTree = "<group>"; };
-		CF83D4C22A6199C8008B6B53 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLHINOAuthWindowController.strings; sourceTree = "<group>"; };
-		CF83D4C42A6199C9008B6B53 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLHINOAuthWindowController.strings; sourceTree = "<group>"; };
-		CF83D4C72A6199CF008B6B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLADSwissSAMLWindowController.xib; sourceTree = "<group>"; };
-		CF83D4CA2A6199D3008B6B53 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLADSwissSAMLWindowController.strings; sourceTree = "<group>"; };
-		CF83D4CC2A6199D3008B6B53 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLADSwissSAMLWindowController.strings; sourceTree = "<group>"; };
 		CF83D4CF2A6199DF008B6B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MLePrescriptionPrepareWindowController.xib; sourceTree = "<group>"; };
 		CF83D4D22A6199E1008B6B53 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MLePrescriptionPrepareWindowController.strings; sourceTree = "<group>"; };
 		CF83D4D42A6199E2008B6B53 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MLePrescriptionPrepareWindowController.strings; sourceTree = "<group>"; };
 		CF8A7337268F1A6D0092E214 /* MedidataXMLGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedidataXMLGenerator.h; sourceTree = "<group>"; };
 		CF8A7338268F1A6D0092E214 /* MedidataXMLGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedidataXMLGenerator.m; sourceTree = "<group>"; };
-		CF8B3ED62A567FA40017CC28 /* MLSDSOAuthWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLSDSOAuthWindowController.h; sourceTree = "<group>"; };
-		CF8B3ED72A567FA40017CC28 /* MLSDSOAuthWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLSDSOAuthWindowController.m; sourceTree = "<group>"; };
-		CF8B3EDA2A56F94A0017CC28 /* MLADSwissOAuthWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLADSwissOAuthWindowController.h; sourceTree = "<group>"; };
-		CF8B3EDB2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLADSwissOAuthWindowController.m; sourceTree = "<group>"; };
 		CF8B3EDE2A56FDC50017CC28 /* MLHINADSwissSaml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHINADSwissSaml.h; sourceTree = "<group>"; };
 		CF8B3EDF2A56FDC50017CC28 /* MLHINADSwissSaml.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHINADSwissSaml.m; sourceTree = "<group>"; };
-		CF8B3EE22A5AB0070017CC28 /* MLADSwissSAMLWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLADSwissSAMLWindowController.h; sourceTree = "<group>"; };
-		CF8B3EE32A5AB0070017CC28 /* MLADSwissSAMLWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLADSwissSAMLWindowController.m; sourceTree = "<group>"; };
 		CF8BEB92253850AF00C2D367 /* MLPrescriptionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionView.h; sourceTree = "<group>"; };
 		CF8BEB93253850AF00C2D367 /* MLPrescriptionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPrescriptionView.m; sourceTree = "<group>"; };
 		CF8BEB962538633000C2D367 /* MLPrescriptionTextFinderClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPrescriptionTextFinderClient.h; sourceTree = "<group>"; };
@@ -675,16 +649,6 @@
 				CF5B30FA243DFCB3000312F1 /* MLPreferencesWindowController.h */,
 				CF5B30FB243DFCB3000312F1 /* MLPreferencesWindowController.m */,
 				CF16C26225236F7F00A05542 /* MLPreferencesWindowController.xib */,
-				CF3B87502A4AF92300D7D894 /* MLHINOAuthWindowController.h */,
-				CF3B87512A4AF92300D7D894 /* MLHINOAuthWindowController.m */,
-				CF83D4C02A6199BA008B6B53 /* MLHINOAuthWindowController.xib */,
-				CF8B3ED62A567FA40017CC28 /* MLSDSOAuthWindowController.h */,
-				CF8B3ED72A567FA40017CC28 /* MLSDSOAuthWindowController.m */,
-				CF8B3EDA2A56F94A0017CC28 /* MLADSwissOAuthWindowController.h */,
-				CF8B3EDB2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m */,
-				CF8B3EE22A5AB0070017CC28 /* MLADSwissSAMLWindowController.h */,
-				CF8B3EE32A5AB0070017CC28 /* MLADSwissSAMLWindowController.m */,
-				CF83D4C82A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -1284,7 +1248,6 @@
 			files = (
 				D5B6F970193136A400495873 /* interactions_callbacks.js in Resources */,
 				CF366B4426BAD1ED0060F8CF /* generalInvoiceRequest_450.xsd in Resources */,
-				CF83D4C52A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib in Resources */,
 				D5E91B9A17E5E8E400B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91B9B17E5E8E400B66B27 /* InfoPlist.strings in Resources */,
 				D5E91B9C17E5E8E400B66B27 /* Credits.rtf in Resources */,
@@ -1297,7 +1260,6 @@
 				D5E91B9F17E5E8E400B66B27 /* amiko_stylesheet.css in Resources */,
 				CF923BEE2549D13A00840F2E /* DesitinLogo.xcassets in Resources */,
 				D5C6443A1EB37A6F00438E6F /* main_callbacks.js in Resources */,
-				CF83D4BD2A6199BA008B6B53 /* MLHINOAuthWindowController.xib in Resources */,
 				D5E91BA017E5E8E400B66B27 /* 28-star-gy.png in Resources */,
 				FA4BC4E8208F592000B7BDF3 /* MLAmiKoPatientSheet.xib in Resources */,
 				FA6371862089CFEE009361D7 /* Localizable.strings in Resources */,
@@ -1339,7 +1301,6 @@
 				D5C5C5021EFF8D6B00DF851F /* comed.iconset in Resources */,
 				D5E91BC917E5E8E800B66B27 /* MLSearchWebView.js in Resources */,
 				D5E91BCA17E5E8E800B66B27 /* InfoPlist.strings in Resources */,
-				CF83D4C62A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib in Resources */,
 				D545C90618A3FC0700491511 /* MLProgressSheet.xib in Resources */,
 				FA1DA17021C3B3B200EF5974 /* Wait.xib in Resources */,
 				D5AB1774180886810050DC12 /* 28-star-ye.png in Resources */,
@@ -1365,7 +1326,6 @@
 				FA5562D92091B33300B85266 /* AmiKoMainMenu.xib in Resources */,
 				D5C5C5191F0C276E00DF851F /* checked_icon.png in Resources */,
 				D5BACC141EBE051D001812FB /* amiko_frequency_fr.db in Resources */,
-				CF83D4BE2A6199BA008B6B53 /* MLHINOAuthWindowController.xib in Resources */,
 				D5AE31881B372093006BC60E /* desitin_icon_512x512.png in Resources */,
 				D545C90518A3F8A400491511 /* amikoosx_splash_1000x670.png in Resources */,
 				D5E91BD317E5E8E800B66B27 /* 28-star@2x.png in Resources */,
@@ -1457,7 +1417,6 @@
 				CF13F8A126ECB2D50060FB46 /* MedidataInvoiceResponseRow.m in Sources */,
 				D5F303431F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				CF8B3EE02A56FDC50017CC28 /* MLHINADSwissSaml.m in Sources */,
-				CF8B3EE42A5AB0070017CC28 /* MLADSwissSAMLWindowController.m in Sources */,
 				CF34E54F243A1A8300E3AF61 /* PatientModel+CoreDataClass.m in Sources */,
 				CF13F89C26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m in Sources */,
 				CF5B30FD243DFCB3000312F1 /* MLPreferencesWindowController.m in Sources */,
@@ -1480,8 +1439,6 @@
 				D5962E8B1EF9C42E0034B964 /* MLCustomScrollView.m in Sources */,
 				FA9F26E721C2CD1A005DA919 /* Wait.m in Sources */,
 				CF6BAE9726EDE3BA0080DD00 /* MedidataInvoiceDocument.m in Sources */,
-				CF8B3EDC2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m in Sources */,
-				CF3B87532A4AF92300D7D894 /* MLHINOAuthWindowController.m in Sources */,
 				D53973CD1FA37B9200D7E444 /* MLOperator.m in Sources */,
 				CF9625EA26CD109700153457 /* MedidataGetUploadStatusOperation.m in Sources */,
 				D517E4C21EB1E5B700187AC8 /* MLFullTextEntry.m in Sources */,
@@ -1490,7 +1447,6 @@
 				CF9625F226CD288100153457 /* MedidataInvoiceResponseDownloadsRow.m in Sources */,
 				D5ECDE1C1F2B24CB00970133 /* MLPrescriptionCellView.m in Sources */,
 				D5E91B9117E5E8E400B66B27 /* MLSearchWebView.m in Sources */,
-				CF8B3ED82A567FA40017CC28 /* MLSDSOAuthWindowController.m in Sources */,
 				CF40233E2A5BF87800B04FA4 /* LFCGzipUtility.m in Sources */,
 				D5E91B9217E5E8E400B66B27 /* MLCustomTableRowView.m in Sources */,
 				CF4023382A5BD6AE00B04FA4 /* MLePrescriptionPrepareWindowController.m in Sources */,
@@ -1512,7 +1468,6 @@
 				D5F3034B1F21FE2200CAFED3 /* MLPrescriptionsCart.h in Sources */,
 				D5AAB3EF1EB20F3F00002F47 /* MLFullTextDBAdapter.m in Sources */,
 				FA98A7AC20A09CE900B2665B /* MLPrescriptionTableView.m in Sources */,
-				CF8B3EDD2A56F94A0017CC28 /* MLADSwissOAuthWindowController.m in Sources */,
 				D545C8F918A2CE0800491511 /* unzip.c in Sources */,
 				D5E91BB717E5E8E800B66B27 /* main.m in Sources */,
 				D5E91BB817E5E8E800B66B27 /* MLAppDelegate.m in Sources */,
@@ -1526,7 +1481,6 @@
 				D5C5C5111F06416800DF851F /* MLContacts.m in Sources */,
 				D53877951AA37CC900AEFDB4 /* MLUtilities.m in Sources */,
 				CF8BEB95253850AF00C2D367 /* MLPrescriptionView.m in Sources */,
-				CF8B3EE52A5AB0070017CC28 /* MLADSwissSAMLWindowController.m in Sources */,
 				D5BACC011EBB1D2C001812FB /* WebViewJavascriptBridge_JS.m in Sources */,
 				FA6A2BB120B2B0EE0080B4C9 /* MLPatientSheetController.m in Sources */,
 				CF13F89D26ECB26D0060FB46 /* MedidataInvoiceResponseUploadedRow.m in Sources */,
@@ -1542,7 +1496,6 @@
 				D53973CE1FA37B9200D7E444 /* MLOperator.m in Sources */,
 				D5C6440E1EB32F5300438E6F /* MLInteractionsHtmlView.m in Sources */,
 				CFDFC48A26CA905C00EDD182 /* MLMedidataResponsesWindowController.m in Sources */,
-				CF3B87542A4AF92300D7D894 /* MLHINOAuthWindowController.m in Sources */,
 				D5C5C5081F03AE2E00DF851F /* MLPatient.m in Sources */,
 				CF9625EB26CD109700153457 /* MedidataGetUploadStatusOperation.m in Sources */,
 				D5E91BBC17E5E8E800B66B27 /* MLDBAdapter.m in Sources */,
@@ -1561,7 +1514,6 @@
 				D5F303441F21F42A00CAFED3 /* MLPrescriptionsCart.m in Sources */,
 				D52EA4AD1EF43B96001ADFEC /* MLColors.m in Sources */,
 				D5ECDE141F2A7C1200970133 /* MLEditableTextField.m in Sources */,
-				CF8B3ED92A567FA40017CC28 /* MLSDSOAuthWindowController.m in Sources */,
 				CF3B874F2A4AEECF00D7D894 /* MLHINTokens.m in Sources */,
 				D5E91BBF17E5E8E800B66B27 /* MLItemCellView.m in Sources */,
 				D5C5C5321F0E5A1D00DF851F /* MLSignatureView.m in Sources */,
@@ -1609,26 +1561,6 @@
 				CF16C26625236F8400A05542 /* de */,
 			);
 			name = MLPreferencesWindowController.xib;
-			sourceTree = "<group>";
-		};
-		CF83D4C02A6199BA008B6B53 /* MLHINOAuthWindowController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CF83D4BF2A6199BA008B6B53 /* Base */,
-				CF83D4C22A6199C8008B6B53 /* de */,
-				CF83D4C42A6199C9008B6B53 /* fr */,
-			);
-			name = MLHINOAuthWindowController.xib;
-			sourceTree = "<group>";
-		};
-		CF83D4C82A6199CF008B6B53 /* MLADSwissSAMLWindowController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CF83D4C72A6199CF008B6B53 /* Base */,
-				CF83D4CA2A6199D3008B6B53 /* de */,
-				CF83D4CC2A6199D3008B6B53 /* fr */,
-			);
-			name = MLADSwissSAMLWindowController.xib;
 			sourceTree = "<group>";
 		};
 		CF83D4D02A6199DF008B6B53 /* MLePrescriptionPrepareWindowController.xib */ = {
