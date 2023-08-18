@@ -232,8 +232,13 @@
         [task setArguments:@[
             @"eprescription",
             @"create",
+#if DEBUG
             @"--api", @"https://api.testnet.certifaction.io",
             @"--hin-api", @"https://oauth2.sign-test.hin.ch/api",
+#else
+            @"--api", @"https://api.certifaction.io",
+            @"--hin-api", @"https://oauth2.sign.hin.ch/api",
+#endif
             @"--token", authHandle.token,
             @"-o", tempOutFilePath,
             @"-f", @"qrcode",
