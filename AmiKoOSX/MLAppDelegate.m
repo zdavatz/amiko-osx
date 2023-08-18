@@ -28,7 +28,6 @@
 #import "MLHINClient.h"
 
 @interface MLAppDelegate()
-// @property (nonatomic, strong) IBOutlet MLMasterViewController *masterViewController;
 @end
 
 @implementation MLAppDelegate
