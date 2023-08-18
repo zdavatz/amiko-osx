@@ -23,9 +23,12 @@
 }
 
 - (NSURL*)authURLWithApplication:(NSString *)applicationName {
-    
+    return [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.hin.ch/REST/v1/OAuth/GetAuthCode/%@?response_type=code&client_id=%@&redirect_uri=%@://oauth&state=%@", applicationName, HIN_CLIENT_ID, [self oauthCallbackURL], applicationName]];
+}
+
+- (NSString *)oauthCallbackURL {
     NSString *scheme = [[MLUtilities appLanguage] isEqual:@"de"] ? @"amiko" : @"comed";
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.hin.ch/REST/v1/OAuth/GetAuthCode/%@?response_type=code&client_id=%@&redirect_uri=%@://oauth&state=%@", applicationName, HIN_CLIENT_ID, scheme, applicationName]];
+    return [NSString stringWithFormat:@"%@://oauth", scheme];
 }
 
 - (NSString *)sdsApplicationName {
@@ -68,7 +71,7 @@
     NSURLComponents *components = [[NSURLComponents alloc] init];
     components.queryItems = @[
         [NSURLQueryItem queryItemWithName:@"grant_type" value:@"authorization_code"],
-        [NSURLQueryItem queryItemWithName:@"redirect_uri" value:@"http://localhost:8080/callback"],
+        [NSURLQueryItem queryItemWithName:@"redirect_uri" value:[self oauthCallbackURL]],
         [NSURLQueryItem queryItemWithName:@"code" value:authCode],
         [NSURLQueryItem queryItemWithName:@"client_id" value:HIN_CLIENT_ID],
         [NSURLQueryItem queryItemWithName:@"client_secret" value:HIN_CLIENT_SECRET],
@@ -110,7 +113,7 @@
     NSURLComponents *components = [[NSURLComponents alloc] init];
     components.queryItems = @[
         [NSURLQueryItem queryItemWithName:@"grant_type" value:@"refresh_token"],
-        [NSURLQueryItem queryItemWithName:@"redirect_uri" value:@"http://localhost:8080/callback"],
+        [NSURLQueryItem queryItemWithName:@"redirect_uri" value:[self oauthCallbackURL]],
         [NSURLQueryItem queryItemWithName:@"refresh_token" value:token.refreshToken],
         [NSURLQueryItem queryItemWithName:@"client_id" value:HIN_CLIENT_ID],
         [NSURLQueryItem queryItemWithName:@"client_secret" value:HIN_CLIENT_SECRET],
