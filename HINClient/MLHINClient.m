@@ -23,7 +23,7 @@
 }
 
 - (NSURL*)authURLWithApplication:(NSString *)applicationName {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.hin.ch/REST/v1/OAuth/GetAuthCode/%@?response_type=code&client_id=%@&redirect_uri=%@://oauth&state=%@", applicationName, HIN_CLIENT_ID, [self oauthCallbackURL], applicationName]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.hin.ch/REST/v1/OAuth/GetAuthCode/%@?response_type=code&client_id=%@&redirect_uri=%@&state=%@", applicationName, HIN_CLIENT_ID, [self oauthCallbackURL], applicationName]];
 }
 
 - (NSString *)oauthCallbackURL {
@@ -194,8 +194,7 @@
             callback(error, nil);
             return;
         }
-        NSString *scheme = [[MLUtilities appLanguage] isEqual:@"de"] ? @"amiko" : @"comed";
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/authService/EPDAuth?targetUrl=%@://oauth&style=redirect", [self HINDomainForADSwiss], scheme]]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/authService/EPDAuth?targetUrl=%@&style=redirect", [self HINDomainForADSwiss], [self oauthCallbackURL]]]];
         [request setAllHTTPHeaderFields:@{
             @"Accept": @"application/json",
             @"Authorization": [NSString stringWithFormat:@"Bearer %@", token.accessToken],
