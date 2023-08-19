@@ -8,6 +8,12 @@
 
 #import "MLHINADSwissAuthHandle.h"
 
+@interface MLHINADSwissAuthHandle ()
+
+@property (nonatomic, strong) NSString *sourceForDebug;
+
+@end
+
 @implementation MLHINADSwissAuthHandle
 
 - (instancetype)initWithToken:(NSString *)token {
@@ -15,6 +21,7 @@
         self.token = token;
         self.expiresAt = [[NSDate date] dateByAddingTimeInterval:12*60*60];
         self.lastUsedAt = [NSDate date];
+        self.sourceForDebug = [MLHINADSwissAuthHandle buildEnvironment];
     }
     return self;
 }
@@ -24,6 +31,8 @@
         self.token = dict[@"token"];
         self.lastUsedAt = dict[@"lastUsedAt"];
         self.expiresAt = dict[@"expiresAt"];
+        self.sourceForDebug = dict[@"source"];
+        
     }
     return self;
 }
@@ -33,6 +42,7 @@
         @"token": self.token,
         @"lastUsedAt": self.lastUsedAt,
         @"expiresAt": self.expiresAt,
+        @"source": self.sourceForDebug ?: @"",
     };
 }
 
@@ -43,6 +53,21 @@
 
 - (void)updateLastUsedAt {
     self.lastUsedAt = [NSDate date];
+}
+
+- (NSString *)token {
+    if (self.sourceForDebug.length && ![self.sourceForDebug isEqual:[MLHINADSwissAuthHandle buildEnvironment]]) {
+        NSLog(@"WARNING: An auth handle generated in %@ environment is being used in %@ environment", self.sourceForDebug, [MLHINADSwissAuthHandle buildEnvironment]);
+    }
+    return _token;
+}
+
++ (NSString *)buildEnvironment {
+#ifdef DEBUG
+        return @"debug";
+#else
+        return @"release";
+#endif
 }
 
 @end

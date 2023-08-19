@@ -64,7 +64,7 @@
     [[MLHINClient shared] fetchADSwissAuthHandleWithToken:[[MLPersistenceManager shared] HINADSwissTokens]
                                                  authCode:code
                                                completion:^(NSError * _Nullable error, NSString * _Nullable authHandle) {
-        NSLog(@"received Auth Handle1 %@ %@", error, authHandle);
+        NSLog(@"received Auth Handle1: (error:%@) %@", error, authHandle);
         if (error) {
             [_self displayError:error];
             return;
