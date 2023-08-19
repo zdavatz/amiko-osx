@@ -77,6 +77,7 @@
         [NSURLQueryItem queryItemWithName:@"client_secret" value:HIN_CLIENT_SECRET],
     ];
     [request setHTTPBody:[components.query dataUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"Fetching Access token from URL: %@", request.URL);
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
             callback(error, nil);
@@ -119,6 +120,7 @@
         [NSURLQueryItem queryItemWithName:@"client_secret" value:HIN_CLIENT_SECRET],
     ];
     [request setHTTPBody:[components.query dataUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"Renewing token with URL: %@", request.URL);
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
             callback(error, nil);
@@ -160,6 +162,7 @@
             @"Authorization": [NSString stringWithFormat:@"Bearer %@", token.accessToken],
         }];
         [request setHTTPMethod:@"GET"];
+        NSLog(@"Fetching SDS Self with URL: %@", request.URL);
         [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error != nil) {
                 callback(error, nil);
@@ -198,6 +201,7 @@
             @"Authorization": [NSString stringWithFormat:@"Bearer %@", token.accessToken],
         }];
         [request setHTTPMethod:@"POST"];
+        NSLog(@"Fetching ADSwiss SAML with URL: %@", request.URL);
         [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error != nil) {
                 callback(error, nil);
@@ -244,6 +248,7 @@
             return;
         }
         [request setHTTPMethod:@"POST"];
+        NSLog(@"Fetching Auth Handle with URL: %@", request.URL);
         [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error != nil) {
                 callback(error, nil);

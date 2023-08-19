@@ -38,11 +38,6 @@
     [self reloadiCloudCheckbox];
     [self reloadHINState];
     
-    [[MLHINClient shared] renewTokenIfNeededWithToken:[[MLPersistenceManager shared] HINSDSTokens]
-                                           completion:^(NSError * _Nullable error, MLHINTokens * _Nullable tokens) {
-        NSLog(@"Token %@", tokens);
-    }];
-    
     [[NSNotificationCenter defaultCenter] addObserverForName:NSUbiquityIdentityDidChangeNotification
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]

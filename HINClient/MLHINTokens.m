@@ -15,6 +15,9 @@
 @property (nonatomic, strong) NSDate *expiresAt;
 @property (nonatomic, strong) NSString *hinId;
 @property (nonatomic, strong) NSString *tokenType;
+// We want to track where does this token comes from,
+// so we can probably show logs and error message better
+@property (nonatomic, strong) NSString *sourceForDebug;
 
 @end
 
@@ -33,8 +36,17 @@
         self.expiresAt = [[NSDate date] dateByAddingTimeInterval:[expiresIn doubleValue]];
         self.hinId = dict[@"hin_id"];
         self.tokenType = dict[@"token_type"];
+        self.sourceForDebug = [MLHINTokens buildEnvironment];
     }
     return self;
+}
+
++ (NSString *)buildEnvironment {
+#ifdef DEBUG
+        return @"debug";
+#else
+        return @"release";
+#endif
 }
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
@@ -45,8 +57,23 @@
         self.hinId = dict[@"hinId"];
         self.tokenType = dict[@"tokenType"];
         self.application = dict[@"application"] ? [dict[@"application"] unsignedIntegerValue] : MLHINTokensApplicationSDS;
+        self.sourceForDebug = dict[@"source"];
     }
     return self;
+}
+
+- (NSString *)accessToken {
+    if (self.sourceForDebug.length && ![self.sourceForDebug isEqual:[MLHINTokens buildEnvironment]]) {
+        NSLog(@"WARNING: A token generated in %@ environment is being used in %@ environment", self.sourceForDebug, [MLHINTokens buildEnvironment]);
+    }
+    return _accessToken;
+}
+
+- (NSString *)refreshToken {
+    if (self.sourceForDebug.length && ![self.sourceForDebug isEqual:[MLHINTokens buildEnvironment]]) {
+        NSLog(@"WARNING: A token generated in %@ environment is being used in %@ environment", self.sourceForDebug, [MLHINTokens buildEnvironment]);
+    }
+    return _refreshToken;
 }
 
 - (NSDictionary *)dictionaryRepresentation {
@@ -57,6 +84,7 @@
         @"hinId": self.hinId,
         @"tokenType": self.tokenType,
         @"application": [NSNumber numberWithUnsignedInteger:self.application],
+        @"source": self.sourceForDebug ?: @"",
     };
 }
 
