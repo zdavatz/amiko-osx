@@ -159,6 +159,7 @@
             [_self displayError:error];
             return;
         }
+        NSLog(@"Opening URL received from ADSwiss's epdAuthURL: %@", result.epdAuthUrl);
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:result.epdAuthUrl]];
     }];
     return nil;

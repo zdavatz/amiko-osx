@@ -146,7 +146,9 @@
         [[MLPersistenceManager shared] setHINSDSTokens:nil];
         [self reloadHINState];
     } else {
-        [[NSWorkspace sharedWorkspace] openURL:[[MLHINClient shared] authURLForSDS]];
+        NSURL *authURL = [[MLHINClient shared] authURLForSDS];
+        NSLog(@"Opening SDS auth URL: %@", authURL);
+        [[NSWorkspace sharedWorkspace] openURL:authURL];
     }
 }
 
@@ -156,7 +158,9 @@
         [[MLPersistenceManager shared] setHINADSwissTokens:nil];
         [self reloadHINState];
     } else {
-        [[NSWorkspace sharedWorkspace] openURL:[[MLHINClient shared] authURLForADSwiss]];
+        NSURL *authURL = [[MLHINClient shared] authURLForADSwiss];
+        NSLog(@"Opening SDS auth URL: %@", authURL);
+        [[NSWorkspace sharedWorkspace] openURL:authURL];
     }
 }
 
