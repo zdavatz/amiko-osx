@@ -14,10 +14,10 @@
 "5Du-8q-WQJ.title" = "Signature du médecin...";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "6C4-wL-IXh"; */
-"6C4-wL-IXh.title" = "Paste";
+"6C4-wL-IXh.title" = "Coller";
 
 /* Class = "NSMenuItem"; title = "Share"; ObjectID = "6i2-RO-aan"; */
-"6i2-RO-aan.title" = "Share";
+"6i2-RO-aan.title" = "Partager";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Fenêtre";
@@ -59,10 +59,10 @@
 "145.title" = "Cacher autres fenêtres";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "Show All";
+"150.title" = "Tout Afficher";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "Zoom";
+"239.title" = "Réduire/Agrandir";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
 "297.title" = "Voir/Cacher Toolbar";
@@ -83,7 +83,7 @@
 "afC-p7-YFh.title" = "Rechercher...";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "ahg-j4-NCC"; */
-"ahg-j4-NCC.title" = "Cut";
+"ahg-j4-NCC.title" = "Couper";
 
 /* Class = "NSMenuItem"; title = "Find Previous..."; ObjectID = "alp-gi-aI7"; */
 "alp-gi-aI7.title" = "Rechercher le Précédent...";
@@ -98,10 +98,10 @@
 "DG6-4p-5Fx.title" = "Chercher la Notice Infopro";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "ecT-Vg-yKm"; */
-"ecT-Vg-yKm.title" = "Copy";
+"ecT-Vg-yKm.title" = "Copier";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "fWF-Ur-1gj"; */
-"fWF-Ur-1gj.title" = "Undo";
+"fWF-Ur-1gj.title" = "Effacer";
 
 /* Class = "NSMenuItem"; title = "Update from file"; ObjectID = "gKE-5n-N9x"; */
 "gKE-5n-N9x.title" = "Ajourner la Banque des Données";
@@ -116,7 +116,7 @@
 "iaD-dX-JgR.title" = "Charger une recette...";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "IE4-Bi-KSo"; */
-"IE4-Bi-KSo.title" = "Delete";
+"IE4-Bi-KSo.title" = "Supprimer";
 
 /* Class = "NSMenuItem"; title = "Medidata Response..."; ObjectID = "JG2-60-8ij"; */
 "JG2-60-8ij.title" = "Medidata Réponses...";
@@ -134,7 +134,7 @@
 "NcS-1e-ymc.title" = "Ordonnance";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "P52-Re-Wjz"; */
-"P52-Re-Wjz.title" = "Select All";
+"P52-Re-Wjz.title" = "Tout Sélectionner";
 
 /* Class = "NSMenuItem"; title = "Print prescription..."; ObjectID = "Rdb-Ti-b5z"; */
 "Rdb-Ti-b5z.title" = "Imprimer l'ordonnance...";
@@ -152,7 +152,7 @@
 "tsG-5e-hg5.title" = "Gérer le patients...";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "Ug2-Yh-EQ7"; */
-"Ug2-Yh-EQ7.title" = "Paste and Match Style";
+"Ug2-Yh-EQ7.title" = "Coller et adapter le style";
 
 /* Class = "NSMenuItem"; title = "Contacts"; ObjectID = "uhw-HQ-GGx"; */
 "uhw-HQ-GGx.title" = "Contacts";
@@ -167,5 +167,5 @@
 "Zio-eg-fPZ.title" = "Sauver la recette...";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "zuN-8U-bRS"; */
-"zuN-8U-bRS.title" = "Redo";
+"zuN-8U-bRS.title" = "Rétablir";
 

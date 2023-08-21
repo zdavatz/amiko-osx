@@ -5,19 +5,19 @@
 "4my-LE-xop.title" = "Rate";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "4xr-bz-rPZ"; */
-"4xr-bz-rPZ.title" = "Edit";
+"4xr-bz-rPZ.title" = "Bearbeiten";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Bring All to Front";
+"5.title" = "Alle nach vorne bringen";
 
 /* Class = "NSMenuItem"; title = "Doctor signature..."; ObjectID = "5Du-8q-WQJ"; */
 "5Du-8q-WQJ.title" = "Arztstempel...";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "6C4-wL-IXh"; */
-"6C4-wL-IXh.title" = "Paste";
+"6C4-wL-IXh.title" = "Einsetzen";
 
 /* Class = "NSMenuItem"; title = "Share"; ObjectID = "6i2-RO-aan"; */
-"6i2-RO-aan.title" = "Share";
+"6i2-RO-aan.title" = "Teilen";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Fenster";
@@ -62,10 +62,10 @@
 "150.title" = "Alle Fenster anzeigen";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "Zoom";
+"239.title" = "Zoomen";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
-"297.title" = "Show Toolbar";
+"297.title" = "Symbolleiste Einblenden";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
 "490.title" = "Hilfe";
@@ -83,7 +83,7 @@
 "afC-p7-YFh.title" = "Suchen...";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "ahg-j4-NCC"; */
-"ahg-j4-NCC.title" = "Cut";
+"ahg-j4-NCC.title" = "Ausschneiden";
 
 /* Class = "NSMenuItem"; title = "Find Previous..."; ObjectID = "alp-gi-aI7"; */
 "alp-gi-aI7.title" = "Vorheriger Treffer...";
@@ -98,10 +98,10 @@
 "DG6-4p-5Fx.title" = "In Fachinformation suchen";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "ecT-Vg-yKm"; */
-"ecT-Vg-yKm.title" = "Copy";
+"ecT-Vg-yKm.title" = "Kopieren";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "fWF-Ur-1gj"; */
-"fWF-Ur-1gj.title" = "Undo";
+"fWF-Ur-1gj.title" = "Widerrufen";
 
 /* Class = "NSMenuItem"; title = "Update from file"; ObjectID = "gKE-5n-N9x"; */
 "gKE-5n-N9x.title" = "Aktualisieren via Datei";
@@ -116,7 +116,7 @@
 "iaD-dX-JgR.title" = "Rezept laden...";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "IE4-Bi-KSo"; */
-"IE4-Bi-KSo.title" = "Delete";
+"IE4-Bi-KSo.title" = "Löschen";
 
 /* Class = "NSMenuItem"; title = "Medidata Response..."; ObjectID = "JG2-60-8ij"; */
 "JG2-60-8ij.title" = "Medidata Antworten...";
@@ -134,7 +134,7 @@
 "NcS-1e-ymc.title" = "Rezept";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "P52-Re-Wjz"; */
-"P52-Re-Wjz.title" = "Select All";
+"P52-Re-Wjz.title" = "Alles";
 
 /* Class = "NSMenuItem"; title = "Print prescription..."; ObjectID = "Rdb-Ti-b5z"; */
 "Rdb-Ti-b5z.title" = "Rezept drucken...";
@@ -143,7 +143,7 @@
 "RnU-V6-Sup.title" = "Wortanaylse";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "SBf-jg-8kW"; */
-"SBf-jg-8kW.title" = "Edit";
+"SBf-jg-8kW.title" = "Bearbeiten";
 
 /* Class = "NSMenuItem"; title = "Feedback"; ObjectID = "SJw-Ze-p6n"; */
 "SJw-Ze-p6n.title" = "Feedback";
@@ -152,7 +152,7 @@
 "tsG-5e-hg5.title" = "Patienten verwalten...";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "Ug2-Yh-EQ7"; */
-"Ug2-Yh-EQ7.title" = "Paste and Match Style";
+"Ug2-Yh-EQ7.title" = "Einsetzen und Stil anpassen";
 
 /* Class = "NSMenuItem"; title = "Contacts"; ObjectID = "uhw-HQ-GGx"; */
 "uhw-HQ-GGx.title" = "Kontakte";
@@ -167,5 +167,5 @@
 "Zio-eg-fPZ.title" = "Rezept speichern...";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "zuN-8U-bRS"; */
-"zuN-8U-bRS.title" = "Redo";
+"zuN-8U-bRS.title" = "Wiederholen";
 

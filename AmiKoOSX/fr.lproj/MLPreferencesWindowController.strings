@@ -1,3 +1,6 @@
+/* Class = "NSTextFieldCell"; title = "HIN (ADSwiss) Login:"; ObjectID = "0kn-xE-yPn"; */
+"0kn-xE-yPn.title" = "HIN (ADSwiss):";
+
 /* Class = "NSButtonCell"; title = "Enable iCloud Sync"; ObjectID = "58g-Mv-66Y"; */
 "58g-Mv-66Y.title" = "Activez la synchronisation iCloud.";
 
@@ -7,8 +10,14 @@
 /* Class = "NSButtonCell"; title = "Login with HIN (SDS)"; ObjectID = "fWZ-2O-dIK"; */
 "fWZ-2O-dIK.title" = "Se connecter avec HIN (SDS)";
 
+/* Class = "NSTextFieldCell"; title = "[Not logged in]"; ObjectID = "h1j-gJ-Mr2"; */
+"h1j-gJ-Mr2.title" = "Non connecté";
+
 /* Class = "NSTextFieldCell"; title = "HIN (SDS) Login:"; ObjectID = "lxV-dO-bXM"; */
-"lxV-dO-bXM.title" = "";
+"lxV-dO-bXM.title" = "HIN (SDS):";
+
+/* Class = "NSTextFieldCell"; title = "[Not logged in]"; ObjectID = "MIz-KT-zeI"; */
+"MIz-KT-zeI.title" = "Non connecté";
 
 /* Class = "NSButtonCell"; title = "Login with HIN (ADSwiss)"; ObjectID = "nei-cC-Zh2"; */
 "nei-cC-Zh2.title" = "Se connecter avec HIN (ADSwiss)";
