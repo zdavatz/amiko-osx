@@ -67,7 +67,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Access Contact List for Patient List</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2020 ywesee GmbH. All rights reserved.</string>
+	<string>Copyright © 2023 ywesee GmbH. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>AmiKoMainMenu</string>
 	<key>NSPrincipalClass</key>
